@@ -32,7 +32,26 @@ class UserDataErrorEnum(proto.Message):
     r"""Container for enum describing possible user data errors."""
 
     class UserDataError(proto.Enum):
-        r"""Enum describing possible request errors."""
+        r"""Enum describing possible request errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            OPERATIONS_FOR_CUSTOMER_MATCH_NOT_ALLOWED (2):
+                Customer is not allowed to perform operations
+                related to Customer Match.
+            TOO_MANY_USER_IDENTIFIERS (3):
+                Maximum number of user identifiers allowed
+                for each request is 100 and for each operation
+                is 20.
+            USER_LIST_NOT_APPLICABLE (4):
+                Current user list is not applicable for the
+                given customer.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         OPERATIONS_FOR_CUSTOMER_MATCH_NOT_ALLOWED = 2

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignCustomizerErrorEnum",},
+    manifest={
+        "CampaignCustomizerErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,16 @@ class CampaignCustomizerErrorEnum(proto.Message):
     """
 
     class CampaignCustomizerError(proto.Enum):
-        r"""Enum describing possible campaign customizer errors."""
+        r"""Enum describing possible campaign customizer errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
 

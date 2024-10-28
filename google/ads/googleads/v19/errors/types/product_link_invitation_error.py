@@ -35,7 +35,28 @@ class ProductLinkInvitationErrorEnum(proto.Message):
     """
 
     class ProductLinkInvitationError(proto.Enum):
-        r"""Enum describing possible product link invitation errors."""
+        r"""Enum describing possible product link invitation errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in the
+                version.
+            INVALID_STATUS (2):
+                The invitation status is invalid.
+            PERMISSION_DENIED (3):
+                The customer doesn't have the permission to
+                perform this action
+            NO_INVITATION_REQUIRED (4):
+                An invitation could not be created, since the
+                user already has admin access to the invited
+                account. Use the ProductLinkService to directly
+                create an active link.
+            CUSTOMER_NOT_PERMITTED_TO_CREATE_INVITATION (5):
+                The customer is not permitted to create the
+                invitation.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

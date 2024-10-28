@@ -35,7 +35,22 @@ class AssetGroupStatusEnum(proto.Message):
     """
 
     class AssetGroupStatus(proto.Enum):
-        r"""The possible statuses of an asset group."""
+        r"""The possible statuses of an asset group.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+            ENABLED (2):
+                The asset group is enabled.
+            PAUSED (3):
+                The asset group is paused.
+            REMOVED (4):
+                The asset group is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

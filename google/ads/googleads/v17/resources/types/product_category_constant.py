@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class ProductCategoryConstant(proto.Message):
     r"""A Product Category.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -64,6 +65,7 @@ class ProductCategoryConstant(proto.Message):
 
     class ProductCategoryLocalization(proto.Message):
         r"""Localization for the product category.
+
         Attributes:
             region_code (str):
                 Output only. Upper-case two-letter ISO 3166-1
@@ -102,22 +104,26 @@ class ProductCategoryConstant(proto.Message):
         number=3,
         optional=True,
     )
-    level: product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel = proto.Field(
+    level: (
+        product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel,
     )
-    state: product_category_state.ProductCategoryStateEnum.ProductCategoryState = proto.Field(
+    state: (
+        product_category_state.ProductCategoryStateEnum.ProductCategoryState
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=product_category_state.ProductCategoryStateEnum.ProductCategoryState,
     )
-    localizations: MutableSequence[
-        ProductCategoryLocalization
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message=ProductCategoryLocalization,
+    localizations: MutableSequence[ProductCategoryLocalization] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=ProductCategoryLocalization,
+        )
     )
 
 

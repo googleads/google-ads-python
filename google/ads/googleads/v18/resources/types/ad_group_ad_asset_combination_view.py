@@ -25,7 +25,9 @@ from google.ads.googleads.v18.common.types import asset_usage
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupAdAssetCombinationView",},
+    manifest={
+        "AdGroupAdAssetCombinationView",
+    },
 )
 
 
@@ -33,6 +35,7 @@ class AdGroupAdAssetCombinationView(proto.Message):
     r"""A view on the usage of ad group ad asset combination.
     Now we only support AdGroupAdAssetCombinationView for Responsive
     Search Ads, with more ad types planned for the future.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -59,15 +62,20 @@ class AdGroupAdAssetCombinationView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    served_assets: MutableSequence[
-        asset_usage.AssetUsage
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=asset_usage.AssetUsage,
+    served_assets: MutableSequence[asset_usage.AssetUsage] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message=asset_usage.AssetUsage,
+        )
     )
     enabled: bool = proto.Field(
-        proto.BOOL, number=3, optional=True,
+        proto.BOOL,
+        number=3,
+        optional=True,
     )
 
 

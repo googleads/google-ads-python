@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class Metrics(proto.Message):
     r"""Metrics data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1986,7 +1987,9 @@ class Metrics(proto.Message):
             optional=True,
         )
     )
-    current_model_attributed_conversions_from_interactions_value_per_interaction: float = proto.Field(
+    current_model_attributed_conversions_from_interactions_value_per_interaction: (
+        float
+    ) = proto.Field(
         proto.DOUBLE,
         number=177,
         optional=True,
@@ -2036,12 +2039,16 @@ class Metrics(proto.Message):
         number=215,
         optional=True,
     )
-    historical_creative_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+    historical_creative_quality_score: (
+        quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+    ) = proto.Field(
         proto.ENUM,
         number=80,
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
     )
-    historical_landing_page_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+    historical_landing_page_quality_score: (
+        quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+    ) = proto.Field(
         proto.ENUM,
         number=81,
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
@@ -2051,7 +2058,9 @@ class Metrics(proto.Message):
         number=216,
         optional=True,
     )
-    historical_search_predicted_ctr: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+    historical_search_predicted_ctr: (
+        quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+    ) = proto.Field(
         proto.ENUM,
         number=83,
         enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
@@ -2536,33 +2545,33 @@ class Metrics(proto.Message):
         proto.STRING,
         number=342,
     )
-    sample_best_performance_entities: MutableSequence[
-        str
-    ] = proto.RepeatedField(
-        proto.STRING,
-        number=343,
+    sample_best_performance_entities: MutableSequence[str] = (
+        proto.RepeatedField(
+            proto.STRING,
+            number=343,
+        )
     )
-    sample_good_performance_entities: MutableSequence[
-        str
-    ] = proto.RepeatedField(
-        proto.STRING,
-        number=344,
+    sample_good_performance_entities: MutableSequence[str] = (
+        proto.RepeatedField(
+            proto.STRING,
+            number=344,
+        )
     )
     sample_low_performance_entities: MutableSequence[str] = proto.RepeatedField(
         proto.STRING,
         number=345,
     )
-    sample_learning_performance_entities: MutableSequence[
-        str
-    ] = proto.RepeatedField(
-        proto.STRING,
-        number=346,
+    sample_learning_performance_entities: MutableSequence[str] = (
+        proto.RepeatedField(
+            proto.STRING,
+            number=346,
+        )
     )
-    sample_unrated_performance_entities: MutableSequence[
-        str
-    ] = proto.RepeatedField(
-        proto.STRING,
-        number=347,
+    sample_unrated_performance_entities: MutableSequence[str] = (
+        proto.RepeatedField(
+            proto.STRING,
+            number=347,
+        )
     )
     asset_pinned_total_count: int = proto.Field(
         proto.INT64,
@@ -2649,6 +2658,7 @@ class Metrics(proto.Message):
 class SearchVolumeRange(proto.Message):
     r"""Search volume range.
     Actual search volume falls within this range.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

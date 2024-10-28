@@ -29,12 +29,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemTarget",},
+    manifest={
+        "FeedItemTarget",
+    },
 )
 
 
 class FeedItemTarget(proto.Message):
     r"""A feed item target.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -91,37 +94,57 @@ class FeedItemTarget(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed_item: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
-    feed_item_target_type: gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType = proto.Field(
+    feed_item_target_type: (
+        gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType,
     )
     feed_item_target_id: int = proto.Field(
-        proto.INT64, number=13, optional=True,
+        proto.INT64,
+        number=13,
+        optional=True,
     )
-    status: feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus = proto.Field(
+    status: (
+        feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=11,
         enum=feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=14, oneof="target",
+        proto.STRING,
+        number=14,
+        oneof="target",
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=15, oneof="target",
+        proto.STRING,
+        number=15,
+        oneof="target",
     )
     keyword: criteria.KeywordInfo = proto.Field(
-        proto.MESSAGE, number=7, oneof="target", message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=7,
+        oneof="target",
+        message=criteria.KeywordInfo,
     )
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=16, oneof="target",
+        proto.STRING,
+        number=16,
+        oneof="target",
     )
-    device: feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice = proto.Field(
+    device: (
+        feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         oneof="target",

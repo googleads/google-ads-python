@@ -34,6 +34,25 @@ class UserListNumberRuleItemOperatorEnum(proto.Message):
     class UserListNumberRuleItemOperator(proto.Enum):
         r"""Enum describing possible user list number rule item
         operators.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            GREATER_THAN (2):
+                Greater than.
+            GREATER_THAN_OR_EQUAL (3):
+                Greater than or equal.
+            EQUALS (4):
+                Equals.
+            NOT_EQUALS (5):
+                Not equals.
+            LESS_THAN (6):
+                Less than.
+            LESS_THAN_OR_EQUAL (7):
+                Less than or equal.
         """
 
         UNSPECIFIED = 0

@@ -35,7 +35,33 @@ class PolicyTopicEntryTypeEnum(proto.Message):
     """
 
     class PolicyTopicEntryType(proto.Enum):
-        r"""The possible policy topic entry types."""
+        r"""The possible policy topic entry types.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            PROHIBITED (2):
+                The resource will not be served.
+            LIMITED (4):
+                The resource will not be served under some
+                circumstances.
+            FULLY_LIMITED (8):
+                The resource cannot serve at all because of
+                the current targeting criteria.
+            DESCRIPTIVE (5):
+                May be of interest, but does not limit how
+                the resource is served.
+            BROADENING (6):
+                Could increase coverage beyond normal.
+            AREA_OF_INTEREST_ONLY (7):
+                Constrained for all targeted countries, but
+                may serve in other countries through area of
+                interest.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

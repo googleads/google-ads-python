@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CampaignFeedServiceClient
+from .async_client import CampaignFeedServiceAsyncClient
 
-__all__ = ("CampaignFeedServiceClient",)
+__all__ = (
+    "CampaignFeedServiceClient",
+    "CampaignFeedServiceAsyncClient",
+)

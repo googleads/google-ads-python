@@ -32,7 +32,34 @@ class DataDrivenModelStatusEnum(proto.Message):
     r"""Container for enum indicating data driven model status."""
 
     class DataDrivenModelStatus(proto.Enum):
-        r"""Enumerates data driven model statuses."""
+        r"""Enumerates data driven model statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AVAILABLE (2):
+                The data driven model is available.
+            STALE (3):
+                The data driven model is stale. It hasn't
+                been updated for at least 7 days. It is still
+                being used, but will become expired if it does
+                not get updated for 30 days.
+            EXPIRED (4):
+                The data driven model expired. It hasn't been
+                updated for at least 30 days and cannot be used.
+                Most commonly this is because there hasn't been
+                the required number of events in a recent 30-day
+                period.
+            NEVER_GENERATED (5):
+                The data driven model has never been
+                generated. Most commonly this is because there
+                has never been the required number of events in
+                any 30-day period.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AVAILABLE = 2

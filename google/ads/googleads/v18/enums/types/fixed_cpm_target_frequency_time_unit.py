@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FixedCpmTargetFrequencyTimeUnitEnum",},
+    manifest={
+        "FixedCpmTargetFrequencyTimeUnitEnum",
+    },
 )
 
 
@@ -36,7 +38,18 @@ class FixedCpmTargetFrequencyTimeUnitEnum(proto.Message):
         r"""An enum describing the time window over which the bidding is
         optimized to meet the target frequency when using Fixed CPM
         bidding strategy.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MONTHLY (2):
+                Optimize bidding to reach target frequency in
+                30 days.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MONTHLY = 2

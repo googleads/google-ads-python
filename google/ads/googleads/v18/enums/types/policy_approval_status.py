@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PolicyApprovalStatusEnum",},
+    manifest={
+        "PolicyApprovalStatusEnum",
+    },
 )
 
 
@@ -37,7 +39,26 @@ class PolicyApprovalStatusEnum(proto.Message):
         approval statuses available the most severe one will be used. The
         order of severity is DISAPPROVED, AREA_OF_INTEREST_ONLY,
         APPROVED_LIMITED and APPROVED.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            DISAPPROVED (2):
+                Will not serve.
+            APPROVED_LIMITED (3):
+                Serves with restrictions.
+            APPROVED (4):
+                Serves without restrictions.
+            AREA_OF_INTEREST_ONLY (5):
+                Will not serve in targeted countries, but may
+                serve for users who are searching for
+                information about the targeted countries.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DISAPPROVED = 2

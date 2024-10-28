@@ -32,7 +32,27 @@ class AccessRoleEnum(proto.Message):
     r"""Container for enum describing possible access role for user."""
 
     class AccessRole(proto.Enum):
-        r"""Possible access role of a user."""
+        r"""Possible access role of a user.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADMIN (2):
+                Owns its account and can control the addition
+                of other users.
+            STANDARD (3):
+                Can modify campaigns, but can't affect other
+                users.
+            READ_ONLY (4):
+                Can view campaigns and account changes, but
+                cannot make edits.
+            EMAIL_ONLY (5):
+                Role for \"email only\" access. Represents an
+                email recipient rather than a true User entity.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

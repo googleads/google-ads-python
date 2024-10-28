@@ -32,7 +32,41 @@ class DateErrorEnum(proto.Message):
     r"""Container for enum describing possible date errors."""
 
     class DateError(proto.Enum):
-        r"""Enum describing possible date errors."""
+        r"""Enum describing possible date errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_FIELD_VALUES_IN_DATE (2):
+                Given field values do not correspond to a
+                valid date.
+            INVALID_FIELD_VALUES_IN_DATE_TIME (3):
+                Given field values do not correspond to a
+                valid date time.
+            INVALID_STRING_DATE (4):
+                The string date's format should be
+                yyyy-mm-dd.
+            INVALID_STRING_DATE_TIME_MICROS (6):
+                The string date time's format should be
+                yyyy-mm-dd hh:mm:ss.ssssss.
+            INVALID_STRING_DATE_TIME_SECONDS (11):
+                The string date time's format should be
+                yyyy-mm-dd hh:mm:ss.
+            INVALID_STRING_DATE_TIME_SECONDS_WITH_OFFSET (12):
+                The string date time's format should be yyyy-mm-dd
+                hh:mm:ss+|-hh:mm.
+            EARLIER_THAN_MINIMUM_DATE (7):
+                Date is before allowed minimum.
+            LATER_THAN_MAXIMUM_DATE (8):
+                Date is after allowed maximum.
+            DATE_RANGE_MINIMUM_DATE_LATER_THAN_MAXIMUM_DATE (9):
+                Date range bounds are not in order.
+            DATE_RANGE_MINIMUM_AND_MAXIMUM_DATES_BOTH_NULL (10):
+                Both dates in range are null.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

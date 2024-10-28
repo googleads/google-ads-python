@@ -71,12 +71,12 @@ class MutateAssetGroupSignalsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "AssetGroupSignalOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AssetGroupSignalOperation",
+    operations: MutableSequence["AssetGroupSignalOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetGroupSignalOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateAssetGroupSignalsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -95,6 +97,7 @@ class MutateAssetGroupSignalsRequest(proto.Message):
 
 class AssetGroupSignalOperation(proto.Message):
     r"""A single operation (create, remove) on an asset group signal.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -126,12 +129,12 @@ class AssetGroupSignalOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
     """
 
-    exempt_policy_violation_keys: MutableSequence[
-        policy.PolicyViolationKey
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message=policy.PolicyViolationKey,
+    exempt_policy_violation_keys: MutableSequence[policy.PolicyViolationKey] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=policy.PolicyViolationKey,
+        )
     )
     create: gagr_asset_group_signal.AssetGroupSignal = proto.Field(
         proto.MESSAGE,
@@ -148,6 +151,7 @@ class AssetGroupSignalOperation(proto.Message):
 
 class MutateAssetGroupSignalsResponse(proto.Message):
     r"""Response message for an asset group signal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateAssetGroupSignalResult]):
             All results for the mutate.
@@ -159,12 +163,12 @@ class MutateAssetGroupSignalsResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateAssetGroupSignalResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateAssetGroupSignalResult",
+    results: MutableSequence["MutateAssetGroupSignalResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAssetGroupSignalResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -175,6 +179,7 @@ class MutateAssetGroupSignalsResponse(proto.Message):
 
 class MutateAssetGroupSignalResult(proto.Message):
     r"""The result for the asset group signal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

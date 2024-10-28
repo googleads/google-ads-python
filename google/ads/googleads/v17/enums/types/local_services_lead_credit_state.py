@@ -35,7 +35,20 @@ class LocalServicesCreditStateEnum(proto.Message):
     """
 
     class CreditState(proto.Enum):
-        r"""Possible credit states of a lead."""
+        r"""Possible credit states of a lead.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                Credit is pending.
+            CREDITED (3):
+                Credit request is complete.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

@@ -155,6 +155,7 @@ class CampaignBidModifierOperation(proto.Message):
 
 class MutateCampaignBidModifiersResponse(proto.Message):
     r"""Response message for campaign bid modifiers mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -182,6 +183,7 @@ class MutateCampaignBidModifiersResponse(proto.Message):
 
 class MutateCampaignBidModifierResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

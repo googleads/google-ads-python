@@ -33,6 +33,7 @@ __protobuf__ = proto.module(
 
 class Label(proto.Message):
     r"""A label.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class CarrierConstant(proto.Message):
     r"""A carrier criterion that can be used in campaign targeting.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -24,13 +24,16 @@ from google.ads.googleads.v18.enums.types import campaign_shared_set_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignSharedSet",},
+    manifest={
+        "CampaignSharedSet",
+    },
 )
 
 
 class CampaignSharedSet(proto.Message):
     r"""CampaignSharedSets are used for managing the shared sets
     associated with a campaign.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -63,15 +66,22 @@ class CampaignSharedSet(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     shared_set: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
-    status: campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus = proto.Field(
+    status: (
+        campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus,

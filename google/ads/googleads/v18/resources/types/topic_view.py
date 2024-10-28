@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"TopicView",},
+    manifest={
+        "TopicView",
+    },
 )
 
 
 class TopicView(proto.Message):
     r"""A topic view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the topic view. Topic view
@@ -37,7 +40,8 @@ class TopicView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

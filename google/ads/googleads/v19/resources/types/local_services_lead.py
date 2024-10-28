@@ -43,6 +43,7 @@ class LocalServicesLead(proto.Message):
     messages or books service from advertiser.
     More info: https://ads.google.com/local-services-ads
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -157,6 +158,7 @@ class LocalServicesLead(proto.Message):
 
 class ContactDetails(proto.Message):
     r"""Fields containing consumer contact details.
+
     Attributes:
         phone_number (str):
             Output only. Consumer phone number in E164
@@ -211,6 +213,7 @@ class Note(proto.Message):
 
 class CreditDetails(proto.Message):
     r"""Represents the credit details of a lead.
+
     Attributes:
         credit_state (google.ads.googleads.v19.enums.types.LocalServicesCreditStateEnum.CreditState):
             Output only. Credit state of the lead.

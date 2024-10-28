@@ -81,6 +81,7 @@ class MutateUserListCustomerTypesRequest(proto.Message):
 
 class UserListCustomerTypeOperation(proto.Message):
     r"""A single mutate operation on the user list customer type.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -120,6 +121,7 @@ class UserListCustomerTypeOperation(proto.Message):
 
 class MutateUserListCustomerTypesResponse(proto.Message):
     r"""Response message for a user list customer type mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -147,6 +149,7 @@ class MutateUserListCustomerTypesResponse(proto.Message):
 
 class MutateUserListCustomerTypeResult(proto.Message):
     r"""The result for the user list customer type mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class MobileAppCategoryConstant(proto.Message):
     r"""A mobile application category constant.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

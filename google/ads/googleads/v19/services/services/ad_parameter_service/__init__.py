@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AdParameterServiceClient
+from .async_client import AdParameterServiceAsyncClient
 
-__all__ = ("AdParameterServiceClient",)
+__all__ = (
+    "AdParameterServiceClient",
+    "AdParameterServiceAsyncClient",
+)

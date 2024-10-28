@@ -67,20 +67,27 @@ class MutateCustomerCustomizersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomerCustomizerOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerCustomizerOperation",
+    operations: MutableSequence["CustomerCustomizerOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerCustomizerOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -119,12 +126,15 @@ class CustomerCustomizerOperation(proto.Message):
         message=gagr_customer_customizer.CustomerCustomizer,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateCustomerCustomizersResponse(proto.Message):
     r"""Response message for a customizer attribute mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCustomerCustomizerResult]):
             All results for the mutate.
@@ -136,18 +146,23 @@ class MutateCustomerCustomizersResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateCustomerCustomizerResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomerCustomizerResult",
+    results: MutableSequence["MutateCustomerCustomizerResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomerCustomizerResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class MutateCustomerCustomizerResult(proto.Message):
     r"""The result for the customizer attribute mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -158,12 +173,15 @@ class MutateCustomerCustomizerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    customer_customizer: gagr_customer_customizer.CustomerCustomizer = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_customer_customizer.CustomerCustomizer,
+    customer_customizer: gagr_customer_customizer.CustomerCustomizer = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_customer_customizer.CustomerCustomizer,
+        )
     )
 
 

@@ -32,7 +32,21 @@ class QualityScoreBucketEnum(proto.Message):
     r"""The relative performance compared to other advertisers."""
 
     class QualityScoreBucket(proto.Enum):
-        r"""Enum listing the possible quality score buckets."""
+        r"""Enum listing the possible quality score buckets.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BELOW_AVERAGE (2):
+                Quality of the creative is below average.
+            AVERAGE (3):
+                Quality of the creative is average.
+            ABOVE_AVERAGE (4):
+                Quality of the creative is above average.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

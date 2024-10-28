@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class CustomerAsset(proto.Message):
     r"""A link between a customer and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer asset.

@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemSetLink",},
+    manifest={
+        "FeedItemSetLink",
+    },
 )
 
 
 class FeedItemSetLink(proto.Message):
     r"""Represents a link between a FeedItem and a FeedItemSet.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the feed item set link. Feed
@@ -40,13 +43,16 @@ class FeedItemSetLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed_item: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     feed_item_set: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 

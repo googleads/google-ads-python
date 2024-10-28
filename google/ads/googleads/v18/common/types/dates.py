@@ -24,12 +24,17 @@ from google.ads.googleads.v18.enums.types import month_of_year
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"DateRange", "YearMonthRange", "YearMonth",},
+    manifest={
+        "DateRange",
+        "YearMonthRange",
+        "YearMonth",
+    },
 )
 
 
 class DateRange(proto.Message):
     r"""A date range.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -46,10 +51,14 @@ class DateRange(proto.Message):
     """
 
     start_date: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
@@ -66,15 +75,20 @@ class YearMonthRange(proto.Message):
     """
 
     start: "YearMonth" = proto.Field(
-        proto.MESSAGE, number=1, message="YearMonth",
+        proto.MESSAGE,
+        number=1,
+        message="YearMonth",
     )
     end: "YearMonth" = proto.Field(
-        proto.MESSAGE, number=2, message="YearMonth",
+        proto.MESSAGE,
+        number=2,
+        message="YearMonth",
     )
 
 
 class YearMonth(proto.Message):
     r"""Year month.
+
     Attributes:
         year (int):
             The year (for example, 2020).
@@ -84,10 +98,13 @@ class YearMonth(proto.Message):
     """
 
     year: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     month: month_of_year.MonthOfYearEnum.MonthOfYear = proto.Field(
-        proto.ENUM, number=2, enum=month_of_year.MonthOfYearEnum.MonthOfYear,
+        proto.ENUM,
+        number=2,
+        enum=month_of_year.MonthOfYearEnum.MonthOfYear,
     )
 
 

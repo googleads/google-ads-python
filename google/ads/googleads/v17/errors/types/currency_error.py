@@ -32,7 +32,18 @@ class CurrencyErrorEnum(proto.Message):
     r"""Container for enum describing possible currency errors."""
 
     class CurrencyError(proto.Enum):
-        r"""Enum describing possible currency errors."""
+        r"""Enum describing possible currency errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            VALUE_NOT_MULTIPLE_OF_BILLABLE_UNIT (2):
+                Bid must be a multiple of billable unit.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         VALUE_NOT_MULTIPLE_OF_BILLABLE_UNIT = 2

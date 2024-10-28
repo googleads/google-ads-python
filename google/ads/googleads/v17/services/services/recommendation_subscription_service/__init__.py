@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import RecommendationSubscriptionServiceClient
+from .async_client import RecommendationSubscriptionServiceAsyncClient
 
-__all__ = ("RecommendationSubscriptionServiceClient",)
+__all__ = (
+    "RecommendationSubscriptionServiceClient",
+    "RecommendationSubscriptionServiceAsyncClient",
+)

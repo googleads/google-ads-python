@@ -34,6 +34,20 @@ class AudienceInsightsMarketingObjectiveEnum(proto.Message):
     class AudienceInsightsMarketingObjective(proto.Enum):
         r"""Describes the overall objective for defining an audience for
         insights.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            AWARENESS (2):
+                The objective is to increase awareness of a
+                brand or product among relevant audiences.
+            CONSIDERATION (3):
+                The objective is to encourage potential
+                customers to consider your brand or products
+                when they're researching or shopping for
+                product.
         """
 
         UNSPECIFIED = 0

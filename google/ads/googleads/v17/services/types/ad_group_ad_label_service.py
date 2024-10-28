@@ -61,12 +61,12 @@ class MutateAdGroupAdLabelsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "AdGroupAdLabelOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AdGroupAdLabelOperation",
+    operations: MutableSequence["AdGroupAdLabelOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupAdLabelOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -80,6 +80,7 @@ class MutateAdGroupAdLabelsRequest(proto.Message):
 
 class AdGroupAdLabelOperation(proto.Message):
     r"""A single operation (create, remove) on an ad group ad label.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -117,6 +118,7 @@ class AdGroupAdLabelOperation(proto.Message):
 
 class MutateAdGroupAdLabelsResponse(proto.Message):
     r"""Response message for an ad group ad labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -133,17 +135,18 @@ class MutateAdGroupAdLabelsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateAdGroupAdLabelResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateAdGroupAdLabelResult",
+    results: MutableSequence["MutateAdGroupAdLabelResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateAdGroupAdLabelResult",
+        )
     )
 
 
 class MutateAdGroupAdLabelResult(proto.Message):
     r"""The result for an ad group ad label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

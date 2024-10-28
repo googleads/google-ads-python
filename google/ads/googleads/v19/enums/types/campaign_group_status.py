@@ -32,7 +32,19 @@ class CampaignGroupStatusEnum(proto.Message):
     r"""Message describing CampaignGroup statuses."""
 
     class CampaignGroupStatus(proto.Enum):
-        r"""Possible statuses of a CampaignGroup."""
+        r"""Possible statuses of a CampaignGroup.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The campaign group is active.
+            REMOVED (3):
+                The campaign group has been removed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

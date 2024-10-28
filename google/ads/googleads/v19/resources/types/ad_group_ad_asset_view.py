@@ -43,6 +43,7 @@ class AdGroupAdAssetView(proto.Message):
     supports AppAds, Demand Gen camapaigns, and Responsive Search
     Ads.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -144,6 +145,7 @@ class AdGroupAdAssetView(proto.Message):
 
 class AdGroupAdAssetPolicySummary(proto.Message):
     r"""Contains policy information for an ad group ad asset.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v19.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for

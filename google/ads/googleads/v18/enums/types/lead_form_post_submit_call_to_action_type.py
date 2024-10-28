@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LeadFormPostSubmitCallToActionTypeEnum",},
+    manifest={
+        "LeadFormPostSubmitCallToActionTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,23 @@ class LeadFormPostSubmitCallToActionTypeEnum(proto.Message):
     class LeadFormPostSubmitCallToActionType(proto.Enum):
         r"""Enum describing the type of post-submit call-to-action
         phrases for a lead form.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            VISIT_SITE (2):
+                Visit site.
+            DOWNLOAD (3):
+                Download.
+            LEARN_MORE (4):
+                Learn more.
+            SHOP_NOW (5):
+                Shop now.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         VISIT_SITE = 2

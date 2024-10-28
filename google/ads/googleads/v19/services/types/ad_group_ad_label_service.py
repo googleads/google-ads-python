@@ -80,6 +80,7 @@ class MutateAdGroupAdLabelsRequest(proto.Message):
 
 class AdGroupAdLabelOperation(proto.Message):
     r"""A single operation (create, remove) on an ad group ad label.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -117,6 +118,7 @@ class AdGroupAdLabelOperation(proto.Message):
 
 class MutateAdGroupAdLabelsResponse(proto.Message):
     r"""Response message for an ad group ad labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -144,6 +146,7 @@ class MutateAdGroupAdLabelsResponse(proto.Message):
 
 class MutateAdGroupAdLabelResult(proto.Message):
     r"""The result for an ad group ad label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

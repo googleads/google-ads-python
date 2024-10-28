@@ -66,13 +66,15 @@ class GetSmartCampaignStatusRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class SmartCampaignNotEligibleDetails(proto.Message):
     r"""Details related to Smart campaigns that are not eligible to
     serve.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -84,7 +86,9 @@ class SmartCampaignNotEligibleDetails(proto.Message):
             This field is a member of `oneof`_ ``_not_eligible_reason``.
     """
 
-    not_eligible_reason: smart_campaign_not_eligible_reason.SmartCampaignNotEligibleReasonEnum.SmartCampaignNotEligibleReason = proto.Field(
+    not_eligible_reason: (
+        smart_campaign_not_eligible_reason.SmartCampaignNotEligibleReasonEnum.SmartCampaignNotEligibleReason
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         optional=True,
@@ -95,6 +99,7 @@ class SmartCampaignNotEligibleDetails(proto.Message):
 class SmartCampaignEligibleDetails(proto.Message):
     r"""Details related to Smart campaigns that are eligible to
     serve.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -116,15 +121,20 @@ class SmartCampaignEligibleDetails(proto.Message):
     """
 
     last_impression_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class SmartCampaignPausedDetails(proto.Message):
     r"""Details related to paused Smart campaigns.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -137,12 +147,15 @@ class SmartCampaignPausedDetails(proto.Message):
     """
 
     paused_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class SmartCampaignRemovedDetails(proto.Message):
     r"""Details related to removed Smart campaigns.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -155,12 +168,15 @@ class SmartCampaignRemovedDetails(proto.Message):
     """
 
     removed_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class SmartCampaignEndedDetails(proto.Message):
     r"""Details related to Smart campaigns that have ended.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -173,7 +189,9 @@ class SmartCampaignEndedDetails(proto.Message):
     """
 
     end_date_time: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
@@ -216,7 +234,9 @@ class GetSmartCampaignStatusResponse(proto.Message):
             This field is a member of `oneof`_ ``smart_campaign_status_details``.
     """
 
-    smart_campaign_status: gage_smart_campaign_status.SmartCampaignStatusEnum.SmartCampaignStatus = proto.Field(
+    smart_campaign_status: (
+        gage_smart_campaign_status.SmartCampaignStatusEnum.SmartCampaignStatus
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=gage_smart_campaign_status.SmartCampaignStatusEnum.SmartCampaignStatus,
@@ -280,20 +300,27 @@ class MutateSmartCampaignSettingsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "SmartCampaignSettingOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="SmartCampaignSettingOperation",
+    operations: MutableSequence["SmartCampaignSettingOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="SmartCampaignSettingOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -319,12 +346,15 @@ class SmartCampaignSettingOperation(proto.Message):
         message=gagr_smart_campaign_setting.SmartCampaignSetting,
     )
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
 class MutateSmartCampaignSettingsResponse(proto.Message):
     r"""Response message for campaign mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -337,17 +367,22 @@ class MutateSmartCampaignSettingsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateSmartCampaignSettingResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateSmartCampaignSettingResult",
+    results: MutableSequence["MutateSmartCampaignSettingResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateSmartCampaignSettingResult",
+        )
     )
 
 
 class MutateSmartCampaignSettingResult(proto.Message):
     r"""The result for the Smart campaign setting mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -358,12 +393,15 @@ class MutateSmartCampaignSettingResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    smart_campaign_setting: gagr_smart_campaign_setting.SmartCampaignSetting = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_smart_campaign_setting.SmartCampaignSetting,
+    smart_campaign_setting: gagr_smart_campaign_setting.SmartCampaignSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_smart_campaign_setting.SmartCampaignSetting,
+        )
     )
 
 

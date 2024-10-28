@@ -35,7 +35,19 @@ class MobileAppVendorEnum(proto.Message):
     """
 
     class MobileAppVendor(proto.Enum):
-        r"""The type of mobile app vendor"""
+        r"""The type of mobile app vendor
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APPLE_APP_STORE (2):
+                Mobile app vendor for Apple app store.
+            GOOGLE_APP_STORE (3):
+                Mobile app vendor for Google app store.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

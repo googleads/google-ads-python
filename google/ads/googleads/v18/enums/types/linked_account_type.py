@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LinkedAccountTypeEnum",},
+    manifest={
+        "LinkedAccountTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,18 @@ class LinkedAccountTypeEnum(proto.Message):
     class LinkedAccountType(proto.Enum):
         r"""Describes the possible link types between a Google Ads
         customer and another account.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            THIRD_PARTY_APP_ANALYTICS (2):
+                A link to provide third party app analytics
+                data.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         THIRD_PARTY_APP_ANALYTICS = 2

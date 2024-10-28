@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AgeRangeTypeEnum",},
+    manifest={
+        "AgeRangeTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,29 @@ class AgeRangeTypeEnum(proto.Message):
     class AgeRangeType(proto.Enum):
         r"""The type of demographic age ranges (for example, between 18
         and 24 years old).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AGE_RANGE_18_24 (503001):
+                Between 18 and 24 years old.
+            AGE_RANGE_25_34 (503002):
+                Between 25 and 34 years old.
+            AGE_RANGE_35_44 (503003):
+                Between 35 and 44 years old.
+            AGE_RANGE_45_54 (503004):
+                Between 45 and 54 years old.
+            AGE_RANGE_55_64 (503005):
+                Between 55 and 64 years old.
+            AGE_RANGE_65_UP (503006):
+                65 years old and beyond.
+            AGE_RANGE_UNDETERMINED (503999):
+                Undetermined age range.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AGE_RANGE_18_24 = 503001

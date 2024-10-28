@@ -39,6 +39,7 @@ class Audience(proto.Message):
     demographics and affinities, to create audiences that represent
     sections of your target segments.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

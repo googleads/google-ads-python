@@ -672,6 +672,7 @@ class GenerateTargetingSuggestionMetricsResponse(proto.Message):
 
 class BasicInsightsAudience(proto.Message):
     r"""A description of an audience used for requesting insights.
+
     Attributes:
         country_location (MutableSequence[google.ads.googleads.v19.common.types.LocationInfo]):
             Required. The countries for this audience.
@@ -910,6 +911,7 @@ class InsightsAudience(proto.Message):
 
 class InsightsAudienceAttributeGroup(proto.Message):
     r"""A list of AudienceInsightsAttributes.
+
     Attributes:
         attributes (MutableSequence[google.ads.googleads.v19.common.types.AudienceInsightsAttribute]):
             Required. A collection of audience attributes
@@ -1041,6 +1043,7 @@ class AudienceCompositionMetrics(proto.Message):
 
 class AudienceCompositionAttribute(proto.Message):
     r"""An audience attribute with metadata and metrics.
+
     Attributes:
         attribute_metadata (google.ads.googleads.v19.common.types.AudienceInsightsAttributeMetadata):
             The attribute with its metadata.

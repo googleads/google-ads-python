@@ -71,18 +71,25 @@ class MutateCampaignDraftsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignDraftOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignDraftOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignDraftOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -104,10 +111,12 @@ class PromoteCampaignDraftRequest(proto.Message):
     """
 
     campaign_draft: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
@@ -146,7 +155,9 @@ class CampaignDraftOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_draft.CampaignDraft = proto.Field(
         proto.MESSAGE,
@@ -161,12 +172,15 @@ class CampaignDraftOperation(proto.Message):
         message=gagr_campaign_draft.CampaignDraft,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCampaignDraftsResponse(proto.Message):
     r"""Response message for campaign draft mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -179,15 +193,20 @@ class MutateCampaignDraftsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateCampaignDraftResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignDraftResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignDraftResult",
     )
 
 
 class MutateCampaignDraftResult(proto.Message):
     r"""The result for the campaign draft mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -198,10 +217,13 @@ class MutateCampaignDraftResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_draft: gagr_campaign_draft.CampaignDraft = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign_draft.CampaignDraft,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign_draft.CampaignDraft,
     )
 
 
@@ -226,13 +248,16 @@ class ListCampaignDraftAsyncErrorsRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     page_size: int = proto.Field(
-        proto.INT32, number=3,
+        proto.INT32,
+        number=3,
     )
 
 
@@ -256,10 +281,13 @@ class ListCampaignDraftAsyncErrorsResponse(proto.Message):
         return self
 
     errors: MutableSequence[status_pb2.Status] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     next_page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

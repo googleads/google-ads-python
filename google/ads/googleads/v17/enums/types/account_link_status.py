@@ -37,7 +37,33 @@ class AccountLinkStatusEnum(proto.Message):
     class AccountLinkStatus(proto.Enum):
         r"""Describes the possible statuses for a link between a Google
         Ads customer and another account.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The link is enabled.
+            REMOVED (3):
+                The link is removed/disabled.
+            REQUESTED (4):
+                The link to the other account has been
+                requested. A user on the other account may now
+                approve the link by setting the status to
+                ENABLED.
+            PENDING_APPROVAL (5):
+                This link has been requested by a user on the
+                other account. It may be approved by a user on
+                this account by setting the status to ENABLED.
+            REJECTED (6):
+                The link is rejected by the approver.
+            REVOKED (7):
+                The link is revoked by the user who requested
+                the link.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

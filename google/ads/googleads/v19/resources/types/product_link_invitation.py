@@ -123,6 +123,7 @@ class ProductLinkInvitation(proto.Message):
 
 class HotelCenterLinkInvitationIdentifier(proto.Message):
     r"""The identifier for Hotel account.
+
     Attributes:
         hotel_center_id (int):
             Output only. The hotel center id of the hotel
@@ -137,6 +138,7 @@ class HotelCenterLinkInvitationIdentifier(proto.Message):
 
 class MerchantCenterLinkInvitationIdentifier(proto.Message):
     r"""The identifier for Merchant Center Account.
+
     Attributes:
         merchant_center_id (int):
             Output only. The Merchant Center id of the
@@ -152,6 +154,7 @@ class MerchantCenterLinkInvitationIdentifier(proto.Message):
 class AdvertisingPartnerLinkInvitationIdentifier(proto.Message):
     r"""The identifier for the Advertising Partner Google Ads
     account.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

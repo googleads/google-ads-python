@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignSharedSetStatusEnum",},
+    manifest={
+        "CampaignSharedSetStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,21 @@ class CampaignSharedSetStatusEnum(proto.Message):
     """
 
     class CampaignSharedSetStatus(proto.Enum):
-        r"""Enum listing the possible campaign shared set statuses."""
+        r"""Enum listing the possible campaign shared set statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The campaign shared set is enabled.
+            REMOVED (3):
+                The campaign shared set is removed and can no
+                longer be used.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

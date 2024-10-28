@@ -72,6 +72,7 @@ class ShoppingProduct(proto.Message):
        UNSUPPORTED_DATE_SEGMENTATION error. On the other hand, filtering
        on date segments is allowed.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -259,6 +260,7 @@ class ShoppingProduct(proto.Message):
 
     class ProductIssue(proto.Message):
         r"""An issue affecting whether a product can show in ads.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -292,7 +294,9 @@ class ShoppingProduct(proto.Message):
             proto.STRING,
             number=1,
         )
-        ads_severity: product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity = proto.Field(
+        ads_severity: (
+            product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity,
@@ -369,7 +373,9 @@ class ShoppingProduct(proto.Message):
         number=11,
         optional=True,
     )
-    channel_exclusivity: product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity = proto.Field(
+    channel_exclusivity: (
+        product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         optional=True,
@@ -383,7 +389,9 @@ class ShoppingProduct(proto.Message):
             enum=product_condition.ProductConditionEnum.ProductCondition,
         )
     )
-    availability: product_availability.ProductAvailabilityEnum.ProductAvailability = proto.Field(
+    availability: (
+        product_availability.ProductAvailabilityEnum.ProductAvailability
+    ) = proto.Field(
         proto.ENUM,
         number=14,
         optional=True,

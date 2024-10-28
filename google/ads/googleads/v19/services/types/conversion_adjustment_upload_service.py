@@ -42,6 +42,7 @@ class UploadConversionAdjustmentsRequest(proto.Message):
     r"""Request message for
     [ConversionAdjustmentUploadService.UploadConversionAdjustments][google.ads.googleads.v19.services.ConversionAdjustmentUploadService.UploadConversionAdjustments].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -143,6 +144,7 @@ class UploadConversionAdjustmentsResponse(proto.Message):
 
 class ConversionAdjustment(proto.Message):
     r"""A conversion adjustment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -256,6 +258,7 @@ class ConversionAdjustment(proto.Message):
 
 class RestatementValue(proto.Message):
     r"""Contains information needed to restate a conversion's value.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -299,6 +302,7 @@ class GclidDateTimePair(proto.Message):
     r"""Uniquely identifies a conversion that was reported without an
     order ID specified.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -331,6 +335,7 @@ class GclidDateTimePair(proto.Message):
 class ConversionAdjustmentResult(proto.Message):
     r"""Information identifying a successfully processed
     ConversionAdjustment.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

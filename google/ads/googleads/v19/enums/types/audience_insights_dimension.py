@@ -32,7 +32,41 @@ class AudienceInsightsDimensionEnum(proto.Message):
     r"""Container for enum describing insights dimensions."""
 
     class AudienceInsightsDimension(proto.Enum):
-        r"""Possible dimensions for use in generating insights."""
+        r"""Possible dimensions for use in generating insights.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            CATEGORY (2):
+                A Product & Service category.
+            KNOWLEDGE_GRAPH (3):
+                A Knowledge Graph entity.
+            GEO_TARGET_COUNTRY (4):
+                A country, represented by a geo target.
+            SUB_COUNTRY_LOCATION (5):
+                A geographic location within a country.
+            YOUTUBE_CHANNEL (6):
+                A YouTube channel.
+            YOUTUBE_DYNAMIC_LINEUP (7):
+                A YouTube Dynamic Lineup.
+            AFFINITY_USER_INTEREST (8):
+                An Affinity UserInterest.
+            IN_MARKET_USER_INTEREST (9):
+                An In-Market UserInterest.
+            PARENTAL_STATUS (10):
+                A Parental Status value (parent, or not a
+                parent).
+            INCOME_RANGE (11):
+                A household income percentile range.
+            AGE_RANGE (12):
+                An age range.
+            GENDER (13):
+                A gender.
+            YOUTUBE_VIDEO (14):
+                A YouTube video.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

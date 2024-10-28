@@ -37,7 +37,34 @@ class InteractionEventTypeEnum(proto.Message):
     class InteractionEventType(proto.Enum):
         r"""Enum describing possible types of payable and free
         interactions.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CLICK (2):
+                Click to site. In most cases, this
+                interaction navigates to an external location,
+                usually the advertiser's landing page. This is
+                also the default InteractionEventType for click
+                events.
+            ENGAGEMENT (3):
+                The user's expressed intent to engage with
+                the ad in-place.
+            VIDEO_VIEW (4):
+                User viewed a video ad.
+            NONE (5):
+                The default InteractionEventType for ad
+                conversion events. This is used when an ad
+                conversion row does NOT indicate that the free
+                interactions (for example, the ad conversions)
+                should be 'promoted' and reported as part of the
+                core metrics. These are simply other (ad)
+                conversions.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CLICK = 2

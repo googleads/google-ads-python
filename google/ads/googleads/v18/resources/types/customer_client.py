@@ -25,7 +25,9 @@ from google.ads.googleads.v18.enums.types import customer_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerClient",},
+    manifest={
+        "CustomerClient",
+    },
 )
 
 
@@ -34,6 +36,7 @@ class CustomerClient(proto.Message):
     CustomerClients only exist for manager customers. All direct and
     indirect client customers are included, as well as the manager
     itself.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -103,37 +106,57 @@ class CustomerClient(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     client_customer: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     hidden: bool = proto.Field(
-        proto.BOOL, number=13, optional=True,
+        proto.BOOL,
+        number=13,
+        optional=True,
     )
     level: int = proto.Field(
-        proto.INT64, number=14, optional=True,
+        proto.INT64,
+        number=14,
+        optional=True,
     )
     time_zone: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     test_account: bool = proto.Field(
-        proto.BOOL, number=16, optional=True,
+        proto.BOOL,
+        number=16,
+        optional=True,
     )
     manager: bool = proto.Field(
-        proto.BOOL, number=17, optional=True,
+        proto.BOOL,
+        number=17,
+        optional=True,
     )
     descriptive_name: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=20, optional=True,
+        proto.INT64,
+        number=20,
+        optional=True,
     )
     applied_labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=21,
+        proto.STRING,
+        number=21,
     )
     status: customer_status.CustomerStatusEnum.CustomerStatus = proto.Field(
         proto.ENUM,

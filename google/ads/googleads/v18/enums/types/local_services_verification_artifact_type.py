@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesVerificationArtifactTypeEnum",},
+    manifest={
+        "LocalServicesVerificationArtifactTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,24 @@ class LocalServicesVerificationArtifactTypeEnum(proto.Message):
     class LocalServicesVerificationArtifactType(proto.Enum):
         r"""Enums describing possible types of local services
         verification artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BACKGROUND_CHECK (2):
+                Background check verification artifact.
+            INSURANCE (3):
+                Insurance verification artifact.
+            LICENSE (4):
+                License verification artifact.
+            BUSINESS_REGISTRATION_CHECK (5):
+                Business registration check verification
+                artifact.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BACKGROUND_CHECK = 2

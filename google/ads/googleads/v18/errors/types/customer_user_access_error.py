@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerUserAccessErrorEnum",},
+    manifest={
+        "CustomerUserAccessErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,32 @@ class CustomerUserAccessErrorEnum(proto.Message):
     """
 
     class CustomerUserAccessError(proto.Enum):
-        r"""Enum describing possible customer user access errors."""
+        r"""Enum describing possible customer user access errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_USER_ID (2):
+                There is no user associated with the user id
+                specified.
+            REMOVAL_DISALLOWED (3):
+                Unable to remove the access between the user
+                and customer.
+            DISALLOWED_ACCESS_ROLE (4):
+                Unable to add or update the access role as
+                specified.
+            LAST_ADMIN_USER_OF_SERVING_CUSTOMER (5):
+                The user can't remove itself from an active
+                serving customer if it's the last admin user and
+                the customer doesn't have any owner manager
+            LAST_ADMIN_USER_OF_MANAGER (6):
+                Last admin user cannot be removed from a
+                manager.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_USER_ID = 2

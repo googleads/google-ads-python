@@ -59,23 +59,29 @@ class MutateRemarketingActionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "RemarketingActionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="RemarketingActionOperation",
+    operations: MutableSequence["RemarketingActionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="RemarketingActionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class RemarketingActionOperation(proto.Message):
     r"""A single operation (create, update) on a remarketing action.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -100,7 +106,9 @@ class RemarketingActionOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: remarketing_action.RemarketingAction = proto.Field(
         proto.MESSAGE,
@@ -118,6 +126,7 @@ class RemarketingActionOperation(proto.Message):
 
 class MutateRemarketingActionsResponse(proto.Message):
     r"""Response message for remarketing action mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -130,24 +139,30 @@ class MutateRemarketingActionsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateRemarketingActionResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateRemarketingActionResult",
+    results: MutableSequence["MutateRemarketingActionResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateRemarketingActionResult",
+        )
     )
 
 
 class MutateRemarketingActionResult(proto.Message):
     r"""The result for the remarketing action mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

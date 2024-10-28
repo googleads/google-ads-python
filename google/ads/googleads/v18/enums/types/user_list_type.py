@@ -22,16 +22,48 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListTypeEnum",},
+    manifest={
+        "UserListTypeEnum",
+    },
 )
 
 
 class UserListTypeEnum(proto.Message):
-    r"""The user list types.
-    """
+    r"""The user list types."""
 
     class UserListType(proto.Enum):
-        r"""Enum containing possible user list types."""
+        r"""Enum containing possible user list types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            REMARKETING (2):
+                UserList represented as a collection of
+                conversion types.
+            LOGICAL (3):
+                UserList represented as a combination of
+                other user lists/interests.
+            EXTERNAL_REMARKETING (4):
+                UserList created in the Google Ad Manager
+                platform.
+            RULE_BASED (5):
+                UserList associated with a rule.
+            SIMILAR (6):
+                UserList with users similar to users of
+                another UserList.
+            CRM_BASED (7):
+                UserList of first-party CRM data provided by
+                advertiser in the form of emails or other
+                formats.
+            LOOKALIKE (9):
+                LookalikeUserlist, composed of users similar
+                to those of a configurable seed (set of
+                UserLists)
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REMARKETING = 2

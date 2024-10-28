@@ -35,7 +35,23 @@ class AdGroupAdStatusEnum(proto.Message):
     """
 
     class AdGroupAdStatus(proto.Enum):
-        r"""The possible statuses of an AdGroupAd."""
+        r"""The possible statuses of an AdGroupAd.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The ad group ad is enabled.
+            PAUSED (3):
+                The ad group ad is paused.
+            REMOVED (4):
+                The ad group ad is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

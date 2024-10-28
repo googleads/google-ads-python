@@ -80,12 +80,12 @@ class ApplyRecommendationRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "ApplyRecommendationOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ApplyRecommendationOperation",
+    operations: MutableSequence["ApplyRecommendationOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ApplyRecommendationOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -237,6 +237,7 @@ class ApplyRecommendationOperation(proto.Message):
         r"""Parameters to use when applying a campaign budget
         recommendation.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -256,6 +257,7 @@ class ApplyRecommendationOperation(proto.Message):
     class ForecastingSetTargetRoasParameters(proto.Message):
         r"""Parameters to use when applying a forecasting set target roas
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -286,6 +288,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class TextAdParameters(proto.Message):
         r"""Parameters to use when applying a text ad recommendation.
+
         Attributes:
             ad (google.ads.googleads.v17.resources.types.Ad):
                 New ad to add to recommended ad group. All
@@ -301,6 +304,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class KeywordParameters(proto.Message):
         r"""Parameters to use when applying keyword recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -340,6 +344,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class TargetCpaOptInParameters(proto.Message):
         r"""Parameters to use when applying Target CPA recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -369,6 +374,7 @@ class ApplyRecommendationOperation(proto.Message):
     class TargetRoasOptInParameters(proto.Message):
         r"""Parameters to use when applying a Target ROAS opt-in
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -408,12 +414,12 @@ class ApplyRecommendationOperation(proto.Message):
                 required field.
         """
 
-        callout_extensions: MutableSequence[
-            extensions.CalloutFeedItem
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=1,
-            message=extensions.CalloutFeedItem,
+        callout_extensions: MutableSequence[extensions.CalloutFeedItem] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=extensions.CalloutFeedItem,
+            )
         )
 
     class CallExtensionParameters(proto.Message):
@@ -426,28 +432,29 @@ class ApplyRecommendationOperation(proto.Message):
                 required field.
         """
 
-        call_extensions: MutableSequence[
-            extensions.CallFeedItem
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=1,
-            message=extensions.CallFeedItem,
+        call_extensions: MutableSequence[extensions.CallFeedItem] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=extensions.CallFeedItem,
+            )
         )
 
     class SitelinkExtensionParameters(proto.Message):
         r"""Parameters to use when applying sitelink recommendation.
+
         Attributes:
             sitelink_extensions (MutableSequence[google.ads.googleads.v17.common.types.SitelinkFeedItem]):
                 Sitelinks to be added. This is a required
                 field.
         """
 
-        sitelink_extensions: MutableSequence[
-            extensions.SitelinkFeedItem
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=1,
-            message=extensions.SitelinkFeedItem,
+        sitelink_extensions: MutableSequence[extensions.SitelinkFeedItem] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=extensions.SitelinkFeedItem,
+            )
         )
 
     class CalloutAssetParameters(proto.Message):
@@ -460,7 +467,9 @@ class ApplyRecommendationOperation(proto.Message):
                 a required field.
         """
 
-        ad_asset_apply_parameters: "ApplyRecommendationOperation.AdAssetApplyParameters" = proto.Field(
+        ad_asset_apply_parameters: (
+            "ApplyRecommendationOperation.AdAssetApplyParameters"
+        ) = proto.Field(
             proto.MESSAGE,
             number=1,
             message="ApplyRecommendationOperation.AdAssetApplyParameters",
@@ -468,13 +477,16 @@ class ApplyRecommendationOperation(proto.Message):
 
     class CallAssetParameters(proto.Message):
         r"""Parameters to use when applying call asset recommendations.
+
         Attributes:
             ad_asset_apply_parameters (google.ads.googleads.v17.services.types.ApplyRecommendationOperation.AdAssetApplyParameters):
                 Required. Call assets to be added. This is a
                 required field.
         """
 
-        ad_asset_apply_parameters: "ApplyRecommendationOperation.AdAssetApplyParameters" = proto.Field(
+        ad_asset_apply_parameters: (
+            "ApplyRecommendationOperation.AdAssetApplyParameters"
+        ) = proto.Field(
             proto.MESSAGE,
             number=1,
             message="ApplyRecommendationOperation.AdAssetApplyParameters",
@@ -490,7 +502,9 @@ class ApplyRecommendationOperation(proto.Message):
                 is a required field.
         """
 
-        ad_asset_apply_parameters: "ApplyRecommendationOperation.AdAssetApplyParameters" = proto.Field(
+        ad_asset_apply_parameters: (
+            "ApplyRecommendationOperation.AdAssetApplyParameters"
+        ) = proto.Field(
             proto.MESSAGE,
             number=1,
             message="ApplyRecommendationOperation.AdAssetApplyParameters",
@@ -548,7 +562,19 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         class ApplyScope(proto.Enum):
-            r"""Scope to apply the assets to."""
+            r"""Scope to apply the assets to.
+
+            Values:
+                UNSPECIFIED (0):
+                    The apply scope has not been specified.
+                UNKNOWN (1):
+                    Unknown.
+                CUSTOMER (2):
+                    Apply at the customer scope.
+                CAMPAIGN (3):
+                    Apply at the campaign scope.
+            """
+
             UNSPECIFIED = 0
             UNKNOWN = 1
             CUSTOMER = 2
@@ -563,7 +589,9 @@ class ApplyRecommendationOperation(proto.Message):
             proto.STRING,
             number=2,
         )
-        scope: "ApplyRecommendationOperation.AdAssetApplyParameters.ApplyScope" = proto.Field(
+        scope: (
+            "ApplyRecommendationOperation.AdAssetApplyParameters.ApplyScope"
+        ) = proto.Field(
             proto.ENUM,
             number=3,
             enum="ApplyRecommendationOperation.AdAssetApplyParameters.ApplyScope",
@@ -572,6 +600,7 @@ class ApplyRecommendationOperation(proto.Message):
     class MoveUnusedBudgetParameters(proto.Message):
         r"""Parameters to use when applying move unused budget
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -659,6 +688,7 @@ class ApplyRecommendationOperation(proto.Message):
         r"""Parameters to use when applying a use broad match keyword
         recommendation.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -678,6 +708,7 @@ class ApplyRecommendationOperation(proto.Message):
     class ForecastingSetTargetCpaParameters(proto.Message):
         r"""Parameters to use when applying a set target CPA
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -709,6 +740,7 @@ class ApplyRecommendationOperation(proto.Message):
         r"""Parameters to use when applying a lead form asset
         recommendation.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -726,7 +758,9 @@ class ApplyRecommendationOperation(proto.Message):
                 This field is a member of `oneof`_ ``_set_submit_lead_form_asset_campaign_goal``.
         """
 
-        ad_asset_apply_parameters: "ApplyRecommendationOperation.AdAssetApplyParameters" = proto.Field(
+        ad_asset_apply_parameters: (
+            "ApplyRecommendationOperation.AdAssetApplyParameters"
+        ) = proto.Field(
             proto.MESSAGE,
             number=1,
             message="ApplyRecommendationOperation.AdAssetApplyParameters",
@@ -813,7 +847,9 @@ class ApplyRecommendationOperation(proto.Message):
         oneof="apply_parameters",
         message=ResponsiveSearchAdAssetParameters,
     )
-    responsive_search_ad_improve_ad_strength: ResponsiveSearchAdImproveAdStrengthParameters = proto.Field(
+    responsive_search_ad_improve_ad_strength: (
+        ResponsiveSearchAdImproveAdStrengthParameters
+    ) = proto.Field(
         proto.MESSAGE,
         number=14,
         oneof="apply_parameters",
@@ -921,6 +957,7 @@ class ApplyRecommendationResponse(proto.Message):
 
 class ApplyRecommendationResult(proto.Message):
     r"""The result of applying a recommendation.
+
     Attributes:
         resource_name (str):
             Returned for successful applies.
@@ -972,12 +1009,12 @@ class DismissRecommendationRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        DismissRecommendationOperation
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message=DismissRecommendationOperation,
+    operations: MutableSequence[DismissRecommendationOperation] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=DismissRecommendationOperation,
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -1003,6 +1040,7 @@ class DismissRecommendationResponse(proto.Message):
 
     class DismissRecommendationResult(proto.Message):
         r"""The result of dismissing a recommendation.
+
         Attributes:
             resource_name (str):
                 Returned for successful dismissals.
@@ -1028,6 +1066,7 @@ class DismissRecommendationResponse(proto.Message):
 class GenerateRecommendationsRequest(proto.Message):
     r"""Request message for
     [RecommendationService.GenerateRecommendations][google.ads.googleads.v17.services.RecommendationService.GenerateRecommendations].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1121,7 +1160,9 @@ class GenerateRecommendationsRequest(proto.Message):
                 This field is a member of `oneof`_ ``bidding_strategy_target_info``.
         """
 
-        bidding_strategy_type: gage_bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = proto.Field(
+        bidding_strategy_type: (
+            gage_bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             optional=True,
@@ -1140,6 +1181,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class AdGroupInfo(proto.Message):
         r"""Current AdGroup Information of the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1171,6 +1213,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class SeedInfo(proto.Message):
         r"""A keyword seed and a specific url to generate keywords from.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1206,7 +1249,9 @@ class GenerateRecommendationsRequest(proto.Message):
         number=2,
         enum=recommendation_type.RecommendationTypeEnum.RecommendationType,
     )
-    advertising_channel_type: gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType = proto.Field(
+    advertising_channel_type: (
+        gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType,
@@ -1216,7 +1261,9 @@ class GenerateRecommendationsRequest(proto.Message):
         number=4,
         optional=True,
     )
-    conversion_tracking_status: conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus = proto.Field(
+    conversion_tracking_status: (
+        conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         optional=True,
@@ -1254,12 +1301,12 @@ class GenerateRecommendationsResponse(proto.Message):
             recommendation for that type.
     """
 
-    recommendations: MutableSequence[
-        recommendation.Recommendation
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=recommendation.Recommendation,
+    recommendations: MutableSequence[recommendation.Recommendation] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=recommendation.Recommendation,
+        )
     )
 
 

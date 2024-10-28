@@ -92,6 +92,7 @@ __protobuf__ = proto.module(
 
 class YoutubeVideoAsset(proto.Message):
     r"""A YouTube asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -117,6 +118,7 @@ class YoutubeVideoAsset(proto.Message):
 
 class MediaBundleAsset(proto.Message):
     r"""A MediaBundle asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -140,6 +142,7 @@ class MediaBundleAsset(proto.Message):
 
 class ImageAsset(proto.Message):
     r"""An Image asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -184,6 +187,7 @@ class ImageDimension(proto.Message):
     r"""Metadata for an image at a certain size, either original or
     resized.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -221,6 +225,7 @@ class ImageDimension(proto.Message):
 
 class TextAsset(proto.Message):
     r"""A Text asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -239,6 +244,7 @@ class TextAsset(proto.Message):
 
 class LeadFormAsset(proto.Message):
     r"""A Lead Form asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -311,7 +317,9 @@ class LeadFormAsset(proto.Message):
         proto.STRING,
         number=10,
     )
-    call_to_action_type: lead_form_call_to_action_type.LeadFormCallToActionTypeEnum.LeadFormCallToActionType = proto.Field(
+    call_to_action_type: (
+        lead_form_call_to_action_type.LeadFormCallToActionTypeEnum.LeadFormCallToActionType
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         enum=lead_form_call_to_action_type.LeadFormCallToActionTypeEnum.LeadFormCallToActionType,
@@ -347,21 +355,23 @@ class LeadFormAsset(proto.Message):
         number=8,
         message="LeadFormField",
     )
-    custom_question_fields: MutableSequence[
-        "LeadFormCustomQuestionField"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=23,
-        message="LeadFormCustomQuestionField",
+    custom_question_fields: MutableSequence["LeadFormCustomQuestionField"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=23,
+            message="LeadFormCustomQuestionField",
+        )
     )
-    delivery_methods: MutableSequence[
-        "LeadFormDeliveryMethod"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=9,
-        message="LeadFormDeliveryMethod",
+    delivery_methods: MutableSequence["LeadFormDeliveryMethod"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message="LeadFormDeliveryMethod",
+        )
     )
-    post_submit_call_to_action_type: lead_form_post_submit_call_to_action_type.LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType = proto.Field(
+    post_submit_call_to_action_type: (
+        lead_form_post_submit_call_to_action_type.LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType
+    ) = proto.Field(
         proto.ENUM,
         number=19,
         enum=lead_form_post_submit_call_to_action_type.LeadFormPostSubmitCallToActionTypeEnum.LeadFormPostSubmitCallToActionType,
@@ -371,7 +381,9 @@ class LeadFormAsset(proto.Message):
         number=20,
         optional=True,
     )
-    desired_intent: lead_form_desired_intent.LeadFormDesiredIntentEnum.LeadFormDesiredIntent = proto.Field(
+    desired_intent: (
+        lead_form_desired_intent.LeadFormDesiredIntentEnum.LeadFormDesiredIntent
+    ) = proto.Field(
         proto.ENUM,
         number=21,
         enum=lead_form_desired_intent.LeadFormDesiredIntentEnum.LeadFormDesiredIntent,
@@ -385,6 +397,7 @@ class LeadFormAsset(proto.Message):
 
 class LeadFormField(proto.Message):
     r"""One input field instance within a form.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -416,7 +429,9 @@ class LeadFormField(proto.Message):
             This field is a member of `oneof`_ ``answers``.
     """
 
-    input_type: lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType = proto.Field(
+    input_type: (
+        lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType,
@@ -436,6 +451,7 @@ class LeadFormField(proto.Message):
 
 class LeadFormCustomQuestionField(proto.Message):
     r"""One custom question input field instance within a form.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -500,6 +516,7 @@ class LeadFormSingleChoiceAnswers(proto.Message):
 
 class LeadFormDeliveryMethod(proto.Message):
     r"""A configuration of how leads are delivered to the advertiser.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -522,6 +539,7 @@ class WebhookDelivery(proto.Message):
     to an endpoint they specify. The requests contain JSON matching
     a schema that Google publishes as part of form ads
     documentation.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -570,6 +588,7 @@ class BookOnGoogleAsset(proto.Message):
 
 class PromotionAsset(proto.Message):
     r"""A Promotion asset.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -634,7 +653,9 @@ class PromotionAsset(proto.Message):
         proto.STRING,
         number=1,
     )
-    discount_modifier: promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier = proto.Field(
+    discount_modifier: (
+        promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier,
@@ -647,7 +668,9 @@ class PromotionAsset(proto.Message):
         proto.STRING,
         number=8,
     )
-    occasion: promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion = proto.Field(
+    occasion: (
+        promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion,
@@ -664,12 +687,12 @@ class PromotionAsset(proto.Message):
         proto.STRING,
         number=12,
     )
-    ad_schedule_targets: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=13,
-        message=criteria.AdScheduleInfo,
+    ad_schedule_targets: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=13,
+            message=criteria.AdScheduleInfo,
+        )
     )
     percent_off: int = proto.Field(
         proto.INT64,
@@ -697,6 +720,7 @@ class PromotionAsset(proto.Message):
 
 class CalloutAsset(proto.Message):
     r"""A Callout asset.
+
     Attributes:
         callout_text (str):
             Required. The callout text.
@@ -727,17 +751,18 @@ class CalloutAsset(proto.Message):
         proto.STRING,
         number=3,
     )
-    ad_schedule_targets: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=4,
-        message=criteria.AdScheduleInfo,
+    ad_schedule_targets: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=criteria.AdScheduleInfo,
+        )
     )
 
 
 class StructuredSnippetAsset(proto.Message):
     r"""A Structured Snippet asset.
+
     Attributes:
         header (str):
             Required. The header of the snippet.
@@ -764,6 +789,7 @@ class StructuredSnippetAsset(proto.Message):
 
 class SitelinkAsset(proto.Message):
     r"""A Sitelink asset.
+
     Attributes:
         link_text (str):
             Required. URL display text for the sitelink.
@@ -812,17 +838,18 @@ class SitelinkAsset(proto.Message):
         proto.STRING,
         number=5,
     )
-    ad_schedule_targets: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message=criteria.AdScheduleInfo,
+    ad_schedule_targets: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=criteria.AdScheduleInfo,
+        )
     )
 
 
 class PageFeedAsset(proto.Message):
     r"""A Page Feed asset.
+
     Attributes:
         page_url (str):
             Required. The webpage that advertisers want
@@ -843,6 +870,7 @@ class PageFeedAsset(proto.Message):
 
 class DynamicEducationAsset(proto.Message):
     r"""A Dynamic Education asset.
+
     Attributes:
         program_id (str):
             Required. Program ID which can be any
@@ -958,6 +986,7 @@ class DynamicEducationAsset(proto.Message):
 
 class MobileAppAsset(proto.Message):
     r"""An asset representing a mobile app.
+
     Attributes:
         app_id (str):
             Required. A string that uniquely identifies a
@@ -1006,6 +1035,7 @@ class MobileAppAsset(proto.Message):
 
 class HotelCalloutAsset(proto.Message):
     r"""An asset representing a hotel callout.
+
     Attributes:
         text (str):
             Required. The text of the hotel callout
@@ -1028,6 +1058,7 @@ class HotelCalloutAsset(proto.Message):
 
 class CallAsset(proto.Message):
     r"""A Call asset.
+
     Attributes:
         country_code (str):
             Required. Two-letter country code of the
@@ -1060,7 +1091,9 @@ class CallAsset(proto.Message):
         proto.STRING,
         number=2,
     )
-    call_conversion_reporting_state: gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState = proto.Field(
+    call_conversion_reporting_state: (
+        gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState,
@@ -1069,17 +1102,18 @@ class CallAsset(proto.Message):
         proto.STRING,
         number=4,
     )
-    ad_schedule_targets: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=5,
-        message=criteria.AdScheduleInfo,
+    ad_schedule_targets: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message=criteria.AdScheduleInfo,
+        )
     )
 
 
 class PriceAsset(proto.Message):
     r"""An asset representing a list of price offers.
+
     Attributes:
         type_ (google.ads.googleads.v17.enums.types.PriceExtensionTypeEnum.PriceExtensionType):
             Required. The type of the price asset.
@@ -1101,7 +1135,9 @@ class PriceAsset(proto.Message):
             enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
         )
     )
-    price_qualifier: price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier = proto.Field(
+    price_qualifier: (
+        price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier,
@@ -1119,6 +1155,7 @@ class PriceAsset(proto.Message):
 
 class PriceOffering(proto.Message):
     r"""A single price offering within a PriceAsset.
+
     Attributes:
         header (str):
             Required. The header of the price offering.
@@ -1154,7 +1191,9 @@ class PriceOffering(proto.Message):
         number=3,
         message=feed_common.Money,
     )
-    unit: price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit = proto.Field(
+    unit: (
+        price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit,
@@ -1171,12 +1210,15 @@ class PriceOffering(proto.Message):
 
 class CallToActionAsset(proto.Message):
     r"""A call to action asset.
+
     Attributes:
         call_to_action (google.ads.googleads.v17.enums.types.CallToActionTypeEnum.CallToActionType):
             Call to action.
     """
 
-    call_to_action: gage_call_to_action_type.CallToActionTypeEnum.CallToActionType = proto.Field(
+    call_to_action: (
+        gage_call_to_action_type.CallToActionTypeEnum.CallToActionType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=gage_call_to_action_type.CallToActionTypeEnum.CallToActionType,
@@ -1185,6 +1227,7 @@ class CallToActionAsset(proto.Message):
 
 class DynamicRealEstateAsset(proto.Message):
     r"""A dynamic real estate asset.
+
     Attributes:
         listing_id (str):
             Required. Listing ID which can be any
@@ -1307,6 +1350,7 @@ class DynamicRealEstateAsset(proto.Message):
 
 class DynamicCustomAsset(proto.Message):
     r"""A dynamic custom asset.
+
     Attributes:
         id (str):
             Required. ID which can be any sequence of
@@ -1450,6 +1494,7 @@ class DynamicCustomAsset(proto.Message):
 
 class DynamicHotelsAndRentalsAsset(proto.Message):
     r"""A dynamic hotels and rentals asset.
+
     Attributes:
         property_id (str):
             Required. Property ID which can be any
@@ -1590,6 +1635,7 @@ class DynamicHotelsAndRentalsAsset(proto.Message):
 
 class DynamicFlightsAsset(proto.Message):
     r"""A dynamic flights asset.
+
     Attributes:
         destination_id (str):
             Required. Destination ID which can be any
@@ -1717,6 +1763,7 @@ class DynamicFlightsAsset(proto.Message):
 
 class DemandGenCarouselCardAsset(proto.Message):
     r"""A Demand Gen Carousel Card asset.
+
     Attributes:
         marketing_image_asset (str):
             Asset resource name of the associated 1.91:1
@@ -1759,6 +1806,7 @@ class DemandGenCarouselCardAsset(proto.Message):
 
 class DynamicTravelAsset(proto.Message):
     r"""A dynamic travel asset.
+
     Attributes:
         destination_id (str):
             Required. Destination ID which can be any
@@ -1899,6 +1947,7 @@ class DynamicTravelAsset(proto.Message):
 
 class DynamicLocalAsset(proto.Message):
     r"""A dynamic local asset.
+
     Attributes:
         deal_id (str):
             Required. Deal ID which can be any sequence
@@ -2031,6 +2080,7 @@ class DynamicLocalAsset(proto.Message):
 
 class DynamicJobsAsset(proto.Message):
     r"""A dynamic jobs asset.
+
     Attributes:
         job_id (str):
             Required. Job ID which can be any sequence of
@@ -2142,6 +2192,7 @@ class DynamicJobsAsset(proto.Message):
 
 class LocationAsset(proto.Message):
     r"""A location asset.
+
     Attributes:
         place_id (str):
             Place IDs uniquely identify a place in the
@@ -2168,14 +2219,16 @@ class LocationAsset(proto.Message):
         proto.STRING,
         number=1,
     )
-    business_profile_locations: MutableSequence[
-        "BusinessProfileLocation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="BusinessProfileLocation",
+    business_profile_locations: MutableSequence["BusinessProfileLocation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="BusinessProfileLocation",
+        )
     )
-    location_ownership_type: gage_location_ownership_type.LocationOwnershipTypeEnum.LocationOwnershipType = proto.Field(
+    location_ownership_type: (
+        gage_location_ownership_type.LocationOwnershipTypeEnum.LocationOwnershipType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_location_ownership_type.LocationOwnershipTypeEnum.LocationOwnershipType,
@@ -2217,6 +2270,7 @@ class BusinessProfileLocation(proto.Message):
 
 class HotelPropertyAsset(proto.Message):
     r"""A hotel property asset.
+
     Attributes:
         place_id (str):
             Place IDs uniquely identify a place in the

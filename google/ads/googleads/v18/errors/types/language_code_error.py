@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"LanguageCodeErrorEnum",},
+    manifest={
+        "LanguageCodeErrorEnum",
+    },
 )
 
 
 class LanguageCodeErrorEnum(proto.Message):
-    r"""Container for enum describing language code errors.
-    """
+    r"""Container for enum describing language code errors."""
 
     class LanguageCodeError(proto.Enum):
-        r"""Enum describing language code errors."""
+        r"""Enum describing language code errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            LANGUAGE_CODE_NOT_FOUND (2):
+                The input language code is not recognized.
+            INVALID_LANGUAGE_CODE (3):
+                The language code is not supported.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LANGUAGE_CODE_NOT_FOUND = 2

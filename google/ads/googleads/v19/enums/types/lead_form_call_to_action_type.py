@@ -34,6 +34,41 @@ class LeadFormCallToActionTypeEnum(proto.Message):
     class LeadFormCallToActionType(proto.Enum):
         r"""Enum describing the type of call-to-action phrases in a lead
         form.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LEARN_MORE (2):
+                Learn more.
+            GET_QUOTE (3):
+                Get quote.
+            APPLY_NOW (4):
+                Apply now.
+            SIGN_UP (5):
+                Sign Up.
+            CONTACT_US (6):
+                Contact us.
+            SUBSCRIBE (7):
+                Subscribe.
+            DOWNLOAD (8):
+                Download.
+            BOOK_NOW (9):
+                Book now.
+            GET_OFFER (10):
+                Get offer.
+            REGISTER (11):
+                Register.
+            GET_INFO (12):
+                Get info.
+            REQUEST_DEMO (13):
+                Request a demo.
+            JOIN_NOW (14):
+                Join now.
+            GET_STARTED (15):
+                Get started.
         """
 
         UNSPECIFIED = 0

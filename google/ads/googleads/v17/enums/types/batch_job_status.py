@@ -32,7 +32,22 @@ class BatchJobStatusEnum(proto.Message):
     r"""Container for enum describing possible batch job statuses."""
 
     class BatchJobStatus(proto.Enum):
-        r"""The batch job statuses."""
+        r"""The batch job statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The job is not currently running.
+            RUNNING (3):
+                The job is running.
+            DONE (4):
+                The job is done.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

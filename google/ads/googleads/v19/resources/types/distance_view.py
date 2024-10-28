@@ -39,6 +39,7 @@ class DistanceView(proto.Message):
     distance and a single impression will contribute to the metrics
     for all DistanceBuckets that include the user's distance.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

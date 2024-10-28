@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ConversionActionServiceClient
+from .async_client import ConversionActionServiceAsyncClient
 
-__all__ = ("ConversionActionServiceClient",)
+__all__ = (
+    "ConversionActionServiceClient",
+    "ConversionActionServiceAsyncClient",
+)

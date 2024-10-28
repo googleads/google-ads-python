@@ -37,6 +37,15 @@ class KeywordPlanCampaignKeywordErrorEnum(proto.Message):
     class KeywordPlanCampaignKeywordError(proto.Enum):
         r"""Enum describing possible errors from applying a keyword plan
         campaign keyword.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CAMPAIGN_KEYWORD_IS_POSITIVE (8):
+                Keyword plan campaign keyword is positive.
         """
 
         UNSPECIFIED = 0

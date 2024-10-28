@@ -15,12 +15,26 @@
 #
 from google.api_core import gapic_v1
 from google.api_core import retry as retries
-from typing import Any, Callable, Iterable, Iterator, Sequence, Tuple, Union
+from google.api_core import retry_async as retries_async
+from typing import (
+    Any,
+    AsyncIterator,
+    Awaitable,
+    Callable,
+    Sequence,
+    Tuple,
+    Iterator,
+    Union,
+)
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault, None]
+    OptionalAsyncRetry = Union[
+        retries_async.AsyncRetry, gapic_v1.method._MethodDefault, None
+    ]
 except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object, None]  # type: ignore
+    OptionalAsyncRetry = Union[retries_async.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v18.services.types import campaign_draft_service
 from google.rpc import status_pb2  # type: ignore
@@ -51,28 +65,31 @@ class ListCampaignDraftAsyncErrorsPager:
         ],
         request: campaign_draft_service.ListCampaignDraftAsyncErrorsRequest,
         response: campaign_draft_service.ListCampaignDraftAsyncErrorsResponse,
+        *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
-        metadata: Sequence[Tuple[str, str]] = (),
+        metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ):
         """Instantiate the pager.
 
         Args:
             method (Callable): The method that was originally called, and
                 which instantiated this pager.
-            request (:class:`google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsRequest`):
+            request (google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsRequest):
                 The initial request object.
-            response (:class:`google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsResponse`):
+            response (google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsResponse):
                 The initial response object.
             retry (google.api_core.retry.Retry): Designation of what errors,
                 if any, should be retried.
             timeout (float): The timeout for this request.
-            metadata (Sequence[Tuple[str, str]]): Strings which should be
-                sent along with the request as metadata.
+            metadata (Sequence[Tuple[str, Union[str, bytes]]]): Key/value pairs which should be
+                sent along with the request as metadata. Normally, each value must be of type `str`,
+                but for metadata keys ending with the suffix `-bin`, the corresponding values must
+                be of type `bytes`.
         """
         self._method = method
-        self._request = campaign_draft_service.ListCampaignDraftAsyncErrorsRequest(
-            request
+        self._request = (
+            campaign_draft_service.ListCampaignDraftAsyncErrorsRequest(request)
         )
         self._response = response
         self._retry = retry
@@ -85,7 +102,7 @@ class ListCampaignDraftAsyncErrorsPager:
     @property
     def pages(
         self,
-    ) -> Iterable[campaign_draft_service.ListCampaignDraftAsyncErrorsResponse]:
+    ) -> Iterator[campaign_draft_service.ListCampaignDraftAsyncErrorsResponse]:
         yield self._response
         while self._response.next_page_token:
             self._request.page_token = self._response.next_page_token
@@ -100,6 +117,97 @@ class ListCampaignDraftAsyncErrorsPager:
     def __iter__(self) -> Iterator[status_pb2.Status]:
         for page in self.pages:
             yield from page.errors
+
+    def __repr__(self) -> str:
+        return "{0}<{1!r}>".format(self.__class__.__name__, self._response)
+
+
+class ListCampaignDraftAsyncErrorsAsyncPager:
+    """A pager for iterating through ``list_campaign_draft_async_errors`` requests.
+
+    This class thinly wraps an initial
+    :class:`google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsResponse` object, and
+    provides an ``__aiter__`` method to iterate through its
+    ``errors`` field.
+
+    If there are more pages, the ``__aiter__`` method will make additional
+    ``ListCampaignDraftAsyncErrors`` requests and continue to iterate
+    through the ``errors`` field on the
+    corresponding responses.
+
+    All the usual :class:`google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsResponse`
+    attributes are available on the pager. If multiple requests are made, only
+    the most recent response is retained, and thus used for attribute lookup.
+    """
+
+    def __init__(
+        self,
+        method: Callable[
+            ...,
+            Awaitable[
+                campaign_draft_service.ListCampaignDraftAsyncErrorsResponse
+            ],
+        ],
+        request: campaign_draft_service.ListCampaignDraftAsyncErrorsRequest,
+        response: campaign_draft_service.ListCampaignDraftAsyncErrorsResponse,
+        *,
+        retry: OptionalAsyncRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
+    ):
+        """Instantiates the pager.
+
+        Args:
+            method (Callable): The method that was originally called, and
+                which instantiated this pager.
+            request (google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsRequest):
+                The initial request object.
+            response (google.ads.googleads.v18.services.types.ListCampaignDraftAsyncErrorsResponse):
+                The initial response object.
+            retry (google.api_core.retry.AsyncRetry): Designation of what errors,
+                if any, should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, Union[str, bytes]]]): Key/value pairs which should be
+                sent along with the request as metadata. Normally, each value must be of type `str`,
+                but for metadata keys ending with the suffix `-bin`, the corresponding values must
+                be of type `bytes`.
+        """
+        self._method = method
+        self._request = (
+            campaign_draft_service.ListCampaignDraftAsyncErrorsRequest(request)
+        )
+        self._response = response
+        self._retry = retry
+        self._timeout = timeout
+        self._metadata = metadata
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._response, name)
+
+    @property
+    async def pages(
+        self,
+    ) -> AsyncIterator[
+        campaign_draft_service.ListCampaignDraftAsyncErrorsResponse
+    ]:
+        yield self._response
+        while self._response.next_page_token:
+            self._request.page_token = self._response.next_page_token
+            self._response = await self._method(
+                self._request,
+                retry=self._retry,
+                timeout=self._timeout,
+                metadata=self._metadata,
+            )
+            yield self._response
+
+    def __aiter__(self) -> AsyncIterator[status_pb2.Status]:
+        async def async_generator():
+            async for page in self.pages:
+                for response in page.errors:
+                    yield response
+
+        return async_generator()
 
     def __repr__(self) -> str:
         return "{0}<{1!r}>".format(self.__class__.__name__, self._response)

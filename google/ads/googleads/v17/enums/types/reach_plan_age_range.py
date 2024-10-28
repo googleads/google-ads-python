@@ -32,7 +32,67 @@ class ReachPlanAgeRangeEnum(proto.Message):
     r"""Message describing plannable age ranges."""
 
     class ReachPlanAgeRange(proto.Enum):
-        r"""Possible plannable age range values."""
+        r"""Possible plannable age range values.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            AGE_RANGE_18_24 (503001):
+                Between 18 and 24 years old.
+            AGE_RANGE_18_34 (2):
+                Between 18 and 34 years old.
+            AGE_RANGE_18_44 (3):
+                Between 18 and 44 years old.
+            AGE_RANGE_18_49 (4):
+                Between 18 and 49 years old.
+            AGE_RANGE_18_54 (5):
+                Between 18 and 54 years old.
+            AGE_RANGE_18_64 (6):
+                Between 18 and 64 years old.
+            AGE_RANGE_18_65_UP (7):
+                Between 18 and 65+ years old.
+            AGE_RANGE_21_34 (8):
+                Between 21 and 34 years old.
+            AGE_RANGE_25_34 (503002):
+                Between 25 and 34 years old.
+            AGE_RANGE_25_44 (9):
+                Between 25 and 44 years old.
+            AGE_RANGE_25_49 (10):
+                Between 25 and 49 years old.
+            AGE_RANGE_25_54 (11):
+                Between 25 and 54 years old.
+            AGE_RANGE_25_64 (12):
+                Between 25 and 64 years old.
+            AGE_RANGE_25_65_UP (13):
+                Between 25 and 65+ years old.
+            AGE_RANGE_35_44 (503003):
+                Between 35 and 44 years old.
+            AGE_RANGE_35_49 (14):
+                Between 35 and 49 years old.
+            AGE_RANGE_35_54 (15):
+                Between 35 and 54 years old.
+            AGE_RANGE_35_64 (16):
+                Between 35 and 64 years old.
+            AGE_RANGE_35_65_UP (17):
+                Between 35 and 65+ years old.
+            AGE_RANGE_45_54 (503004):
+                Between 45 and 54 years old.
+            AGE_RANGE_45_64 (18):
+                Between 45 and 64 years old.
+            AGE_RANGE_45_65_UP (19):
+                Between 45 and 65+ years old.
+            AGE_RANGE_50_65_UP (20):
+                Between 50 and 65+ years old.
+            AGE_RANGE_55_64 (503005):
+                Between 55 and 64 years old.
+            AGE_RANGE_55_65_UP (21):
+                Between 55 and 65+ years old.
+            AGE_RANGE_65_UP (503006):
+                65 years old and beyond.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AGE_RANGE_18_24 = 503001

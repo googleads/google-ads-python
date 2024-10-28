@@ -32,7 +32,28 @@ class AdStrengthEnum(proto.Message):
     r"""Container for enum describing possible ad strengths."""
 
     class AdStrength(proto.Enum):
-        r"""Enum listing the possible ad strengths."""
+        r"""Enum listing the possible ad strengths.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The ad strength is currently pending.
+            NO_ADS (3):
+                No ads could be generated.
+            POOR (4):
+                Poor strength.
+            AVERAGE (5):
+                Average strength.
+            GOOD (6):
+                Good strength.
+            EXCELLENT (7):
+                Excellent strength.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

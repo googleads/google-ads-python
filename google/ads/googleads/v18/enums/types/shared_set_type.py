@@ -22,16 +22,38 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SharedSetTypeEnum",},
+    manifest={
+        "SharedSetTypeEnum",
+    },
 )
 
 
 class SharedSetTypeEnum(proto.Message):
-    r"""Container for enum describing types of shared sets.
-    """
+    r"""Container for enum describing types of shared sets."""
 
     class SharedSetType(proto.Enum):
-        r"""Enum listing the possible shared set types."""
+        r"""Enum listing the possible shared set types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NEGATIVE_KEYWORDS (2):
+                A set of keywords that can be excluded from
+                targeting.
+            NEGATIVE_PLACEMENTS (3):
+                A set of placements that can be excluded from
+                targeting.
+            ACCOUNT_LEVEL_NEGATIVE_KEYWORDS (4):
+                An account-level set of keywords that can be
+                excluded from targeting.
+            BRANDS (5):
+                A set of brands can be included or excluded
+                from targeting.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NEGATIVE_KEYWORDS = 2

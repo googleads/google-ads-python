@@ -59,23 +59,29 @@ class MutateAssetGroupAssetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AssetGroupAssetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetGroupAssetOperation",
+    operations: MutableSequence["AssetGroupAssetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetGroupAssetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class AssetGroupAssetOperation(proto.Message):
     r"""A single operation (create, remove) on an asset group asset.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -106,7 +112,9 @@ class AssetGroupAssetOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: asset_group_asset.AssetGroupAsset = proto.Field(
         proto.MESSAGE,
@@ -121,12 +129,15 @@ class AssetGroupAssetOperation(proto.Message):
         message=asset_group_asset.AssetGroupAsset,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateAssetGroupAssetsResponse(proto.Message):
     r"""Response message for an asset group asset mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateAssetGroupAssetResult]):
             All results for the mutate.
@@ -138,25 +149,31 @@ class MutateAssetGroupAssetsResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateAssetGroupAssetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAssetGroupAssetResult",
+    results: MutableSequence["MutateAssetGroupAssetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAssetGroupAssetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class MutateAssetGroupAssetResult(proto.Message):
     r"""The result for the asset group asset mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesEmployee(proto.Message):
     r"""A local services employee resource.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -123,22 +124,26 @@ class LocalServicesEmployee(proto.Message):
         proto.STRING,
         number=3,
     )
-    status: local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus = proto.Field(
+    status: (
+        local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus,
     )
-    type_: local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType = proto.Field(
+    type_: (
+        local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType,
     )
-    university_degrees: MutableSequence[
-        "UniversityDegree"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message="UniversityDegree",
+    university_degrees: MutableSequence["UniversityDegree"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message="UniversityDegree",
+        )
     )
     residencies: MutableSequence["Residency"] = proto.RepeatedField(
         proto.MESSAGE,
@@ -199,6 +204,7 @@ class UniversityDegree(proto.Message):
     r"""A list of degrees this employee has obtained, and wants to
     feature.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -240,6 +246,7 @@ class Residency(proto.Message):
     qualified medical professional practices under the supervision
     of a senior clinician.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -270,6 +277,7 @@ class Fellowship(proto.Message):
     r"""Details about the employee's medical Fellowship.
     Fellowship is a period of medical training that the professional
     undertakes after finishing their residency.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

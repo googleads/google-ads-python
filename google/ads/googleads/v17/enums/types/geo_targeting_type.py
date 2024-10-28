@@ -32,7 +32,20 @@ class GeoTargetingTypeEnum(proto.Message):
     r"""Container for enum describing possible geo targeting types."""
 
     class GeoTargetingType(proto.Enum):
-        r"""The possible geo targeting types."""
+        r"""The possible geo targeting types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            AREA_OF_INTEREST (2):
+                Location the user is interested in while
+                making the query.
+            LOCATION_OF_PRESENCE (3):
+                Location of the user issuing the query.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AREA_OF_INTEREST = 2

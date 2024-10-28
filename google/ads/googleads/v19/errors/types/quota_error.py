@@ -32,7 +32,27 @@ class QuotaErrorEnum(proto.Message):
     r"""Container for enum describing possible quota errors."""
 
     class QuotaError(proto.Enum):
-        r"""Enum describing possible quota errors."""
+        r"""Enum describing possible quota errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            RESOURCE_EXHAUSTED (2):
+                Too many requests.
+            ACCESS_PROHIBITED (3):
+                Access is prohibited.
+            RESOURCE_TEMPORARILY_EXHAUSTED (4):
+                Too many requests in a short amount of time.
+            EXCESSIVE_SHORT_TERM_QUERY_RESOURCE_CONSUMPTION (5):
+                Too many expensive requests from query
+                pattern over a short amount of time.
+            EXCESSIVE_LONG_TERM_QUERY_RESOURCE_CONSUMPTION (6):
+                Too many expensive requests from query
+                pattern over an extended duration of time.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -30,12 +30,15 @@ from google.ads.googleads.v18.enums.types import value_rule_set_dimension
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionValueRuleSet",},
+    manifest={
+        "ConversionValueRuleSet",
+    },
 )
 
 
 class ConversionValueRuleSet(proto.Message):
     r"""A conversion value rule set
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion value rule
@@ -80,13 +83,16 @@ class ConversionValueRuleSet(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     conversion_value_rules: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     dimensions: MutableSequence[
         value_rule_set_dimension.ValueRuleSetDimensionEnum.ValueRuleSetDimension
@@ -96,17 +102,23 @@ class ConversionValueRuleSet(proto.Message):
         enum=value_rule_set_dimension.ValueRuleSetDimensionEnum.ValueRuleSetDimension,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
-    attachment_type: value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType = proto.Field(
+    attachment_type: (
+        value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
-    status: conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus = proto.Field(
+    status: (
+        conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus,

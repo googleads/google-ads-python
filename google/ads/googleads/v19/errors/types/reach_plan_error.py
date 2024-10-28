@@ -35,7 +35,23 @@ class ReachPlanErrorEnum(proto.Message):
     """
 
     class ReachPlanError(proto.Enum):
-        r"""Enum describing possible errors from ReachPlanService."""
+        r"""Enum describing possible errors from ReachPlanService.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NOT_FORECASTABLE_MISSING_RATE (2):
+                Not forecastable due to missing rate card
+                data.
+            NOT_FORECASTABLE_NOT_ENOUGH_INVENTORY (3):
+                Not forecastable due to not enough inventory.
+            NOT_FORECASTABLE_ACCOUNT_NOT_ENABLED (4):
+                Not forecastable due to account not being
+                enabled.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

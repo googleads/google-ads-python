@@ -35,7 +35,31 @@ class SmartCampaignStatusEnum(proto.Message):
     """
 
     class SmartCampaignStatus(proto.Enum):
-        r"""Smart campaign statuses."""
+        r"""Smart campaign statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            PAUSED (2):
+                The campaign was paused.
+            NOT_ELIGIBLE (3):
+                The campaign is not eligible to serve and has
+                issues that may require intervention.
+            PENDING (4):
+                The campaign is pending the approval of at
+                least one ad.
+            ELIGIBLE (5):
+                The campaign is eligible to serve.
+            REMOVED (6):
+                The campaign has been removed.
+            ENDED (7):
+                The campaign has ended.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PAUSED = 2

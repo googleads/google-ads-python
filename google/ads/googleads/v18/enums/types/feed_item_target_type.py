@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemTargetTypeEnum",},
+    manifest={
+        "FeedItemTargetTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,22 @@ class FeedItemTargetTypeEnum(proto.Message):
     """
 
     class FeedItemTargetType(proto.Enum):
-        r"""Possible type of a feed item target."""
+        r"""Possible type of a feed item target.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN (2):
+                Feed item targets a campaign.
+            AD_GROUP (3):
+                Feed item targets an ad group.
+            CRITERION (4):
+                Feed item targets a criterion.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN = 2

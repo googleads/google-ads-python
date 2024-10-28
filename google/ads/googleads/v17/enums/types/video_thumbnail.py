@@ -36,7 +36,25 @@ class VideoThumbnailEnum(proto.Message):
     """
 
     class VideoThumbnail(proto.Enum):
-        r"""Enum listing the possible types of a video thumbnail."""
+        r"""Enum listing the possible types of a video thumbnail.
+
+        Values:
+            UNSPECIFIED (0):
+                The type has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version. This is a response-only value.
+            DEFAULT_THUMBNAIL (2):
+                The default thumbnail. Can be auto-generated
+                or user-uploaded.
+            THUMBNAIL_1 (3):
+                Thumbnail 1, generated from the video.
+            THUMBNAIL_2 (4):
+                Thumbnail 2, generated from the video.
+            THUMBNAIL_3 (5):
+                Thumbnail 3, generated from the video.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DEFAULT_THUMBNAIL = 2

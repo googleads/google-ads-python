@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"DisplayUploadProductTypeEnum",},
+    manifest={
+        "DisplayUploadProductTypeEnum",
+    },
 )
 
 
@@ -37,7 +39,55 @@ class DisplayUploadProductTypeEnum(proto.Message):
     """
 
     class DisplayUploadProductType(proto.Enum):
-        r"""Enumerates display upload product types."""
+        r"""Enumerates display upload product types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            HTML5_UPLOAD_AD (2):
+                HTML5 upload ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+            DYNAMIC_HTML5_EDUCATION_AD (3):
+                Dynamic HTML5 education ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in an education campaign.
+            DYNAMIC_HTML5_FLIGHT_AD (4):
+                Dynamic HTML5 flight ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a flight campaign.
+            DYNAMIC_HTML5_HOTEL_RENTAL_AD (5):
+                Dynamic HTML5 hotel and rental ad. This product type
+                requires the upload_media_bundle field in
+                DisplayUploadAdInfo to be set. Can only be used in a hotel
+                campaign.
+            DYNAMIC_HTML5_JOB_AD (6):
+                Dynamic HTML5 job ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a job campaign.
+            DYNAMIC_HTML5_LOCAL_AD (7):
+                Dynamic HTML5 local ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a local campaign.
+            DYNAMIC_HTML5_REAL_ESTATE_AD (8):
+                Dynamic HTML5 real estate ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a real estate campaign.
+            DYNAMIC_HTML5_CUSTOM_AD (9):
+                Dynamic HTML5 custom ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a custom campaign.
+            DYNAMIC_HTML5_TRAVEL_AD (10):
+                Dynamic HTML5 travel ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a travel campaign.
+            DYNAMIC_HTML5_HOTEL_AD (11):
+                Dynamic HTML5 hotel ad. This product type requires the
+                upload_media_bundle field in DisplayUploadAdInfo to be set.
+                Can only be used in a hotel campaign.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         HTML5_UPLOAD_AD = 2

@@ -37,6 +37,7 @@ class CampaignAggregateAssetView(proto.Message):
     r"""A campaign-level aggregate asset view that shows where the
     asset is linked, performamce of the asset and stats.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

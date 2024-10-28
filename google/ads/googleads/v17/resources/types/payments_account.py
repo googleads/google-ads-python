@@ -32,6 +32,7 @@ class PaymentsAccount(proto.Message):
     r"""A payments account, which can be used to set up billing for
     an Ads customer.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

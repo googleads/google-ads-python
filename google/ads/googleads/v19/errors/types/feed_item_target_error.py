@@ -35,7 +35,37 @@ class FeedItemTargetErrorEnum(proto.Message):
     """
 
     class FeedItemTargetError(proto.Enum):
-        r"""Enum describing possible feed item target errors."""
+        r"""Enum describing possible feed item target errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            MUST_SET_TARGET_ONEOF_ON_CREATE (2):
+                On CREATE, the FeedItemTarget must have a
+                populated field in the oneof target.
+            FEED_ITEM_TARGET_ALREADY_EXISTS (3):
+                The specified feed item target already
+                exists, so it cannot be added.
+            FEED_ITEM_SCHEDULES_CANNOT_OVERLAP (4):
+                The schedules for a given feed item cannot
+                overlap.
+            TARGET_LIMIT_EXCEEDED_FOR_GIVEN_TYPE (5):
+                Too many targets of a given type were added
+                for a single feed item.
+            TOO_MANY_SCHEDULES_PER_DAY (6):
+                Too many AdSchedules are enabled for the feed
+                item for the given day.
+            CANNOT_HAVE_ENABLED_CAMPAIGN_AND_ENABLED_AD_GROUP_TARGETS (7):
+                A feed item may either have an enabled
+                campaign target or an enabled ad group target.
+            DUPLICATE_AD_SCHEDULE (8):
+                Duplicate ad schedules aren't allowed.
+            DUPLICATE_KEYWORD (9):
+                Duplicate keywords aren't allowed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

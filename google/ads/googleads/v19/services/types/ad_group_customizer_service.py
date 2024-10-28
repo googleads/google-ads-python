@@ -134,6 +134,7 @@ class AdGroupCustomizerOperation(proto.Message):
 
 class MutateAdGroupCustomizersResponse(proto.Message):
     r"""Response message for an ad group customizer mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateAdGroupCustomizerResult]):
             All results for the mutate.
@@ -161,6 +162,7 @@ class MutateAdGroupCustomizersResponse(proto.Message):
 
 class MutateAdGroupCustomizerResult(proto.Message):
     r"""The result for the ad group customizer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

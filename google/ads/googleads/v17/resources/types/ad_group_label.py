@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class AdGroupLabel(proto.Message):
     r"""A relationship between an ad group and a label.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesBusinessRegistrationTypeEnum",},
+    manifest={
+        "LocalServicesBusinessRegistrationTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,19 @@ class LocalServicesBusinessRegistrationTypeEnum(proto.Message):
     class LocalServicesBusinessRegistrationType(proto.Enum):
         r"""Enums describing possible registration types of a local
         services business registration check verification artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NUMBER (2):
+                Registration number check type.
+            DOCUMENT (3):
+                Registration document check type.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NUMBER = 2

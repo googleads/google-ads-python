@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LabelStatusEnum",},
+    manifest={
+        "LabelStatusEnum",
+    },
 )
 
 
 class LabelStatusEnum(proto.Message):
-    r"""Container for enum describing possible status of a label.
-    """
+    r"""Container for enum describing possible status of a label."""
 
     class LabelStatus(proto.Enum):
-        r"""Possible statuses of a label."""
+        r"""Possible statuses of a label.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Label is enabled.
+            REMOVED (3):
+                Label is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

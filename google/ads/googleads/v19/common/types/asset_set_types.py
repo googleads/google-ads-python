@@ -231,6 +231,7 @@ class ChainFilter(proto.Message):
 
 class MapsLocationSet(proto.Message):
     r"""Wrapper for multiple maps location sync data
+
     Attributes:
         maps_locations (MutableSequence[google.ads.googleads.v19.common.types.MapsLocationInfo]):
             Required. A list of maps location info that
@@ -246,6 +247,7 @@ class MapsLocationSet(proto.Message):
 
 class MapsLocationInfo(proto.Message):
     r"""Wrapper for place ids
+
     Attributes:
         place_id (str):
             Place ID of the Maps location.
@@ -280,6 +282,7 @@ class BusinessProfileLocationGroup(proto.Message):
 class DynamicBusinessProfileLocationGroupFilter(proto.Message):
     r"""Represents a filter on Business Profile locations in an asset
     set. If multiple filters are provided, they are AND'ed together.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -317,6 +320,7 @@ class DynamicBusinessProfileLocationGroupFilter(proto.Message):
 
 class BusinessProfileBusinessNameFilter(proto.Message):
     r"""Business Profile location group business name filter.
+
     Attributes:
         business_name (str):
             Business name string to use for filtering.

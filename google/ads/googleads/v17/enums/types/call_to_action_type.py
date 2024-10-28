@@ -32,7 +32,50 @@ class CallToActionTypeEnum(proto.Message):
     r"""Container for enum describing the call to action types."""
 
     class CallToActionType(proto.Enum):
-        r"""Enum describing possible types of call to action."""
+        r"""Enum describing possible types of call to action.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LEARN_MORE (2):
+                The call to action type is learn more.
+            GET_QUOTE (3):
+                The call to action type is get quote.
+            APPLY_NOW (4):
+                The call to action type is apply now.
+            SIGN_UP (5):
+                The call to action type is sign up.
+            CONTACT_US (6):
+                The call to action type is contact us.
+            SUBSCRIBE (7):
+                The call to action type is subscribe.
+            DOWNLOAD (8):
+                The call to action type is download.
+            BOOK_NOW (9):
+                The call to action type is book now.
+            SHOP_NOW (10):
+                The call to action type is shop now.
+            BUY_NOW (11):
+                The call to action type is buy now.
+            DONATE_NOW (12):
+                The call to action type is donate now.
+            ORDER_NOW (13):
+                The call to action type is order now.
+            PLAY_NOW (14):
+                The call to action type is play now.
+            SEE_MORE (15):
+                The call to action type is see more.
+            START_NOW (16):
+                The call to action type is start now.
+            VISIT_SITE (17):
+                The call to action type is visit site.
+            WATCH_NOW (18):
+                The call to action type is watch now.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LEARN_MORE = 2

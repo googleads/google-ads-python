@@ -134,6 +134,7 @@ class CampaignCustomizerOperation(proto.Message):
 
 class MutateCampaignCustomizersResponse(proto.Message):
     r"""Response message for a campaign customizer mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCampaignCustomizerResult]):
             All results for the mutate.
@@ -161,6 +162,7 @@ class MutateCampaignCustomizersResponse(proto.Message):
 
 class MutateCampaignCustomizerResult(proto.Message):
     r"""The result for the campaign customizer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

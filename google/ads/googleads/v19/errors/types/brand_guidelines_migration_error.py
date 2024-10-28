@@ -35,7 +35,33 @@ class BrandGuidelinesMigrationErrorEnum(proto.Message):
     """
 
     class BrandGuidelinesMigrationError(proto.Enum):
-        r"""Enum describing brand guidelines migration errors."""
+        r"""Enum describing brand guidelines migration errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            BRAND_GUIDELINES_ALREADY_ENABLED (2):
+                This campaign is already enabled for Brand
+                Guidelines.
+            CANNOT_ENABLE_BRAND_GUIDELINES_FOR_REMOVED_CAMPAIGN (3):
+                Brand Guidelines can only be enabled for
+                active or suspended campaigns.
+            BRAND_GUIDELINES_LOGO_LIMIT_EXCEEDED (4):
+                Maximum of 5 square and landscape logos can
+                be specified for Brand Guidelines.
+            CANNOT_AUTO_POPULATE_BRAND_ASSETS_WHEN_BRAND_ASSETS_PROVIDED (5):
+                Either auto_populate_brand_assets must be true or
+                brand_assets must be provided, but not both.
+            AUTO_POPULATE_BRAND_ASSETS_REQUIRED_WHEN_BRAND_ASSETS_OMITTED (6):
+                Either auto_populate_brand_assets can be false or
+                brand_assets can be omitted, but not both.
+            TOO_MANY_ENABLE_OPERATIONS (7):
+                A maximum of 10 enable operations can be
+                executed in a request.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

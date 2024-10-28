@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class CustomerFeed(proto.Message):
     r"""A customer feed.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -32,6 +32,7 @@ class RealTimeBiddingSetting(proto.Message):
     r"""Settings for Real-Time Bidding, a feature only available for
     campaigns targeting the Ad Exchange network.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

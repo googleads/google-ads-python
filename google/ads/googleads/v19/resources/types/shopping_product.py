@@ -72,6 +72,7 @@ class ShoppingProduct(proto.Message):
        UNSUPPORTED_DATE_SEGMENTATION error. On the other hand, filtering
        on date segments is allowed.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -259,6 +260,7 @@ class ShoppingProduct(proto.Message):
 
     class ProductIssue(proto.Message):
         r"""An issue affecting whether a product can show in ads.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:

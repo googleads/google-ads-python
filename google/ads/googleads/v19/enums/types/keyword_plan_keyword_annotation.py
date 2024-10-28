@@ -35,7 +35,17 @@ class KeywordPlanKeywordAnnotationEnum(proto.Message):
     """
 
     class KeywordPlanKeywordAnnotation(proto.Enum):
-        r"""Enumerates keyword plan annotations that can be requested."""
+        r"""Enumerates keyword plan annotations that can be requested.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            KEYWORD_CONCEPT (2):
+                Return the keyword concept and concept group
+                data.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

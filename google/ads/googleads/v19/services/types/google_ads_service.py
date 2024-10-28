@@ -834,6 +834,7 @@ class SearchGoogleAdsStreamResponse(proto.Message):
 
 class GoogleAdsRow(proto.Message):
     r"""A returned row from the query.
+
     Attributes:
         account_budget (google.ads.googleads.v19.resources.types.AccountBudget):
             The account budget in the query.
@@ -2380,6 +2381,7 @@ class MutateGoogleAdsResponse(proto.Message):
 
 class MutateOperation(proto.Message):
     r"""A single operation (create, update, remove) on a resource.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -3121,6 +3123,7 @@ class MutateOperation(proto.Message):
 
 class MutateOperationResponse(proto.Message):
     r"""Response message for the resource mutate.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -3881,6 +3884,7 @@ class MutateOperationResponse(proto.Message):
 
 class SearchSettings(proto.Message):
     r"""Indicates search settings in request parameter.
+
     Attributes:
         omit_results (bool):
             If true, results will be excluded from the

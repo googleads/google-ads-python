@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ProductLinkInvitationServiceClient
+from .async_client import ProductLinkInvitationServiceAsyncClient
 
-__all__ = ("ProductLinkInvitationServiceClient",)
+__all__ = (
+    "ProductLinkInvitationServiceClient",
+    "ProductLinkInvitationServiceAsyncClient",
+)

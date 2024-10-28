@@ -35,7 +35,20 @@ class LocalServicesParticipantTypeEnum(proto.Message):
     """
 
     class ParticipantType(proto.Enum):
-        r"""Possible types of lead conversation participant."""
+        r"""Possible types of lead conversation participant.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADVERTISER (2):
+                Local Services Ads Provider participant.
+            CONSUMER (3):
+                Local Services Ads Consumer participant.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADVERTISER = 2

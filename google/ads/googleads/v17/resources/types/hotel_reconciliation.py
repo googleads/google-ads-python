@@ -142,7 +142,9 @@ class HotelReconciliation(proto.Message):
         proto.BOOL,
         number=9,
     )
-    status: hotel_reconciliation_status.HotelReconciliationStatusEnum.HotelReconciliationStatus = proto.Field(
+    status: (
+        hotel_reconciliation_status.HotelReconciliationStatusEnum.HotelReconciliationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=hotel_reconciliation_status.HotelReconciliationStatusEnum.HotelReconciliationStatus,

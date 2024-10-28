@@ -35,7 +35,31 @@ class BiddingStrategyErrorEnum(proto.Message):
     """
 
     class BiddingStrategyError(proto.Enum):
-        r"""Enum describing possible bidding strategy errors."""
+        r"""Enum describing possible bidding strategy errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_NAME (2):
+                Each bidding strategy must have a unique
+                name.
+            CANNOT_CHANGE_BIDDING_STRATEGY_TYPE (3):
+                Bidding strategy type is immutable.
+            CANNOT_REMOVE_ASSOCIATED_STRATEGY (4):
+                Only bidding strategies not linked to
+                campaigns, adgroups or adgroup criteria can be
+                removed.
+            BIDDING_STRATEGY_NOT_SUPPORTED (5):
+                The specified bidding strategy is not
+                supported.
+            INCOMPATIBLE_BIDDING_STRATEGY_AND_BIDDING_STRATEGY_GOAL_TYPE (6):
+                The bidding strategy is incompatible with the
+                campaign's bidding strategy goal type.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_NAME = 2

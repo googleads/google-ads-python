@@ -26,13 +26,17 @@ from google.ads.googleads.v18.enums.types import mobile_app_vendor
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AccountLink", "ThirdPartyAppAnalyticsLinkIdentifier",},
+    manifest={
+        "AccountLink",
+        "ThirdPartyAppAnalyticsLinkIdentifier",
+    },
 )
 
 
 class AccountLink(proto.Message):
     r"""Represents the data sharing connection between a Google Ads
     account and another account
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -57,31 +61,41 @@ class AccountLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     account_link_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
-    status: account_link_status.AccountLinkStatusEnum.AccountLinkStatus = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=account_link_status.AccountLinkStatusEnum.AccountLinkStatus,
+    status: account_link_status.AccountLinkStatusEnum.AccountLinkStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=account_link_status.AccountLinkStatusEnum.AccountLinkStatus,
+        )
     )
-    type_: linked_account_type.LinkedAccountTypeEnum.LinkedAccountType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=linked_account_type.LinkedAccountTypeEnum.LinkedAccountType,
+    type_: linked_account_type.LinkedAccountTypeEnum.LinkedAccountType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=linked_account_type.LinkedAccountTypeEnum.LinkedAccountType,
+        )
     )
-    third_party_app_analytics: "ThirdPartyAppAnalyticsLinkIdentifier" = proto.Field(
-        proto.MESSAGE,
-        number=5,
-        oneof="linked_account",
-        message="ThirdPartyAppAnalyticsLinkIdentifier",
+    third_party_app_analytics: "ThirdPartyAppAnalyticsLinkIdentifier" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=5,
+            oneof="linked_account",
+            message="ThirdPartyAppAnalyticsLinkIdentifier",
+        )
     )
 
 
 class ThirdPartyAppAnalyticsLinkIdentifier(proto.Message):
     r"""The identifiers of a Third Party App Analytics Link.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -119,15 +133,21 @@ class ThirdPartyAppAnalyticsLinkIdentifier(proto.Message):
     """
 
     app_analytics_provider_id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     app_id: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
-    app_vendor: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+    app_vendor: mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,
+        )
     )
 
 

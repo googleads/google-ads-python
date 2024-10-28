@@ -75,6 +75,7 @@ class SmartCampaignNotEligibleDetails(proto.Message):
     r"""Details related to Smart campaigns that are not eligible to
     serve.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -98,6 +99,7 @@ class SmartCampaignNotEligibleDetails(proto.Message):
 class SmartCampaignEligibleDetails(proto.Message):
     r"""Details related to Smart campaigns that are eligible to
     serve.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -132,6 +134,7 @@ class SmartCampaignEligibleDetails(proto.Message):
 
 class SmartCampaignPausedDetails(proto.Message):
     r"""Details related to paused Smart campaigns.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -152,6 +155,7 @@ class SmartCampaignPausedDetails(proto.Message):
 
 class SmartCampaignRemovedDetails(proto.Message):
     r"""Details related to removed Smart campaigns.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -172,6 +176,7 @@ class SmartCampaignRemovedDetails(proto.Message):
 
 class SmartCampaignEndedDetails(proto.Message):
     r"""Details related to Smart campaigns that have ended.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -349,6 +354,7 @@ class SmartCampaignSettingOperation(proto.Message):
 
 class MutateSmartCampaignSettingsResponse(proto.Message):
     r"""Response message for campaign mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -376,6 +382,7 @@ class MutateSmartCampaignSettingsResponse(proto.Message):
 
 class MutateSmartCampaignSettingResult(proto.Message):
     r"""The result for the Smart campaign setting mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

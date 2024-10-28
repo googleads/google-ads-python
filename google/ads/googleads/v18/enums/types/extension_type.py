@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ExtensionTypeEnum",},
+    manifest={
+        "ExtensionTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,42 @@ class ExtensionTypeEnum(proto.Message):
     """
 
     class ExtensionType(proto.Enum):
-        r"""Possible data types for an extension in an extension setting."""
+        r"""Possible data types for an extension in an extension setting.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NONE (2):
+                None.
+            APP (3):
+                App.
+            CALL (4):
+                Call.
+            CALLOUT (5):
+                Callout.
+            MESSAGE (6):
+                Message.
+            PRICE (7):
+                Price.
+            PROMOTION (8):
+                Promotion.
+            SITELINK (10):
+                Sitelink.
+            STRUCTURED_SNIPPET (11):
+                Structured snippet.
+            LOCATION (12):
+                Location.
+            AFFILIATE_LOCATION (13):
+                Affiliate location.
+            HOTEL_CALLOUT (15):
+                Hotel callout
+            IMAGE (16):
+                Image.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NONE = 2

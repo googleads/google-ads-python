@@ -22,18 +22,43 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListStringRuleItemOperatorEnum",},
+    manifest={
+        "UserListStringRuleItemOperatorEnum",
+    },
 )
 
 
 class UserListStringRuleItemOperatorEnum(proto.Message):
-    r"""Supported rule operator for string type.
-    """
+    r"""Supported rule operator for string type."""
 
     class UserListStringRuleItemOperator(proto.Enum):
         r"""Enum describing possible user list string rule item
         operators.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CONTAINS (2):
+                Contains.
+            EQUALS (3):
+                Equals.
+            STARTS_WITH (4):
+                Starts with.
+            ENDS_WITH (5):
+                Ends with.
+            NOT_EQUALS (6):
+                Not equals.
+            NOT_CONTAINS (7):
+                Not contains.
+            NOT_STARTS_WITH (8):
+                Not starts with.
+            NOT_ENDS_WITH (9):
+                Not ends with.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CONTAINS = 2

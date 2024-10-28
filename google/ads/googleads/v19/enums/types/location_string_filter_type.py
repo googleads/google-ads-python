@@ -35,7 +35,17 @@ class LocationStringFilterTypeEnum(proto.Message):
     """
 
     class LocationStringFilterType(proto.Enum):
-        r"""Possible types of a location string filter."""
+        r"""Possible types of a location string filter.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EXACT (2):
+                The filter will use exact string matching.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

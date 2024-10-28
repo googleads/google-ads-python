@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class AdGroupFeed(proto.Message):
     r"""An ad group feed.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

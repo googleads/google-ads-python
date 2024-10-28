@@ -32,7 +32,40 @@ class FeedItemSetErrorEnum(proto.Message):
     r"""Container for enum describing possible feed item set errors."""
 
     class FeedItemSetError(proto.Enum):
-        r"""Enum describing possible feed item set errors."""
+        r"""Enum describing possible feed item set errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            FEED_ITEM_SET_REMOVED (2):
+                The given ID refers to a removed FeedItemSet.
+            CANNOT_CLEAR_DYNAMIC_FILTER (3):
+                The dynamic filter of a feed item set cannot
+                be cleared on UPDATE if it exists. A set is
+                either static or dynamic once added, and that
+                cannot change.
+            CANNOT_CREATE_DYNAMIC_FILTER (4):
+                The dynamic filter of a feed item set cannot
+                be created on UPDATE if it does not exist. A set
+                is either static or dynamic once added, and that
+                cannot change.
+            INVALID_FEED_TYPE (5):
+                FeedItemSets can only be made for location or
+                affiliate location feeds.
+            DUPLICATE_NAME (6):
+                FeedItemSets duplicate name. Name should be
+                unique within an account.
+            WRONG_DYNAMIC_FILTER_FOR_FEED_TYPE (7):
+                The feed type of the parent Feed is not compatible with the
+                type of dynamic filter being set. For example, you can only
+                set dynamic_location_set_filter for LOCATION feed item sets.
+            DYNAMIC_FILTER_INVALID_CHAIN_IDS (8):
+                Chain ID specified for
+                AffiliateLocationFeedData is invalid.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

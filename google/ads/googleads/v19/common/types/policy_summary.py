@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class PolicySummary(proto.Message):
     r"""Contains policy summary information.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v19.common.types.PolicyTopicEntry]):
             The list of policy findings.

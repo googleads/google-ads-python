@@ -82,7 +82,9 @@ class MutateFeedItemsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -91,6 +93,7 @@ class MutateFeedItemsRequest(proto.Message):
 
 class FeedItemOperation(proto.Message):
     r"""A single operation (create, update, remove) on an feed item.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -147,6 +150,7 @@ class FeedItemOperation(proto.Message):
 
 class MutateFeedItemsResponse(proto.Message):
     r"""Response message for an feed item mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -172,6 +176,7 @@ class MutateFeedItemsResponse(proto.Message):
 
 class MutateFeedItemResult(proto.Message):
     r"""The result for the feed item mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

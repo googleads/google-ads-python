@@ -35,7 +35,26 @@ class AccessInvitationStatusEnum(proto.Message):
     """
 
     class AccessInvitationStatus(proto.Enum):
-        r"""Possible access invitation status of a user"""
+        r"""Possible access invitation status of a user
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The initial state of an invitation, before
+                being acted upon by anyone.
+            DECLINED (3):
+                Invitation process was terminated by the
+                email recipient. No new user was created.
+            EXPIRED (4):
+                Invitation URLs expired without being acted
+                upon. No new user can be created.  Invitations
+                expire 20 days after creation.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

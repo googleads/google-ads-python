@@ -36,6 +36,7 @@ class PerformanceMaxPlacementView(proto.Message):
     r"""A view with impression metrics for Performance Max campaign
     placements.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

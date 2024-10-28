@@ -36,7 +36,28 @@ class GoogleAdsFieldCategoryEnum(proto.Message):
     """
 
     class GoogleAdsFieldCategory(proto.Enum):
-        r"""The category of the artifact."""
+        r"""The category of the artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified
+            UNKNOWN (1):
+                Unknown
+            RESOURCE (2):
+                The described artifact is a resource.
+            ATTRIBUTE (3):
+                The described artifact is a field and is an
+                attribute of a resource. Including a resource
+                attribute field in a query may segment the query
+                if the resource to which it is attributed
+                segments the resource found in the FROM clause.
+            SEGMENT (5):
+                The described artifact is a field and always
+                segments search queries.
+            METRIC (6):
+                The described artifact is a field and is a
+                metric. It never segments search queries.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -24,12 +24,15 @@ from google.ads.googleads.v18.common.types import lifecycle_goals
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerLifecycleGoal",},
+    manifest={
+        "CustomerLifecycleGoal",
+    },
 )
 
 
 class CustomerLifecycleGoal(proto.Message):
     r"""Account level customer lifecycle goal settings.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer lifecycle goal.
@@ -42,9 +45,12 @@ class CustomerLifecycleGoal(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    customer_acquisition_goal_value_settings: lifecycle_goals.LifecycleGoalValueSettings = proto.Field(
+    customer_acquisition_goal_value_settings: (
+        lifecycle_goals.LifecycleGoalValueSettings
+    ) = proto.Field(
         proto.MESSAGE,
         number=3,
         message=lifecycle_goals.LifecycleGoalValueSettings,

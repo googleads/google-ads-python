@@ -32,7 +32,32 @@ class MatchingFunctionOperatorEnum(proto.Message):
     r"""Container for enum describing matching function operator."""
 
     class MatchingFunctionOperator(proto.Enum):
-        r"""Possible operators in a matching function."""
+        r"""Possible operators in a matching function.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            IN (2):
+                The IN operator.
+            IDENTITY (3):
+                The IDENTITY operator.
+            EQUALS (4):
+                The EQUALS operator
+            AND (5):
+                Operator that takes two or more operands that are of type
+                FunctionOperand and checks that all the operands evaluate to
+                true. For functions related to ad formats, all the operands
+                must be in left_operands.
+            CONTAINS_ANY (6):
+                Operator that returns true if the elements in left_operands
+                contain any of the elements in right_operands. Otherwise,
+                return false. The right_operands must contain at least 1 and
+                no more than 3 ConstantOperands.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IN = 2

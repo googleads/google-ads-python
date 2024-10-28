@@ -34,7 +34,18 @@ class GeoTargetingRestrictionEnum(proto.Message):
     class GeoTargetingRestriction(proto.Enum):
         r"""A restriction used to determine if the request context's
         geo should be matched.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LOCATION_OF_PRESENCE (2):
+                Indicates that request context should match
+                the physical location of the user.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LOCATION_OF_PRESENCE = 2

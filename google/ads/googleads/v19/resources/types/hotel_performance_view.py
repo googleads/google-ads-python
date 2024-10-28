@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class HotelPerformanceView(proto.Message):
     r"""A hotel performance view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the hotel performance

@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CustomAudience(proto.Message):
     r"""A custom audience. This is a list of users by interest.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the custom audience. Custom

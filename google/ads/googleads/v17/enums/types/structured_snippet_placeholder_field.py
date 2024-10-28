@@ -32,7 +32,27 @@ class StructuredSnippetPlaceholderFieldEnum(proto.Message):
     r"""Values for Structured Snippet placeholder fields."""
 
     class StructuredSnippetPlaceholderField(proto.Enum):
-        r"""Possible values for Structured Snippet placeholder fields."""
+        r"""Possible values for Structured Snippet placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            HEADER (2):
+                Data Type: STRING. The category of snippet of
+                your products/services. Must match exactly one
+                of the predefined structured snippets headers.
+                For a list, visit
+                https://developers.google.com/google-ads/api/reference/data/structured-snippet-headers
+            SNIPPETS (3):
+                Data Type: STRING_LIST. Text values that describe your
+                products/services. All text must be family safe. Special or
+                non-ASCII characters are not permitted. A snippet can be at
+                most 25 characters.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         HEADER = 2

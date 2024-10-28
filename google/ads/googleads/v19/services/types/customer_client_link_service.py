@@ -67,6 +67,7 @@ class MutateCustomerClientLinkRequest(proto.Message):
 
 class CustomerClientLinkOperation(proto.Message):
     r"""A single operation (create, update) on a CustomerClientLink.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -111,6 +112,7 @@ class CustomerClientLinkOperation(proto.Message):
 
 class MutateCustomerClientLinkResponse(proto.Message):
     r"""Response message for a CustomerClientLink mutate.
+
     Attributes:
         result (google.ads.googleads.v19.services.types.MutateCustomerClientLinkResult):
             A result that identifies the resource
@@ -126,6 +128,7 @@ class MutateCustomerClientLinkResponse(proto.Message):
 
 class MutateCustomerClientLinkResult(proto.Message):
     r"""The result for a single customer client link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

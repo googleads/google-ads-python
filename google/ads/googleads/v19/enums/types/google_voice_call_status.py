@@ -35,7 +35,19 @@ class GoogleVoiceCallStatusEnum(proto.Message):
     """
 
     class GoogleVoiceCallStatus(proto.Enum):
-        r"""Possible statuses of a google voice call."""
+        r"""Possible statuses of a google voice call.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MISSED (2):
+                The call was missed.
+            RECEIVED (3):
+                The call was received.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

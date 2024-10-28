@@ -32,7 +32,31 @@ class MessagePlaceholderFieldEnum(proto.Message):
     r"""Values for Message placeholder fields."""
 
     class MessagePlaceholderField(proto.Enum):
-        r"""Possible values for Message placeholder fields."""
+        r"""Possible values for Message placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_NAME (2):
+                Data Type: STRING. The name of your business.
+            COUNTRY_CODE (3):
+                Data Type: STRING. Country code of phone
+                number.
+            PHONE_NUMBER (4):
+                Data Type: STRING. A phone number that's
+                capable of sending and receiving text messages.
+            MESSAGE_EXTENSION_TEXT (5):
+                Data Type: STRING. The text that will go in
+                your click-to-message ad.
+            MESSAGE_TEXT (6):
+                Data Type: STRING. The message text
+                automatically shows in people's messaging apps
+                when they tap to send you a message.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_NAME = 2

@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ConsentStatusEnum",},
+    manifest={
+        "ConsentStatusEnum",
+    },
 )
 
 
 class ConsentStatusEnum(proto.Message):
-    r"""Enums represent consent status.
-    """
+    r"""Enums represent consent status."""
 
     class ConsentStatus(proto.Enum):
-        r"""Consent status"""
+        r"""Consent status
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Output-only. Represents a format not yet
+                defined in this enum.
+            GRANTED (2):
+                Granted.
+            DENIED (3):
+                Denied.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GRANTED = 2

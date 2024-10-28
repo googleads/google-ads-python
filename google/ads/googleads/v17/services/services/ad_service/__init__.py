@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AdServiceClient
+from .async_client import AdServiceAsyncClient
 
-__all__ = ("AdServiceClient",)
+__all__ = (
+    "AdServiceClient",
+    "AdServiceAsyncClient",
+)

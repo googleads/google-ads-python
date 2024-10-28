@@ -27,12 +27,16 @@ from google.ads.googleads.v18.enums.types import custom_audience_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomAudience", "CustomAudienceMember",},
+    manifest={
+        "CustomAudience",
+        "CustomAudienceMember",
+    },
 )
 
 
 class CustomAudience(proto.Message):
     r"""A custom audience. This is a list of users by interest.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the custom audience. Custom
@@ -65,29 +69,39 @@ class CustomAudience(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
-    status: custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus = proto.Field(
+    status: (
+        custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    type_: custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType,
+    type_: custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=custom_audience_type.CustomAudienceTypeEnum.CustomAudienceType,
+        )
     )
     description: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     members: MutableSequence["CustomAudienceMember"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomAudienceMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomAudienceMember",
     )
 
 
@@ -133,22 +147,32 @@ class CustomAudienceMember(proto.Message):
             This field is a member of `oneof`_ ``value``.
     """
 
-    member_type: custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType = proto.Field(
+    member_type: (
+        custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType,
     )
     keyword: str = proto.Field(
-        proto.STRING, number=2, oneof="value",
+        proto.STRING,
+        number=2,
+        oneof="value",
     )
     url: str = proto.Field(
-        proto.STRING, number=3, oneof="value",
+        proto.STRING,
+        number=3,
+        oneof="value",
     )
     place_category: int = proto.Field(
-        proto.INT64, number=4, oneof="value",
+        proto.INT64,
+        number=4,
+        oneof="value",
     )
     app: str = proto.Field(
-        proto.STRING, number=5, oneof="value",
+        proto.STRING,
+        number=5,
+        oneof="value",
     )
 
 

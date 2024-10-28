@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BillingSetupServiceClient
+from .async_client import BillingSetupServiceAsyncClient
 
-__all__ = ("BillingSetupServiceClient",)
+__all__ = (
+    "BillingSetupServiceClient",
+    "BillingSetupServiceAsyncClient",
+)

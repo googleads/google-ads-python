@@ -43,6 +43,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAd(proto.Message):
     r"""An ad group ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -122,7 +123,9 @@ class AdGroupAd(proto.Message):
         proto.STRING,
         number=10,
     )
-    primary_status: ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus = proto.Field(
+    primary_status: (
+        ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=16,
         enum=ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus,
@@ -138,6 +141,7 @@ class AdGroupAd(proto.Message):
 
 class AdGroupAdPolicySummary(proto.Message):
     r"""Contains policy information for an ad.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v17.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for
@@ -151,19 +155,23 @@ class AdGroupAdPolicySummary(proto.Message):
             individual policy topic entries.
     """
 
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,

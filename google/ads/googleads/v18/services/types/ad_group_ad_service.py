@@ -74,18 +74,25 @@ class MutateAdGroupAdsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AdGroupAdOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupAdOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupAdOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -129,10 +136,14 @@ class AdGroupAdOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     policy_validation_parameter: policy.PolicyValidationParameter = proto.Field(
-        proto.MESSAGE, number=5, message=policy.PolicyValidationParameter,
+        proto.MESSAGE,
+        number=5,
+        message=policy.PolicyValidationParameter,
     )
     create: gagr_ad_group_ad.AdGroupAd = proto.Field(
         proto.MESSAGE,
@@ -147,12 +158,15 @@ class AdGroupAdOperation(proto.Message):
         message=gagr_ad_group_ad.AdGroupAd,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateAdGroupAdsResponse(proto.Message):
     r"""Response message for an ad group ad mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -165,15 +179,20 @@ class MutateAdGroupAdsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateAdGroupAdResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupAdResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupAdResult",
     )
 
 
 class MutateAdGroupAdResult(proto.Message):
     r"""The result for the ad mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful
@@ -185,10 +204,13 @@ class MutateAdGroupAdResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_ad: gagr_ad_group_ad.AdGroupAd = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_ad_group_ad.AdGroupAd,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_ad_group_ad.AdGroupAd,
     )
 
 
@@ -207,17 +229,21 @@ class RemoveAutomaticallyCreatedAssetsRequest(proto.Message):
     """
 
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    assets_with_field_type: MutableSequence[
-        "AssetsWithFieldType"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AssetsWithFieldType",
+    assets_with_field_type: MutableSequence["AssetsWithFieldType"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetsWithFieldType",
+        )
     )
 
 
 class AssetsWithFieldType(proto.Message):
     r"""The combination of system asset and field type to remove.
+
     Attributes:
         asset (str):
             Required. The resource name of the asset to
@@ -227,9 +253,12 @@ class AssetsWithFieldType(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,

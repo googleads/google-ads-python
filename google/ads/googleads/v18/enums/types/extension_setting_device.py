@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ExtensionSettingDeviceEnum",},
+    manifest={
+        "ExtensionSettingDeviceEnum",
+    },
 )
 
 
 class ExtensionSettingDeviceEnum(proto.Message):
-    r"""Container for enum describing extension setting device types.
-    """
+    r"""Container for enum describing extension setting device types."""
 
     class ExtensionSettingDevice(proto.Enum):
-        r"""Possible device types for an extension setting."""
+        r"""Possible device types for an extension setting.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            MOBILE (2):
+                Mobile. The extensions in the extension
+                setting will only serve on mobile devices.
+            DESKTOP (3):
+                Desktop. The extensions in the extension
+                setting will only serve on desktop devices.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MOBILE = 2

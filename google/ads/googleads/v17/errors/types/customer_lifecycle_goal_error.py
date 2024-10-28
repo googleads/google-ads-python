@@ -35,7 +35,48 @@ class CustomerLifecycleGoalErrorEnum(proto.Message):
     """
 
     class CustomerLifecycleGoalError(proto.Enum):
-        r"""Enum describing possible customer lifecycle goal errors."""
+        r"""Enum describing possible customer lifecycle goal errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CUSTOMER_ACQUISITION_VALUE_MISSING (2):
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.value
+                must be set.
+            CUSTOMER_ACQUISITION_INVALID_VALUE (3):
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.value
+                must be no less than 0.01.
+            CUSTOMER_ACQUISITION_INVALID_HIGH_LIFETIME_VALUE (4):
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.high_lifetime_value
+                must be no less than 0.01. Also, to set this field,
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.value
+                must also be present, and high_lifetime_value must be
+                greater than value.
+            CUSTOMER_ACQUISITION_VALUE_CANNOT_BE_CLEARED (5):
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.value
+                cannot be cleared. This value would have no effect as long
+                as none of your campaigns adopt the customer acquisitiong
+                goal.
+            CUSTOMER_ACQUISITION_HIGH_LIFETIME_VALUE_CANNOT_BE_CLEARED (6):
+                CustomerLifecycleGoal.customer_acquisition_goal_value_settings.high_lifetime_value
+                cannot be cleared. This value would have no effect as long
+                as none of your campaigns adopt the high value optimization
+                of customer acquisitiong goal.
+            INVALID_EXISTING_USER_LIST (7):
+                Found invalid value in
+                CustomerLifecycleGoal.lifecycle_goal_customer_definition_settings.existing_user_lists.
+                The userlist must be accessible, active and belong to one of
+                the following types: CRM_BASED, RULE_BASED, REMARKETING.
+            INVALID_HIGH_LIFETIME_VALUE_USER_LIST (8):
+                Found invalid value in
+                CustomerLifecycleGoal.lifecycle_goal_customer_definition_settings.high_lifetime_value_user_lists.
+                The userlist must be accessible, active and belong to one of
+                the following types: CRM_BASED, RULE_BASED, REMARKETING.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CUSTOMER_ACQUISITION_VALUE_MISSING = 2

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomizerAttributeStatusEnum",},
+    manifest={
+        "CustomizerAttributeStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,20 @@ class CustomizerAttributeStatusEnum(proto.Message):
     """
 
     class CustomizerAttributeStatus(proto.Enum):
-        r"""The possible statuses of a customizer attribute."""
+        r"""The possible statuses of a customizer attribute.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+            ENABLED (2):
+                The customizer attribute is enabled.
+            REMOVED (3):
+                The customizer attribute is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

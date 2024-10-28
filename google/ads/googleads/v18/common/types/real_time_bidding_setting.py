@@ -22,13 +22,16 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"RealTimeBiddingSetting",},
+    manifest={
+        "RealTimeBiddingSetting",
+    },
 )
 
 
 class RealTimeBiddingSetting(proto.Message):
     r"""Settings for Real-Time Bidding, a feature only available for
     campaigns targeting the Ad Exchange network.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -41,7 +44,9 @@ class RealTimeBiddingSetting(proto.Message):
     """
 
     opt_in: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 

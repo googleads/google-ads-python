@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class WebpageView(proto.Message):
     r"""A webpage view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the webpage view. Webpage

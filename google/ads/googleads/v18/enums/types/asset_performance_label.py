@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetPerformanceLabelEnum",},
+    manifest={
+        "AssetPerformanceLabelEnum",
+    },
 )
 
 
@@ -35,7 +37,29 @@ class AssetPerformanceLabelEnum(proto.Message):
     class AssetPerformanceLabel(proto.Enum):
         r"""Enum describing the possible performance labels of an asset,
         usually computed in the context of a linkage.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                This asset does not yet have any performance
+                informantion. This may be because it is still
+                under review.
+            LEARNING (3):
+                The asset has started getting impressions but
+                the stats are not statistically significant
+                enough to get an asset performance label.
+            LOW (4):
+                Worst performing assets.
+            GOOD (5):
+                Good performing assets.
+            BEST (6):
+                Best performing assets.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

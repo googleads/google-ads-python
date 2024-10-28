@@ -37,6 +37,16 @@ class TargetFrequencyTimeUnitEnum(proto.Message):
     class TargetFrequencyTimeUnit(proto.Enum):
         r"""Enum describing time window over which we want to reach
         Target Frequency.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            WEEKLY (2):
+                Optimize bidding to reach Target Frequency in
+                a week.
         """
 
         UNSPECIFIED = 0

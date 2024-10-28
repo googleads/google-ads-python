@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class CampaignAsset(proto.Message):
     r"""A link between a Campaign and an Asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -35,7 +35,22 @@ class ResourceChangeOperationEnum(proto.Message):
     """
 
     class ResourceChangeOperation(proto.Enum):
-        r"""The operation on the changed resource in change_event resource."""
+        r"""The operation on the changed resource in change_event resource.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents an
+                unclassified operation unknown in this version.
+            CREATE (2):
+                The resource was created.
+            UPDATE (3):
+                The resource was modified.
+            REMOVE (4):
+                The resource was removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CREATE = 2

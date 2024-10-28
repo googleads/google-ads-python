@@ -109,12 +109,16 @@ class BiddingSeasonalityAdjustment(proto.Message):
         proto.INT64,
         number=2,
     )
-    scope: seasonality_event_scope.SeasonalityEventScopeEnum.SeasonalityEventScope = proto.Field(
+    scope: (
+        seasonality_event_scope.SeasonalityEventScopeEnum.SeasonalityEventScope
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=seasonality_event_scope.SeasonalityEventScopeEnum.SeasonalityEventScope,
     )
-    status: seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus = proto.Field(
+    status: (
+        seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=seasonality_event_status.SeasonalityEventStatusEnum.SeasonalityEventStatus,

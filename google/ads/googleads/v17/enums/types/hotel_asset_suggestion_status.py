@@ -35,7 +35,24 @@ class HotelAssetSuggestionStatusEnum(proto.Message):
     """
 
     class HotelAssetSuggestionStatus(proto.Enum):
-        r"""Possible statuses of a hotel asset suggestion."""
+        r"""Possible statuses of a hotel asset suggestion.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            SUCCESS (2):
+                The hotel asset suggestion was successfully
+                retrieved.
+            HOTEL_NOT_FOUND (3):
+                A hotel look up returns nothing.
+            INVALID_PLACE_ID (4):
+                A Google Places ID is invalid and cannot be
+                decoded.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SUCCESS = 2

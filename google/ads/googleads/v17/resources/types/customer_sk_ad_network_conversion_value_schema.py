@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class CustomerSkAdNetworkConversionValueSchema(proto.Message):
     r"""A CustomerSkAdNetworkConversionValueSchema.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the schema.
@@ -48,6 +49,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
     class SkAdNetworkConversionValueSchema(proto.Message):
         r"""The CustomerLink specific SkAdNetworkConversionValueSchema.
+
         Attributes:
             app_id (str):
                 Required. Output only. Apple App Store app
@@ -72,6 +74,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
         class FineGrainedConversionValueMappings(proto.Message):
             r"""Mappings for fine grained conversion value.
+
             Attributes:
                 fine_grained_conversion_value (int):
                     Output only. Fine grained conversion value. Valid values are
@@ -93,6 +96,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
         class PostbackMapping(proto.Message):
             r"""Mappings for each postback in multiple conversion windows.
+
             This message has `oneof`_ fields (mutually exclusive fields).
             For each oneof, at most one member field can be set at the same time.
             Setting any member of the oneof automatically clears all other
@@ -133,7 +137,9 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
                 number=2,
                 message="CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.CoarseGrainedConversionValueMappings",
             )
-            lock_window_coarse_conversion_value: sk_ad_network_coarse_conversion_value.SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue = proto.Field(
+            lock_window_coarse_conversion_value: (
+                sk_ad_network_coarse_conversion_value.SkAdNetworkCoarseConversionValueEnum.SkAdNetworkCoarseConversionValue
+            ) = proto.Field(
                 proto.ENUM,
                 number=3,
                 oneof="lock_window_trigger",
@@ -152,6 +158,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
         class CoarseGrainedConversionValueMappings(proto.Message):
             r"""Mappings for coarse grained conversion values.
+
             Attributes:
                 low_conversion_value_mapping (google.ads.googleads.v17.resources.types.CustomerSkAdNetworkConversionValueSchema.SkAdNetworkConversionValueSchema.ConversionValueMapping):
                     Output only. Mapping for "low" coarse
@@ -255,6 +262,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
             class RevenueRange(proto.Message):
                 r"""Defines a range for revenue values.
+
                 Attributes:
                     min_event_revenue (float):
                         Output only. For revenue ranges, the minimum value in
@@ -277,6 +285,7 @@ class CustomerSkAdNetworkConversionValueSchema(proto.Message):
 
             class EventOccurrenceRange(proto.Message):
                 r"""Defines a range for event counter values.
+
                 Attributes:
                     min_event_count (int):
                         Output only. For event counter ranges, the

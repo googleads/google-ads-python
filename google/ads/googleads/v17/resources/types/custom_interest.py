@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CustomInterest(proto.Message):
     r"""A custom interest. This is a list of users by interest.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -83,7 +84,9 @@ class CustomInterest(proto.Message):
         number=8,
         optional=True,
     )
-    status: custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus = proto.Field(
+    status: (
+        custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus,
@@ -117,6 +120,7 @@ class CustomInterestMember(proto.Message):
     keyword or url. It is immutable, that is, it can only be created
     or removed but not changed.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -130,7 +134,9 @@ class CustomInterestMember(proto.Message):
             This field is a member of `oneof`_ ``_parameter``.
     """
 
-    member_type: custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType = proto.Field(
+    member_type: (
+        custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType,

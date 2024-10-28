@@ -32,7 +32,18 @@ class ListingTypeEnum(proto.Message):
     r"""Container for enum describing possible listing types."""
 
     class ListingType(proto.Enum):
-        r"""Possible listing types."""
+        r"""Possible listing types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            VEHICLES (2):
+                This campaign serves vehicle ads.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         VEHICLES = 2

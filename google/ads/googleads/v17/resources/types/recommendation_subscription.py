@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class RecommendationSubscription(proto.Message):
     r"""Recommendation Subscription resource
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -89,7 +90,9 @@ class RecommendationSubscription(proto.Message):
         number=4,
         optional=True,
     )
-    status: recommendation_subscription_status.RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus = proto.Field(
+    status: (
+        recommendation_subscription_status.RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         optional=True,

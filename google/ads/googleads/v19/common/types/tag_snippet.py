@@ -33,6 +33,7 @@ __protobuf__ = proto.module(
 
 class TagSnippet(proto.Message):
     r"""The site tag and event snippet pair for a TrackingCodeType.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

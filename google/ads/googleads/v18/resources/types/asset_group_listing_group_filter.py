@@ -88,32 +88,44 @@ class AssetGroupListingGroupFilter(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
-    type_: listing_group_filter_type_enum.ListingGroupFilterTypeEnum.ListingGroupFilterType = proto.Field(
+    type_: (
+        listing_group_filter_type_enum.ListingGroupFilterTypeEnum.ListingGroupFilterType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=listing_group_filter_type_enum.ListingGroupFilterTypeEnum.ListingGroupFilterType,
     )
-    listing_source: listing_group_filter_listing_source.ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource = proto.Field(
+    listing_source: (
+        listing_group_filter_listing_source.ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=listing_group_filter_listing_source.ListingGroupFilterListingSourceEnum.ListingGroupFilterListingSource,
     )
     case_value: "ListingGroupFilterDimension" = proto.Field(
-        proto.MESSAGE, number=6, message="ListingGroupFilterDimension",
+        proto.MESSAGE,
+        number=6,
+        message="ListingGroupFilterDimension",
     )
     parent_listing_group_filter: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     path: "ListingGroupFilterDimensionPath" = proto.Field(
-        proto.MESSAGE, number=8, message="ListingGroupFilterDimensionPath",
+        proto.MESSAGE,
+        number=8,
+        message="ListingGroupFilterDimensionPath",
     )
 
 
@@ -129,15 +141,18 @@ class ListingGroupFilterDimensionPath(proto.Message):
             filter.
     """
 
-    dimensions: MutableSequence[
-        "ListingGroupFilterDimension"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ListingGroupFilterDimension",
+    dimensions: MutableSequence["ListingGroupFilterDimension"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="ListingGroupFilterDimension",
+        )
     )
 
 
 class ListingGroupFilterDimension(proto.Message):
     r"""Listing dimensions for the asset group listing group filter.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -189,6 +204,7 @@ class ListingGroupFilterDimension(proto.Message):
         cases of the same subdivision must have the same dimension type
         (category level).
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -206,9 +222,13 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         category_id: int = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
-        level: listing_group_filter_product_category_level.ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel = proto.Field(
+        level: (
+            listing_group_filter_product_category_level.ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=listing_group_filter_product_category_level.ListingGroupFilterProductCategoryLevelEnum.ListingGroupFilterProductCategoryLevel,
@@ -216,6 +236,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductBrand(proto.Message):
         r"""Brand of the product.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -226,17 +247,22 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         value: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
 
     class ProductChannel(proto.Message):
         r"""Locality of a product offer.
+
         Attributes:
             channel (google.ads.googleads.v18.enums.types.ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel):
                 Value of the locality.
         """
 
-        channel: listing_group_filter_product_channel.ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel = proto.Field(
+        channel: (
+            listing_group_filter_product_channel.ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=listing_group_filter_product_channel.ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel,
@@ -244,12 +270,15 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductCondition(proto.Message):
         r"""Condition of a product offer.
+
         Attributes:
             condition (google.ads.googleads.v18.enums.types.ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition):
                 Value of the condition.
         """
 
-        condition: listing_group_filter_product_condition.ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition = proto.Field(
+        condition: (
+            listing_group_filter_product_condition.ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=listing_group_filter_product_condition.ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition,
@@ -257,6 +286,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductCustomAttribute(proto.Message):
         r"""Custom attribute of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -269,9 +299,13 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         value: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
-        index: listing_group_filter_custom_attribute_index.ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex = proto.Field(
+        index: (
+            listing_group_filter_custom_attribute_index.ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=listing_group_filter_custom_attribute_index.ListingGroupFilterCustomAttributeIndexEnum.ListingGroupFilterCustomAttributeIndex,
@@ -279,6 +313,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductItemId(proto.Message):
         r"""Item id of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -289,11 +324,14 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         value: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
 
     class ProductType(proto.Message):
         r"""Type of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -306,9 +344,13 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         value: str = proto.Field(
-            proto.STRING, number=1, optional=True,
+            proto.STRING,
+            number=1,
+            optional=True,
         )
-        level: listing_group_filter_product_type_level.ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel = proto.Field(
+        level: (
+            listing_group_filter_product_type_level.ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=listing_group_filter_product_type_level.ListingGroupFilterProductTypeLevelEnum.ListingGroupFilterProductTypeLevel,
@@ -345,6 +387,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class WebpageCondition(proto.Message):
         r"""Matching condition for URL filtering.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other
@@ -369,23 +412,39 @@ class ListingGroupFilterDimension(proto.Message):
         """
 
         custom_label: str = proto.Field(
-            proto.STRING, number=1, oneof="condition",
+            proto.STRING,
+            number=1,
+            oneof="condition",
         )
         url_contains: str = proto.Field(
-            proto.STRING, number=2, oneof="condition",
+            proto.STRING,
+            number=2,
+            oneof="condition",
         )
 
     product_category: ProductCategory = proto.Field(
-        proto.MESSAGE, number=10, oneof="dimension", message=ProductCategory,
+        proto.MESSAGE,
+        number=10,
+        oneof="dimension",
+        message=ProductCategory,
     )
     product_brand: ProductBrand = proto.Field(
-        proto.MESSAGE, number=2, oneof="dimension", message=ProductBrand,
+        proto.MESSAGE,
+        number=2,
+        oneof="dimension",
+        message=ProductBrand,
     )
     product_channel: ProductChannel = proto.Field(
-        proto.MESSAGE, number=3, oneof="dimension", message=ProductChannel,
+        proto.MESSAGE,
+        number=3,
+        oneof="dimension",
+        message=ProductChannel,
     )
     product_condition: ProductCondition = proto.Field(
-        proto.MESSAGE, number=4, oneof="dimension", message=ProductCondition,
+        proto.MESSAGE,
+        number=4,
+        oneof="dimension",
+        message=ProductCondition,
     )
     product_custom_attribute: ProductCustomAttribute = proto.Field(
         proto.MESSAGE,
@@ -394,13 +453,22 @@ class ListingGroupFilterDimension(proto.Message):
         message=ProductCustomAttribute,
     )
     product_item_id: ProductItemId = proto.Field(
-        proto.MESSAGE, number=6, oneof="dimension", message=ProductItemId,
+        proto.MESSAGE,
+        number=6,
+        oneof="dimension",
+        message=ProductItemId,
     )
     product_type: ProductType = proto.Field(
-        proto.MESSAGE, number=7, oneof="dimension", message=ProductType,
+        proto.MESSAGE,
+        number=7,
+        oneof="dimension",
+        message=ProductType,
     )
     webpage: Webpage = proto.Field(
-        proto.MESSAGE, number=9, oneof="dimension", message=Webpage,
+        proto.MESSAGE,
+        number=9,
+        oneof="dimension",
+        message=Webpage,
     )
 
 

@@ -32,12 +32,15 @@ from google.ads.googleads.v18.enums.types import asset_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignAsset",},
+    manifest={
+        "CampaignAsset",
+    },
 )
 
 
 class CampaignAsset(proto.Message):
     r"""A link between a Campaign and an Asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -84,28 +87,39 @@ class CampaignAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     asset: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     source: asset_source.AssetSourceEnum.AssetSource = proto.Field(
-        proto.ENUM, number=8, enum=asset_source.AssetSourceEnum.AssetSource,
+        proto.ENUM,
+        number=8,
+        enum=asset_source.AssetSourceEnum.AssetSource,
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

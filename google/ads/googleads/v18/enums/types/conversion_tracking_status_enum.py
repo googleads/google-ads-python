@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionTrackingStatusEnum",},
+    manifest={
+        "ConversionTrackingStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,29 @@ class ConversionTrackingStatusEnum(proto.Message):
     """
 
     class ConversionTrackingStatus(proto.Enum):
-        r"""Conversion Tracking status of the customer."""
+        r"""Conversion Tracking status of the customer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NOT_CONVERSION_TRACKED (2):
+                Customer does not use any conversion
+                tracking.
+            CONVERSION_TRACKING_MANAGED_BY_SELF (3):
+                The conversion actions are created and
+                managed by this customer.
+            CONVERSION_TRACKING_MANAGED_BY_THIS_MANAGER (4):
+                The conversion actions are created and managed by the
+                manager specified in the request's ``login-customer-id``.
+            CONVERSION_TRACKING_MANAGED_BY_ANOTHER_MANAGER (5):
+                The conversion actions are created and managed by a manager
+                different from the customer or manager specified in the
+                request's ``login-customer-id``.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_CONVERSION_TRACKED = 2

@@ -37,7 +37,67 @@ class AdGroupAdPrimaryStatusReasonEnum(proto.Message):
     """
 
     class AdGroupAdPrimaryStatusReason(proto.Enum):
-        r"""Possible ad group ad status reasons."""
+        r"""Possible ad group ad status reasons.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN_REMOVED (2):
+                The user-specified campaign status is
+                removed. Contributes to
+                AdGroupAdPrimaryStatus.REMOVED.
+            CAMPAIGN_PAUSED (3):
+                The user-specified campaign status is paused.
+                Contributes to AdGroupAdPrimaryStatus.PAUSED.
+            CAMPAIGN_PENDING (4):
+                The user-specified time for this campaign to
+                start is in the future. Contributes to
+                AdGroupAdPrimaryStatus.PENDING.
+            CAMPAIGN_ENDED (5):
+                The user-specified time for this campaign to
+                end has passed. Contributes to
+                AdGroupAdPrimaryStatus.ENDED.
+            AD_GROUP_PAUSED (6):
+                The user-specified ad group status is paused.
+                Contributes to AdGroupAdPrimaryStatus.PAUSED.
+            AD_GROUP_REMOVED (7):
+                The user-specified ad group status is
+                removed. Contributes to
+                AdGroupAdPrimaryStatus.REMOVED.
+            AD_GROUP_AD_PAUSED (8):
+                The user-specified ad status is paused.
+                Contributes to AdGroupAdPrimaryStatus.PAUSED.
+            AD_GROUP_AD_REMOVED (9):
+                The user-specified ad status is removed.
+                Contributes to AdGroupAdPrimaryStatus.REMOVED.
+            AD_GROUP_AD_DISAPPROVED (10):
+                The ad is disapproved. Contributes to
+                AdGroupAdPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_AD_UNDER_REVIEW (11):
+                The ad is under review. Contributes to
+                AdGroupAdPrimaryStatus.PENDING.
+            AD_GROUP_AD_POOR_QUALITY (12):
+                The ad is poor quality. This is determined by
+                the serving stack that served the Ad.
+                Contributes to AdGroupAdPrimaryStatus.LIMITED.
+            AD_GROUP_AD_NO_ADS (13):
+                No eligible ads instances could be generated.
+                Contributes to AdGroupAdPrimaryStatus.PENDING.
+            AD_GROUP_AD_APPROVED_LABELED (14):
+                The ad is internally labeled with a limiting
+                label. Contributes to
+                AdGroupAdPrimaryStatus.LIMITED.
+            AD_GROUP_AD_AREA_OF_INTEREST_ONLY (15):
+                The ad is only serving in the user-specified
+                area of interest. Contributes to
+                AdGroupAdPrimaryStatus.LIMITED.
+            AD_GROUP_AD_UNDER_APPEAL (16):
+                The ad is part of an ongoing appeal. This
+                reason does not impact AdGroupAdPrimaryStatus.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

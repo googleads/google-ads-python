@@ -22,16 +22,44 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"HotelReconciliationStatusEnum",},
+    manifest={
+        "HotelReconciliationStatusEnum",
+    },
 )
 
 
 class HotelReconciliationStatusEnum(proto.Message):
-    r"""Container for HotelReconciliationStatus.
-    """
+    r"""Container for HotelReconciliationStatus."""
 
     class HotelReconciliationStatus(proto.Enum):
-        r"""Status of the hotel booking reconciliation."""
+        r"""Status of the hotel booking reconciliation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            RESERVATION_ENABLED (2):
+                Bookings are for a future date, or a stay is
+                underway but the check-out date hasn't passed.
+                An active reservation can't be reconciled.
+            RECONCILIATION_NEEDED (3):
+                Check-out has already taken place, or the
+                booked dates have passed without cancellation.
+                Bookings that are not reconciled within 45 days
+                of the check-out date are billed based on the
+                original booking price.
+            RECONCILED (4):
+                These bookings have been reconciled.
+                Reconciled bookings are billed 45 days after the
+                check-out date.
+            CANCELED (5):
+                This booking was marked as canceled. Canceled
+                stays with a value greater than zero (due to
+                minimum stay rules or cancellation fees) are
+                billed 45 days after the check-out date.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         RESERVATION_ENABLED = 2

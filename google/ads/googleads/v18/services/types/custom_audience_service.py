@@ -52,20 +52,25 @@ class MutateCustomAudiencesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomAudienceOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomAudienceOperation",
+    operations: MutableSequence["CustomAudienceOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomAudienceOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
 class CustomAudienceOperation(proto.Message):
     r"""A single operation (create, update) on a custom audience.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -97,7 +102,9 @@ class CustomAudienceOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: custom_audience.CustomAudience = proto.Field(
         proto.MESSAGE,
@@ -112,33 +119,40 @@ class CustomAudienceOperation(proto.Message):
         message=custom_audience.CustomAudience,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCustomAudiencesResponse(proto.Message):
     r"""Response message for custom audience mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCustomAudienceResult]):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateCustomAudienceResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomAudienceResult",
+    results: MutableSequence["MutateCustomAudienceResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomAudienceResult",
+        )
     )
 
 
 class MutateCustomAudienceResult(proto.Message):
     r"""The result for the custom audience mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

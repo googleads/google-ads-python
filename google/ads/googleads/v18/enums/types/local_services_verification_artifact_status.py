@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesVerificationArtifactStatusEnum",},
+    manifest={
+        "LocalServicesVerificationArtifactStatusEnum",
+    },
 )
 
 
@@ -35,7 +37,26 @@ class LocalServicesVerificationArtifactStatusEnum(proto.Message):
     class LocalServicesVerificationArtifactStatus(proto.Enum):
         r"""Enums describing statuses of a local services verification
         artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PASSED (2):
+                Artifact has passed verification.
+            FAILED (3):
+                Artifact has failed verification.
+            PENDING (4):
+                Artifact is in the process of verification.
+            NO_SUBMISSION (5):
+                Artifact needs user to upload information
+                before it is verified.
+            CANCELLED (6):
+                Artifact has been cancelled by the user.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PASSED = 2

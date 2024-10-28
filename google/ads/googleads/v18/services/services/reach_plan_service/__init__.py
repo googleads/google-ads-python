@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ReachPlanServiceClient
+from .async_client import ReachPlanServiceAsyncClient
 
-__all__ = ("ReachPlanServiceClient",)
+__all__ = (
+    "ReachPlanServiceClient",
+    "ReachPlanServiceAsyncClient",
+)

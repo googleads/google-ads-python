@@ -88,7 +88,9 @@ class ConversionCustomVariable(proto.Message):
         proto.STRING,
         number=4,
     )
-    status: conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus = proto.Field(
+    status: (
+        conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=conversion_custom_variable_status.ConversionCustomVariableStatusEnum.ConversionCustomVariableStatus,

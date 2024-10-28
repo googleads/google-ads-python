@@ -34,7 +34,25 @@ class LookalikeExpansionLevelEnum(proto.Message):
     class LookalikeExpansionLevel(proto.Enum):
         r"""Expansion level, reflecting the size of the lookalike
         audience
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Invalid expansion level.
+            NARROW (2):
+                Expansion to a small set of users that are
+                similar to the seed lists
+            BALANCED (3):
+                Expansion to a medium set of users that are similar to the
+                seed lists. Includes all users of EXPANSION_LEVEL_NARROW,
+                and more.
+            BROAD (4):
+                Expansion to a large set of users that are similar to the
+                seed lists. Includes all users of EXPANSION_LEVEL_BALANCED,
+                and more.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NARROW = 2

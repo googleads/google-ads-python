@@ -120,6 +120,7 @@ class CustomerManagerLinkOperation(proto.Message):
     3. Update operation with status INACTIVE terminates link to
         manager.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -148,6 +149,7 @@ class CustomerManagerLinkOperation(proto.Message):
 
 class MutateCustomerManagerLinkResponse(proto.Message):
     r"""Response message for a CustomerManagerLink mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCustomerManagerLinkResult]):
             A result that identifies the resource
@@ -165,6 +167,7 @@ class MutateCustomerManagerLinkResponse(proto.Message):
 
 class MoveManagerLinkResponse(proto.Message):
     r"""Response message for a CustomerManagerLink moveManagerLink.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -181,6 +184,7 @@ class MoveManagerLinkResponse(proto.Message):
 
 class MutateCustomerManagerLinkResult(proto.Message):
     r"""The result for the customer manager link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

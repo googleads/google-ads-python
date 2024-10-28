@@ -35,7 +35,45 @@ class OperationAccessDeniedErrorEnum(proto.Message):
     """
 
     class OperationAccessDeniedError(proto.Enum):
-        r"""Enum describing possible operation access denied errors."""
+        r"""Enum describing possible operation access denied errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            ACTION_NOT_PERMITTED (2):
+                Unauthorized invocation of a service's method
+                (get, mutate, etc.)
+            CREATE_OPERATION_NOT_PERMITTED (3):
+                Unauthorized CREATE operation in invoking a
+                service's mutate method.
+            REMOVE_OPERATION_NOT_PERMITTED (4):
+                Unauthorized REMOVE operation in invoking a
+                service's mutate method.
+            UPDATE_OPERATION_NOT_PERMITTED (5):
+                Unauthorized UPDATE operation in invoking a
+                service's mutate method.
+            MUTATE_ACTION_NOT_PERMITTED_FOR_CLIENT (6):
+                A mutate action is not allowed on this
+                resource, from this client.
+            OPERATION_NOT_PERMITTED_FOR_CAMPAIGN_TYPE (7):
+                This operation is not permitted on this
+                campaign type
+            CREATE_AS_REMOVED_NOT_PERMITTED (8):
+                A CREATE operation may not set status to
+                REMOVED.
+            OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE (9):
+                This operation is not allowed because the
+                resource is removed.
+            OPERATION_NOT_PERMITTED_FOR_AD_GROUP_TYPE (10):
+                This operation is not permitted on this ad
+                group type.
+            MUTATE_NOT_PERMITTED_FOR_CUSTOMER (11):
+                The mutate is not allowed for this customer.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ACTION_NOT_PERMITTED = 2

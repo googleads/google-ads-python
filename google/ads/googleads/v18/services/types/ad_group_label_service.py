@@ -58,21 +58,27 @@ class MutateAdGroupLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AdGroupLabelOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupLabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdGroupLabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class AdGroupLabelOperation(proto.Message):
     r"""A single operation (create, remove) on an ad group label.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -102,12 +108,15 @@ class AdGroupLabelOperation(proto.Message):
         message=ad_group_label.AdGroupLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateAdGroupLabelsResponse(proto.Message):
     r"""Response message for an ad group labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -120,22 +129,28 @@ class MutateAdGroupLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateAdGroupLabelResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdGroupLabelResult",
     )
 
 
 class MutateAdGroupLabelResult(proto.Message):
     r"""The result for an ad group label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

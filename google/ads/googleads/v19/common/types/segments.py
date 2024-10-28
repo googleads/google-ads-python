@@ -118,6 +118,7 @@ __protobuf__ = proto.module(
 
 class Segments(proto.Message):
     r"""Segment only fields.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1208,6 +1209,7 @@ class Segments(proto.Message):
 
 class Keyword(proto.Message):
     r"""A Keyword criterion segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1233,6 +1235,7 @@ class Keyword(proto.Message):
 
 class BudgetCampaignAssociationStatus(proto.Message):
     r"""A BudgetCampaignAssociationStatus segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1260,6 +1263,7 @@ class BudgetCampaignAssociationStatus(proto.Message):
 
 class AssetInteractionTarget(proto.Message):
     r"""An AssetInteractionTarget segment.
+
     Attributes:
         asset (str):
             The asset resource name.
@@ -1282,6 +1286,7 @@ class AssetInteractionTarget(proto.Message):
 
 class SkAdNetworkSourceApp(proto.Message):
     r"""A SkAdNetworkSourceApp segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

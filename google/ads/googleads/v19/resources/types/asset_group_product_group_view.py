@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class AssetGroupProductGroupView(proto.Message):
     r"""An asset group product group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the asset group product

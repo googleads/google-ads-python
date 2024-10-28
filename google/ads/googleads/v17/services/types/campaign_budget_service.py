@@ -71,12 +71,12 @@ class MutateCampaignBudgetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CampaignBudgetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignBudgetOperation",
+    operations: MutableSequence["CampaignBudgetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignBudgetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateCampaignBudgetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -153,6 +155,7 @@ class CampaignBudgetOperation(proto.Message):
 
 class MutateCampaignBudgetsResponse(proto.Message):
     r"""Response message for campaign budget mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +172,18 @@ class MutateCampaignBudgetsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateCampaignBudgetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateCampaignBudgetResult",
+    results: MutableSequence["MutateCampaignBudgetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCampaignBudgetResult",
+        )
     )
 
 
 class MutateCampaignBudgetResult(proto.Message):
     r"""The result for the campaign budget mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

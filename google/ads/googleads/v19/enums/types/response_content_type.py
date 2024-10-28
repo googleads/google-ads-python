@@ -32,7 +32,21 @@ class ResponseContentTypeEnum(proto.Message):
     r"""Container for possible response content types."""
 
     class ResponseContentType(proto.Enum):
-        r"""Possible response content types."""
+        r"""Possible response content types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified. Will return the resource name
+                only in the response.
+            RESOURCE_NAME_ONLY (1):
+                The mutate response will be the resource
+                name.
+            MUTABLE_RESOURCE (2):
+                The mutate response will contain the resource
+                name and the resource with mutable fields if
+                possible. Otherwise, only the resource name will
+                be returned.
+        """
 
         UNSPECIFIED = 0
         RESOURCE_NAME_ONLY = 1

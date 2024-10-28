@@ -36,7 +36,70 @@ class AdGroupPrimaryStatusReasonEnum(proto.Message):
     """
 
     class AdGroupPrimaryStatusReason(proto.Enum):
-        r"""Possible ad group status reasons."""
+        r"""Possible ad group status reasons.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN_REMOVED (2):
+                The user-specified campaign status is removed. Contributes
+                to AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_PAUSED (3):
+                The user-specified campaign status is paused. Contributes to
+                AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_PENDING (4):
+                The user-specified time for this campaign to start is in the
+                future. Contributes to AdGroupPrimaryStatus.NOT_ELIGIBLE
+            CAMPAIGN_ENDED (5):
+                The user-specified time for this campaign to end has passed.
+                Contributes to AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_PAUSED (6):
+                The user-specified ad group status is paused.
+                Contributes to AdGroupPrimaryStatus.PAUSED.
+            AD_GROUP_REMOVED (7):
+                The user-specified ad group status is
+                removed. Contributes to
+                AdGroupPrimaryStatus.REMOVED.
+            AD_GROUP_INCOMPLETE (8):
+                The construction of this ad group is not yet complete.
+                Contributes to AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            KEYWORDS_PAUSED (9):
+                The user-specified keyword statuses in this ad group are all
+                paused. Contributes to AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            NO_KEYWORDS (10):
+                No eligible keywords exist in this ad group. Contributes to
+                AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_ADS_PAUSED (11):
+                The user-specified ad group ads statuses in this ad group
+                are all paused. Contributes to
+                AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            NO_AD_GROUP_ADS (12):
+                No eligible ad group ads exist in this ad group. Contributes
+                to AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            HAS_ADS_DISAPPROVED (13):
+                Policy status reason when at least one ad is
+                disapproved. Contributes to multiple
+                AdGroupPrimaryStatus.
+            HAS_ADS_LIMITED_BY_POLICY (14):
+                Policy status reason when at least one ad is
+                limited by policy. Contributes to multiple
+                AdGroupPrimaryStatus.
+            MOST_ADS_UNDER_REVIEW (15):
+                Policy status reason when most ads are
+                pending review. Contributes to
+                AdGroupPrimaryStatus.PENDING.
+            CAMPAIGN_DRAFT (16):
+                The AdGroup belongs to a Draft campaign. Contributes to
+                AdGroupPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_PAUSED_DUE_TO_LOW_ACTIVITY (19):
+                Ad group has been paused due to prolonged low
+                activity in serving. Contributes to
+                AdGroupPrimaryStatus.PAUSED.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN_REMOVED = 2

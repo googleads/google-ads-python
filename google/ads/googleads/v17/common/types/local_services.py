@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesDocumentReadOnly(proto.Message):
     r"""A Local Services Document with read only accessible data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

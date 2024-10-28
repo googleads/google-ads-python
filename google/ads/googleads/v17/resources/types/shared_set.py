@@ -35,6 +35,7 @@ class SharedSet(proto.Message):
     r"""SharedSets are used for sharing criterion exclusions across
     multiple campaigns.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

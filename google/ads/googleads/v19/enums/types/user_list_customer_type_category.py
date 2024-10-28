@@ -32,7 +32,55 @@ class UserListCustomerTypeCategoryEnum(proto.Message):
     r"""The user list customer type categories."""
 
     class UserListCustomerTypeCategory(proto.Enum):
-        r"""Enum containing possible user list customer type categories."""
+        r"""Enum containing possible user list customer type categories.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Unknown type.
+            ALL_CUSTOMERS (2):
+                Customer type category for all customers.
+            PURCHASERS (3):
+                Customer type category for all purchasers.
+            HIGH_VALUE_CUSTOMERS (4):
+                Customer type category for high value
+                purchasers.
+            DISENGAGED_CUSTOMERS (5):
+                Customer type category for disengaged
+                purchasers.
+            QUALIFIED_LEADS (6):
+                Customer type category for qualified leads.
+            CONVERTED_LEADS (7):
+                Customer type category for converted leads.
+            PAID_SUBSCRIBERS (8):
+                Customer type category for paid subscribers.
+            LOYALTY_SIGN_UPS (9):
+                Customer type category for loyalty signups.
+            CART_ABANDONERS (10):
+                Customer type category for cart abandoners.
+            LOYALTY_TIER_1_MEMBERS (11):
+                Customer type category for loyalty tier 1
+                members.
+            LOYALTY_TIER_2_MEMBERS (12):
+                Customer type category for loyalty tier 2
+                members.
+            LOYALTY_TIER_3_MEMBERS (13):
+                Customer type category for loyalty tier 3
+                members.
+            LOYALTY_TIER_4_MEMBERS (14):
+                Customer type category for loyalty tier 4
+                members.
+            LOYALTY_TIER_5_MEMBERS (15):
+                Customer type category for loyalty tier 5
+                members.
+            LOYALTY_TIER_6_MEMBERS (16):
+                Customer type category for loyalty tier 6
+                members.
+            LOYALTY_TIER_7_MEMBERS (17):
+                Customer type category for loyalty tier 7
+                members.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

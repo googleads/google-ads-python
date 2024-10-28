@@ -32,7 +32,19 @@ class ConsentStatusEnum(proto.Message):
     r"""Enums represent consent status."""
 
     class ConsentStatus(proto.Enum):
-        r"""Consent status"""
+        r"""Consent status
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Output-only. Represents a format not yet
+                defined in this enum.
+            GRANTED (2):
+                Granted.
+            DENIED (3):
+                Denied.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

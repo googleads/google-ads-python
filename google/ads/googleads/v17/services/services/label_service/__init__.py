@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import LabelServiceClient
+from .async_client import LabelServiceAsyncClient
 
-__all__ = ("LabelServiceClient",)
+__all__ = (
+    "LabelServiceClient",
+    "LabelServiceAsyncClient",
+)

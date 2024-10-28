@@ -22,16 +22,39 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PerformanceMaxUpgradeStatusEnum",},
+    manifest={
+        "PerformanceMaxUpgradeStatusEnum",
+    },
 )
 
 
 class PerformanceMaxUpgradeStatusEnum(proto.Message):
-    r"""Performance Max Upgrade status for campaign.
-    """
+    r"""Performance Max Upgrade status for campaign."""
 
     class PerformanceMaxUpgradeStatus(proto.Enum):
-        r"""Performance Max Upgrade status enum for campaign."""
+        r"""Performance Max Upgrade status enum for campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            UPGRADE_IN_PROGRESS (3):
+                The upgrade to a Performance Max campaign is
+                in progress.
+            UPGRADE_COMPLETE (4):
+                The upgrade to a Performance Max campaign is
+                complete.
+            UPGRADE_FAILED (5):
+                The upgrade to a Performance Max campaign
+                failed. The campaign will still serve as it was
+                before upgrade was attempted.
+            UPGRADE_ELIGIBLE (6):
+                The campaign is eligible for upgrade to a
+                Performance Max campaign.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UPGRADE_IN_PROGRESS = 3

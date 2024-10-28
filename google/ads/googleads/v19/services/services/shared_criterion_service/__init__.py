@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import SharedCriterionServiceClient
+from .async_client import SharedCriterionServiceAsyncClient
 
-__all__ = ("SharedCriterionServiceClient",)
+__all__ = (
+    "SharedCriterionServiceClient",
+    "SharedCriterionServiceAsyncClient",
+)

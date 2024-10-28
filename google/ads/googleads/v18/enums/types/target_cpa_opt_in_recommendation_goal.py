@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"TargetCpaOptInRecommendationGoalEnum",},
+    manifest={
+        "TargetCpaOptInRecommendationGoalEnum",
+    },
 )
 
 
@@ -33,7 +35,29 @@ class TargetCpaOptInRecommendationGoalEnum(proto.Message):
     """
 
     class TargetCpaOptInRecommendationGoal(proto.Enum):
-        r"""Goal of TargetCpaOptIn recommendation."""
+        r"""Goal of TargetCpaOptIn recommendation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SAME_COST (2):
+                Recommendation to set Target CPA to maintain
+                the same cost.
+            SAME_CONVERSIONS (3):
+                Recommendation to set Target CPA to maintain
+                the same conversions.
+            SAME_CPA (4):
+                Recommendation to set Target CPA to maintain
+                the same CPA.
+            CLOSEST_CPA (5):
+                Recommendation to set Target CPA to a value
+                that is as close as possible to, yet lower than,
+                the actual CPA (computed for past 28 days).
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SAME_COST = 2

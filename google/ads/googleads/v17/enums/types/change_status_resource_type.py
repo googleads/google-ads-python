@@ -37,7 +37,51 @@ class ChangeStatusResourceTypeEnum(proto.Message):
     class ChangeStatusResourceType(proto.Enum):
         r"""Enum listing the resource types support by the ChangeStatus
         resource.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents an
+                unclassified resource unknown in this version.
+            AD_GROUP (3):
+                An AdGroup resource change.
+            AD_GROUP_AD (4):
+                An AdGroupAd resource change.
+            AD_GROUP_CRITERION (5):
+                An AdGroupCriterion resource change.
+            CAMPAIGN (6):
+                A Campaign resource change.
+            CAMPAIGN_CRITERION (7):
+                A CampaignCriterion resource change.
+            FEED (9):
+                A Feed resource change.
+            FEED_ITEM (10):
+                A FeedItem resource change.
+            AD_GROUP_FEED (11):
+                An AdGroupFeed resource change.
+            CAMPAIGN_FEED (12):
+                A CampaignFeed resource change.
+            AD_GROUP_BID_MODIFIER (13):
+                An AdGroupBidModifier resource change.
+            SHARED_SET (14):
+                A SharedSet resource change.
+            CAMPAIGN_SHARED_SET (15):
+                A CampaignSharedSet resource change.
+            ASSET (16):
+                An Asset resource change.
+            CUSTOMER_ASSET (17):
+                A CustomerAsset resource change.
+            CAMPAIGN_ASSET (18):
+                A CampaignAsset resource change.
+            AD_GROUP_ASSET (19):
+                An AdGroupAsset resource change.
+            COMBINED_AUDIENCE (20):
+                A CombinedAudience resource change.
+            ASSET_GROUP (21):
+                An AssetGroup resource change.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_GROUP = 3

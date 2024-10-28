@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesEmployee(proto.Message):
     r"""A local services employee resource.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -203,6 +204,7 @@ class UniversityDegree(proto.Message):
     r"""A list of degrees this employee has obtained, and wants to
     feature.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -244,6 +246,7 @@ class Residency(proto.Message):
     qualified medical professional practices under the supervision
     of a senior clinician.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -274,6 +277,7 @@ class Fellowship(proto.Message):
     r"""Details about the employee's medical Fellowship.
     Fellowship is a period of medical training that the professional
     undertakes after finishing their residency.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

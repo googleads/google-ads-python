@@ -22,16 +22,28 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"TimeZoneErrorEnum",},
+    manifest={
+        "TimeZoneErrorEnum",
+    },
 )
 
 
 class TimeZoneErrorEnum(proto.Message):
-    r"""Container for enum describing possible time zone errors.
-    """
+    r"""Container for enum describing possible time zone errors."""
 
     class TimeZoneError(proto.Enum):
-        r"""Enum describing possible currency code errors."""
+        r"""Enum describing possible currency code errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_TIME_ZONE (5):
+                Time zone is not valid.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_TIME_ZONE = 5

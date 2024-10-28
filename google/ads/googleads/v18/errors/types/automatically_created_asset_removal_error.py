@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AutomaticallyCreatedAssetRemovalErrorEnum",},
+    manifest={
+        "AutomaticallyCreatedAssetRemovalErrorEnum",
+    },
 )
 
 
@@ -35,7 +37,26 @@ class AutomaticallyCreatedAssetRemovalErrorEnum(proto.Message):
     class AutomaticallyCreatedAssetRemovalError(proto.Enum):
         r"""Enum describing possible automatically created asset removal
         errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            AD_DOES_NOT_EXIST (2):
+                The ad does not exist.
+            INVALID_AD_TYPE (3):
+                Ad type is not supported. Only Responsive
+                Search Ad type is supported.
+            ASSET_DOES_NOT_EXIST (4):
+                The asset does not exist.
+            ASSET_FIELD_TYPE_DOES_NOT_MATCH (5):
+                The asset field type does not match.
+            NOT_AN_AUTOMATICALLY_CREATED_ASSET (6):
+                Not an automatically created asset.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_DOES_NOT_EXIST = 2

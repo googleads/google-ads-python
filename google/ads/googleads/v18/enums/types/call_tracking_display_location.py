@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CallTrackingDisplayLocationEnum",},
+    manifest={
+        "CallTrackingDisplayLocationEnum",
+    },
 )
 
 
@@ -33,7 +35,21 @@ class CallTrackingDisplayLocationEnum(proto.Message):
     """
 
     class CallTrackingDisplayLocation(proto.Enum):
-        r"""Possible call tracking display locations."""
+        r"""Possible call tracking display locations.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AD (2):
+                The phone call placed from the ad.
+            LANDING_PAGE (3):
+                The phone call placed from the landing page
+                ad points to.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD = 2

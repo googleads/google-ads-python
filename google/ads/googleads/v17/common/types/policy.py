@@ -48,6 +48,7 @@ class PolicyViolationKey(proto.Message):
     r"""Key of the violation. The key is used for referring to a
     violation when filing an exemption request.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -80,6 +81,7 @@ class PolicyViolationKey(proto.Message):
 
 class PolicyValidationParameter(proto.Message):
     r"""Parameter for controlling how policy exemption is done.
+
     Attributes:
         ignorable_policy_topics (MutableSequence[str]):
             The list of policy topics that should not
@@ -109,12 +111,12 @@ class PolicyValidationParameter(proto.Message):
         proto.STRING,
         number=3,
     )
-    exempt_policy_violation_keys: MutableSequence[
-        "PolicyViolationKey"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="PolicyViolationKey",
+    exempt_policy_violation_keys: MutableSequence["PolicyViolationKey"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="PolicyViolationKey",
+        )
     )
 
 
@@ -128,6 +130,7 @@ class PolicyTopicEntry(proto.Message):
     or more evidences that indicate the reason for the finding. It
     may also optionally have one or more constraints that provide
     details about how serving may be restricted.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -157,7 +160,9 @@ class PolicyTopicEntry(proto.Message):
         number=5,
         optional=True,
     )
-    type_: policy_topic_entry_type.PolicyTopicEntryTypeEnum.PolicyTopicEntryType = proto.Field(
+    type_: (
+        policy_topic_entry_type.PolicyTopicEntryTypeEnum.PolicyTopicEntryType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_topic_entry_type.PolicyTopicEntryTypeEnum.PolicyTopicEntryType,
@@ -176,6 +181,7 @@ class PolicyTopicEntry(proto.Message):
 
 class PolicyTopicEvidence(proto.Message):
     r"""Additional information that explains a policy finding.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -219,6 +225,7 @@ class PolicyTopicEvidence(proto.Message):
 
     class TextList(proto.Message):
         r"""A list of fragments of text that violated a policy.
+
         Attributes:
             texts (MutableSequence[str]):
                 The fragments of text from the resource that
@@ -263,6 +270,7 @@ class PolicyTopicEvidence(proto.Message):
 
     class DestinationMismatch(proto.Message):
         r"""Evidence of mismatches between the URLs of a resource.
+
         Attributes:
             url_types (MutableSequence[google.ads.googleads.v17.enums.types.PolicyTopicEvidenceDestinationMismatchUrlTypeEnum.PolicyTopicEvidenceDestinationMismatchUrlType]):
                 The set of URLs that did not match each
@@ -319,7 +327,9 @@ class PolicyTopicEvidence(proto.Message):
             number=7,
             optional=True,
         )
-        device: policy_topic_evidence_destination_not_working_device.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice = proto.Field(
+        device: (
+            policy_topic_evidence_destination_not_working_device.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice
+        ) = proto.Field(
             proto.ENUM,
             number=4,
             enum=policy_topic_evidence_destination_not_working_device.PolicyTopicEvidenceDestinationNotWorkingDeviceEnum.PolicyTopicEvidenceDestinationNotWorkingDevice,
@@ -329,7 +339,9 @@ class PolicyTopicEvidence(proto.Message):
             number=8,
             optional=True,
         )
-        dns_error_type: policy_topic_evidence_destination_not_working_dns_error_type.PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType = proto.Field(
+        dns_error_type: (
+            policy_topic_evidence_destination_not_working_dns_error_type.PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum.PolicyTopicEvidenceDestinationNotWorkingDnsErrorType
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             oneof="reason",
@@ -414,6 +426,7 @@ class PolicyTopicConstraint(proto.Message):
         r"""A list of countries where a resource's serving is
         constrained.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -448,6 +461,7 @@ class PolicyTopicConstraint(proto.Message):
     class CountryConstraint(proto.Message):
         r"""Indicates that a resource's ability to serve in a particular
         country is constrained.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

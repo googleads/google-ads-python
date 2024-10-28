@@ -32,7 +32,24 @@ class IdentityVerificationProgramStatusEnum(proto.Message):
     r"""Container for IdentityVerificationProgramStatus."""
 
     class IdentityVerificationProgramStatus(proto.Enum):
-        r"""Program status of identity verification."""
+        r"""Program status of identity verification.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            PENDING_USER_ACTION (2):
+                Verification is pending on user action to
+                proceed.
+            PENDING_REVIEW (3):
+                Verification is pending on review.
+            SUCCESS (4):
+                Verification succeeded.
+            FAILURE (5):
+                Verification failed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING_USER_ACTION = 2

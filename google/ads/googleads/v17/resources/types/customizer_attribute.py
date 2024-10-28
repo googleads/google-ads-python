@@ -73,12 +73,16 @@ class CustomizerAttribute(proto.Message):
         proto.STRING,
         number=3,
     )
-    type_: customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType = proto.Field(
+    type_: (
+        customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType,
     )
-    status: customizer_attribute_status.CustomizerAttributeStatusEnum.CustomizerAttributeStatus = proto.Field(
+    status: (
+        customizer_attribute_status.CustomizerAttributeStatusEnum.CustomizerAttributeStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=customizer_attribute_status.CustomizerAttributeStatusEnum.CustomizerAttributeStatus,

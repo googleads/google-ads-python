@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import bidding_strategy_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"BiddingStrategy",},
+    manifest={
+        "BiddingStrategy",
+    },
 )
 
 
 class BiddingStrategy(proto.Message):
     r"""A bidding strategy.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -160,41 +163,61 @@ class BiddingStrategy(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=16, optional=True,
+        proto.INT64,
+        number=16,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
-    status: bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus = proto.Field(
+    status: (
+        bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus
+    ) = proto.Field(
         proto.ENUM,
         number=15,
         enum=bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus,
     )
-    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+        )
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=23,
+        proto.STRING,
+        number=23,
     )
     effective_currency_code: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     aligned_campaign_budget_id: int = proto.Field(
-        proto.INT64, number=25,
+        proto.INT64,
+        number=25,
     )
     campaign_count: int = proto.Field(
-        proto.INT64, number=18, optional=True,
+        proto.INT64,
+        number=18,
+        optional=True,
     )
     non_removed_campaign_count: int = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     enhanced_cpc: bidding.EnhancedCpc = proto.Field(
-        proto.MESSAGE, number=7, oneof="scheme", message=bidding.EnhancedCpc,
+        proto.MESSAGE,
+        number=7,
+        oneof="scheme",
+        message=bidding.EnhancedCpc,
     )
     maximize_conversion_value: bidding.MaximizeConversionValue = proto.Field(
         proto.MESSAGE,
@@ -209,7 +232,10 @@ class BiddingStrategy(proto.Message):
         message=bidding.MaximizeConversions,
     )
     target_cpa: bidding.TargetCpa = proto.Field(
-        proto.MESSAGE, number=9, oneof="scheme", message=bidding.TargetCpa,
+        proto.MESSAGE,
+        number=9,
+        oneof="scheme",
+        message=bidding.TargetCpa,
     )
     target_impression_share: bidding.TargetImpressionShare = proto.Field(
         proto.MESSAGE,
@@ -218,10 +244,16 @@ class BiddingStrategy(proto.Message):
         message=bidding.TargetImpressionShare,
     )
     target_roas: bidding.TargetRoas = proto.Field(
-        proto.MESSAGE, number=11, oneof="scheme", message=bidding.TargetRoas,
+        proto.MESSAGE,
+        number=11,
+        oneof="scheme",
+        message=bidding.TargetRoas,
     )
     target_spend: bidding.TargetSpend = proto.Field(
-        proto.MESSAGE, number=12, oneof="scheme", message=bidding.TargetSpend,
+        proto.MESSAGE,
+        number=12,
+        oneof="scheme",
+        message=bidding.TargetSpend,
     )
 
 

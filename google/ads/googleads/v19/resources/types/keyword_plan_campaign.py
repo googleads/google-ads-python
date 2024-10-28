@@ -38,6 +38,7 @@ class KeywordPlanCampaign(proto.Message):
     r"""A Keyword Plan campaign.
     Max number of keyword plan campaigns per plan allowed: 1.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -128,6 +129,7 @@ class KeywordPlanCampaign(proto.Message):
 
 class KeywordPlanGeoTarget(proto.Message):
     r"""A geo target.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

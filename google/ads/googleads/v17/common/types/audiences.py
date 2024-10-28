@@ -49,6 +49,7 @@ __protobuf__ = proto.module(
 
 class AudienceDimension(proto.Message):
     r"""Positive dimension specifying user's audience.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -132,6 +133,7 @@ class AudienceExclusionDimension(proto.Message):
 
 class ExclusionSegment(proto.Message):
     r"""An audience segment to be excluded from an audience.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -151,6 +153,7 @@ class ExclusionSegment(proto.Message):
 
 class AgeDimension(proto.Message):
     r"""Dimension specifying users by their age.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -177,6 +180,7 @@ class AgeDimension(proto.Message):
 
 class AgeSegment(proto.Message):
     r"""Contiguous age range.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -208,6 +212,7 @@ class AgeSegment(proto.Message):
 
 class GenderDimension(proto.Message):
     r"""Dimension specifying users by their gender.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -219,12 +224,12 @@ class GenderDimension(proto.Message):
             This field is a member of `oneof`_ ``_include_undetermined``.
     """
 
-    genders: MutableSequence[
-        gender_type.GenderTypeEnum.GenderType
-    ] = proto.RepeatedField(
-        proto.ENUM,
-        number=1,
-        enum=gender_type.GenderTypeEnum.GenderType,
+    genders: MutableSequence[gender_type.GenderTypeEnum.GenderType] = (
+        proto.RepeatedField(
+            proto.ENUM,
+            number=1,
+            enum=gender_type.GenderTypeEnum.GenderType,
+        )
     )
     include_undetermined: bool = proto.Field(
         proto.BOOL,
@@ -235,6 +240,7 @@ class GenderDimension(proto.Message):
 
 class HouseholdIncomeDimension(proto.Message):
     r"""Dimension specifying users by their household income.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -264,6 +270,7 @@ class HouseholdIncomeDimension(proto.Message):
 
 class ParentalStatusDimension(proto.Message):
     r"""Dimension specifying users by their parental status.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -310,6 +317,7 @@ class AudienceSegmentDimension(proto.Message):
 
 class AudienceSegment(proto.Message):
     r"""Positive audience segment.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -374,6 +382,7 @@ class AudienceSegment(proto.Message):
 
 class UserListSegment(proto.Message):
     r"""User list segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -392,6 +401,7 @@ class UserListSegment(proto.Message):
 
 class UserInterestSegment(proto.Message):
     r"""User interest segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -410,6 +420,7 @@ class UserInterestSegment(proto.Message):
 
 class LifeEventSegment(proto.Message):
     r"""Live event segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -428,6 +439,7 @@ class LifeEventSegment(proto.Message):
 
 class DetailedDemographicSegment(proto.Message):
     r"""Detailed demographic segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -446,6 +458,7 @@ class DetailedDemographicSegment(proto.Message):
 
 class CustomAudienceSegment(proto.Message):
     r"""Custom audience segment.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

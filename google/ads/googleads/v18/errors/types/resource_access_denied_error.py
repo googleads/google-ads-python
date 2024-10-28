@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"ResourceAccessDeniedErrorEnum",},
+    manifest={
+        "ResourceAccessDeniedErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,18 @@ class ResourceAccessDeniedErrorEnum(proto.Message):
     """
 
     class ResourceAccessDeniedError(proto.Enum):
-        r"""Enum describing possible resource access denied errors."""
+        r"""Enum describing possible resource access denied errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            WRITE_ACCESS_DENIED (3):
+                User did not have write access.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         WRITE_ACCESS_DENIED = 3

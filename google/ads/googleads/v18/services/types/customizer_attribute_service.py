@@ -68,20 +68,27 @@ class MutateCustomizerAttributesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomizerAttributeOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomizerAttributeOperation",
+    operations: MutableSequence["CustomizerAttributeOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomizerAttributeOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -117,7 +124,9 @@ class CustomizerAttributeOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_customizer_attribute.CustomizerAttribute = proto.Field(
         proto.MESSAGE,
@@ -126,12 +135,15 @@ class CustomizerAttributeOperation(proto.Message):
         message=gagr_customizer_attribute.CustomizerAttribute,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateCustomizerAttributesResponse(proto.Message):
     r"""Response message for a customizer attribute mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCustomizerAttributeResult]):
             All results for the mutate.
@@ -143,18 +155,23 @@ class MutateCustomizerAttributesResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateCustomizerAttributeResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomizerAttributeResult",
+    results: MutableSequence["MutateCustomizerAttributeResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomizerAttributeResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class MutateCustomizerAttributeResult(proto.Message):
     r"""The result for the customizer attribute mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -165,12 +182,15 @@ class MutateCustomizerAttributeResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    customizer_attribute: gagr_customizer_attribute.CustomizerAttribute = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_customizer_attribute.CustomizerAttribute,
+    customizer_attribute: gagr_customizer_attribute.CustomizerAttribute = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_customizer_attribute.CustomizerAttribute,
+        )
     )
 
 

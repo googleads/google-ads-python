@@ -35,7 +35,19 @@ class AssetSetStatusEnum(proto.Message):
     """
 
     class AssetSetStatus(proto.Enum):
-        r"""The possible statuses of an asset set."""
+        r"""The possible statuses of an asset set.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version. This is a response-only value.
+            ENABLED (2):
+                The asset set is enabled.
+            REMOVED (3):
+                The asset set is removed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

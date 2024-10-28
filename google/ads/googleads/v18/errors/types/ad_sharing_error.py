@@ -22,16 +22,34 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AdSharingErrorEnum",},
+    manifest={
+        "AdSharingErrorEnum",
+    },
 )
 
 
 class AdSharingErrorEnum(proto.Message):
-    r"""Container for enum describing possible ad sharing errors.
-    """
+    r"""Container for enum describing possible ad sharing errors."""
 
     class AdSharingError(proto.Enum):
-        r"""Enum describing possible ad sharing errors."""
+        r"""Enum describing possible ad sharing errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            AD_GROUP_ALREADY_CONTAINS_AD (2):
+                Error resulting in attempting to add an Ad to
+                an AdGroup that already contains the Ad.
+            INCOMPATIBLE_AD_UNDER_AD_GROUP (3):
+                Ad is not compatible with the AdGroup it is
+                being shared with.
+            CANNOT_SHARE_INACTIVE_AD (4):
+                Cannot add AdGroupAd on inactive Ad.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_GROUP_ALREADY_CONTAINS_AD = 2

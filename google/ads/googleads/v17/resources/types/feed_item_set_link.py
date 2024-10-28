@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class FeedItemSetLink(proto.Message):
     r"""Represents a link between a FeedItem and a FeedItemSet.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the feed item set link. Feed

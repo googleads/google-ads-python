@@ -37,6 +37,7 @@ class CustomerClient(proto.Message):
     indirect client customers are included, as well as the manager
     itself.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

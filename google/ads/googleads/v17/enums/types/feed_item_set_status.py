@@ -35,7 +35,20 @@ class FeedItemSetStatusEnum(proto.Message):
     """
 
     class FeedItemSetStatus(proto.Enum):
-        r"""Possible statuses of a feed item set."""
+        r"""Possible statuses of a feed item set.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Feed item set is enabled.
+            REMOVED (3):
+                Feed item set has been removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

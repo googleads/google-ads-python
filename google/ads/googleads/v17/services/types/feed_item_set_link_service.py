@@ -61,12 +61,12 @@ class MutateFeedItemSetLinksRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "FeedItemSetLinkOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="FeedItemSetLinkOperation",
+    operations: MutableSequence["FeedItemSetLinkOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="FeedItemSetLinkOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -119,6 +119,7 @@ class FeedItemSetLinkOperation(proto.Message):
 
 class MutateFeedItemSetLinksResponse(proto.Message):
     r"""Response message for a feed item set link mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateFeedItemSetLinkResult]):
             All results for the mutate.
@@ -130,12 +131,12 @@ class MutateFeedItemSetLinksResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateFeedItemSetLinkResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateFeedItemSetLinkResult",
+    results: MutableSequence["MutateFeedItemSetLinkResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateFeedItemSetLinkResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -146,6 +147,7 @@ class MutateFeedItemSetLinksResponse(proto.Message):
 
 class MutateFeedItemSetLinkResult(proto.Message):
     r"""The result for the feed item set link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

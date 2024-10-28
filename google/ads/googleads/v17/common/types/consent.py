@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class Consent(proto.Message):
     r"""Consent
+
     Attributes:
         ad_user_data (google.ads.googleads.v17.enums.types.ConsentStatusEnum.ConsentStatus):
             This represents consent for ad user data.

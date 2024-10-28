@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListRuleTypeEnum",},
+    manifest={
+        "UserListRuleTypeEnum",
+    },
 )
 
 
 class UserListRuleTypeEnum(proto.Message):
-    r"""Rule based user list rule type.
-    """
+    r"""Rule based user list rule type."""
 
     class UserListRuleType(proto.Enum):
-        r"""Enum describing possible user list rule types."""
+        r"""Enum describing possible user list rule types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AND_OF_ORS (2):
+                Conjunctive normal form.
+            OR_OF_ANDS (3):
+                Disjunctive normal form.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AND_OF_ORS = 2

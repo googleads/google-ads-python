@@ -25,7 +25,9 @@ from google.ads.googleads.v18.common.types import tag_snippet
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"RemarketingAction",},
+    manifest={
+        "RemarketingAction",
+    },
 )
 
 
@@ -34,6 +36,7 @@ class RemarketingAction(proto.Message):
     collect the product id and the type of page people visited
     (product page, shopping cart page, purchase page, general site
     visit) on an advertiser's website.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -60,16 +63,23 @@ class RemarketingAction(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     tag_snippets: MutableSequence[tag_snippet.TagSnippet] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=tag_snippet.TagSnippet,
+        proto.MESSAGE,
+        number=4,
+        message=tag_snippet.TagSnippet,
     )
 
 

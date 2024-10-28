@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import GoogleAdsServiceClient
+from .async_client import GoogleAdsServiceAsyncClient
 
-__all__ = ("GoogleAdsServiceClient",)
+__all__ = (
+    "GoogleAdsServiceClient",
+    "GoogleAdsServiceAsyncClient",
+)

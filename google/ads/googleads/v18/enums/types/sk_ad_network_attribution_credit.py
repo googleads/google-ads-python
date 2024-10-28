@@ -22,16 +22,37 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SkAdNetworkAttributionCreditEnum",},
+    manifest={
+        "SkAdNetworkAttributionCreditEnum",
+    },
 )
 
 
 class SkAdNetworkAttributionCreditEnum(proto.Message):
-    r"""Container for enumeration of SkAdNetwork attribution credits.
-    """
+    r"""Container for enumeration of SkAdNetwork attribution credits."""
 
     class SkAdNetworkAttributionCredit(proto.Enum):
-        r"""Enumerates SkAdNetwork attribution credits."""
+        r"""Enumerates SkAdNetwork attribution credits.
+
+        Values:
+            UNSPECIFIED (0):
+                Default value. This value is equivalent to
+                null.
+            UNKNOWN (1):
+                The value is unknown in this API version. The
+                true enum value cannot be returned in this API
+                version or is not supported yet.
+            UNAVAILABLE (2):
+                The value was not present in the postback or
+                we do not have this data for other reasons.
+            WON (3):
+                Google was the ad network that won ad
+                attribution.
+            CONTRIBUTED (4):
+                Google qualified for attribution, but didn't
+                win.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNAVAILABLE = 2

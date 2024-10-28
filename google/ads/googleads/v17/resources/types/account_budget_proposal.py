@@ -184,12 +184,16 @@ class AccountBudgetProposal(proto.Message):
         number=27,
         optional=True,
     )
-    proposal_type: account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType = proto.Field(
+    proposal_type: (
+        account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType,
     )
-    status: account_budget_proposal_status.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus = proto.Field(
+    status: (
+        account_budget_proposal_status.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=15,
         enum=account_budget_proposal_status.AccountBudgetProposalStatusEnum.AccountBudgetProposalStatus,
@@ -262,7 +266,9 @@ class AccountBudgetProposal(proto.Message):
         number=33,
         oneof="proposed_spending_limit",
     )
-    proposed_spending_limit_type: spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+    proposed_spending_limit_type: (
+        spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+    ) = proto.Field(
         proto.ENUM,
         number=11,
         oneof="proposed_spending_limit",
@@ -273,7 +279,9 @@ class AccountBudgetProposal(proto.Message):
         number=34,
         oneof="approved_spending_limit",
     )
-    approved_spending_limit_type: spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+    approved_spending_limit_type: (
+        spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+    ) = proto.Field(
         proto.ENUM,
         number=24,
         oneof="approved_spending_limit",

@@ -32,7 +32,20 @@ class DistinctErrorEnum(proto.Message):
     r"""Container for enum describing possible distinct errors."""
 
     class DistinctError(proto.Enum):
-        r"""Enum describing possible distinct errors."""
+        r"""Enum describing possible distinct errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_ELEMENT (2):
+                Duplicate element.
+            DUPLICATE_TYPE (3):
+                Duplicate type.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_ELEMENT = 2

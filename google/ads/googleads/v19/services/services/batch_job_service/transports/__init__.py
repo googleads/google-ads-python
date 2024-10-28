@@ -17,14 +17,18 @@ from collections import OrderedDict
 
 from .base import BatchJobServiceTransport
 from .grpc import BatchJobServiceGrpcTransport
+from .grpc_asyncio import BatchJobServiceGrpcAsyncIOTransport
+
 
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()
 )  # type: Dict[str, Type[BatchJobServiceTransport]]
 _transport_registry["grpc"] = BatchJobServiceGrpcTransport
+_transport_registry["grpc_asyncio"] = BatchJobServiceGrpcAsyncIOTransport
 
 __all__ = (
     "BatchJobServiceTransport",
     "BatchJobServiceGrpcTransport",
+    "BatchJobServiceGrpcAsyncIOTransport",
 )

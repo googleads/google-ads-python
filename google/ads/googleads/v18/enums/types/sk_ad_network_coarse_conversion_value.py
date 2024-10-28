@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SkAdNetworkCoarseConversionValueEnum",},
+    manifest={
+        "SkAdNetworkCoarseConversionValueEnum",
+    },
 )
 
 
@@ -33,7 +35,26 @@ class SkAdNetworkCoarseConversionValueEnum(proto.Message):
     """
 
     class SkAdNetworkCoarseConversionValue(proto.Enum):
-        r"""Enumerates SkAdNetwork coarse conversion values"""
+        r"""Enumerates SkAdNetwork coarse conversion values
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            UNAVAILABLE (2):
+                The value was not present in the postback or
+                we do not have this data for other reasons.
+            LOW (3):
+                A low coarse conversion value.
+            MEDIUM (4):
+                A medium coarse conversion value.
+            HIGH (5):
+                A high coarse conversion value.
+            NONE (6):
+                A coarse conversion value was not configured.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNAVAILABLE = 2

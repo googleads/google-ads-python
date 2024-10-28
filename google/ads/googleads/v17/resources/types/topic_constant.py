@@ -34,6 +34,7 @@ class TopicConstant(proto.Message):
     Display Network based on the category into which the placement
     falls (for example, "Pets & Animals/Pets/Dogs").
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

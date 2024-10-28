@@ -24,12 +24,15 @@ from google.ads.googleads.v18.enums.types import manager_link_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerClientLink",},
+    manifest={
+        "CustomerClientLink",
+    },
 )
 
 
 class CustomerClientLink(proto.Message):
     r"""Represents customer client link relationship.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -59,21 +62,30 @@ class CustomerClientLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     client_customer: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     manager_link_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
-    status: manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus,
+    status: manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=manager_link_status.ManagerLinkStatusEnum.ManagerLinkStatus,
+        )
     )
     hidden: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
 
 

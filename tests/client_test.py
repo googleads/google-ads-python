@@ -30,6 +30,7 @@ from google.ads.googleads import client as Client
 
 latest_version = Client._DEFAULT_VERSION
 valid_versions = Client._VALID_API_VERSIONS
+message_types = Client._MESSAGE_TYPES
 
 services_path = f"google.ads.googleads.{latest_version}.services.services"
 services = import_module(services_path)
@@ -551,17 +552,23 @@ class GoogleAdsClientTest(TestCase):
 
     def test_get_type(self):
         for ver in valid_versions:
-            # Retrieve names for all types defined in pb2 files.
-            type_path = f"google.ads.googleads.{ver}"
-            type_names = import_module(type_path).__all__
+            type_classnames = []
+            # Build up all the names of each type class.
+            for type in message_types:
+                # Types from services are located in a slightly different
+                # location.
+                if type == "services":
+                    type_path = f"google.ads.googleads.{ver}.{type}.types"
+                else:
+                    type_path = f"google.ads.googleads.{ver}.{type}"
+
+                # Retrieve names for all types defined in pb2 files.
+                type_names = import_module(type_path).__all__
+                type_classnames.extend(type_names)
+
             client = self._create_test_client()
             # Iterate through retrieval of all types by name.
-            for name in type_names:
-                if name.lower().endswith(
-                    "serviceclient"
-                ) or name.lower().endswith("transport"):
-                    continue
-
+            for name in type_classnames:
                 try:
                     client.get_type(name, version=ver)
                 except ValueError as error:

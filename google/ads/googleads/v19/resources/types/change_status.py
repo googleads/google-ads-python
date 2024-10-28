@@ -35,6 +35,7 @@ class ChangeStatus(proto.Message):
     r"""Describes the status of returned resource. ChangeStatus could
     have up to 3 minutes delay to reflect a new change.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

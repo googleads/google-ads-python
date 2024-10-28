@@ -96,6 +96,7 @@ class MutateAdGroupAssetSetsRequest(proto.Message):
 
 class AdGroupAssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on an ad group asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -132,6 +133,7 @@ class AdGroupAssetSetOperation(proto.Message):
 
 class MutateAdGroupAssetSetsResponse(proto.Message):
     r"""Response message for an ad group asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateAdGroupAssetSetResult]):
             All results for the mutate.
@@ -159,6 +161,7 @@ class MutateAdGroupAssetSetsResponse(proto.Message):
 
 class MutateAdGroupAssetSetResult(proto.Message):
     r"""The result for the ad group asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

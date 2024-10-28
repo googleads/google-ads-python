@@ -93,7 +93,9 @@ class AssetGroupSignal(proto.Message):
         proto.STRING,
         number=2,
     )
-    approval_status: asset_group_signal_approval_status.AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus = proto.Field(
+    approval_status: (
+        asset_group_signal_approval_status.AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_group_signal_approval_status.AssetGroupSignalApprovalStatusEnum.AssetGroupSignalApprovalStatus,

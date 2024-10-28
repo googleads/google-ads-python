@@ -33,6 +33,7 @@ __protobuf__ = proto.module(
 
 class TagSnippet(proto.Message):
     r"""The site tag and event snippet pair for a TrackingCodeType.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -64,7 +65,9 @@ class TagSnippet(proto.Message):
             enum=tracking_code_type.TrackingCodeTypeEnum.TrackingCodeType,
         )
     )
-    page_format: tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat = proto.Field(
+    page_format: (
+        tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat,

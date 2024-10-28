@@ -27,12 +27,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupBidModifier",},
+    manifest={
+        "AdGroupBidModifier",
+    },
 )
 
 
 class AdGroupBidModifier(proto.Message):
     r"""Represents an ad group bid modifier.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -108,36 +111,51 @@ class AdGroupBidModifier(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=14, optional=True,
+        proto.INT64,
+        number=14,
+        optional=True,
     )
     bid_modifier: float = proto.Field(
-        proto.DOUBLE, number=15, optional=True,
+        proto.DOUBLE,
+        number=15,
+        optional=True,
     )
     base_ad_group: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
-    bid_modifier_source: gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource = proto.Field(
+    bid_modifier_source: (
+        gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource,
     )
-    hotel_date_selection_type: criteria.HotelDateSelectionTypeInfo = proto.Field(
-        proto.MESSAGE,
-        number=5,
-        oneof="criterion",
-        message=criteria.HotelDateSelectionTypeInfo,
+    hotel_date_selection_type: criteria.HotelDateSelectionTypeInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=5,
+            oneof="criterion",
+            message=criteria.HotelDateSelectionTypeInfo,
+        )
     )
-    hotel_advance_booking_window: criteria.HotelAdvanceBookingWindowInfo = proto.Field(
-        proto.MESSAGE,
-        number=6,
-        oneof="criterion",
-        message=criteria.HotelAdvanceBookingWindowInfo,
+    hotel_advance_booking_window: criteria.HotelAdvanceBookingWindowInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=6,
+            oneof="criterion",
+            message=criteria.HotelAdvanceBookingWindowInfo,
+        )
     )
     hotel_length_of_stay: criteria.HotelLengthOfStayInfo = proto.Field(
         proto.MESSAGE,

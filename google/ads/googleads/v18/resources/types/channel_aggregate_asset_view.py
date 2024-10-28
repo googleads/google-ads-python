@@ -30,13 +30,16 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ChannelAggregateAssetView",},
+    manifest={
+        "ChannelAggregateAssetView",
+    },
 )
 
 
 class ChannelAggregateAssetView(proto.Message):
     r"""A channel-level aggregate asset view that shows where the
     asset is linked, performamce of the asset and stats.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -67,16 +70,21 @@ class ChannelAggregateAssetView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    advertising_channel_type: gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType = proto.Field(
+    advertising_channel_type: (
+        gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         optional=True,
         enum=gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     asset_source: gage_asset_source.AssetSourceEnum.AssetSource = proto.Field(
         proto.ENUM,
@@ -84,11 +92,13 @@ class ChannelAggregateAssetView(proto.Message):
         optional=True,
         enum=gage_asset_source.AssetSourceEnum.AssetSource,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=5,
-        optional=True,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            optional=True,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
 
 

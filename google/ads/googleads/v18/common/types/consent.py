@@ -24,12 +24,15 @@ from google.ads.googleads.v18.enums.types import consent_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"Consent",},
+    manifest={
+        "Consent",
+    },
 )
 
 
 class Consent(proto.Message):
     r"""Consent
+
     Attributes:
         ad_user_data (google.ads.googleads.v18.enums.types.ConsentStatusEnum.ConsentStatus):
             This represents consent for ad user data.
@@ -44,10 +47,12 @@ class Consent(proto.Message):
         number=1,
         enum=consent_status.ConsentStatusEnum.ConsentStatus,
     )
-    ad_personalization: consent_status.ConsentStatusEnum.ConsentStatus = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=consent_status.ConsentStatusEnum.ConsentStatus,
+    ad_personalization: consent_status.ConsentStatusEnum.ConsentStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=consent_status.ConsentStatusEnum.ConsentStatus,
+        )
     )
 
 

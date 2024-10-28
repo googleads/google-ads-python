@@ -70,12 +70,12 @@ class MutateCampaignAssetSetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CampaignAssetSetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignAssetSetOperation",
+    operations: MutableSequence["CampaignAssetSetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignAssetSetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -85,7 +85,9 @@ class MutateCampaignAssetSetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -94,6 +96,7 @@ class MutateCampaignAssetSetsRequest(proto.Message):
 
 class CampaignAssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on a campaign asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -130,6 +133,7 @@ class CampaignAssetSetOperation(proto.Message):
 
 class MutateCampaignAssetSetsResponse(proto.Message):
     r"""Response message for a campaign asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCampaignAssetSetResult]):
             All results for the mutate.
@@ -141,12 +145,12 @@ class MutateCampaignAssetSetsResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateCampaignAssetSetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCampaignAssetSetResult",
+    results: MutableSequence["MutateCampaignAssetSetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCampaignAssetSetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -157,6 +161,7 @@ class MutateCampaignAssetSetsResponse(proto.Message):
 
 class MutateCampaignAssetSetResult(proto.Message):
     r"""The result for the campaign asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

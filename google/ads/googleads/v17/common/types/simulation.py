@@ -44,6 +44,7 @@ __protobuf__ = proto.module(
 
 class CpcBidSimulationPointList(proto.Message):
     r"""A container for simulation points for simulations of type CPC_BID.
+
     Attributes:
         points (MutableSequence[google.ads.googleads.v17.common.types.CpcBidSimulationPoint]):
             Projected metrics for a series of CPC bid
@@ -59,6 +60,7 @@ class CpcBidSimulationPointList(proto.Message):
 
 class CpvBidSimulationPointList(proto.Message):
     r"""A container for simulation points for simulations of type CPV_BID.
+
     Attributes:
         points (MutableSequence[google.ads.googleads.v17.common.types.CpvBidSimulationPoint]):
             Projected metrics for a series of CPV bid
@@ -116,12 +118,12 @@ class PercentCpcBidSimulationPointList(proto.Message):
             bid amounts.
     """
 
-    points: MutableSequence[
-        "PercentCpcBidSimulationPoint"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="PercentCpcBidSimulationPoint",
+    points: MutableSequence["PercentCpcBidSimulationPoint"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="PercentCpcBidSimulationPoint",
+        )
     )
 
 
@@ -152,17 +154,18 @@ class TargetImpressionShareSimulationPointList(proto.Message):
             impression share value.
     """
 
-    points: MutableSequence[
-        "TargetImpressionShareSimulationPoint"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="TargetImpressionShareSimulationPoint",
+    points: MutableSequence["TargetImpressionShareSimulationPoint"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="TargetImpressionShareSimulationPoint",
+        )
     )
 
 
 class CpcBidSimulationPoint(proto.Message):
     r"""Projected metrics for a specific CPC bid amount.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -265,6 +268,7 @@ class CpcBidSimulationPoint(proto.Message):
 
 class CpvBidSimulationPoint(proto.Message):
     r"""Projected metrics for a specific CPV bid amount.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -311,6 +315,7 @@ class CpvBidSimulationPoint(proto.Message):
 
 class TargetCpaSimulationPoint(proto.Message):
     r"""Projected metrics for a specific target CPA amount.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -436,6 +441,7 @@ class TargetCpaSimulationPoint(proto.Message):
 
 class TargetRoasSimulationPoint(proto.Message):
     r"""Projected metrics for a specific target ROAS amount.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -523,6 +529,7 @@ class PercentCpcBidSimulationPoint(proto.Message):
     r"""Projected metrics for a specific percent CPC amount. Only
     Hotel advertising channel type supports this field.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -599,6 +606,7 @@ class PercentCpcBidSimulationPoint(proto.Message):
 
 class BudgetSimulationPoint(proto.Message):
     r"""Projected metrics for a specific budget amount.
+
     Attributes:
         budget_amount_micros (int):
             The simulated budget upon which projected

@@ -32,7 +32,21 @@ class CustomInterestTypeEnum(proto.Message):
     r"""The types of custom interest."""
 
     class CustomInterestType(proto.Enum):
-        r"""Enum containing possible custom interest types."""
+        r"""Enum containing possible custom interest types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CUSTOM_AFFINITY (2):
+                Allows brand advertisers to define custom
+                affinity audience lists.
+            CUSTOM_INTENT (3):
+                Allows advertisers to define custom intent
+                audience lists.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

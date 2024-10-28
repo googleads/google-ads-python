@@ -32,7 +32,21 @@ class ContextErrorEnum(proto.Message):
     r"""Container for enum describing possible context errors."""
 
     class ContextError(proto.Enum):
-        r"""Enum describing possible context errors."""
+        r"""Enum describing possible context errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            OPERATION_NOT_PERMITTED_FOR_CONTEXT (2):
+                The operation is not allowed for the given
+                context.
+            OPERATION_NOT_PERMITTED_FOR_REMOVED_RESOURCE (3):
+                The operation is not allowed for removed
+                resources.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

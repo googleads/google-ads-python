@@ -144,6 +144,7 @@ class CustomConversionGoalOperation(proto.Message):
 
 class MutateCustomConversionGoalsResponse(proto.Message):
     r"""Response message for a custom conversion goal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCustomConversionGoalResult]):
             All results for the mutate.
@@ -160,6 +161,7 @@ class MutateCustomConversionGoalsResponse(proto.Message):
 
 class MutateCustomConversionGoalResult(proto.Message):
     r"""The result for the custom conversion goal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

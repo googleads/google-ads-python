@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class TravelActivityGroupView(proto.Message):
     r"""A travel activity group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the travel activity group

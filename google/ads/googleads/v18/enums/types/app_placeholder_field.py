@@ -22,16 +22,52 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AppPlaceholderFieldEnum",},
+    manifest={
+        "AppPlaceholderFieldEnum",
+    },
 )
 
 
 class AppPlaceholderFieldEnum(proto.Message):
-    r"""Values for App placeholder fields.
-    """
+    r"""Values for App placeholder fields."""
 
     class AppPlaceholderField(proto.Enum):
-        r"""Possible values for App placeholder fields."""
+        r"""Possible values for App placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            STORE (2):
+                Data Type: INT64. The application store that
+                the target application belongs to. Valid values
+                are: 1 = Apple iTunes Store; 2 = Google Play
+                Store.
+            ID (3):
+                Data Type: STRING. The store-specific ID for
+                the target application.
+            LINK_TEXT (4):
+                Data Type: STRING. The visible text displayed
+                when the link is rendered in an ad.
+            URL (5):
+                Data Type: STRING. The destination URL of the
+                in-app link.
+            FINAL_URLS (6):
+                Data Type: URL_LIST. Final URLs for the in-app link when
+                using Upgraded URLs.
+            FINAL_MOBILE_URLS (7):
+                Data Type: URL_LIST. Final Mobile URLs for the in-app link
+                when using Upgraded URLs.
+            TRACKING_URL (8):
+                Data Type: URL. Tracking template for the
+                in-app link when using Upgraded URLs.
+            FINAL_URL_SUFFIX (9):
+                Data Type: STRING. Final URL suffix for the
+                in-app link when using parallel tracking.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         STORE = 2

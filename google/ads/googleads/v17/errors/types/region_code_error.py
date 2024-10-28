@@ -32,7 +32,18 @@ class RegionCodeErrorEnum(proto.Message):
     r"""Container for enum describing possible region code errors."""
 
     class RegionCodeError(proto.Enum):
-        r"""Enum describing possible region code errors."""
+        r"""Enum describing possible region code errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_REGION_CODE (2):
+                Invalid region code.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_REGION_CODE = 2

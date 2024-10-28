@@ -32,7 +32,22 @@ class BidModifierSourceEnum(proto.Message):
     r"""Container for enum describing possible bid modifier sources."""
 
     class BidModifierSource(proto.Enum):
-        r"""Enum describing possible bid modifier sources."""
+        r"""Enum describing possible bid modifier sources.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN (2):
+                The bid modifier is specified at the campaign
+                level, on the campaign level criterion.
+            AD_GROUP (3):
+                The bid modifier is specified (overridden) at
+                the ad group level.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN = 2

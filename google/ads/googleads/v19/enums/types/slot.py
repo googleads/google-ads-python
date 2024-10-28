@@ -32,7 +32,28 @@ class SlotEnum(proto.Message):
     r"""Container for enumeration of possible positions of the Ad."""
 
     class Slot(proto.Enum):
-        r"""Enumerates possible positions of the Ad."""
+        r"""Enumerates possible positions of the Ad.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            SEARCH_SIDE (2):
+                Google search: Side.
+            SEARCH_TOP (3):
+                Google search: Top.
+            SEARCH_OTHER (4):
+                Google search: Other.
+            CONTENT (5):
+                Google Display Network.
+            SEARCH_PARTNER_TOP (6):
+                Search partners: Top.
+            SEARCH_PARTNER_OTHER (7):
+                Search partners: Other.
+            MIXED (8):
+                Cross-network.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

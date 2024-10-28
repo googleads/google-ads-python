@@ -35,7 +35,22 @@ class ValueRuleDeviceTypeEnum(proto.Message):
     """
 
     class ValueRuleDeviceType(proto.Enum):
-        r"""Possible device types used in conversion value rule."""
+        r"""Possible device types used in conversion value rule.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MOBILE (2):
+                Mobile device.
+            DESKTOP (3):
+                Desktop device.
+            TABLET (4):
+                Tablet device.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MOBILE = 2

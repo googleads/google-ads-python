@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CustomInterestServiceClient
+from .async_client import CustomInterestServiceAsyncClient
 
-__all__ = ("CustomInterestServiceClient",)
+__all__ = (
+    "CustomInterestServiceClient",
+    "CustomInterestServiceAsyncClient",
+)

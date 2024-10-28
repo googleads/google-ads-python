@@ -240,6 +240,7 @@ class ApplyRecommendationOperation(proto.Message):
         r"""Parameters to use when applying a campaign budget
         recommendation.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -259,6 +260,7 @@ class ApplyRecommendationOperation(proto.Message):
     class ForecastingSetTargetRoasParameters(proto.Message):
         r"""Parameters to use when applying a forecasting set target roas
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -289,6 +291,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class TextAdParameters(proto.Message):
         r"""Parameters to use when applying a text ad recommendation.
+
         Attributes:
             ad (google.ads.googleads.v19.resources.types.Ad):
                 New ad to add to recommended ad group. All
@@ -304,6 +307,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class KeywordParameters(proto.Message):
         r"""Parameters to use when applying keyword recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -343,6 +347,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class TargetCpaOptInParameters(proto.Message):
         r"""Parameters to use when applying Target CPA recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -372,6 +377,7 @@ class ApplyRecommendationOperation(proto.Message):
     class TargetRoasOptInParameters(proto.Message):
         r"""Parameters to use when applying a Target ROAS opt-in
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -439,6 +445,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class SitelinkExtensionParameters(proto.Message):
         r"""Parameters to use when applying sitelink recommendation.
+
         Attributes:
             sitelink_extensions (MutableSequence[google.ads.googleads.v19.common.types.SitelinkFeedItem]):
                 Sitelinks to be added. This is a required
@@ -473,6 +480,7 @@ class ApplyRecommendationOperation(proto.Message):
 
     class CallAssetParameters(proto.Message):
         r"""Parameters to use when applying call asset recommendations.
+
         Attributes:
             ad_asset_apply_parameters (google.ads.googleads.v19.services.types.ApplyRecommendationOperation.AdAssetApplyParameters):
                 Required. Call assets to be added. This is a
@@ -557,7 +565,18 @@ class ApplyRecommendationOperation(proto.Message):
         """
 
         class ApplyScope(proto.Enum):
-            r"""Scope to apply the assets to."""
+            r"""Scope to apply the assets to.
+
+            Values:
+                UNSPECIFIED (0):
+                    The apply scope has not been specified.
+                UNKNOWN (1):
+                    Unknown.
+                CUSTOMER (2):
+                    Apply at the customer scope.
+                CAMPAIGN (3):
+                    Apply at the campaign scope.
+            """
 
             UNSPECIFIED = 0
             UNKNOWN = 1
@@ -584,6 +603,7 @@ class ApplyRecommendationOperation(proto.Message):
     class MoveUnusedBudgetParameters(proto.Message):
         r"""Parameters to use when applying move unused budget
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -671,6 +691,7 @@ class ApplyRecommendationOperation(proto.Message):
         r"""Parameters to use when applying a use broad match keyword
         recommendation.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -690,6 +711,7 @@ class ApplyRecommendationOperation(proto.Message):
     class ForecastingSetTargetCpaParameters(proto.Message):
         r"""Parameters to use when applying a set target CPA
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -720,6 +742,7 @@ class ApplyRecommendationOperation(proto.Message):
     class LeadFormAssetParameters(proto.Message):
         r"""Parameters to use when applying a lead form asset
         recommendation.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -937,6 +960,7 @@ class ApplyRecommendationResponse(proto.Message):
 
 class ApplyRecommendationResult(proto.Message):
     r"""The result of applying a recommendation.
+
     Attributes:
         resource_name (str):
             Returned for successful applies.
@@ -1019,6 +1043,7 @@ class DismissRecommendationResponse(proto.Message):
 
     class DismissRecommendationResult(proto.Message):
         r"""The result of dismissing a recommendation.
+
         Attributes:
             resource_name (str):
                 Returned for successful dismissals.
@@ -1044,6 +1069,7 @@ class DismissRecommendationResponse(proto.Message):
 class GenerateRecommendationsRequest(proto.Message):
     r"""Request message for
     [RecommendationService.GenerateRecommendations][google.ads.googleads.v19.services.RecommendationService.GenerateRecommendations].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1227,6 +1253,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class AdGroupInfo(proto.Message):
         r"""Current AdGroup Information of the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1260,6 +1287,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class SeedInfo(proto.Message):
         r"""A keyword seed and a specific url to generate keywords from.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1286,6 +1314,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class BudgetInfo(proto.Message):
         r"""Current budget information of the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1305,6 +1334,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class AssetGroupInfo(proto.Message):
         r"""Current AssetGroup information of the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1340,6 +1370,7 @@ class GenerateRecommendationsRequest(proto.Message):
 
     class TargetImpressionShareInfo(proto.Message):
         r"""Current Target Impression Share information of the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:

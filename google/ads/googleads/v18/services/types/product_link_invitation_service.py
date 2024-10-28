@@ -54,9 +54,12 @@ class CreateProductLinkInvitationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    product_link_invitation: gagr_product_link_invitation.ProductLinkInvitation = proto.Field(
+    product_link_invitation: (
+        gagr_product_link_invitation.ProductLinkInvitation
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_product_link_invitation.ProductLinkInvitation,
@@ -65,13 +68,15 @@ class CreateProductLinkInvitationRequest(proto.Message):
 
 class CreateProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation create.
+
     Attributes:
         resource_name (str):
             Resource name of the product link invitation.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -92,27 +97,33 @@ class UpdateProductLinkInvitationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    product_link_invitation_status: gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus = proto.Field(
+    product_link_invitation_status: (
+        gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus,
     )
     resource_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
 class UpdateProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation update.
+
     Attributes:
         resource_name (str):
             Result of the update.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -132,22 +143,26 @@ class RemoveProductLinkInvitationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     resource_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class RemoveProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation removeal.
+
     Attributes:
         resource_name (str):
             Result for the remove request.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

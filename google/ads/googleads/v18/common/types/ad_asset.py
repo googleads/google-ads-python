@@ -43,6 +43,7 @@ __protobuf__ = proto.module(
 
 class AdTextAsset(proto.Message):
     r"""A text asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -64,25 +65,34 @@ class AdTextAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    pinned_field: served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType = proto.Field(
+    pinned_field: (
+        served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType,
     )
-    asset_performance_label: gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel = proto.Field(
+    asset_performance_label: (
+        gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
     )
     policy_summary_info: asset_policy.AdAssetPolicySummary = proto.Field(
-        proto.MESSAGE, number=6, message=asset_policy.AdAssetPolicySummary,
+        proto.MESSAGE,
+        number=6,
+        message=asset_policy.AdAssetPolicySummary,
     )
 
 
 class AdImageAsset(proto.Message):
     r"""An image asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -93,12 +103,15 @@ class AdImageAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class AdVideoAsset(proto.Message):
     r"""A video asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -113,15 +126,21 @@ class AdVideoAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     ad_video_asset_info: "AdVideoAssetInfo" = proto.Field(
-        proto.MESSAGE, number=4, optional=True, message="AdVideoAssetInfo",
+        proto.MESSAGE,
+        number=4,
+        optional=True,
+        message="AdVideoAssetInfo",
     )
 
 
 class AdVideoAssetInfo(proto.Message):
     r"""Contains info fields for AdVideoAssets.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -142,16 +161,19 @@ class AdVideoAssetInfo(proto.Message):
             This field is a member of `oneof`_ ``_ad_video_asset_inventory_preferences``.
     """
 
-    ad_video_asset_inventory_preferences: "AdVideoAssetInventoryPreferences" = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        optional=True,
-        message="AdVideoAssetInventoryPreferences",
+    ad_video_asset_inventory_preferences: "AdVideoAssetInventoryPreferences" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            optional=True,
+            message="AdVideoAssetInventoryPreferences",
+        )
     )
 
 
 class AdVideoAssetInventoryPreferences(proto.Message):
     r"""YouTube Video Asset inventory preferences.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -176,18 +198,25 @@ class AdVideoAssetInventoryPreferences(proto.Message):
     """
 
     in_feed_preference: bool = proto.Field(
-        proto.BOOL, number=1, optional=True,
+        proto.BOOL,
+        number=1,
+        optional=True,
     )
     in_stream_preference: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
     shorts_preference: bool = proto.Field(
-        proto.BOOL, number=3, optional=True,
+        proto.BOOL,
+        number=3,
+        optional=True,
     )
 
 
 class AdMediaBundleAsset(proto.Message):
     r"""A media bundle asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -198,12 +227,15 @@ class AdMediaBundleAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class AdDemandGenCarouselCardAsset(proto.Message):
     r"""A Demand Gen carousel card asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -215,12 +247,15 @@ class AdDemandGenCarouselCardAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class AdCallToActionAsset(proto.Message):
     r"""A call to action asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -232,7 +267,9 @@ class AdCallToActionAsset(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

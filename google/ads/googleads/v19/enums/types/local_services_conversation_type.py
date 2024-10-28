@@ -35,7 +35,30 @@ class LocalServicesLeadConversationTypeEnum(proto.Message):
     """
 
     class ConversationType(proto.Enum):
-        r"""Possible types of lead conversation."""
+        r"""Possible types of lead conversation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EMAIL (2):
+                Email lead conversation.
+            MESSAGE (3):
+                Message lead conversation.
+            PHONE_CALL (4):
+                Phone call lead conversation.
+            SMS (5):
+                SMS lead conversation.
+            BOOKING (6):
+                Booking lead conversation.
+            WHATSAPP (7):
+                WhatsApp lead conversation.
+            ADS_API (8):
+                Lead conversation created through Google Ads
+                API.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -35,7 +35,53 @@ class BrandSafetySuitabilityEnum(proto.Message):
     """
 
     class BrandSafetySuitability(proto.Enum):
-        r"""3-Tier brand safety suitability control."""
+        r"""3-Tier brand safety suitability control.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EXPANDED_INVENTORY (2):
+                This option lets you show ads across all
+                inventory on YouTube and video partners that
+                meet our standards for monetization. This option
+                may be an appropriate choice for brands that
+                want maximum access to the full breadth of
+                videos eligible for ads, including, for example,
+                videos that have strong profanity in the context
+                of comedy or a documentary, or excessive
+                violence as featured in video games.
+            STANDARD_INVENTORY (3):
+                This option lets you show ads across a wide
+                range of content that's appropriate for most
+                brands, such as popular music videos,
+                documentaries, and movie trailers. The content
+                you can show ads on is based on YouTube's
+                advertiser-friendly content guidelines that take
+                into account, for example, the strength or
+                frequency of profanity, or the appropriateness
+                of subject matter like sensitive events. Ads
+                won't show, for example, on content with
+                repeated strong profanity, strong sexual
+                content, or graphic violence.
+            LIMITED_INVENTORY (4):
+                This option lets you show ads on a reduced
+                range of content that's appropriate for brands
+                with particularly strict guidelines around
+                inappropriate language and sexual
+                suggestiveness; above and beyond what YouTube's
+                advertiser-friendly content guidelines address.
+                The videos accessible in this sensitive category
+                meet heightened requirements, especially for
+                inappropriate language and sexual
+                suggestiveness. For example, your ads will be
+                excluded from showing on some of YouTube's most
+                popular music videos and other pop culture
+                content across YouTube and Google video
+                partners.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

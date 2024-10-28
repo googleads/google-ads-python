@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocationSourceTypeEnum",},
+    manifest={
+        "LocationSourceTypeEnum",
+    },
 )
 
 
 class LocationSourceTypeEnum(proto.Message):
-    r"""Used to distinguish the location source type.
-    """
+    r"""Used to distinguish the location source type."""
 
     class LocationSourceType(proto.Enum):
-        r"""The possible types of a location source."""
+        r"""The possible types of a location source.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            GOOGLE_MY_BUSINESS (2):
+                Locations associated with the customer's
+                linked Business Profile.
+            AFFILIATE (3):
+                Affiliate (chain) store locations. For
+                example, Best Buy store locations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GOOGLE_MY_BUSINESS = 2

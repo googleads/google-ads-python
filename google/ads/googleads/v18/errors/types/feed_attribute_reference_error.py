@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedAttributeReferenceErrorEnum",},
+    manifest={
+        "FeedAttributeReferenceErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,23 @@ class FeedAttributeReferenceErrorEnum(proto.Message):
     """
 
     class FeedAttributeReferenceError(proto.Enum):
-        r"""Enum describing possible feed attribute reference errors."""
+        r"""Enum describing possible feed attribute reference errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CANNOT_REFERENCE_REMOVED_FEED (2):
+                A feed referenced by ID has been removed.
+            INVALID_FEED_NAME (3):
+                There is no enabled feed with the given name.
+            INVALID_FEED_ATTRIBUTE_NAME (4):
+                There is no feed attribute in an enabled feed
+                with the given name.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CANNOT_REFERENCE_REMOVED_FEED = 2

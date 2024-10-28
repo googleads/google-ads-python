@@ -34,6 +34,7 @@ class KeywordPlanCampaignKeyword(proto.Message):
     r"""A Keyword Plan Campaign keyword.
     Only negative keywords are supported for Campaign Keyword.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

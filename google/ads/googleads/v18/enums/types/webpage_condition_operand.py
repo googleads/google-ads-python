@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"WebpageConditionOperandEnum",},
+    manifest={
+        "WebpageConditionOperandEnum",
+    },
 )
 
 
@@ -33,7 +35,31 @@ class WebpageConditionOperandEnum(proto.Message):
     """
 
     class WebpageConditionOperand(proto.Enum):
-        r"""The webpage condition operand in webpage criterion."""
+        r"""The webpage condition operand in webpage criterion.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            URL (2):
+                Operand denoting a webpage URL targeting
+                condition.
+            CATEGORY (3):
+                Operand denoting a webpage category targeting
+                condition.
+            PAGE_TITLE (4):
+                Operand denoting a webpage title targeting
+                condition.
+            PAGE_CONTENT (5):
+                Operand denoting a webpage content targeting
+                condition.
+            CUSTOM_LABEL (6):
+                Operand denoting a webpage custom label
+                targeting condition.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         URL = 2

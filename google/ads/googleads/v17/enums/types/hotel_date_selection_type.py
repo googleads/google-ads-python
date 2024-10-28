@@ -35,7 +35,20 @@ class HotelDateSelectionTypeEnum(proto.Message):
     """
 
     class HotelDateSelectionType(proto.Enum):
-        r"""Enum describing possible hotel date selection types."""
+        r"""Enum describing possible hotel date selection types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DEFAULT_SELECTION (50):
+                Dates selected by default.
+            USER_SELECTED (51):
+                Dates selected by the user.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DEFAULT_SELECTION = 50

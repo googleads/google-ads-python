@@ -68,20 +68,27 @@ class MutateCampaignCriteriaRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CampaignCriterionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignCriterionOperation",
+    operations: MutableSequence["CampaignCriterionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignCriterionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -123,7 +130,9 @@ class CampaignCriterionOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_criterion.CampaignCriterion = proto.Field(
         proto.MESSAGE,
@@ -138,12 +147,15 @@ class CampaignCriterionOperation(proto.Message):
         message=gagr_campaign_criterion.CampaignCriterion,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCampaignCriteriaResponse(proto.Message):
     r"""Response message for campaign criterion mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -156,17 +168,22 @@ class MutateCampaignCriteriaResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateCampaignCriterionResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignCriterionResult",
+    results: MutableSequence["MutateCampaignCriterionResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCampaignCriterionResult",
+        )
     )
 
 
 class MutateCampaignCriterionResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -177,7 +194,8 @@ class MutateCampaignCriterionResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_criterion: gagr_campaign_criterion.CampaignCriterion = proto.Field(
         proto.MESSAGE,

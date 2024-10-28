@@ -32,7 +32,22 @@ class StringLengthErrorEnum(proto.Message):
     r"""Container for enum describing possible string length errors."""
 
     class StringLengthError(proto.Enum):
-        r"""Enum describing possible string length errors."""
+        r"""Enum describing possible string length errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            EMPTY (4):
+                The specified field should have a least one
+                non-whitespace character in it.
+            TOO_SHORT (2):
+                Too short.
+            TOO_LONG (3):
+                Too long.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

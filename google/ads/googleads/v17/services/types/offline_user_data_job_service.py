@@ -119,6 +119,7 @@ class AddOfflineUserDataJobOperationsRequest(proto.Message):
     r"""Request message for
     [OfflineUserDataJobService.AddOfflineUserDataJobOperations][google.ads.googleads.v17.services.OfflineUserDataJobService.AddOfflineUserDataJobOperations].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -159,12 +160,12 @@ class AddOfflineUserDataJobOperationsRequest(proto.Message):
         number=6,
         optional=True,
     )
-    operations: MutableSequence[
-        "OfflineUserDataJobOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message="OfflineUserDataJobOperation",
+    operations: MutableSequence["OfflineUserDataJobOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message="OfflineUserDataJobOperation",
+        )
     )
     validate_only: bool = proto.Field(
         proto.BOOL,

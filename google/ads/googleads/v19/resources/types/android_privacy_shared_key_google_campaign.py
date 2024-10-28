@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class AndroidPrivacySharedKeyGoogleCampaign(proto.Message):
     r"""An Android privacy shared key view for Google campaign key.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Android privacy shared

@@ -72,6 +72,7 @@ __protobuf__ = proto.module(
 
 class TextAdInfo(proto.Message):
     r"""A text ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -108,6 +109,7 @@ class TextAdInfo(proto.Message):
 
 class ExpandedTextAdInfo(proto.Message):
     r"""An expanded text ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -182,6 +184,7 @@ class ExpandedTextAdInfo(proto.Message):
 
 class ExpandedDynamicSearchAdInfo(proto.Message):
     r"""An expanded dynamic search ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -225,6 +228,7 @@ class ShoppingProductAdInfo(proto.Message):
 
 class ShoppingComparisonListingAdInfo(proto.Message):
     r"""A Shopping Comparison Listing ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -244,6 +248,7 @@ class ShoppingComparisonListingAdInfo(proto.Message):
 
 class ImageAdInfo(proto.Message):
     r"""An image ad.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -479,6 +484,7 @@ class VideoOutstreamAdInfo(proto.Message):
 
 class InFeedVideoAdInfo(proto.Message):
     r"""Representation of In-feed video ad format.
+
     Attributes:
         headline (str):
             The headline of the ad.
@@ -511,6 +517,7 @@ class InFeedVideoAdInfo(proto.Message):
 
 class VideoAdInfo(proto.Message):
     r"""A video ad.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -582,6 +589,7 @@ class VideoAdInfo(proto.Message):
 
 class VideoResponsiveAdInfo(proto.Message):
     r"""A video responsive ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v19.common.types.AdTextAsset]):
             List of text assets used for the short
@@ -674,6 +682,7 @@ class ResponsiveSearchAdInfo(proto.Message):
     More information at
     https://support.google.com/google-ads/answer/7684791
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -722,6 +731,7 @@ class ResponsiveSearchAdInfo(proto.Message):
 class LegacyResponsiveDisplayAdInfo(proto.Message):
     r"""A legacy responsive display ad. Ads of this type are labeled
     'Responsive ads' in the Google Ads UI.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -883,6 +893,7 @@ class LegacyResponsiveDisplayAdInfo(proto.Message):
 
 class AppAdInfo(proto.Message):
     r"""An app ad.
+
     Attributes:
         mandatory_ad_text (google.ads.googleads.v19.common.types.AdTextAsset):
             Mandatory ad text.
@@ -1048,6 +1059,7 @@ class LegacyAppInstallAdInfo(proto.Message):
     r"""A legacy app install ad that only can be used by a few select
     customers.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1102,6 +1114,7 @@ class LegacyAppInstallAdInfo(proto.Message):
 
 class ResponsiveDisplayAdInfo(proto.Message):
     r"""A responsive display ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1288,6 +1301,7 @@ class ResponsiveDisplayAdInfo(proto.Message):
 
 class LocalAdInfo(proto.Message):
     r"""A local ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1385,6 +1399,7 @@ class DisplayUploadAdInfo(proto.Message):
     the ``display_upload_product_type`` field, which determines what
     kinds of data need to be included with the ad.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1444,6 +1459,7 @@ class ResponsiveDisplayAdControlSpec(proto.Message):
 
 class SmartCampaignAdInfo(proto.Message):
     r"""A Smart campaign ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v19.common.types.AdTextAsset]):
             List of text assets, each of which
@@ -1471,6 +1487,7 @@ class SmartCampaignAdInfo(proto.Message):
 
 class CallAdInfo(proto.Message):
     r"""A call ad.
+
     Attributes:
         country_code (str):
             The country code in the ad.
@@ -1580,6 +1597,7 @@ class CallAdInfo(proto.Message):
 
 class DemandGenMultiAssetAdInfo(proto.Message):
     r"""A Demand Gen multi asset ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1702,6 +1720,7 @@ class DemandGenMultiAssetAdInfo(proto.Message):
 
 class DemandGenCarouselAdInfo(proto.Message):
     r"""A Demand Gen carousel ad.
+
     Attributes:
         business_name (str):
             Required. The Advertiser/brand name.
@@ -1754,6 +1773,7 @@ class DemandGenCarouselAdInfo(proto.Message):
 
 class DemandGenVideoResponsiveAdInfo(proto.Message):
     r"""A Demand Gen video responsive ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v19.common.types.AdTextAsset]):
             List of text assets used for the short
@@ -1832,6 +1852,7 @@ class DemandGenVideoResponsiveAdInfo(proto.Message):
 
 class DemandGenProductAdInfo(proto.Message):
     r"""A Demand Gen product ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

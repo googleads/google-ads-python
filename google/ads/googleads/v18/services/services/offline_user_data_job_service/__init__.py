@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import OfflineUserDataJobServiceClient
+from .async_client import OfflineUserDataJobServiceAsyncClient
 
-__all__ = ("OfflineUserDataJobServiceClient",)
+__all__ = (
+    "OfflineUserDataJobServiceClient",
+    "OfflineUserDataJobServiceAsyncClient",
+)

@@ -81,15 +81,19 @@ class LookalikeUserListInfo(proto.Message):
     """
 
     seed_user_list_ids: MutableSequence[int] = proto.RepeatedField(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
-    expansion_level: lookalike_expansion_level.LookalikeExpansionLevelEnum.LookalikeExpansionLevel = proto.Field(
+    expansion_level: (
+        lookalike_expansion_level.LookalikeExpansionLevelEnum.LookalikeExpansionLevel
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=lookalike_expansion_level.LookalikeExpansionLevelEnum.LookalikeExpansionLevel,
     )
     country_codes: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -97,6 +101,7 @@ class SimilarUserListInfo(proto.Message):
     r"""SimilarUserList is a list of users which are similar to users
     from another UserList. These lists are read-only and
     automatically created by Google.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -109,12 +114,15 @@ class SimilarUserListInfo(proto.Message):
     """
 
     seed_user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class CrmBasedUserListInfo(proto.Message):
     r"""UserList of CRM users provided by the advertiser.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -147,14 +155,20 @@ class CrmBasedUserListInfo(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    upload_key_type: customer_match_upload_key_type.CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType = proto.Field(
+    upload_key_type: (
+        customer_match_upload_key_type.CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=customer_match_upload_key_type.CustomerMatchUploadKeyTypeEnum.CustomerMatchUploadKeyType,
     )
-    data_source_type: user_list_crm_data_source_type.UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType = proto.Field(
+    data_source_type: (
+        user_list_crm_data_source_type.UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=user_list_crm_data_source_type.UserListCrmDataSourceTypeEnum.UserListCrmDataSourceType,
@@ -181,32 +195,40 @@ class UserListRuleInfo(proto.Message):
             groups are grouped together based on rule_type.
     """
 
-    rule_type: user_list_rule_type.UserListRuleTypeEnum.UserListRuleType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=user_list_rule_type.UserListRuleTypeEnum.UserListRuleType,
+    rule_type: user_list_rule_type.UserListRuleTypeEnum.UserListRuleType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=user_list_rule_type.UserListRuleTypeEnum.UserListRuleType,
+        )
     )
-    rule_item_groups: MutableSequence[
-        "UserListRuleItemGroupInfo"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListRuleItemGroupInfo",
+    rule_item_groups: MutableSequence["UserListRuleItemGroupInfo"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="UserListRuleItemGroupInfo",
+        )
     )
 
 
 class UserListRuleItemGroupInfo(proto.Message):
     r"""A group of rule items.
+
     Attributes:
         rule_items (MutableSequence[google.ads.googleads.v18.common.types.UserListRuleItemInfo]):
             Rule items that will be grouped together based on rule_type.
     """
 
     rule_items: MutableSequence["UserListRuleItemInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListRuleItemInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleItemInfo",
     )
 
 
 class UserListRuleItemInfo(proto.Message):
     r"""An atomic rule item.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -244,7 +266,9 @@ class UserListRuleItemInfo(proto.Message):
     """
 
     name: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     number_rule_item: "UserListNumberRuleItemInfo" = proto.Field(
         proto.MESSAGE,
@@ -268,6 +292,7 @@ class UserListRuleItemInfo(proto.Message):
 
 class UserListDateRuleItemInfo(proto.Message):
     r"""A rule item composed of a date operation.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -291,21 +316,28 @@ class UserListDateRuleItemInfo(proto.Message):
             This field is a member of `oneof`_ ``_offset_in_days``.
     """
 
-    operator: user_list_date_rule_item_operator.UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator = proto.Field(
+    operator: (
+        user_list_date_rule_item_operator.UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_date_rule_item_operator.UserListDateRuleItemOperatorEnum.UserListDateRuleItemOperator,
     )
     value: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     offset_in_days: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
 class UserListNumberRuleItemInfo(proto.Message):
     r"""A rule item composed of a number operation.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -321,18 +353,23 @@ class UserListNumberRuleItemInfo(proto.Message):
             This field is a member of `oneof`_ ``_value``.
     """
 
-    operator: user_list_number_rule_item_operator.UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator = proto.Field(
+    operator: (
+        user_list_number_rule_item_operator.UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_number_rule_item_operator.UserListNumberRuleItemOperatorEnum.UserListNumberRuleItemOperator,
     )
     value: float = proto.Field(
-        proto.DOUBLE, number=3, optional=True,
+        proto.DOUBLE,
+        number=3,
+        optional=True,
     )
 
 
 class UserListStringRuleItemInfo(proto.Message):
     r"""A rule item composed of a string operation.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -351,19 +388,24 @@ class UserListStringRuleItemInfo(proto.Message):
             This field is a member of `oneof`_ ``_value``.
     """
 
-    operator: user_list_string_rule_item_operator.UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator = proto.Field(
+    operator: (
+        user_list_string_rule_item_operator.UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_string_rule_item_operator.UserListStringRuleItemOperatorEnum.UserListStringRuleItemOperator,
     )
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 
 class FlexibleRuleOperandInfo(proto.Message):
     r"""Flexible rule that wraps the common rule and a lookback
     window.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -379,10 +421,14 @@ class FlexibleRuleOperandInfo(proto.Message):
     """
 
     rule: "UserListRuleInfo" = proto.Field(
-        proto.MESSAGE, number=1, message="UserListRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListRuleInfo",
     )
     lookback_window_days: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -410,25 +456,32 @@ class FlexibleRuleUserListInfo(proto.Message):
             AND_NOT operator, and joined together by OR.
     """
 
-    inclusive_rule_operator: user_list_flexible_rule_operator.UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator = proto.Field(
+    inclusive_rule_operator: (
+        user_list_flexible_rule_operator.UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_flexible_rule_operator.UserListFlexibleRuleOperatorEnum.UserListFlexibleRuleOperator,
     )
-    inclusive_operands: MutableSequence[
-        "FlexibleRuleOperandInfo"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FlexibleRuleOperandInfo",
+    inclusive_operands: MutableSequence["FlexibleRuleOperandInfo"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="FlexibleRuleOperandInfo",
+        )
     )
-    exclusive_operands: MutableSequence[
-        "FlexibleRuleOperandInfo"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="FlexibleRuleOperandInfo",
+    exclusive_operands: MutableSequence["FlexibleRuleOperandInfo"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message="FlexibleRuleOperandInfo",
+        )
     )
 
 
 class RuleBasedUserListInfo(proto.Message):
     r"""Representation of a userlist that is generated by a rule.
+
     Attributes:
         prepopulation_status (google.ads.googleads.v18.enums.types.UserListPrepopulationStatusEnum.UserListPrepopulationStatus):
             The status of pre-population. The field is
@@ -455,13 +508,17 @@ class RuleBasedUserListInfo(proto.Message):
             operands.
     """
 
-    prepopulation_status: user_list_prepopulation_status.UserListPrepopulationStatusEnum.UserListPrepopulationStatus = proto.Field(
+    prepopulation_status: (
+        user_list_prepopulation_status.UserListPrepopulationStatusEnum.UserListPrepopulationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_prepopulation_status.UserListPrepopulationStatusEnum.UserListPrepopulationStatus,
     )
     flexible_rule_user_list: "FlexibleRuleUserListInfo" = proto.Field(
-        proto.MESSAGE, number=5, message="FlexibleRuleUserListInfo",
+        proto.MESSAGE,
+        number=5,
+        message="FlexibleRuleUserListInfo",
     )
 
 
@@ -481,7 +538,9 @@ class LogicalUserListInfo(proto.Message):
     """
 
     rules: MutableSequence["UserListLogicalRuleInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListLogicalRuleInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListLogicalRuleInfo",
     )
 
 
@@ -496,20 +555,25 @@ class UserListLogicalRuleInfo(proto.Message):
             The list of operands of the rule.
     """
 
-    operator: user_list_logical_rule_operator.UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator = proto.Field(
+    operator: (
+        user_list_logical_rule_operator.UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=user_list_logical_rule_operator.UserListLogicalRuleOperatorEnum.UserListLogicalRuleOperator,
     )
-    rule_operands: MutableSequence[
-        "LogicalUserListOperandInfo"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="LogicalUserListOperandInfo",
+    rule_operands: MutableSequence["LogicalUserListOperandInfo"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="LogicalUserListOperandInfo",
+        )
     )
 
 
 class LogicalUserListOperandInfo(proto.Message):
     r"""Operand of logical user list that consists of a user list.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -520,7 +584,9 @@ class LogicalUserListOperandInfo(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -534,7 +600,9 @@ class BasicUserListInfo(proto.Message):
     """
 
     actions: MutableSequence["UserListActionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserListActionInfo",
+        proto.MESSAGE,
+        number=1,
+        message="UserListActionInfo",
     )
 
 
@@ -562,10 +630,14 @@ class UserListActionInfo(proto.Message):
     """
 
     conversion_action: str = proto.Field(
-        proto.STRING, number=3, oneof="user_list_action",
+        proto.STRING,
+        number=3,
+        oneof="user_list_action",
     )
     remarketing_action: str = proto.Field(
-        proto.STRING, number=4, oneof="user_list_action",
+        proto.STRING,
+        number=4,
+        oneof="user_list_action",
     )
 
 

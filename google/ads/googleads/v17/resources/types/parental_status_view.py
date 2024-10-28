@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class ParentalStatusView(proto.Message):
     r"""A parental status view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the parental status view.

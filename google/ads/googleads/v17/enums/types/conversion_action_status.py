@@ -35,7 +35,23 @@ class ConversionActionStatusEnum(proto.Message):
     """
 
     class ConversionActionStatus(proto.Enum):
-        r"""Possible statuses of a conversion action."""
+        r"""Possible statuses of a conversion action.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Conversions will be recorded.
+            REMOVED (3):
+                Conversions will not be recorded.
+            HIDDEN (4):
+                Conversions will not be recorded and the
+                conversion action will not appear in the UI.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -58,16 +58,21 @@ class MutateCampaignLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignLabelOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignLabelOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignLabelOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -105,12 +110,15 @@ class CampaignLabelOperation(proto.Message):
         message=campaign_label.CampaignLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateCampaignLabelsResponse(proto.Message):
     r"""Response message for a campaign labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -123,22 +131,28 @@ class MutateCampaignLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateCampaignLabelResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignLabelResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignLabelResult",
     )
 
 
 class MutateCampaignLabelResult(proto.Message):
     r"""The result for a campaign label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

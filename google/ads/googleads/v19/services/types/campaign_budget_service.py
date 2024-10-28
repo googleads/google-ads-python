@@ -155,6 +155,7 @@ class CampaignBudgetOperation(proto.Message):
 
 class MutateCampaignBudgetsResponse(proto.Message):
     r"""Response message for campaign budget mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -182,6 +183,7 @@ class MutateCampaignBudgetsResponse(proto.Message):
 
 class MutateCampaignBudgetResult(proto.Message):
     r"""The result for the campaign budget mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

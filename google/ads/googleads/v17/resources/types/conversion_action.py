@@ -47,6 +47,7 @@ __protobuf__ = proto.module(
 
 class ConversionAction(proto.Message):
     r"""A conversion action.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -167,12 +168,16 @@ class ConversionAction(proto.Message):
                 attribution model for the conversion action.
         """
 
-        attribution_model: gage_attribution_model.AttributionModelEnum.AttributionModel = proto.Field(
+        attribution_model: (
+            gage_attribution_model.AttributionModelEnum.AttributionModel
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=gage_attribution_model.AttributionModelEnum.AttributionModel,
         )
-        data_driven_model_status: gage_data_driven_model_status.DataDrivenModelStatusEnum.DataDrivenModelStatus = proto.Field(
+        data_driven_model_status: (
+            gage_data_driven_model_status.DataDrivenModelStatusEnum.DataDrivenModelStatus
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=gage_data_driven_model_status.DataDrivenModelStatusEnum.DataDrivenModelStatus,
@@ -181,6 +186,7 @@ class ConversionAction(proto.Message):
     class ValueSettings(proto.Message):
         r"""Settings related to the value for conversion events
         associated with this conversion action.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -230,6 +236,7 @@ class ConversionAction(proto.Message):
         r"""Settings related to a third party app analytics conversion
         action.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -255,6 +262,7 @@ class ConversionAction(proto.Message):
 
     class FirebaseSettings(proto.Message):
         r"""Settings related to a Firebase conversion action.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -297,6 +305,7 @@ class ConversionAction(proto.Message):
 
     class GoogleAnalytics4Settings(proto.Message):
         r"""Settings related to a Google Analytics 4 conversion action.
+
         Attributes:
             event_name (str):
                 Output only. The name of the GA 4 event.
@@ -333,12 +342,16 @@ class ConversionAction(proto.Message):
         number=22,
         optional=True,
     )
-    status: conversion_action_status.ConversionActionStatusEnum.ConversionActionStatus = proto.Field(
+    status: (
+        conversion_action_status.ConversionActionStatusEnum.ConversionActionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=conversion_action_status.ConversionActionStatusEnum.ConversionActionStatus,
     )
-    type_: conversion_action_type.ConversionActionTypeEnum.ConversionActionType = proto.Field(
+    type_: (
+        conversion_action_type.ConversionActionTypeEnum.ConversionActionType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=conversion_action_type.ConversionActionTypeEnum.ConversionActionType,
@@ -355,7 +368,9 @@ class ConversionAction(proto.Message):
         number=31,
         optional=True,
     )
-    category: conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory = proto.Field(
+    category: (
+        conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
@@ -385,7 +400,9 @@ class ConversionAction(proto.Message):
         number=11,
         message=ValueSettings,
     )
-    counting_type: conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType = proto.Field(
+    counting_type: (
+        conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         enum=conversion_action_counting_type.ConversionActionCountingTypeEnum.ConversionActionCountingType,
@@ -410,7 +427,9 @@ class ConversionAction(proto.Message):
         number=28,
         optional=True,
     )
-    mobile_app_vendor: gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor = proto.Field(
+    mobile_app_vendor: (
+        gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         enum=gage_mobile_app_vendor.MobileAppVendorEnum.MobileAppVendor,

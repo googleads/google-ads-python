@@ -78,20 +78,26 @@ class ProductLinkInvitation(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     product_link_invitation_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
-    status: product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus = proto.Field(
+    status: (
+        product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus,
     )
-    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = proto.Field(
-        proto.ENUM,
-        number=6,
-        enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+        )
     )
     hotel_center: "HotelCenterLinkInvitationIdentifier" = proto.Field(
         proto.MESSAGE,
@@ -105,16 +111,19 @@ class ProductLinkInvitation(proto.Message):
         oneof="invited_account",
         message="MerchantCenterLinkInvitationIdentifier",
     )
-    advertising_partner: "AdvertisingPartnerLinkInvitationIdentifier" = proto.Field(
-        proto.MESSAGE,
-        number=7,
-        oneof="invited_account",
-        message="AdvertisingPartnerLinkInvitationIdentifier",
+    advertising_partner: "AdvertisingPartnerLinkInvitationIdentifier" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=7,
+            oneof="invited_account",
+            message="AdvertisingPartnerLinkInvitationIdentifier",
+        )
     )
 
 
 class HotelCenterLinkInvitationIdentifier(proto.Message):
     r"""The identifier for Hotel account.
+
     Attributes:
         hotel_center_id (int):
             Output only. The hotel center id of the hotel
@@ -122,12 +131,14 @@ class HotelCenterLinkInvitationIdentifier(proto.Message):
     """
 
     hotel_center_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
 class MerchantCenterLinkInvitationIdentifier(proto.Message):
     r"""The identifier for Merchant Center Account.
+
     Attributes:
         merchant_center_id (int):
             Output only. The Merchant Center id of the
@@ -135,13 +146,15 @@ class MerchantCenterLinkInvitationIdentifier(proto.Message):
     """
 
     merchant_center_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
 class AdvertisingPartnerLinkInvitationIdentifier(proto.Message):
     r"""The identifier for the Advertising Partner Google Ads
     account.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -155,7 +168,9 @@ class AdvertisingPartnerLinkInvitationIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

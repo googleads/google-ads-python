@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import SharedSetServiceClient
+from .async_client import SharedSetServiceAsyncClient
 
-__all__ = ("SharedSetServiceClient",)
+__all__ = (
+    "SharedSetServiceClient",
+    "SharedSetServiceAsyncClient",
+)

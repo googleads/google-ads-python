@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedPlaceholderView",},
+    manifest={
+        "FeedPlaceholderView",
+    },
 )
 
 
 class FeedPlaceholderView(proto.Message):
     r"""A feed placeholder view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the feed placeholder view.
@@ -44,9 +47,12 @@ class FeedPlaceholderView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    placeholder_type: gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType = proto.Field(
+    placeholder_type: (
+        gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType,

@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class AdGroupBidModifier(proto.Message):
     r"""Represents an ad group bid modifier.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -133,7 +134,9 @@ class AdGroupBidModifier(proto.Message):
         number=16,
         optional=True,
     )
-    bid_modifier_source: gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource = proto.Field(
+    bid_modifier_source: (
+        gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=gage_bid_modifier_source.BidModifierSourceEnum.BidModifierSource,

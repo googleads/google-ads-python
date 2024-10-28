@@ -35,6 +35,7 @@ class ChangeStatus(proto.Message):
     r"""Describes the status of returned resource. ChangeStatus could
     have up to 3 minutes delay to reflect a new change.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -140,7 +141,9 @@ class ChangeStatus(proto.Message):
         number=24,
         optional=True,
     )
-    resource_type: change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType = proto.Field(
+    resource_type: (
+        change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType,
@@ -155,7 +158,9 @@ class ChangeStatus(proto.Message):
         number=18,
         optional=True,
     )
-    resource_status: change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation = proto.Field(
+    resource_status: (
+        change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation,

@@ -32,7 +32,22 @@ class InsightsTrendEnum(proto.Message):
     r"""Container for enum describing a trend."""
 
     class InsightsTrend(proto.Enum):
-        r"""Describes which direction a trend is moving."""
+        r"""Describes which direction a trend is moving.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            EMERGING (2):
+                This is a new trend.
+            RISING (3):
+                This trend has increased recently.
+            SUSTAINED (4):
+                This trend has remained stable.
+            DECLINING (5):
+                This trend is declining.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

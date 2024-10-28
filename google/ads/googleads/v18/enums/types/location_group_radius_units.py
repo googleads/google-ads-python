@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocationGroupRadiusUnitsEnum",},
+    manifest={
+        "LocationGroupRadiusUnitsEnum",
+    },
 )
 
 
@@ -35,7 +37,21 @@ class LocationGroupRadiusUnitsEnum(proto.Message):
     class LocationGroupRadiusUnits(proto.Enum):
         r"""The unit of radius distance in location group (for example,
         MILES)
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            METERS (2):
+                Meters
+            MILES (3):
+                Miles
+            MILLI_MILES (4):
+                Milli Miles
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         METERS = 2

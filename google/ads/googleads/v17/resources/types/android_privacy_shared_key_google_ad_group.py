@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class AndroidPrivacySharedKeyGoogleAdGroup(proto.Message):
     r"""An Android privacy shared key view for Google ad group key.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Android privacy shared
@@ -77,7 +78,9 @@ class AndroidPrivacySharedKeyGoogleAdGroup(proto.Message):
         proto.INT64,
         number=2,
     )
-    android_privacy_interaction_type: gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType = proto.Field(
+    android_privacy_interaction_type: (
+        gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType,
@@ -86,7 +89,9 @@ class AndroidPrivacySharedKeyGoogleAdGroup(proto.Message):
         proto.STRING,
         number=4,
     )
-    android_privacy_network_type: gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType = proto.Field(
+    android_privacy_network_type: (
+        gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType,

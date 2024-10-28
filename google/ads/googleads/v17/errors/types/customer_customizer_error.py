@@ -35,7 +35,16 @@ class CustomerCustomizerErrorEnum(proto.Message):
     """
 
     class CustomerCustomizerError(proto.Enum):
-        r"""Enum describing possible customer customizer errors."""
+        r"""Enum describing possible customer customizer errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
 

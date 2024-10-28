@@ -32,7 +32,21 @@ class ProductAvailabilityEnum(proto.Message):
     r"""The availability of a product."""
 
     class ProductAvailability(proto.Enum):
-        r"""Product availability."""
+        r"""Product availability.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                Used for return value only. Represents values
+                unknown in this version.
+            IN_STOCK (2):
+                The product is in stock.
+            OUT_OF_STOCK (3):
+                The product is out of stock.
+            PREORDER (4):
+                The product can be preordered.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

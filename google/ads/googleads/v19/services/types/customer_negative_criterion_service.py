@@ -137,6 +137,7 @@ class CustomerNegativeCriterionOperation(proto.Message):
 
 class MutateCustomerNegativeCriteriaResponse(proto.Message):
     r"""Response message for customer negative criterion mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -164,6 +165,7 @@ class MutateCustomerNegativeCriteriaResponse(proto.Message):
 
 class MutateCustomerNegativeCriteriaResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

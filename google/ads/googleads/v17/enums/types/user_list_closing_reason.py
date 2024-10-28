@@ -35,7 +35,19 @@ class UserListClosingReasonEnum(proto.Message):
     """
 
     class UserListClosingReason(proto.Enum):
-        r"""Enum describing possible user list closing reasons."""
+        r"""Enum describing possible user list closing reasons.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            UNUSED (2):
+                The userlist was closed because of not being
+                used for over one year.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNUSED = 2

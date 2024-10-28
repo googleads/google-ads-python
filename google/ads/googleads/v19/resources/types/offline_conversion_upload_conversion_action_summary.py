@@ -41,6 +41,7 @@ __protobuf__ = proto.module(
 
 class OfflineConversionUploadConversionActionSummary(proto.Message):
     r"""Offline conversion upload summary at conversion action level.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion

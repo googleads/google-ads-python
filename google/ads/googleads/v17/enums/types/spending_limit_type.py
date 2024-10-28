@@ -34,7 +34,17 @@ class SpendingLimitTypeEnum(proto.Message):
     class SpendingLimitType(proto.Enum):
         r"""The possible spending limit types used by certain resources
         as an alternative to absolute money values in micros.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INFINITE (2):
+                Infinite, indicates unlimited spending power.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INFINITE = 2

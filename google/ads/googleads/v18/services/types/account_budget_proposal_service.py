@@ -50,13 +50,17 @@ class MutateAccountBudgetProposalRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "AccountBudgetProposalOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="AccountBudgetProposalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AccountBudgetProposalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -102,7 +106,9 @@ class AccountBudgetProposalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     create: account_budget_proposal.AccountBudgetProposal = proto.Field(
         proto.MESSAGE,
@@ -111,31 +117,38 @@ class AccountBudgetProposalOperation(proto.Message):
         message=account_budget_proposal.AccountBudgetProposal,
     )
     remove: str = proto.Field(
-        proto.STRING, number=1, oneof="operation",
+        proto.STRING,
+        number=1,
+        oneof="operation",
     )
 
 
 class MutateAccountBudgetProposalResponse(proto.Message):
     r"""Response message for account-level budget mutate operations.
+
     Attributes:
         result (google.ads.googleads.v18.services.types.MutateAccountBudgetProposalResult):
             The result of the mutate.
     """
 
     result: "MutateAccountBudgetProposalResult" = proto.Field(
-        proto.MESSAGE, number=2, message="MutateAccountBudgetProposalResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAccountBudgetProposalResult",
     )
 
 
 class MutateAccountBudgetProposalResult(proto.Message):
     r"""The result for the account budget proposal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

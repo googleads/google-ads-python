@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetGroupProductGroupView",},
+    manifest={
+        "AssetGroupProductGroupView",
+    },
 )
 
 
 class AssetGroupProductGroupView(proto.Message):
     r"""An asset group product group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the asset group product
@@ -44,13 +47,16 @@ class AssetGroupProductGroupView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset_group_listing_group_filter: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 

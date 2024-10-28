@@ -43,6 +43,7 @@ class LocalServicesLeadConversation(proto.Message):
     appended to a Lead. More info:
     https://ads.google.com/local-services-ads
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -89,12 +90,16 @@ class LocalServicesLeadConversation(proto.Message):
         proto.INT64,
         number=2,
     )
-    conversation_channel: local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType = proto.Field(
+    conversation_channel: (
+        local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType,
     )
-    participant_type: local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType = proto.Field(
+    participant_type: (
+        local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType,
@@ -123,6 +128,7 @@ class LocalServicesLeadConversation(proto.Message):
 
 class PhoneCallDetails(proto.Message):
     r"""Represents details of a phone call conversation.
+
     Attributes:
         call_duration_millis (int):
             Output only. The duration (in milliseconds)

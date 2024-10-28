@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class HotelGroupView(proto.Message):
     r"""A hotel group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the hotel group view.

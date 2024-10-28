@@ -40,6 +40,7 @@ class ChannelAggregateAssetView(proto.Message):
     r"""A channel-level aggregate asset view that shows where the
     asset is linked, performamce of the asset and stats.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -72,7 +73,9 @@ class ChannelAggregateAssetView(proto.Message):
         proto.STRING,
         number=1,
     )
-    advertising_channel_type: gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType = proto.Field(
+    advertising_channel_type: (
+        gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         optional=True,

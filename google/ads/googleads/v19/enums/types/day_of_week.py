@@ -35,7 +35,28 @@ class DayOfWeekEnum(proto.Message):
     """
 
     class DayOfWeek(proto.Enum):
-        r"""Enumerates days of the week, for example, "Monday"."""
+        r"""Enumerates days of the week, for example, "Monday".
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            MONDAY (2):
+                Monday.
+            TUESDAY (3):
+                Tuesday.
+            WEDNESDAY (4):
+                Wednesday.
+            THURSDAY (5):
+                Thursday.
+            FRIDAY (6):
+                Friday.
+            SATURDAY (7):
+                Saturday.
+            SUNDAY (8):
+                Sunday.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

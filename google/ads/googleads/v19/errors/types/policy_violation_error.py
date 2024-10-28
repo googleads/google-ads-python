@@ -35,7 +35,18 @@ class PolicyViolationErrorEnum(proto.Message):
     """
 
     class PolicyViolationError(proto.Enum):
-        r"""Enum describing possible policy violation errors."""
+        r"""Enum describing possible policy violation errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            POLICY_ERROR (2):
+                A policy was violated. See
+                PolicyViolationDetails for more detail.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

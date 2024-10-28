@@ -90,7 +90,9 @@ class MutateAdGroupAdsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -164,6 +166,7 @@ class AdGroupAdOperation(proto.Message):
 
 class MutateAdGroupAdsResponse(proto.Message):
     r"""Response message for an ad group ad mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -189,6 +192,7 @@ class MutateAdGroupAdsResponse(proto.Message):
 
 class MutateAdGroupAdResult(proto.Message):
     r"""The result for the ad mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful
@@ -228,17 +232,18 @@ class RemoveAutomaticallyCreatedAssetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    assets_with_field_type: MutableSequence[
-        "AssetsWithFieldType"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AssetsWithFieldType",
+    assets_with_field_type: MutableSequence["AssetsWithFieldType"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetsWithFieldType",
+        )
     )
 
 
 class AssetsWithFieldType(proto.Message):
     r"""The combination of system asset and field type to remove.
+
     Attributes:
         asset (str):
             Required. The resource name of the asset to
@@ -251,7 +256,9 @@ class AssetsWithFieldType(proto.Message):
         proto.STRING,
         number=1,
     )
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,

@@ -38,6 +38,7 @@ class UserInterest(proto.Message):
     r"""A user interest: a particular interest-based vertical to be
     targeted.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

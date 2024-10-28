@@ -39,7 +39,23 @@ class KeywordPlanCompetitionLevelEnum(proto.Message):
     """
 
     class KeywordPlanCompetitionLevel(proto.Enum):
-        r"""Competition level of a keyword."""
+        r"""Competition level of a keyword.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            LOW (2):
+                Low competition. The Competition Index range for this is [0,
+                33].
+            MEDIUM (3):
+                Medium competition. The Competition Index range for this is
+                [34, 66].
+            HIGH (4):
+                High competition. The Competition Index range for this is
+                [67, 100].
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

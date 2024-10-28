@@ -70,12 +70,12 @@ class MutateAdGroupAssetSetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "AdGroupAssetSetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AdGroupAssetSetOperation",
+    operations: MutableSequence["AdGroupAssetSetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupAssetSetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -85,7 +85,9 @@ class MutateAdGroupAssetSetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -94,6 +96,7 @@ class MutateAdGroupAssetSetsRequest(proto.Message):
 
 class AdGroupAssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on an ad group asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -130,6 +133,7 @@ class AdGroupAssetSetOperation(proto.Message):
 
 class MutateAdGroupAssetSetsResponse(proto.Message):
     r"""Response message for an ad group asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateAdGroupAssetSetResult]):
             All results for the mutate.
@@ -141,12 +145,12 @@ class MutateAdGroupAssetSetsResponse(proto.Message):
             level error.
     """
 
-    results: MutableSequence[
-        "MutateAdGroupAssetSetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateAdGroupAssetSetResult",
+    results: MutableSequence["MutateAdGroupAssetSetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAdGroupAssetSetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -157,6 +161,7 @@ class MutateAdGroupAssetSetsResponse(proto.Message):
 
 class MutateAdGroupAssetSetResult(proto.Message):
     r"""The result for the ad group asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

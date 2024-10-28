@@ -123,7 +123,9 @@ class AssetGroup(proto.Message):
             enum=asset_group_status.AssetGroupStatusEnum.AssetGroupStatus,
         )
     )
-    primary_status: asset_group_primary_status.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_group_primary_status.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=11,
         enum=asset_group_primary_status.AssetGroupPrimaryStatusEnum.AssetGroupPrimaryStatus,

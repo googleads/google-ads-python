@@ -22,16 +22,40 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OptimizationGoalTypeEnum",},
+    manifest={
+        "OptimizationGoalTypeEnum",
+    },
 )
 
 
 class OptimizationGoalTypeEnum(proto.Message):
-    r"""Container for enum describing the type of optimization goal.
-    """
+    r"""Container for enum describing the type of optimization goal."""
 
     class OptimizationGoalType(proto.Enum):
-        r"""The type of optimization goal"""
+        r"""The type of optimization goal
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used as a return value only. Represents value
+                unknown in this version.
+            CALL_CLICKS (2):
+                Optimize for call clicks. Call click
+                conversions are times people selected 'Call' to
+                contact a store after viewing an ad.
+            DRIVING_DIRECTIONS (3):
+                Optimize for driving directions. Driving
+                directions conversions are times people selected
+                'Get directions' to navigate to a store after
+                viewing an ad.
+            APP_PRE_REGISTRATION (4):
+                Optimize for pre-registration.
+                Pre-registration conversions are the number of
+                pre-registration signups to receive a
+                notification when the app is released.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CALL_CLICKS = 2

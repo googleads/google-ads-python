@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class ClickLocation(proto.Message):
     r"""Location criteria associated with a click.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

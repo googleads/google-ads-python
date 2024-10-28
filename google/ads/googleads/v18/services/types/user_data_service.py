@@ -37,6 +37,7 @@ class UploadUserDataRequest(proto.Message):
     r"""Request message for
     [UserDataService.UploadUserData][google.ads.googleads.v18.services.UserDataService.UploadUserData]
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -53,12 +54,17 @@ class UploadUserDataRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["UserDataOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="UserDataOperation",
+        proto.MESSAGE,
+        number=3,
+        message="UserDataOperation",
     )
-    customer_match_user_list_metadata: offline_user_data.CustomerMatchUserListMetadata = proto.Field(
+    customer_match_user_list_metadata: (
+        offline_user_data.CustomerMatchUserListMetadata
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         oneof="metadata",
@@ -68,6 +74,7 @@ class UploadUserDataRequest(proto.Message):
 
 class UserDataOperation(proto.Message):
     r"""Operation to be made for the UploadUserDataRequest.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -109,6 +116,7 @@ class UploadUserDataResponse(proto.Message):
     'Segment members' section for the Customer Match List in the Google
     Ads UI.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -126,10 +134,14 @@ class UploadUserDataResponse(proto.Message):
     """
 
     upload_date_time: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     received_operations_count: int = proto.Field(
-        proto.INT32, number=4, optional=True,
+        proto.INT32,
+        number=4,
+        optional=True,
     )
 
 

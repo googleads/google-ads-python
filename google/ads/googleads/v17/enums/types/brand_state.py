@@ -32,7 +32,40 @@ class BrandStateEnum(proto.Message):
     r"""Container for enum describing possible brand states."""
 
     class BrandState(proto.Enum):
-        r"""Enumeration of different brand states."""
+        r"""Enumeration of different brand states.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Brand is verified and globally available for
+                selection
+            DEPRECATED (3):
+                Brand was globally available in past but is
+                no longer a valid brand (based on business
+                criteria)
+            UNVERIFIED (4):
+                Brand is unverified and customer scoped, but
+                can be selected by customer (only who requested
+                for same) for targeting
+            APPROVED (5):
+                Was a customer-scoped (unverified) brand,
+                which got approved by business and added to the
+                global list. Its assigned CKG MID should be used
+                instead of this
+            CANCELLED (6):
+                Was a customer-scoped (unverified) brand, but
+                the request was canceled by customer and this
+                brand id is no longer valid
+            REJECTED (7):
+                Was a customer-scoped (unverified) brand, but
+                the request was rejected by internal business
+                team and this brand id is no longer valid
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

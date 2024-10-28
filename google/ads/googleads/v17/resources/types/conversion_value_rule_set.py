@@ -38,6 +38,7 @@ __protobuf__ = proto.module(
 
 class ConversionValueRuleSet(proto.Message):
     r"""A conversion value rule set
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion value rule
@@ -104,7 +105,9 @@ class ConversionValueRuleSet(proto.Message):
         proto.STRING,
         number=5,
     )
-    attachment_type: value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType = proto.Field(
+    attachment_type: (
+        value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=value_rule_set_attachment_type.ValueRuleSetAttachmentTypeEnum.ValueRuleSetAttachmentType,
@@ -113,7 +116,9 @@ class ConversionValueRuleSet(proto.Message):
         proto.STRING,
         number=7,
     )
-    status: conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus = proto.Field(
+    status: (
+        conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=conversion_value_rule_set_status.ConversionValueRuleSetStatusEnum.ConversionValueRuleSetStatus,

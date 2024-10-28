@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"DynamicSearchAdsSearchTermView",},
+    manifest={
+        "DynamicSearchAdsSearchTermView",
+    },
 )
 
 
 class DynamicSearchAdsSearchTermView(proto.Message):
     r"""A dynamic search ads search term view.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -82,28 +85,43 @@ class DynamicSearchAdsSearchTermView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     headline: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     landing_page: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     page_url: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     has_negative_keyword: bool = proto.Field(
-        proto.BOOL, number=13, optional=True,
+        proto.BOOL,
+        number=13,
+        optional=True,
     )
     has_matching_keyword: bool = proto.Field(
-        proto.BOOL, number=14, optional=True,
+        proto.BOOL,
+        number=14,
+        optional=True,
     )
     has_negative_url: bool = proto.Field(
-        proto.BOOL, number=15, optional=True,
+        proto.BOOL,
+        number=15,
+        optional=True,
     )
 
 

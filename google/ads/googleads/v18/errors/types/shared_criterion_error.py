@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"SharedCriterionErrorEnum",},
+    manifest={
+        "SharedCriterionErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class SharedCriterionErrorEnum(proto.Message):
     """
 
     class SharedCriterionError(proto.Enum):
-        r"""Enum describing possible shared criterion errors."""
+        r"""Enum describing possible shared criterion errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CRITERION_TYPE_NOT_ALLOWED_FOR_SHARED_SET_TYPE (2):
+                The criterion is not appropriate for the
+                shared set type.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CRITERION_TYPE_NOT_ALLOWED_FOR_SHARED_SET_TYPE = 2

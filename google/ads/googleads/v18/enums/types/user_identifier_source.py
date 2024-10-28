@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserIdentifierSourceEnum",},
+    manifest={
+        "UserIdentifierSourceEnum",
+    },
 )
 
 
@@ -36,7 +38,21 @@ class UserIdentifierSourceEnum(proto.Message):
     class UserIdentifierSource(proto.Enum):
         r"""The type of user identifier source for offline Store Sales,
         click conversion, and conversion adjustment uploads.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version
+            FIRST_PARTY (2):
+                Indicates that the user identifier was
+                provided by the first party (advertiser).
+            THIRD_PARTY (3):
+                Indicates that the user identifier was
+                provided by the third party (partner).
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         FIRST_PARTY = 2

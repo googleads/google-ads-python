@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class TravelActivityPerformanceView(proto.Message):
     r"""A travel activity performance view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the travel activity

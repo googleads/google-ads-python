@@ -32,7 +32,37 @@ class ConversionOriginEnum(proto.Message):
     r"""Container for enum describing possible conversion origins."""
 
     class ConversionOrigin(proto.Enum):
-        r"""The possible places where a conversion can occur."""
+        r"""The possible places where a conversion can occur.
+
+        Values:
+            UNSPECIFIED (0):
+                The conversion origin has not been specified.
+            UNKNOWN (1):
+                The conversion origin is not known in this
+                version.
+            WEBSITE (2):
+                Conversion that occurs when a user visits a
+                website or takes an action there after viewing
+                an ad.
+            GOOGLE_HOSTED (3):
+                Conversions reported by an offline pipeline
+                which collects local actions from Google-hosted
+                pages (for example, Google Maps, Google Place
+                Page, etc) and attributes them to relevant ad
+                events.
+            APP (4):
+                Conversion that occurs when a user performs
+                an action through any app platforms.
+            CALL_FROM_ADS (5):
+                Conversion that occurs when a user makes a
+                call from ads.
+            STORE (6):
+                Conversion that occurs when a user visits or
+                makes a purchase at a physical store.
+            YOUTUBE_HOSTED (7):
+                Conversion that occurs on YouTube.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         WEBSITE = 2

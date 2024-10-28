@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AdGroupFeedServiceClient
+from .async_client import AdGroupFeedServiceAsyncClient
 
-__all__ = ("AdGroupFeedServiceClient",)
+__all__ = (
+    "AdGroupFeedServiceClient",
+    "AdGroupFeedServiceAsyncClient",
+)

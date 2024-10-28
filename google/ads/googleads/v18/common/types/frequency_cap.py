@@ -26,7 +26,10 @@ from google.ads.googleads.v18.enums.types import frequency_cap_time_unit
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"FrequencyCapEntry", "FrequencyCapKey",},
+    manifest={
+        "FrequencyCapEntry",
+        "FrequencyCapKey",
+    },
 )
 
 
@@ -34,6 +37,7 @@ class FrequencyCapEntry(proto.Message):
     r"""A rule specifying the maximum number of times an ad (or some
     set of ads) can be shown to a user over a particular time
     period.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -50,16 +54,21 @@ class FrequencyCapEntry(proto.Message):
     """
 
     key: "FrequencyCapKey" = proto.Field(
-        proto.MESSAGE, number=1, message="FrequencyCapKey",
+        proto.MESSAGE,
+        number=1,
+        message="FrequencyCapKey",
     )
     cap: int = proto.Field(
-        proto.INT32, number=3, optional=True,
+        proto.INT32,
+        number=3,
+        optional=True,
     )
 
 
 class FrequencyCapKey(proto.Message):
     r"""A group of fields used as keys for a frequency cap.
     There can be no more than one frequency cap with the same key.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -80,23 +89,31 @@ class FrequencyCapKey(proto.Message):
             This field is a member of `oneof`_ ``_time_length``.
     """
 
-    level: frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel,
+    level: frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel,
+        )
     )
-    event_type: frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType = proto.Field(
+    event_type: (
+        frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType,
     )
-    time_unit: frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit = proto.Field(
+    time_unit: (
+        frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit,
     )
     time_length: int = proto.Field(
-        proto.INT32, number=5, optional=True,
+        proto.INT32,
+        number=5,
+        optional=True,
     )
 
 

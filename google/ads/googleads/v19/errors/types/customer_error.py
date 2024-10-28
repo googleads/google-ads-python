@@ -34,6 +34,27 @@ class CustomerErrorEnum(proto.Message):
     class CustomerError(proto.Enum):
         r"""Set of errors that are related to requests dealing with
         Customer.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            STATUS_CHANGE_DISALLOWED (2):
+                Customer status is not allowed to be changed
+                from DRAFT and CLOSED. Currency code and at
+                least one of country code and time zone needs to
+                be set when status is changed to ENABLED.
+            ACCOUNT_NOT_SET_UP (3):
+                CustomerService cannot get a customer that
+                has not been fully set up.
+            CREATION_DENIED_FOR_POLICY_VIOLATION (4):
+                Customer creation is denied for policy
+                violation.
+            CREATION_DENIED_INELIGIBLE_MCC (5):
+                Manager account is ineligible to create new
+                accounts.
         """
 
         UNSPECIFIED = 0

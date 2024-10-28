@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class Feed(proto.Message):
     r"""A feed.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -94,6 +95,7 @@ class Feed(proto.Message):
         r"""Data used to configure a location feed populated from
         Business Profile.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -136,6 +138,7 @@ class Feed(proto.Message):
 
         class OAuthInfo(proto.Message):
             r"""Data used for authorization using OAuth.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -216,7 +219,9 @@ class Feed(proto.Message):
             proto.INT64,
             number=3,
         )
-        relationship_type: affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType = proto.Field(
+        relationship_type: (
+            affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType,
@@ -241,12 +246,12 @@ class Feed(proto.Message):
         number=4,
         message="FeedAttribute",
     )
-    attribute_operations: MutableSequence[
-        "FeedAttributeOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=9,
-        message="FeedAttributeOperation",
+    attribute_operations: MutableSequence["FeedAttributeOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message="FeedAttributeOperation",
+        )
     )
     origin: feed_origin.FeedOriginEnum.FeedOrigin = proto.Field(
         proto.ENUM,
@@ -278,6 +283,7 @@ class FeedAttribute(proto.Message):
     type of the FeedItemAttributes with the same FeedAttributeId.
     Optionally, a FeedAttribute can be marked as being part of a
     FeedItem's unique key.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -340,7 +346,18 @@ class FeedAttributeOperation(proto.Message):
     """
 
     class Operator(proto.Enum):
-        r"""The operator."""
+        r"""The operator.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADD (2):
+                Add the attribute to the existing attributes.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADD = 2

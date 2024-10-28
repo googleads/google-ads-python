@@ -32,7 +32,39 @@ class AdDestinationTypeEnum(proto.Message):
     r"""Container for enumeration of Google Ads destination types."""
 
     class AdDestinationType(proto.Enum):
-        r"""Enumerates Google Ads destination types"""
+        r"""Enumerates Google Ads destination types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            NOT_APPLICABLE (2):
+                Ads that don't intend to drive users off from
+                ads to other destinations
+            WEBSITE (3):
+                Website
+            APP_DEEP_LINK (4):
+                App Deep Link
+            APP_STORE (5):
+                iOS App Store or Play Store
+            PHONE_CALL (6):
+                Call Dialer
+            MAP_DIRECTIONS (7):
+                Map App
+            LOCATION_LISTING (8):
+                Location Dedicated Page
+            MESSAGE (9):
+                Text Message
+            LEAD_FORM (10):
+                Lead Generation Form
+            YOUTUBE (11):
+                YouTube
+            UNMODELED_FOR_CONVERSIONS (12):
+                Ad Destination for Conversions with keys
+                unknown
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_APPLICABLE = 2

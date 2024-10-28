@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductIssueSeverityEnum",},
+    manifest={
+        "ProductIssueSeverityEnum",
+    },
 )
 
 
 class ProductIssueSeverityEnum(proto.Message):
-    r"""The severity of a product issue.
-    """
+    r"""The severity of a product issue."""
 
     class ProductIssueSeverity(proto.Enum):
-        r"""Product issue severity."""
+        r"""Product issue severity.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            WARNING (2):
+                The issue limits the performance of the
+                product in ads.
+            ERROR (3):
+                The issue prevents the product from showing
+                in ads.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         WARNING = 2

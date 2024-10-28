@@ -70,12 +70,12 @@ class MutateCampaignCustomizersRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CampaignCustomizerOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignCustomizerOperation",
+    operations: MutableSequence["CampaignCustomizerOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignCustomizerOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -85,7 +85,9 @@ class MutateCampaignCustomizersRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -132,6 +134,7 @@ class CampaignCustomizerOperation(proto.Message):
 
 class MutateCampaignCustomizersResponse(proto.Message):
     r"""Response message for a campaign customizer mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCampaignCustomizerResult]):
             All results for the mutate.
@@ -143,12 +146,12 @@ class MutateCampaignCustomizersResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateCampaignCustomizerResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCampaignCustomizerResult",
+    results: MutableSequence["MutateCampaignCustomizerResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCampaignCustomizerResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -159,6 +162,7 @@ class MutateCampaignCustomizersResponse(proto.Message):
 
 class MutateCampaignCustomizerResult(proto.Message):
     r"""The result for the campaign customizer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

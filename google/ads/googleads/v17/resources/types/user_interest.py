@@ -38,6 +38,7 @@ class UserInterest(proto.Message):
     r"""A user interest: a particular interest-based vertical to be
     targeted.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -75,7 +76,9 @@ class UserInterest(proto.Message):
         proto.STRING,
         number=1,
     )
-    taxonomy_type: user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType = proto.Field(
+    taxonomy_type: (
+        user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType,

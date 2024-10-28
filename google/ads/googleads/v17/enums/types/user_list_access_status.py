@@ -32,7 +32,20 @@ class UserListAccessStatusEnum(proto.Message):
     r"""Indicates if this client still has access to the list."""
 
     class UserListAccessStatus(proto.Enum):
-        r"""Enum containing possible user list access statuses."""
+        r"""Enum containing possible user list access statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The access is enabled.
+            DISABLED (3):
+                The access is disabled.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

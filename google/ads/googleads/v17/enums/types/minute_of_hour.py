@@ -32,7 +32,23 @@ class MinuteOfHourEnum(proto.Message):
     r"""Container for enumeration of quarter-hours."""
 
     class MinuteOfHour(proto.Enum):
-        r"""Enumerates of quarter-hours. For example, "FIFTEEN"."""
+        r"""Enumerates of quarter-hours. For example, "FIFTEEN".
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            ZERO (2):
+                Zero minutes past the hour.
+            FIFTEEN (3):
+                Fifteen minutes past the hour.
+            THIRTY (4):
+                Thirty minutes past the hour.
+            FORTY_FIVE (5):
+                Forty-five minutes past the hour.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ZERO = 2

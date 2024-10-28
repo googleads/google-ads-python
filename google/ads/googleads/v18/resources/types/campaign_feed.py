@@ -29,12 +29,15 @@ from google.ads.googleads.v18.enums.types import placeholder_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignFeed",},
+    manifest={
+        "CampaignFeed",
+    },
 )
 
 
 class CampaignFeed(proto.Message):
     r"""A campaign feed.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -67,13 +70,18 @@ class CampaignFeed(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     placeholder_types: MutableSequence[
         placeholder_type.PlaceholderTypeEnum.PlaceholderType

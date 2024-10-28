@@ -35,7 +35,30 @@ class ExperimentMetricDirectionEnum(proto.Message):
     """
 
     class ExperimentMetricDirection(proto.Enum):
-        r"""The type of experiment metric direction."""
+        r"""The type of experiment metric direction.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            NO_CHANGE (2):
+                The goal of the experiment is to not change
+                the metric.
+            INCREASE (3):
+                The goal of the experiment is to increate the
+                metric.
+            DECREASE (4):
+                The goal of the experiment is to decrease the
+                metric.
+            NO_CHANGE_OR_INCREASE (5):
+                The goal of the experiment is to either not
+                change or increase the metric.
+            NO_CHANGE_OR_DECREASE (6):
+                The goal of the experiment is to either not
+                change or decrease the metric.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NO_CHANGE = 2

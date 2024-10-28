@@ -32,7 +32,21 @@ class InvoiceTypeEnum(proto.Message):
     r"""Container for enum describing the type of invoices."""
 
     class InvoiceType(proto.Enum):
-        r"""The possible type of invoices."""
+        r"""The possible type of invoices.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CREDIT_MEMO (2):
+                An invoice with a negative amount. The
+                account receives a credit.
+            INVOICE (3):
+                An invoice with a positive amount. The
+                account owes a balance.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

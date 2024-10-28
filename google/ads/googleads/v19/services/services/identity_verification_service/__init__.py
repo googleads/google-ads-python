@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import IdentityVerificationServiceClient
+from .async_client import IdentityVerificationServiceAsyncClient
 
-__all__ = ("IdentityVerificationServiceClient",)
+__all__ = (
+    "IdentityVerificationServiceClient",
+    "IdentityVerificationServiceAsyncClient",
+)

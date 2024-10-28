@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class CustomerAsset(proto.Message):
     r"""A link between a customer and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer asset.
@@ -101,7 +102,9 @@ class CustomerAsset(proto.Message):
         number=4,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

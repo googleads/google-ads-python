@@ -166,6 +166,7 @@ class AdGroupAdOperation(proto.Message):
 
 class MutateAdGroupAdsResponse(proto.Message):
     r"""Response message for an ad group ad mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -191,6 +192,7 @@ class MutateAdGroupAdsResponse(proto.Message):
 
 class MutateAdGroupAdResult(proto.Message):
     r"""The result for the ad mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful
@@ -241,6 +243,7 @@ class RemoveAutomaticallyCreatedAssetsRequest(proto.Message):
 
 class AssetsWithFieldType(proto.Message):
     r"""The combination of system asset and field type to remove.
+
     Attributes:
         asset (str):
             Required. The resource name of the asset to

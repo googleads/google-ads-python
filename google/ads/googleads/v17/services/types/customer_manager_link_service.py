@@ -57,12 +57,12 @@ class MutateCustomerManagerLinkRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CustomerManagerLinkOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CustomerManagerLinkOperation",
+    operations: MutableSequence["CustomerManagerLinkOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerManagerLinkOperation",
+        )
     )
     validate_only: bool = proto.Field(
         proto.BOOL,
@@ -120,6 +120,7 @@ class CustomerManagerLinkOperation(proto.Message):
     3. Update operation with status INACTIVE terminates link to
         manager.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -148,23 +149,25 @@ class CustomerManagerLinkOperation(proto.Message):
 
 class MutateCustomerManagerLinkResponse(proto.Message):
     r"""Response message for a CustomerManagerLink mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCustomerManagerLinkResult]):
             A result that identifies the resource
             affected by the mutate request.
     """
 
-    results: MutableSequence[
-        "MutateCustomerManagerLinkResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCustomerManagerLinkResult",
+    results: MutableSequence["MutateCustomerManagerLinkResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomerManagerLinkResult",
+        )
     )
 
 
 class MoveManagerLinkResponse(proto.Message):
     r"""Response message for a CustomerManagerLink moveManagerLink.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -181,6 +184,7 @@ class MoveManagerLinkResponse(proto.Message):
 
 class MutateCustomerManagerLinkResult(proto.Message):
     r"""The result for the customer manager link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -37,6 +37,7 @@ class AccountLink(proto.Message):
     r"""Represents the data sharing connection between a Google Ads
     account and another account
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -94,6 +95,7 @@ class AccountLink(proto.Message):
 
 class ThirdPartyAppAnalyticsLinkIdentifier(proto.Message):
     r"""The identifiers of a Third Party App Analytics Link.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

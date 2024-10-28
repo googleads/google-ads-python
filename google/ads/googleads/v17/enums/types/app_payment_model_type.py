@@ -32,7 +32,18 @@ class AppPaymentModelTypeEnum(proto.Message):
     r"""Represents a criterion for targeting paid apps."""
 
     class AppPaymentModelType(proto.Enum):
-        r"""Enum describing possible app payment models."""
+        r"""Enum describing possible app payment models.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PAID (30):
+                Represents paid-for apps.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PAID = 30

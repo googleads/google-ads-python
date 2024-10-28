@@ -37,6 +37,7 @@ class UploadUserDataRequest(proto.Message):
     r"""Request message for
     [UserDataService.UploadUserData][google.ads.googleads.v19.services.UserDataService.UploadUserData]
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -73,6 +74,7 @@ class UploadUserDataRequest(proto.Message):
 
 class UserDataOperation(proto.Message):
     r"""Operation to be made for the UploadUserDataRequest.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -113,6 +115,7 @@ class UploadUserDataResponse(proto.Message):
     Uploads made through this service will not be visible under the
     'Segment members' section for the Customer Match List in the Google
     Ads UI.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

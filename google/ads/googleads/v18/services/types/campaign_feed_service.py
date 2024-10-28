@@ -68,18 +68,25 @@ class MutateCampaignFeedsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignFeedOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignFeedOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignFeedOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -121,7 +128,9 @@ class CampaignFeedOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_feed.CampaignFeed = proto.Field(
         proto.MESSAGE,
@@ -136,12 +145,15 @@ class CampaignFeedOperation(proto.Message):
         message=gagr_campaign_feed.CampaignFeed,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCampaignFeedsResponse(proto.Message):
     r"""Response message for a campaign feed mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -154,15 +166,20 @@ class MutateCampaignFeedsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateCampaignFeedResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignFeedResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignFeedResult",
     )
 
 
 class MutateCampaignFeedResult(proto.Message):
     r"""The result for the campaign feed mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -173,10 +190,13 @@ class MutateCampaignFeedResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_feed: gagr_campaign_feed.CampaignFeed = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign_feed.CampaignFeed,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign_feed.CampaignFeed,
     )
 
 

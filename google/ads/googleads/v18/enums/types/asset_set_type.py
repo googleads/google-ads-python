@@ -22,16 +22,66 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetSetTypeEnum",},
+    manifest={
+        "AssetSetTypeEnum",
+    },
 )
 
 
 class AssetSetTypeEnum(proto.Message):
-    r"""Container for enum describing possible types of an asset set.
-    """
+    r"""Container for enum describing possible types of an asset set."""
 
     class AssetSetType(proto.Enum):
-        r"""Possible types of an asset set."""
+        r"""Possible types of an asset set.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PAGE_FEED (2):
+                Page asset set.
+            DYNAMIC_EDUCATION (3):
+                Dynamic education asset set.
+            MERCHANT_CENTER_FEED (4):
+                Google Merchant Center asset set.
+            DYNAMIC_REAL_ESTATE (5):
+                Dynamic real estate asset set.
+            DYNAMIC_CUSTOM (6):
+                Dynamic custom asset set.
+            DYNAMIC_HOTELS_AND_RENTALS (7):
+                Dynamic hotels and rentals asset set.
+            DYNAMIC_FLIGHTS (8):
+                Dynamic flights asset set.
+            DYNAMIC_TRAVEL (9):
+                Dynamic travel asset set.
+            DYNAMIC_LOCAL (10):
+                Dynamic local asset set.
+            DYNAMIC_JOBS (11):
+                Dynamic jobs asset set.
+            LOCATION_SYNC (12):
+                Location sync level asset set.
+            BUSINESS_PROFILE_DYNAMIC_LOCATION_GROUP (13):
+                Business Profile location group asset set.
+            CHAIN_DYNAMIC_LOCATION_GROUP (14):
+                Chain location group asset set which can be
+                used for both owned locations and affiliate
+                locations.
+            STATIC_LOCATION_GROUP (15):
+                Static location group asset set which can be
+                used for both owned locations and affiliate
+                locations.
+            HOTEL_PROPERTY (16):
+                Hotel Property asset set which is used to
+                link a hotel property feed to Performance Max
+                for travel goals campaigns.
+            TRAVEL_FEED (17):
+                Travel Feed asset set type. Can represent
+                either a Hotel feed or a Things to Do
+                (activities) feed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PAGE_FEED = 2

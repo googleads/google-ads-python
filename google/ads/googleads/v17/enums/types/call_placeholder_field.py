@@ -32,7 +32,37 @@ class CallPlaceholderFieldEnum(proto.Message):
     r"""Values for Call placeholder fields."""
 
     class CallPlaceholderField(proto.Enum):
-        r"""Possible values for Call placeholder fields."""
+        r"""Possible values for Call placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PHONE_NUMBER (2):
+                Data Type: STRING. The advertiser's phone
+                number to append to the ad.
+            COUNTRY_CODE (3):
+                Data Type: STRING. Uppercase two-letter
+                country code of the advertiser's phone number.
+            TRACKED (4):
+                Data Type: BOOLEAN. Indicates whether call
+                tracking is enabled. Default: true.
+            CONVERSION_TYPE_ID (5):
+                Data Type: INT64. The ID of an
+                AdCallMetricsConversion object. This object
+                contains the phoneCallDurationfield which is the
+                minimum duration (in seconds) of a call to be
+                considered a conversion.
+            CONVERSION_REPORTING_STATE (6):
+                Data Type: STRING. Indicates whether this call extension
+                uses its own call conversion setting or follows the account
+                level setting. Valid values are:
+                USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION and
+                USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PHONE_NUMBER = 2

@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CustomAudience(proto.Message):
     r"""A custom audience. This is a list of users by interest.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the custom audience. Custom
@@ -75,7 +76,9 @@ class CustomAudience(proto.Message):
         proto.INT64,
         number=2,
     )
-    status: custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus = proto.Field(
+    status: (
+        custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_audience_status.CustomAudienceStatusEnum.CustomAudienceStatus,
@@ -144,7 +147,9 @@ class CustomAudienceMember(proto.Message):
             This field is a member of `oneof`_ ``value``.
     """
 
-    member_type: custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType = proto.Field(
+    member_type: (
+        custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=custom_audience_member_type.CustomAudienceMemberTypeEnum.CustomAudienceMemberType,

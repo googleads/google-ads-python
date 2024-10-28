@@ -97,6 +97,7 @@ class BillingSetup(proto.Message):
 
     class PaymentsAccountInfo(proto.Message):
         r"""Container of payments account information for this billing.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:

@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class AssetUsage(proto.Message):
     r"""Contains the usage information of the asset.
+
     Attributes:
         asset (str):
             Resource name of the asset.
@@ -45,7 +46,9 @@ class AssetUsage(proto.Message):
         proto.STRING,
         number=1,
     )
-    served_asset_field_type: gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType = proto.Field(
+    served_asset_field_type: (
+        gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType,

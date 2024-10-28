@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class CampaignDraft(proto.Message):
     r"""A campaign draft.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -114,7 +115,9 @@ class CampaignDraft(proto.Message):
         number=12,
         optional=True,
     )
-    status: campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus = proto.Field(
+    status: (
+        campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=campaign_draft_status.CampaignDraftStatusEnum.CampaignDraftStatus,

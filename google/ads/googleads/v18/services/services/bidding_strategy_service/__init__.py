@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BiddingStrategyServiceClient
+from .async_client import BiddingStrategyServiceAsyncClient
 
-__all__ = ("BiddingStrategyServiceClient",)
+__all__ = (
+    "BiddingStrategyServiceClient",
+    "BiddingStrategyServiceAsyncClient",
+)

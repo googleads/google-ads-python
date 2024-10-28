@@ -35,7 +35,22 @@ class LocationOwnershipTypeEnum(proto.Message):
     """
 
     class LocationOwnershipType(proto.Enum):
-        r"""Possible types of a location ownership."""
+        r"""Possible types of a location ownership.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_OWNER (2):
+                Business Owner of location(legacy location
+                extension - LE).
+            AFFILIATE (3):
+                Affiliate location(Third party location
+                extension - ALE).
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_OWNER = 2

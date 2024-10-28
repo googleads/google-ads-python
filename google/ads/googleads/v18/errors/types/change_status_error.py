@@ -22,16 +22,41 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"ChangeStatusErrorEnum",},
+    manifest={
+        "ChangeStatusErrorEnum",
+    },
 )
 
 
 class ChangeStatusErrorEnum(proto.Message):
-    r"""Container for enum describing possible change status errors.
-    """
+    r"""Container for enum describing possible change status errors."""
 
     class ChangeStatusError(proto.Enum):
-        r"""Enum describing possible change status errors."""
+        r"""Enum describing possible change status errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            START_DATE_TOO_OLD (3):
+                The requested start date is too old.
+            CHANGE_DATE_RANGE_INFINITE (4):
+                The change_status search request must specify a finite range
+                filter on last_change_date_time.
+            CHANGE_DATE_RANGE_NEGATIVE (5):
+                The change status search request has
+                specified invalid date time filters that can
+                never logically produce any valid results (for
+                example, start time after end time).
+            LIMIT_NOT_SPECIFIED (6):
+                The change_status search request must specify a LIMIT.
+            INVALID_LIMIT_CLAUSE (7):
+                The LIMIT specified by change_status request should be less
+                than or equal to 10K.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         START_DATE_TOO_OLD = 3

@@ -70,21 +70,27 @@ class MutateExperimentsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["ExperimentOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ExperimentOperation",
+        proto.MESSAGE,
+        number=2,
+        message="ExperimentOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class ExperimentOperation(proto.Message):
     r"""A single operation on an experiment.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -115,7 +121,9 @@ class ExperimentOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_experiment.Experiment = proto.Field(
         proto.MESSAGE,
@@ -130,12 +138,15 @@ class ExperimentOperation(proto.Message):
         message=gagr_experiment.Experiment,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateExperimentsResponse(proto.Message):
     r"""Response message for experiment mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -148,22 +159,28 @@ class MutateExperimentsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateExperimentResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateExperimentResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateExperimentResult",
     )
 
 
 class MutateExperimentResult(proto.Message):
     r"""The result for the campaign experiment mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -181,10 +198,12 @@ class EndExperimentRequest(proto.Message):
     """
 
     experiment: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
@@ -210,13 +229,16 @@ class ListExperimentAsyncErrorsRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     page_size: int = proto.Field(
-        proto.INT32, number=3,
+        proto.INT32,
+        number=3,
     )
 
 
@@ -240,10 +262,13 @@ class ListExperimentAsyncErrorsResponse(proto.Message):
         return self
 
     errors: MutableSequence[status_pb2.Status] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     next_page_token: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -266,15 +291,19 @@ class GraduateExperimentRequest(proto.Message):
     """
 
     experiment: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    campaign_budget_mappings: MutableSequence[
-        "CampaignBudgetMapping"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignBudgetMapping",
+    campaign_budget_mappings: MutableSequence["CampaignBudgetMapping"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignBudgetMapping",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
@@ -292,10 +321,12 @@ class CampaignBudgetMapping(proto.Message):
     """
 
     experiment_campaign: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_budget: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -312,22 +343,26 @@ class ScheduleExperimentRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
 class ScheduleExperimentMetadata(proto.Message):
     r"""The metadata of the scheduled experiment.
+
     Attributes:
         experiment (str):
             Required. The scheduled experiment.
     """
 
     experiment: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -345,22 +380,26 @@ class PromoteExperimentRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
 class PromoteExperimentMetadata(proto.Message):
     r"""The metadata of the promoted experiment.
+
     Attributes:
         experiment (str):
             Required. The promoted experiment.
     """
 
     experiment: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

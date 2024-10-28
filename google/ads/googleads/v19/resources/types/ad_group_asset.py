@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAsset(proto.Message):
     r"""A link between an ad group and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the ad group asset.

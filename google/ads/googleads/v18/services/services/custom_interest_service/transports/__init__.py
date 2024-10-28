@@ -17,14 +17,18 @@ from collections import OrderedDict
 
 from .base import CustomInterestServiceTransport
 from .grpc import CustomInterestServiceGrpcTransport
+from .grpc_asyncio import CustomInterestServiceGrpcAsyncIOTransport
+
 
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()
 )  # type: Dict[str, Type[CustomInterestServiceTransport]]
 _transport_registry["grpc"] = CustomInterestServiceGrpcTransport
+_transport_registry["grpc_asyncio"] = CustomInterestServiceGrpcAsyncIOTransport
 
 __all__ = (
     "CustomInterestServiceTransport",
     "CustomInterestServiceGrpcTransport",
+    "CustomInterestServiceGrpcAsyncIOTransport",
 )

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"DeviceEnum",},
+    manifest={
+        "DeviceEnum",
+    },
 )
 
 
@@ -33,7 +35,25 @@ class DeviceEnum(proto.Message):
     """
 
     class Device(proto.Enum):
-        r"""Enumerates Google Ads devices available for targeting."""
+        r"""Enumerates Google Ads devices available for targeting.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            MOBILE (2):
+                Mobile devices with full browsers.
+            TABLET (3):
+                Tablets with full browsers.
+            DESKTOP (4):
+                Computers.
+            CONNECTED_TV (6):
+                Smart TVs and game consoles.
+            OTHER (5):
+                Other device types.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MOBILE = 2

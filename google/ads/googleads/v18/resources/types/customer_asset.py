@@ -32,12 +32,15 @@ from google.ads.googleads.v18.enums.types import asset_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerAsset",},
+    manifest={
+        "CustomerAsset",
+    },
 )
 
 
 class CustomerAsset(proto.Message):
     r"""A link between a customer and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer asset.
@@ -75,25 +78,33 @@ class CustomerAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     asset: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     source: asset_source.AssetSourceEnum.AssetSource = proto.Field(
-        proto.ENUM, number=5, enum=asset_source.AssetSourceEnum.AssetSource,
+        proto.ENUM,
+        number=5,
+        enum=asset_source.AssetSourceEnum.AssetSource,
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,
         number=4,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

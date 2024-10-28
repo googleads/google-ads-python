@@ -172,6 +172,7 @@ class MutateAssetGroupListingGroupFiltersResponse(proto.Message):
 
 class MutateAssetGroupListingGroupFilterResult(proto.Message):
     r"""The result for the asset group listing group filter mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

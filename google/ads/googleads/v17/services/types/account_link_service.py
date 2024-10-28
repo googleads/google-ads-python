@@ -121,6 +121,7 @@ class MutateAccountLinkRequest(proto.Message):
 
 class AccountLinkOperation(proto.Message):
     r"""A single update on an account link.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -166,6 +167,7 @@ class AccountLinkOperation(proto.Message):
 
 class MutateAccountLinkResponse(proto.Message):
     r"""Response message for account link mutate.
+
     Attributes:
         result (google.ads.googleads.v17.services.types.MutateAccountLinkResult):
             Result for the mutate.
@@ -191,6 +193,7 @@ class MutateAccountLinkResponse(proto.Message):
 
 class MutateAccountLinkResult(proto.Message):
     r"""The result for the account link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -56,6 +56,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesVerificationArtifact(proto.Message):
     r"""A local services verification resource.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -109,35 +110,47 @@ class LocalServicesVerificationArtifact(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     creation_date_time: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    status: local_services_verification_artifact_status.LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus = proto.Field(
+    status: (
+        local_services_verification_artifact_status.LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=local_services_verification_artifact_status.LocalServicesVerificationArtifactStatusEnum.LocalServicesVerificationArtifactStatus,
     )
-    artifact_type: local_services_verification_artifact_type.LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType = proto.Field(
+    artifact_type: (
+        local_services_verification_artifact_type.LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=local_services_verification_artifact_type.LocalServicesVerificationArtifactTypeEnum.LocalServicesVerificationArtifactType,
     )
-    background_check_verification_artifact: "BackgroundCheckVerificationArtifact" = proto.Field(
+    background_check_verification_artifact: (
+        "BackgroundCheckVerificationArtifact"
+    ) = proto.Field(
         proto.MESSAGE,
         number=6,
         oneof="artifact_data",
         message="BackgroundCheckVerificationArtifact",
     )
-    insurance_verification_artifact: "InsuranceVerificationArtifact" = proto.Field(
-        proto.MESSAGE,
-        number=7,
-        oneof="artifact_data",
-        message="InsuranceVerificationArtifact",
+    insurance_verification_artifact: "InsuranceVerificationArtifact" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=7,
+            oneof="artifact_data",
+            message="InsuranceVerificationArtifact",
+        )
     )
     license_verification_artifact: "LicenseVerificationArtifact" = proto.Field(
         proto.MESSAGE,
@@ -145,7 +158,9 @@ class LocalServicesVerificationArtifact(proto.Message):
         oneof="artifact_data",
         message="LicenseVerificationArtifact",
     )
-    business_registration_check_verification_artifact: "BusinessRegistrationCheckVerificationArtifact" = proto.Field(
+    business_registration_check_verification_artifact: (
+        "BusinessRegistrationCheckVerificationArtifact"
+    ) = proto.Field(
         proto.MESSAGE,
         number=9,
         oneof="artifact_data",
@@ -156,6 +171,7 @@ class LocalServicesVerificationArtifact(proto.Message):
 class BackgroundCheckVerificationArtifact(proto.Message):
     r"""A proto holding information specific to local services
     background check.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -175,16 +191,21 @@ class BackgroundCheckVerificationArtifact(proto.Message):
     """
 
     case_url: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     final_adjudication_date_time: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class InsuranceVerificationArtifact(proto.Message):
     r"""A proto holding information specific to a local services
     insurance.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -217,28 +238,37 @@ class InsuranceVerificationArtifact(proto.Message):
     """
 
     amount_micros: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
-    rejection_reason: local_services_insurance_rejection_reason.LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason = proto.Field(
+    rejection_reason: (
+        local_services_insurance_rejection_reason.LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         optional=True,
         enum=local_services_insurance_rejection_reason.LocalServicesInsuranceRejectionReasonEnum.LocalServicesInsuranceRejectionReason,
     )
-    insurance_document_readonly: local_services.LocalServicesDocumentReadOnly = proto.Field(
+    insurance_document_readonly: (
+        local_services.LocalServicesDocumentReadOnly
+    ) = proto.Field(
         proto.MESSAGE,
         number=3,
         optional=True,
         message=local_services.LocalServicesDocumentReadOnly,
     )
     expiration_date_time: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
 class LicenseVerificationArtifact(proto.Message):
     r"""A proto holding information specific to a local services
     license.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -279,31 +309,45 @@ class LicenseVerificationArtifact(proto.Message):
     """
 
     license_type: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     license_number: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     licensee_first_name: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     licensee_last_name: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    rejection_reason: local_services_license_rejection_reason.LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason = proto.Field(
+    rejection_reason: (
+        local_services_license_rejection_reason.LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         optional=True,
         enum=local_services_license_rejection_reason.LocalServicesLicenseRejectionReasonEnum.LocalServicesLicenseRejectionReason,
     )
-    license_document_readonly: local_services.LocalServicesDocumentReadOnly = proto.Field(
-        proto.MESSAGE,
-        number=6,
-        optional=True,
-        message=local_services.LocalServicesDocumentReadOnly,
+    license_document_readonly: local_services.LocalServicesDocumentReadOnly = (
+        proto.Field(
+            proto.MESSAGE,
+            number=6,
+            optional=True,
+            message=local_services.LocalServicesDocumentReadOnly,
+        )
     )
     expiration_date_time: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
 
 
@@ -346,16 +390,22 @@ class BusinessRegistrationCheckVerificationArtifact(proto.Message):
             This field is a member of `oneof`_ ``business_registration``.
     """
 
-    registration_type: local_services_business_registration_type.LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType = proto.Field(
+    registration_type: (
+        local_services_business_registration_type.LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         optional=True,
         enum=local_services_business_registration_type.LocalServicesBusinessRegistrationTypeEnum.LocalServicesBusinessRegistrationType,
     )
     check_id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    rejection_reason: local_services_business_registration_check_rejection_reason.LocalServicesBusinessRegistrationCheckRejectionReasonEnum.LocalServicesBusinessRegistrationCheckRejectionReason = proto.Field(
+    rejection_reason: (
+        local_services_business_registration_check_rejection_reason.LocalServicesBusinessRegistrationCheckRejectionReasonEnum.LocalServicesBusinessRegistrationCheckRejectionReason
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         optional=True,
@@ -379,6 +429,7 @@ class BusinessRegistrationNumber(proto.Message):
     r"""A proto holding information specific to a local services
     business registration number.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -390,13 +441,16 @@ class BusinessRegistrationNumber(proto.Message):
     """
 
     number: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class BusinessRegistrationDocument(proto.Message):
     r"""A proto holding information specific to a local services
     business registration document.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -409,11 +463,13 @@ class BusinessRegistrationDocument(proto.Message):
             This field is a member of `oneof`_ ``_document_readonly``.
     """
 
-    document_readonly: local_services.LocalServicesDocumentReadOnly = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        optional=True,
-        message=local_services.LocalServicesDocumentReadOnly,
+    document_readonly: local_services.LocalServicesDocumentReadOnly = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            optional=True,
+            message=local_services.LocalServicesDocumentReadOnly,
+        )
     )
 
 

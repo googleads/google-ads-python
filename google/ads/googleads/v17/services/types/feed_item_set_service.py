@@ -79,6 +79,7 @@ class MutateFeedItemSetsRequest(proto.Message):
 
 class FeedItemSetOperation(proto.Message):
     r"""A single operation (create, remove) on an feed item set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -134,6 +135,7 @@ class FeedItemSetOperation(proto.Message):
 
 class MutateFeedItemSetsResponse(proto.Message):
     r"""Response message for an feed item set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateFeedItemSetResult]):
             All results for the mutate.
@@ -159,6 +161,7 @@ class MutateFeedItemSetsResponse(proto.Message):
 
 class MutateFeedItemSetResult(proto.Message):
     r"""The result for the feed item set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

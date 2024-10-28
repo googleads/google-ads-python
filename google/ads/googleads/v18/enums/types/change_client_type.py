@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ChangeClientTypeEnum",},
+    manifest={
+        "ChangeClientTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,55 @@ class ChangeClientTypeEnum(proto.Message):
     """
 
     class ChangeClientType(proto.Enum):
-        r"""The source that the change_event resource was made through."""
+        r"""The source that the change_event resource was made through.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents an
+                unclassified client type unknown in this
+                version.
+            GOOGLE_ADS_WEB_CLIENT (2):
+                Changes made through the "ads.google.com".
+                For example, changes made through campaign
+                management.
+            GOOGLE_ADS_AUTOMATED_RULE (3):
+                Changes made through Google Ads automated
+                rules.
+            GOOGLE_ADS_SCRIPTS (4):
+                Changes made through Google Ads scripts.
+            GOOGLE_ADS_BULK_UPLOAD (5):
+                Changes made by Google Ads bulk upload.
+            GOOGLE_ADS_API (6):
+                Changes made by Google Ads API.
+            GOOGLE_ADS_EDITOR (7):
+                Changes made by Google Ads Editor. This value
+                is a placeholder. The API does not return these
+                changes.
+            GOOGLE_ADS_MOBILE_APP (8):
+                Changes made by Google Ads mobile app.
+            GOOGLE_ADS_RECOMMENDATIONS (9):
+                Changes made through Google Ads
+                recommendations.
+            SEARCH_ADS_360_SYNC (10):
+                Changes made through Search Ads 360 Sync.
+            SEARCH_ADS_360_POST (11):
+                Changes made through Search Ads 360 Post.
+            INTERNAL_TOOL (12):
+                Changes made through internal tools.
+                For example, when a user sets a URL template on
+                an entity like a Campaign, it's automatically
+                wrapped with the SA360 Clickserver URL.
+            OTHER (13):
+                Types of changes that are not categorized,
+                for example, changes made by coupon redemption
+                through Google Ads.
+            GOOGLE_ADS_RECOMMENDATIONS_SUBSCRIPTION (14):
+                Changes made by subscribing to Google Ads
+                recommendations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GOOGLE_ADS_WEB_CLIENT = 2

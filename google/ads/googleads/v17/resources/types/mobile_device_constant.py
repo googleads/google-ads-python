@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class MobileDeviceConstant(proto.Message):
     r"""A mobile device constant.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

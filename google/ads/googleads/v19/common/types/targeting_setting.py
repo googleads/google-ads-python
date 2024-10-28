@@ -72,6 +72,7 @@ class TargetingSetting(proto.Message):
 
 class TargetRestriction(proto.Message):
     r"""The list of per-targeting-dimension targeting settings.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -118,7 +119,21 @@ class TargetRestrictionOperation(proto.Message):
     """
 
     class Operator(proto.Enum):
-        r"""The operator."""
+        r"""The operator.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADD (2):
+                Add the restriction to the existing
+                restrictions.
+            REMOVE (3):
+                Remove the restriction from the existing
+                restrictions.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

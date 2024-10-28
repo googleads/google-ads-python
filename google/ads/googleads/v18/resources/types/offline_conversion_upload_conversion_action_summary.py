@@ -33,12 +33,15 @@ from google.ads.googleads.v18.resources.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineConversionUploadConversionActionSummary",},
+    manifest={
+        "OfflineConversionUploadConversionActionSummary",
+    },
 )
 
 
 class OfflineConversionUploadConversionActionSummary(proto.Message):
     r"""Offline conversion upload summary at conversion action level.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion
@@ -84,35 +87,46 @@ class OfflineConversionUploadConversionActionSummary(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    client: offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient = proto.Field(
+    client: (
+        offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient,
     )
     conversion_action_id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     conversion_action_name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    status: offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus = proto.Field(
+    status: (
+        offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus,
     )
     total_event_count: int = proto.Field(
-        proto.INT64, number=6,
+        proto.INT64,
+        number=6,
     )
     successful_event_count: int = proto.Field(
-        proto.INT64, number=7,
+        proto.INT64,
+        number=7,
     )
     pending_event_count: int = proto.Field(
-        proto.INT64, number=8,
+        proto.INT64,
+        number=8,
     )
     last_upload_date_time: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     daily_summaries: MutableSequence[
         offline_conversion_upload_client_summary.OfflineConversionSummary

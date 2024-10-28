@@ -37,7 +37,18 @@ class AdGroupCriterionCustomizerErrorEnum(proto.Message):
     class AdGroupCriterionCustomizerError(proto.Enum):
         r"""Enum describing possible ad group criterion customizer
         errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CRITERION_IS_NOT_KEYWORD (2):
+                Only keyword type criterion is allowed to
+                link customizer attribute.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CRITERION_IS_NOT_KEYWORD = 2

@@ -37,6 +37,24 @@ class GeoTargetConstantSuggestionErrorEnum(proto.Message):
     class GeoTargetConstantSuggestionError(proto.Enum):
         r"""Enum describing possible geo target constant suggestion
         errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            LOCATION_NAME_SIZE_LIMIT (2):
+                A location name cannot be greater than 300
+                characters.
+            LOCATION_NAME_LIMIT (3):
+                At most 25 location names can be specified in
+                a SuggestGeoTargetConstants method.
+            INVALID_COUNTRY_CODE (4):
+                The country code is invalid.
+            REQUEST_PARAMETERS_UNSET (5):
+                Geo target constant resource names or
+                location names must be provided in the request.
         """
 
         UNSPECIFIED = 0

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum",},
+    manifest={
+        "PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,24 @@ class PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum(proto.Message):
     class PolicyTopicEvidenceDestinationNotWorkingDnsErrorType(proto.Enum):
         r"""The possible policy topic evidence destination not working
         DNS error types.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            HOSTNAME_NOT_FOUND (2):
+                Host name not found in DNS when fetching
+                landing page.
+            GOOGLE_CRAWLER_DNS_ISSUE (3):
+                Google internal crawler issue when
+                communicating with DNS. This error doesn't mean
+                the landing page doesn't work. Google will
+                recrawl the landing page.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         HOSTNAME_NOT_FOUND = 2

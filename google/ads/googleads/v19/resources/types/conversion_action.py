@@ -47,6 +47,7 @@ __protobuf__ = proto.module(
 
 class ConversionAction(proto.Message):
     r"""A conversion action.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -186,6 +187,7 @@ class ConversionAction(proto.Message):
         r"""Settings related to the value for conversion events
         associated with this conversion action.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -234,6 +236,7 @@ class ConversionAction(proto.Message):
         r"""Settings related to a third party app analytics conversion
         action.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -259,6 +262,7 @@ class ConversionAction(proto.Message):
 
     class FirebaseSettings(proto.Message):
         r"""Settings related to a Firebase conversion action.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -301,6 +305,7 @@ class ConversionAction(proto.Message):
 
     class GoogleAnalytics4Settings(proto.Message):
         r"""Settings related to a Google Analytics 4 conversion action.
+
         Attributes:
             event_name (str):
                 Output only. The name of the GA 4 event.

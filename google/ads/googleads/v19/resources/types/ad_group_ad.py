@@ -50,6 +50,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAd(proto.Message):
     r"""An ad group ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -159,6 +160,7 @@ class AdGroupAd(proto.Message):
 
 class AdGroupAdPolicySummary(proto.Message):
     r"""Contains policy information for an ad.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v19.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for
@@ -197,6 +199,7 @@ class AdGroupAdPolicySummary(proto.Message):
 
 class AdGroupAdAssetAutomationSetting(proto.Message):
     r"""Asset automation setting for an AdGroupAd.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -80,7 +80,9 @@ class CustomerUserAccessInvitation(proto.Message):
         proto.STRING,
         number=5,
     )
-    invitation_status: access_invitation_status.AccessInvitationStatusEnum.AccessInvitationStatus = proto.Field(
+    invitation_status: (
+        access_invitation_status.AccessInvitationStatusEnum.AccessInvitationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=access_invitation_status.AccessInvitationStatusEnum.AccessInvitationStatus,

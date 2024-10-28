@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"PaymentsAccountErrorEnum",},
+    manifest={
+        "PaymentsAccountErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class PaymentsAccountErrorEnum(proto.Message):
     """
 
     class PaymentsAccountError(proto.Enum):
-        r"""Enum describing possible errors in payments account service."""
+        r"""Enum describing possible errors in payments account service.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NOT_SUPPORTED_FOR_MANAGER_CUSTOMER (2):
+                Manager customers are not supported for
+                payments account service.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_SUPPORTED_FOR_MANAGER_CUSTOMER = 2

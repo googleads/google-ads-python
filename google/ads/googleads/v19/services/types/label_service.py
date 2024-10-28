@@ -93,6 +93,7 @@ class MutateLabelsRequest(proto.Message):
 
 class LabelOperation(proto.Message):
     r"""A single operation (create, remove, update) on a label.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -149,6 +150,7 @@ class LabelOperation(proto.Message):
 
 class MutateLabelsResponse(proto.Message):
     r"""Response message for a labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -174,6 +176,7 @@ class MutateLabelsResponse(proto.Message):
 
 class MutateLabelResult(proto.Message):
     r"""The result for a label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

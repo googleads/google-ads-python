@@ -32,7 +32,22 @@ class SkAdNetworkUserTypeEnum(proto.Message):
     r"""Container for enumeration of SkAdNetwork user types."""
 
     class SkAdNetworkUserType(proto.Enum):
-        r"""Enumerates SkAdNetwork user types"""
+        r"""Enumerates SkAdNetwork user types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            UNAVAILABLE (2):
+                The value was not present in the postback or
+                we do not have this data for other reasons.
+            NEW_INSTALLER (3):
+                The user installed the app for the first
+                time.
+            REINSTALLER (4):
+                The user has previously installed the app.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

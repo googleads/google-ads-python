@@ -22,16 +22,28 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignKeywordMatchTypeEnum",},
+    manifest={
+        "CampaignKeywordMatchTypeEnum",
+    },
 )
 
 
 class CampaignKeywordMatchTypeEnum(proto.Message):
-    r"""Container for enum describing keyword match type.
-    """
+    r"""Container for enum describing keyword match type."""
 
     class CampaignKeywordMatchType(proto.Enum):
-        r"""Enum describing keyword match type of Campaign."""
+        r"""Enum describing keyword match type of Campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BROAD (2):
+                Campaign level broad match.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BROAD = 2

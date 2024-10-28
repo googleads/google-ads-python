@@ -100,29 +100,40 @@ class GenerateCreatorInsightsRequest(proto.Message):
 
     class YouTubeChannels(proto.Message):
         r"""A collection of YouTube Channels.
+
         Attributes:
             youtube_channels (MutableSequence[google.ads.googleads.v18.common.types.YouTubeChannelInfo]):
                 Optional. The YouTube Channel IDs to fetch
                 creator insights for.
         """
 
-        youtube_channels: MutableSequence[
-            criteria.YouTubeChannelInfo
-        ] = proto.RepeatedField(
-            proto.MESSAGE, number=1, message=criteria.YouTubeChannelInfo,
+        youtube_channels: MutableSequence[criteria.YouTubeChannelInfo] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=criteria.YouTubeChannelInfo,
+            )
         )
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     search_attributes: SearchAttributes = proto.Field(
-        proto.MESSAGE, number=3, oneof="criteria", message=SearchAttributes,
+        proto.MESSAGE,
+        number=3,
+        oneof="criteria",
+        message=SearchAttributes,
     )
     search_channels: YouTubeChannels = proto.Field(
-        proto.MESSAGE, number=4, oneof="criteria", message=YouTubeChannels,
+        proto.MESSAGE,
+        number=4,
+        oneof="criteria",
+        message=YouTubeChannels,
     )
 
 
@@ -137,15 +148,18 @@ class GenerateCreatorInsightsResponse(proto.Message):
             maintained by the YouTube Creator.
     """
 
-    creator_insights: MutableSequence[
-        "YouTubeCreatorInsights"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="YouTubeCreatorInsights",
+    creator_insights: MutableSequence["YouTubeCreatorInsights"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="YouTubeCreatorInsights",
+        )
     )
 
 
 class YouTubeCreatorInsights(proto.Message):
     r"""A YouTube creator and the insights for this creator.
+
     Attributes:
         creator_name (str):
             The name of the creator.
@@ -154,17 +168,21 @@ class YouTubeCreatorInsights(proto.Message):
     """
 
     creator_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    creator_channels: MutableSequence[
-        "YouTubeChannelInsights"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="YouTubeChannelInsights",
+    creator_channels: MutableSequence["YouTubeChannelInsights"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="YouTubeChannelInsights",
+        )
     )
 
 
 class YouTubeMetrics(proto.Message):
     r"""YouTube Channel metrics.
+
     Attributes:
         subscriber_count (int):
             The number of subscribers.
@@ -173,10 +191,12 @@ class YouTubeMetrics(proto.Message):
     """
 
     subscriber_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     views_count: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
 
 
@@ -206,13 +226,18 @@ class YouTubeChannelInsights(proto.Message):
     """
 
     display_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     youtube_channel: criteria.YouTubeChannelInfo = proto.Field(
-        proto.MESSAGE, number=2, message=criteria.YouTubeChannelInfo,
+        proto.MESSAGE,
+        number=2,
+        message=criteria.YouTubeChannelInfo,
     )
     channel_metrics: "YouTubeMetrics" = proto.Field(
-        proto.MESSAGE, number=3, message="YouTubeMetrics",
+        proto.MESSAGE,
+        number=3,
+        message="YouTubeMetrics",
     )
     channel_audience_demographics: MutableSequence[
         audience_insights_attribute.AudienceInsightsAttributeMetadata
@@ -229,7 +254,8 @@ class YouTubeChannelInsights(proto.Message):
         message=audience_insights_attribute.AudienceInsightsAttributeMetadata,
     )
     channel_type: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
 
 

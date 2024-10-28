@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemQualityApprovalStatusEnum",},
+    manifest={
+        "FeedItemQualityApprovalStatusEnum",
+    },
 )
 
 
@@ -35,7 +37,20 @@ class FeedItemQualityApprovalStatusEnum(proto.Message):
     class FeedItemQualityApprovalStatus(proto.Enum):
         r"""The possible quality evaluation approval statuses of a feed
         item.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APPROVED (2):
+                Meets all quality expectations.
+            DISAPPROVED (3):
+                Does not meet some quality expectations. The specific reason
+                is found in the quality_disapproval_reasons field.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         APPROVED = 2

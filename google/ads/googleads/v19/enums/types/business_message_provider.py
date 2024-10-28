@@ -32,7 +32,17 @@ class BusinessMessageProviderEnum(proto.Message):
     r"""Describes business message provider types."""
 
     class BusinessMessageProvider(proto.Enum):
-        r"""The possible value of business message provider types."""
+        r"""The possible value of business message provider types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            WHATSAPP (2):
+                WhatsApp message provider
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

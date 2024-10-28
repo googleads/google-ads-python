@@ -94,6 +94,7 @@ class MutateAdsRequest(proto.Message):
 
 class AdOperation(proto.Message):
     r"""A single update operation on an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -131,6 +132,7 @@ class AdOperation(proto.Message):
 
 class MutateAdsResponse(proto.Message):
     r"""Response message for an ad mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -156,6 +158,7 @@ class MutateAdsResponse(proto.Message):
 
 class MutateAdResult(proto.Message):
     r"""The result for the ad mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful

@@ -94,6 +94,7 @@ class SuggestTravelAssetsResponse(proto.Message):
 
 class HotelAssetSuggestion(proto.Message):
     r"""Message containing the asset suggestions for a hotel.
+
     Attributes:
         place_id (str):
             Google Places ID of the hotel.
@@ -153,6 +154,7 @@ class HotelAssetSuggestion(proto.Message):
 
 class HotelTextAsset(proto.Message):
     r"""A single text asset suggestion for a hotel.
+
     Attributes:
         text (str):
             Asset text in requested language.
@@ -176,6 +178,7 @@ class HotelTextAsset(proto.Message):
 
 class HotelImageAsset(proto.Message):
     r"""A single image asset suggestion for a hotel.
+
     Attributes:
         uri (str):
             URI for the image.

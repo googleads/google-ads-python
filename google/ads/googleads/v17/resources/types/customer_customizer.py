@@ -62,7 +62,9 @@ class CustomerCustomizer(proto.Message):
         proto.STRING,
         number=2,
     )
-    status: customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus = proto.Field(
+    status: (
+        customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus,

@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CampaignBudgetServiceClient
+from .async_client import CampaignBudgetServiceAsyncClient
 
-__all__ = ("CampaignBudgetServiceClient",)
+__all__ = (
+    "CampaignBudgetServiceClient",
+    "CampaignBudgetServiceAsyncClient",
+)

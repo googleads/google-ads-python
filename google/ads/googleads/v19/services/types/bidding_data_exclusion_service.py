@@ -155,6 +155,7 @@ class BiddingDataExclusionOperation(proto.Message):
 
 class MutateBiddingDataExclusionsResponse(proto.Message):
     r"""Response message for data exlusions mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -182,6 +183,7 @@ class MutateBiddingDataExclusionsResponse(proto.Message):
 
 class MutateBiddingDataExclusionsResult(proto.Message):
     r"""The result for the data exclusion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

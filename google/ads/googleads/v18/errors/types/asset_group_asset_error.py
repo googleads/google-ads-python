@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetGroupAssetErrorEnum",},
+    manifest={
+        "AssetGroupAssetErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,28 @@ class AssetGroupAssetErrorEnum(proto.Message):
     """
 
     class AssetGroupAssetError(proto.Enum):
-        r"""Enum describing possible asset group asset errors."""
+        r"""Enum describing possible asset group asset errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_RESOURCE (2):
+                Cannot add duplicated asset group asset.
+            EXPANDABLE_TAGS_NOT_ALLOWED_IN_DESCRIPTION (3):
+                Expandable tags are not allowed in
+                description assets.
+            AD_CUSTOMIZER_NOT_SUPPORTED (4):
+                Ad customizers are not supported in
+                assetgroup's text assets.
+            HOTEL_PROPERTY_ASSET_NOT_LINKED_TO_CAMPAIGN (5):
+                Cannot add a HotelPropertyAsset to an AssetGroup that isn't
+                linked to the parent campaign's hotel_property_asset_set
+                field.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_RESOURCE = 2

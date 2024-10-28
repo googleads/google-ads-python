@@ -37,7 +37,53 @@ class ChangeEventResourceTypeEnum(proto.Message):
     class ChangeEventResourceType(proto.Enum):
         r"""Enum listing the resource types support by the ChangeEvent
         resource.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents an
+                unclassified resource unknown in this version.
+            AD (2):
+                An Ad resource change.
+            AD_GROUP (3):
+                An AdGroup resource change.
+            AD_GROUP_CRITERION (4):
+                An AdGroupCriterion resource change.
+            CAMPAIGN (5):
+                A Campaign resource change.
+            CAMPAIGN_BUDGET (6):
+                A CampaignBudget resource change.
+            AD_GROUP_BID_MODIFIER (7):
+                An AdGroupBidModifier resource change.
+            CAMPAIGN_CRITERION (8):
+                A CampaignCriterion resource change.
+            FEED (9):
+                A Feed resource change.
+            FEED_ITEM (10):
+                A FeedItem resource change.
+            CAMPAIGN_FEED (11):
+                A CampaignFeed resource change.
+            AD_GROUP_FEED (12):
+                An AdGroupFeed resource change.
+            AD_GROUP_AD (13):
+                An AdGroupAd resource change.
+            ASSET (14):
+                An Asset resource change.
+            CUSTOMER_ASSET (15):
+                A CustomerAsset resource change.
+            CAMPAIGN_ASSET (16):
+                A CampaignAsset resource change.
+            AD_GROUP_ASSET (17):
+                An AdGroupAsset resource change.
+            ASSET_SET (18):
+                An AssetSet resource change.
+            ASSET_SET_ASSET (19):
+                An AssetSetAsset resource change.
+            CAMPAIGN_ASSET_SET (20):
+                A CampaignAssetSet resource change.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD = 2

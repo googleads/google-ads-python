@@ -32,7 +32,19 @@ class UserListFlexibleRuleOperatorEnum(proto.Message):
     r"""Logical operator connecting two rules."""
 
     class UserListFlexibleRuleOperator(proto.Enum):
-        r"""Enum describing possible user list combined rule operators."""
+        r"""Enum describing possible user list combined rule operators.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AND (2):
+                A AND B.
+            OR (3):
+                A OR B.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

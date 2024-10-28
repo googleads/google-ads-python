@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CustomizerAttributeServiceClient
+from .async_client import CustomizerAttributeServiceAsyncClient
 
-__all__ = ("CustomizerAttributeServiceClient",)
+__all__ = (
+    "CustomizerAttributeServiceClient",
+    "CustomizerAttributeServiceAsyncClient",
+)

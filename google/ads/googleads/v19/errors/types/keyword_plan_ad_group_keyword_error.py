@@ -37,6 +37,35 @@ class KeywordPlanAdGroupKeywordErrorEnum(proto.Message):
     class KeywordPlanAdGroupKeywordError(proto.Enum):
         r"""Enum describing possible errors from applying a keyword plan
         ad group keyword or keyword plan campaign keyword.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_KEYWORD_MATCH_TYPE (2):
+                A keyword or negative keyword has invalid
+                match type.
+            DUPLICATE_KEYWORD (3):
+                A keyword or negative keyword with same text
+                and match type already exists.
+            KEYWORD_TEXT_TOO_LONG (4):
+                Keyword or negative keyword text exceeds the
+                allowed limit.
+            KEYWORD_HAS_INVALID_CHARS (5):
+                Keyword or negative keyword text has invalid
+                characters or symbols.
+            KEYWORD_HAS_TOO_MANY_WORDS (6):
+                Keyword or negative keyword text has too many
+                words.
+            INVALID_KEYWORD_TEXT (7):
+                Keyword or negative keyword has invalid text.
+            NEGATIVE_KEYWORD_HAS_CPC_BID (8):
+                Cpc Bid set for negative keyword.
+            NEW_BMM_KEYWORDS_NOT_ALLOWED (9):
+                New broad match modifier (BMM)
+                KpAdGroupKeywords are not allowed.
         """
 
         UNSPECIFIED = 0

@@ -34,6 +34,7 @@ class CustomerLabel(proto.Message):
     it. Additional CustomerLabels may be returned by increasing
     permissions with login-customer-id.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

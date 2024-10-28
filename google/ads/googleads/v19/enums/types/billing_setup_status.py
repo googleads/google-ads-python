@@ -32,7 +32,27 @@ class BillingSetupStatusEnum(proto.Message):
     r"""Message describing BillingSetup statuses."""
 
     class BillingSetupStatus(proto.Enum):
-        r"""The possible statuses of a BillingSetup."""
+        r"""The possible statuses of a BillingSetup.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The billing setup is pending approval.
+            APPROVED_HELD (3):
+                The billing setup has been approved but the
+                corresponding first budget has not.  This can
+                only occur for billing setups configured for
+                monthly invoicing.
+            APPROVED (4):
+                The billing setup has been approved.
+            CANCELLED (5):
+                The billing setup was cancelled by the user
+                prior to approval.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -35,7 +35,25 @@ class ConversionValueRuleStatusEnum(proto.Message):
     """
 
     class ConversionValueRuleStatus(proto.Enum):
-        r"""Possible statuses of a conversion value rule."""
+        r"""Possible statuses of a conversion value rule.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Conversion Value Rule is enabled and can be
+                applied.
+            REMOVED (3):
+                Conversion Value Rule is permanently deleted
+                and can't be applied.
+            PAUSED (4):
+                Conversion Value Rule is paused, but can be
+                re-enabled.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -39,7 +39,120 @@ class CampaignPrimaryStatusReasonEnum(proto.Message):
         Provides insight into why a campaign is not serving or not
         serving optimally. These reasons are aggregated to determine an
         overall campaign primary status.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN_REMOVED (2):
+                The user-specified campaign status is
+                removed.
+            CAMPAIGN_PAUSED (3):
+                The user-specified campaign status is paused.
+            CAMPAIGN_PENDING (4):
+                The user-specified time for this campaign to
+                start is in the future.
+            CAMPAIGN_ENDED (5):
+                The user-specified time for this campaign to
+                end has passed.
+            CAMPAIGN_DRAFT (6):
+                The campaign is a draft.
+            BIDDING_STRATEGY_MISCONFIGURED (7):
+                The bidding strategy has incorrect
+                user-specified settings.
+            BIDDING_STRATEGY_LIMITED (8):
+                The bidding strategy is limited by
+                user-specified settings such as lack of data or
+                similar.
+            BIDDING_STRATEGY_LEARNING (9):
+                The automated bidding system is adjusting to
+                user-specified changes to the bidding strategy.
+            BIDDING_STRATEGY_CONSTRAINED (10):
+                Campaign could capture more conversion value
+                by adjusting CPA/ROAS targets.
+            BUDGET_CONSTRAINED (11):
+                The budget is limiting the campaign's ability
+                to serve.
+            BUDGET_MISCONFIGURED (12):
+                The budget has incorrect user-specified
+                settings.
+            SEARCH_VOLUME_LIMITED (13):
+                Campaign is not targeting all relevant
+                queries.
+            AD_GROUPS_PAUSED (14):
+                The user-specified ad group statuses are all
+                paused.
+            NO_AD_GROUPS (15):
+                No eligible ad groups exist in this campaign.
+            KEYWORDS_PAUSED (16):
+                The user-specified keyword statuses are all
+                paused.
+            NO_KEYWORDS (17):
+                No eligible keywords exist in this campaign.
+            AD_GROUP_ADS_PAUSED (18):
+                The user-specified ad group ad statuses are
+                all paused.
+            NO_AD_GROUP_ADS (19):
+                No eligible ad group ads exist in this
+                campaign.
+            HAS_ADS_LIMITED_BY_POLICY (20):
+                At least one ad in this campaign is limited
+                by policy.
+            HAS_ADS_DISAPPROVED (21):
+                At least one ad in this campaign is
+                disapproved.
+            MOST_ADS_UNDER_REVIEW (22):
+                Most ads in this campaign are pending review.
+            MISSING_LEAD_FORM_EXTENSION (23):
+                The campaign has a lead form goal, and the
+                lead form extension is missing.
+            MISSING_CALL_EXTENSION (24):
+                The campaign has a call goal, and the call
+                extension is missing.
+            LEAD_FORM_EXTENSION_UNDER_REVIEW (25):
+                The lead form extension is under review.
+            LEAD_FORM_EXTENSION_DISAPPROVED (26):
+                The lead extension is disapproved.
+            CALL_EXTENSION_UNDER_REVIEW (27):
+                The call extension is under review.
+            CALL_EXTENSION_DISAPPROVED (28):
+                The call extension is disapproved.
+            NO_MOBILE_APPLICATION_AD_GROUP_CRITERIA (29):
+                No eligible mobile application ad group
+                criteria exist in this campaign.
+            CAMPAIGN_GROUP_PAUSED (30):
+                The user-specified campaign group status is
+                paused.
+            CAMPAIGN_GROUP_ALL_GROUP_BUDGETS_ENDED (31):
+                The user-specified times of all group budgets
+                associated with the parent campaign group has
+                passed.
+            APP_NOT_RELEASED (32):
+                The app associated with this ACi campaign is
+                not released in the target countries of the
+                campaign.
+            APP_PARTIALLY_RELEASED (33):
+                The app associated with this ACi campaign is
+                partially released in the target countries of
+                the campaign.
+            HAS_ASSET_GROUPS_DISAPPROVED (34):
+                At least one asset group in this campaign is
+                disapproved.
+            HAS_ASSET_GROUPS_LIMITED_BY_POLICY (35):
+                At least one asset group in this campaign is
+                limited by policy.
+            MOST_ASSET_GROUPS_UNDER_REVIEW (36):
+                Most asset groups in this campaign are
+                pending review.
+            NO_ASSET_GROUPS (37):
+                No eligible asset groups exist in this
+                campaign.
+            ASSET_GROUPS_PAUSED (38):
+                All asset groups in this campaign are paused.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN_REMOVED = 2

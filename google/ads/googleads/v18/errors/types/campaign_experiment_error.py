@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignExperimentErrorEnum",},
+    manifest={
+        "CampaignExperimentErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,48 @@ class CampaignExperimentErrorEnum(proto.Message):
     """
 
     class CampaignExperimentError(proto.Enum):
-        r"""Enum describing possible campaign experiment errors."""
+        r"""Enum describing possible campaign experiment errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_NAME (2):
+                An active campaign or experiment with this
+                name already exists.
+            INVALID_TRANSITION (3):
+                Experiment cannot be updated from the current
+                state to the requested target state. For
+                example, an experiment can only graduate if its
+                status is ENABLED.
+            CANNOT_CREATE_EXPERIMENT_WITH_SHARED_BUDGET (4):
+                Cannot create an experiment from a campaign
+                using an explicitly shared budget.
+            CANNOT_CREATE_EXPERIMENT_FOR_REMOVED_BASE_CAMPAIGN (5):
+                Cannot create an experiment for a removed
+                base campaign.
+            CANNOT_CREATE_EXPERIMENT_FOR_NON_PROPOSED_DRAFT (6):
+                Cannot create an experiment from a draft,
+                which has a status other than proposed.
+            CUSTOMER_CANNOT_CREATE_EXPERIMENT (7):
+                This customer is not allowed to create an
+                experiment.
+            CAMPAIGN_CANNOT_CREATE_EXPERIMENT (8):
+                This campaign is not allowed to create an
+                experiment.
+            EXPERIMENT_DURATIONS_MUST_NOT_OVERLAP (9):
+                Trying to set an experiment duration which
+                overlaps with another experiment.
+            EXPERIMENT_DURATION_MUST_BE_WITHIN_CAMPAIGN_DURATION (10):
+                All non-removed experiments must start and
+                end within their campaign's duration.
+            CANNOT_MUTATE_EXPERIMENT_DUE_TO_STATUS (11):
+                The experiment cannot be modified because its
+                status is in a terminal state, such as REMOVED.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_NAME = 2

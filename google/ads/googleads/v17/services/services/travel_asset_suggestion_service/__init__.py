@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import TravelAssetSuggestionServiceClient
+from .async_client import TravelAssetSuggestionServiceAsyncClient
 
-__all__ = ("TravelAssetSuggestionServiceClient",)
+__all__ = (
+    "TravelAssetSuggestionServiceClient",
+    "TravelAssetSuggestionServiceAsyncClient",
+)

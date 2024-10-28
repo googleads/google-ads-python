@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemTargetDeviceEnum",},
+    manifest={
+        "FeedItemTargetDeviceEnum",
+    },
 )
 
 
@@ -33,7 +35,18 @@ class FeedItemTargetDeviceEnum(proto.Message):
     """
 
     class FeedItemTargetDevice(proto.Enum):
-        r"""Possible data types for a feed item target device."""
+        r"""Possible data types for a feed item target device.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MOBILE (2):
+                Mobile.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MOBILE = 2

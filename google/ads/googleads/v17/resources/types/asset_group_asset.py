@@ -116,7 +116,9 @@ class AssetGroupAsset(proto.Message):
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,
@@ -135,7 +137,9 @@ class AssetGroupAsset(proto.Message):
         number=10,
         message=asset_policy.AssetLinkPrimaryStatusDetails,
     )
-    performance_label: asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel = proto.Field(
+    performance_label: (
+        asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,

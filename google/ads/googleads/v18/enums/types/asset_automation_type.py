@@ -22,16 +22,40 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetAutomationTypeEnum",},
+    manifest={
+        "AssetAutomationTypeEnum",
+    },
 )
 
 
 class AssetAutomationTypeEnum(proto.Message):
-    r"""Container for enum describing the type of asset automation.
-    """
+    r"""Container for enum describing the type of asset automation."""
 
     class AssetAutomationType(proto.Enum):
-        r"""The type of asset automation."""
+        r"""The type of asset automation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used as a return value only. Represents value
+                unknown in this version.
+            TEXT_ASSET_AUTOMATION (2):
+                Text asset automation includes headlines and
+                descriptions. By default, advertisers are
+                opted-in for Performance Max and opted-out for
+                Search.
+            GENERATE_VERTICAL_YOUTUBE_VIDEOS (3):
+                Converts horizontal video assets to vertical
+                orientation using content-aware technology. By
+                default, advertisers are opted in for
+                DemandGenVideoResponsiveAd.
+            GENERATE_SHORTER_YOUTUBE_VIDEOS (4):
+                Shortens video assets to better capture user
+                attention using content-aware technology. By
+                default, advertisers are opted out.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TEXT_ASSET_AUTOMATION = 2

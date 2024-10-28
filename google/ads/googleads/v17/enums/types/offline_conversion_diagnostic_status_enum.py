@@ -32,7 +32,31 @@ class OfflineConversionDiagnosticStatusEnum(proto.Message):
     r"""All possible statuses for oci diagnostics."""
 
     class OfflineConversionDiagnosticStatus(proto.Enum):
-        r"""Possible statuses of the offline ingestion setup."""
+        r"""Possible statuses of the offline ingestion setup.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EXCELLENT (2):
+                Your offline data ingestion setup is active
+                and optimal for downstream processing.
+            GOOD (3):
+                Your offline ingestion setup is active, but
+                there are further improvements you could make.
+                See alerts.
+            NEEDS_ATTENTION (4):
+                Your offline ingestion setup is active, but
+                there are errors that require your attention.
+                See alerts.
+            NO_RECENT_UPLOAD (6):
+                Your offline ingestion setup has not received
+                data in the last 28 days, there may be something
+                wrong.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EXCELLENT = 2

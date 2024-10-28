@@ -70,12 +70,12 @@ class MutateSharedCriteriaRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "SharedCriterionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="SharedCriterionOperation",
+    operations: MutableSequence["SharedCriterionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="SharedCriterionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -85,7 +85,9 @@ class MutateSharedCriteriaRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -94,6 +96,7 @@ class MutateSharedCriteriaRequest(proto.Message):
 
 class SharedCriterionOperation(proto.Message):
     r"""A single operation (create, remove) on an shared criterion.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -131,6 +134,7 @@ class SharedCriterionOperation(proto.Message):
 
 class MutateSharedCriteriaResponse(proto.Message):
     r"""Response message for a shared criterion mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -147,17 +151,18 @@ class MutateSharedCriteriaResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateSharedCriterionResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateSharedCriterionResult",
+    results: MutableSequence["MutateSharedCriterionResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateSharedCriterionResult",
+        )
     )
 
 
 class MutateSharedCriterionResult(proto.Message):
     r"""The result for the shared criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

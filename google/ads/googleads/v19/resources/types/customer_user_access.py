@@ -34,6 +34,7 @@ class CustomerUserAccess(proto.Message):
     r"""Represents the permission of a single user onto a single
     customer.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -57,7 +57,9 @@ class CreateProductLinkInvitationRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    product_link_invitation: gagr_product_link_invitation.ProductLinkInvitation = proto.Field(
+    product_link_invitation: (
+        gagr_product_link_invitation.ProductLinkInvitation
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_product_link_invitation.ProductLinkInvitation,
@@ -66,6 +68,7 @@ class CreateProductLinkInvitationRequest(proto.Message):
 
 class CreateProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation create.
+
     Attributes:
         resource_name (str):
             Resource name of the product link invitation.
@@ -97,7 +100,9 @@ class UpdateProductLinkInvitationRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    product_link_invitation_status: gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus = proto.Field(
+    product_link_invitation_status: (
+        gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_product_link_invitation_status.ProductLinkInvitationStatusEnum.ProductLinkInvitationStatus,
@@ -110,6 +115,7 @@ class UpdateProductLinkInvitationRequest(proto.Message):
 
 class UpdateProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation update.
+
     Attributes:
         resource_name (str):
             Result of the update.
@@ -148,6 +154,7 @@ class RemoveProductLinkInvitationRequest(proto.Message):
 
 class RemoveProductLinkInvitationResponse(proto.Message):
     r"""Response message for product link invitation removeal.
+
     Attributes:
         resource_name (str):
             Result for the remove request.

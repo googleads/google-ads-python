@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import KeywordPlanAdGroupServiceClient
+from .async_client import KeywordPlanAdGroupServiceAsyncClient
 
-__all__ = ("KeywordPlanAdGroupServiceClient",)
+__all__ = (
+    "KeywordPlanAdGroupServiceClient",
+    "KeywordPlanAdGroupServiceAsyncClient",
+)

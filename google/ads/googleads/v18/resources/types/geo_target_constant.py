@@ -24,12 +24,15 @@ from google.ads.googleads.v18.enums.types import geo_target_constant_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"GeoTargetConstant",},
+    manifest={
+        "GeoTargetConstant",
+    },
 )
 
 
 class GeoTargetConstant(proto.Message):
     r"""A geo target constant.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -75,30 +78,45 @@ class GeoTargetConstant(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     target_type: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
-    status: geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus = proto.Field(
+    status: (
+        geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus,
     )
     canonical_name: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     parent_geo_target: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
 
 

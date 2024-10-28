@@ -52,18 +52,23 @@ class ConfigureCustomerLifecycleGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerLifecycleGoalOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="CustomerLifecycleGoalOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerLifecycleGoalOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
 class CustomerLifecycleGoalOperation(proto.Message):
     r"""A single operation on a customer lifecycle goal.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -88,7 +93,9 @@ class CustomerLifecycleGoalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     create: customer_lifecycle_goal.CustomerLifecycleGoal = proto.Field(
         proto.MESSAGE,
@@ -123,13 +130,15 @@ class ConfigureCustomerLifecycleGoalsResponse(proto.Message):
 
 class ConfigureCustomerLifecycleGoalsResult(proto.Message):
     r"""The result for the customer lifecycle goal configuration.
+
     Attributes:
         resource_name (str):
             Returned for the successful operation.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

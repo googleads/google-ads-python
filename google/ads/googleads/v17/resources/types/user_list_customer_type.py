@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class UserListCustomerType(proto.Message):
     r"""A user list customer type
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the user list customer type
@@ -56,7 +57,9 @@ class UserListCustomerType(proto.Message):
         proto.STRING,
         number=2,
     )
-    customer_type_category: user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory = proto.Field(
+    customer_type_category: (
+        user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory,

@@ -119,6 +119,7 @@ class AddOfflineUserDataJobOperationsRequest(proto.Message):
     r"""Request message for
     [OfflineUserDataJobService.AddOfflineUserDataJobOperations][google.ads.googleads.v19.services.OfflineUserDataJobService.AddOfflineUserDataJobOperations].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

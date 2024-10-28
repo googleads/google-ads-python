@@ -35,7 +35,25 @@ class RecommendationSubscriptionStatusEnum(proto.Message):
     """
 
     class RecommendationSubscriptionStatus(proto.Enum):
-        r"""Enum describing recommendation subscription statuses."""
+        r"""Enum describing recommendation subscription statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Output-only. Represents a format not yet
+                defined in this enum.
+            ENABLED (2):
+                A subscription in the enabled state will
+                automatically apply any recommendations of that
+                type.
+            PAUSED (3):
+                Recommendations of the relevant type will not
+                be automatically applied. Subscriptions cannot
+                be deleted. Once created, they can only move
+                between enabled and paused states.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

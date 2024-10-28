@@ -32,7 +32,22 @@ class ListingGroupTypeEnum(proto.Message):
     r"""Container for enum describing the type of the listing group."""
 
     class ListingGroupType(proto.Enum):
-        r"""The type of the listing group."""
+        r"""The type of the listing group.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SUBDIVISION (2):
+                Subdivision of products along some listing
+                dimension. These nodes are not used by serving
+                to target listing entries, but is purely to
+                define the structure of the tree.
+            UNIT (3):
+                Listing group unit that defines a bid.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

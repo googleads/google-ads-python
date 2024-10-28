@@ -37,6 +37,36 @@ class LocalServicesBusinessRegistrationCheckRejectionReasonEnum(proto.Message):
     class LocalServicesBusinessRegistrationCheckRejectionReason(proto.Enum):
         r"""Enums describing possible rejection reasons of a local
         services business registration check verification artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_NAME_MISMATCH (2):
+                Business name doesn't match business name for
+                the Local Services Ad.
+            BUSINESS_DETAILS_MISMATCH (3):
+                Business details mismatch.
+            ID_NOT_FOUND (4):
+                Business registration ID not found.
+            POOR_DOCUMENT_IMAGE_QUALITY (5):
+                Uploaded document not clear, blurry, etc.
+            DOCUMENT_EXPIRED (6):
+                Uploaded document has expired.
+            DOCUMENT_INVALID (7):
+                Document revoked or annuled.
+            DOCUMENT_TYPE_MISMATCH (8):
+                Document type mismatch.
+            DOCUMENT_UNVERIFIABLE (9):
+                Uploaded document could not be verified as
+                legitimate.
+            OTHER (10):
+                The business registration process could not
+                be completed due to an issue. Contact
+                https://support.google.com/localservices to
+                learn more.
         """
 
         UNSPECIFIED = 0

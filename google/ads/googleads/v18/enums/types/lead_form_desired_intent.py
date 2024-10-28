@@ -22,18 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LeadFormDesiredIntentEnum",},
+    manifest={
+        "LeadFormDesiredIntentEnum",
+    },
 )
 
 
 class LeadFormDesiredIntentEnum(proto.Message):
-    r"""Describes the chosen level of intent of generated leads.
-    """
+    r"""Describes the chosen level of intent of generated leads."""
 
     class LeadFormDesiredIntent(proto.Enum):
         r"""Enum describing the chosen level of intent of generated
         leads.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LOW_INTENT (2):
+                Deliver more leads at a potentially lower
+                quality.
+            HIGH_INTENT (3):
+                Deliver leads that are more qualified.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LOW_INTENT = 2

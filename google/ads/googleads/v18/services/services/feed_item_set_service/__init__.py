@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import FeedItemSetServiceClient
+from .async_client import FeedItemSetServiceAsyncClient
 
-__all__ = ("FeedItemSetServiceClient",)
+__all__ = (
+    "FeedItemSetServiceClient",
+    "FeedItemSetServiceAsyncClient",
+)

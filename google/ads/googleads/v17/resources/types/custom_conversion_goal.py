@@ -69,7 +69,9 @@ class CustomConversionGoal(proto.Message):
         proto.STRING,
         number=4,
     )
-    status: custom_conversion_goal_status.CustomConversionGoalStatusEnum.CustomConversionGoalStatus = proto.Field(
+    status: (
+        custom_conversion_goal_status.CustomConversionGoalStatusEnum.CustomConversionGoalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=custom_conversion_goal_status.CustomConversionGoalStatusEnum.CustomConversionGoalStatus,

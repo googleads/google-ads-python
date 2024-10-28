@@ -84,7 +84,9 @@ class MutateCampaignAssetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -151,6 +153,7 @@ class CampaignAssetOperation(proto.Message):
 
 class MutateCampaignAssetsResponse(proto.Message):
     r"""Response message for a campaign asset mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -176,6 +179,7 @@ class MutateCampaignAssetsResponse(proto.Message):
 
 class MutateCampaignAssetResult(proto.Message):
     r"""The result for the campaign asset mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

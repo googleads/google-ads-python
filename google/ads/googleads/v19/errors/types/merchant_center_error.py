@@ -35,7 +35,21 @@ class MerchantCenterErrorEnum(proto.Message):
     """
 
     class MerchantCenterError(proto.Enum):
-        r"""Enum describing Merchant Center errors."""
+        r"""Enum describing Merchant Center errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            MERCHANT_ID_CANNOT_BE_ACCESSED (2):
+                Merchant ID is either not found or not linked
+                to the Google Ads customer.
+            CUSTOMER_NOT_ALLOWED_FOR_SHOPPING_PERFORMANCE_MAX (3):
+                Customer not allowlisted for Shopping in
+                Performance Max Campaign.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

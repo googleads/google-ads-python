@@ -22,16 +22,36 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"SharedSetErrorEnum",},
+    manifest={
+        "SharedSetErrorEnum",
+    },
 )
 
 
 class SharedSetErrorEnum(proto.Message):
-    r"""Container for enum describing possible shared set errors.
-    """
+    r"""Container for enum describing possible shared set errors."""
 
     class SharedSetError(proto.Enum):
-        r"""Enum describing possible shared set errors."""
+        r"""Enum describing possible shared set errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CUSTOMER_CANNOT_CREATE_SHARED_SET_OF_THIS_TYPE (2):
+                The customer cannot create this type of
+                shared set.
+            DUPLICATE_NAME (3):
+                A shared set with this name already exists.
+            SHARED_SET_REMOVED (4):
+                Removed shared sets cannot be mutated.
+            SHARED_SET_IN_USE (5):
+                The shared set cannot be removed because it
+                is in use.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CUSTOMER_CANNOT_CREATE_SHARED_SET_OF_THIS_TYPE = 2

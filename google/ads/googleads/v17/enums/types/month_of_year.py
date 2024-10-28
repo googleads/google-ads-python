@@ -35,7 +35,39 @@ class MonthOfYearEnum(proto.Message):
     """
 
     class MonthOfYear(proto.Enum):
-        r"""Enumerates months of the year, for example, "January"."""
+        r"""Enumerates months of the year, for example, "January".
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            JANUARY (2):
+                January.
+            FEBRUARY (3):
+                February.
+            MARCH (4):
+                March.
+            APRIL (5):
+                April.
+            MAY (6):
+                May.
+            JUNE (7):
+                June.
+            JULY (8):
+                July.
+            AUGUST (9):
+                August.
+            SEPTEMBER (10):
+                September.
+            OCTOBER (11):
+                October.
+            NOVEMBER (12):
+                November.
+            DECEMBER (13):
+                December.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         JANUARY = 2

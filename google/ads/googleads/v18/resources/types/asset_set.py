@@ -26,7 +26,9 @@ from google.ads.googleads.v18.enums.types import asset_set_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetSet",},
+    manifest={
+        "AssetSet",
+    },
 )
 
 
@@ -95,6 +97,7 @@ class AssetSet(proto.Message):
 
     class MerchantCenterFeed(proto.Message):
         r"""Merchant ID and Feed Label from Google Merchant Center.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -109,15 +112,19 @@ class AssetSet(proto.Message):
         """
 
         merchant_id: int = proto.Field(
-            proto.INT64, number=1,
+            proto.INT64,
+            number=1,
         )
         feed_label: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     class HotelPropertyData(proto.Message):
         r"""For Performance Max for travel goals campaigns with a Hotel
         Center account link. Read-only.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -134,23 +141,32 @@ class AssetSet(proto.Message):
         """
 
         hotel_center_id: int = proto.Field(
-            proto.INT64, number=1, optional=True,
+            proto.INT64,
+            number=1,
+            optional=True,
         )
         partner_name: str = proto.Field(
-            proto.STRING, number=2, optional=True,
+            proto.STRING,
+            number=2,
+            optional=True,
         )
 
     id: int = proto.Field(
-        proto.INT64, number=6,
+        proto.INT64,
+        number=6,
     )
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     type_: asset_set_type.AssetSetTypeEnum.AssetSetType = proto.Field(
-        proto.ENUM, number=3, enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
+        proto.ENUM,
+        number=3,
+        enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
     )
     status: asset_set_status.AssetSetStatusEnum.AssetSetStatus = proto.Field(
         proto.ENUM,
@@ -158,13 +174,18 @@ class AssetSet(proto.Message):
         enum=asset_set_status.AssetSetStatusEnum.AssetSetStatus,
     )
     merchant_center_feed: MerchantCenterFeed = proto.Field(
-        proto.MESSAGE, number=5, message=MerchantCenterFeed,
+        proto.MESSAGE,
+        number=5,
+        message=MerchantCenterFeed,
     )
     location_group_parent_asset_set_id: int = proto.Field(
-        proto.INT64, number=10,
+        proto.INT64,
+        number=10,
     )
     hotel_property_data: HotelPropertyData = proto.Field(
-        proto.MESSAGE, number=11, message=HotelPropertyData,
+        proto.MESSAGE,
+        number=11,
+        message=HotelPropertyData,
     )
     location_set: asset_set_types.LocationSet = proto.Field(
         proto.MESSAGE,
@@ -172,7 +193,9 @@ class AssetSet(proto.Message):
         oneof="asset_set_source",
         message=asset_set_types.LocationSet,
     )
-    business_profile_location_group: asset_set_types.BusinessProfileLocationGroup = proto.Field(
+    business_profile_location_group: (
+        asset_set_types.BusinessProfileLocationGroup
+    ) = proto.Field(
         proto.MESSAGE,
         number=8,
         oneof="asset_set_source",

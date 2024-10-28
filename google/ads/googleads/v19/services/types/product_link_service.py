@@ -108,6 +108,7 @@ class RemoveProductLinkRequest(proto.Message):
 
 class RemoveProductLinkResponse(proto.Message):
     r"""Response message for product link removal.
+
     Attributes:
         resource_name (str):
             Result for the remove request.

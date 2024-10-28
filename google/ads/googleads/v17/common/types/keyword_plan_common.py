@@ -53,6 +53,7 @@ class KeywordPlanHistoricalMetrics(proto.Message):
     https://support.google.com/google-ads/answer/3022575 for more
     details.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -97,14 +98,16 @@ class KeywordPlanHistoricalMetrics(proto.Message):
         number=7,
         optional=True,
     )
-    monthly_search_volumes: MutableSequence[
-        "MonthlySearchVolume"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message="MonthlySearchVolume",
+    monthly_search_volumes: MutableSequence["MonthlySearchVolume"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message="MonthlySearchVolume",
+        )
     )
-    competition: keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel = proto.Field(
+    competition: (
+        keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=keyword_plan_competition_level.KeywordPlanCompetitionLevelEnum.KeywordPlanCompetitionLevel,
@@ -133,6 +136,7 @@ class KeywordPlanHistoricalMetrics(proto.Message):
 
 class HistoricalMetricsOptions(proto.Message):
     r"""Historical metrics options.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -165,6 +169,7 @@ class HistoricalMetricsOptions(proto.Message):
 
 class MonthlySearchVolume(proto.Message):
     r"""Monthly search volume.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -202,6 +207,7 @@ class MonthlySearchVolume(proto.Message):
 
 class KeywordPlanAggregateMetrics(proto.Message):
     r"""The aggregate metrics specification of the request.
+
     Attributes:
         aggregate_metric_types (MutableSequence[google.ads.googleads.v17.enums.types.KeywordPlanAggregateMetricTypeEnum.KeywordPlanAggregateMetricType]):
             The list of aggregate metrics to fetch data.
@@ -218,6 +224,7 @@ class KeywordPlanAggregateMetrics(proto.Message):
 
 class KeywordPlanAggregateMetricResults(proto.Message):
     r"""The aggregated historical metrics for keyword plan keywords.
+
     Attributes:
         device_searches (MutableSequence[google.ads.googleads.v17.common.types.KeywordPlanDeviceSearches]):
             The aggregate searches for all the keywords
@@ -231,18 +238,19 @@ class KeywordPlanAggregateMetricResults(proto.Message):
             request.
     """
 
-    device_searches: MutableSequence[
-        "KeywordPlanDeviceSearches"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="KeywordPlanDeviceSearches",
+    device_searches: MutableSequence["KeywordPlanDeviceSearches"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="KeywordPlanDeviceSearches",
+        )
     )
 
 
 class KeywordPlanDeviceSearches(proto.Message):
     r"""The total searches for the device type during the specified
     time period.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -269,6 +277,7 @@ class KeywordPlanDeviceSearches(proto.Message):
 
 class KeywordAnnotations(proto.Message):
     r"""The annotations for the keyword plan keywords.
+
     Attributes:
         concepts (MutableSequence[google.ads.googleads.v17.common.types.KeywordConcept]):
             The list of concepts for the keyword.
@@ -283,6 +292,7 @@ class KeywordAnnotations(proto.Message):
 
 class KeywordConcept(proto.Message):
     r"""The concept for the keyword.
+
     Attributes:
         name (str):
             The concept name for the keyword in the concept_group.
@@ -303,6 +313,7 @@ class KeywordConcept(proto.Message):
 
 class ConceptGroup(proto.Message):
     r"""The concept group for the keyword concept.
+
     Attributes:
         name (str):
             The concept group name.
@@ -314,7 +325,9 @@ class ConceptGroup(proto.Message):
         proto.STRING,
         number=1,
     )
-    type_: keyword_plan_concept_group_type.KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType = proto.Field(
+    type_: (
+        keyword_plan_concept_group_type.KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=keyword_plan_concept_group_type.KeywordPlanConceptGroupTypeEnum.KeywordPlanConceptGroupType,

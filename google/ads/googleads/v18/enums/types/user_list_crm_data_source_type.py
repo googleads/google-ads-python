@@ -22,16 +22,34 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListCrmDataSourceTypeEnum",},
+    manifest={
+        "UserListCrmDataSourceTypeEnum",
+    },
 )
 
 
 class UserListCrmDataSourceTypeEnum(proto.Message):
-    r"""Indicates source of Crm upload data.
-    """
+    r"""Indicates source of Crm upload data."""
 
     class UserListCrmDataSourceType(proto.Enum):
-        r"""Enum describing possible user list crm data source type."""
+        r"""Enum describing possible user list crm data source type.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            FIRST_PARTY (2):
+                The uploaded data is first-party data.
+            THIRD_PARTY_CREDIT_BUREAU (3):
+                The uploaded data is from a third-party
+                credit bureau.
+            THIRD_PARTY_VOTER_FILE (4):
+                The uploaded data is from a third-party voter
+                file.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         FIRST_PARTY = 2

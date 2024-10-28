@@ -56,6 +56,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesVerificationArtifact(proto.Message):
     r"""A local services verification resource.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -171,6 +172,7 @@ class BackgroundCheckVerificationArtifact(proto.Message):
     r"""A proto holding information specific to local services
     background check.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -203,6 +205,7 @@ class BackgroundCheckVerificationArtifact(proto.Message):
 class InsuranceVerificationArtifact(proto.Message):
     r"""A proto holding information specific to a local services
     insurance.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -265,6 +268,7 @@ class InsuranceVerificationArtifact(proto.Message):
 class LicenseVerificationArtifact(proto.Message):
     r"""A proto holding information specific to a local services
     license.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -425,6 +429,7 @@ class BusinessRegistrationNumber(proto.Message):
     r"""A proto holding information specific to a local services
     business registration number.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -445,6 +450,7 @@ class BusinessRegistrationNumber(proto.Message):
 class BusinessRegistrationDocument(proto.Message):
     r"""A proto holding information specific to a local services
     business registration document.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

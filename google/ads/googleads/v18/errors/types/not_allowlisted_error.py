@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"NotAllowlistedErrorEnum",},
+    manifest={
+        "NotAllowlistedErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class NotAllowlistedErrorEnum(proto.Message):
     """
 
     class NotAllowlistedError(proto.Enum):
-        r"""Enum describing possible not allowlisted errors."""
+        r"""Enum describing possible not allowlisted errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE (2):
+                Customer is not allowlisted for accessing
+                this feature.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CUSTOMER_NOT_ALLOWLISTED_FOR_THIS_FEATURE = 2

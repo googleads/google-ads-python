@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PromotionExtensionDiscountModifierEnum",},
+    manifest={
+        "PromotionExtensionDiscountModifierEnum",
+    },
 )
 
 
@@ -33,7 +35,18 @@ class PromotionExtensionDiscountModifierEnum(proto.Message):
     """
 
     class PromotionExtensionDiscountModifier(proto.Enum):
-        r"""A promotion extension discount modifier."""
+        r"""A promotion extension discount modifier.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            UP_TO (2):
+                'Up to'.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UP_TO = 2

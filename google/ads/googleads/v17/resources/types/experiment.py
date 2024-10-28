@@ -39,6 +39,7 @@ class Experiment(proto.Message):
     multiple campaigns, compare the performance, and apply the
     effective changes.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -172,7 +173,9 @@ class Experiment(proto.Message):
         number=18,
         optional=True,
     )
-    promote_status: async_action_status.AsyncActionStatusEnum.AsyncActionStatus = proto.Field(
+    promote_status: (
+        async_action_status.AsyncActionStatusEnum.AsyncActionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=19,
         enum=async_action_status.AsyncActionStatusEnum.AsyncActionStatus,

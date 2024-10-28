@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class ConversionGoalCampaignConfig(proto.Message):
     r"""Conversion goal settings for a Campaign.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion goal campaign

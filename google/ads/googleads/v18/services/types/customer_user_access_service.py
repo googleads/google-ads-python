@@ -48,15 +48,19 @@ class MutateCustomerUserAccessRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerUserAccessOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="CustomerUserAccessOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CustomerUserAccessOperation",
     )
 
 
 class CustomerUserAccessOperation(proto.Message):
     r"""A single operation (update, remove) on customer user access.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -83,7 +87,9 @@ class CustomerUserAccessOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=3, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=3,
+        message=field_mask_pb2.FieldMask,
     )
     update: customer_user_access.CustomerUserAccess = proto.Field(
         proto.MESSAGE,
@@ -92,31 +98,38 @@ class CustomerUserAccessOperation(proto.Message):
         message=customer_user_access.CustomerUserAccess,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateCustomerUserAccessResponse(proto.Message):
     r"""Response message for customer user access mutate.
+
     Attributes:
         result (google.ads.googleads.v18.services.types.MutateCustomerUserAccessResult):
             Result for the mutate.
     """
 
     result: "MutateCustomerUserAccessResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateCustomerUserAccessResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateCustomerUserAccessResult",
     )
 
 
 class MutateCustomerUserAccessResult(proto.Message):
     r"""The result for the customer user access mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

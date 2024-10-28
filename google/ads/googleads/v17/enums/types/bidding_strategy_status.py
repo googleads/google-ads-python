@@ -32,7 +32,21 @@ class BiddingStrategyStatusEnum(proto.Message):
     r"""Message describing BiddingStrategy statuses."""
 
     class BiddingStrategyStatus(proto.Enum):
-        r"""The possible statuses of a BiddingStrategy."""
+        r"""The possible statuses of a BiddingStrategy.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The bidding strategy is enabled.
+            REMOVED (4):
+                The bidding strategy is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -118,6 +118,7 @@ class CustomerLabelOperation(proto.Message):
 
 class MutateCustomerLabelsResponse(proto.Message):
     r"""Response message for a customer labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -143,6 +144,7 @@ class MutateCustomerLabelsResponse(proto.Message):
 
 class MutateCustomerLabelResult(proto.Message):
     r"""The result for a customer label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

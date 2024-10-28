@@ -32,7 +32,22 @@ class DisplayAdFormatSettingEnum(proto.Message):
     r"""Container for display ad format settings."""
 
     class DisplayAdFormatSetting(proto.Enum):
-        r"""Enumerates display ad format settings."""
+        r"""Enumerates display ad format settings.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            ALL_FORMATS (2):
+                Text, image and native formats.
+            NON_NATIVE (3):
+                Text and image formats.
+            NATIVE (4):
+                Native format, for example, the format
+                rendering is controlled by the publisher and not
+                by Google.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

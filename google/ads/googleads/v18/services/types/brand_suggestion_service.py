@@ -37,6 +37,7 @@ class SuggestBrandsRequest(proto.Message):
     r"""Request message for
     [BrandSuggestionService.SuggestBrands][google.ads.googleads.v18.services.BrandSuggestionService.SuggestBrands].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -55,13 +56,17 @@ class SuggestBrandsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     brand_prefix: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     selected_brands: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -76,12 +81,15 @@ class SuggestBrandsResponse(proto.Message):
     """
 
     brands: MutableSequence["BrandSuggestion"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="BrandSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="BrandSuggestion",
     )
 
 
 class BrandSuggestion(proto.Message):
     r"""Information of brand suggestion.
+
     Attributes:
         id (str):
             Id for the brand. It would be CKG MID for
@@ -95,16 +103,21 @@ class BrandSuggestion(proto.Message):
     """
 
     id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     state: brand_state.BrandStateEnum.BrandState = proto.Field(
-        proto.ENUM, number=4, enum=brand_state.BrandStateEnum.BrandState,
+        proto.ENUM,
+        number=4,
+        enum=brand_state.BrandStateEnum.BrandState,
     )
 
 

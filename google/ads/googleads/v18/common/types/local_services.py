@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesDocumentReadOnly",},
+    manifest={
+        "LocalServicesDocumentReadOnly",
+    },
 )
 
 
 class LocalServicesDocumentReadOnly(proto.Message):
     r"""A Local Services Document with read only accessible data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -39,7 +42,9 @@ class LocalServicesDocumentReadOnly(proto.Message):
     """
 
     document_url: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

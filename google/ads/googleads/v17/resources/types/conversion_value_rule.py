@@ -38,6 +38,7 @@ __protobuf__ = proto.module(
 
 class ConversionValueRule(proto.Message):
     r"""A conversion value rule
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion value rule.
@@ -71,6 +72,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAction(proto.Message):
         r"""Action applied when rule is applied.
+
         Attributes:
             operation (google.ads.googleads.v17.enums.types.ValueRuleOperationEnum.ValueRuleOperation):
                 Specifies applied operation.
@@ -78,7 +80,9 @@ class ConversionValueRule(proto.Message):
                 Specifies applied value.
         """
 
-        operation: value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation = proto.Field(
+        operation: (
+            value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation,
@@ -90,6 +94,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleGeoLocationCondition(proto.Message):
         r"""Condition on Geo dimension.
+
         Attributes:
             excluded_geo_target_constants (MutableSequence[str]):
                 Geo locations that advertisers want to
@@ -103,13 +108,15 @@ class ConversionValueRule(proto.Message):
                 Included Geo location match type.
         """
 
-        excluded_geo_target_constants: MutableSequence[
-            str
-        ] = proto.RepeatedField(
-            proto.STRING,
-            number=1,
+        excluded_geo_target_constants: MutableSequence[str] = (
+            proto.RepeatedField(
+                proto.STRING,
+                number=1,
+            )
         )
-        excluded_geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
+        excluded_geo_match_type: (
+            value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
@@ -118,7 +125,9 @@ class ConversionValueRule(proto.Message):
             proto.STRING,
             number=3,
         )
-        geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
+        geo_match_type: (
+            value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+        ) = proto.Field(
             proto.ENUM,
             number=4,
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
@@ -126,6 +135,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleDeviceCondition(proto.Message):
         r"""Condition on Device dimension.
+
         Attributes:
             device_types (MutableSequence[google.ads.googleads.v17.enums.types.ValueRuleDeviceTypeEnum.ValueRuleDeviceType]):
                 Value for device type condition.
@@ -141,6 +151,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAudienceCondition(proto.Message):
         r"""Condition on Audience dimension.
+
         Attributes:
             user_lists (MutableSequence[str]):
                 User Lists.
@@ -189,7 +200,9 @@ class ConversionValueRule(proto.Message):
         proto.STRING,
         number=7,
     )
-    status: conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus = proto.Field(
+    status: (
+        conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus,

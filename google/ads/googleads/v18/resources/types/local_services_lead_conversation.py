@@ -43,6 +43,7 @@ class LocalServicesLeadConversation(proto.Message):
     appended to a Lead. More info:
     https://ads.google.com/local-services-ads
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -82,37 +83,52 @@ class LocalServicesLeadConversation(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
-    conversation_channel: local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType = proto.Field(
+    conversation_channel: (
+        local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=local_services_conversation_type.LocalServicesLeadConversationTypeEnum.ConversationType,
     )
-    participant_type: local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType = proto.Field(
+    participant_type: (
+        local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=local_services_participant_type.LocalServicesParticipantTypeEnum.ParticipantType,
     )
     lead: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     event_date_time: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     phone_call_details: "PhoneCallDetails" = proto.Field(
-        proto.MESSAGE, number=7, optional=True, message="PhoneCallDetails",
+        proto.MESSAGE,
+        number=7,
+        optional=True,
+        message="PhoneCallDetails",
     )
     message_details: "MessageDetails" = proto.Field(
-        proto.MESSAGE, number=8, optional=True, message="MessageDetails",
+        proto.MESSAGE,
+        number=8,
+        optional=True,
+        message="MessageDetails",
     )
 
 
 class PhoneCallDetails(proto.Message):
     r"""Represents details of a phone call conversation.
+
     Attributes:
         call_duration_millis (int):
             Output only. The duration (in milliseconds)
@@ -123,10 +139,12 @@ class PhoneCallDetails(proto.Message):
     """
 
     call_duration_millis: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
     call_recording_url: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
@@ -145,10 +163,12 @@ class MessageDetails(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     attachment_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

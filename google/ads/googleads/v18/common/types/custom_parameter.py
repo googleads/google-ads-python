@@ -22,13 +22,16 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomParameter",},
+    manifest={
+        "CustomParameter",
+    },
 )
 
 
 class CustomParameter(proto.Message):
     r"""A mapping that can be used by custom parameter tags in a
     ``tracking_url_template``, ``final_urls``, or ``mobile_final_urls``.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -44,10 +47,14 @@ class CustomParameter(proto.Message):
     """
 
     key: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     value: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 

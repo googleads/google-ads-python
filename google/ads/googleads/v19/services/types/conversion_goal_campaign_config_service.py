@@ -88,6 +88,7 @@ class ConversionGoalCampaignConfigOperation(proto.Message):
     r"""A single operation (update) on a conversion goal campaign
     config.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -137,6 +138,7 @@ class MutateConversionGoalCampaignConfigsResponse(proto.Message):
 
 class MutateConversionGoalCampaignConfigResult(proto.Message):
     r"""The result for the conversion goal campaign config mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

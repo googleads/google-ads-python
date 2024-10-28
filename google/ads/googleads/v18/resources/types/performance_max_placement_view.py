@@ -26,13 +26,16 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"PerformanceMaxPlacementView",},
+    manifest={
+        "PerformanceMaxPlacementView",
+    },
 )
 
 
 class PerformanceMaxPlacementView(proto.Message):
     r"""A view with impression metrics for Performance Max campaign
     placements.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -69,21 +72,30 @@ class PerformanceMaxPlacementView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     placement: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     target_url: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+        )
     )
 
 

@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class CampaignCriterion(proto.Message):
     r"""A campaign criterion.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

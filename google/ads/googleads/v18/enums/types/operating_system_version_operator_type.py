@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OperatingSystemVersionOperatorTypeEnum",},
+    manifest={
+        "OperatingSystemVersionOperatorTypeEnum",
+    },
 )
 
 
 class OperatingSystemVersionOperatorTypeEnum(proto.Message):
-    r"""Container for enum describing the type of OS operators.
-    """
+    r"""Container for enum describing the type of OS operators."""
 
     class OperatingSystemVersionOperatorType(proto.Enum):
-        r"""The type of operating system version."""
+        r"""The type of operating system version.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EQUALS_TO (2):
+                Equals to the specified version.
+            GREATER_THAN_EQUALS_TO (4):
+                Greater than or equals to the specified
+                version.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EQUALS_TO = 2

@@ -35,7 +35,24 @@ class ProductStatusEnum(proto.Message):
     """
 
     class ProductStatus(proto.Enum):
-        r"""Enum describing the status of a product."""
+        r"""Enum describing the status of a product.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents values
+                unknown in this version.
+            NOT_ELIGIBLE (2):
+                The product cannot show in ads.
+            ELIGIBLE_LIMITED (3):
+                The product can show in ads but may be
+                limited in where and when it can show due to
+                identified issues.
+            ELIGIBLE (4):
+                The product can show in ads.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_ELIGIBLE = 2

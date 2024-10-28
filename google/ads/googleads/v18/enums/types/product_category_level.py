@@ -22,16 +22,36 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductCategoryLevelEnum",},
+    manifest={
+        "ProductCategoryLevelEnum",
+    },
 )
 
 
 class ProductCategoryLevelEnum(proto.Message):
-    r"""Level of a product category.
-    """
+    r"""Level of a product category."""
 
     class ProductCategoryLevel(proto.Enum):
-        r"""Enum describing the level of the product category."""
+        r"""Enum describing the level of the product category.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LEVEL1 (2):
+                Level 1.
+            LEVEL2 (3):
+                Level 2.
+            LEVEL3 (4):
+                Level 3.
+            LEVEL4 (5):
+                Level 4.
+            LEVEL5 (6):
+                Level 5.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LEVEL1 = 2

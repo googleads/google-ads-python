@@ -58,18 +58,23 @@ class MutateFeedItemSetLinksRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "FeedItemSetLinkOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedItemSetLinkOperation",
+    operations: MutableSequence["FeedItemSetLinkOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="FeedItemSetLinkOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -106,12 +111,15 @@ class FeedItemSetLinkOperation(proto.Message):
         message=feed_item_set_link.FeedItemSetLink,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateFeedItemSetLinksResponse(proto.Message):
     r"""Response message for a feed item set link mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateFeedItemSetLinkResult]):
             All results for the mutate.
@@ -123,25 +131,31 @@ class MutateFeedItemSetLinksResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateFeedItemSetLinkResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateFeedItemSetLinkResult",
+    results: MutableSequence["MutateFeedItemSetLinkResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateFeedItemSetLinkResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class MutateFeedItemSetLinkResult(proto.Message):
     r"""The result for the feed item set link mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

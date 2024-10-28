@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AccountBudgetProposalServiceClient
+from .async_client import AccountBudgetProposalServiceAsyncClient
 
-__all__ = ("AccountBudgetProposalServiceClient",)
+__all__ = (
+    "AccountBudgetProposalServiceClient",
+    "AccountBudgetProposalServiceAsyncClient",
+)

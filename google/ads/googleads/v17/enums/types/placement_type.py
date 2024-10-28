@@ -32,7 +32,34 @@ class PlacementTypeEnum(proto.Message):
     r"""Container for enum describing possible placement types."""
 
     class PlacementType(proto.Enum):
-        r"""Possible placement types for a feed mapping."""
+        r"""Possible placement types for a feed mapping.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            WEBSITE (2):
+                Websites(for example,
+                'www.flowers4sale.com').
+            MOBILE_APP_CATEGORY (3):
+                Mobile application categories(for example,
+                'Games').
+            MOBILE_APPLICATION (4):
+                mobile applications(for example,
+                'mobileapp::2-com.whatsthewordanswers').
+            YOUTUBE_VIDEO (5):
+                YouTube videos(for example,
+                'youtube.com/video/wtLJPvx7-ys').
+            YOUTUBE_CHANNEL (6):
+                YouTube channels(for example,
+                'youtube.com::L8ZULXASCc1I_oaOT0NaOQ').
+            GOOGLE_PRODUCTS (7):
+                Surfaces owned and operated by Google(for
+                example, 'tv.google.com').
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         WEBSITE = 2

@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class BiddingStrategy(proto.Message):
     r"""A bidding strategy.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -175,15 +176,19 @@ class BiddingStrategy(proto.Message):
         number=17,
         optional=True,
     )
-    status: bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus = proto.Field(
+    status: (
+        bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus
+    ) = proto.Field(
         proto.ENUM,
         number=15,
         enum=bidding_strategy_status.BiddingStrategyStatusEnum.BiddingStrategyStatus,
     )
-    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+        )
     )
     currency_code: str = proto.Field(
         proto.STRING,

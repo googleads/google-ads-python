@@ -78,6 +78,7 @@ class AppendLeadConversationResponse(proto.Message):
 
 class Conversation(proto.Message):
     r"""Details of the conversation that needs to be appended.
+
     Attributes:
         local_services_lead (str):
             Required. The resource name of the local
@@ -100,6 +101,7 @@ class Conversation(proto.Message):
 
 class ConversationOrError(proto.Message):
     r"""Result of the append conversation operation.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

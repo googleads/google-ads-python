@@ -32,7 +32,24 @@ class SearchEngineResultsPageTypeEnum(proto.Message):
     r"""The type of the search engine results page."""
 
     class SearchEngineResultsPageType(proto.Enum):
-        r"""The type of the search engine results page."""
+        r"""The type of the search engine results page.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADS_ONLY (2):
+                Only ads were contained in the search engine
+                results page.
+            ORGANIC_ONLY (3):
+                Only organic results were contained in the
+                search engine results page.
+            ADS_AND_ORGANIC (4):
+                Both ads and organic results were contained
+                in the search engine results page.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

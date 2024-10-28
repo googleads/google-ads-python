@@ -22,16 +22,38 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"DateRangeErrorEnum",},
+    manifest={
+        "DateRangeErrorEnum",
+    },
 )
 
 
 class DateRangeErrorEnum(proto.Message):
-    r"""Container for enum describing possible date range errors.
-    """
+    r"""Container for enum describing possible date range errors."""
 
     class DateRangeError(proto.Enum):
-        r"""Enum describing possible date range errors."""
+        r"""Enum describing possible date range errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_DATE (2):
+                Invalid date.
+            START_DATE_AFTER_END_DATE (3):
+                The start date was after the end date.
+            CANNOT_SET_DATE_TO_PAST (4):
+                Cannot set date to past time
+            AFTER_MAXIMUM_ALLOWABLE_DATE (5):
+                A date was used that is past the system
+                "last" date.
+            CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED (6):
+                Trying to change start date on a resource
+                that has started.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_DATE = 2

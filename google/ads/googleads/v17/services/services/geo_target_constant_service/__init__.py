@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import GeoTargetConstantServiceClient
+from .async_client import GeoTargetConstantServiceAsyncClient
 
-__all__ = ("GeoTargetConstantServiceClient",)
+__all__ = (
+    "GeoTargetConstantServiceClient",
+    "GeoTargetConstantServiceAsyncClient",
+)

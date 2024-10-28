@@ -39,6 +39,25 @@ class CriterionCategoryLocaleAvailabilityModeEnum(proto.Message):
     class CriterionCategoryLocaleAvailabilityMode(proto.Enum):
         r"""Enum containing the possible
         CriterionCategoryLocaleAvailabilityMode.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ALL_LOCALES (2):
+                The category is available to campaigns of all
+                locales.
+            COUNTRY_AND_ALL_LANGUAGES (3):
+                The category is available to campaigns within
+                a list of countries, regardless of language.
+            LANGUAGE_AND_ALL_COUNTRIES (4):
+                The category is available to campaigns within
+                a list of languages, regardless of country.
+            COUNTRY_AND_LANGUAGE (5):
+                The category is available to campaigns within
+                a list of country, language pairs.
         """
 
         UNSPECIFIED = 0

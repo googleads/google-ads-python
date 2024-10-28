@@ -153,6 +153,7 @@ class AdGroupAssetOperation(proto.Message):
 
 class MutateAdGroupAssetsResponse(proto.Message):
     r"""Response message for an ad group asset mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -178,6 +179,7 @@ class MutateAdGroupAssetsResponse(proto.Message):
 
 class MutateAdGroupAssetResult(proto.Message):
     r"""The result for the ad group asset mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

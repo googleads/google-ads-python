@@ -71,12 +71,12 @@ class MutateExtensionFeedItemsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "ExtensionFeedItemOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ExtensionFeedItemOperation",
+    operations: MutableSequence["ExtensionFeedItemOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ExtensionFeedItemOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateExtensionFeedItemsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -153,6 +155,7 @@ class ExtensionFeedItemOperation(proto.Message):
 
 class MutateExtensionFeedItemsResponse(proto.Message):
     r"""Response message for an extension feed item mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +172,18 @@ class MutateExtensionFeedItemsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateExtensionFeedItemResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateExtensionFeedItemResult",
+    results: MutableSequence["MutateExtensionFeedItemResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateExtensionFeedItemResult",
+        )
     )
 
 
 class MutateExtensionFeedItemResult(proto.Message):
     r"""The result for the extension feed item mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

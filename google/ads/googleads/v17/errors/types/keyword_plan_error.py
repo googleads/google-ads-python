@@ -37,7 +37,49 @@ class KeywordPlanErrorEnum(proto.Message):
     """
 
     class KeywordPlanError(proto.Enum):
-        r"""Enum describing possible errors from applying a keyword plan."""
+        r"""Enum describing possible errors from applying a keyword plan.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            BID_MULTIPLIER_OUT_OF_RANGE (2):
+                The plan's bid multiplier value is outside
+                the valid range.
+            BID_TOO_HIGH (3):
+                The plan's bid value is too high.
+            BID_TOO_LOW (4):
+                The plan's bid value is too low.
+            BID_TOO_MANY_FRACTIONAL_DIGITS (5):
+                The plan's cpc bid is not a multiple of the
+                minimum billable unit.
+            DAILY_BUDGET_TOO_LOW (6):
+                The plan's daily budget value is too low.
+            DAILY_BUDGET_TOO_MANY_FRACTIONAL_DIGITS (7):
+                The plan's daily budget is not a multiple of
+                the minimum billable unit.
+            INVALID_VALUE (8):
+                The input has an invalid value.
+            KEYWORD_PLAN_HAS_NO_KEYWORDS (9):
+                The plan has no keyword.
+            KEYWORD_PLAN_NOT_ENABLED (10):
+                The plan is not enabled and API cannot
+                provide mutation, forecast or stats.
+            KEYWORD_PLAN_NOT_FOUND (11):
+                The requested plan cannot be found for
+                providing forecast or stats.
+            MISSING_BID (13):
+                The plan is missing a cpc bid.
+            MISSING_FORECAST_PERIOD (14):
+                The plan is missing required forecast_period field.
+            INVALID_FORECAST_DATE_RANGE (15):
+                The plan's forecast_period has invalid forecast date range.
+            INVALID_NAME (16):
+                The plan's name is invalid.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BID_MULTIPLIER_OUT_OF_RANGE = 2

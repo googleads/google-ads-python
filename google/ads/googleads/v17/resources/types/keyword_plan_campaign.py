@@ -38,6 +38,7 @@ class KeywordPlanCampaign(proto.Message):
     r"""A Keyword Plan campaign.
     Max number of keyword plan campaigns per plan allowed: 1.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -107,7 +108,9 @@ class KeywordPlanCampaign(proto.Message):
         proto.STRING,
         number=12,
     )
-    keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
+    keyword_plan_network: (
+        gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
@@ -126,6 +129,7 @@ class KeywordPlanCampaign(proto.Message):
 
 class KeywordPlanGeoTarget(proto.Message):
     r"""A geo target.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

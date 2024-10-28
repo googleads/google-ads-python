@@ -36,7 +36,20 @@ class SeasonalityEventStatusEnum(proto.Message):
     """
 
     class SeasonalityEventStatus(proto.Enum):
-        r"""The possible statuses of a Seasonality Event."""
+        r"""The possible statuses of a Seasonality Event.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The seasonality event is enabled.
+            REMOVED (4):
+                The seasonality event is removed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

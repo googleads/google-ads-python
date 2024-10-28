@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetUsage",},
+    manifest={
+        "AssetUsage",
+    },
 )
 
 
 class AssetUsage(proto.Message):
     r"""Contains the usage information of the asset.
+
     Attributes:
         asset (str):
             Resource name of the asset.
@@ -40,9 +43,12 @@ class AssetUsage(proto.Message):
     """
 
     asset: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    served_asset_field_type: gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType = proto.Field(
+    served_asset_field_type: (
+        gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType,

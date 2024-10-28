@@ -30,12 +30,17 @@ from google.ads.googleads.v18.enums.types import feed_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"Feed", "FeedAttribute", "FeedAttributeOperation",},
+    manifest={
+        "Feed",
+        "FeedAttribute",
+        "FeedAttributeOperation",
+    },
 )
 
 
 class Feed(proto.Message):
     r"""A feed.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -90,6 +95,7 @@ class Feed(proto.Message):
         r"""Data used to configure a location feed populated from
         Business Profile.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -132,6 +138,7 @@ class Feed(proto.Message):
 
         class OAuthInfo(proto.Message):
             r"""Data used for authorization using OAuth.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -152,13 +159,19 @@ class Feed(proto.Message):
             """
 
             http_method: str = proto.Field(
-                proto.STRING, number=4, optional=True,
+                proto.STRING,
+                number=4,
+                optional=True,
             )
             http_request_url: str = proto.Field(
-                proto.STRING, number=5, optional=True,
+                proto.STRING,
+                number=5,
+                optional=True,
             )
             http_authorization_header: str = proto.Field(
-                proto.STRING, number=6, optional=True,
+                proto.STRING,
+                number=6,
+                optional=True,
             )
 
         oauth_info: "Feed.PlacesLocationFeedData.OAuthInfo" = proto.Field(
@@ -167,19 +180,26 @@ class Feed(proto.Message):
             message="Feed.PlacesLocationFeedData.OAuthInfo",
         )
         email_address: str = proto.Field(
-            proto.STRING, number=7, optional=True,
+            proto.STRING,
+            number=7,
+            optional=True,
         )
         business_account_id: str = proto.Field(
-            proto.STRING, number=8,
+            proto.STRING,
+            number=8,
         )
         business_name_filter: str = proto.Field(
-            proto.STRING, number=9, optional=True,
+            proto.STRING,
+            number=9,
+            optional=True,
         )
         category_filters: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=11,
+            proto.STRING,
+            number=11,
         )
         label_filters: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=12,
+            proto.STRING,
+            number=12,
         )
 
     class AffiliateLocationFeedData(proto.Message):
@@ -196,36 +216,52 @@ class Feed(proto.Message):
         """
 
         chain_ids: MutableSequence[int] = proto.RepeatedField(
-            proto.INT64, number=3,
+            proto.INT64,
+            number=3,
         )
-        relationship_type: affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType = proto.Field(
+        relationship_type: (
+            affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=affiliate_location_feed_relationship_type.AffiliateLocationFeedRelationshipTypeEnum.AffiliateLocationFeedRelationshipType,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     attributes: MutableSequence["FeedAttribute"] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="FeedAttribute",
+        proto.MESSAGE,
+        number=4,
+        message="FeedAttribute",
     )
-    attribute_operations: MutableSequence[
-        "FeedAttributeOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=9, message="FeedAttributeOperation",
+    attribute_operations: MutableSequence["FeedAttributeOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message="FeedAttributeOperation",
+        )
     )
     origin: feed_origin.FeedOriginEnum.FeedOrigin = proto.Field(
-        proto.ENUM, number=5, enum=feed_origin.FeedOriginEnum.FeedOrigin,
+        proto.ENUM,
+        number=5,
+        enum=feed_origin.FeedOriginEnum.FeedOrigin,
     )
     status: feed_status.FeedStatusEnum.FeedStatus = proto.Field(
-        proto.ENUM, number=8, enum=feed_status.FeedStatusEnum.FeedStatus,
+        proto.ENUM,
+        number=8,
+        enum=feed_status.FeedStatusEnum.FeedStatus,
     )
     places_location_feed_data: PlacesLocationFeedData = proto.Field(
         proto.MESSAGE,
@@ -247,6 +283,7 @@ class FeedAttribute(proto.Message):
     type of the FeedItemAttributes with the same FeedAttributeId.
     Optionally, a FeedAttribute can be marked as being part of a
     FeedItem's unique key.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -272,18 +309,26 @@ class FeedAttribute(proto.Message):
     """
 
     id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
-    type_: feed_attribute_type.FeedAttributeTypeEnum.FeedAttributeType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=feed_attribute_type.FeedAttributeTypeEnum.FeedAttributeType,
+    type_: feed_attribute_type.FeedAttributeTypeEnum.FeedAttributeType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=feed_attribute_type.FeedAttributeTypeEnum.FeedAttributeType,
+        )
     )
     is_part_of_key: bool = proto.Field(
-        proto.BOOL, number=7, optional=True,
+        proto.BOOL,
+        number=7,
+        optional=True,
     )
 
 
@@ -301,16 +346,31 @@ class FeedAttributeOperation(proto.Message):
     """
 
     class Operator(proto.Enum):
-        r"""The operator."""
+        r"""The operator.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADD (2):
+                Add the attribute to the existing attributes.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADD = 2
 
     operator: Operator = proto.Field(
-        proto.ENUM, number=1, enum=Operator,
+        proto.ENUM,
+        number=1,
+        enum=Operator,
     )
     value: "FeedAttribute" = proto.Field(
-        proto.MESSAGE, number=2, message="FeedAttribute",
+        proto.MESSAGE,
+        number=2,
+        message="FeedAttribute",
     )
 
 

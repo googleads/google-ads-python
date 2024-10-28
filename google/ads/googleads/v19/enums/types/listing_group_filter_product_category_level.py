@@ -35,7 +35,25 @@ class ListingGroupFilterProductCategoryLevelEnum(proto.Message):
     """
 
     class ListingGroupFilterProductCategoryLevel(proto.Enum):
-        r"""The level of the listing group filter product category."""
+        r"""The level of the listing group filter product category.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LEVEL1 (2):
+                Level 1.
+            LEVEL2 (3):
+                Level 2.
+            LEVEL3 (4):
+                Level 3.
+            LEVEL4 (5):
+                Level 4.
+            LEVEL5 (6):
+                Level 5.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

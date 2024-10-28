@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AndroidPrivacyInteractionTypeEnum",},
+    manifest={
+        "AndroidPrivacyInteractionTypeEnum",
+    },
 )
 
 
 class AndroidPrivacyInteractionTypeEnum(proto.Message):
-    r"""The interaction type enum for Android privacy shared key.
-    """
+    r"""The interaction type enum for Android privacy shared key."""
 
     class AndroidPrivacyInteractionType(proto.Enum):
-        r"""Enumerates interaction types"""
+        r"""Enumerates interaction types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            CLICK (2):
+                The physical click interaction type.
+            ENGAGED_VIEW (3):
+                The 10 seconds engaged view interaction type.
+            VIEW (4):
+                The view (ad impression) interaction type.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CLICK = 2

@@ -464,6 +464,7 @@ class AssetFieldTypePolicySummary(proto.Message):
     r"""Contains policy information for an asset under AssetFieldType
     context.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -505,6 +506,7 @@ class AssetFieldTypePolicySummary(proto.Message):
 
 class AssetPolicySummary(proto.Message):
     r"""Contains policy information for an asset.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v19.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for

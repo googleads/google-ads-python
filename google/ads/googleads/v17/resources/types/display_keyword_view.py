@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class DisplayKeywordView(proto.Message):
     r"""A display keyword view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the display keyword view.

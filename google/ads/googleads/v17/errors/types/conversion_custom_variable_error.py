@@ -35,7 +35,25 @@ class ConversionCustomVariableErrorEnum(proto.Message):
     """
 
     class ConversionCustomVariableError(proto.Enum):
-        r"""Enum describing possible conversion custom variable errors."""
+        r"""Enum describing possible conversion custom variable errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_NAME (2):
+                A conversion custom variable with the
+                specified name already exists.
+            DUPLICATE_TAG (3):
+                A conversion custom variable with the
+                specified tag already exists.
+            RESERVED_TAG (4):
+                A conversion custom variable with the
+                specified tag is reserved for other uses.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_NAME = 2

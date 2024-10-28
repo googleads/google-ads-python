@@ -71,12 +71,12 @@ class MutateBiddingSeasonalityAdjustmentsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "BiddingSeasonalityAdjustmentOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="BiddingSeasonalityAdjustmentOperation",
+    operations: MutableSequence["BiddingSeasonalityAdjustmentOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="BiddingSeasonalityAdjustmentOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateBiddingSeasonalityAdjustmentsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -132,17 +134,21 @@ class BiddingSeasonalityAdjustmentOperation(proto.Message):
         number=4,
         message=field_mask_pb2.FieldMask,
     )
-    create: gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,
+    create: gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,
+        )
     )
-    update: gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        oneof="operation",
-        message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,
+    update: gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            oneof="operation",
+            message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,
+        )
     )
     remove: str = proto.Field(
         proto.STRING,
@@ -153,6 +159,7 @@ class BiddingSeasonalityAdjustmentOperation(proto.Message):
 
 class MutateBiddingSeasonalityAdjustmentsResponse(proto.Message):
     r"""Response message for seasonality adjustments mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +176,18 @@ class MutateBiddingSeasonalityAdjustmentsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateBiddingSeasonalityAdjustmentsResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateBiddingSeasonalityAdjustmentsResult",
+    results: MutableSequence["MutateBiddingSeasonalityAdjustmentsResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateBiddingSeasonalityAdjustmentsResult",
+        )
     )
 
 
 class MutateBiddingSeasonalityAdjustmentsResult(proto.Message):
     r"""The result for the seasonality adjustment mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -193,7 +201,9 @@ class MutateBiddingSeasonalityAdjustmentsResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    bidding_seasonality_adjustment: gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment = proto.Field(
+    bidding_seasonality_adjustment: (
+        gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_bidding_seasonality_adjustment.BiddingSeasonalityAdjustment,

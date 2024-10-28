@@ -32,7 +32,21 @@ class AssetAutomationTypeEnum(proto.Message):
     r"""Container for enum describing the type of asset automation."""
 
     class AssetAutomationType(proto.Enum):
-        r"""The type of asset automation."""
+        r"""The type of asset automation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used as a return value only. Represents value
+                unknown in this version.
+            TEXT_ASSET_AUTOMATION (2):
+                Text asset automation includes headlines and
+                descriptions. By default, advertisers are
+                opted-in for Performance Max and opted-out for
+                Search.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TEXT_ASSET_AUTOMATION = 2

@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BatchJobServiceClient
+from .async_client import BatchJobServiceAsyncClient
 
-__all__ = ("BatchJobServiceClient",)
+__all__ = (
+    "BatchJobServiceClient",
+    "BatchJobServiceAsyncClient",
+)

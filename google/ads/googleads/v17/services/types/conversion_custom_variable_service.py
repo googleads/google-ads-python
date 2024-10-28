@@ -71,12 +71,12 @@ class MutateConversionCustomVariablesRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "ConversionCustomVariableOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ConversionCustomVariableOperation",
+    operations: MutableSequence["ConversionCustomVariableOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionCustomVariableOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateConversionCustomVariablesRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -164,17 +166,18 @@ class MutateConversionCustomVariablesResponse(proto.Message):
         number=1,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateConversionCustomVariableResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateConversionCustomVariableResult",
+    results: MutableSequence["MutateConversionCustomVariableResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateConversionCustomVariableResult",
+        )
     )
 
 
 class MutateConversionCustomVariableResult(proto.Message):
     r"""The result for the conversion custom variable mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -188,7 +191,9 @@ class MutateConversionCustomVariableResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    conversion_custom_variable: gagr_conversion_custom_variable.ConversionCustomVariable = proto.Field(
+    conversion_custom_variable: (
+        gagr_conversion_custom_variable.ConversionCustomVariable
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_conversion_custom_variable.ConversionCustomVariable,

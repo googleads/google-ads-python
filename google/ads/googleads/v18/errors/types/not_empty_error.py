@@ -22,16 +22,28 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"NotEmptyErrorEnum",},
+    manifest={
+        "NotEmptyErrorEnum",
+    },
 )
 
 
 class NotEmptyErrorEnum(proto.Message):
-    r"""Container for enum describing possible not empty errors.
-    """
+    r"""Container for enum describing possible not empty errors."""
 
     class NotEmptyError(proto.Enum):
-        r"""Enum describing possible not empty errors."""
+        r"""Enum describing possible not empty errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            EMPTY_LIST (2):
+                Empty list.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EMPTY_LIST = 2

@@ -35,7 +35,21 @@ class FeedItemSetLinkErrorEnum(proto.Message):
     """
 
     class FeedItemSetLinkError(proto.Enum):
-        r"""Enum describing possible feed item set link errors."""
+        r"""Enum describing possible feed item set link errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            FEED_ID_MISMATCH (2):
+                The feed IDs of the FeedItemSet and FeedItem
+                do not match. Only FeedItems in a given Feed can
+                be linked to a FeedItemSet in that Feed.
+            NO_MUTATE_ALLOWED_FOR_DYNAMIC_SET (3):
+                Cannot add or remove links to a dynamic set.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

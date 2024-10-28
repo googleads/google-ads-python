@@ -38,6 +38,7 @@ class MatchingFunction(proto.Message):
     CustomerFeed, CampaignFeed, or AdGroupFeed. The matching
     function is used to filter the set of feed items selected.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -79,7 +80,9 @@ class MatchingFunction(proto.Message):
         number=5,
         optional=True,
     )
-    operator: matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator = proto.Field(
+    operator: (
+        matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator,
@@ -98,6 +101,7 @@ class MatchingFunction(proto.Message):
 
 class Operand(proto.Message):
     r"""An operand in a matching function.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -129,6 +133,7 @@ class Operand(proto.Message):
 
     class ConstantOperand(proto.Message):
         r"""A constant operand in a matching function.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other
@@ -184,6 +189,7 @@ class Operand(proto.Message):
         r"""A feed attribute operand in a matching function.
         Used to represent a feed attribute in feed.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -234,7 +240,9 @@ class Operand(proto.Message):
                 context.
         """
 
-        context_type: matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType = proto.Field(
+        context_type: (
+            matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType,

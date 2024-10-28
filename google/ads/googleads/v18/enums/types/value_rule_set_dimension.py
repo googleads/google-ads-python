@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ValueRuleSetDimensionEnum",},
+    manifest={
+        "ValueRuleSetDimensionEnum",
+    },
 )
 
 
@@ -33,7 +35,27 @@ class ValueRuleSetDimensionEnum(proto.Message):
     """
 
     class ValueRuleSetDimension(proto.Enum):
-        r"""Possible dimensions of a conversion value rule set."""
+        r"""Possible dimensions of a conversion value rule set.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            GEO_LOCATION (2):
+                Dimension for geo location.
+            DEVICE (3):
+                Dimension for device type.
+            AUDIENCE (4):
+                Dimension for audience.
+            NO_CONDITION (5):
+                This dimension implies the rule will always
+                apply.
+            ITINERARY (6):
+                Dimension for itinerary.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GEO_LOCATION = 2

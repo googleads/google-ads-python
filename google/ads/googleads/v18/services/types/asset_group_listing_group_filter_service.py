@@ -63,19 +63,23 @@ class MutateAssetGroupListingGroupFiltersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AssetGroupListingGroupFilterOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AssetGroupListingGroupFilterOperation",
+    operations: MutableSequence["AssetGroupListingGroupFilterOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetGroupListingGroupFilterOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -121,22 +125,30 @@ class AssetGroupListingGroupFilterOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
-    create: gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter = proto.Field(
+    create: (
+        gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter
+    ) = proto.Field(
         proto.MESSAGE,
         number=1,
         oneof="operation",
         message=gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter,
     )
-    update: gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter = proto.Field(
+    update: (
+        gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         oneof="operation",
         message=gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -149,17 +161,18 @@ class MutateAssetGroupListingGroupFiltersResponse(proto.Message):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateAssetGroupListingGroupFilterResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateAssetGroupListingGroupFilterResult",
+    results: MutableSequence["MutateAssetGroupListingGroupFilterResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAssetGroupListingGroupFilterResult",
+        )
     )
 
 
 class MutateAssetGroupListingGroupFilterResult(proto.Message):
     r"""The result for the asset group listing group filter mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -170,9 +183,12 @@ class MutateAssetGroupListingGroupFilterResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    asset_group_listing_group_filter: gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter = proto.Field(
+    asset_group_listing_group_filter: (
+        gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_asset_group_listing_group_filter.AssetGroupListingGroupFilter,

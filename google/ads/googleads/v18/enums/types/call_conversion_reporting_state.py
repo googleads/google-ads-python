@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CallConversionReportingStateEnum",},
+    manifest={
+        "CallConversionReportingStateEnum",
+    },
 )
 
 
@@ -33,7 +35,25 @@ class CallConversionReportingStateEnum(proto.Message):
     """
 
     class CallConversionReportingState(proto.Enum):
-        r"""Possible data types for a call conversion action state."""
+        r"""Possible data types for a call conversion action state.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DISABLED (2):
+                Call conversion action is disabled.
+            USE_ACCOUNT_LEVEL_CALL_CONVERSION_ACTION (3):
+                Call conversion action will use call
+                conversion type set at the account level.
+            USE_RESOURCE_LEVEL_CALL_CONVERSION_ACTION (4):
+                Call conversion action will use call
+                conversion type set at the resource (call only
+                ads/call extensions) level.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DISABLED = 2

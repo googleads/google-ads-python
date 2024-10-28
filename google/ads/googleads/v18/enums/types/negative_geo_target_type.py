@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"NegativeGeoTargetTypeEnum",},
+    manifest={
+        "NegativeGeoTargetTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,23 @@ class NegativeGeoTargetTypeEnum(proto.Message):
     """
 
     class NegativeGeoTargetType(proto.Enum):
-        r"""The possible negative geo target types."""
+        r"""The possible negative geo target types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            PRESENCE_OR_INTEREST (4):
+                Specifies that a user is excluded from seeing
+                the ad if they are in, or show interest in,
+                advertiser's excluded locations.
+            PRESENCE (5):
+                Specifies that a user is excluded from seeing
+                the ad if they are in advertiser's excluded
+                locations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PRESENCE_OR_INTEREST = 4

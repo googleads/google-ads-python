@@ -17,14 +17,20 @@ from collections import OrderedDict
 
 from .base import SmartCampaignSettingServiceTransport
 from .grpc import SmartCampaignSettingServiceGrpcTransport
+from .grpc_asyncio import SmartCampaignSettingServiceGrpcAsyncIOTransport
+
 
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()
 )  # type: Dict[str, Type[SmartCampaignSettingServiceTransport]]
 _transport_registry["grpc"] = SmartCampaignSettingServiceGrpcTransport
+_transport_registry[
+    "grpc_asyncio"
+] = SmartCampaignSettingServiceGrpcAsyncIOTransport
 
 __all__ = (
     "SmartCampaignSettingServiceTransport",
     "SmartCampaignSettingServiceGrpcTransport",
+    "SmartCampaignSettingServiceGrpcAsyncIOTransport",
 )

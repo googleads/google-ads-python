@@ -30,7 +30,9 @@ from google.ads.googleads.v18.enums.types import product_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ShoppingProduct",},
+    manifest={
+        "ShoppingProduct",
+    },
 )
 
 
@@ -69,6 +71,7 @@ class ShoppingProduct(proto.Message):
        date segments is not permitted and will return
        UNSUPPORTED_DATE_SEGMENTATION error. On the other hand, filtering
        on date segments is allowed.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -257,6 +260,7 @@ class ShoppingProduct(proto.Message):
 
     class ProductIssue(proto.Message):
         r"""An issue affecting whether a product can show in ads.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -287,34 +291,45 @@ class ShoppingProduct(proto.Message):
         """
 
         error_code: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
-        ads_severity: product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity = proto.Field(
+        ads_severity: (
+            product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=product_issue_severity.ProductIssueSeverityEnum.ProductIssueSeverity,
         )
         attribute_name: str = proto.Field(
-            proto.STRING, number=3, optional=True,
+            proto.STRING,
+            number=3,
+            optional=True,
         )
         description: str = proto.Field(
-            proto.STRING, number=4,
+            proto.STRING,
+            number=4,
         )
         detail: str = proto.Field(
-            proto.STRING, number=5,
+            proto.STRING,
+            number=5,
         )
         documentation: str = proto.Field(
-            proto.STRING, number=6,
+            proto.STRING,
+            number=6,
         )
         affected_regions: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=7,
+            proto.STRING,
+            number=7,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     merchant_center_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     channel: product_channel.ProductChannelEnum.ProductChannel = proto.Field(
         proto.ENUM,
@@ -322,97 +337,149 @@ class ShoppingProduct(proto.Message):
         enum=product_channel.ProductChannelEnum.ProductChannel,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     feed_label: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     item_id: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     multi_client_account_id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     title: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     brand: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     price_micros: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
-    channel_exclusivity: product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity = proto.Field(
+    channel_exclusivity: (
+        product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         optional=True,
         enum=product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity,
     )
-    condition: product_condition.ProductConditionEnum.ProductCondition = proto.Field(
-        proto.ENUM,
-        number=13,
-        optional=True,
-        enum=product_condition.ProductConditionEnum.ProductCondition,
+    condition: product_condition.ProductConditionEnum.ProductCondition = (
+        proto.Field(
+            proto.ENUM,
+            number=13,
+            optional=True,
+            enum=product_condition.ProductConditionEnum.ProductCondition,
+        )
     )
-    availability: product_availability.ProductAvailabilityEnum.ProductAvailability = proto.Field(
+    availability: (
+        product_availability.ProductAvailabilityEnum.ProductAvailability
+    ) = proto.Field(
         proto.ENUM,
         number=14,
         optional=True,
         enum=product_availability.ProductAvailabilityEnum.ProductAvailability,
     )
     target_countries: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=15,
+        proto.STRING,
+        number=15,
     )
     custom_attribute0: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     custom_attribute1: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     custom_attribute2: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     custom_attribute3: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     custom_attribute4: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     category_level1: str = proto.Field(
-        proto.STRING, number=21, optional=True,
+        proto.STRING,
+        number=21,
+        optional=True,
     )
     category_level2: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
     category_level3: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
     category_level4: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
     category_level5: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     product_type_level1: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     product_type_level2: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
     product_type_level3: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     product_type_level4: str = proto.Field(
-        proto.STRING, number=29, optional=True,
+        proto.STRING,
+        number=29,
+        optional=True,
     )
     product_type_level5: str = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     effective_max_cpc_micros: int = proto.Field(
-        proto.INT64, number=31, optional=True,
+        proto.INT64,
+        number=31,
+        optional=True,
     )
     status: product_status.ProductStatusEnum.ProductStatus = proto.Field(
         proto.ENUM,
@@ -420,13 +487,19 @@ class ShoppingProduct(proto.Message):
         enum=product_status.ProductStatusEnum.ProductStatus,
     )
     issues: MutableSequence[ProductIssue] = proto.RepeatedField(
-        proto.MESSAGE, number=33, message=ProductIssue,
+        proto.MESSAGE,
+        number=33,
+        message=ProductIssue,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=34, optional=True,
+        proto.STRING,
+        number=34,
+        optional=True,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=35, optional=True,
+        proto.STRING,
+        number=35,
+        optional=True,
     )
 
 

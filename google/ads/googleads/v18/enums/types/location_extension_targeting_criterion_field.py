@@ -22,18 +22,45 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocationExtensionTargetingCriterionFieldEnum",},
+    manifest={
+        "LocationExtensionTargetingCriterionFieldEnum",
+    },
 )
 
 
 class LocationExtensionTargetingCriterionFieldEnum(proto.Message):
-    r"""Values for Location Extension Targeting criterion fields.
-    """
+    r"""Values for Location Extension Targeting criterion fields."""
 
     class LocationExtensionTargetingCriterionField(proto.Enum):
         r"""Possible values for Location Extension Targeting criterion
         fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADDRESS_LINE_1 (2):
+                Data Type: STRING. Line 1 of the business
+                address.
+            ADDRESS_LINE_2 (3):
+                Data Type: STRING. Line 2 of the business
+                address.
+            CITY (4):
+                Data Type: STRING. City of the business
+                address.
+            PROVINCE (5):
+                Data Type: STRING. Province of the business
+                address.
+            POSTAL_CODE (6):
+                Data Type: STRING. Postal code of the
+                business address.
+            COUNTRY_CODE (7):
+                Data Type: STRING. Country code of the
+                business address.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADDRESS_LINE_1 = 2

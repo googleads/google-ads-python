@@ -71,12 +71,12 @@ class MutateCustomerExtensionSettingsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CustomerExtensionSettingOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CustomerExtensionSettingOperation",
+    operations: MutableSequence["CustomerExtensionSettingOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerExtensionSettingOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateCustomerExtensionSettingsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -158,6 +160,7 @@ class CustomerExtensionSettingOperation(proto.Message):
 
 class MutateCustomerExtensionSettingsResponse(proto.Message):
     r"""Response message for a customer extension setting mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -174,17 +177,18 @@ class MutateCustomerExtensionSettingsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateCustomerExtensionSettingResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateCustomerExtensionSettingResult",
+    results: MutableSequence["MutateCustomerExtensionSettingResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCustomerExtensionSettingResult",
+        )
     )
 
 
 class MutateCustomerExtensionSettingResult(proto.Message):
     r"""The result for the customer extension setting mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -198,7 +202,9 @@ class MutateCustomerExtensionSettingResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    customer_extension_setting: gagr_customer_extension_setting.CustomerExtensionSetting = proto.Field(
+    customer_extension_setting: (
+        gagr_customer_extension_setting.CustomerExtensionSetting
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_customer_extension_setting.CustomerExtensionSetting,

@@ -32,7 +32,20 @@ class CustomInterestMemberTypeEnum(proto.Message):
     r"""The types of custom interest member, either KEYWORD or URL."""
 
     class CustomInterestMemberType(proto.Enum):
-        r"""Enum containing possible custom interest member types."""
+        r"""Enum containing possible custom interest member types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            KEYWORD (2):
+                Custom interest member type KEYWORD.
+            URL (3):
+                Custom interest member type URL.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         KEYWORD = 2

@@ -64,15 +64,21 @@ class MutateCustomerRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "CustomerOperation" = proto.Field(
-        proto.MESSAGE, number=4, message="CustomerOperation",
+        proto.MESSAGE,
+        number=4,
+        message="CustomerOperation",
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -82,6 +88,7 @@ class MutateCustomerRequest(proto.Message):
 class CreateCustomerClientRequest(proto.Message):
     r"""Request message for
     [CustomerService.CreateCustomerClient][google.ads.googleads.v18.services.CustomerService.CreateCustomerClient].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -109,24 +116,33 @@ class CreateCustomerClientRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer_client: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     access_role: gage_access_role.AccessRoleEnum.AccessRole = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=6,
+        proto.BOOL,
+        number=6,
     )
 
 
 class CustomerOperation(proto.Message):
     r"""A single update on a customer.
+
     Attributes:
         update (google.ads.googleads.v18.resources.types.Customer):
             Mutate operation. Only updates are supported
@@ -137,15 +153,20 @@ class CustomerOperation(proto.Message):
     """
 
     update: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=1, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=1,
+        message=gagr_customer.Customer,
     )
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
 
 
 class CreateCustomerClientResponse(proto.Message):
     r"""Response message for CreateCustomerClient mutate.
+
     Attributes:
         resource_name (str):
             The resource name of the newly created customer. Customer
@@ -157,27 +178,33 @@ class CreateCustomerClientResponse(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     invitation_link: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
 class MutateCustomerResponse(proto.Message):
     r"""Response message for customer mutate.
+
     Attributes:
         result (google.ads.googleads.v18.services.types.MutateCustomerResult):
             Result for the mutate.
     """
 
     result: "MutateCustomerResult" = proto.Field(
-        proto.MESSAGE, number=2, message="MutateCustomerResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCustomerResult",
     )
 
 
 class MutateCustomerResult(proto.Message):
     r"""The result for the customer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -188,10 +215,13 @@ class MutateCustomerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer: gagr_customer.Customer = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_customer.Customer,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_customer.Customer,
     )
 
 
@@ -213,7 +243,8 @@ class ListAccessibleCustomersResponse(proto.Message):
     """
 
     resource_names: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

@@ -32,7 +32,21 @@ class ListingGroupFilterProductConditionEnum(proto.Message):
     r"""Condition of a product offer."""
 
     class ListingGroupFilterProductCondition(proto.Enum):
-        r"""Enum describing the condition of a product offer."""
+        r"""Enum describing the condition of a product offer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NEW (2):
+                The product condition is new.
+            REFURBISHED (3):
+                The product condition is refurbished.
+            USED (4):
+                The product condition is used.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

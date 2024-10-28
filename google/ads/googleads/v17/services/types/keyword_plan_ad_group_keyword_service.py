@@ -65,12 +65,12 @@ class MutateKeywordPlanAdGroupKeywordsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "KeywordPlanAdGroupKeywordOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="KeywordPlanAdGroupKeywordOperation",
+    operations: MutableSequence["KeywordPlanAdGroupKeywordOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="KeywordPlanAdGroupKeywordOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -148,6 +148,7 @@ class KeywordPlanAdGroupKeywordOperation(proto.Message):
 
 class MutateKeywordPlanAdGroupKeywordsResponse(proto.Message):
     r"""Response message for a Keyword Plan ad group keyword mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -164,17 +165,18 @@ class MutateKeywordPlanAdGroupKeywordsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateKeywordPlanAdGroupKeywordResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateKeywordPlanAdGroupKeywordResult",
+    results: MutableSequence["MutateKeywordPlanAdGroupKeywordResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateKeywordPlanAdGroupKeywordResult",
+        )
     )
 
 
 class MutateKeywordPlanAdGroupKeywordResult(proto.Message):
     r"""The result for the Keyword Plan ad group keyword mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

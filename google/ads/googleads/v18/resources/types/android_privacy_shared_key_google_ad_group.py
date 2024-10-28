@@ -29,12 +29,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AndroidPrivacySharedKeyGoogleAdGroup",},
+    manifest={
+        "AndroidPrivacySharedKeyGoogleAdGroup",
+    },
 )
 
 
 class AndroidPrivacySharedKeyGoogleAdGroup(proto.Message):
     r"""An Android privacy shared key view for Google ad group key.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Android privacy shared
@@ -68,29 +71,38 @@ class AndroidPrivacySharedKeyGoogleAdGroup(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
-    android_privacy_interaction_type: gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType = proto.Field(
+    android_privacy_interaction_type: (
+        gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType,
     )
     android_privacy_interaction_date: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    android_privacy_network_type: gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType = proto.Field(
+    android_privacy_network_type: (
+        gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_android_privacy_network_type.AndroidPrivacyNetworkTypeEnum.AndroidPrivacyNetworkType,
     )
     ad_group_id: int = proto.Field(
-        proto.INT64, number=6,
+        proto.INT64,
+        number=6,
     )
     shared_ad_group_key: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
 
 

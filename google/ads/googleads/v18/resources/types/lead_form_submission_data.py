@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class LeadFormSubmissionData(proto.Message):
     r"""Data from lead form submissions.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the lead form submission
@@ -72,43 +73,56 @@ class LeadFormSubmissionData(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    lead_form_submission_fields: MutableSequence[
-        "LeadFormSubmissionField"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="LeadFormSubmissionField",
+    lead_form_submission_fields: MutableSequence["LeadFormSubmissionField"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message="LeadFormSubmissionField",
+        )
     )
     custom_lead_form_submission_fields: MutableSequence[
         "CustomLeadFormSubmissionField"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="CustomLeadFormSubmissionField",
+        proto.MESSAGE,
+        number=10,
+        message="CustomLeadFormSubmissionField",
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     gclid: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     submission_date_time: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
 
 
 class LeadFormSubmissionField(proto.Message):
     r"""Fields in the submitted lead form.
+
     Attributes:
         field_type (google.ads.googleads.v18.enums.types.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType):
             Output only. Field type for lead form fields.
@@ -117,18 +131,22 @@ class LeadFormSubmissionField(proto.Message):
             fields.
     """
 
-    field_type: lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType = proto.Field(
+    field_type: (
+        lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=lead_form_field_user_input_type.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType,
     )
     field_value: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class CustomLeadFormSubmissionField(proto.Message):
     r"""Fields in the submitted custom question
+
     Attributes:
         question_text (str):
             Output only. Question text for custom
@@ -139,10 +157,12 @@ class CustomLeadFormSubmissionField(proto.Message):
     """
 
     question_text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     field_value: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

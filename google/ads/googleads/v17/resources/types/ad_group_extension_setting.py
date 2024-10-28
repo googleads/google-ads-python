@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class AdGroupExtensionSetting(proto.Message):
     r"""An ad group extension setting.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -87,7 +88,9 @@ class AdGroupExtensionSetting(proto.Message):
         proto.STRING,
         number=7,
     )
-    device: extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice = proto.Field(
+    device: (
+        extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice,

@@ -153,6 +153,7 @@ class CustomerAssetOperation(proto.Message):
 
 class MutateCustomerAssetsResponse(proto.Message):
     r"""Response message for a customer asset mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -178,6 +179,7 @@ class MutateCustomerAssetsResponse(proto.Message):
 
 class MutateCustomerAssetResult(proto.Message):
     r"""The result for the customer asset mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

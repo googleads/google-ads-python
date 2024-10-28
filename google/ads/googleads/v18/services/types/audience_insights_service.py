@@ -93,16 +93,22 @@ class GenerateInsightsFinderReportRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     baseline_audience: "BasicInsightsAudience" = proto.Field(
-        proto.MESSAGE, number=2, message="BasicInsightsAudience",
+        proto.MESSAGE,
+        number=2,
+        message="BasicInsightsAudience",
     )
     specific_audience: "BasicInsightsAudience" = proto.Field(
-        proto.MESSAGE, number=3, message="BasicInsightsAudience",
+        proto.MESSAGE,
+        number=3,
+        message="BasicInsightsAudience",
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -119,7 +125,8 @@ class GenerateInsightsFinderReportResponse(proto.Message):
     """
 
     saved_report_url: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -150,16 +157,22 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     audience: "InsightsAudience" = proto.Field(
-        proto.MESSAGE, number=2, message="InsightsAudience",
+        proto.MESSAGE,
+        number=2,
+        message="InsightsAudience",
     )
     baseline_audience: "InsightsAudience" = proto.Field(
-        proto.MESSAGE, number=6, message="InsightsAudience",
+        proto.MESSAGE,
+        number=6,
+        message="InsightsAudience",
     )
     data_month: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     dimensions: MutableSequence[
         audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
@@ -169,7 +182,8 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -187,10 +201,12 @@ class GenerateAudienceCompositionInsightsResponse(proto.Message):
             dimension.
     """
 
-    sections: MutableSequence[
-        "AudienceCompositionSection"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceCompositionSection",
+    sections: MutableSequence["AudienceCompositionSection"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceCompositionSection",
+        )
     )
 
 
@@ -225,10 +241,12 @@ class GenerateSuggestedTargetingInsightsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     audience_definition: "InsightsAudienceDefinition" = proto.Field(
         proto.MESSAGE,
@@ -253,10 +271,12 @@ class GenerateSuggestedTargetingInsightsResponse(proto.Message):
             Suggested insights for targetable audiences.
     """
 
-    suggestions: MutableSequence[
-        "TargetingSuggestionMetrics"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetingSuggestionMetrics",
+    suggestions: MutableSequence["TargetingSuggestionMetrics"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="TargetingSuggestionMetrics",
+        )
     )
 
 
@@ -295,33 +315,46 @@ class TargetingSuggestionMetrics(proto.Message):
             targeting.
     """
 
-    locations: MutableSequence[
-        "AudienceInsightsAttributeMetadata"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttributeMetadata",
+    locations: MutableSequence["AudienceInsightsAttributeMetadata"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttributeMetadata",
+        )
     )
     age_ranges: MutableSequence[criteria.AgeRangeInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=criteria.AgeRangeInfo,
+        proto.MESSAGE,
+        number=2,
+        message=criteria.AgeRangeInfo,
     )
     gender: criteria.GenderInfo = proto.Field(
-        proto.MESSAGE, number=3, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.GenderInfo,
     )
     parental_status: criteria.ParentalStatusInfo = proto.Field(
-        proto.MESSAGE, number=8, message=criteria.ParentalStatusInfo,
+        proto.MESSAGE,
+        number=8,
+        message=criteria.ParentalStatusInfo,
     )
-    user_interests: MutableSequence[
-        "AudienceInsightsAttributeMetadata"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="AudienceInsightsAttributeMetadata",
+    user_interests: MutableSequence["AudienceInsightsAttributeMetadata"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message="AudienceInsightsAttributeMetadata",
+        )
     )
     coverage: float = proto.Field(
-        proto.DOUBLE, number=5,
+        proto.DOUBLE,
+        number=5,
     )
     index: float = proto.Field(
-        proto.DOUBLE, number=6,
+        proto.DOUBLE,
+        number=6,
     )
     potential_youtube_reach: int = proto.Field(
-        proto.INT64, number=7,
+        proto.INT64,
+        number=7,
     )
 
 
@@ -362,7 +395,8 @@ class ListAudienceInsightsAttributesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     dimensions: MutableSequence[
         audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
@@ -372,18 +406,24 @@ class ListAudienceInsightsAttributesRequest(proto.Message):
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     query_text: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    location_country_filters: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=criteria.LocationInfo,
+    location_country_filters: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message=criteria.LocationInfo,
+        )
     )
     youtube_reach_location: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=6, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=6,
+        message=criteria.LocationInfo,
     )
 
 
@@ -396,10 +436,12 @@ class ListAudienceInsightsAttributesResponse(proto.Message):
             The attributes matching the search query.
     """
 
-    attributes: MutableSequence[
-        "AudienceInsightsAttributeMetadata"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttributeMetadata",
+    attributes: MutableSequence["AudienceInsightsAttributeMetadata"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttributeMetadata",
+        )
     )
 
 
@@ -427,10 +469,13 @@ class ListInsightsEligibleDatesResponse(proto.Message):
     """
 
     data_months: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     last_thirty_days: dates.DateRange = proto.Field(
-        proto.MESSAGE, number=2, message=dates.DateRange,
+        proto.MESSAGE,
+        number=2,
+        message=dates.DateRange,
     )
 
 
@@ -460,13 +505,18 @@ class GenerateAudienceOverlapInsightsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     country_location: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=2, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=2,
+        message=criteria.LocationInfo,
     )
     primary_attribute: "AudienceInsightsAttribute" = proto.Field(
-        proto.MESSAGE, number=3, message="AudienceInsightsAttribute",
+        proto.MESSAGE,
+        number=3,
+        message="AudienceInsightsAttribute",
     )
     dimensions: MutableSequence[
         audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
@@ -476,7 +526,8 @@ class GenerateAudienceOverlapInsightsRequest(proto.Message):
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -494,13 +545,19 @@ class GenerateAudienceOverlapInsightsResponse(proto.Message):
             dimension.
     """
 
-    primary_attribute_metadata: "AudienceInsightsAttributeMetadata" = proto.Field(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttributeMetadata",
+    primary_attribute_metadata: "AudienceInsightsAttributeMetadata" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttributeMetadata",
+        )
     )
-    dimension_results: MutableSequence[
-        "DimensionOverlapResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="DimensionOverlapResult",
+    dimension_results: MutableSequence["DimensionOverlapResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="DimensionOverlapResult",
+        )
     )
 
 
@@ -518,13 +575,17 @@ class DimensionOverlapResult(proto.Message):
             primary attribute.
     """
 
-    dimension: audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension = proto.Field(
+    dimension: (
+        audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     items: MutableSequence["AudienceOverlapItem"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AudienceOverlapItem",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceOverlapItem",
     )
 
 
@@ -546,10 +607,13 @@ class AudienceOverlapItem(proto.Message):
     """
 
     attribute_metadata: "AudienceInsightsAttributeMetadata" = proto.Field(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttributeMetadata",
+        proto.MESSAGE,
+        number=1,
+        message="AudienceInsightsAttributeMetadata",
     )
     potential_youtube_reach_intersection: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
 
 
@@ -568,13 +632,17 @@ class GenerateTargetingSuggestionMetricsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     audiences: MutableSequence["BasicInsightsAudience"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="BasicInsightsAudience",
+        proto.MESSAGE,
+        number=2,
+        message="BasicInsightsAudience",
     )
     customer_insights_group: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -590,10 +658,12 @@ class GenerateTargetingSuggestionMetricsResponse(proto.Message):
             requested, matching the order requested.
     """
 
-    suggestions: MutableSequence[
-        "TargetingSuggestionMetrics"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="TargetingSuggestionMetrics",
+    suggestions: MutableSequence["TargetingSuggestionMetrics"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="TargetingSuggestionMetrics",
+        )
     )
 
 
@@ -663,7 +733,10 @@ class AudienceInsightsAttribute(proto.Message):
         message=criteria.AgeRangeInfo,
     )
     gender: criteria.GenderInfo = proto.Field(
-        proto.MESSAGE, number=2, oneof="attribute", message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=2,
+        oneof="attribute",
+        message=criteria.GenderInfo,
     )
     location: criteria.LocationInfo = proto.Field(
         proto.MESSAGE,
@@ -753,6 +826,7 @@ class AudienceInsightsTopic(proto.Message):
 
 class AudienceInsightsEntity(proto.Message):
     r"""A Knowledge Graph entity, represented by its machine id.
+
     Attributes:
         knowledge_graph_machine_id (str):
             Required. The machine id (mid) of the
@@ -760,24 +834,28 @@ class AudienceInsightsEntity(proto.Message):
     """
 
     knowledge_graph_machine_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class AudienceInsightsCategory(proto.Message):
     r"""A Product and Service category.
+
     Attributes:
         category_id (str):
             Required. The criterion id of the category.
     """
 
     category_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class AudienceInsightsDynamicLineup(proto.Message):
     r"""A YouTube Dynamic Lineup.
+
     Attributes:
         dynamic_lineup_id (str):
             Required. The numeric ID of the dynamic
@@ -785,12 +863,14 @@ class AudienceInsightsDynamicLineup(proto.Message):
     """
 
     dynamic_lineup_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class BasicInsightsAudience(proto.Message):
     r"""A description of an audience used for requesting insights.
+
     Attributes:
         country_location (MutableSequence[google.ads.googleads.v18.common.types.LocationInfo]):
             Required. The countries for this audience.
@@ -814,29 +894,41 @@ class BasicInsightsAudience(proto.Message):
             that this audience is interested in.
     """
 
-    country_location: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+    country_location: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=criteria.LocationInfo,
+        )
     )
-    sub_country_locations: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=criteria.LocationInfo,
+    sub_country_locations: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message=criteria.LocationInfo,
+        )
     )
     gender: criteria.GenderInfo = proto.Field(
-        proto.MESSAGE, number=3, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.GenderInfo,
     )
     age_ranges: MutableSequence[criteria.AgeRangeInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.AgeRangeInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.AgeRangeInfo,
     )
-    user_interests: MutableSequence[
-        criteria.UserInterestInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=criteria.UserInterestInfo,
+    user_interests: MutableSequence[criteria.UserInterestInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message=criteria.UserInterestInfo,
+        )
     )
     topics: MutableSequence["AudienceInsightsTopic"] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="AudienceInsightsTopic",
+        proto.MESSAGE,
+        number=6,
+        message="AudienceInsightsTopic",
     )
 
 
@@ -891,22 +983,29 @@ class AudienceInsightsAttributeMetadata(proto.Message):
             This field is a member of `oneof`_ ``dimension_metadata``.
     """
 
-    dimension: audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension = proto.Field(
+    dimension: (
+        audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     attribute: "AudienceInsightsAttribute" = proto.Field(
-        proto.MESSAGE, number=2, message="AudienceInsightsAttribute",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceInsightsAttribute",
     )
     display_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     display_info: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     potential_youtube_reach: int = proto.Field(
-        proto.INT64, number=9,
+        proto.INT64,
+        number=9,
     )
     youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = proto.Field(
         proto.MESSAGE,
@@ -926,16 +1025,19 @@ class AudienceInsightsAttributeMetadata(proto.Message):
         oneof="dimension_metadata",
         message="LocationAttributeMetadata",
     )
-    user_interest_attribute_metadata: "UserInterestAttributeMetadata" = proto.Field(
-        proto.MESSAGE,
-        number=10,
-        oneof="dimension_metadata",
-        message="UserInterestAttributeMetadata",
+    user_interest_attribute_metadata: "UserInterestAttributeMetadata" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=10,
+            oneof="dimension_metadata",
+            message="UserInterestAttributeMetadata",
+        )
     )
 
 
 class YouTubeChannelAttributeMetadata(proto.Message):
     r"""Metadata associated with a YouTube channel attribute.
+
     Attributes:
         subscriber_count (int):
             The approximate number of subscribers to the
@@ -943,12 +1045,14 @@ class YouTubeChannelAttributeMetadata(proto.Message):
     """
 
     subscriber_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
 class DynamicLineupAttributeMetadata(proto.Message):
     r"""Metadata associated with a Dynamic Lineup attribute.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -989,34 +1093,52 @@ class DynamicLineupAttributeMetadata(proto.Message):
         """
 
         youtube_channel: criteria.YouTubeChannelInfo = proto.Field(
-            proto.MESSAGE, number=1, message=criteria.YouTubeChannelInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.YouTubeChannelInfo,
         )
         display_name: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
-        youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = proto.Field(
-            proto.MESSAGE, number=3, message="YouTubeChannelAttributeMetadata",
+        youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=3,
+                message="YouTubeChannelAttributeMetadata",
+            )
         )
 
     inventory_country: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.LocationInfo,
     )
     median_monthly_inventory: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     channel_count_lower_bound: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     channel_count_upper_bound: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     sample_channels: MutableSequence[SampleChannel] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=SampleChannel,
+        proto.MESSAGE,
+        number=5,
+        message=SampleChannel,
     )
 
 
 class LocationAttributeMetadata(proto.Message):
     r"""Metadata associated with a Location attribute.
+
     Attributes:
         country_location (google.ads.googleads.v18.common.types.LocationInfo):
             The country location of the sub country
@@ -1024,12 +1146,15 @@ class LocationAttributeMetadata(proto.Message):
     """
 
     country_location: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.LocationInfo,
     )
 
 
 class UserInterestAttributeMetadata(proto.Message):
     r"""Metadata associated with a User Interest attribute.
+
     Attributes:
         user_interest_description (str):
             English language text description of the user
@@ -1037,7 +1162,8 @@ class UserInterestAttributeMetadata(proto.Message):
     """
 
     user_interest_description: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1061,13 +1187,18 @@ class InsightsAudienceDefinition(proto.Message):
     """
 
     audience: "InsightsAudience" = proto.Field(
-        proto.MESSAGE, number=1, message="InsightsAudience",
+        proto.MESSAGE,
+        number=1,
+        message="InsightsAudience",
     )
     baseline_audience: "InsightsAudience" = proto.Field(
-        proto.MESSAGE, number=2, message="InsightsAudience",
+        proto.MESSAGE,
+        number=2,
+        message="InsightsAudience",
     )
     data_month: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -1093,15 +1224,20 @@ class InsightsAudienceDescription(proto.Message):
             unset will provide both.
     """
 
-    country_locations: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+    country_locations: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=criteria.LocationInfo,
+        )
     )
     audience_description: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
-    marketing_objective: audience_insights_marketing_objective.AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective = proto.Field(
+    marketing_objective: (
+        audience_insights_marketing_objective.AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=audience_insights_marketing_objective.AudienceInsightsMarketingObjectiveEnum.AudienceInsightsMarketingObjective,
@@ -1152,44 +1288,61 @@ class InsightsAudience(proto.Message):
             Attributes each.
     """
 
-    country_locations: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+    country_locations: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=criteria.LocationInfo,
+        )
     )
-    sub_country_locations: MutableSequence[
-        criteria.LocationInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=criteria.LocationInfo,
+    sub_country_locations: MutableSequence[criteria.LocationInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message=criteria.LocationInfo,
+        )
     )
     gender: criteria.GenderInfo = proto.Field(
-        proto.MESSAGE, number=3, message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=3,
+        message=criteria.GenderInfo,
     )
     age_ranges: MutableSequence[criteria.AgeRangeInfo] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=criteria.AgeRangeInfo,
+        proto.MESSAGE,
+        number=4,
+        message=criteria.AgeRangeInfo,
     )
     parental_status: criteria.ParentalStatusInfo = proto.Field(
-        proto.MESSAGE, number=5, message=criteria.ParentalStatusInfo,
+        proto.MESSAGE,
+        number=5,
+        message=criteria.ParentalStatusInfo,
     )
-    income_ranges: MutableSequence[
-        criteria.IncomeRangeInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=criteria.IncomeRangeInfo,
+    income_ranges: MutableSequence[criteria.IncomeRangeInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=criteria.IncomeRangeInfo,
+        )
     )
-    dynamic_lineups: MutableSequence[
-        "AudienceInsightsDynamicLineup"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="AudienceInsightsDynamicLineup",
+    dynamic_lineups: MutableSequence["AudienceInsightsDynamicLineup"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message="AudienceInsightsDynamicLineup",
+        )
     )
     topic_audience_combinations: MutableSequence[
         "InsightsAudienceAttributeGroup"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="InsightsAudienceAttributeGroup",
+        proto.MESSAGE,
+        number=8,
+        message="InsightsAudienceAttributeGroup",
     )
 
 
 class InsightsAudienceAttributeGroup(proto.Message):
     r"""A list of AudienceInsightsAttributes.
+
     Attributes:
         attributes (MutableSequence[google.ads.googleads.v18.services.types.AudienceInsightsAttribute]):
             Required. A collection of audience attributes
@@ -1200,10 +1353,12 @@ class InsightsAudienceAttributeGroup(proto.Message):
             supported in this context.
     """
 
-    attributes: MutableSequence[
-        "AudienceInsightsAttribute"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttribute",
+    attributes: MutableSequence["AudienceInsightsAttribute"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttribute",
+        )
     )
 
 
@@ -1223,20 +1378,26 @@ class AudienceCompositionSection(proto.Message):
             clusters. Only populated if dimension is YOUTUBE_CHANNEL.
     """
 
-    dimension: audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension = proto.Field(
+    dimension: (
+        audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
-    top_attributes: MutableSequence[
-        "AudienceCompositionAttribute"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="AudienceCompositionAttribute",
+    top_attributes: MutableSequence["AudienceCompositionAttribute"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message="AudienceCompositionAttribute",
+        )
     )
     clustered_attributes: MutableSequence[
         "AudienceCompositionAttributeCluster"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="AudienceCompositionAttributeCluster",
+        proto.MESSAGE,
+        number=4,
+        message="AudienceCompositionAttributeCluster",
     )
 
 
@@ -1258,15 +1419,20 @@ class AudienceCompositionAttributeCluster(proto.Message):
     """
 
     cluster_display_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     cluster_metrics: "AudienceCompositionMetrics" = proto.Field(
-        proto.MESSAGE, number=3, message="AudienceCompositionMetrics",
+        proto.MESSAGE,
+        number=3,
+        message="AudienceCompositionMetrics",
     )
-    attributes: MutableSequence[
-        "AudienceCompositionAttribute"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message="AudienceCompositionAttribute",
+    attributes: MutableSequence["AudienceCompositionAttribute"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message="AudienceCompositionAttribute",
+        )
     )
 
 
@@ -1289,21 +1455,26 @@ class AudienceCompositionMetrics(proto.Message):
     """
 
     baseline_audience_share: float = proto.Field(
-        proto.DOUBLE, number=1,
+        proto.DOUBLE,
+        number=1,
     )
     audience_share: float = proto.Field(
-        proto.DOUBLE, number=2,
+        proto.DOUBLE,
+        number=2,
     )
     index: float = proto.Field(
-        proto.DOUBLE, number=3,
+        proto.DOUBLE,
+        number=3,
     )
     score: float = proto.Field(
-        proto.DOUBLE, number=4,
+        proto.DOUBLE,
+        number=4,
     )
 
 
 class AudienceCompositionAttribute(proto.Message):
     r"""An audience attribute with metadata and metrics.
+
     Attributes:
         attribute_metadata (google.ads.googleads.v18.services.types.AudienceInsightsAttributeMetadata):
             The attribute with its metadata.
@@ -1312,10 +1483,14 @@ class AudienceCompositionAttribute(proto.Message):
     """
 
     attribute_metadata: "AudienceInsightsAttributeMetadata" = proto.Field(
-        proto.MESSAGE, number=1, message="AudienceInsightsAttributeMetadata",
+        proto.MESSAGE,
+        number=1,
+        message="AudienceInsightsAttributeMetadata",
     )
     metrics: "AudienceCompositionMetrics" = proto.Field(
-        proto.MESSAGE, number=2, message="AudienceCompositionMetrics",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceCompositionMetrics",
     )
 
 

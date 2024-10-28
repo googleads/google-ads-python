@@ -41,6 +41,7 @@ __protobuf__ = proto.module(
 
 class OfflineConversionUploadConversionActionSummary(proto.Message):
     r"""Offline conversion upload summary at conversion action level.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion
@@ -89,7 +90,9 @@ class OfflineConversionUploadConversionActionSummary(proto.Message):
         proto.STRING,
         number=1,
     )
-    client: offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient = proto.Field(
+    client: (
+        offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient,
@@ -102,7 +105,9 @@ class OfflineConversionUploadConversionActionSummary(proto.Message):
         proto.STRING,
         number=4,
     )
-    status: offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus = proto.Field(
+    status: (
+        offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus,

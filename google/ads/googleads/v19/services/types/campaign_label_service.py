@@ -118,6 +118,7 @@ class CampaignLabelOperation(proto.Message):
 
 class MutateCampaignLabelsResponse(proto.Message):
     r"""Response message for a campaign labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -143,6 +144,7 @@ class MutateCampaignLabelsResponse(proto.Message):
 
 class MutateCampaignLabelResult(proto.Message):
     r"""The result for a campaign label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

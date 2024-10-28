@@ -71,12 +71,12 @@ class MutateConversionValueRuleSetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "ConversionValueRuleSetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ConversionValueRuleSetOperation",
+    operations: MutableSequence["ConversionValueRuleSetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionValueRuleSetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateConversionValueRuleSetsRequest(proto.Message):
         proto.BOOL,
         number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -166,12 +168,12 @@ class MutateConversionValueRuleSetsResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateConversionValueRuleSetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateConversionValueRuleSetResult",
+    results: MutableSequence["MutateConversionValueRuleSetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateConversionValueRuleSetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -182,6 +184,7 @@ class MutateConversionValueRuleSetsResponse(proto.Message):
 
 class MutateConversionValueRuleSetResult(proto.Message):
     r"""The result for the conversion value rule set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -195,7 +198,9 @@ class MutateConversionValueRuleSetResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    conversion_value_rule_set: gagr_conversion_value_rule_set.ConversionValueRuleSet = proto.Field(
+    conversion_value_rule_set: (
+        gagr_conversion_value_rule_set.ConversionValueRuleSet
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_conversion_value_rule_set.ConversionValueRuleSet,

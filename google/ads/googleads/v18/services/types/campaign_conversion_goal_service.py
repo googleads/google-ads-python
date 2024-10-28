@@ -52,20 +52,25 @@ class MutateCampaignConversionGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CampaignConversionGoalOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignConversionGoalOperation",
+    operations: MutableSequence["CampaignConversionGoalOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignConversionGoalOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
 class CampaignConversionGoalOperation(proto.Message):
     r"""A single operation (update) on a campaign conversion goal.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -80,7 +85,9 @@ class CampaignConversionGoalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     update: campaign_conversion_goal.CampaignConversionGoal = proto.Field(
         proto.MESSAGE,
@@ -92,27 +99,32 @@ class CampaignConversionGoalOperation(proto.Message):
 
 class MutateCampaignConversionGoalsResponse(proto.Message):
     r"""Response message for a campaign conversion goal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCampaignConversionGoalResult]):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateCampaignConversionGoalResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCampaignConversionGoalResult",
+    results: MutableSequence["MutateCampaignConversionGoalResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCampaignConversionGoalResult",
+        )
     )
 
 
 class MutateCampaignConversionGoalResult(proto.Message):
     r"""The result for the campaign conversion goal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

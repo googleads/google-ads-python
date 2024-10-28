@@ -48,6 +48,7 @@ __protobuf__ = proto.module(
 
 class Customer(proto.Message):
     r"""A customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -308,7 +309,9 @@ class Customer(proto.Message):
         number=45,
         message="LocalServicesSettings",
     )
-    video_brand_safety_suitability: brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability = proto.Field(
+    video_brand_safety_suitability: (
+        brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability
+    ) = proto.Field(
         proto.ENUM,
         number=46,
         enum=brand_safety_suitability.BrandSafetySuitabilityEnum.BrandSafetySuitability,
@@ -318,6 +321,7 @@ class Customer(proto.Message):
 class CallReportingSetting(proto.Message):
     r"""Call reporting setting for a customer. Only mutable in an ``update``
     operation.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -360,6 +364,7 @@ class CallReportingSetting(proto.Message):
 class ConversionTrackingSetting(proto.Message):
     r"""A collection of customer-wide settings related to Google Ads
     Conversion Tracking.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -420,7 +425,9 @@ class ConversionTrackingSetting(proto.Message):
         proto.BOOL,
         number=5,
     )
-    conversion_tracking_status: conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus = proto.Field(
+    conversion_tracking_status: (
+        conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=conversion_tracking_status_enum.ConversionTrackingStatusEnum.ConversionTrackingStatus,
@@ -437,6 +444,7 @@ class ConversionTrackingSetting(proto.Message):
 
 class RemarketingSetting(proto.Message):
     r"""Remarketing setting for a customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -455,6 +463,7 @@ class RemarketingSetting(proto.Message):
 
 class CustomerAgreementSetting(proto.Message):
     r"""Customer Agreement Setting for a customer.
+
     Attributes:
         accepted_lead_form_terms (bool):
             Output only. Whether the customer has
@@ -469,6 +478,7 @@ class CustomerAgreementSetting(proto.Message):
 
 class LocalServicesSettings(proto.Message):
     r"""Settings for Local Services customer.
+
     Attributes:
         granular_license_statuses (MutableSequence[google.ads.googleads.v17.resources.types.GranularLicenseStatus]):
             Output only. A read-only list of geo vertical
@@ -478,24 +488,25 @@ class LocalServicesSettings(proto.Message):
             level insurance statuses.
     """
 
-    granular_license_statuses: MutableSequence[
-        "GranularLicenseStatus"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="GranularLicenseStatus",
+    granular_license_statuses: MutableSequence["GranularLicenseStatus"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="GranularLicenseStatus",
+        )
     )
-    granular_insurance_statuses: MutableSequence[
-        "GranularInsuranceStatus"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="GranularInsuranceStatus",
+    granular_insurance_statuses: MutableSequence["GranularInsuranceStatus"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="GranularInsuranceStatus",
+        )
     )
 
 
 class GranularLicenseStatus(proto.Message):
     r"""License status at geo + vertical level.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -532,7 +543,9 @@ class GranularLicenseStatus(proto.Message):
         number=2,
         optional=True,
     )
-    verification_status: local_services_verification_status.LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus = proto.Field(
+    verification_status: (
+        local_services_verification_status.LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         optional=True,
@@ -542,6 +555,7 @@ class GranularLicenseStatus(proto.Message):
 
 class GranularInsuranceStatus(proto.Message):
     r"""Insurance status at geo + vertical level.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -578,7 +592,9 @@ class GranularInsuranceStatus(proto.Message):
         number=2,
         optional=True,
     )
-    verification_status: local_services_verification_status.LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus = proto.Field(
+    verification_status: (
+        local_services_verification_status.LocalServicesVerificationStatusEnum.LocalServicesVerificationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         optional=True,

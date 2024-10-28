@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class AssetUsage(proto.Message):
     r"""Contains the usage information of the asset.
+
     Attributes:
         asset (str):
             Resource name of the asset.

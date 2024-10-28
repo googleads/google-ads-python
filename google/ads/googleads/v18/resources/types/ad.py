@@ -31,12 +31,15 @@ from google.ads.googleads.v18.enums.types import system_managed_entity_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"Ad",},
+    manifest={
+        "Ad",
+    },
 )
 
 
 class Ad(proto.Message):
     r"""An ad.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -242,54 +245,81 @@ class Ad(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=37,
+        proto.STRING,
+        number=37,
     )
     id: int = proto.Field(
-        proto.INT64, number=40, optional=True,
+        proto.INT64,
+        number=40,
+        optional=True,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=41,
+        proto.STRING,
+        number=41,
     )
-    final_app_urls: MutableSequence[
-        final_app_url.FinalAppUrl
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=35, message=final_app_url.FinalAppUrl,
+    final_app_urls: MutableSequence[final_app_url.FinalAppUrl] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=35,
+            message=final_app_url.FinalAppUrl,
+        )
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=42,
+        proto.STRING,
+        number=42,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=43, optional=True,
+        proto.STRING,
+        number=43,
+        optional=True,
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=44, optional=True,
+        proto.STRING,
+        number=44,
+        optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=10,
+            message=custom_parameter.CustomParameter,
+        )
     )
     display_url: str = proto.Field(
-        proto.STRING, number=45, optional=True,
+        proto.STRING,
+        number=45,
+        optional=True,
     )
     type_: ad_type.AdTypeEnum.AdType = proto.Field(
-        proto.ENUM, number=5, enum=ad_type.AdTypeEnum.AdType,
+        proto.ENUM,
+        number=5,
+        enum=ad_type.AdTypeEnum.AdType,
     )
     added_by_google_ads: bool = proto.Field(
-        proto.BOOL, number=46, optional=True,
+        proto.BOOL,
+        number=46,
+        optional=True,
     )
     device_preference: device.DeviceEnum.Device = proto.Field(
-        proto.ENUM, number=20, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=20,
+        enum=device.DeviceEnum.Device,
     )
-    url_collections: MutableSequence[
-        url_collection.UrlCollection
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=26, message=url_collection.UrlCollection,
+    url_collections: MutableSequence[url_collection.UrlCollection] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=26,
+            message=url_collection.UrlCollection,
+        )
     )
     name: str = proto.Field(
-        proto.STRING, number=47, optional=True,
+        proto.STRING,
+        number=47,
+        optional=True,
     )
-    system_managed_resource_source: system_managed_entity_source.SystemManagedResourceSourceEnum.SystemManagedResourceSource = proto.Field(
+    system_managed_resource_source: (
+        system_managed_entity_source.SystemManagedResourceSourceEnum.SystemManagedResourceSource
+    ) = proto.Field(
         proto.ENUM,
         number=27,
         enum=system_managed_entity_source.SystemManagedResourceSourceEnum.SystemManagedResourceSource,
@@ -312,11 +342,13 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.CallAdInfo,
     )
-    expanded_dynamic_search_ad: ad_type_infos.ExpandedDynamicSearchAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=14,
-        oneof="ad_data",
-        message=ad_type_infos.ExpandedDynamicSearchAdInfo,
+    expanded_dynamic_search_ad: ad_type_infos.ExpandedDynamicSearchAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=14,
+            oneof="ad_data",
+            message=ad_type_infos.ExpandedDynamicSearchAdInfo,
+        )
     )
     hotel_ad: ad_type_infos.HotelAdInfo = proto.Field(
         proto.MESSAGE,
@@ -360,7 +392,9 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.ResponsiveSearchAdInfo,
     )
-    legacy_responsive_display_ad: ad_type_infos.LegacyResponsiveDisplayAdInfo = proto.Field(
+    legacy_responsive_display_ad: (
+        ad_type_infos.LegacyResponsiveDisplayAdInfo
+    ) = proto.Field(
         proto.MESSAGE,
         number=28,
         oneof="ad_data",
@@ -402,7 +436,9 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.AppEngagementAdInfo,
     )
-    shopping_comparison_listing_ad: ad_type_infos.ShoppingComparisonListingAdInfo = proto.Field(
+    shopping_comparison_listing_ad: (
+        ad_type_infos.ShoppingComparisonListingAdInfo
+    ) = proto.Field(
         proto.MESSAGE,
         number=36,
         oneof="ad_data",
@@ -414,17 +450,21 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.SmartCampaignAdInfo,
     )
-    app_pre_registration_ad: ad_type_infos.AppPreRegistrationAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=50,
-        oneof="ad_data",
-        message=ad_type_infos.AppPreRegistrationAdInfo,
+    app_pre_registration_ad: ad_type_infos.AppPreRegistrationAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=50,
+            oneof="ad_data",
+            message=ad_type_infos.AppPreRegistrationAdInfo,
+        )
     )
-    demand_gen_multi_asset_ad: ad_type_infos.DemandGenMultiAssetAdInfo = proto.Field(
-        proto.MESSAGE,
-        number=62,
-        oneof="ad_data",
-        message=ad_type_infos.DemandGenMultiAssetAdInfo,
+    demand_gen_multi_asset_ad: ad_type_infos.DemandGenMultiAssetAdInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=62,
+            oneof="ad_data",
+            message=ad_type_infos.DemandGenMultiAssetAdInfo,
+        )
     )
     demand_gen_carousel_ad: ad_type_infos.DemandGenCarouselAdInfo = proto.Field(
         proto.MESSAGE,
@@ -432,7 +472,9 @@ class Ad(proto.Message):
         oneof="ad_data",
         message=ad_type_infos.DemandGenCarouselAdInfo,
     )
-    demand_gen_video_responsive_ad: ad_type_infos.DemandGenVideoResponsiveAdInfo = proto.Field(
+    demand_gen_video_responsive_ad: (
+        ad_type_infos.DemandGenVideoResponsiveAdInfo
+    ) = proto.Field(
         proto.MESSAGE,
         number=64,
         oneof="ad_data",

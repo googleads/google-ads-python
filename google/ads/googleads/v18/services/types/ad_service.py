@@ -67,26 +67,34 @@ class MutateAdsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AdOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AdOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
 class AdOperation(proto.Message):
     r"""A single update operation on an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -105,18 +113,26 @@ class AdOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
     policy_validation_parameter: policy.PolicyValidationParameter = proto.Field(
-        proto.MESSAGE, number=3, message=policy.PolicyValidationParameter,
+        proto.MESSAGE,
+        number=3,
+        message=policy.PolicyValidationParameter,
     )
     update: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=1, oneof="operation", message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=1,
+        oneof="operation",
+        message=gagr_ad.Ad,
     )
 
 
 class MutateAdsResponse(proto.Message):
     r"""Response message for an ad mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -129,15 +145,20 @@ class MutateAdsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
     results: MutableSequence["MutateAdResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateAdResult",
     )
 
 
 class MutateAdResult(proto.Message):
     r"""The result for the ad mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful
@@ -149,10 +170,13 @@ class MutateAdResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_ad.Ad,
     )
 
 

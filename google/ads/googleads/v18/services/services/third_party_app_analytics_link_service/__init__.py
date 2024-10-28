@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ThirdPartyAppAnalyticsLinkServiceClient
+from .async_client import ThirdPartyAppAnalyticsLinkServiceAsyncClient
 
-__all__ = ("ThirdPartyAppAnalyticsLinkServiceClient",)
+__all__ = (
+    "ThirdPartyAppAnalyticsLinkServiceClient",
+    "ThirdPartyAppAnalyticsLinkServiceAsyncClient",
+)

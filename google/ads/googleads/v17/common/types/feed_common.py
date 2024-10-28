@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class Money(proto.Message):
     r"""Represents a price in a particular currency.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

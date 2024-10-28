@@ -23,7 +23,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"TopicConstant",},
+    manifest={
+        "TopicConstant",
+    },
 )
 
 
@@ -31,6 +33,7 @@ class TopicConstant(proto.Message):
     r"""Use topics to target or exclude placements in the Google
     Display Network based on the category into which the placement
     falls (for example, "Pets & Animals/Pets/Dogs").
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -60,16 +63,22 @@ class TopicConstant(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     topic_constant_parent: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     path: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
 
 

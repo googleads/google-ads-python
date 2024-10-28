@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemValidationStatusEnum",},
+    manifest={
+        "FeedItemValidationStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,22 @@ class FeedItemValidationStatusEnum(proto.Message):
     """
 
     class FeedItemValidationStatus(proto.Enum):
-        r"""The possible validation statuses of a feed item."""
+        r"""The possible validation statuses of a feed item.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                Validation pending.
+            INVALID (3):
+                An error was found.
+            VALID (4):
+                Feed item is semantically well-formed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

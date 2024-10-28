@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AdGroupCriterionCustomizerServiceClient
+from .async_client import AdGroupCriterionCustomizerServiceAsyncClient
 
-__all__ = ("AdGroupCriterionCustomizerServiceClient",)
+__all__ = (
+    "AdGroupCriterionCustomizerServiceClient",
+    "AdGroupCriterionCustomizerServiceAsyncClient",
+)

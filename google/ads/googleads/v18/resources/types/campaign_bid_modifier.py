@@ -24,13 +24,16 @@ from google.ads.googleads.v18.common.types import criteria
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignBidModifier",},
+    manifest={
+        "CampaignBidModifier",
+    },
 )
 
 
 class CampaignBidModifier(proto.Message):
     r"""Represents a bid-modifiable only criterion at the campaign
     level.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -64,16 +67,23 @@ class CampaignBidModifier(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     bid_modifier: float = proto.Field(
-        proto.DOUBLE, number=8, optional=True,
+        proto.DOUBLE,
+        number=8,
+        optional=True,
     )
     interaction_type: criteria.InteractionTypeInfo = proto.Field(
         proto.MESSAGE,

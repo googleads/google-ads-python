@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"NewResourceCreationErrorEnum",},
+    manifest={
+        "NewResourceCreationErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,26 @@ class NewResourceCreationErrorEnum(proto.Message):
     """
 
     class NewResourceCreationError(proto.Enum):
-        r"""Enum describing possible new resource creation errors."""
+        r"""Enum describing possible new resource creation errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CANNOT_SET_ID_FOR_CREATE (2):
+                Do not set the id field while creating new
+                resources.
+            DUPLICATE_TEMP_IDS (3):
+                Creating more than one resource with the same
+                temp ID is not allowed.
+            TEMP_ID_RESOURCE_HAD_ERRORS (4):
+                Parent resource with specified temp ID failed
+                validation, so no validation will be done for
+                this child resource.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CANNOT_SET_ID_FOR_CREATE = 2

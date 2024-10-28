@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ConversionGoalCampaignConfigServiceClient
+from .async_client import ConversionGoalCampaignConfigServiceAsyncClient
 
-__all__ = ("ConversionGoalCampaignConfigServiceClient",)
+__all__ = (
+    "ConversionGoalCampaignConfigServiceClient",
+    "ConversionGoalCampaignConfigServiceAsyncClient",
+)

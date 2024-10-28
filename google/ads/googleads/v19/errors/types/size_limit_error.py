@@ -32,7 +32,24 @@ class SizeLimitErrorEnum(proto.Message):
     r"""Container for enum describing possible size limit errors."""
 
     class SizeLimitError(proto.Enum):
-        r"""Enum describing possible size limit errors."""
+        r"""Enum describing possible size limit errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            REQUEST_SIZE_LIMIT_EXCEEDED (2):
+                The number of entries in the request exceeds
+                the system limit, or the contents of the
+                operations exceed transaction limits due to
+                their size or complexity. Try reducing the
+                number of entries per request.
+            RESPONSE_SIZE_LIMIT_EXCEEDED (3):
+                The number of entries in the response exceeds
+                the system limit.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

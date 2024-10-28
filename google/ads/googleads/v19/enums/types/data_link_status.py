@@ -32,7 +32,31 @@ class DataLinkStatusEnum(proto.Message):
     r"""Container for enum describing different types of data links."""
 
     class DataLinkStatus(proto.Enum):
-        r"""Describes the possible data link statuses."""
+        r"""Describes the possible data link statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            REQUESTED (2):
+                Link has been requested by one party, but not
+                confirmed by the other party.
+            PENDING_APPROVAL (3):
+                Link is waiting for the customer to approve.
+            ENABLED (4):
+                Link is established and can be used as
+                needed.
+            DISABLED (5):
+                Link is no longer valid and should be
+                ignored.
+            REVOKED (6):
+                Link request has been cancelled by the
+                requester and further cleanup may be needed.
+            REJECTED (7):
+                Link request has been rejected by the
+                approver.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

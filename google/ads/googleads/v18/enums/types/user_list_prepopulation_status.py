@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListPrepopulationStatusEnum",},
+    manifest={
+        "UserListPrepopulationStatusEnum",
+    },
 )
 
 
 class UserListPrepopulationStatusEnum(proto.Message):
-    r"""Indicates status of prepopulation based on the rule.
-    """
+    r"""Indicates status of prepopulation based on the rule."""
 
     class UserListPrepopulationStatus(proto.Enum):
-        r"""Enum describing possible user list prepopulation status."""
+        r"""Enum describing possible user list prepopulation status.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            REQUESTED (2):
+                Prepopoulation is being requested.
+            FINISHED (3):
+                Prepopulation is finished.
+            FAILED (4):
+                Prepopulation failed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REQUESTED = 2

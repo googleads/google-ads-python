@@ -32,7 +32,21 @@ class UserListLogicalRuleOperatorEnum(proto.Message):
     r"""The logical operator of the rule."""
 
     class UserListLogicalRuleOperator(proto.Enum):
-        r"""Enum describing possible user list logical rule operators."""
+        r"""Enum describing possible user list logical rule operators.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ALL (2):
+                And - all of the operands.
+            ANY (3):
+                Or - at least one of the operands.
+            NONE (4):
+                Not - none of the operands.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -35,7 +35,29 @@ class AdGroupAdPrimaryStatusEnum(proto.Message):
     """
 
     class AdGroupAdPrimaryStatus(proto.Enum):
-        r"""The possible statuses of an AdGroupAd."""
+        r"""The possible statuses of an AdGroupAd.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The ad group ad is eligible to serve.
+            PAUSED (3):
+                The ad group ad is paused.
+            REMOVED (4):
+                The ad group ad is removed.
+            PENDING (5):
+                The ad cannot serve now, but may serve later
+                without advertiser action.
+            LIMITED (6):
+                The ad group ad is serving in a limited
+                capacity.
+            NOT_ELIGIBLE (7):
+                The ad group ad is not eligible to serve.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

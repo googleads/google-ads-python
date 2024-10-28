@@ -25,12 +25,15 @@ from google.ads.googleads.v18.enums.types import experiment_metric_direction
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"MetricGoal",},
+    manifest={
+        "MetricGoal",
+    },
 )
 
 
 class MetricGoal(proto.Message):
     r"""A metric goal for an experiment.
+
     Attributes:
         metric (google.ads.googleads.v18.enums.types.ExperimentMetricEnum.ExperimentMetric):
             The metric of the goal. For example, clicks,
@@ -40,12 +43,16 @@ class MetricGoal(proto.Message):
             example, increase, decrease, no change.
     """
 
-    metric: experiment_metric.ExperimentMetricEnum.ExperimentMetric = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=experiment_metric.ExperimentMetricEnum.ExperimentMetric,
+    metric: experiment_metric.ExperimentMetricEnum.ExperimentMetric = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=experiment_metric.ExperimentMetricEnum.ExperimentMetric,
+        )
     )
-    direction: experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection = proto.Field(
+    direction: (
+        experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection,

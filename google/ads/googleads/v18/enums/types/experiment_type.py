@@ -22,16 +22,53 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ExperimentTypeEnum",},
+    manifest={
+        "ExperimentTypeEnum",
+    },
 )
 
 
 class ExperimentTypeEnum(proto.Message):
-    r"""Container for enum describing the type of experiment.
-    """
+    r"""Container for enum describing the type of experiment."""
 
     class ExperimentType(proto.Enum):
-        r"""The type of the experiment."""
+        r"""The type of the experiment.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            DISPLAY_AND_VIDEO_360 (2):
+                This is a DISPLAY_AND_VIDEO_360 experiment.
+            AD_VARIATION (3):
+                This is an ad variation experiment.
+            YOUTUBE_CUSTOM (5):
+                A custom experiment consisting of Video
+                campaigns.
+            DISPLAY_CUSTOM (6):
+                A custom experiment consisting of display
+                campaigns.
+            SEARCH_CUSTOM (7):
+                A custom experiment consisting of search
+                campaigns.
+            DISPLAY_AUTOMATED_BIDDING_STRATEGY (8):
+                An experiment that compares bidding
+                strategies for display campaigns.
+            SEARCH_AUTOMATED_BIDDING_STRATEGY (9):
+                An experiment that compares bidding
+                strategies for search campaigns.".
+            SHOPPING_AUTOMATED_BIDDING_STRATEGY (10):
+                An experiment that compares bidding
+                strategies for shopping campaigns.
+            SMART_MATCHING (11):
+                DEPRECATED. A smart matching experiment with
+                search campaigns.
+            HOTEL_CUSTOM (12):
+                A custom experiment consisting of hotel
+                campaigns.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DISPLAY_AND_VIDEO_360 = 2

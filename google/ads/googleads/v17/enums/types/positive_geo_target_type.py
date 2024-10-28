@@ -35,7 +35,28 @@ class PositiveGeoTargetTypeEnum(proto.Message):
     """
 
     class PositiveGeoTargetType(proto.Enum):
-        r"""The possible positive geo target types."""
+        r"""The possible positive geo target types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            PRESENCE_OR_INTEREST (5):
+                Specifies that an ad is triggered if the user
+                is in, or shows interest in, advertiser's
+                targeted locations.
+            SEARCH_INTEREST (6):
+                Specifies that an ad is triggered if the user
+                searches for advertiser's targeted locations.
+                This can only be used with Search and standard
+                Shopping campaigns.
+            PRESENCE (7):
+                Specifies that an ad is triggered if the user
+                is in or regularly in advertiser's targeted
+                locations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PRESENCE_OR_INTEREST = 5

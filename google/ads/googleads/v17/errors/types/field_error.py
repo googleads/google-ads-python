@@ -32,7 +32,35 @@ class FieldErrorEnum(proto.Message):
     r"""Container for enum describing possible field errors."""
 
     class FieldError(proto.Enum):
-        r"""Enum describing possible field errors."""
+        r"""Enum describing possible field errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            REQUIRED (2):
+                The required field was not present.
+            IMMUTABLE_FIELD (3):
+                The field attempted to be mutated is
+                immutable.
+            INVALID_VALUE (4):
+                The field's value is invalid.
+            VALUE_MUST_BE_UNSET (5):
+                The field cannot be set.
+            REQUIRED_NONEMPTY_LIST (6):
+                The required repeated field was empty.
+            FIELD_CANNOT_BE_CLEARED (7):
+                The field cannot be cleared.
+            BLOCKED_VALUE (9):
+                The field's value is on a deny-list for this
+                field.
+            FIELD_CAN_ONLY_BE_CLEARED (10):
+                The field's value cannot be modified, except
+                for clearing.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REQUIRED = 2

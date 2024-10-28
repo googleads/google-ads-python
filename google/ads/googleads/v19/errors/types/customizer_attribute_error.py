@@ -35,7 +35,18 @@ class CustomizerAttributeErrorEnum(proto.Message):
     """
 
     class CustomizerAttributeError(proto.Enum):
-        r"""Enum describing possible customizer attribute errors."""
+        r"""Enum describing possible customizer attribute errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_CUSTOMIZER_ATTRIBUTE_NAME (2):
+                CustomizerAttribute name matches that of
+                another active CustomizerAttribute.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

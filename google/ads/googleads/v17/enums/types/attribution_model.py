@@ -39,7 +39,40 @@ class AttributionModelEnum(proto.Message):
         r"""The attribution model that describes how to distribute credit
         for a particular conversion across potentially many prior
         interactions.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EXTERNAL (100):
+                Uses external attribution.
+            GOOGLE_ADS_LAST_CLICK (101):
+                Attributes all credit for a conversion to its
+                last click.
+            GOOGLE_SEARCH_ATTRIBUTION_FIRST_CLICK (102):
+                Attributes all credit for a conversion to its
+                first click using Google Search attribution.
+            GOOGLE_SEARCH_ATTRIBUTION_LINEAR (103):
+                Attributes credit for a conversion equally
+                across all of its clicks using Google Search
+                attribution.
+            GOOGLE_SEARCH_ATTRIBUTION_TIME_DECAY (104):
+                Attributes exponentially more credit for a
+                conversion to its more recent clicks using
+                Google Search attribution (half-life is 1 week).
+            GOOGLE_SEARCH_ATTRIBUTION_POSITION_BASED (105):
+                Attributes 40% of the credit for a conversion
+                to its first and last clicks. Remaining 20% is
+                evenly distributed across all other clicks. This
+                uses Google Search attribution.
+            GOOGLE_SEARCH_ATTRIBUTION_DATA_DRIVEN (106):
+                Flexible model that uses machine learning to
+                determine the appropriate distribution of credit
+                among clicks using Google Search attribution.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EXTERNAL = 100

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetGroupSignalApprovalStatusEnum",},
+    manifest={
+        "AssetGroupSignalApprovalStatusEnum",
+    },
 )
 
 
@@ -36,7 +38,27 @@ class AssetGroupSignalApprovalStatusEnum(proto.Message):
     class AssetGroupSignalApprovalStatus(proto.Enum):
         r"""Enumerates AssetGroupSignal approval statuses, which are only
         used for Search Theme Signal.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            APPROVED (2):
+                Search Theme is eligible to show ads.
+            LIMITED (3):
+                Low search volume; Below first page bid
+                estimate.
+            DISAPPROVED (4):
+                Search Theme is inactive and isn't showing
+                ads. A disapproved Search Theme usually means
+                there's an issue with one or more of our
+                advertising policies.
+            UNDER_REVIEW (5):
+                Search Theme is under review. It won’t be
+                able to trigger ads until it's been reviewed.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         APPROVED = 2

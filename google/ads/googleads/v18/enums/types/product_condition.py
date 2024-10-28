@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductConditionEnum",},
+    manifest={
+        "ProductConditionEnum",
+    },
 )
 
 
 class ProductConditionEnum(proto.Message):
-    r"""Condition of a product offer.
-    """
+    r"""Condition of a product offer."""
 
     class ProductCondition(proto.Enum):
-        r"""Enum describing the condition of a product offer."""
+        r"""Enum describing the condition of a product offer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NEW (3):
+                The product condition is new.
+            REFURBISHED (4):
+                The product condition is refurbished.
+            USED (5):
+                The product condition is used.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NEW = 3

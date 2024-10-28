@@ -32,7 +32,21 @@ class SharedSetStatusEnum(proto.Message):
     r"""Container for enum describing types of shared set statuses."""
 
     class SharedSetStatus(proto.Enum):
-        r"""Enum listing the possible shared set statuses."""
+        r"""Enum listing the possible shared set statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The shared set is enabled.
+            REMOVED (3):
+                The shared set is removed and can no longer
+                be used.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

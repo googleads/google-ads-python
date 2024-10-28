@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesLeadTypeEnum",},
+    manifest={
+        "LocalServicesLeadTypeEnum",
+    },
 )
 
 
 class LocalServicesLeadTypeEnum(proto.Message):
-    r"""Container for enum describing possible types of lead.
-    """
+    r"""Container for enum describing possible types of lead."""
 
     class LeadType(proto.Enum):
-        r"""Possible types of lead."""
+        r"""Possible types of lead.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MESSAGE (2):
+                Message lead.
+            PHONE_CALL (3):
+                Lead created by phone call.
+            BOOKING (4):
+                Booking lead.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MESSAGE = 2

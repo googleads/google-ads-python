@@ -70,7 +70,7 @@ def main(client, customer_id):
     campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Set the bidding strategy and budget.
-    campaign.manual_cpc.enhanced_cpc_enabled = True
+    campaign.manual_cpc = client.get_type("ManualCpc")
     campaign.campaign_budget = campaign_budget_response.results[0].resource_name
 
     # Set the campaign network options.

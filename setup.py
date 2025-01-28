@@ -22,8 +22,8 @@ install_requires = [
     # NOTE: Source code for grpcio and grpcio-status exist in the same
     # grpc/grpc monorepo and thus these two dependencies should always
     # have the same version range.
-    "grpcio >= 1.59.0, < 2.0.0",
-    "grpcio-status >= 1.59.0, < 2.0.0",
+    "grpcio >= 1.70.0, < 2.0.0",
+    "grpcio-status >= 1.63.2, < 2.0.0",
     "proto-plus >= 1.22.3, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
     "protobuf >= 4.25.0, < 6.0.0",
@@ -49,10 +49,11 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
     ],
     description="Client library for the Google Ads API",
     include_package_data=True,
-    python_requires=">=3.8, <3.13",
+    python_requires=">=3.8",
     long_description=long_description,
     install_requires=install_requires,
     extras_require={

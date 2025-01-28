@@ -14,7 +14,7 @@
 
 import nox
 
-PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
 PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
@@ -74,8 +74,8 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
         "protobuf==4.25.0",
         "google-auth-oauthlib==0.3.0",
         "googleapis-common-protos==1.56.3",
-        "grpcio==1.59.0",
-        "grpcio-status==1.59.0",
+        "grpcio==1.70.0",
+        "grpcio-status==1.62.3",
     )
     session.run(*FREEZE_COMMAND)
     session.run(

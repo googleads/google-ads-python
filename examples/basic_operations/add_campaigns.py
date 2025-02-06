@@ -70,7 +70,7 @@ def main(client, customer_id):
     campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Set the bidding strategy and budget.
-    campaign.manual_cpc.enhanced_cpc_enabled = True
+    campaign.manual_cpc = client.get_type("ManualCpc")
     campaign.campaign_budget = campaign_budget_response.results[0].resource_name
 
     # Set the campaign network options.
@@ -114,10 +114,6 @@ def handle_googleads_exception(exception):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Adds a campaign for specified customer."
     )
@@ -130,5 +126,9 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     main(googleads_client, args.customer_id)

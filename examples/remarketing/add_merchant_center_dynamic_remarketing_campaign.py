@@ -87,11 +87,6 @@ def create_campaign(
     campaign.shopping_setting.campaign_priority = 0
     # This connects the campaign to the Merchant Center account.
     campaign.shopping_setting.merchant_id = merchant_center_account_id
-    # Display Network campaigns do not support partition by country. The only
-    # supported value is "ZZ". This signals that products from all countries are
-    # available in the campaign. The actual products which serve are based on
-    # the products tagged in the user list entry.
-    campaign.shopping_setting.sales_country = "ZZ"
     campaign.shopping_setting.enable_local = True
     # Dynamic remarketing campaigns are only available on the Google Display
     # Network.
@@ -299,10 +294,6 @@ def attach_user_list(client, customer_id, ad_group_resource_name, user_list_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Creates a shopping campaign associated with an existing "
@@ -339,6 +330,10 @@ if __name__ == "__main__":
         help="The user list ID to target.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

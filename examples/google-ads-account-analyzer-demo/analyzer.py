@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Gets the account infomation of the given MCC and login customer."""
+"""Gets the account information of the given MCC and login customer."""
 
 
 import argparse
@@ -158,7 +158,7 @@ def print_account_hierarchy(
 
 
 def get_users_module(google_ads_client, customer_id):
-    """Prints the user access informaion for the given customer_id.
+    """Prints the user access information for the given customer_id.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -189,8 +189,6 @@ def get_users_module(google_ads_client, customer_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
     parser = argparse.ArgumentParser(
         description="This analyzer will display the account info "
         "according to the input."
@@ -206,6 +204,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
+        # GoogleAdsClient will read the google-ads.yaml configuration file in
+        # the home directory if none is specified.
         googleads_client = GoogleAdsClient.load_from_storage()
         account_hierarchy_module(googleads_client, args.customer_id)
         get_users_module(googleads_client, args.customer_id)

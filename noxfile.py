@@ -14,27 +14,74 @@
 
 import nox
 
+PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
-@nox.session(python=["3.7"])
-def tests(session):
+TEST_COMMAND = [
+    "coverage",
+    "run",
+    "--append",
+    "-m",
+    "unittest",
+    "discover",
+    "--buffer",
+    "-s=tests",
+    "-p",
+    "*_test.py",
+]
+COVERAGE_COMMAND = [
+    "coverage",
+    "report",
+    "-m",
+    "--omit=.nox/*,examples/*,*/__init__.py",
+]
+FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
+
+
+@nox.session(python=PYTHON_VERSIONS)
+@nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
+def tests(session, protobuf_implementation):
     session.install(".")
     # modules for testing
     session.install(
-        "mock>=4.0.3",
-        "pyfakefs>=3.5,<3.7",
+        "pyfakefs>=5.0.0,<6.0",
         "coverage==6.5.0",
     )
+    session.run(*FREEZE_COMMAND)
     session.run(
-        "coverage",
-        "run",
-        "--append",
-        "-m",
-        "unittest",
-        "discover",
-        "-s=tests",
-        "-p",
-        "*_test.py",
+        *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
     )
+    session.run(*COVERAGE_COMMAND)
+
+
+# This session runs all the unit tests but with the lowest-possible versions
+# of supported dependencies that are published by Google.
+@nox.session(python=PYTHON_VERSIONS)
+@nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
+def tests_minimum_dependency_versions(session, protobuf_implementation):
+    session.install(".")
+    # modules for testing
+    session.install(
+        "pyfakefs>=5.0.0,<6.0",
+        "coverage==6.5.0",
+        # Google-published dependencies pinned to the
+        # lowest possible version supported.
+        "google-api-core==2.13.0",
+        "proto-plus==1.22.3",
+        "protobuf==4.25.0",
+        "google-auth-oauthlib==0.3.0",
+        "googleapis-common-protos==1.56.3",
+        "grpcio==1.59.0",
+        "grpcio-status==1.59.0",
+    )
+    session.run(*FREEZE_COMMAND)
     session.run(
-        "coverage", "report", "-m", "--omit=.nox/*,examples/*,*/__init__.py"
+        *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
     )
+    session.run(*COVERAGE_COMMAND)

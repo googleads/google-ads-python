@@ -174,9 +174,6 @@ def add_standard_shopping_campaign(
     )
     campaign.shopping_setting.merchant_id = merchant_center_account_id
 
-    # Sets the sales country of products to include in the campaign.
-    campaign.shopping_setting.sales_country = "US"
-
     # Sets the priority of the campaign. Higher numbers take priority over lower
     # numbers. For standard shopping campaigns, allowed values are between 0 and
     # 2, inclusive.
@@ -190,11 +187,15 @@ def add_standard_shopping_campaign(
     # and the ads are ready to serve.
     campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
-    # Sets the bidding strategy to Manual CPC (with eCPC enabled)
+    # Sets the bidding strategy to Manual CPC (with eCPC disabled). eCPC for
+    # standard Shopping campaigns is deprecated. If eCPC is set to true, Google
+    # Ads ignores the setting and behaves as if the setting was false. See this
+    # blog post for more information:
+    # https://ads-developers.googleblog.com/2023/09/google-ads-shopping-campaign-enhanced.html
     # Recommendation: Use one of the automated bidding strategies for Shopping
     # campaigns to help you optimize your advertising spend. More information
     # can be found here: https://support.google.com/google-ads/answer/6309029
-    campaign.manual_cpc.enhanced_cpc_enabled = True
+    campaign.manual_cpc.enhanced_cpc_enabled = False
 
     # Sets the budget.
     campaign.campaign_budget = budget_resource_name
@@ -252,10 +253,6 @@ def add_default_shopping_listing_group(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Adds a standard shopping campaign, a shopping product ad "
@@ -286,6 +283,10 @@ if __name__ == "__main__":
         help="Create a default listing group.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

@@ -30,8 +30,6 @@ NUMBER_OF_CAMPAIGNS_TO_ADD = 2
 NUMBER_OF_AD_GROUPS_TO_ADD = 2
 NUMBER_OF_KEYWORDS_TO_ADD = 4
 
-PAGE_SIZE = 1000
-
 _temporary_id = 0
 
 
@@ -83,13 +81,13 @@ async def main(client, customer_id):
     operations_response = run_batch_job(batch_job_service, resource_name)
 
     # Create an asyncio.Event instance to control execution during the
-    # asyncronous steps in _poll_batch_job. Note that this is not important
-    # for polling asyncronously, it simply helps with execution control so we
-    # can run _fetch_and_print_results after the asyncronous operations have
+    # asynchronous steps in _poll_batch_job. Note that this is not important
+    # for polling asynchronously, it simply helps with execution control, so we
+    # can run _fetch_and_print_results after the asynchronous operations have
     # completed.
     done_event = asyncio.Event()
     poll_batch_job(operations_response, done_event)
-    # Execution will stop here and wait for the asyncronous steps in
+    # Execution will stop here and wait for the asynchronous steps in
     # _poll_batch_job to complete before proceeding.
     await done_event.wait()
 
@@ -592,7 +590,7 @@ def fetch_and_print_results(client, batch_job_service, resource_name):
 
     list_results_request = client.get_type("ListBatchJobResultsRequest")
     list_results_request.resource_name = resource_name
-    list_results_request.page_size = PAGE_SIZE
+    list_results_request.page_size = 1000
     # Gets all the results from running batch job and prints their information.
     batch_job_results = batch_job_service.list_batch_job_results(
         request=list_results_request
@@ -629,10 +627,6 @@ def handle_googleads_exception(exception):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Adds complete campaigns, including campaign budgets, "
@@ -651,5 +645,9 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     asyncio.run(main(googleads_client, args.customer_id))

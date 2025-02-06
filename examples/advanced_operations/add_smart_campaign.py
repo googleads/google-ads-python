@@ -36,7 +36,7 @@ _COUNTRY_CODE = "US"
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
 _LANGUAGE_CODE = "en"
 _LANDING_PAGE_URL = "http://www.example.com"
-_PHONE_NUMBER = "555-555-5555"
+_PHONE_NUMBER = "800-555-0100"
 _BUDGET_TEMPORARY_ID = "-1"
 _SMART_CAMPAIGN_TEMPORARY_ID = "-2"
 _AD_GROUP_TEMPORARY_ID = "-3"
@@ -809,10 +809,6 @@ def print_response_details(response):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(description=("Creates a Smart campaign."))
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -873,6 +869,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

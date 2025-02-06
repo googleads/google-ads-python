@@ -56,15 +56,6 @@ def main(client, customer_id):
         client.enums.UserListPrepopulationStatusEnum.REQUESTED
     )
 
-    # Creates an ExpressionRuleUserListInfo object, or a boolean rule that
-    # defines this user list. The default rule_type for a UserListRuleInfo
-    # object is OR of ANDs (disjunctive normal form). That is, rule items will
-    # be ANDed together within rule item groups and the groups themselves will
-    # be ORed together.
-    expression_rule_user_list_info = (
-        rule_based_user_list_info.expression_rule_user_list
-    )
-
     # Creates a rule group that includes the checkout and cart size rules.
     # Combining the two rule items into a UserListRuleItemGroupInfo object
     # causes Google Ads to AND their rules together. To instead OR the rules
@@ -152,13 +143,32 @@ def main(client, customer_id):
         ]
     )
     # [END setup_advanced_remarketing_5]
+
     # [START setup_advanced_remarketing_6]
-    expression_rule_user_list_info.rule.rule_item_groups.extend(
+    # Create a FlexibleRuleUserListInfo object, or a flexible rule
+    # representation of visitors with one or multiple actions.
+    # FlexibleRuleUserListInfo wraps UserListRuleInfo in a
+    # FlexibleRuleOperandInfo object that represents which user lists to
+    # include or exclude.
+    flexible_rule_user_list_info = (
+        rule_based_user_list_info.flexible_rule_user_list
+    )
+    flexible_rule_user_list_info.inclusive_rule_operator = (
+        client.enums.UserListFlexibleRuleOperatorEnum.AND
+    )
+    # The default rule_type for a UserListRuleInfo object is OR of
+    # ANDs (disjunctive normal form). That is, rule items will be
+    # ANDed together within rule item groups and the groups
+    # themselves will be ORed together.
+    rule_operand = client.get_type("FlexibleRuleOperandInfo")
+    rule_operand.rule.rule_item_groups.extend(
         [
             checkout_and_cart_size_rule_group,
             checkout_date_rule_group,
         ]
     )
+    rule_operand.lookback_window_days = 7
+    flexible_rule_user_list_info.inclusive_operands.append(rule_operand)
     # [END setup_advanced_remarketing_6]
 
     # Issue a mutate request to add the user list, then print the results.
@@ -172,10 +182,6 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Creates a rule-based user list defined by an expression "
         "rule for users who have either checked out in November, "
@@ -191,6 +197,10 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(googleads_client, args.customer_id)

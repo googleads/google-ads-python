@@ -135,10 +135,6 @@ def modify_user_access(client, customer_id, user_id, access_role):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="This code example updates the access role of a user, "
         "given the email address."
@@ -168,6 +164,10 @@ if __name__ == "__main__":
         choices=_ACCESS_ROLES,
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
     try:
         main(
             googleads_client,

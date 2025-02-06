@@ -112,10 +112,6 @@ def main(client, customer_id, ad_group_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Shows how to use the validate_only header to validate a "
@@ -136,5 +132,9 @@ if __name__ == "__main__":
         "-a", "--ad_group_id", type=str, required=True, help="The Ad Group ID."
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     main(googleads_client, args.customer_id, args.ad_group_id)

@@ -57,10 +57,6 @@ def main(client, customer_id, email_address, access_role):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Sends an invitation email to a user to manage a customer "
@@ -91,6 +87,10 @@ if __name__ == "__main__":
         help="The updated user access role.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

@@ -106,10 +106,6 @@ def main(client, customer_id, output_file, write_headers):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    google_ads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Retrieves a campaign stats and writes to CSV file."
     )
@@ -142,9 +138,13 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+
     try:
         main(
-            google_ads_client,
+            googleads_client,
             args.customer_id,
             args.output_file,
             args.write_headers,

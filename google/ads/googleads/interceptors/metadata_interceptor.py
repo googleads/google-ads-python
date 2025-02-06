@@ -19,22 +19,22 @@ and updates the metadata in order to insert the developer token and
 login-customer-id values.
 """
 
-import pkg_resources
+# TODO: Explicitly importing the protobuf package version here should be removed
+# once the below issue is resolved, and the protobuf version is added to the
+# request user-agent directly by the google-api-core package:
+# https://github.com/googleapis/python-api-core/issues/416
+from importlib import metadata
+
+try:
+    _PROTOBUF_VERSION = metadata.version("protobuf")
+except metadata.PackageNotFoundError:
+    _PROTOBUF_VERSION = None
+
 
 from google.protobuf.internal import api_implementation
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
 
 from .interceptor import Interceptor
-
-# TODO: This logic should be updated or removed once the following is fixed:
-# https://github.com/googleapis/python-api-core/issues/416
-try:
-    _PROTOBUF_VERSION = pkg_resources.get_distribution("protobuf").version
-except pkg_resources.DistributionNotFound:
-    # If the distribution can't be found for whatever reason then we set
-    # the version to None so that we can know to leave this header out of the
-    # request.
-    _PROTOBUF_VERSION = None
 
 # Determine which protobuf implementation is being used.
 if api_implementation.Type() == "cpp":
@@ -51,7 +51,11 @@ class MetadataInterceptor(
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(
-        self, developer_token, login_customer_id, linked_customer_id=None
+        self,
+        developer_token,
+        login_customer_id,
+        linked_customer_id=None,
+        use_cloud_org_for_api_access=None,
     ):
         """Initialization method for this class.
 
@@ -59,6 +63,11 @@ class MetadataInterceptor(
             developer_token: a str developer token.
             login_customer_id: a str specifying a login customer ID.
             linked_customer_id: a str specifying a linked customer ID.
+            use_cloud_org_for_api_access: a str specifying whether to use the
+                Google Cloud Organization of your Google Cloud project instead
+                of developer token to determine your Google Ads API access
+                levels. Use this flag only if you are enrolled into a limited
+                pilot that supports this configuration
         """
         self.developer_token_meta = ("developer-token", developer_token)
         self.login_customer_id_meta = (
@@ -71,6 +80,7 @@ class MetadataInterceptor(
             if linked_customer_id
             else None
         )
+        self.use_cloud_org_for_api_access = use_cloud_org_for_api_access
 
     def _update_client_call_details_metadata(
         self, client_call_details, metadata
@@ -112,7 +122,10 @@ class MetadataInterceptor(
         else:
             metadata = list(client_call_details.metadata)
 
-        metadata.append(self.developer_token_meta)
+        # If self.use_cloud_org_for_api_access is not True, add the developer
+        # token to the request's metadata
+        if not self.use_cloud_org_for_api_access:
+            metadata.append(self.developer_token_meta)
 
         if self.login_customer_id_meta:
             metadata.append(self.login_customer_id_meta)

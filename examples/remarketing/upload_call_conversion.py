@@ -36,6 +36,7 @@ def main(
     conversion_value,
     conversion_custom_variable_id,
     conversion_custom_variable_value,
+    ad_user_data_consent,
 ):
     """Imports offline call conversion values for calls related to your ads.
 
@@ -45,7 +46,7 @@ def main(
         conversion_action_id: The ID of the conversion action to upload to.
         caller_id: The caller ID from which this call was placed. Caller ID is
             expected to be in E.164 format with preceding '+' sign,
-            e.g. '+16502531234'.
+            e.g. '+18005550100'.
         call_start_date_time: The date and time at which the call occurred. The
             format is 'yyyy-mm-dd hh:mm:ss+|-hh:mm',
             e.g. '2021-01-01 12:32:45-08:00'.
@@ -57,6 +58,8 @@ def main(
             variable to associate with the upload.
         conversion_custom_variable_value: The str value of the conversion custom
             variable to associate with the upload.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
     """
     # Get the ConversionUploadService client.
     conversion_upload_service = client.get_service("ConversionUploadService")
@@ -80,11 +83,24 @@ def main(
         conversion_custom_variable.value = conversion_custom_variable_value
         call_conversion.custom_variables.append(conversion_custom_variable)
 
+    # Specifies whether user consent was obtained for the data you are
+    # uploading. For more details. see:
+    # https://www.google.com/about/company/user-consent-policy
+    if ad_user_data_consent:
+        call_conversion.consent.ad_user_data = client.enums.ConsentStatusEnum[
+            ad_user_data_consent
+        ]
+
     # Issue a request to upload the call conversion.
+    # Partial failure MUST be enabled for this request.
     request = client.get_type("UploadCallConversionsRequest")
     request.customer_id = customer_id
     request.conversions = [call_conversion]
     request.partial_failure = True
+    # NOTE: This request only uploads a single conversion, but if you have
+    # multiple conversions to upload, it's most efficient to upload them in a
+    # single request. See the following for per-request limits for reference:
+    # https://developers.google.com/google-ads/api/docs/best-practices/quotas#conversion_upload_service
     upload_call_conversions_response = (
         conversion_upload_service.upload_call_conversions(request=request)
     )
@@ -110,10 +126,6 @@ def main(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
         "to your ads."
@@ -140,7 +152,7 @@ if __name__ == "__main__":
         required=True,
         help="The caller ID from which this call was placed. Caller ID is "
         "expected to be in E.164 format with preceding '+' sign, "
-        "e.g. '+16502531234'.",
+        "e.g. '+18005550100'.",
     )
     parser.add_argument(
         "-s",
@@ -178,7 +190,21 @@ if __name__ == "__main__":
         type=str,
         help="The value of the conversion custom variable to associate with the upload.",
     )
+    parser.add_argument(
+        "-d",
+        "--ad_user_data_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The data consent status for ad user data for all members in "
+            "the job."
+        ),
+    )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(
@@ -191,6 +217,7 @@ if __name__ == "__main__":
             args.conversion_value,
             args.conversion_custom_variable_id,
             args.conversion_custom_variable_value,
+            args.ad_user_data_consent,
         )
     except GoogleAdsException as ex:
         print(

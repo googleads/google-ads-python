@@ -43,6 +43,8 @@ def main(
     country_code,
     language_code,
     quantity,
+    ad_user_data_consent,
+    ad_personalization_consent,
 ):
     """Uploads offline conversion data for store sales transactions.
 
@@ -83,6 +85,10 @@ def main(
             required if uploading with item attributes.
         quantity: Optional number of items sold. Only required if uploading with
             item attributes.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
+        ad_personalization_consent: The personalization consent status for ad
+            user data for all members in the job.
     """
     # Get the OfflineUserDataJobService and OperationService clients.
     offline_user_data_job_service = client.get_service(
@@ -110,6 +116,13 @@ def main(
         offline_user_data_job_resource_name,
         conversion_action_id,
         custom_value,
+        item_id,
+        merchant_center_account_id,
+        country_code,
+        language_code,
+        quantity,
+        ad_user_data_consent,
+        ad_personalization_consent,
     )
 
     # Issue an asynchronous request to run the offline user data job.
@@ -257,6 +270,8 @@ def add_transactions_to_offline_user_data_job(
     country_code,
     language_code,
     quantity,
+    ad_user_data_consent,
+    ad_personalization_consent,
 ):
     """Add operations to the job for a set of sample transactions.
 
@@ -283,17 +298,24 @@ def add_transactions_to_offline_user_data_job(
             required if uploading with item attributes.
         quantity: Optional number of items sold. Only required if uploading with
             item attributes.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
+        ad_personalization_consent: The personalization consent status for ad
+            user data for all members in the job.
     """
     # Construct some sample transactions.
     operations = build_offline_user_data_job_operations(
         client,
         customer_id,
         conversion_action_id,
+        custom_value,
         item_id,
         merchant_center_account_id,
         country_code,
         language_code,
         quantity,
+        ad_user_data_consent,
+        ad_personalization_consent,
     )
 
     # [START enable_warnings_1]
@@ -365,6 +387,8 @@ def build_offline_user_data_job_operations(
     country_code,
     language_code,
     quantity,
+    ad_user_data_consent,
+    ad_personalization_consent,
 ):
     """Create offline user data job operations for sample transactions.
 
@@ -388,6 +412,10 @@ def build_offline_user_data_job_operations(
             required if uploading with item attributes.
         quantity: Optional number of items sold. Only required if uploading with
             item attributes.
+        ad_user_data_consent: The consent status for ad user data for all
+            members in the job.
+        ad_personalization_consent: The personalization consent status for ad
+            user data for all members in the job.
 
     Returns:
         A list of OfflineUserDataJobOperations.
@@ -399,7 +427,7 @@ def build_offline_user_data_job_operations(
     user_data_with_email_address = user_data_with_email_address_operation.create
     email_identifier = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
-    email_identifier.hashed_email = normalize_and_hash("customer@example.com")
+    email_identifier.hashed_email = normalize_and_hash("dana@example.com")
     state_identifier = client.get_type("UserIdentifier")
     state_identifier.address_info.state = "NY"
     user_data_with_email_address.user_identifiers.extend(
@@ -424,6 +452,23 @@ def build_offline_user_data_job_operations(
         datetime.now() - datetime.timedelta(months=1)
     ).strftime("%Y-%m-%d %H:%M:%S")
 
+    # Specifies whether user consent was obtained for the data you are
+    # uploading. For more details, see:
+    # https://www.google.com/about/company/user-consent-policy
+    if ad_user_data_consent:
+        user_data_with_email_address.consent.ad_user_data = (
+            client.enums.ConsentStatusEnum[ad_user_data_consent]
+        )
+    if ad_personalization_consent:
+        user_data_with_email_address.consent.ad_personalization = (
+            client.enums.ConsentStatusEnum[ad_personalization_consent]
+        )
+
+    if custom_value:
+        user_data_with_email_address.transaction_attribute.custom_value = (
+            custom_value
+        )
+
     # Create the second transaction for upload based on a physical address.
     user_data_with_physical_address_operation = client.get_type(
         "OfflineUserDataJobOperation"
@@ -434,9 +479,11 @@ def build_offline_user_data_job_operations(
     address_identifier = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
     address_identifier.address_info.hashed_first_name = normalize_and_hash(
-        "John"
+        "Dana"
     )
-    address_identifier.address_info.hashed_last_name = normalize_and_hash("Doe")
+    address_identifier.address_info.hashed_last_name = normalize_and_hash(
+        "Quinn"
+    )
     # Country and zip codes are sent in plain text.
     address_identifier.address_info.country_code = "US"
     address_identifier.address_info.postal_code = "10011"
@@ -460,14 +507,6 @@ def build_offline_user_data_job_operations(
     ).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
-
-    if custom_value:
-        user_data_with_email_address.transaction_attribute.custom_value = (
-            custom_value
-        )
-        user_data_with_physical_address.transaction_attribute.custom_value = (
-            custom_value
-        )
 
     # Optional: If uploading data with item attributes, also assign these
     # values in the transaction attribute
@@ -563,10 +602,6 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "
         "transactions."
@@ -586,21 +621,20 @@ if __name__ == "__main__":
         required=True,
         help="The ID of a store sales conversion action.",
     )
-    parser.add_argument(
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument(
         "-k",
         "--custom_key",
         type=str,
-        required=False,
         help="Only required after creating a custom key and custom values in "
         "the account. Custom key and values are used to segment store sales "
         "conversions. This measurement can be used to provide more advanced "
         "insights. If provided, a custom value must also be provided",
     )
-    parser.add_argument(
+    group.add_argument(
         "-v",
         "--custom_value",
         type=str,
-        required=False,
         help="Only required after creating a custom key and custom values in "
         "the account. Custom key and values are used to segment store sales "
         "conversions. This measurement can be used to provide more advanced "
@@ -702,7 +736,31 @@ if __name__ == "__main__":
         help="Optional number of items sold. Only required if uploading with "
         "item attributes.",
     )
+    parser.add_argument(
+        "-d",
+        "--ad_user_data_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The data consent status for ad user data for all members in "
+            "the job."
+        ),
+    )
+    parser.add_argument(
+        "-p",
+        "--ad_personalization_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=(
+            "The personalization consent status for ad user data for all "
+            "members in the job."
+        ),
+    )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     # Additional check to make sure that custom_key and custom_value are either
     # not provided or both provided together.
@@ -733,6 +791,8 @@ if __name__ == "__main__":
             args.country_code,
             args.language_code,
             args.quantity,
+            args.ad_user_data_consent,
+            args.ad_personalization_consent,
         )
     except GoogleAdsException as ex:
         print(

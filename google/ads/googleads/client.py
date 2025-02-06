@@ -13,13 +13,11 @@
 # limitations under the License.
 """A client and common configurations for the Google Ads API."""
 
-from importlib import import_module
+from importlib import import_module, metadata
 import logging.config
-import pkg_resources
 
 from google.api_core.gapic_v1.client_info import ClientInfo
 import grpc.experimental
-import proto
 from proto.enums import ProtoEnumMeta
 
 from google.ads.googleads import config, oauth2, util
@@ -33,19 +31,12 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v12", "v11", "v10"]
+_VALID_API_VERSIONS = ["v18", "v17", "v16"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
 # information of API calls.
-try:
-    _CLIENT_INFO = ClientInfo(
-        client_library_version=pkg_resources.get_distribution(
-            "google-ads",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    _CLIENT_INFO = ClientInfo()
+_CLIENT_INFO = ClientInfo(client_library_version=metadata.version("google-ads"))
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
 _GRPC_CHANNEL_OPTIONS = [
@@ -83,7 +74,7 @@ class _EnumGetter:
     def __dir__(self):
         """Overrides behavior when dir() is called on instances of this class.
 
-        It's useful to use dir() to see a list of available attrbutes. Since
+        It's useful to use dir() to see a list of available attributes. Since
         this class exposes all the enums in the API it borrows the __all__
         property from the corresponding enums module.
         """
@@ -126,7 +117,7 @@ class _EnumGetter:
         """Returns self serialized as a dict.
 
         Since this class overrides __getattr__ we define this method to help
-        with pickling, which is imporant to avoid recursion depth errors when
+        with pickling, which is important to avoid recursion depth errors when
         pickling this class or the GoogleAdsClient or using multiprocessing.
 
         Returns:
@@ -138,7 +129,7 @@ class _EnumGetter:
         """Deserializes self with the given dictionary.
 
         Since this class overrides __getattr__ we define this method to help
-        with pickling, which is imporant to avoid recursion depth errors when
+        with pickling, which is important to avoid recursion depth errors when
         pickling this class or the GoogleAdsClient or using multiprocessing.
 
         Args:
@@ -187,6 +178,9 @@ class GoogleAdsClient:
             "linked_customer_id": config_data.get("linked_customer_id"),
             "http_proxy": config_data.get("http_proxy"),
             "use_proto_plus": config_data.get("use_proto_plus"),
+            "use_cloud_org_for_api_access": config_data.get(
+                "use_cloud_org_for_api_access"
+            ),
         }
 
     @classmethod
@@ -203,10 +197,11 @@ class GoogleAdsClient:
             version_module = import_module(f"google.ads.googleads.{version}")
         except ImportError:
             raise ValueError(
-                'Specified Google Ads API version "{}" does not '
-                'exist. Valid API versions are: "{}"'.format(
-                    version, '", "'.join(_VALID_API_VERSIONS)
-                )
+                f"There was an error importing the "
+                f'"google.ads.googleads.{version}" module. Please check that '
+                f'"{version}" is a valid API version. Here are the current '
+                "API versions supported by this library: "
+                f"{', '.join(_VALID_API_VERSIONS)}."
             )
         return version_module
 
@@ -301,6 +296,7 @@ class GoogleAdsClient:
         version=None,
         http_proxy=None,
         use_proto_plus=False,
+        use_cloud_org_for_api_access=None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -313,6 +309,13 @@ class GoogleAdsClient:
             linked_customer_id: a str specifying a linked customer ID.
             version: a str indicating the Google Ads API version to be used.
             http_proxy: a str specifying the proxy URI through which to connect.
+            use_proto_plus: a bool specifying whether or not to use proto-plus
+                for protobuf message interfaces.
+            use_cloud_org_for_api_access: a str specifying whether to use the
+                Google Cloud Organization of your Google Cloud project instead
+                of developer token to determine your Google Ads API access
+                levels. Use this flag only if you are enrolled into a limited
+                pilot that supports this configuration
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -325,6 +328,7 @@ class GoogleAdsClient:
         self.version = version
         self.http_proxy = http_proxy
         self.use_proto_plus = use_proto_plus
+        self.use_cloud_org_for_api_access = use_cloud_org_for_api_access
         self.enums = _EnumGetter(self)
 
         # If given, write the http_proxy channel option for GRPC to use
@@ -385,6 +389,7 @@ class GoogleAdsClient:
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
+                self.use_cloud_org_for_api_access,
             ),
             LoggingInterceptor(_logger, version, endpoint),
             ExceptionInterceptor(version, use_proto_plus=self.use_proto_plus),

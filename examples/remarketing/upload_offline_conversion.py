@@ -39,6 +39,8 @@ def main(
     conversion_custom_variable_value,
     gbraid,
     wbraid,
+    order_id,
+    ad_user_data_consent,
 ):
     """Creates a click conversion with a default currency of USD.
 
@@ -60,12 +62,16 @@ def main(
             wbraid parameters must be None.
         wbraid: The WBRAID for the iOS app conversion. If set, the gclid and
             gbraid parameters must be None.
+        order_id: The order ID for the click conversion.
+        ad_user_data_consent: The ad user data consent for the click.
     """
     click_conversion = client.get_type("ClickConversion")
     conversion_upload_service = client.get_service("ConversionUploadService")
     conversion_action_service = client.get_service("ConversionActionService")
-    click_conversion.conversion_action = conversion_action_service.conversion_action_path(
-        customer_id, conversion_action_id
+    click_conversion.conversion_action = (
+        conversion_action_service.conversion_action_path(
+            customer_id, conversion_action_id
+        )
     )
 
     # Sets the single specified ID field.
@@ -82,18 +88,40 @@ def main(
 
     if conversion_custom_variable_id and conversion_custom_variable_value:
         conversion_custom_variable = client.get_type("CustomVariable")
-        conversion_custom_variable.conversion_custom_variable = conversion_upload_service.conversion_custom_variable_path(
-            customer_id, conversion_custom_variable_id
+        conversion_custom_variable.conversion_custom_variable = (
+            conversion_upload_service.conversion_custom_variable_path(
+                customer_id, conversion_custom_variable_id
+            )
         )
         conversion_custom_variable.value = conversion_custom_variable_value
         click_conversion.custom_variables.append(conversion_custom_variable)
 
+    if order_id:
+        click_conversion.order_id = order_id
+
+    # Sets the consent information, if provided.
+    if ad_user_data_consent:
+        # Specifies whether user consent was obtained for the data you are
+        # uploading. For more details, see:
+        # https://www.google.com/about/company/user-consent-policy
+        click_conversion.consent.ad_user_data = client.enums.ConsentStatusEnum[
+            ad_user_data_consent
+        ]
+
+    # Uploads the click conversion. Partial failure must be set to True here.
+    #
+    # NOTE: This request only uploads a single conversion, but if you have
+    # multiple conversions to upload, it's most efficient to upload them in a
+    # single request. See the following for per-request limits for reference:
+    # https://developers.google.com/google-ads/api/docs/best-practices/quotas#conversion_upload_service
     request = client.get_type("UploadClickConversionsRequest")
     request.customer_id = customer_id
     request.conversions.append(click_conversion)
     request.partial_failure = True
-    conversion_upload_response = conversion_upload_service.upload_click_conversions(
-        request=request,
+    conversion_upload_response = (
+        conversion_upload_service.upload_click_conversions(
+            request=request,
+        )
     )
     uploaded_click_conversion = conversion_upload_response.results[0]
     print(
@@ -106,10 +134,6 @@ def main(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Uploads an offline conversion."
     )
@@ -186,8 +210,24 @@ if __name__ == "__main__":
         "example. See the following for more details: "
         "https://developers.google.com/google-ads/api/docs/conversions/upload-clicks",
     )
-
+    parser.add_argument(
+        "-o",
+        "--order_id",
+        type=str,
+        help="The order ID for the click conversion.",
+    )
+    parser.add_argument(
+        "-s",
+        "--ad_user_data_consent",
+        type=str,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        help=("The ad user data consent for the click."),
+    )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(
@@ -201,6 +241,8 @@ if __name__ == "__main__":
             args.conversion_custom_variable_value,
             args.gbraid,
             args.wbraid,
+            args.order_id,
+            args.ad_user_data_consent,
         )
     except GoogleAdsException as ex:
         print(

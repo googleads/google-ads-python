@@ -107,7 +107,9 @@ def get_credentials(config_data):
         An initialized credentials instance.
     """
     required_installed_app_keys = config.get_oauth2_installed_app_keys()
-    required_service_account_keys = config.get_oauth2_service_account_keys()
+    required_service_account_keys = (
+        config.get_oauth2_required_service_account_keys()
+    )
 
     if all(key in config_data for key in required_installed_app_keys):
         # Using the Installed App Flow

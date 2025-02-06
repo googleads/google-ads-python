@@ -39,6 +39,12 @@ _MESSAGES_WITH_SENSITIVE_FIELDS = {
     "ChangeEvent": ["user_email"],
     "CreateCustomerClientRequest": ["email_address"],
     "Feed": ["places_location_feed_data.email_address"],
+    "LocalServicesLead": [
+        "contact_details.phone_number",
+        "contact_details.email",
+        "contact_details.consumer_name",
+    ],
+    "LocalServicesLeadConversation": ["message_details.text"],
 }
 
 # This is a list of the names of messages that return search results from the

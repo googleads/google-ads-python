@@ -120,6 +120,9 @@ def main(client, customer_id, audience_id):
         headline_asset_resource_names,
         description_asset_resource_names,
     )
+    asset_group_signal_operations = create_asset_group_signal_operations(
+        client, customer_id, audience_id
+    )
 
     mutate_operations = [
         # It's important to create these entities in this order because
@@ -130,15 +133,8 @@ def main(client, customer_id, audience_id):
         # other mutate operations
         *campaign_criterion_operations,
         *asset_group_operations,
+        *asset_group_signal_operations,
     ]
-
-    # Append an asset group signal operation is an audience ID is given.
-    if audience_id:
-        mutate_operations.append(
-            create_asset_group_signal_operation(
-                client, customer_id, audience_id
-            )
-        )
 
     # Send the operations in a single Mutate request.
     response = googleads_service.mutate(
@@ -632,8 +628,7 @@ def print_response_details(response):
             )
 
 
-# [START add_performance_max_campaign_9]
-def create_asset_group_signal_operation(client, customer_id, audience_id):
+def create_asset_group_signal_operations(client, customer_id, audience_id):
     """Creates a list of MutateOperations that may create asset group signals.
 
     Args:
@@ -644,34 +639,44 @@ def create_asset_group_signal_operation(client, customer_id, audience_id):
     Returns:
         MutateOperations that create new asset group signals.
     """
-    if not audience_id:
-        return None
-
     googleads_service = client.get_service("GoogleAdsService")
     asset_group_resource_name = googleads_service.asset_group_path(
         customer_id, _ASSET_GROUP_TEMPORARY_ID
     )
 
+    operations = []
+
+    if audience_id:
+        # Create an audience asset group signal.
+        # To learn more about Audience Signals, see:
+        # https://developers.google.com/google-ads/api/performance-max/asset-group-signals#audiences
+        # [START add_performance_max_campaign_9]
+        mutate_operation = client.get_type("MutateOperation")
+        operation = mutate_operation.asset_group_signal_operation.create
+        operation.asset_group = asset_group_resource_name
+        operation.audience.audience = googleads_service.audience_path(
+            customer_id, audience_id
+        )
+        operations.append(mutate_operation)
+        # [END add_performance_max_campaign_9]
+
+    # Create a search theme asset group signal.
+    # To learn more about Search Themes Signals, see:
+    # https://developers.google.com/google-ads/api/performance-max/asset-group-signals#search_themes
+    # [START add_performance_max_campaign_10]
     mutate_operation = client.get_type("MutateOperation")
     operation = mutate_operation.asset_group_signal_operation.create
-    # To learn more about Audience Signals, see:
-    # https://developers.google.com/google-ads/api/docs/performance-max/asset-groups#audience_signals
     operation.asset_group = asset_group_resource_name
-    operation.audience.audience = googleads_service.audience_path(
-        customer_id, audience_id
-    )
+    operation.search_theme.text = "travel"
+    operations.append(mutate_operation)
+    # [END add_performance_max_campaign_10]
 
-    return mutate_operation
-    # [END add_performance_max_campaign_9]
+    return operations
 
 
 # [END add_performance_max_campaign]
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=("Creates a Performance Max campaign.")
     )
@@ -691,6 +696,10 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(googleads_client, args.customer_id, args.audience_id)

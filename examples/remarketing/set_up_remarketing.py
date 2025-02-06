@@ -35,9 +35,6 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 10000
-
-
 def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
     """The main method that creates all necessary entities for the example.
 
@@ -111,9 +108,21 @@ def create_user_list(client, customer_id):
     )
     user_list_rule_item_info.string_rule_item.value = "example.com"
     user_list_rule_item_group_info.rule_items.append(user_list_rule_item_info)
-    user_list.rule_based_user_list.expression_rule_user_list.rule.rule_item_groups.append(
-        user_list_rule_item_group_info
+
+    # Specify that the user list targets visitors of a page based on the
+    # provided rule.
+    flexible_rule_user_list_info = (
+        user_list.rule_based_user_list.flexible_rule_user_list
     )
+    flexible_rule_user_list_info.inclusive_rule_operator = (
+        client.enums.UserListFlexibleRuleOperatorEnum.AND
+    )
+    # Inclusive operands are joined together with the specified
+    # inclusive rule operator.
+    rule_operand = client.get_type("FlexibleRuleOperandInfo")
+    rule_operand.rule.rule_item_groups.extend([user_list_rule_item_group_info])
+    rule_operand.lookback_window_days = 7
+    flexible_rule_user_list_info.inclusive_operands.append(rule_operand)
 
     user_list_service = client.get_service("UserListService")
     response = user_list_service.mutate_user_lists(
@@ -262,7 +271,6 @@ def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = _DEFAULT_PAGE_SIZE
     response = googleads_service.search(request=search_request)
 
     # Iterates over all rows in all pages. Prints the user list criteria and
@@ -356,10 +364,6 @@ def modify_campaign_bids(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Demonstrates various operations involved in remarketing."
     )
@@ -406,6 +410,10 @@ if __name__ == "__main__":
         ),
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

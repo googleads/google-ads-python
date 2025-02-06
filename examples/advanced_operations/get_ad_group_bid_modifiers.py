@@ -20,10 +20,8 @@ import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-_DEFAULT_PAGE_SIZE = 1000
 
-
-def main(client, customer_id, page_size, ad_group_id=None):
+def main(client, customer_id, ad_group_id=None):
     ga_service = client.get_service("GoogleAdsService")
 
     query = """
@@ -40,8 +38,7 @@ def main(client, customer_id, page_size, ad_group_id=None):
           ad_group_bid_modifier.hotel_length_of_stay.max_nights,
           ad_group_bid_modifier.hotel_check_in_day.day_of_week,
           ad_group_bid_modifier.hotel_check_in_date_range.start_date,
-          ad_group_bid_modifier.hotel_check_in_date_range.end_date,
-          ad_group_bid_modifier.preferred_content.type
+          ad_group_bid_modifier.hotel_check_in_date_range.end_date
         FROM ad_group_bid_modifier"""
 
     if ad_group_id:
@@ -53,7 +50,6 @@ def main(client, customer_id, page_size, ad_group_id=None):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = _DEFAULT_PAGE_SIZE
 
     results = ga_service.search(request=search_request)
 
@@ -88,8 +84,6 @@ def main(client, customer_id, page_size, ad_group_id=None):
                 f"Min Nights: {modifier.hotel_length_of_stay.min_nights}, "
                 f"Max Nights: {modifier.hotel_length_of_stay.max_nights}"
             )
-        elif criterion_field == "preferred_content":
-            criterion_details += f"Type: {modifier.preferred_content.type_}"
         else:
             criterion_details = "  - No Criterion type found."
 
@@ -97,10 +91,6 @@ def main(client, customer_id, page_size, ad_group_id=None):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="List ad group bid modifiers for specified customer."
     )
@@ -124,11 +114,14 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+
     try:
         main(
             googleads_client,
             args.customer_id,
-            _DEFAULT_PAGE_SIZE,
             ad_group_id=args.ad_group_id,
         )
     except GoogleAdsException as ex:

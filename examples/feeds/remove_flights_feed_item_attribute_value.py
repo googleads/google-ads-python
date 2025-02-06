@@ -253,10 +253,6 @@ def get_feed_item(client, customer_id, feed_id, feed_item_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Removes a feed item attribute value of a feed item in a "
         "flights feed."
@@ -291,6 +287,10 @@ if __name__ == "__main__":
         help="The flight placeholder field name for the attribute to be removed.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

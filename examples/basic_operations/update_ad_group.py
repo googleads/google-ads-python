@@ -53,10 +53,6 @@ def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Updates an ad group for specified customer and campaign "
@@ -82,6 +78,10 @@ if __name__ == "__main__":
         help="The cpc bid micro amount.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

@@ -13,7 +13,6 @@
 # limitations under the License.
 """A set of functions to help load configuration from various locations."""
 
-from distutils.util import strtobool
 import functools
 import json
 import logging.config
@@ -33,10 +32,12 @@ _OPTIONAL_KEYS = (
     "logging",
     "linked_customer_id",
     "http_proxy",
+    "use_cloud_org_for_api_access",
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
-_OAUTH2_SERVICE_ACCOUNT_KEYS = ("json_key_file_path", "impersonated_email")
+_OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS = ("json_key_file_path",)
+_OAUTH2_OPTIONAL_SERVICE_ACCOUNT_KEYS = ("impersonated_email",)
 # These keys are deprecated environment variables that can be used in place of
 # the primary OAuth2 service account keys for backwards compatibility. They will
 # be removed in favor of the primary keys at some point.
@@ -50,7 +51,8 @@ _KEYS_ENV_VARIABLES_MAP = {
     + _OPTIONAL_KEYS
     + _OAUTH2_INSTALLED_APP_KEYS
     + _CONFIG_FILE_PATH_KEY
-    + _OAUTH2_SERVICE_ACCOUNT_KEYS
+    + _OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS
+    + _OAUTH2_OPTIONAL_SERVICE_ACCOUNT_KEYS
     + _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS
 }
 
@@ -206,7 +208,7 @@ def _validate_customer_id(customer_id, id_type):
     """
     if customer_id is not None:
         # Checks that the string is comprised only of 10 digits.
-        pattern = re.compile("^\d{10}", re.ASCII)
+        pattern = re.compile(r"^\d{10}", re.ASCII)
         if not pattern.fullmatch(customer_id):
             raise ValueError(
                 f"The specified {id_type} customer ID is invalid. It must be a "
@@ -350,13 +352,13 @@ def get_oauth2_installed_app_keys():
     return _OAUTH2_INSTALLED_APP_KEYS
 
 
-def get_oauth2_service_account_keys():
+def get_oauth2_required_service_account_keys():
     """A getter that returns the required OAuth2 service account keys.
 
     Returns:
         A tuple containing the required keys as strs.
     """
-    return _OAUTH2_SERVICE_ACCOUNT_KEYS
+    return _OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS
 
 
 def convert_login_customer_id_to_str(config_data):
@@ -411,18 +413,27 @@ def disambiguate_string_bool(value):
         A boolean.
 
     Raises:
-        TypeError: If the string is not a valid boolean representation.
+        TypeError, ValueError: If the string is not a valid boolean
+            representation.
     """
+    # This section reproduces the logic from the now deprecated
+    # distutils.util.strtobool. The below values are the same used by strtobool
+    # as true/false equivalents.
+    true_equivalents = ("y", "yes", "t", "true", "on", "1")
+    false_equivalents = ("n", "no", "f", "false", "off", "0")
+
     if isinstance(value, bool):
         return value
     elif isinstance(value, str):
-        try:
-            return bool(strtobool(value))
-        except ValueError:
+        if value.lower() in true_equivalents:
+            return True
+        elif value.lower() in false_equivalents:
+            return False
+        else:
             raise ValueError(
-                'The "use_proto_plus" configuration key value should be'
-                f'explicitly set to "True" or "False" but "{value}" '
-                "was given."
+                "The 'use_proto_plus' configuration key value must be "
+                f"explicitly set to {true_equivalents} for 'true', or "
+                f"{false_equivalents} for 'false', but '{value}' was given."
             )
     else:
         raise TypeError(

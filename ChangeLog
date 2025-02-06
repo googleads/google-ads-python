@@ -1,4 +1,105 @@
-* 18.2.0
+* 25.1.0
+- Google Ads API v18 release.
+
+* 25.0.0
+- Google Ads API v17_1 release.
+- Remove support for Google Ads API v15.
+- Add support for protobuf version 5
+- Add deprecation warning for Python 3.8 and below.
+
+* 24.1.0
+- Google Ads API v17 release.
+- Remove page_size parameter from Search requests in all examples.
+
+* 24.0.0
+- Google Ads API v16_1 release.
+- Remove support for Google Ads API v14.
+- Remove the following obsolete examples:
+  - account_management/approve_merchant_center_link.py
+  - account_management/reject_merchant_center_link.py
+  - remarketing/add_flights_feed.py
+  - remarketing/add_real_estate_feed.py
+- Added example account_management/verify_advertiser_identity.py.
+- Update example remarketing/upload_conversion_adjustment.py to use order ID.
+- Update all examples to initialize client after CLI argument validation.
+
+* 23.1.0
+- Google Ads API v16 release.
+- Use native `open` function to load README in setup.py.
+- Remove `namespace_packages` parameter in call to `setup` in setup.py.
+- Remove `upload_image` and `upload_media_bundle` examples.
+- Combine detect and apply recommendations examples.
+- Update extensions-related examples to use assets instead.
+
+* 23.0.0
+- Remove support for Python 3.7
+- Add support for Python 3.11 and 3.12
+- Remove support for Google Ads API v13
+- Add Docker support for unit tests
+- Switch to a native/implicit namespace package
+- Remove usage of pkg_resources
+
+* 22.1.0
+- Google Ads API v15 release.
+- Add configuration option allowing developer token to be ignored.
+- Make "impersonation_email" an optional configuration for service accounts.
+- Redact PII fields from new LocalServicesLead and LocalServicesLeadConversation in logs.
+- Add DMA consent to conversions and Customer Match examples.
+- Update enhanced conversions examples to fit with for-leads and for-web workflows.
+- Update usage of ProductBiddingCategoryConstant to ProductCategoryConstant in examples.
+
+* 22.0.0
+- Remove support for Google Ads API v12.
+
+* 21.3.0
+- Google Ads API v14_1 release.
+- Increase maximum version for proto-plus and google-api-core dependencies.
+- Remove add_keyword_plan example.
+- Add generate_forecast_metrics and generate_historical_metrics examples.
+- Add deprecation warning for Python 3.7.
+
+* 21.2.0
+- Google Ads API v14 release.
+- Lower minimum version requirement for dependencies:
+  - google-api-core
+  - googleapis-common-protos
+  - proto-plus
+  - protobuf.
+- Update unit tests to run with lowest-supported Google-maintained dependencies.
+- Update upload_conversion_enhancement example with recommended placeholder names.
+- Update place_id field to place_ids in add_performance_max_for_travel_goals_campaign example.
+- Add add_things_to_do_ad example.
+- Remove examples:
+  - generate_forecast_metrics
+  - generate_historical_metrics
+  - get_campaign_criterion_bid_modifier_simulations
+
+* 21.1.0
+- Google Ads API v13_1 release.
+- Add Python versions 3.8, 3.9, and 3.10 to list of classifiers.
+- Remove restatement functionality from upload_conversion_enhancement example.
+- Move examples/hotel_ads to examples/travel
+- Update metadata_interceptor tests to dynamically retrieve Python version.
+
+* 21.0.0
+- Remove support for Google Ads API v11.
+- Update examples to use recommended example PII.
+- Increase maximum support version of google-auth-oauthlib to < 2.0.0.
+- Fix bug in add_customer_match_user_list example.
+- Add add_dynamic_page_feed_asset example.
+- Add add_performance_max_for_travel_goals_campaign example.
+- Update create_experiment example to get campaign ID from experiment arm response.
+
+* 20.0.0
+- Remove support for Google Ads API v10.
+- Google Ads API v13 release.
+- Extend version range for proto-plus and google-api-core
+- Update add_customer_match_user_list example with more complex user identifiers
+- Remove add_expression_rule_user_list example
+- Update remarketing examples to use flexible rule user lists
+- Update get_ad_group_bid_modifiers example to remove preferred content criteria
+
+* 19.0.0
 - Google Ads API v12 release.
 - Bump proto-plus to 1.22.1.
 - Remove example for Add Dynamic Page Feed.

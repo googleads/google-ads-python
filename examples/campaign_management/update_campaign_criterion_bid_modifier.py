@@ -53,10 +53,6 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Updates the bid modifier and device type for the given "
@@ -89,6 +85,10 @@ if __name__ == "__main__":
         help="The desired campaign criterion bid modifier.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

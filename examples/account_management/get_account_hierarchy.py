@@ -177,10 +177,6 @@ def print_account_hierarchy(
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="This example gets the account hierarchy of the specified "
         "manager account and login customer ID."
@@ -198,6 +194,10 @@ if __name__ == "__main__":
         "authenticated Google Ads account.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
     try:
         main(googleads_client, args.login_customer_id)
     except GoogleAdsException as ex:

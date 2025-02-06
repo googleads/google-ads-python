@@ -39,10 +39,9 @@ def main(client, customer_id, base_campaign_id):
           the experiment.
     """
     experiment = create_experiment_resource(client, customer_id)
-    treatment_arm = create_experiment_arms(
+    draft_campaign = create_experiment_arms(
         client, customer_id, base_campaign_id, experiment
     )
-    draft_campaign = fetch_draft_campaign(client, customer_id, treatment_arm)
 
     modify_draft_campaign(client, customer_id, draft_campaign)
 
@@ -125,60 +124,31 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
     operations.append(operation_2)
 
     experiment_arm_service = client.get_service("ExperimentArmService")
-    response = experiment_arm_service.mutate_experiment_arms(
-        customer_id=customer_id, operations=operations
+    request = client.get_type("MutateExperimentArmsRequest")
+    request.customer_id = customer_id
+    request.operations = operations
+    # We want to fetch the draft campaign IDs from the treatment arm, so the
+    # easiest way to do that is to have the response return the newly created
+    # entities.
+    request.response_content_type = (
+        client.enums.ResponseContentTypeEnum.MUTABLE_RESOURCE
     )
+    response = experiment_arm_service.mutate_experiment_arms(request=request)
 
     # Results always return in the order that you specify them in the request.
-    # Since we created the treatment arm last, it will be the last result.  If
-    # you don't remember which arm is the treatment arm, you can always filter
-    # the query in the next section with `experiment_arm.control = false`.
-    control_arm = response.results[0].resource_name
-    treatment_arm = response.results[1].resource_name
+    # Since we created the treatment arm second, it will be the second result.
+    control_arm_result = response.results[0]
+    treatment_arm_result = response.results[1]
 
-    print(f"Created control arm with resource name {control_arm}")
-    print(f"Created treatment arm with resource name {treatment_arm}")
+    print(
+        f"Created control arm with resource name {control_arm_result.resource_name}"
+    )
+    print(
+        f"Created treatment arm with resource name {treatment_arm_result.resource_name}"
+    )
 
-    return treatment_arm
+    return treatment_arm_result.experiment_arm.in_design_campaigns[0]
     # [END create_experiment_2]
-
-
-# [START create_experiment_3]
-def fetch_draft_campaign(client, customer_id, treatment_arm):
-    """Retrieves the in-design campaigns for an experiment.
-
-    Args:
-        client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID.
-        treatment_arm: the resource name for the treatment arm of an experiment.
-
-    Returns:
-        the resource name for the in-design campaign.
-    """
-    # The `in_design_campaigns` represent campaign drafts, which you can modify
-    # before starting the experiment.
-    ga_service = client.get_service("GoogleAdsService")
-
-    query = f"""
-      SELECT
-        experiment_arm.in_design_campaigns
-      FROM experiment_arm
-      WHERE experiment_arm.resource_name = '{treatment_arm}'"""
-
-    request = client.get_type("SearchGoogleAdsRequest")
-    request.customer_id = customer_id
-    request.query = query
-
-    response = ga_service.search(request=request)
-
-    # In design campaigns returns as a list, but for now it can only ever
-    # contain a single ID, so we just grab the first one.
-    draft_campaign = response.results[0].experiment_arm.in_design_campaigns[0]
-
-    print(f"Found draft campaign with resource name {draft_campaign}")
-
-    return draft_campaign
-    # [END create_experiment_3]
 
 
 def modify_draft_campaign(client, customer_id, draft_campaign):
@@ -213,10 +183,6 @@ def modify_draft_campaign(client, customer_id, draft_campaign):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=("Create a campaign experiment based on a campaign draft.")
     )
@@ -236,6 +202,10 @@ if __name__ == "__main__":
         help="The campaign id.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(googleads_client, args.customer_id, args.base_campaign_id)

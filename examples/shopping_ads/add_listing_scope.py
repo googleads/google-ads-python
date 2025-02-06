@@ -94,10 +94,6 @@ def main(client, customer_id, campaign_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=("Adds a shopping listing scope to a shopping campaign.")
     )
@@ -113,6 +109,10 @@ if __name__ == "__main__":
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

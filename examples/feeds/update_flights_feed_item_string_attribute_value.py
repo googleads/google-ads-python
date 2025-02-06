@@ -184,12 +184,9 @@ def placeholder_field_maps(
           feed.attributes
         FROM feed
         WHERE feed.resource_name = '{feed_resource_name}'"""
-    # Issues a search request. The page_size is set to 1 because we're only
-    # requesting a single result.
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = 1
 
     response = googleads_service.search(request=search_request)
     row = list(response)[0]
@@ -226,7 +223,6 @@ def get_feed_item(client, customer_id, feed_item_resource_name):
     search_request = client.get_type("SearchGoogleAdsRequest")
     search_request.customer_id = customer_id
     search_request.query = query
-    search_request.page_size = 1
     response = googleads_service.search(request=search_request)
 
     # Returns the feed item attribute values, which belongs to the first item.
@@ -274,10 +270,6 @@ def get_attribute_index(target_feed_item_attribute_value, feed_item):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description="Updates a feed item attribute value in a flights feed."
     )
@@ -321,6 +313,10 @@ if __name__ == "__main__":
         help="The new value to set the feed attribute to.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
 
     try:
         main(

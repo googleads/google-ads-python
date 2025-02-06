@@ -21,10 +21,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-_DEFAULT_PAGE_SIZE = 1000
-
-
-def main(client, customer_id, campaign_id, page_size):
+def main(client, customer_id, campaign_id):
     ga_service = client.get_service("GoogleAdsService")
 
     query = f"""
@@ -40,12 +37,11 @@ def main(client, customer_id, campaign_id, page_size):
 
     request = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
+    request.search_settings.return_total_results_count = True
     request.query = query
-    request.page_size = page_size
 
     results = ga_service.search(request=request)
 
-    disapproved_ads_count = 0
     disapproved_enum = client.enums.PolicyApprovalStatusEnum.DISAPPROVED
 
     print("Disapproved ads:")
@@ -78,10 +74,6 @@ def main(client, customer_id, campaign_id, page_size):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v12")
-
     parser = argparse.ArgumentParser(
         description=(
             "Lists disapproved ads for a given customer's specified "
@@ -101,12 +93,15 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+
     try:
         main(
             googleads_client,
             args.customer_id,
             args.campaign_id,
-            _DEFAULT_PAGE_SIZE,
         )
     except GoogleAdsException as ex:
         print(

@@ -24,14 +24,12 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
-_API_VERSION = "v12"
-
 
 def main(client, customer_id):
     # Instantiate the GoogleAdsService object with a custom interceptor.
     ga_service = client.get_service(
         "GoogleAdsService",
-        interceptors=[CloudLoggingInterceptor(api_version=_API_VERSION)],
+        interceptors=[CloudLoggingInterceptor(api_version="v16")],
     )
 
     query = """
@@ -54,10 +52,6 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version=_API_VERSION)
-
     parser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."
     )
@@ -70,6 +64,10 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
     args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v16")
 
     try:
         main(googleads_client, args.customer_id)

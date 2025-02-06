@@ -13,7 +13,7 @@
 # limitations under the License.
 """Tests the configuration helper module."""
 
-import mock
+from unittest import mock
 import os
 import yaml
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
@@ -37,6 +37,7 @@ class ConfigTest(FileTestCase):
         self.configuration_file_path = "/usr/test/path/google-ads.yaml"
         self.impersonated_email = "impersonated@account.com"
         self.use_proto_plus = False
+        self.use_cloud_org_for_api_access = False
         # The below fields are defaults that include required keys.
         # They are merged with other keys in individual tests, and isolated
         # here so that new required keys don't need to be added to each test.
@@ -602,10 +603,10 @@ class ConfigTest(FileTestCase):
             config._OAUTH2_INSTALLED_APP_KEYS,
         )
 
-    def test_get_oauth2_service_account_keys(self):
+    def test_get_oauth2_required_service_account_keys(self):
         self.assertEqual(
-            config.get_oauth2_service_account_keys(),
-            config._OAUTH2_SERVICE_ACCOUNT_KEYS,
+            config.get_oauth2_required_service_account_keys(),
+            config._OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS,
         )
 
     def test_convert_login_customer_id_to_str_with_int(self):
@@ -659,3 +660,32 @@ class ConfigTest(FileTestCase):
 
     def test_disambiguate_string_bool_raises_type_error(self):
         self.assertRaises(TypeError, config.disambiguate_string_bool, {})
+
+    def test_load_from_env_use_cloud_org_for_api_access(self):
+        """Should load api access flag from environment when specified"""
+        environ = {
+            **self.default_env_var_config,
+            **{
+                "GOOGLE_ADS_USE_CLOUD_ORG_FOR_API_ACCESS": self.use_cloud_org_for_api_access,
+            },
+        }
+
+        with mock.patch("os.environ", environ):
+            results = config.load_from_env()
+            self.assertEqual(
+                results["use_cloud_org_for_api_access"],
+                self.use_cloud_org_for_api_access,
+            )
+
+    def test_load_from_yaml_file_use_cloud_org_for_api_access(self):
+        """Should load "use_cloud_org_for_api_access" config from a yaml."""
+        self._create_mock_yaml({"use_cloud_org_for_api_access": True})
+
+        result = config.load_from_yaml_file()
+        self.assertEqual(result["use_cloud_org_for_api_access"], True)
+
+    def test_load_from_yaml_file_use_cloud_org_for_api_access_not_set(self):
+        """Should set "use_cloud_org_for_api_access" as None when not set."""
+        self._create_mock_yaml({})
+        result = config.load_from_yaml_file()
+        self.assertEqual(result.get("use_cloud_org_for_api_access"), None)

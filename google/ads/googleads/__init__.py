@@ -12,8 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+import warnings
+
 import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "18.1.0"
+VERSION = "25.1.0"
+
+if sys.version_info.major == 3 and sys.version_info.minor <= 8:
+    warnings.warn(
+        "Python versions 3.8 and below will soon be deprecated in the "
+        "google-ads package. Please upgrade to Python 3.9 or higher as soon as "
+        "possible.",
+        category=DeprecationWarning,
+    )

@@ -12,16 +12,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example is to get budget recommendations for Performance Max; 
+"""This example generates budget recommendations on-the-fly for Performance Max campaigns.
+
+This means that you can use this example to get budget recommendations before creating campaigns.
 
 The response includes weekly impact metrics for the recommended budgets.
 
-Example uses: 
+This example uses the following: 
 1) Performance Max for the campaign type
 2) United States for the geo targeting 
-3) Maximize Conversions Value for the bidding strategy.
+3) Maximize Conversions Value for the bidding strategy
 
-To get impact metrics for a custom budget, run get_impact_metrics.py.
+To get impact metrics for a custom budget, run get_recommendation_impact_metrics.py.
 """
 
 

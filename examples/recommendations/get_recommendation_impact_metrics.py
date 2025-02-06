@@ -21,7 +21,7 @@ Example uses:
 2) United States for the geo targeting 
 3) Maximize Conversions Value for the bidding strategy.
 
-To get budget recommendations, run get_budget_recommendations.py.
+To get budget recommendations, run generate_budget_recommendations.py.
 """
 
 

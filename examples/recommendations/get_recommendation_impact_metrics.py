@@ -41,21 +41,21 @@ def main(client, customer_id, budget_amount_user):
         budget_amount_user: a budget amount (not in micros) advertiser wants to use.
     """
     # Start Recommendation Service.
-    reco_service = client.get_service("RecommendationService")
+    recommendation_service = client.get_service("RecommendationService")
 
     # Build Request.
-    reco_request = client.get_type("GenerateRecommendationsRequest")
+    request = client.get_type("GenerateRecommendationsRequest")
 
-    reco_request.customer_id = customer_id
-    reco_request.recommendation_types = ["CAMPAIGN_BUDGET"]
-    reco_request.advertising_channel_type = "PERFORMANCE_MAX"
-    reco_request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
-    reco_request.positive_locations_ids = [2840]  # 2840 is for United States
-    reco_request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
-    reco_request.budget_info.current_budget = round((budget_amount_user*1000000), 2)  # because current_budget takes micros
+    request.customer_id = customer_id
+    request.recommendation_types = ["CAMPAIGN_BUDGET"]
+    request.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
+    request.positive_locations_ids = [2840]  # 2840 is for United States
+    request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    request.budget_info.current_budget = round((budget_amount_user*1000000), 2)
 
     # Send Request.
-    results = reco_service.generate_recommendations(reco_request)
+    results = recommendation_service.generate_recommendations(request)
 
     recommendations = results.recommendations
 

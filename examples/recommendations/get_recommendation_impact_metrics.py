@@ -12,14 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example is to get impact metrics for a custom budget; 
+"""This example is to get impact metrics for a custom budget.
 
-This is for users who want to input a different budget than the recommended one.
-
-Example uses: 
+This example uses the following: 
 1) Performance Max for the campaign type
 2) United States for the geo targeting 
-3) Maximize Conversions Value for the bidding strategy.
+3) Maximize Conversions Value for the bidding strategy
 
 To get budget recommendations, run generate_budget_recommendations.py.
 """
@@ -41,54 +39,44 @@ def main(client, customer_id, budget_amount_user):
         budget_amount_user: a budget amount (not in micros) advertiser wants to use.
     """
     # Start Recommendation Service.
-    reco_service = client.get_service("RecommendationService")
+    recommendation_service = client.get_service("RecommendationService")
 
     # Build Request.
-    reco_request = client.get_type("GenerateRecommendationsRequest")
+    request = client.get_type("GenerateRecommendationsRequest")
 
-    reco_request.customer_id = customer_id
-    reco_request.recommendation_types = ["CAMPAIGN_BUDGET"]
-    reco_request.advertising_channel_type = "PERFORMANCE_MAX"
-    reco_request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
-    reco_request.positive_locations_ids = [2840]  # 2840 is for United States
-    reco_request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
-    reco_request.budget_info.current_budget = round((budget_amount_user*1000000), 2)  # because current_budget takes micros
+    request.customer_id = customer_id
+    request.recommendation_types = ["CAMPAIGN_BUDGET"]
+    request.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
+    request.positive_locations_ids = [2840]  # 2840 is for United States
+    request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    request.budget_info.current_budget = round((budget_amount_user*1000000), 2)
 
     # Send Request.
-    results = reco_service.generate_recommendations(reco_request)
+    results = recommendation_service.generate_recommendations(request)
 
     recommendations = results.recommendations
 
-    budget_impact_metrics = []    # List to store impact metrics for user input budget
+    # List to store impact metrics for user input budget
+    budget_impact_metrics = []
 
-    for reco in recommendations:
-        if hasattr(reco, 'campaign_budget_recommendation'):
-            campaign_budget_reco = reco.campaign_budget_recommendation
-
-            if hasattr(campaign_budget_reco, 'budget_options'):
-                for budget_option in campaign_budget_reco.budget_options:
-                    if hasattr(budget_option, 'impact') and hasattr(budget_option, 'budget_amount_micros'): # Check if both exist
-                        impact = budget_option.impact
-                        budget_amount = budget_option.budget_amount_micros
-
-                        if hasattr(impact, 'potential_metrics'):
-                            if budget_amount/1000000 == budget_amount_user:
-                                budget_data = {
-                                    "budget_amount": round((budget_amount/1000000), 2),
-                                    "potential_metrics": impact.potential_metrics
-                                }
-                                budget_impact_metrics.append(budget_data)
-                        else:
-                            print("potential_metrics not found for this budget option.")
-                    else:
-                        print("impact or budget_amount_micros not found for this budget option.")
+    # Get impact metrics for custom budget.
+    for rec in recommendations:
+        campaign_budget_rec = rec.campaign_budget_recommendation
+        for budget_option in campaign_budget_rec.budget_options:
+            if hasattr(budget_option, 'impact'):
+                impact = budget_option.impact
+                budget_amount = budget_option.budget_amount_micros
+                if budget_amount/1000000 == budget_amount_user:
+                    budget_data = {
+                        "budget_amount": round((budget_amount/1000000), 2),
+                        "potential_metrics": impact.potential_metrics
+                    }
+                    budget_impact_metrics.append(budget_data)
             else:
-                print("budget_options not found for this recommendation.")
-        else:
-            print("campaign_budget_recommendation not found for this recommendation.")
+                print("impact metrics not found for this budget amount.")
 
-    print("budget_impact_metrics:")
-    print(budget_impact_metrics)
+    print(f"budget_impact_metrics:\n{budget_impact_metrics}")
     """
     budget_impact_metrics:
     [{'budget_amount': 100.0, 'potential_metrics': cost_micros: 700000000

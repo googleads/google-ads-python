@@ -14,9 +14,7 @@
 # limitations under the License.
 """This example generates budget recommendations on-the-fly for Performance Max campaigns.
 
-This means that you can use this example to get budget recommendations before creating campaigns.
-
-The response includes weekly impact metrics for the recommended budgets.
+Use this example to get budget recommendations during campaign creation workflows.
 
 This example uses the following: 
 1) Performance Max for the campaign type
@@ -42,69 +40,56 @@ def main(client, customer_id):
         customer_id: a client customer ID.
     """
     # Start Recommendation Service.
-    reco_service = client.get_service("RecommendationService")
+    recommendation_service = client.get_service("RecommendationService")
 
     # Build Request.
-    reco_request = client.get_type("GenerateRecommendationsRequest")
+    request = client.get_type("GenerateRecommendationsRequest")
 
-    reco_request.customer_id = customer_id
-    reco_request.recommendation_types = ["CAMPAIGN_BUDGET"]
-    reco_request.advertising_channel_type = "PERFORMANCE_MAX"
-    reco_request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
-    reco_request.positive_locations_ids = [2840]  # 2840 is for United States
-    reco_request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    request.customer_id = customer_id
+    request.recommendation_types = ["CAMPAIGN_BUDGET"]
+    request.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
+    request.positive_locations_ids = [2840]  # 2840 is for United States
+    request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
 
     # Send Request.
-    results = reco_service.generate_recommendations(reco_request)
+    results = recommendation_service.generate_recommendations(request)
 
     recommendations = results.recommendations
 
-    budget_recommendations_list = []    # List to store budget recos with impact metrics
-    budget_amounts =  [] # List to store budget reco amounts
+    # Initialize a list to store all budget recommendations with impact metrics.
+    budget_recommendations_list = []
+    # Initialize a list to store budget recommendation amounts.
+    budget_amounts =  []
 
-    for reco in recommendations:
-        if hasattr(reco, 'campaign_budget_recommendation'):
-            campaign_budget_reco = reco.campaign_budget_recommendation
-
-            if hasattr(campaign_budget_reco, 'budget_options'):
-                for budget_option in campaign_budget_reco.budget_options:
-                    if hasattr(budget_option, 'impact') and hasattr(budget_option, 'budget_amount_micros'): # Check if both exist
-                        impact = budget_option.impact
-                        budget_amount = budget_option.budget_amount_micros
-
-                        if hasattr(impact, 'potential_metrics'):
-                            if budget_amount > 0:
-                                budget_data = {
-                                    "budget_amount": round((budget_amount/1000000), 2),
-                                    "potential_metrics": impact.potential_metrics
-                                }
-                                budget_recommendations_list.append(budget_data)
-                                budget_amounts.append(round((budget_amount/1000000), 2))  
-                        else:
-                            print("potential_metrics not found for this budget option.")
-                    else:
-                        print("impact or budget_amount_micros not found for this budget option.")
-            else:
-                print("budget_options not found for this recommendation.")
-        else:
-            print("campaign_budget_recommendation not found for this recommendation.")
-    print("budget_recommendations_list:")
-    print(budget_recommendations_list)
+    # Get budget recommendations with their associated impact metrics.
+    for rec in recommendations:
+      campaign_budget_rec = rec.campaign_budget_recommendation
+      if hasattr(rec, 'campaign_budget_recommendation'):
+        campaign_budget_rec = rec.campaign_budget_recommendation
+        for budget_option in campaign_budget_rec.budget_options:
+          impact = budget_option.impact
+          budget_amount = budget_option.budget_amount_micros
+          if budget_amount > 0:
+            budget_data = {
+              "budget_amount": round((budget_amount/1000000), 2),
+              "potential_metrics": impact.potential_metrics
+            }
+            budget_recommendations_list.append(budget_data)
+            budget_amounts.append(round((budget_amount/1000000), 2))
+      else:
+        print("campaign_budget_recommendation not found for this account.")
+    
+    print(f"budget_recommendations_list:\n{budget_recommendations_list}")
     """
     budget_recommendations_list:
     [{'budget_amount': 44.56, 'potential_metrics': cost_micros: 311920000
     conversions: 2.1
     conversions_value: 82.537178980480363
-    }, {'budget_amount': 55.7, 'potential_metrics': cost_micros: 389900000
-    conversions: 2.1
-    conversions_value: 82.537178980480363
-    }, {'budget_amount': 66.84, 'potential_metrics': cost_micros: 467880000
-    conversions: 2.1
-    conversions_value: 82.537178980480363
-    }]
+    }, ...}]
     """
-    print("budget_amounts:")
-    print(budget_amounts)
+
+    print(f"budget_amounts:\n{budget_amounts}")
     """
     budget_amounts:
     [44.56, 55.7, 66.84]
@@ -112,7 +97,7 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=("Get impact metrics for Performance Max budget."))
+    parser = argparse.ArgumentParser(description=("Generate budget recommendations for a Performance Max campaign."))
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
         "-c",

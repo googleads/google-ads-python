@@ -59,7 +59,8 @@ def main(client, customer_id, budget_amount_user):
 
     recommendations = results.recommendations
 
-    budget_impact_metrics = []    # List to store impact metrics for user input budget
+    # List to store impact metrics for user input budget
+    budget_impact_metrics = []
 
     # Get impact metrics for custom budget.
     for rec in recommendations:
@@ -69,11 +70,11 @@ def main(client, customer_id, budget_amount_user):
                 impact = budget_option.impact
                 budget_amount = budget_option.budget_amount_micros
                 if budget_amount/1000000 == budget_amount_user:
-                                budget_data = {
-                                    "budget_amount": round((budget_amount/1000000), 2),
-                                    "potential_metrics": impact.potential_metrics
-                                }
-                                budget_impact_metrics.append(budget_data)
+                    budget_data = {
+                        "budget_amount": round((budget_amount/1000000), 2),
+                        "potential_metrics": impact.potential_metrics
+                    }
+                    budget_impact_metrics.append(budget_data)
             else:
                 print("impact metrics not found for this budget amount.")
 

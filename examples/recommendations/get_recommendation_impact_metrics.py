@@ -12,14 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example is to get impact metrics for a custom budget; 
+"""This example is to get impact metrics for a custom budget. 
 
-This is for users who want to input a different budget than the recommended one.
+Use this example to get impact metrics for a budget amount during campaign creation workflows.
 
-Example uses: 
+This example uses the following: 
 1) Performance Max for the campaign type
 2) United States for the geo targeting 
-3) Maximize Conversions Value for the bidding strategy.
+3) Maximize Conversions Value for the bidding strategy
 
 To get budget recommendations, run generate_budget_recommendations.py.
 """

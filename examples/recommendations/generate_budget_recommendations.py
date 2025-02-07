@@ -70,12 +70,12 @@ def main(client, customer_id):
                 impact = budget_option.impact
                 budget_amount = budget_option.budget_amount_micros
                 if budget_amount > 0:
-                                budget_data = {
-                                    "budget_amount": round((budget_amount/1000000), 2),
-                                    "potential_metrics": impact.potential_metrics
-                                }
-                                budget_recommendations_list.append(budget_data)
-                                budget_amounts.append(round((budget_amount/1000000), 2))
+                    budget_data = {
+                        "budget_amount": round((budget_amount/1000000), 2),
+                        "potential_metrics": impact.potential_metrics
+                    }
+                    budget_recommendations_list.append(budget_data)
+                    budget_amounts.append(round((budget_amount/1000000), 2))
         else:
             print("campaign_budget_recommendation not found for this account.")
     

@@ -39,10 +39,7 @@ def main(client, customer_id):
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    # Start Recommendation Service.
     recommendation_service = client.get_service("RecommendationService")
-
-    # Build Request.
     request = client.get_type("GenerateRecommendationsRequest")
 
     request.customer_id = customer_id
@@ -52,7 +49,6 @@ def main(client, customer_id):
     request.positive_locations_ids = [2840]  # 2840 is for United States
     request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
 
-    # Send Request.
     results = recommendation_service.generate_recommendations(request)
 
     recommendations = results.recommendations
@@ -64,8 +60,14 @@ def main(client, customer_id):
 
     # Get budget recommendations with their associated impact metrics.
     for rec in recommendations:
+        # Check if the API responded with recommendations
         if hasattr(rec, 'campaign_budget_recommendation'):
             campaign_budget_rec = rec.campaign_budget_recommendation
+            # Loop through the budget options in the campaign budget recommendation
+            # to compile a list of budget amounts and their respective potential 
+            # impact metrics. If you have a campaign creation interface, 
+            # you could display this information for end users to decide which 
+            # budget amount best aligns with their goals.
             for budget_option in campaign_budget_rec.budget_options:
                 impact = budget_option.impact
                 budget_amount = budget_option.budget_amount_micros

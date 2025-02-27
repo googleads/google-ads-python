@@ -14,7 +14,7 @@
 # limitations under the License.
 """This example is to get impact metrics for a custom budget. 
 
-Use this example to get impact metrics for a budget amount during campaign creation workflows.
+Use this example to get impact metrics for a given budget amount.
 
 This example uses the following: 
 1) Performance Max for the campaign type
@@ -32,18 +32,15 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id, budget_amount_user):
+def main(client, customer_id, user_provided_budget_amount):
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        budget_amount_user: a budget amount (not in micros) advertiser wants to use.
+        user_provided_budget_amount: a user-provided budget amount (not in micros), to retrieve impact metrics for.
     """
-    # Start Recommendation Service.
     recommendation_service = client.get_service("RecommendationService")
-
-    # Build Request.
     request = client.get_type("GenerateRecommendationsRequest")
 
     request.customer_id = customer_id
@@ -52,9 +49,8 @@ def main(client, customer_id, budget_amount_user):
     request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
     request.positive_locations_ids = [2840]  # 2840 is for United States
     request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
-    request.budget_info.current_budget = round((budget_amount_user*1000000), 2)
+    request.budget_info.current_budget = round((user_provided_budget_amount*1000000), 2)
 
-    # Send Request.
     results = recommendation_service.generate_recommendations(request)
 
     recommendations = results.recommendations
@@ -65,11 +61,16 @@ def main(client, customer_id, budget_amount_user):
     # Get impact metrics for custom budget.
     for rec in recommendations:
         campaign_budget_rec = rec.campaign_budget_recommendation
+        # Loop through the budget options in the campaign budget recommendation
+        # to compile a list of budget amounts and their respective potential 
+        # impact metrics. If you have a campaign creation interface, 
+        # you could display this information for end users to decide which 
+        # budget amount best aligns with their goals.
         for budget_option in campaign_budget_rec.budget_options:
             if hasattr(budget_option, 'impact'):
                 impact = budget_option.impact
                 budget_amount = budget_option.budget_amount_micros
-                if budget_amount/1000000 == budget_amount_user:
+                if budget_amount/1000000 == user_provided_budget_amount:
                     budget_data = {
                         "budget_amount": round((budget_amount/1000000), 2),
                         "potential_metrics": impact.potential_metrics
@@ -100,7 +101,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "-b",
-        "--budget_amount_user",
+        "--user_provided_budget_amount",
         type=int,
         required=True,
         help=(
@@ -118,7 +119,7 @@ if __name__ == "__main__":
         main(
             googleads_client,
             args.customer_id,
-            args.budget_amount_user,
+            args.user_provided_budget_amount,
         )
     except GoogleAdsException as ex:
         print(

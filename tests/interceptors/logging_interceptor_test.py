@@ -51,13 +51,18 @@ customer_user_access_invitation = import_module(
     f"{module_prefix}.resources.types.customer_user_access_invitation"
 )
 change_event = import_module(f"{module_prefix}.resources.types.change_event")
-feed = import_module(f"{module_prefix}.resources.types.feed")
 local_services_lead = import_module(
     f"{module_prefix}.resources.types.local_services_lead"
 )
 local_services_lead_conversation = import_module(
     f"{module_prefix}.resources.types.local_services_lead_conversation"
 )
+
+
+v18_google_ads_service = import_module(
+    "google.ads.googleads.v18.services.types.google_ads_service"
+)
+v18_feed = import_module("google.ads.googleads.v18.resources.types.feed")
 
 
 class LoggingInterceptorTest(TestCase):
@@ -819,10 +824,11 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_search_places_location_feed_data(self):
         """Masks Feed.places_location_feed_data on a SearchStream response."""
-        response = google_ads_service.SearchGoogleAdsStreamResponse()
-        row = google_ads_service.GoogleAdsRow(
-            feed=feed.Feed(
-                places_location_feed_data=feed.Feed.PlacesLocationFeedData(
+        # This only applies in v18 and below because Feeds were removed in v19
+        response = v18_google_ads_service.SearchGoogleAdsStreamResponse()
+        row = v18_google_ads_service.GoogleAdsRow(
+            feed=v18_feed.Feed(
+                places_location_feed_data=v18_feed.Feed.PlacesLocationFeedData(
                     email_address="test@test.com"
                 )
             )
@@ -876,8 +882,8 @@ class LoggingInterceptorTest(TestCase):
 
     def test_mask_places_location_feed_data(self):
         """Copies and masks a PlacesLocationFeedData instance."""
-        message = feed.Feed(
-            places_location_feed_data=feed.Feed.PlacesLocationFeedData(
+        message = v18_feed.Feed(
+            places_location_feed_data=v18_feed.Feed.PlacesLocationFeedData(
                 email_address="test@test.com"
             )
         )

@@ -101,7 +101,7 @@ def main(
         client.enums.UserIdentifierSourceEnum.FIRST_PARTY
     )
     # Uses the normalize and hash method specifically for email addresses.
-    email_identifier.hashed_phone_number = normalize_and_hash_email_address(
+    email_identifier.hashed_email = normalize_and_hash_email_address(
         raw_record["email"]
     )
     # Adds the user identifier to the conversion.
@@ -292,7 +292,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(

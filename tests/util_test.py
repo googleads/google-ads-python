@@ -34,9 +34,10 @@ from google.ads.googleads import client
 
 default_version = client._DEFAULT_VERSION
 
-feed_module = import_module(
-    f"google.ads.googleads.{default_version}.resources.types.feed"
-)
+ClickConversion = import_module(
+    f"google.ads.googleads.{default_version}."
+    "services.types.conversion_upload_service"
+).ClickConversion
 
 
 class ConvertStringTest(TestCase):
@@ -56,21 +57,29 @@ class ConvertStringTest(TestCase):
 class SetNestedMessageFieldTest(TestCase):
     def test_set_nested_message_field(self):
         val = "test value"
-        feed = feed_module.Feed()
+        click_conversion = ClickConversion()
         util.set_nested_message_field(
-            feed, "places_location_feed_data.email_address", val
+            click_conversion,
+            "external_attribution_data.external_attribution_model",
+            val,
         )
-        self.assertEqual(feed.places_location_feed_data.email_address, val)
+        self.assertEqual(
+            click_conversion.external_attribution_data.external_attribution_model,
+            val,
+        )
 
 
 class GetNestedMessageFieldTest(TestCase):
     def test_get_nested_message_field(self):
         val = "test value"
-        feed = feed_module.Feed()
-        feed.places_location_feed_data.email_address = val
+        click_conversion = ClickConversion()
+        click_conversion.external_attribution_data.external_attribution_model = (
+            val
+        )
         self.assertEqual(
             util.get_nested_attr(
-                feed, "places_location_feed_data.email_address"
+                click_conversion,
+                "external_attribution_data.external_attribution_model",
             ),
             val,
         )

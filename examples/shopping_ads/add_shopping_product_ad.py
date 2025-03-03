@@ -187,15 +187,11 @@ def add_standard_shopping_campaign(
     # and the ads are ready to serve.
     campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
-    # Sets the bidding strategy to Manual CPC (with eCPC disabled). eCPC for
-    # standard Shopping campaigns is deprecated. If eCPC is set to true, Google
-    # Ads ignores the setting and behaves as if the setting was false. See this
-    # blog post for more information:
-    # https://ads-developers.googleblog.com/2023/09/google-ads-shopping-campaign-enhanced.html
+    # Sets the bidding strategy to Manual CPC.
     # Recommendation: Use one of the automated bidding strategies for Shopping
     # campaigns to help you optimize your advertising spend. More information
     # can be found here: https://support.google.com/google-ads/answer/6309029
-    campaign.manual_cpc.enhanced_cpc_enabled = False
+    campaign.manual_cpc = client.get_type("ManualCpc")
 
     # Sets the budget.
     campaign.campaign_budget = budget_resource_name
@@ -286,7 +282,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(

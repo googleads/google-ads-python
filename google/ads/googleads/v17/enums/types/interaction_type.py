@@ -32,7 +32,18 @@ class InteractionTypeEnum(proto.Message):
     r"""Container for enum describing possible interaction types."""
 
     class InteractionType(proto.Enum):
-        r"""Enum describing possible interaction types."""
+        r"""Enum describing possible interaction types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CALLS (8000):
+                Calls.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CALLS = 8000

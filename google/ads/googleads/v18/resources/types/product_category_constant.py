@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import product_category_state
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductCategoryConstant",},
+    manifest={
+        "ProductCategoryConstant",
+    },
 )
 
 
 class ProductCategoryConstant(proto.Message):
     r"""A Product Category.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -62,6 +65,7 @@ class ProductCategoryConstant(proto.Message):
 
     class ProductCategoryLocalization(proto.Message):
         r"""Localization for the product category.
+
         Attributes:
             region_code (str):
                 Output only. Upper-case two-letter ISO 3166-1
@@ -75,38 +79,51 @@ class ProductCategoryConstant(proto.Message):
         """
 
         region_code: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         language_code: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
         value: str = proto.Field(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     category_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     product_category_constant_parent: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    level: product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel = proto.Field(
+    level: (
+        product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel,
     )
-    state: product_category_state.ProductCategoryStateEnum.ProductCategoryState = proto.Field(
+    state: (
+        product_category_state.ProductCategoryStateEnum.ProductCategoryState
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=product_category_state.ProductCategoryStateEnum.ProductCategoryState,
     )
-    localizations: MutableSequence[
-        ProductCategoryLocalization
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ProductCategoryLocalization,
+    localizations: MutableSequence[ProductCategoryLocalization] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=ProductCategoryLocalization,
+        )
     )
 
 

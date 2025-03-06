@@ -37,6 +37,23 @@ class SearchTermMatchTypeEnum(proto.Message):
     class SearchTermMatchType(proto.Enum):
         r"""Possible match types for a keyword triggering an ad,
         including variants.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BROAD (2):
+                Broad match.
+            EXACT (3):
+                Exact match.
+            PHRASE (4):
+                Phrase match.
+            NEAR_EXACT (5):
+                Exact match (close variant).
+            NEAR_PHRASE (6):
+                Phrase match (close variant).
         """
 
         UNSPECIFIED = 0

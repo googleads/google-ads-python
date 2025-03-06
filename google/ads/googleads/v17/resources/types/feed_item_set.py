@@ -100,13 +100,17 @@ class FeedItemSet(proto.Message):
             enum=feed_item_set_status.FeedItemSetStatusEnum.FeedItemSetStatus,
         )
     )
-    dynamic_location_set_filter: feed_item_set_filter_type_infos.DynamicLocationSetFilter = proto.Field(
+    dynamic_location_set_filter: (
+        feed_item_set_filter_type_infos.DynamicLocationSetFilter
+    ) = proto.Field(
         proto.MESSAGE,
         number=5,
         oneof="dynamic_set_filter",
         message=feed_item_set_filter_type_infos.DynamicLocationSetFilter,
     )
-    dynamic_affiliate_location_set_filter: feed_item_set_filter_type_infos.DynamicAffiliateLocationSetFilter = proto.Field(
+    dynamic_affiliate_location_set_filter: (
+        feed_item_set_filter_type_infos.DynamicAffiliateLocationSetFilter
+    ) = proto.Field(
         proto.MESSAGE,
         number=6,
         oneof="dynamic_set_filter",

@@ -35,7 +35,32 @@ class SimulationTypeEnum(proto.Message):
     """
 
     class SimulationType(proto.Enum):
-        r"""Enum describing the field a simulation modifies."""
+        r"""Enum describing the field a simulation modifies.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CPC_BID (2):
+                The simulation is for a CPC bid.
+            CPV_BID (3):
+                The simulation is for a CPV bid.
+            TARGET_CPA (4):
+                The simulation is for a CPA target.
+            BID_MODIFIER (5):
+                The simulation is for a bid modifier.
+            TARGET_ROAS (6):
+                The simulation is for a ROAS target.
+            PERCENT_CPC_BID (7):
+                The simulation is for a percent CPC bid.
+            TARGET_IMPRESSION_SHARE (8):
+                The simulation is for an impression share
+                target.
+            BUDGET (9):
+                The simulation is for a budget.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

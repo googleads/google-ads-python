@@ -36,7 +36,11 @@ from google.ads.googleads.v18.enums.types import policy_review_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"Asset", "AssetFieldTypePolicySummary", "AssetPolicySummary",},
+    manifest={
+        "Asset",
+        "AssetFieldTypePolicySummary",
+        "AssetPolicySummary",
+    },
 )
 
 
@@ -208,33 +212,48 @@ class Asset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     type_: asset_type.AssetTypeEnum.AssetType = proto.Field(
-        proto.ENUM, number=4, enum=asset_type.AssetTypeEnum.AssetType,
+        proto.ENUM,
+        number=4,
+        enum=asset_type.AssetTypeEnum.AssetType,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=16,
+        proto.STRING,
+        number=16,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=18, message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=18,
+            message=custom_parameter.CustomParameter,
+        )
     )
     final_url_suffix: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     source: gage_asset_source.AssetSourceEnum.AssetSource = proto.Field(
         proto.ENUM,
@@ -242,12 +261,16 @@ class Asset(proto.Message):
         enum=gage_asset_source.AssetSourceEnum.AssetSource,
     )
     policy_summary: "AssetPolicySummary" = proto.Field(
-        proto.MESSAGE, number=13, message="AssetPolicySummary",
+        proto.MESSAGE,
+        number=13,
+        message="AssetPolicySummary",
     )
     field_type_policy_summaries: MutableSequence[
         "AssetFieldTypePolicySummary"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=40, message="AssetFieldTypePolicySummary",
+        proto.MESSAGE,
+        number=40,
+        message="AssetFieldTypePolicySummary",
     )
     youtube_video_asset: asset_types.YoutubeVideoAsset = proto.Field(
         proto.MESSAGE,
@@ -363,7 +386,9 @@ class Asset(proto.Message):
         oneof="asset_data",
         message=asset_types.DynamicCustomAsset,
     )
-    dynamic_hotels_and_rentals_asset: asset_types.DynamicHotelsAndRentalsAsset = proto.Field(
+    dynamic_hotels_and_rentals_asset: (
+        asset_types.DynamicHotelsAndRentalsAsset
+    ) = proto.Field(
         proto.MESSAGE,
         number=32,
         oneof="asset_data",
@@ -375,11 +400,13 @@ class Asset(proto.Message):
         oneof="asset_data",
         message=asset_types.DynamicFlightsAsset,
     )
-    demand_gen_carousel_card_asset: asset_types.DemandGenCarouselCardAsset = proto.Field(
-        proto.MESSAGE,
-        number=50,
-        oneof="asset_data",
-        message=asset_types.DemandGenCarouselCardAsset,
+    demand_gen_carousel_card_asset: asset_types.DemandGenCarouselCardAsset = (
+        proto.Field(
+            proto.MESSAGE,
+            number=50,
+            oneof="asset_data",
+            message=asset_types.DemandGenCarouselCardAsset,
+        )
     )
     dynamic_travel_asset: asset_types.DynamicTravelAsset = proto.Field(
         proto.MESSAGE,
@@ -417,6 +444,7 @@ class AssetFieldTypePolicySummary(proto.Message):
     r"""Contains policy information for an asset under AssetFieldType
     context.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -434,7 +462,9 @@ class AssetFieldTypePolicySummary(proto.Message):
             This field is a member of `oneof`_ ``_policy_summary_info``.
     """
 
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         optional=True,
@@ -447,12 +477,16 @@ class AssetFieldTypePolicySummary(proto.Message):
         enum=gage_asset_source.AssetSourceEnum.AssetSource,
     )
     policy_summary_info: "AssetPolicySummary" = proto.Field(
-        proto.MESSAGE, number=3, optional=True, message="AssetPolicySummary",
+        proto.MESSAGE,
+        number=3,
+        optional=True,
+        message="AssetPolicySummary",
     )
 
 
 class AssetPolicySummary(proto.Message):
     r"""Contains policy information for an asset.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v18.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for
@@ -466,17 +500,23 @@ class AssetPolicySummary(proto.Message):
             its individual policy topic entries.
     """
 
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,

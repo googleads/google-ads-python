@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineUserDataJobMatchRateRangeEnum",},
+    manifest={
+        "OfflineUserDataJobMatchRateRangeEnum",
+    },
 )
 
 
@@ -33,7 +35,42 @@ class OfflineUserDataJobMatchRateRangeEnum(proto.Message):
     """
 
     class OfflineUserDataJobMatchRateRange(proto.Enum):
-        r"""The match rate range of an offline user data job."""
+        r"""The match rate range of an offline user data job.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Default value for match rate range.
+            MATCH_RANGE_LESS_THAN_20 (2):
+                Match rate range for offline data upload
+                entity is between 0% and 19%.
+            MATCH_RANGE_20_TO_30 (3):
+                Match rate range for offline data upload
+                entity is between 20% and 30%.
+            MATCH_RANGE_31_TO_40 (4):
+                Match rate range for offline data upload
+                entity is between 31% and 40%.
+            MATCH_RANGE_41_TO_50 (5):
+                Match rate range for offline data upload
+                entity is between 41% and 50%.
+            MATCH_RANGE_51_TO_60 (6):
+                Match rate range for offline data upload
+                entity is between 51% and 60%.
+            MATCH_RANGE_61_TO_70 (7):
+                Match rate range for offline data upload
+                entity is between 61% and 70%.
+            MATCH_RANGE_71_TO_80 (8):
+                Match rate range for offline data upload
+                entity is between 71% and 80%.
+            MATCH_RANGE_81_TO_90 (9):
+                Match rate range for offline data upload
+                entity is between 81% and 90%.
+            MATCH_RANGE_91_TO_100 (10):
+                Match rate range for offline data upload
+                entity is more than or equal to 91%.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MATCH_RANGE_LESS_THAN_20 = 2

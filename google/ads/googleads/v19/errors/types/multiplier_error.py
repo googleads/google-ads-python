@@ -32,7 +32,45 @@ class MultiplierErrorEnum(proto.Message):
     r"""Container for enum describing possible multiplier errors."""
 
     class MultiplierError(proto.Enum):
-        r"""Enum describing possible multiplier errors."""
+        r"""Enum describing possible multiplier errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            MULTIPLIER_TOO_HIGH (2):
+                Multiplier value is too high
+            MULTIPLIER_TOO_LOW (3):
+                Multiplier value is too low
+            TOO_MANY_FRACTIONAL_DIGITS (4):
+                Too many fractional digits
+            MULTIPLIER_NOT_ALLOWED_FOR_BIDDING_STRATEGY (5):
+                A multiplier cannot be set for this bidding
+                strategy
+            MULTIPLIER_NOT_ALLOWED_WHEN_BASE_BID_IS_MISSING (6):
+                A multiplier cannot be set when there is no
+                base bid (for example, content max cpc)
+            NO_MULTIPLIER_SPECIFIED (7):
+                A bid multiplier must be specified
+            MULTIPLIER_CAUSES_BID_TO_EXCEED_DAILY_BUDGET (8):
+                Multiplier causes bid to exceed daily budget
+            MULTIPLIER_CAUSES_BID_TO_EXCEED_MONTHLY_BUDGET (9):
+                Multiplier causes bid to exceed monthly
+                budget
+            MULTIPLIER_CAUSES_BID_TO_EXCEED_CUSTOM_BUDGET (10):
+                Multiplier causes bid to exceed custom budget
+            MULTIPLIER_CAUSES_BID_TO_EXCEED_MAX_ALLOWED_BID (11):
+                Multiplier causes bid to exceed maximum
+                allowed bid
+            BID_LESS_THAN_MIN_ALLOWED_BID_WITH_MULTIPLIER (12):
+                Multiplier causes bid to become less than the
+                minimum bid allowed
+            MULTIPLIER_AND_BIDDING_STRATEGY_TYPE_MISMATCH (13):
+                Multiplier type (cpc versus cpm) needs to
+                match campaign's bidding strategy
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

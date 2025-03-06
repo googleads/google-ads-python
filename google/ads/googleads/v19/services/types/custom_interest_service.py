@@ -70,6 +70,7 @@ class MutateCustomInterestsRequest(proto.Message):
 
 class CustomInterestOperation(proto.Message):
     r"""A single operation (create, update) on a custom interest.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -114,6 +115,7 @@ class CustomInterestOperation(proto.Message):
 
 class MutateCustomInterestsResponse(proto.Message):
     r"""Response message for custom interest mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCustomInterestResult]):
             All results for the mutate.
@@ -130,6 +132,7 @@ class MutateCustomInterestsResponse(proto.Message):
 
 class MutateCustomInterestResult(proto.Message):
     r"""The result for the custom interest mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

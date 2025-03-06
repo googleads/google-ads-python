@@ -91,7 +91,9 @@ class CallView(proto.Message):
         proto.STRING,
         number=6,
     )
-    call_tracking_display_location: gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation = proto.Field(
+    call_tracking_display_location: (
+        gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=gage_call_tracking_display_location.CallTrackingDisplayLocationEnum.CallTrackingDisplayLocation,
@@ -101,7 +103,9 @@ class CallView(proto.Message):
         number=8,
         enum=call_type.CallTypeEnum.CallType,
     )
-    call_status: google_voice_call_status.GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus = proto.Field(
+    call_status: (
+        google_voice_call_status.GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=google_voice_call_status.GoogleVoiceCallStatusEnum.GoogleVoiceCallStatus,

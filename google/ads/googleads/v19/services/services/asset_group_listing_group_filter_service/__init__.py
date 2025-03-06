@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AssetGroupListingGroupFilterServiceClient
+from .async_client import AssetGroupListingGroupFilterServiceAsyncClient
 
-__all__ = ("AssetGroupListingGroupFilterServiceClient",)
+__all__ = (
+    "AssetGroupListingGroupFilterServiceClient",
+    "AssetGroupListingGroupFilterServiceAsyncClient",
+)

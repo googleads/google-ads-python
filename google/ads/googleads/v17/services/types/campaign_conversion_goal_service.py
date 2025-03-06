@@ -55,12 +55,12 @@ class MutateCampaignConversionGoalsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CampaignConversionGoalOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignConversionGoalOperation",
+    operations: MutableSequence["CampaignConversionGoalOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignConversionGoalOperation",
+        )
     )
     validate_only: bool = proto.Field(
         proto.BOOL,
@@ -70,6 +70,7 @@ class MutateCampaignConversionGoalsRequest(proto.Message):
 
 class CampaignConversionGoalOperation(proto.Message):
     r"""A single operation (update) on a campaign conversion goal.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -98,22 +99,24 @@ class CampaignConversionGoalOperation(proto.Message):
 
 class MutateCampaignConversionGoalsResponse(proto.Message):
     r"""Response message for a campaign conversion goal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCampaignConversionGoalResult]):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateCampaignConversionGoalResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCampaignConversionGoalResult",
+    results: MutableSequence["MutateCampaignConversionGoalResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCampaignConversionGoalResult",
+        )
     )
 
 
 class MutateCampaignConversionGoalResult(proto.Message):
     r"""The result for the campaign conversion goal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

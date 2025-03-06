@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ConversionAdjustmentUploadServiceClient
+from .async_client import ConversionAdjustmentUploadServiceAsyncClient
 
-__all__ = ("ConversionAdjustmentUploadServiceClient",)
+__all__ = (
+    "ConversionAdjustmentUploadServiceClient",
+    "ConversionAdjustmentUploadServiceAsyncClient",
+)

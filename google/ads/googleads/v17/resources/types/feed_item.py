@@ -53,6 +53,7 @@ __protobuf__ = proto.module(
 
 class FeedItem(proto.Message):
     r"""A feed item.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -136,41 +137,44 @@ class FeedItem(proto.Message):
         number=14,
         optional=True,
     )
-    attribute_values: MutableSequence[
-        "FeedItemAttributeValue"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message="FeedItemAttributeValue",
+    attribute_values: MutableSequence["FeedItemAttributeValue"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message="FeedItemAttributeValue",
+        )
     )
-    geo_targeting_restriction: gage_geo_targeting_restriction.GeoTargetingRestrictionEnum.GeoTargetingRestriction = proto.Field(
+    geo_targeting_restriction: (
+        gage_geo_targeting_restriction.GeoTargetingRestrictionEnum.GeoTargetingRestriction
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=gage_geo_targeting_restriction.GeoTargetingRestrictionEnum.GeoTargetingRestriction,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=8,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=8,
+            message=custom_parameter.CustomParameter,
+        )
     )
     status: feed_item_status.FeedItemStatusEnum.FeedItemStatus = proto.Field(
         proto.ENUM,
         number=9,
         enum=feed_item_status.FeedItemStatusEnum.FeedItemStatus,
     )
-    policy_infos: MutableSequence[
-        "FeedItemPlaceholderPolicyInfo"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=10,
-        message="FeedItemPlaceholderPolicyInfo",
+    policy_infos: MutableSequence["FeedItemPlaceholderPolicyInfo"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=10,
+            message="FeedItemPlaceholderPolicyInfo",
+        )
     )
 
 
 class FeedItemAttributeValue(proto.Message):
     r"""A feed item attribute value.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -279,6 +283,7 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
     r"""Policy, validation, and quality approval info for a feed item
     for the specified placeholder type.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -313,7 +318,9 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
             evaluation disapproval reasons.
     """
 
-    placeholder_type_enum: placeholder_type.PlaceholderTypeEnum.PlaceholderType = proto.Field(
+    placeholder_type_enum: (
+        placeholder_type.PlaceholderTypeEnum.PlaceholderType
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=placeholder_type.PlaceholderTypeEnum.PlaceholderType,
@@ -323,36 +330,44 @@ class FeedItemPlaceholderPolicyInfo(proto.Message):
         number=11,
         optional=True,
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,
     )
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=5,
-        message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    validation_status: feed_item_validation_status.FeedItemValidationStatusEnum.FeedItemValidationStatus = proto.Field(
+    validation_status: (
+        feed_item_validation_status.FeedItemValidationStatusEnum.FeedItemValidationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=feed_item_validation_status.FeedItemValidationStatusEnum.FeedItemValidationStatus,
     )
-    validation_errors: MutableSequence[
-        "FeedItemValidationError"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=7,
-        message="FeedItemValidationError",
+    validation_errors: MutableSequence["FeedItemValidationError"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message="FeedItemValidationError",
+        )
     )
-    quality_approval_status: feed_item_quality_approval_status.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus = proto.Field(
+    quality_approval_status: (
+        feed_item_quality_approval_status.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=feed_item_quality_approval_status.FeedItemQualityApprovalStatusEnum.FeedItemQualityApprovalStatus,
@@ -370,6 +385,7 @@ class FeedItemValidationError(proto.Message):
     r"""Stores a validation error and the set of offending feed
     attributes which together are responsible for causing a feed
     item validation error.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -400,7 +416,9 @@ class FeedItemValidationError(proto.Message):
             This field is a member of `oneof`_ ``_extra_info``.
     """
 
-    validation_error: feed_item_validation_error.FeedItemValidationErrorEnum.FeedItemValidationError = proto.Field(
+    validation_error: (
+        feed_item_validation_error.FeedItemValidationErrorEnum.FeedItemValidationError
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=feed_item_validation_error.FeedItemValidationErrorEnum.FeedItemValidationError,

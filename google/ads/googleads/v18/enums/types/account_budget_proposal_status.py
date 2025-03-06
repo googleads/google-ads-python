@@ -22,16 +22,41 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AccountBudgetProposalStatusEnum",},
+    manifest={
+        "AccountBudgetProposalStatusEnum",
+    },
 )
 
 
 class AccountBudgetProposalStatusEnum(proto.Message):
-    r"""Message describing AccountBudgetProposal statuses.
-    """
+    r"""Message describing AccountBudgetProposal statuses."""
 
     class AccountBudgetProposalStatus(proto.Enum):
-        r"""The possible statuses of an AccountBudgetProposal."""
+        r"""The possible statuses of an AccountBudgetProposal.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The proposal is pending approval.
+            APPROVED_HELD (3):
+                The proposal has been approved but the
+                corresponding billing setup has not.  This can
+                occur for proposals that set up the first budget
+                when signing up for billing or when performing a
+                change of bill-to operation.
+            APPROVED (4):
+                The proposal has been approved.
+            CANCELLED (5):
+                The proposal has been cancelled by the user.
+            REJECTED (6):
+                The proposal has been rejected by the user,
+                for example, by rejecting an acceptance email.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

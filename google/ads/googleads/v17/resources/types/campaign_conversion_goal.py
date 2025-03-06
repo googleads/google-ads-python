@@ -63,7 +63,9 @@ class CampaignConversionGoal(proto.Message):
         proto.STRING,
         number=2,
     )
-    category: conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory = proto.Field(
+    category: (
+        conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,

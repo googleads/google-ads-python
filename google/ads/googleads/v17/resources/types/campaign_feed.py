@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class CampaignFeed(proto.Message):
     r"""A campaign feed.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

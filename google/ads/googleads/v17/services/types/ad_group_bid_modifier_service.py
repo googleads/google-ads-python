@@ -71,12 +71,12 @@ class MutateAdGroupBidModifiersRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "AdGroupBidModifierOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AdGroupBidModifierOperation",
+    operations: MutableSequence["AdGroupBidModifierOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupBidModifierOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateAdGroupBidModifiersRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -153,6 +155,7 @@ class AdGroupBidModifierOperation(proto.Message):
 
 class MutateAdGroupBidModifiersResponse(proto.Message):
     r"""Response message for ad group bid modifiers mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +172,18 @@ class MutateAdGroupBidModifiersResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateAdGroupBidModifierResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateAdGroupBidModifierResult",
+    results: MutableSequence["MutateAdGroupBidModifierResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateAdGroupBidModifierResult",
+        )
     )
 
 
 class MutateAdGroupBidModifierResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

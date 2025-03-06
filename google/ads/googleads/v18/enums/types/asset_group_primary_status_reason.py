@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetGroupPrimaryStatusReasonEnum",},
+    manifest={
+        "AssetGroupPrimaryStatusReasonEnum",
+    },
 )
 
 
@@ -37,7 +39,46 @@ class AssetGroupPrimaryStatusReasonEnum(proto.Message):
         reasons. Provides reasons into why an asset group is not serving
         or not serving optimally. It will be empty when the asset group
         is serving without issues.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ASSET_GROUP_PAUSED (2):
+                The user-specified asset group status is
+                paused. Contributes to
+                AssetGroupPrimaryStatus.PAUSED
+            ASSET_GROUP_REMOVED (3):
+                The user-specified asset group status is
+                removed. Contributes to
+                AssetGroupPrimaryStatus.REMOVED.
+            CAMPAIGN_REMOVED (4):
+                The user-specified campaign status is removed. Contributes
+                to AssetGroupPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_PAUSED (5):
+                The user-specified campaign status is paused. Contributes to
+                AssetGroupPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_PENDING (6):
+                The user-specified time for this campaign to start is in the
+                future. Contributes to AssetGroupPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_ENDED (7):
+                The user-specified time for this campaign to end has passed.
+                Contributes to AssetGroupPrimaryStatus.NOT_ELIGIBLE.
+            ASSET_GROUP_LIMITED (8):
+                The asset group is approved but only serves
+                in limited capacity due to policies. Contributes
+                to AssetGroupPrimaryStatus.LIMITED.
+            ASSET_GROUP_DISAPPROVED (9):
+                The asset group has been marked as disapproved. Contributes
+                to AssetGroupPrimaryStatus.NOT_ELIGIBLE.
+            ASSET_GROUP_UNDER_REVIEW (10):
+                The asset group has not completed policy
+                review. Contributes to
+                AssetGroupPrimaryStatus.PENDING.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ASSET_GROUP_PAUSED = 2

@@ -70,6 +70,7 @@ class MutateCampaignConversionGoalsRequest(proto.Message):
 
 class CampaignConversionGoalOperation(proto.Message):
     r"""A single operation (update) on a campaign conversion goal.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -98,6 +99,7 @@ class CampaignConversionGoalOperation(proto.Message):
 
 class MutateCampaignConversionGoalsResponse(proto.Message):
     r"""Response message for a campaign conversion goal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCampaignConversionGoalResult]):
             All results for the mutate.
@@ -114,6 +116,7 @@ class MutateCampaignConversionGoalsResponse(proto.Message):
 
 class MutateCampaignConversionGoalResult(proto.Message):
     r"""The result for the campaign conversion goal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

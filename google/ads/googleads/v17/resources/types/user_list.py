@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class UserList(proto.Message):
     r"""A user list. This is a list of users a customer may target.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -229,7 +230,9 @@ class UserList(proto.Message):
         number=28,
         optional=True,
     )
-    membership_status: user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus = proto.Field(
+    membership_status: (
+        user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=user_list_membership_status.UserListMembershipStatusEnum.UserListMembershipStatus,
@@ -249,7 +252,9 @@ class UserList(proto.Message):
         number=31,
         optional=True,
     )
-    size_range_for_display: user_list_size_range.UserListSizeRangeEnum.UserListSizeRange = proto.Field(
+    size_range_for_display: (
+        user_list_size_range.UserListSizeRangeEnum.UserListSizeRange
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=user_list_size_range.UserListSizeRangeEnum.UserListSizeRange,
@@ -259,7 +264,9 @@ class UserList(proto.Message):
         number=32,
         optional=True,
     )
-    size_range_for_search: user_list_size_range.UserListSizeRangeEnum.UserListSizeRange = proto.Field(
+    size_range_for_search: (
+        user_list_size_range.UserListSizeRangeEnum.UserListSizeRange
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         enum=user_list_size_range.UserListSizeRangeEnum.UserListSizeRange,
@@ -269,7 +276,9 @@ class UserList(proto.Message):
         number=13,
         enum=user_list_type.UserListTypeEnum.UserListType,
     )
-    closing_reason: user_list_closing_reason.UserListClosingReasonEnum.UserListClosingReason = proto.Field(
+    closing_reason: (
+        user_list_closing_reason.UserListClosingReasonEnum.UserListClosingReason
+    ) = proto.Field(
         proto.ENUM,
         number=14,
         enum=user_list_closing_reason.UserListClosingReasonEnum.UserListClosingReason,
@@ -281,7 +290,9 @@ class UserList(proto.Message):
             enum=gage_access_reason.AccessReasonEnum.AccessReason,
         )
     )
-    account_user_list_status: user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus = proto.Field(
+    account_user_list_status: (
+        user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus
+    ) = proto.Field(
         proto.ENUM,
         number=16,
         enum=user_list_access_status.UserListAccessStatusEnum.UserListAccessStatus,

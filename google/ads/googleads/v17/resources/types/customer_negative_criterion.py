@@ -33,6 +33,7 @@ __protobuf__ = proto.module(
 
 class CustomerNegativeCriterion(proto.Message):
     r"""A negative criterion for exclusions at the customer level.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

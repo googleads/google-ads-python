@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CustomerExtensionSetting(proto.Message):
     r"""A customer extension setting.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer extension
@@ -72,7 +73,9 @@ class CustomerExtensionSetting(proto.Message):
         proto.STRING,
         number=5,
     )
-    device: extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice = proto.Field(
+    device: (
+        extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=extension_setting_device.ExtensionSettingDeviceEnum.ExtensionSettingDevice,

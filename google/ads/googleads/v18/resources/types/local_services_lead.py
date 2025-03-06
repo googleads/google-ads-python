@@ -28,7 +28,12 @@ from google.ads.googleads.v18.enums.types import local_services_lead_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesLead", "ContactDetails", "Note", "CreditDetails",},
+    manifest={
+        "LocalServicesLead",
+        "ContactDetails",
+        "Note",
+        "CreditDetails",
+    },
 )
 
 
@@ -37,6 +42,7 @@ class LocalServicesLead(proto.Message):
     Contains details of Lead which is generated when user calls,
     messages or books service from advertiser.
     More info: https://ads.google.com/local-services-ads
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -90,49 +96,69 @@ class LocalServicesLead(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     category_id: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     service_id: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     contact_details: "ContactDetails" = proto.Field(
-        proto.MESSAGE, number=5, message="ContactDetails",
+        proto.MESSAGE,
+        number=5,
+        message="ContactDetails",
     )
-    lead_type: local_services_lead_type.LocalServicesLeadTypeEnum.LeadType = proto.Field(
-        proto.ENUM,
-        number=6,
-        enum=local_services_lead_type.LocalServicesLeadTypeEnum.LeadType,
+    lead_type: local_services_lead_type.LocalServicesLeadTypeEnum.LeadType = (
+        proto.Field(
+            proto.ENUM,
+            number=6,
+            enum=local_services_lead_type.LocalServicesLeadTypeEnum.LeadType,
+        )
     )
-    lead_status: local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus = proto.Field(
+    lead_status: (
+        local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus,
     )
     creation_date_time: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     locale: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     note: "Note" = proto.Field(
-        proto.MESSAGE, number=10, optional=True, message="Note",
+        proto.MESSAGE,
+        number=10,
+        optional=True,
+        message="Note",
     )
     lead_charged: bool = proto.Field(
-        proto.BOOL, number=11,
+        proto.BOOL,
+        number=11,
     )
     credit_details: "CreditDetails" = proto.Field(
-        proto.MESSAGE, number=12, optional=True, message="CreditDetails",
+        proto.MESSAGE,
+        number=12,
+        optional=True,
+        message="CreditDetails",
     )
 
 
 class ContactDetails(proto.Message):
     r"""Fields containing consumer contact details.
+
     Attributes:
         phone_number (str):
             Output only. Consumer phone number in E164
@@ -146,13 +172,16 @@ class ContactDetails(proto.Message):
     """
 
     phone_number: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     email: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     consumer_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -173,15 +202,18 @@ class Note(proto.Message):
     """
 
     edit_date_time: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     description: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class CreditDetails(proto.Message):
     r"""Represents the credit details of a lead.
+
     Attributes:
         credit_state (google.ads.googleads.v18.enums.types.LocalServicesCreditStateEnum.CreditState):
             Output only. Credit state of the lead.
@@ -193,13 +225,16 @@ class CreditDetails(proto.Message):
             09:15:00" or "2018-02-01 14:34:30".
     """
 
-    credit_state: local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState = proto.Field(
+    credit_state: (
+        local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState,
     )
     credit_state_last_update_date_time: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CustomerNegativeCriterionServiceClient
+from .async_client import CustomerNegativeCriterionServiceAsyncClient
 
-__all__ = ("CustomerNegativeCriterionServiceClient",)
+__all__ = (
+    "CustomerNegativeCriterionServiceClient",
+    "CustomerNegativeCriterionServiceAsyncClient",
+)

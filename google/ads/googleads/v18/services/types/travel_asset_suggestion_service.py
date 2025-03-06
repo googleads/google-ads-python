@@ -60,13 +60,16 @@ class SuggestTravelAssetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     language_option: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     place_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -80,15 +83,18 @@ class SuggestTravelAssetsResponse(proto.Message):
             in the request.
     """
 
-    hotel_asset_suggestions: MutableSequence[
-        "HotelAssetSuggestion"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="HotelAssetSuggestion",
+    hotel_asset_suggestions: MutableSequence["HotelAssetSuggestion"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="HotelAssetSuggestion",
+        )
     )
 
 
 class HotelAssetSuggestion(proto.Message):
     r"""Message containing the asset suggestions for a hotel.
+
     Attributes:
         place_id (str):
             Google Places ID of the hotel.
@@ -109,26 +115,37 @@ class HotelAssetSuggestion(proto.Message):
     """
 
     place_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     final_url: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     hotel_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    call_to_action: call_to_action_type.CallToActionTypeEnum.CallToActionType = proto.Field(
+    call_to_action: (
+        call_to_action_type.CallToActionTypeEnum.CallToActionType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=call_to_action_type.CallToActionTypeEnum.CallToActionType,
     )
     text_assets: MutableSequence["HotelTextAsset"] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message="HotelTextAsset",
+        proto.MESSAGE,
+        number=5,
+        message="HotelTextAsset",
     )
     image_assets: MutableSequence["HotelImageAsset"] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="HotelImageAsset",
+        proto.MESSAGE,
+        number=6,
+        message="HotelImageAsset",
     )
-    status: hotel_asset_suggestion_status.HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus = proto.Field(
+    status: (
+        hotel_asset_suggestion_status.HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=hotel_asset_suggestion_status.HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus,
@@ -137,6 +154,7 @@ class HotelAssetSuggestion(proto.Message):
 
 class HotelTextAsset(proto.Message):
     r"""A single text asset suggestion for a hotel.
+
     Attributes:
         text (str):
             Asset text in requested language.
@@ -146,9 +164,12 @@ class HotelTextAsset(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,
@@ -157,6 +178,7 @@ class HotelTextAsset(proto.Message):
 
 class HotelImageAsset(proto.Message):
     r"""A single image asset suggestion for a hotel.
+
     Attributes:
         uri (str):
             URI for the image.
@@ -166,9 +188,12 @@ class HotelImageAsset(proto.Message):
     """
 
     uri: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,

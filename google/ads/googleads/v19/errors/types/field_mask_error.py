@@ -32,7 +32,29 @@ class FieldMaskErrorEnum(proto.Message):
     r"""Container for enum describing possible field mask errors."""
 
     class FieldMaskError(proto.Enum):
-        r"""Enum describing possible field mask errors."""
+        r"""Enum describing possible field mask errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            FIELD_MASK_MISSING (5):
+                The field mask must be provided for update
+                operations.
+            FIELD_MASK_NOT_ALLOWED (4):
+                The field mask must be empty for create and
+                remove operations.
+            FIELD_NOT_FOUND (2):
+                The field mask contained an invalid field.
+            FIELD_HAS_SUBFIELDS (3):
+                The field mask updated a field with
+                subfields. Fields with subfields may be cleared,
+                but not updated. To fix this, the field mask
+                should select all the subfields of the invalid
+                field.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

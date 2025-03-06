@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class FeedPlaceholderView(proto.Message):
     r"""A feed placeholder view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the feed placeholder view.
@@ -49,7 +50,9 @@ class FeedPlaceholderView(proto.Message):
         proto.STRING,
         number=1,
     )
-    placeholder_type: gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType = proto.Field(
+    placeholder_type: (
+        gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType,

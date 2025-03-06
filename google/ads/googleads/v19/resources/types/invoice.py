@@ -39,6 +39,7 @@ class Invoice(proto.Message):
     InvoiceService, the snapshotted information may not match the
     PDF invoice.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -190,6 +191,7 @@ class Invoice(proto.Message):
 
     class AccountSummary(proto.Message):
         r"""Represents a summarized view at account level.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -390,6 +392,7 @@ class Invoice(proto.Message):
 
     class AccountBudgetSummary(proto.Message):
         r"""Represents a summarized account budget billable cost.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -562,6 +565,7 @@ class Invoice(proto.Message):
         r"""Details about the invalid activity for the invoice that
         contain additional details about invoice against which
         corrections are made.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

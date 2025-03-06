@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import KeywordThemeConstantServiceClient
+from .async_client import KeywordThemeConstantServiceAsyncClient
 
-__all__ = ("KeywordThemeConstantServiceClient",)
+__all__ = (
+    "KeywordThemeConstantServiceClient",
+    "KeywordThemeConstantServiceAsyncClient",
+)

@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CustomerManagerLinkServiceClient
+from .async_client import CustomerManagerLinkServiceAsyncClient
 
-__all__ = ("CustomerManagerLinkServiceClient",)
+__all__ = (
+    "CustomerManagerLinkServiceClient",
+    "CustomerManagerLinkServiceAsyncClient",
+)

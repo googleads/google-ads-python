@@ -155,6 +155,7 @@ class AdGroupBidModifierOperation(proto.Message):
 
 class MutateAdGroupBidModifiersResponse(proto.Message):
     r"""Response message for ad group bid modifiers mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -182,6 +183,7 @@ class MutateAdGroupBidModifiersResponse(proto.Message):
 
 class MutateAdGroupBidModifierResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

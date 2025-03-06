@@ -37,6 +37,7 @@ class AdParameter(proto.Message):
     placeholder of the form "{param#:value}". For example,
     "{param1:$17}"
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

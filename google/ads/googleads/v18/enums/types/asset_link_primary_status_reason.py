@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetLinkPrimaryStatusReasonEnum",},
+    manifest={
+        "AssetLinkPrimaryStatusReasonEnum",
+    },
 )
 
 
@@ -40,7 +42,31 @@ class AssetLinkPrimaryStatusReasonEnum(proto.Message):
         limited in serving due to violation of an alcohol policy. In
         this case, the PrimaryStatus will be returned as PAUSED, since
         the asset's effective status is determined by its paused state.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ASSET_LINK_PAUSED (2):
+                The asset is paused for its linked rollup
+                level. Contributes to a PrimaryStatus of PAUSED.
+            ASSET_LINK_REMOVED (3):
+                The asset is removed for its linked rollup
+                level. Contributes to a PrimaryStatus of
+                REMOVED.
+            ASSET_DISAPPROVED (4):
+                The asset has been marked as disapproved. Contributes to a
+                PrimaryStatus of NOT_ELIGIBLE
+            ASSET_UNDER_REVIEW (5):
+                The asset has not completed policy review.
+                Contributes to a PrimaryStatus of PENDING.
+            ASSET_APPROVED_LABELED (6):
+                The asset is approved with policies applied.
+                Contributes to a PrimaryStatus of LIMITED.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ASSET_LINK_PAUSED = 2

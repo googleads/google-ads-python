@@ -58,6 +58,7 @@ class Commission(proto.Message):
     r"""Commission is an automatic bidding strategy in which the
     advertiser pays a certain portion of the conversion value.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -72,7 +73,9 @@ class Commission(proto.Message):
     """
 
     commission_rate_micros: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
@@ -97,6 +100,7 @@ class ManualCpa(proto.Message):
 
 class ManualCpc(proto.Message):
     r"""Manual click-based bidding where user pays per click.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -108,7 +112,9 @@ class ManualCpc(proto.Message):
     """
 
     enhanced_cpc_enabled: bool = proto.Field(
-        proto.BOOL, number=2, optional=True,
+        proto.BOOL,
+        number=2,
+        optional=True,
     )
 
 
@@ -120,8 +126,7 @@ class ManualCpm(proto.Message):
 
 
 class ManualCpv(proto.Message):
-    r"""View based bidding where user pays per video view.
-    """
+    r"""View based bidding where user pays per video view."""
 
 
 class MaximizeConversions(proto.Message):
@@ -152,13 +157,16 @@ class MaximizeConversions(proto.Message):
     """
 
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     target_cpa_micros: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
 
 
@@ -189,13 +197,16 @@ class MaximizeConversionValue(proto.Message):
     """
 
     target_roas: float = proto.Field(
-        proto.DOUBLE, number=2,
+        proto.DOUBLE,
+        number=2,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=4,
+        proto.INT64,
+        number=4,
     )
 
 
@@ -203,6 +214,7 @@ class TargetCpa(proto.Message):
     r"""An automated bid strategy that sets bids to help get as many
     conversions as possible at the target cost-per-acquisition (CPA)
     you set.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -231,13 +243,19 @@ class TargetCpa(proto.Message):
     """
 
     target_cpa_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
 
 
@@ -245,6 +263,7 @@ class TargetCpm(proto.Message):
     r"""Target CPM (cost per thousand impressions) is an automated
     bidding strategy that sets bids to optimize performance given
     the target CPM you set.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -265,6 +284,7 @@ class TargetCpm(proto.Message):
 
 class TargetCpmTargetFrequencyGoal(proto.Message):
     r"""Target Frequency bidding goal details.
+
     Attributes:
         target_count (int):
             Target Frequency count representing how many
@@ -275,9 +295,12 @@ class TargetCpmTargetFrequencyGoal(proto.Message):
     """
 
     target_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
-    time_unit: target_frequency_time_unit.TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit = proto.Field(
+    time_unit: (
+        target_frequency_time_unit.TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=target_frequency_time_unit.TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit,
@@ -288,6 +311,7 @@ class TargetImpressionShare(proto.Message):
     r"""An automated bidding strategy that sets bids so that a
     certain percentage of search ads are shown at the top of the
     first page (or other targeted location).
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -310,22 +334,29 @@ class TargetImpressionShare(proto.Message):
             This field is a member of `oneof`_ ``_cpc_bid_ceiling_micros``.
     """
 
-    location: target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation = proto.Field(
+    location: (
+        target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation,
     )
     location_fraction_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 
 class TargetRoas(proto.Message):
     r"""An automated bidding strategy that helps you maximize revenue
     while averaging a specific target return on ad spend (ROAS).
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -353,19 +384,26 @@ class TargetRoas(proto.Message):
     """
 
     target_roas: float = proto.Field(
-        proto.DOUBLE, number=4, optional=True,
+        proto.DOUBLE,
+        number=4,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     cpc_bid_floor_micros: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
 
 
 class TargetSpend(proto.Message):
     r"""An automated bid strategy that sets your bids to help get as
     many clicks as possible within your budget.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -391,16 +429,21 @@ class TargetSpend(proto.Message):
     """
 
     target_spend_micros: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
 class PercentCpc(proto.Message):
     r"""A bidding strategy where bids are a fraction of the
     advertised price for some good or service.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -422,16 +465,21 @@ class PercentCpc(proto.Message):
     """
 
     cpc_bid_ceiling_micros: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     enhanced_cpc_enabled: bool = proto.Field(
-        proto.BOOL, number=4, optional=True,
+        proto.BOOL,
+        number=4,
+        optional=True,
     )
 
 
 class FixedCpm(proto.Message):
     r"""Fixed CPM (cost per thousand impression) bidding strategy. A
     manual bidding strategy with a fixed CPM.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -446,7 +494,9 @@ class FixedCpm(proto.Message):
     """
 
     goal: fixed_cpm_goal.FixedCpmGoalEnum.FixedCpmGoal = proto.Field(
-        proto.ENUM, number=1, enum=fixed_cpm_goal.FixedCpmGoalEnum.FixedCpmGoal,
+        proto.ENUM,
+        number=1,
+        enum=fixed_cpm_goal.FixedCpmGoalEnum.FixedCpmGoal,
     )
     target_frequency_info: "FixedCpmTargetFrequencyGoalInfo" = proto.Field(
         proto.MESSAGE,
@@ -472,9 +522,12 @@ class FixedCpmTargetFrequencyGoalInfo(proto.Message):
     """
 
     target_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
-    time_unit: fixed_cpm_target_frequency_time_unit.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit = proto.Field(
+    time_unit: (
+        fixed_cpm_target_frequency_time_unit.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=fixed_cpm_target_frequency_time_unit.FixedCpmTargetFrequencyTimeUnitEnum.FixedCpmTargetFrequencyTimeUnit,

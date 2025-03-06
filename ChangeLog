@@ -1,3 +1,10 @@
+* 26.0.0
+- Migrate to default GAPIC templates
+- Migrate from setup.py to pyproject.toml
+- Remove Google Ads API v16
+- Add support for Python 3.13
+- Remove support for Python 3.8
+
 * 25.2.0
 - Google Ads API v19 release.
 

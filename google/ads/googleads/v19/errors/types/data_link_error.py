@@ -32,7 +32,33 @@ class DataLinkErrorEnum(proto.Message):
     r"""Container for enum describing possible DataLink errors."""
 
     class DataLinkError(proto.Enum):
-        r"""Enum describing possible DataLink errors."""
+        r"""Enum describing possible DataLink errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            YOUTUBE_CHANNEL_ID_INVALID (2):
+                The requested YouTube Channel ID is invalid.
+            YOUTUBE_VIDEO_ID_INVALID (3):
+                The requested YouTube Video ID is invalid.
+            YOUTUBE_VIDEO_FROM_DIFFERENT_CHANNEL (4):
+                The requested YouTube Video ID doesn't belong
+                to the requested YouTube Channel ID.
+            PERMISSION_DENIED (5):
+                A link cannot be created because the customer
+                doesn't have the permission.
+            INVALID_STATUS (6):
+                A link can not be removed or updated because
+                the status is invalid.
+            INVALID_UPDATE_STATUS (7):
+                The input status in the update request is
+                invalid.
+            INVALID_RESOURCE_NAME (8):
+                The input resource name is invalid.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

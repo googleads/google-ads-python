@@ -23,12 +23,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"UrlCollection",},
+    manifest={
+        "UrlCollection",
+    },
 )
 
 
 class UrlCollection(proto.Message):
     r"""Collection of urls that is tagged with a unique identifier.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -48,16 +51,22 @@ class UrlCollection(proto.Message):
     """
 
     url_collection_id: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     final_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     final_mobile_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     tracking_url_template: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 

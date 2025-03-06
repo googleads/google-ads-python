@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductGroupView",},
+    manifest={
+        "ProductGroupView",
+    },
 )
 
 
 class ProductGroupView(proto.Message):
     r"""A product group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the product group view.
@@ -37,7 +40,8 @@ class ProductGroupView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

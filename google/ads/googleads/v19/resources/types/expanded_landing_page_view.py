@@ -32,6 +32,7 @@ class ExpandedLandingPageView(proto.Message):
     r"""A landing page view with metrics aggregated at the expanded
     final URL level.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

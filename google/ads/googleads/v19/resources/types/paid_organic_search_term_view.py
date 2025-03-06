@@ -33,6 +33,7 @@ class PaidOrganicSearchTermView(proto.Message):
     stats across ads and organic listings aggregated by search term
     at the ad group level.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

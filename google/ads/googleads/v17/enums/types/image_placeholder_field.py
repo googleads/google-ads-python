@@ -34,7 +34,17 @@ class ImagePlaceholderFieldEnum(proto.Message):
     class ImagePlaceholderField(proto.Enum):
         r"""Possible values for Advertiser Provided Image placeholder
         fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ASSET_ID (2):
+                Data Type: INT64. The asset ID of the image.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ASSET_ID = 2

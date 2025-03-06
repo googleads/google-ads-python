@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetSetLinkStatusEnum",},
+    manifest={
+        "AssetSetLinkStatusEnum",
+    },
 )
 
 
@@ -35,7 +37,21 @@ class AssetSetLinkStatusEnum(proto.Message):
     class AssetSetLinkStatus(proto.Enum):
         r"""The possible statuses of the linkage between asset set and
         its container.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version. This is a response-only value.
+            ENABLED (2):
+                The linkage between asset set and its
+                container is enabled.
+            REMOVED (3):
+                The linkage between asset set and its
+                container is removed.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

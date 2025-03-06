@@ -72,6 +72,7 @@ __protobuf__ = proto.module(
 
 class TextAdInfo(proto.Message):
     r"""A text ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -90,18 +91,25 @@ class TextAdInfo(proto.Message):
     """
 
     headline: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     description1: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     description2: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
 
 
 class ExpandedTextAdInfo(proto.Message):
     r"""An expanded text ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -138,30 +146,45 @@ class ExpandedTextAdInfo(proto.Message):
     """
 
     headline_part1: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     headline_part2: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     headline_part3: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     description: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     description2: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     path1: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     path2: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 
 class ExpandedDynamicSearchAdInfo(proto.Message):
     r"""An expanded dynamic search ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -176,35 +199,36 @@ class ExpandedDynamicSearchAdInfo(proto.Message):
     """
 
     description: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     description2: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
 class HotelAdInfo(proto.Message):
-    r"""A hotel ad.
-    """
+    r"""A hotel ad."""
 
 
 class TravelAdInfo(proto.Message):
-    r"""A travel ad.
-    """
+    r"""A travel ad."""
 
 
 class ShoppingSmartAdInfo(proto.Message):
-    r"""A Smart Shopping ad.
-    """
+    r"""A Smart Shopping ad."""
 
 
 class ShoppingProductAdInfo(proto.Message):
-    r"""A standard Shopping ad.
-    """
+    r"""A standard Shopping ad."""
 
 
 class ShoppingComparisonListingAdInfo(proto.Message):
     r"""A Shopping Comparison Listing ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -216,12 +240,15 @@ class ShoppingComparisonListingAdInfo(proto.Message):
     """
 
     headline: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ImageAdInfo(proto.Message):
     r"""An image ad.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -278,37 +305,60 @@ class ImageAdInfo(proto.Message):
     """
 
     pixel_width: int = proto.Field(
-        proto.INT64, number=15, optional=True,
+        proto.INT64,
+        number=15,
+        optional=True,
     )
     pixel_height: int = proto.Field(
-        proto.INT64, number=16, optional=True,
+        proto.INT64,
+        number=16,
+        optional=True,
     )
     image_url: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     preview_pixel_width: int = proto.Field(
-        proto.INT64, number=18, optional=True,
+        proto.INT64,
+        number=18,
+        optional=True,
     )
     preview_pixel_height: int = proto.Field(
-        proto.INT64, number=19, optional=True,
+        proto.INT64,
+        number=19,
+        optional=True,
     )
     preview_image_url: str = proto.Field(
-        proto.STRING, number=20, optional=True,
+        proto.STRING,
+        number=20,
+        optional=True,
     )
     mime_type: gage_mime_type.MimeTypeEnum.MimeType = proto.Field(
-        proto.ENUM, number=10, enum=gage_mime_type.MimeTypeEnum.MimeType,
+        proto.ENUM,
+        number=10,
+        enum=gage_mime_type.MimeTypeEnum.MimeType,
     )
     name: str = proto.Field(
-        proto.STRING, number=21, optional=True,
+        proto.STRING,
+        number=21,
+        optional=True,
     )
     image_asset: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=22, oneof="image", message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=22,
+        oneof="image",
+        message=ad_asset.AdImageAsset,
     )
     data: bytes = proto.Field(
-        proto.BYTES, number=13, oneof="image",
+        proto.BYTES,
+        number=13,
+        oneof="image",
     )
     ad_id_to_copy_image_from: int = proto.Field(
-        proto.INT64, number=14, oneof="image",
+        proto.INT64,
+        number=14,
+        oneof="image",
     )
 
 
@@ -330,13 +380,17 @@ class VideoBumperInStreamAdInfo(proto.Message):
     """
 
     companion_banner: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdImageAsset,
     )
     action_button_label: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     action_headline: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
 
 
@@ -358,13 +412,17 @@ class VideoNonSkippableInStreamAdInfo(proto.Message):
     """
 
     companion_banner: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=5, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdImageAsset,
     )
     action_button_label: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     action_headline: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
@@ -389,13 +447,17 @@ class VideoTrueViewInStreamAdInfo(proto.Message):
     """
 
     action_button_label: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     action_headline: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     companion_banner: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=7, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=7,
+        message=ad_asset.AdImageAsset,
     )
 
 
@@ -411,15 +473,18 @@ class VideoOutstreamAdInfo(proto.Message):
     """
 
     headline: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     description: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
 class InFeedVideoAdInfo(proto.Message):
     r"""Representation of In-feed video ad format.
+
     Attributes:
         headline (str):
             The headline of the ad.
@@ -432,13 +497,16 @@ class InFeedVideoAdInfo(proto.Message):
     """
 
     headline: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     description1: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     description2: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     thumbnail: video_thumbnail.VideoThumbnailEnum.VideoThumbnail = proto.Field(
         proto.ENUM,
@@ -449,6 +517,7 @@ class InFeedVideoAdInfo(proto.Message):
 
 class VideoAdInfo(proto.Message):
     r"""A video ad.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -482,7 +551,9 @@ class VideoAdInfo(proto.Message):
     """
 
     video: ad_asset.AdVideoAsset = proto.Field(
-        proto.MESSAGE, number=8, message=ad_asset.AdVideoAsset,
+        proto.MESSAGE,
+        number=8,
+        message=ad_asset.AdVideoAsset,
     )
     in_stream: "VideoTrueViewInStreamAdInfo" = proto.Field(
         proto.MESSAGE,
@@ -497,7 +568,10 @@ class VideoAdInfo(proto.Message):
         message="VideoBumperInStreamAdInfo",
     )
     out_stream: "VideoOutstreamAdInfo" = proto.Field(
-        proto.MESSAGE, number=4, oneof="format", message="VideoOutstreamAdInfo",
+        proto.MESSAGE,
+        number=4,
+        oneof="format",
+        message="VideoOutstreamAdInfo",
     )
     non_skippable: "VideoNonSkippableInStreamAdInfo" = proto.Field(
         proto.MESSAGE,
@@ -506,12 +580,16 @@ class VideoAdInfo(proto.Message):
         message="VideoNonSkippableInStreamAdInfo",
     )
     in_feed: "InFeedVideoAdInfo" = proto.Field(
-        proto.MESSAGE, number=9, oneof="format", message="InFeedVideoAdInfo",
+        proto.MESSAGE,
+        number=9,
+        oneof="format",
+        message="InFeedVideoAdInfo",
     )
 
 
 class VideoResponsiveAdInfo(proto.Message):
     r"""A video responsive ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v18.common.types.AdTextAsset]):
             List of text assets used for the short
@@ -546,32 +624,46 @@ class VideoResponsiveAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     long_headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdTextAsset,
     )
-    call_to_actions: MutableSequence[
-        ad_asset.AdTextAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdTextAsset,
+    call_to_actions: MutableSequence[ad_asset.AdTextAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=ad_asset.AdTextAsset,
+        )
     )
     videos: MutableSequence[ad_asset.AdVideoAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdVideoAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdVideoAsset,
     )
-    companion_banners: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ad_asset.AdImageAsset,
+    companion_banners: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=ad_asset.AdImageAsset,
+        )
     )
     breadcrumb1: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     breadcrumb2: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
 
 
@@ -589,6 +681,7 @@ class ResponsiveSearchAdInfo(proto.Message):
 
     More information at
     https://support.google.com/google-ads/answer/7684791
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -614,22 +707,31 @@ class ResponsiveSearchAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     path1: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     path2: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
 
 
 class LegacyResponsiveDisplayAdInfo(proto.Message):
     r"""A legacy responsive display ad. Ads of this type are labeled
     'Responsive ads' in the Google Ads UI.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -711,56 +813,87 @@ class LegacyResponsiveDisplayAdInfo(proto.Message):
     """
 
     short_headline: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     long_headline: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     description: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     business_name: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     allow_flexible_color: bool = proto.Field(
-        proto.BOOL, number=20, optional=True,
+        proto.BOOL,
+        number=20,
+        optional=True,
     )
     accent_color: str = proto.Field(
-        proto.STRING, number=21, optional=True,
+        proto.STRING,
+        number=21,
+        optional=True,
     )
     main_color: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
     call_to_action_text: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
     logo_image: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
     square_logo_image: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     marketing_image: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     square_marketing_image: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
-    format_setting: display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting = proto.Field(
+    format_setting: (
+        display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting
+    ) = proto.Field(
         proto.ENUM,
         number=13,
         enum=display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting,
     )
     price_prefix: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     promo_text: str = proto.Field(
-        proto.STRING, number=29, optional=True,
+        proto.STRING,
+        number=29,
+        optional=True,
     )
 
 
 class AppAdInfo(proto.Message):
     r"""An app ad.
+
     Attributes:
         mandatory_ad_text (google.ads.googleads.v18.common.types.AdTextAsset):
             Mandatory ad text.
@@ -784,26 +917,38 @@ class AppAdInfo(proto.Message):
     """
 
     mandatory_ad_text: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdTextAsset,
     )
     images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=4,
+        message=ad_asset.AdImageAsset,
     )
-    youtube_videos: MutableSequence[
-        ad_asset.AdVideoAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdVideoAsset,
+    youtube_videos: MutableSequence[ad_asset.AdVideoAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message=ad_asset.AdVideoAsset,
+        )
     )
-    html5_media_bundles: MutableSequence[
-        ad_asset.AdMediaBundleAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ad_asset.AdMediaBundleAsset,
+    html5_media_bundles: MutableSequence[ad_asset.AdMediaBundleAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=ad_asset.AdMediaBundleAsset,
+        )
     )
 
 
@@ -832,16 +977,24 @@ class AppEngagementAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdImageAsset,
     )
     videos: MutableSequence[ad_asset.AdVideoAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdVideoAsset,
+        proto.MESSAGE,
+        number=4,
+        message=ad_asset.AdVideoAsset,
     )
 
 
@@ -871,24 +1024,33 @@ class AppPreRegistrationAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdImageAsset,
     )
-    youtube_videos: MutableSequence[
-        ad_asset.AdVideoAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdVideoAsset,
+    youtube_videos: MutableSequence[ad_asset.AdVideoAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=ad_asset.AdVideoAsset,
+        )
     )
 
 
 class LegacyAppInstallAdInfo(proto.Message):
     r"""A legacy app install ad that only can be used by a few select
     customers.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -914,26 +1076,37 @@ class LegacyAppInstallAdInfo(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
-    app_store: legacy_app_install_ad_app_store.LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore = proto.Field(
+    app_store: (
+        legacy_app_install_ad_app_store.LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=legacy_app_install_ad_app_store.LegacyAppInstallAdAppStoreEnum.LegacyAppInstallAdAppStore,
     )
     headline: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     description1: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     description2: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
 
 
 class ResponsiveDisplayAdInfo(proto.Message):
     r"""A responsive display ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1021,71 +1194,106 @@ class ResponsiveDisplayAdInfo(proto.Message):
             Specification for various creative controls.
     """
 
-    marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdImageAsset,
+    marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=ad_asset.AdImageAsset,
+        )
     )
-    square_marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdImageAsset,
+    square_marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message=ad_asset.AdImageAsset,
+        )
     )
     logo_images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdImageAsset,
     )
-    square_logo_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdImageAsset,
+    square_logo_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=ad_asset.AdImageAsset,
+        )
     )
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdTextAsset,
     )
     long_headline: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=6, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=6,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=7,
+        message=ad_asset.AdTextAsset,
     )
-    youtube_videos: MutableSequence[
-        ad_asset.AdVideoAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message=ad_asset.AdVideoAsset,
+    youtube_videos: MutableSequence[ad_asset.AdVideoAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=8,
+            message=ad_asset.AdVideoAsset,
+        )
     )
     business_name: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     main_color: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
     accent_color: str = proto.Field(
-        proto.STRING, number=19, optional=True,
+        proto.STRING,
+        number=19,
+        optional=True,
     )
     allow_flexible_color: bool = proto.Field(
-        proto.BOOL, number=20, optional=True,
+        proto.BOOL,
+        number=20,
+        optional=True,
     )
     call_to_action_text: str = proto.Field(
-        proto.STRING, number=21, optional=True,
+        proto.STRING,
+        number=21,
+        optional=True,
     )
     price_prefix: str = proto.Field(
-        proto.STRING, number=22, optional=True,
+        proto.STRING,
+        number=22,
+        optional=True,
     )
     promo_text: str = proto.Field(
-        proto.STRING, number=23, optional=True,
+        proto.STRING,
+        number=23,
+        optional=True,
     )
-    format_setting: display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting = proto.Field(
+    format_setting: (
+        display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting
+    ) = proto.Field(
         proto.ENUM,
         number=16,
         enum=display_ad_format_setting.DisplayAdFormatSettingEnum.DisplayAdFormatSetting,
     )
     control_spec: "ResponsiveDisplayAdControlSpec" = proto.Field(
-        proto.MESSAGE, number=24, message="ResponsiveDisplayAdControlSpec",
+        proto.MESSAGE,
+        number=24,
+        message="ResponsiveDisplayAdControlSpec",
     )
 
 
 class LocalAdInfo(proto.Message):
     r"""A local ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1133,32 +1341,48 @@ class LocalAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
-    call_to_actions: MutableSequence[
-        ad_asset.AdTextAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+    call_to_actions: MutableSequence[ad_asset.AdTextAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=ad_asset.AdTextAsset,
+        )
     )
-    marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdImageAsset,
+    marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=ad_asset.AdImageAsset,
+        )
     )
     logo_images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdImageAsset,
     )
     videos: MutableSequence[ad_asset.AdVideoAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ad_asset.AdVideoAsset,
+        proto.MESSAGE,
+        number=6,
+        message=ad_asset.AdVideoAsset,
     )
     path1: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     path2: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
 
 
@@ -1166,6 +1390,7 @@ class DisplayUploadAdInfo(proto.Message):
     r"""A generic type of display ad. The exact ad format is controlled by
     the ``display_upload_product_type`` field, which determines what
     kinds of data need to be included with the ad.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1186,7 +1411,9 @@ class DisplayUploadAdInfo(proto.Message):
             This field is a member of `oneof`_ ``media_asset``.
     """
 
-    display_upload_product_type: gage_display_upload_product_type.DisplayUploadProductTypeEnum.DisplayUploadProductType = proto.Field(
+    display_upload_product_type: (
+        gage_display_upload_product_type.DisplayUploadProductTypeEnum.DisplayUploadProductType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=gage_display_upload_product_type.DisplayUploadProductTypeEnum.DisplayUploadProductType,
@@ -1213,15 +1440,18 @@ class ResponsiveDisplayAdControlSpec(proto.Message):
     """
 
     enable_asset_enhancements: bool = proto.Field(
-        proto.BOOL, number=1,
+        proto.BOOL,
+        number=1,
     )
     enable_autogen_video: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
 class SmartCampaignAdInfo(proto.Message):
     r"""A Smart campaign ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v18.common.types.AdTextAsset]):
             List of text assets, each of which
@@ -1236,15 +1466,20 @@ class SmartCampaignAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
 
 
 class CallAdInfo(proto.Message):
     r"""A call ad.
+
     Attributes:
         country_code (str):
             The country code in the ad.
@@ -1292,53 +1527,69 @@ class CallAdInfo(proto.Message):
     """
 
     country_code: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     phone_number: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     business_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     headline1: str = proto.Field(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     headline2: str = proto.Field(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     description1: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     description2: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     call_tracked: bool = proto.Field(
-        proto.BOOL, number=6,
+        proto.BOOL,
+        number=6,
     )
     disable_call_conversion: bool = proto.Field(
-        proto.BOOL, number=7,
+        proto.BOOL,
+        number=7,
     )
     phone_number_verification_url: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
-    conversion_reporting_state: call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState = proto.Field(
+    conversion_reporting_state: (
+        call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         enum=call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState,
     )
     path1: str = proto.Field(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     path2: str = proto.Field(
-        proto.STRING, number=14,
+        proto.STRING,
+        number=14,
     )
 
 
 class DemandGenMultiAssetAdInfo(proto.Message):
     r"""A Demand Gen multi asset ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1392,43 +1643,62 @@ class DemandGenMultiAssetAdInfo(proto.Message):
             This field is a member of `oneof`_ ``_lead_form_only``.
     """
 
-    marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdImageAsset,
+    marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=ad_asset.AdImageAsset,
+        )
     )
-    square_marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdImageAsset,
+    square_marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message=ad_asset.AdImageAsset,
+        )
     )
-    portrait_marketing_images: MutableSequence[
-        ad_asset.AdImageAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdImageAsset,
+    portrait_marketing_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=ad_asset.AdImageAsset,
+        )
     )
     logo_images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=4,
+        message=ad_asset.AdImageAsset,
     )
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=6,
+        message=ad_asset.AdTextAsset,
     )
     business_name: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     call_to_action_text: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     lead_form_only: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
 
 
 class DemandGenCarouselAdInfo(proto.Message):
     r"""A Demand Gen carousel ad.
+
     Attributes:
         business_name (str):
             Required. The Advertiser/brand name.
@@ -1448,29 +1718,40 @@ class DemandGenCarouselAdInfo(proto.Message):
     """
 
     business_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     logo_image: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=2, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdImageAsset,
     )
     headline: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdTextAsset,
     )
     description: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=4, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=4,
+        message=ad_asset.AdTextAsset,
     )
     call_to_action_text: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
-    carousel_cards: MutableSequence[
-        ad_asset.AdDemandGenCarouselCardAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=ad_asset.AdDemandGenCarouselCardAsset,
+    carousel_cards: MutableSequence[ad_asset.AdDemandGenCarouselCardAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=ad_asset.AdDemandGenCarouselCardAsset,
+        )
     )
 
 
 class DemandGenVideoResponsiveAdInfo(proto.Message):
     r"""A Demand Gen video responsive ad.
+
     Attributes:
         headlines (MutableSequence[google.ads.googleads.v18.common.types.AdTextAsset]):
             List of text assets used for the short
@@ -1501,38 +1782,55 @@ class DemandGenVideoResponsiveAdInfo(proto.Message):
     """
 
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        message=ad_asset.AdTextAsset,
     )
     long_headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        message=ad_asset.AdTextAsset,
     )
     descriptions: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=3,
+        message=ad_asset.AdTextAsset,
     )
     videos: MutableSequence[ad_asset.AdVideoAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=ad_asset.AdVideoAsset,
+        proto.MESSAGE,
+        number=4,
+        message=ad_asset.AdVideoAsset,
     )
     logo_images: MutableSequence[ad_asset.AdImageAsset] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=5,
+        message=ad_asset.AdImageAsset,
     )
     breadcrumb1: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     breadcrumb2: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
     business_name: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=8, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=8,
+        message=ad_asset.AdTextAsset,
     )
-    call_to_actions: MutableSequence[
-        ad_asset.AdCallToActionAsset
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=9, message=ad_asset.AdCallToActionAsset,
+    call_to_actions: MutableSequence[ad_asset.AdCallToActionAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message=ad_asset.AdCallToActionAsset,
+        )
     )
 
 
 class DemandGenProductAdInfo(proto.Message):
     r"""A Demand Gen product ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1569,22 +1867,35 @@ class DemandGenProductAdInfo(proto.Message):
     """
 
     headline: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=1, optional=True, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=1,
+        optional=True,
+        message=ad_asset.AdTextAsset,
     )
     description: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=2, optional=True, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=2,
+        optional=True,
+        message=ad_asset.AdTextAsset,
     )
     logo_image: ad_asset.AdImageAsset = proto.Field(
-        proto.MESSAGE, number=3, optional=True, message=ad_asset.AdImageAsset,
+        proto.MESSAGE,
+        number=3,
+        optional=True,
+        message=ad_asset.AdImageAsset,
     )
     breadcrumb1: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     breadcrumb2: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
     business_name: ad_asset.AdTextAsset = proto.Field(
-        proto.MESSAGE, number=6, message=ad_asset.AdTextAsset,
+        proto.MESSAGE,
+        number=6,
+        message=ad_asset.AdTextAsset,
     )
     call_to_action: ad_asset.AdCallToActionAsset = proto.Field(
         proto.MESSAGE,

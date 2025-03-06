@@ -22,13 +22,16 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ThirdPartyAppAnalyticsLink",},
+    manifest={
+        "ThirdPartyAppAnalyticsLink",
+    },
 )
 
 
 class ThirdPartyAppAnalyticsLink(proto.Message):
     r"""A data sharing connection, allowing the import of third party
     app analytics into a Google Ads Customer.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -50,10 +53,13 @@ class ThirdPartyAppAnalyticsLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     shareable_link_id: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

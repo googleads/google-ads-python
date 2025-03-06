@@ -24,7 +24,9 @@ from google.ads.googleads.v18.enums.types import geo_targeting_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"GeographicView",},
+    manifest={
+        "GeographicView",
+    },
 )
 
 
@@ -36,6 +38,7 @@ class GeographicView(proto.Message):
     physical location of the user or an area of interest. If other
     segment fields are used, you may get more than one row per
     country.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -55,15 +58,20 @@ class GeographicView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    location_type: geo_targeting_type.GeoTargetingTypeEnum.GeoTargetingType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=geo_targeting_type.GeoTargetingTypeEnum.GeoTargetingType,
+    location_type: geo_targeting_type.GeoTargetingTypeEnum.GeoTargetingType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=geo_targeting_type.GeoTargetingTypeEnum.GeoTargetingType,
+        )
     )
     country_criterion_id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
 
 

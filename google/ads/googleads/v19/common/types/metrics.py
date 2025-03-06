@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class Metrics(proto.Message):
     r"""Metrics data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -2748,6 +2749,7 @@ class Metrics(proto.Message):
 class SearchVolumeRange(proto.Message):
     r"""Search volume range.
     Actual search volume falls within this range.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

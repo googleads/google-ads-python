@@ -40,7 +40,84 @@ class AdGroupCriterionPrimaryStatusReasonEnum(proto.Message):
         is not serving or not serving optimally. These reasons are
         aggregated to determine an overall Ad Group Criterion primary
         status.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents
+                unknown value in this version.
+            CAMPAIGN_PENDING (2):
+                The user-specified time for this campaign to
+                start is in the future. Contributes to
+                AdGroupCriterionPrimaryStatus.PENDING.
+            CAMPAIGN_CRITERION_NEGATIVE (3):
+                The ad group criterion is overridden by negative campaign
+                criterion. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            CAMPAIGN_PAUSED (4):
+                The user-specified campaign status is paused.
+                Contributes to
+                AdGroupCriterionPrimaryStatus.PAUSED.
+            CAMPAIGN_REMOVED (5):
+                The user-specified campaign status is
+                removed. Contributes to
+                AdGroupCriterionPrimaryStatus.REMOVED.
+            CAMPAIGN_ENDED (6):
+                The user-specified time for this campaign to
+                end has passed. Contributes to
+                AdGroupCriterionPrimaryStatus.ENDED.
+            AD_GROUP_PAUSED (7):
+                The user-specified ad group status is paused.
+                Contributes to
+                AdGroupCriterionPrimaryStatus.PAUSED.
+            AD_GROUP_REMOVED (8):
+                The user-specified ad group status is
+                removed. Contributes to
+                AdGroupCriterionPrimaryStatus.REMOVED.
+            AD_GROUP_CRITERION_DISAPPROVED (9):
+                The ad group criterion is disapproved by the ads approval
+                system. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_CRITERION_RARELY_SERVED (10):
+                The ad group criterion is rarely served. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_CRITERION_LOW_QUALITY (11):
+                The ad group criterion has a low quality
+                score. Contributes to
+                AdGroupCriterionPrimaryStatus.LIMITED.
+            AD_GROUP_CRITERION_UNDER_REVIEW (12):
+                The ad group criterion is under review.
+                Contributes to
+                AdGroupCriterionPrimaryStatus.PENDING.
+            AD_GROUP_CRITERION_PENDING_REVIEW (13):
+                The ad group criterion is pending review. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_CRITERION_BELOW_FIRST_PAGE_BID (14):
+                The ad group criterion's bid is below the
+                value necessary to serve on the first page.
+                Contributes to
+                AdGroupCriterionPrimaryStatus.LIMITED.
+            AD_GROUP_CRITERION_NEGATIVE (15):
+                The ad group criterion is negative. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_CRITERION_RESTRICTED (16):
+                The ad group criterion is restricted. Contributes to
+                AdGroupCriterionPrimaryStatus.NOT_ELIGIBLE.
+            AD_GROUP_CRITERION_PAUSED (17):
+                The user-specified ad group criterion status
+                is paused. Contributes to
+                AdGroupCriterionPrimaryStatus.PAUSED.
+            AD_GROUP_CRITERION_PAUSED_DUE_TO_LOW_ACTIVITY (18):
+                The ad group criterion has been paused due to
+                prolonged low activity in serving. Contributes
+                to AdGroupCriterionPrimaryStatus.PAUSED.
+            AD_GROUP_CRITERION_REMOVED (19):
+                The user-specified ad group criterion status
+                is removed. Contributes to
+                AdGroupCriterionPrimaryStatus.REMOVED.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN_PENDING = 2

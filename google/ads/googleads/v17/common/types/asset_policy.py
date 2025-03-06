@@ -44,6 +44,7 @@ __protobuf__ = proto.module(
 
 class AdAssetPolicySummary(proto.Message):
     r"""Contains policy information for an asset inside an ad.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v17.common.types.PolicyTopicEntry]):
             The list of policy findings for this asset.
@@ -55,19 +56,23 @@ class AdAssetPolicySummary(proto.Message):
             individual policy topic entries.
     """
 
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,
@@ -83,6 +88,7 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
     ASSET_DISAPPROVED, the details field will contain additional
     information about the offline evaluation errors which led to the
     asset being disapproved.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -103,13 +109,17 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
             This field is a member of `oneof`_ ``details``.
     """
 
-    reason: asset_link_primary_status_reason.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason = proto.Field(
+    reason: (
+        asset_link_primary_status_reason.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         optional=True,
         enum=asset_link_primary_status_reason.AssetLinkPrimaryStatusReasonEnum.AssetLinkPrimaryStatusReason,
     )
-    status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         optional=True,
@@ -125,6 +135,7 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
 
 class AssetDisapproved(proto.Message):
     r"""Details related to AssetLinkPrimaryStatusReasonPB.ASSET_DISAPPROVED
+
     Attributes:
         offline_evaluation_error_reasons (MutableSequence[google.ads.googleads.v17.enums.types.AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons]):
             Provides the quality evaluation disapproval

@@ -37,7 +37,21 @@ class FrequencyCapLevelEnum(proto.Message):
     class FrequencyCapLevel(proto.Enum):
         r"""The level on which the cap is to be applied (e.g ad group ad,
         ad group). Cap is applied to all the resources of this level.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AD_GROUP_AD (2):
+                The cap is applied at the ad group ad level.
+            AD_GROUP (3):
+                The cap is applied at the ad group level.
+            CAMPAIGN (4):
+                The cap is applied at the campaign level.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_GROUP_AD = 2

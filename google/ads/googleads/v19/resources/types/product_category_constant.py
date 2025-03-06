@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class ProductCategoryConstant(proto.Message):
     r"""A Product Category.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -64,6 +65,7 @@ class ProductCategoryConstant(proto.Message):
 
     class ProductCategoryLocalization(proto.Message):
         r"""Localization for the product category.
+
         Attributes:
             region_code (str):
                 Output only. Upper-case two-letter ISO 3166-1

@@ -37,6 +37,29 @@ class BusinessMessageCallToActionTypeEnum(proto.Message):
     class BusinessMessageCallToActionType(proto.Enum):
         r"""Enum describing the type of call-to-action phrases in a
         business message.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APPLY_NOW (2):
+                Apply now.
+            BOOK_NOW (3):
+                Book now.
+            CONTACT_US (4):
+                Contact us.
+            GET_INFO (5):
+                Get info.
+            GET_OFFER (6):
+                Get offer.
+            GET_QUOTE (7):
+                Get quote.
+            GET_STARTED (8):
+                Get started.
+            LEARN_MORE (9):
+                Learn more.
         """
 
         UNSPECIFIED = 0

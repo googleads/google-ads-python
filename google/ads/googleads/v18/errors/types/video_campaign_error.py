@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"VideoCampaignErrorEnum",},
+    manifest={
+        "VideoCampaignErrorEnum",
+    },
 )
 
 
 class VideoCampaignErrorEnum(proto.Message):
-    r"""Container for enum describing possible video campaign errors.
-    """
+    r"""Container for enum describing possible video campaign errors."""
 
     class VideoCampaignError(proto.Enum):
-        r"""Enum describing possible video campaign errors."""
+        r"""Enum describing possible video campaign errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            MUTATE_REQUIRES_RESERVATION (2):
+                Cannot modify the video campaign without
+                reservation. See
+                https://support.google.com/google-ads/answer/9547606.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MUTATE_REQUIRES_RESERVATION = 2

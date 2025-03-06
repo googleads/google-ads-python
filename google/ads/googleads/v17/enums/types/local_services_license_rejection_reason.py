@@ -37,7 +37,34 @@ class LocalServicesLicenseRejectionReasonEnum(proto.Message):
     class LocalServicesLicenseRejectionReason(proto.Enum):
         r"""Enums describing possible rejection reasons of a local
         services license verification artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_NAME_MISMATCH (2):
+                Business name doesn't match business name for
+                the Local Services Ad.
+            UNAUTHORIZED (3):
+                License is unauthorized or been revoked.
+            EXPIRED (4):
+                License is expired.
+            POOR_QUALITY (5):
+                License is poor quality - blurry images,
+                illegible, etc...
+            UNVERIFIABLE (6):
+                License cannot be verified due to a not
+                legitimate image.
+            WRONG_DOCUMENT_OR_ID (7):
+                License is not the requested document type or
+                contains an invalid ID.
+            OTHER (8):
+                License has another flaw not listed
+                explicitly.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_NAME_MISMATCH = 2

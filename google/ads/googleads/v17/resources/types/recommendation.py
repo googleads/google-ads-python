@@ -47,6 +47,7 @@ __protobuf__ = proto.module(
 
 class Recommendation(proto.Message):
     r"""A recommendation.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -402,6 +403,7 @@ class Recommendation(proto.Message):
 
     class MerchantInfo(proto.Message):
         r"""The Merchant Center account details.
+
         Attributes:
             id (int):
                 Output only. The Merchant Center account ID.
@@ -455,6 +457,7 @@ class Recommendation(proto.Message):
         r"""Weekly account performance metrics. For some recommendation
         types, these are averaged over the past 90-day period and hence
         can be fractional.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -522,6 +525,7 @@ class Recommendation(proto.Message):
 
     class CampaignBudgetRecommendation(proto.Message):
         r"""The budget recommendation for budget constrained campaigns.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -543,6 +547,7 @@ class Recommendation(proto.Message):
 
         class CampaignBudgetRecommendationOption(proto.Message):
             r"""The impact estimates for a given budget amount.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -587,6 +592,7 @@ class Recommendation(proto.Message):
 
     class KeywordRecommendation(proto.Message):
         r"""The keyword recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -644,6 +650,7 @@ class Recommendation(proto.Message):
 
     class TextAdRecommendation(proto.Message):
         r"""The text ad recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -681,6 +688,7 @@ class Recommendation(proto.Message):
 
     class TargetCpaOptInRecommendation(proto.Message):
         r"""The Target CPA opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -697,6 +705,7 @@ class Recommendation(proto.Message):
 
         class TargetCpaOptInRecommendationOption(proto.Message):
             r"""The Target CPA opt-in option with impact estimate.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -720,7 +729,9 @@ class Recommendation(proto.Message):
                     option is selected.
             """
 
-            goal: target_cpa_opt_in_recommendation_goal.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal = proto.Field(
+            goal: (
+                target_cpa_opt_in_recommendation_goal.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal
+            ) = proto.Field(
                 proto.ENUM,
                 number=1,
                 enum=target_cpa_opt_in_recommendation_goal.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal,
@@ -756,6 +767,7 @@ class Recommendation(proto.Message):
 
     class MaximizeConversionsOptInRecommendation(proto.Message):
         r"""The Maximize Conversions Opt-In recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -780,6 +792,7 @@ class Recommendation(proto.Message):
 
     class MaximizeClicksOptInRecommendation(proto.Message):
         r"""The Maximize Clicks opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -802,6 +815,7 @@ class Recommendation(proto.Message):
 
     class CalloutAssetRecommendation(proto.Message):
         r"""The callout asset recommendation.
+
         Attributes:
             recommended_campaign_callout_assets (MutableSequence[google.ads.googleads.v17.resources.types.Asset]):
                 Output only. New callout extension assets
@@ -811,23 +825,24 @@ class Recommendation(proto.Message):
                 recommended at the customer level.
         """
 
-        recommended_campaign_callout_assets: MutableSequence[
-            asset.Asset
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=1,
-            message=asset.Asset,
+        recommended_campaign_callout_assets: MutableSequence[asset.Asset] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=asset.Asset,
+            )
         )
-        recommended_customer_callout_assets: MutableSequence[
-            asset.Asset
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=2,
-            message=asset.Asset,
+        recommended_customer_callout_assets: MutableSequence[asset.Asset] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=2,
+                message=asset.Asset,
+            )
         )
 
     class SitelinkAssetRecommendation(proto.Message):
         r"""The sitelink asset recommendation.
+
         Attributes:
             recommended_campaign_sitelink_assets (MutableSequence[google.ads.googleads.v17.resources.types.Asset]):
                 Output only. New sitelink assets recommended
@@ -837,19 +852,19 @@ class Recommendation(proto.Message):
                 at the customer level.
         """
 
-        recommended_campaign_sitelink_assets: MutableSequence[
-            asset.Asset
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=1,
-            message=asset.Asset,
+        recommended_campaign_sitelink_assets: MutableSequence[asset.Asset] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message=asset.Asset,
+            )
         )
-        recommended_customer_sitelink_assets: MutableSequence[
-            asset.Asset
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=2,
-            message=asset.Asset,
+        recommended_customer_sitelink_assets: MutableSequence[asset.Asset] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=2,
+                message=asset.Asset,
+            )
         )
 
     class CallAssetRecommendation(proto.Message):
@@ -857,6 +872,7 @@ class Recommendation(proto.Message):
 
     class KeywordMatchTypeRecommendation(proto.Message):
         r"""The keyword match type recommendation.
+
         Attributes:
             keyword (google.ads.googleads.v17.common.types.KeywordInfo):
                 Output only. The existing keyword where the
@@ -870,7 +886,9 @@ class Recommendation(proto.Message):
             number=1,
             message=criteria.KeywordInfo,
         )
-        recommended_match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
+        recommended_match_type: (
+            keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
@@ -878,6 +896,7 @@ class Recommendation(proto.Message):
 
     class MoveUnusedBudgetRecommendation(proto.Message):
         r"""The move unused budget recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -905,6 +924,7 @@ class Recommendation(proto.Message):
 
     class TargetRoasOptInRecommendation(proto.Message):
         r"""The Target ROAS opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -937,6 +957,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdAssetRecommendation(proto.Message):
         r"""The add responsive search ad asset recommendation.
+
         Attributes:
             current_ad (google.ads.googleads.v17.resources.types.Ad):
                 Output only. The current ad to be updated.
@@ -959,6 +980,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdImproveAdStrengthRecommendation(proto.Message):
         r"""The responsive search ad improve ad strength recommendation.
+
         Attributes:
             current_ad (google.ads.googleads.v17.resources.types.Ad):
                 Output only. The current ad to be updated.
@@ -979,6 +1001,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdRecommendation(proto.Message):
         r"""The add responsive search ad recommendation.
+
         Attributes:
             ad (google.ads.googleads.v17.resources.types.Ad):
                 Output only. Recommended ad.
@@ -992,6 +1015,7 @@ class Recommendation(proto.Message):
 
     class UseBroadMatchKeywordRecommendation(proto.Message):
         r"""The use broad match keyword recommendation.
+
         Attributes:
             keyword (MutableSequence[google.ads.googleads.v17.common.types.KeywordInfo]):
                 Output only. Sample of keywords to be
@@ -1058,6 +1082,7 @@ class Recommendation(proto.Message):
 
     class RaiseTargetCpaBidTooLowRecommendation(proto.Message):
         r"""The raise target CPA bid too low recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1097,6 +1122,7 @@ class Recommendation(proto.Message):
 
     class ForecastingSetTargetRoasRecommendation(proto.Message):
         r"""The forecasting set target ROAS recommendation.
+
         Attributes:
             recommended_target_roas (float):
                 Output only. The recommended target ROAS
@@ -1241,7 +1267,9 @@ class Recommendation(proto.Message):
             proto.STRING,
             number=2,
         )
-        reason: shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason = proto.Field(
+        reason: (
+            shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason
+        ) = proto.Field(
             proto.ENUM,
             number=3,
             enum=shopping_add_products_to_campaign_recommendation_enum.ShoppingAddProductsToCampaignRecommendationEnum.Reason,
@@ -1298,6 +1326,7 @@ class Recommendation(proto.Message):
 
     class TargetAdjustmentInfo(proto.Message):
         r"""Information of a target adjustment recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1333,6 +1362,7 @@ class Recommendation(proto.Message):
 
     class RaiseTargetCpaRecommendation(proto.Message):
         r"""Recommendation to raise Target CPA.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1352,7 +1382,9 @@ class Recommendation(proto.Message):
             number=1,
             message="Recommendation.TargetAdjustmentInfo",
         )
-        app_bidding_goal: gage_app_bidding_goal.AppBiddingGoalEnum.AppBiddingGoal = proto.Field(
+        app_bidding_goal: (
+            gage_app_bidding_goal.AppBiddingGoalEnum.AppBiddingGoal
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             optional=True,
@@ -1361,6 +1393,7 @@ class Recommendation(proto.Message):
 
     class LowerTargetRoasRecommendation(proto.Message):
         r"""Recommendation to lower Target ROAS.
+
         Attributes:
             target_adjustment (google.ads.googleads.v17.resources.types.Recommendation.TargetAdjustmentInfo):
                 Output only. The relevant information
@@ -1447,6 +1480,7 @@ class Recommendation(proto.Message):
 
     class ForecastingSetTargetCpaRecommendation(proto.Message):
         r"""The set target CPA recommendations.
+
         Attributes:
             recommended_target_cpa_micros (int):
                 Output only. The recommended target CPA.
@@ -1515,12 +1549,12 @@ class Recommendation(proto.Message):
             proto.INT64,
             number=3,
         )
-        top_spending_account: MutableSequence[
-            "Recommendation.AccountInfo"
-        ] = proto.RepeatedField(
-            proto.MESSAGE,
-            number=4,
-            message="Recommendation.AccountInfo",
+        top_spending_account: MutableSequence["Recommendation.AccountInfo"] = (
+            proto.RepeatedField(
+                proto.MESSAGE,
+                number=4,
+                message="Recommendation.AccountInfo",
+            )
         )
         targeting_accounts_count: int = proto.Field(
             proto.INT64,
@@ -1534,6 +1568,7 @@ class Recommendation(proto.Message):
 
     class AccountInfo(proto.Message):
         r"""Wrapper for information about a Google Ads account.
+
         Attributes:
             customer_id (int):
                 Output only. The customer ID of the account.
@@ -1553,6 +1588,7 @@ class Recommendation(proto.Message):
 
     class CustomAudienceOptInRecommendation(proto.Message):
         r"""The Custom Audience Opt In recommendation.
+
         Attributes:
             keywords (MutableSequence[google.ads.googleads.v17.common.types.KeywordInfo]):
                 Output only. The list of keywords to use for
@@ -1570,6 +1606,7 @@ class Recommendation(proto.Message):
 
     class ImproveDemandGenAdStrengthRecommendation(proto.Message):
         r"""The improve Demand Gen ad strength recommendation.
+
         Attributes:
             ad (str):
                 Output only. The resource name of the ad that
@@ -1590,11 +1627,11 @@ class Recommendation(proto.Message):
             number=2,
             enum=gage_ad_strength.AdStrengthEnum.AdStrength,
         )
-        demand_gen_asset_action_items: MutableSequence[
-            str
-        ] = proto.RepeatedField(
-            proto.STRING,
-            number=3,
+        demand_gen_asset_action_items: MutableSequence[str] = (
+            proto.RepeatedField(
+                proto.STRING,
+                number=3,
+            )
         )
 
     resource_name: str = proto.Field(
@@ -1671,7 +1708,9 @@ class Recommendation(proto.Message):
             message=TargetCpaOptInRecommendation,
         )
     )
-    maximize_conversions_opt_in_recommendation: MaximizeConversionsOptInRecommendation = proto.Field(
+    maximize_conversions_opt_in_recommendation: (
+        MaximizeConversionsOptInRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=11,
         oneof="recommendation",
@@ -1741,55 +1780,73 @@ class Recommendation(proto.Message):
             message=ResponsiveSearchAdRecommendation,
         )
     )
-    marginal_roi_campaign_budget_recommendation: CampaignBudgetRecommendation = proto.Field(
+    marginal_roi_campaign_budget_recommendation: (
+        CampaignBudgetRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=29,
         oneof="recommendation",
         message=CampaignBudgetRecommendation,
     )
-    use_broad_match_keyword_recommendation: UseBroadMatchKeywordRecommendation = proto.Field(
+    use_broad_match_keyword_recommendation: (
+        UseBroadMatchKeywordRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=30,
         oneof="recommendation",
         message=UseBroadMatchKeywordRecommendation,
     )
-    responsive_search_ad_asset_recommendation: ResponsiveSearchAdAssetRecommendation = proto.Field(
+    responsive_search_ad_asset_recommendation: (
+        ResponsiveSearchAdAssetRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=31,
         oneof="recommendation",
         message=ResponsiveSearchAdAssetRecommendation,
     )
-    upgrade_smart_shopping_campaign_to_performance_max_recommendation: UpgradeSmartShoppingCampaignToPerformanceMaxRecommendation = proto.Field(
+    upgrade_smart_shopping_campaign_to_performance_max_recommendation: (
+        UpgradeSmartShoppingCampaignToPerformanceMaxRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=32,
         oneof="recommendation",
         message=UpgradeSmartShoppingCampaignToPerformanceMaxRecommendation,
     )
-    responsive_search_ad_improve_ad_strength_recommendation: ResponsiveSearchAdImproveAdStrengthRecommendation = proto.Field(
+    responsive_search_ad_improve_ad_strength_recommendation: (
+        ResponsiveSearchAdImproveAdStrengthRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=33,
         oneof="recommendation",
         message=ResponsiveSearchAdImproveAdStrengthRecommendation,
     )
-    display_expansion_opt_in_recommendation: DisplayExpansionOptInRecommendation = proto.Field(
+    display_expansion_opt_in_recommendation: (
+        DisplayExpansionOptInRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=34,
         oneof="recommendation",
         message=DisplayExpansionOptInRecommendation,
     )
-    upgrade_local_campaign_to_performance_max_recommendation: UpgradeLocalCampaignToPerformanceMaxRecommendation = proto.Field(
+    upgrade_local_campaign_to_performance_max_recommendation: (
+        UpgradeLocalCampaignToPerformanceMaxRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=35,
         oneof="recommendation",
         message=UpgradeLocalCampaignToPerformanceMaxRecommendation,
     )
-    raise_target_cpa_bid_too_low_recommendation: RaiseTargetCpaBidTooLowRecommendation = proto.Field(
+    raise_target_cpa_bid_too_low_recommendation: (
+        RaiseTargetCpaBidTooLowRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=36,
         oneof="recommendation",
         message=RaiseTargetCpaBidTooLowRecommendation,
     )
-    forecasting_set_target_roas_recommendation: ForecastingSetTargetRoasRecommendation = proto.Field(
+    forecasting_set_target_roas_recommendation: (
+        ForecastingSetTargetRoasRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=37,
         oneof="recommendation",
@@ -1813,7 +1870,9 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=CallAssetRecommendation,
     )
-    shopping_add_age_group_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+    shopping_add_age_group_recommendation: (
+        ShoppingOfferAttributeRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=42,
         oneof="recommendation",
@@ -1843,7 +1902,9 @@ class Recommendation(proto.Message):
             message=ShoppingOfferAttributeRecommendation,
         )
     )
-    shopping_add_more_identifiers_recommendation: ShoppingOfferAttributeRecommendation = proto.Field(
+    shopping_add_more_identifiers_recommendation: (
+        ShoppingOfferAttributeRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=46,
         oneof="recommendation",
@@ -1857,31 +1918,41 @@ class Recommendation(proto.Message):
             message=ShoppingOfferAttributeRecommendation,
         )
     )
-    shopping_add_products_to_campaign_recommendation: ShoppingAddProductsToCampaignRecommendation = proto.Field(
+    shopping_add_products_to_campaign_recommendation: (
+        ShoppingAddProductsToCampaignRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=48,
         oneof="recommendation",
         message=ShoppingAddProductsToCampaignRecommendation,
     )
-    shopping_fix_disapproved_products_recommendation: ShoppingFixDisapprovedProductsRecommendation = proto.Field(
+    shopping_fix_disapproved_products_recommendation: (
+        ShoppingFixDisapprovedProductsRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=49,
         oneof="recommendation",
         message=ShoppingFixDisapprovedProductsRecommendation,
     )
-    shopping_target_all_offers_recommendation: ShoppingTargetAllOffersRecommendation = proto.Field(
+    shopping_target_all_offers_recommendation: (
+        ShoppingTargetAllOffersRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=50,
         oneof="recommendation",
         message=ShoppingTargetAllOffersRecommendation,
     )
-    shopping_fix_suspended_merchant_center_account_recommendation: ShoppingMerchantCenterAccountSuspensionRecommendation = proto.Field(
+    shopping_fix_suspended_merchant_center_account_recommendation: (
+        ShoppingMerchantCenterAccountSuspensionRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=51,
         oneof="recommendation",
         message=ShoppingMerchantCenterAccountSuspensionRecommendation,
     )
-    shopping_fix_merchant_center_account_suspension_warning_recommendation: ShoppingMerchantCenterAccountSuspensionRecommendation = proto.Field(
+    shopping_fix_merchant_center_account_suspension_warning_recommendation: (
+        ShoppingMerchantCenterAccountSuspensionRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=52,
         oneof="recommendation",
@@ -1893,7 +1964,9 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=ShoppingMigrateRegularShoppingCampaignOffersToPerformanceMaxRecommendation,
     )
-    dynamic_image_extension_opt_in_recommendation: DynamicImageExtensionOptInRecommendation = proto.Field(
+    dynamic_image_extension_opt_in_recommendation: (
+        DynamicImageExtensionOptInRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=54,
         oneof="recommendation",
@@ -1921,19 +1994,25 @@ class Recommendation(proto.Message):
             message=PerformanceMaxOptInRecommendation,
         )
     )
-    improve_performance_max_ad_strength_recommendation: ImprovePerformanceMaxAdStrengthRecommendation = proto.Field(
+    improve_performance_max_ad_strength_recommendation: (
+        ImprovePerformanceMaxAdStrengthRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=58,
         oneof="recommendation",
         message=ImprovePerformanceMaxAdStrengthRecommendation,
     )
-    migrate_dynamic_search_ads_campaign_to_performance_max_recommendation: MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation = proto.Field(
+    migrate_dynamic_search_ads_campaign_to_performance_max_recommendation: (
+        MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=59,
         oneof="recommendation",
         message=MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation,
     )
-    forecasting_set_target_cpa_recommendation: ForecastingSetTargetCpaRecommendation = proto.Field(
+    forecasting_set_target_cpa_recommendation: (
+        ForecastingSetTargetCpaRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=60,
         oneof="recommendation",
@@ -1955,25 +2034,33 @@ class Recommendation(proto.Message):
             message=ForecastingSetTargetRoasRecommendation,
         )
     )
-    maximize_conversion_value_opt_in_recommendation: MaximizeConversionValueOptInRecommendation = proto.Field(
+    maximize_conversion_value_opt_in_recommendation: (
+        MaximizeConversionValueOptInRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=63,
         oneof="recommendation",
         message=MaximizeConversionValueOptInRecommendation,
     )
-    improve_google_tag_coverage_recommendation: ImproveGoogleTagCoverageRecommendation = proto.Field(
+    improve_google_tag_coverage_recommendation: (
+        ImproveGoogleTagCoverageRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=64,
         oneof="recommendation",
         message=ImproveGoogleTagCoverageRecommendation,
     )
-    performance_max_final_url_opt_in_recommendation: PerformanceMaxFinalUrlOptInRecommendation = proto.Field(
+    performance_max_final_url_opt_in_recommendation: (
+        PerformanceMaxFinalUrlOptInRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=65,
         oneof="recommendation",
         message=PerformanceMaxFinalUrlOptInRecommendation,
     )
-    refresh_customer_match_list_recommendation: RefreshCustomerMatchListRecommendation = proto.Field(
+    refresh_customer_match_list_recommendation: (
+        RefreshCustomerMatchListRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=66,
         oneof="recommendation",
@@ -1993,7 +2080,9 @@ class Recommendation(proto.Message):
         oneof="recommendation",
         message=LeadFormAssetRecommendation,
     )
-    improve_demand_gen_ad_strength_recommendation: ImproveDemandGenAdStrengthRecommendation = proto.Field(
+    improve_demand_gen_ad_strength_recommendation: (
+        ImproveDemandGenAdStrengthRecommendation
+    ) = proto.Field(
         proto.MESSAGE,
         number=69,
         oneof="recommendation",

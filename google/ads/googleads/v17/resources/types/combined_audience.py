@@ -63,7 +63,9 @@ class CombinedAudience(proto.Message):
         proto.INT64,
         number=2,
     )
-    status: combined_audience_status.CombinedAudienceStatusEnum.CombinedAudienceStatus = proto.Field(
+    status: (
+        combined_audience_status.CombinedAudienceStatusEnum.CombinedAudienceStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=combined_audience_status.CombinedAudienceStatusEnum.CombinedAudienceStatus,

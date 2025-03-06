@@ -37,6 +37,35 @@ class AssetOfflineEvaluationErrorReasonsEnum(proto.Message):
     class AssetOfflineEvaluationErrorReasons(proto.Enum):
         r"""Enum describing the quality evaluation disapproval reason of
         an asset.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PRICE_ASSET_DESCRIPTION_REPEATS_ROW_HEADER (2):
+                One or more descriptions repeats its
+                corresponding row header.
+            PRICE_ASSET_REPETITIVE_HEADERS (3):
+                Price asset contains repetitive headers.
+            PRICE_ASSET_HEADER_INCOMPATIBLE_WITH_PRICE_TYPE (4):
+                Price item header is not relevant to the
+                price type.
+            PRICE_ASSET_DESCRIPTION_INCOMPATIBLE_WITH_ITEM_HEADER (5):
+                Price item description is not relevant to the
+                item header.
+            PRICE_ASSET_DESCRIPTION_HAS_PRICE_QUALIFIER (6):
+                Price asset has a price qualifier in a
+                description.
+            PRICE_ASSET_UNSUPPORTED_LANGUAGE (7):
+                Unsupported language for price assets
+            PRICE_ASSET_OTHER_ERROR (8):
+                Human raters identified an issue with the
+                price asset that isn't captured by other error
+                reasons. The primary purpose of this value is to
+                represent legacy FeedItem disapprovals that are
+                no longer produced.
         """
 
         UNSPECIFIED = 0

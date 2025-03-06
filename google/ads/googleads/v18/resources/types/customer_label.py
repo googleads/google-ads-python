@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerLabel",},
+    manifest={
+        "CustomerLabel",
+    },
 )
 
 
@@ -31,6 +33,7 @@ class CustomerLabel(proto.Message):
     This customer may not have access to all the labels attached to
     it. Additional CustomerLabels may be returned by increasing
     permissions with login-customer-id.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -56,13 +59,18 @@ class CustomerLabel(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     customer: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     label: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
 
 

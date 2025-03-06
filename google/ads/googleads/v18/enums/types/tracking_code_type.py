@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"TrackingCodeTypeEnum",},
+    manifest={
+        "TrackingCodeTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,31 @@ class TrackingCodeTypeEnum(proto.Message):
     class TrackingCodeType(proto.Enum):
         r"""The type of the generated tag snippets for tracking
         conversions.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            WEBPAGE (2):
+                The snippet that is fired as a result of a
+                website page loading.
+            WEBPAGE_ONCLICK (3):
+                The snippet contains a JavaScript function
+                which fires the tag. This function is typically
+                called from an onClick handler added to a link
+                or button element on the page.
+            CLICK_TO_CALL (4):
+                For embedding on a mobile webpage. The
+                snippet contains a JavaScript function which
+                fires the tag.
+            WEBSITE_CALL (5):
+                The snippet that is used to replace the phone
+                number on your website with a Google forwarding
+                number for call tracking purposes.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         WEBPAGE = 2

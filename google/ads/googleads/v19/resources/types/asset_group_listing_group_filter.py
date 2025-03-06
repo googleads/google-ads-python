@@ -152,6 +152,7 @@ class ListingGroupFilterDimensionPath(proto.Message):
 
 class ListingGroupFilterDimension(proto.Message):
     r"""Listing dimensions for the asset group listing group filter.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -203,6 +204,7 @@ class ListingGroupFilterDimension(proto.Message):
         cases of the same subdivision must have the same dimension type
         (category level).
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -234,6 +236,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductBrand(proto.Message):
         r"""Brand of the product.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -251,6 +254,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductChannel(proto.Message):
         r"""Locality of a product offer.
+
         Attributes:
             channel (google.ads.googleads.v19.enums.types.ListingGroupFilterProductChannelEnum.ListingGroupFilterProductChannel):
                 Value of the locality.
@@ -266,6 +270,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductCondition(proto.Message):
         r"""Condition of a product offer.
+
         Attributes:
             condition (google.ads.googleads.v19.enums.types.ListingGroupFilterProductConditionEnum.ListingGroupFilterProductCondition):
                 Value of the condition.
@@ -281,6 +286,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductCustomAttribute(proto.Message):
         r"""Custom attribute of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -307,6 +313,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductItemId(proto.Message):
         r"""Item id of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -324,6 +331,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class ProductType(proto.Message):
         r"""Type of a product offer.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -379,6 +387,7 @@ class ListingGroupFilterDimension(proto.Message):
 
     class WebpageCondition(proto.Message):
         r"""Matching condition for URL filtering.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other

@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class CustomerLifecycleGoal(proto.Message):
     r"""Account level customer lifecycle goal settings.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer lifecycle goal.

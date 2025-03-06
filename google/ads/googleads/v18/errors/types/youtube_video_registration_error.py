@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"YoutubeVideoRegistrationErrorEnum",},
+    manifest={
+        "YoutubeVideoRegistrationErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,24 @@ class YoutubeVideoRegistrationErrorEnum(proto.Message):
     """
 
     class YoutubeVideoRegistrationError(proto.Enum):
-        r"""Enum describing YouTube video registration errors."""
+        r"""Enum describing YouTube video registration errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            VIDEO_NOT_FOUND (2):
+                Video to be registered wasn't found.
+            VIDEO_NOT_ACCESSIBLE (3):
+                Video to be registered is not accessible (for
+                example, private).
+            VIDEO_NOT_ELIGIBLE (4):
+                Video to be registered is not eligible (for
+                example, mature content).
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         VIDEO_NOT_FOUND = 2

@@ -36,6 +36,7 @@ class AdGroupAdAssetCombinationView(proto.Message):
     Now we only support AdGroupAdAssetCombinationView for Responsive
     Search Ads, with more ad types planned for the future.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -33,6 +33,7 @@ __protobuf__ = proto.module(
 
 class MetricGoal(proto.Message):
     r"""A metric goal for an experiment.
+
     Attributes:
         metric (google.ads.googleads.v17.enums.types.ExperimentMetricEnum.ExperimentMetric):
             The metric of the goal. For example, clicks,
@@ -49,7 +50,9 @@ class MetricGoal(proto.Message):
             enum=experiment_metric.ExperimentMetricEnum.ExperimentMetric,
         )
     )
-    direction: experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection = proto.Field(
+    direction: (
+        experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=experiment_metric_direction.ExperimentMetricDirectionEnum.ExperimentMetricDirection,

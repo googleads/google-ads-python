@@ -90,6 +90,7 @@ class MutateExperimentsRequest(proto.Message):
 
 class ExperimentOperation(proto.Message):
     r"""A single operation on an experiment.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -145,6 +146,7 @@ class ExperimentOperation(proto.Message):
 
 class MutateExperimentsResponse(proto.Message):
     r"""Response message for experiment mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -170,6 +172,7 @@ class MutateExperimentsResponse(proto.Message):
 
 class MutateExperimentResult(proto.Message):
     r"""The result for the campaign experiment mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -291,12 +294,12 @@ class GraduateExperimentRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    campaign_budget_mappings: MutableSequence[
-        "CampaignBudgetMapping"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignBudgetMapping",
+    campaign_budget_mappings: MutableSequence["CampaignBudgetMapping"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignBudgetMapping",
+        )
     )
     validate_only: bool = proto.Field(
         proto.BOOL,
@@ -351,6 +354,7 @@ class ScheduleExperimentRequest(proto.Message):
 
 class ScheduleExperimentMetadata(proto.Message):
     r"""The metadata of the scheduled experiment.
+
     Attributes:
         experiment (str):
             Required. The scheduled experiment.
@@ -387,6 +391,7 @@ class PromoteExperimentRequest(proto.Message):
 
 class PromoteExperimentMetadata(proto.Message):
     r"""The metadata of the promoted experiment.
+
     Attributes:
         experiment (str):
             Required. The promoted experiment.

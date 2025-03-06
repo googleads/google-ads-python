@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"UserListCustomerType",},
+    manifest={
+        "UserListCustomerType",
+    },
 )
 
 
 class UserListCustomerType(proto.Message):
     r"""A user list customer type
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the user list customer type
@@ -47,12 +50,16 @@ class UserListCustomerType(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     user_list: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
-    customer_type_category: user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory = proto.Field(
+    customer_type_category: (
+        user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=user_list_customer_type_category.UserListCustomerTypeCategoryEnum.UserListCustomerTypeCategory,

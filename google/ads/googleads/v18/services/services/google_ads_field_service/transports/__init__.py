@@ -17,14 +17,18 @@ from collections import OrderedDict
 
 from .base import GoogleAdsFieldServiceTransport
 from .grpc import GoogleAdsFieldServiceGrpcTransport
+from .grpc_asyncio import GoogleAdsFieldServiceGrpcAsyncIOTransport
+
 
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()
 )  # type: Dict[str, Type[GoogleAdsFieldServiceTransport]]
 _transport_registry["grpc"] = GoogleAdsFieldServiceGrpcTransport
+_transport_registry["grpc_asyncio"] = GoogleAdsFieldServiceGrpcAsyncIOTransport
 
 __all__ = (
     "GoogleAdsFieldServiceTransport",
     "GoogleAdsFieldServiceGrpcTransport",
+    "GoogleAdsFieldServiceGrpcAsyncIOTransport",
 )

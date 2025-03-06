@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class SmartCampaignSearchTermView(proto.Message):
     r"""A Smart campaign search term view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Smart campaign search

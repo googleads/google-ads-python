@@ -68,20 +68,27 @@ class MutateAdGroupBidModifiersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AdGroupBidModifierOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupBidModifierOperation",
+    operations: MutableSequence["AdGroupBidModifierOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupBidModifierOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -123,7 +130,9 @@ class AdGroupBidModifierOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_ad_group_bid_modifier.AdGroupBidModifier = proto.Field(
         proto.MESSAGE,
@@ -138,12 +147,15 @@ class AdGroupBidModifierOperation(proto.Message):
         message=gagr_ad_group_bid_modifier.AdGroupBidModifier,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateAdGroupBidModifiersResponse(proto.Message):
     r"""Response message for ad group bid modifiers mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -156,17 +168,22 @@ class MutateAdGroupBidModifiersResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateAdGroupBidModifierResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupBidModifierResult",
+    results: MutableSequence["MutateAdGroupBidModifierResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateAdGroupBidModifierResult",
+        )
     )
 
 
 class MutateAdGroupBidModifierResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -177,12 +194,15 @@ class MutateAdGroupBidModifierResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    ad_group_bid_modifier: gagr_ad_group_bid_modifier.AdGroupBidModifier = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_ad_group_bid_modifier.AdGroupBidModifier,
+    ad_group_bid_modifier: gagr_ad_group_bid_modifier.AdGroupBidModifier = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_ad_group_bid_modifier.AdGroupBidModifier,
+        )
     )
 
 

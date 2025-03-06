@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CustomInterest(proto.Message):
     r"""A custom interest. This is a list of users by interest.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -118,6 +119,7 @@ class CustomInterestMember(proto.Message):
     r"""A member of custom interest audience. A member can be a
     keyword or url. It is immutable, that is, it can only be created
     or removed but not changed.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

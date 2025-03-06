@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"PaidOrganicSearchTermView",},
+    manifest={
+        "PaidOrganicSearchTermView",
+    },
 )
 
 
@@ -30,6 +32,7 @@ class PaidOrganicSearchTermView(proto.Message):
     r"""A paid organic search term view providing a view of search
     stats across ads and organic listings aggregated by search term
     at the ad group level.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -46,10 +49,13 @@ class PaidOrganicSearchTermView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

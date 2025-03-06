@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class SmartCampaignSetting(proto.Message):
     r"""Settings for configuring Smart campaigns.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -85,6 +86,7 @@ class SmartCampaignSetting(proto.Message):
 
     class PhoneNumber(proto.Message):
         r"""Phone number and country code in smart campaign settings.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -113,6 +115,7 @@ class SmartCampaignSetting(proto.Message):
     class AdOptimizedBusinessProfileSetting(proto.Message):
         r"""Settings for configuring a business profile optimized for ads
         as this campaign's landing page.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

@@ -39,6 +39,7 @@ class Audience(proto.Message):
     demographics and affinities, to create audiences that represent
     sections of your target segments.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -105,12 +106,12 @@ class Audience(proto.Message):
         proto.STRING,
         number=5,
     )
-    dimensions: MutableSequence[
-        audiences.AudienceDimension
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message=audiences.AudienceDimension,
+    dimensions: MutableSequence[audiences.AudienceDimension] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=audiences.AudienceDimension,
+        )
     )
     exclusion_dimension: audiences.AudienceExclusionDimension = proto.Field(
         proto.MESSAGE,

@@ -64,12 +64,12 @@ class MutateKeywordPlanCampaignKeywordsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "KeywordPlanCampaignKeywordOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="KeywordPlanCampaignKeywordOperation",
+    operations: MutableSequence["KeywordPlanCampaignKeywordOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="KeywordPlanCampaignKeywordOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -146,6 +146,7 @@ class KeywordPlanCampaignKeywordOperation(proto.Message):
 
 class MutateKeywordPlanCampaignKeywordsResponse(proto.Message):
     r"""Response message for a Keyword Plan campaign keyword mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -162,17 +163,18 @@ class MutateKeywordPlanCampaignKeywordsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateKeywordPlanCampaignKeywordResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateKeywordPlanCampaignKeywordResult",
+    results: MutableSequence["MutateKeywordPlanCampaignKeywordResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateKeywordPlanCampaignKeywordResult",
+        )
     )
 
 
 class MutateKeywordPlanCampaignKeywordResult(proto.Message):
     r"""The result for the Keyword Plan campaign keyword mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

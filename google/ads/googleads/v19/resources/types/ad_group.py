@@ -45,6 +45,7 @@ __protobuf__ = proto.module(
 
 class AdGroup(proto.Message):
     r"""An ad group.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -240,6 +241,7 @@ class AdGroup(proto.Message):
 
     class AudienceSetting(proto.Message):
         r"""Settings for the audience targeting.
+
         Attributes:
             use_audience_grouped (bool):
                 Immutable. If true, this ad group uses an

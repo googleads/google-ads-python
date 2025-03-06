@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CriterionSystemServingStatusEnum",},
+    manifest={
+        "CriterionSystemServingStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class CriterionSystemServingStatusEnum(proto.Message):
     """
 
     class CriterionSystemServingStatus(proto.Enum):
-        r"""Enumerates criterion system serving statuses."""
+        r"""Enumerates criterion system serving statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            ELIGIBLE (2):
+                Eligible.
+            RARELY_SERVED (3):
+                Low search volume.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ELIGIBLE = 2

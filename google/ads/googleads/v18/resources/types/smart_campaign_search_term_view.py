@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"SmartCampaignSearchTermView",},
+    manifest={
+        "SmartCampaignSearchTermView",
+    },
 )
 
 
 class SmartCampaignSearchTermView(proto.Message):
     r"""A Smart campaign search term view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Smart campaign search
@@ -43,13 +46,16 @@ class SmartCampaignSearchTermView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 

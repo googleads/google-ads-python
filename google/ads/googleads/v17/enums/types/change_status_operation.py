@@ -35,7 +35,22 @@ class ChangeStatusOperationEnum(proto.Message):
     """
 
     class ChangeStatusOperation(proto.Enum):
-        r"""Status of the changed resource"""
+        r"""Status of the changed resource
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents an
+                unclassified resource unknown in this version.
+            ADDED (2):
+                The resource was created.
+            CHANGED (3):
+                The resource was modified.
+            REMOVED (4):
+                The resource was removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADDED = 2

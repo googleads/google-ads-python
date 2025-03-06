@@ -43,6 +43,7 @@ __protobuf__ = proto.module(
 
 class AdTextAsset(proto.Message):
     r"""A text asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -68,12 +69,16 @@ class AdTextAsset(proto.Message):
         number=4,
         optional=True,
     )
-    pinned_field: served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType = proto.Field(
+    pinned_field: (
+        served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=served_asset_field_type.ServedAssetFieldTypeEnum.ServedAssetFieldType,
     )
-    asset_performance_label: gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel = proto.Field(
+    asset_performance_label: (
+        gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_asset_performance_label.AssetPerformanceLabelEnum.AssetPerformanceLabel,
@@ -87,6 +92,7 @@ class AdTextAsset(proto.Message):
 
 class AdImageAsset(proto.Message):
     r"""An image asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -105,6 +111,7 @@ class AdImageAsset(proto.Message):
 
 class AdVideoAsset(proto.Message):
     r"""A video asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -133,6 +140,7 @@ class AdVideoAsset(proto.Message):
 
 class AdVideoAssetInfo(proto.Message):
     r"""Contains info fields for AdVideoAssets.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -165,6 +173,7 @@ class AdVideoAssetInfo(proto.Message):
 
 class AdVideoAssetInventoryPreferences(proto.Message):
     r"""YouTube Video Asset inventory preferences.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -207,6 +216,7 @@ class AdVideoAssetInventoryPreferences(proto.Message):
 
 class AdMediaBundleAsset(proto.Message):
     r"""A media bundle asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -225,6 +235,7 @@ class AdMediaBundleAsset(proto.Message):
 
 class AdDemandGenCarouselCardAsset(proto.Message):
     r"""A Demand Gen carousel card asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -244,6 +255,7 @@ class AdDemandGenCarouselCardAsset(proto.Message):
 
 class AdCallToActionAsset(proto.Message):
     r"""A call to action asset used inside an ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

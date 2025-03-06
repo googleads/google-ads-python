@@ -24,13 +24,16 @@ from google.ads.googleads.v18.enums.types import access_role as gage_access_role
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerUserAccess",},
+    manifest={
+        "CustomerUserAccess",
+    },
 )
 
 
 class CustomerUserAccess(proto.Message):
     r"""Represents the permission of a single user onto a single
     customer.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -65,22 +68,32 @@ class CustomerUserAccess(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     user_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     access_role: gage_access_role.AccessRoleEnum.AccessRole = proto.Field(
-        proto.ENUM, number=4, enum=gage_access_role.AccessRoleEnum.AccessRole,
+        proto.ENUM,
+        number=4,
+        enum=gage_access_role.AccessRoleEnum.AccessRole,
     )
     access_creation_date_time: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     inviter_user_email_address: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
 
 

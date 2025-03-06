@@ -32,12 +32,15 @@ from google.ads.googleads.v18.enums.types import asset_source
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupAsset",},
+    manifest={
+        "AdGroupAsset",
+    },
 )
 
 
 class AdGroupAsset(proto.Message):
     r"""A link between an ad group and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the ad group asset.
@@ -78,28 +81,37 @@ class AdGroupAsset(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
     source: asset_source.AssetSourceEnum.AssetSource = proto.Field(
-        proto.ENUM, number=6, enum=asset_source.AssetSourceEnum.AssetSource,
+        proto.ENUM,
+        number=6,
+        enum=asset_source.AssetSourceEnum.AssetSource,
     )
     status: asset_link_status.AssetLinkStatusEnum.AssetLinkStatus = proto.Field(
         proto.ENUM,
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

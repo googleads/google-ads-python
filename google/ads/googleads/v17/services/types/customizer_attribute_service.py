@@ -71,12 +71,12 @@ class MutateCustomizerAttributesRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CustomizerAttributeOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CustomizerAttributeOperation",
+    operations: MutableSequence["CustomizerAttributeOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomizerAttributeOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateCustomizerAttributesRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -141,6 +143,7 @@ class CustomizerAttributeOperation(proto.Message):
 
 class MutateCustomizerAttributesResponse(proto.Message):
     r"""Response message for a customizer attribute mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCustomizerAttributeResult]):
             All results for the mutate.
@@ -152,12 +155,12 @@ class MutateCustomizerAttributesResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateCustomizerAttributeResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCustomizerAttributeResult",
+    results: MutableSequence["MutateCustomizerAttributeResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomizerAttributeResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -168,6 +171,7 @@ class MutateCustomizerAttributesResponse(proto.Message):
 
 class MutateCustomizerAttributeResult(proto.Message):
     r"""The result for the customizer attribute mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

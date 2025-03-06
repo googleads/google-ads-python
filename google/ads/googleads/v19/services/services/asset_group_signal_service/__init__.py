@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AssetGroupSignalServiceClient
+from .async_client import AssetGroupSignalServiceAsyncClient
 
-__all__ = ("AssetGroupSignalServiceClient",)
+__all__ = (
+    "AssetGroupSignalServiceClient",
+    "AssetGroupSignalServiceAsyncClient",
+)

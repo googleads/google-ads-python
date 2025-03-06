@@ -22,18 +22,33 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"VanityPharmaDisplayUrlModeEnum",},
+    manifest={
+        "VanityPharmaDisplayUrlModeEnum",
+    },
 )
 
 
 class VanityPharmaDisplayUrlModeEnum(proto.Message):
-    r"""The display mode for vanity pharma URLs.
-    """
+    r"""The display mode for vanity pharma URLs."""
 
     class VanityPharmaDisplayUrlMode(proto.Enum):
         r"""Enum describing possible display modes for vanity pharma
         URLs.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MANUFACTURER_WEBSITE_URL (2):
+                Replace vanity pharma URL with manufacturer
+                website url.
+            WEBSITE_DESCRIPTION (3):
+                Replace vanity pharma URL with description of
+                the website.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MANUFACTURER_WEBSITE_URL = 2

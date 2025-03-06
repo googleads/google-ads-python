@@ -35,7 +35,20 @@ class InsightsKnowledgeGraphEntityCapabilitiesEnum(proto.Message):
     """
 
     class InsightsKnowledgeGraphEntityCapabilities(proto.Enum):
-        r"""The capabilities of an entity."""
+        r"""The capabilities of an entity.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            CONTENT_TRENDING_INSIGHTS (2):
+                An entity that is supported to use as a trending topic in
+                [ContentCreatorInsightsService.GenerateTrendingInsights].
+            CREATOR_ATTRIBUTE (3):
+                An entity that is supported to use as a creator attribute in
+                [ContentCreatorInsightsService.GenerateCreatorInsights].
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

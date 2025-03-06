@@ -45,6 +45,7 @@ __protobuf__ = proto.module(
 
 class AdGroup(proto.Message):
     r"""An ad group.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -234,6 +235,7 @@ class AdGroup(proto.Message):
 
     class AudienceSetting(proto.Message):
         r"""Settings for the audience targeting.
+
         Attributes:
             use_audience_grouped (bool):
                 Immutable. If true, this ad group uses an
@@ -271,7 +273,9 @@ class AdGroup(proto.Message):
         number=12,
         enum=ad_group_type.AdGroupTypeEnum.AdGroupType,
     )
-    ad_rotation_mode: ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode = proto.Field(
+    ad_rotation_mode: (
+        ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode
+    ) = proto.Field(
         proto.ENUM,
         number=22,
         enum=ad_group_ad_rotation_mode.AdGroupAdRotationModeEnum.AdGroupAdRotationMode,
@@ -286,12 +290,12 @@ class AdGroup(proto.Message):
         number=37,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=6,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=custom_parameter.CustomParameter,
+        )
     )
     campaign: str = proto.Field(
         proto.STRING,
@@ -352,7 +356,9 @@ class AdGroup(proto.Message):
         proto.BOOL,
         number=59,
     )
-    display_custom_bid_dimension: targeting_dimension.TargetingDimensionEnum.TargetingDimension = proto.Field(
+    display_custom_bid_dimension: (
+        targeting_dimension.TargetingDimensionEnum.TargetingDimension
+    ) = proto.Field(
         proto.ENUM,
         number=23,
         enum=targeting_dimension.TargetingDimensionEnum.TargetingDimension,
@@ -377,7 +383,9 @@ class AdGroup(proto.Message):
         number=47,
         optional=True,
     )
-    effective_target_cpa_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
+    effective_target_cpa_source: (
+        bidding_source.BiddingSourceEnum.BiddingSource
+    ) = proto.Field(
         proto.ENUM,
         number=29,
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
@@ -387,7 +395,9 @@ class AdGroup(proto.Message):
         number=48,
         optional=True,
     )
-    effective_target_roas_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
+    effective_target_roas_source: (
+        bidding_source.BiddingSourceEnum.BiddingSource
+    ) = proto.Field(
         proto.ENUM,
         number=32,
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
@@ -410,7 +420,9 @@ class AdGroup(proto.Message):
         number=58,
         enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
     )
-    primary_status: ad_group_primary_status.AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus = proto.Field(
+    primary_status: (
+        ad_group_primary_status.AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=62,
         enum=ad_group_primary_status.AdGroupPrimaryStatusEnum.AdGroupPrimaryStatus,

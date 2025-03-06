@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"HotelPriceBucketEnum",},
+    manifest={
+        "HotelPriceBucketEnum",
+    },
 )
 
 
@@ -33,7 +35,27 @@ class HotelPriceBucketEnum(proto.Message):
     """
 
     class HotelPriceBucket(proto.Enum):
-        r"""Enum describing possible hotel price buckets."""
+        r"""Enum describing possible hotel price buckets.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            LOWEST_UNIQUE (2):
+                Uniquely lowest price. Partner has the lowest
+                price, and no other partners are within a small
+                variance of that price.
+            LOWEST_TIED (3):
+                Tied for lowest price. Partner is within a
+                small variance of the lowest price.
+            NOT_LOWEST (4):
+                Not lowest price. Partner is not within a
+                small variance of the lowest price.
+            ONLY_PARTNER_SHOWN (5):
+                Partner was the only one shown.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LOWEST_UNIQUE = 2

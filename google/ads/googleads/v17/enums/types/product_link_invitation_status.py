@@ -37,7 +37,36 @@ class ProductLinkInvitationStatusEnum(proto.Message):
     class ProductLinkInvitationStatus(proto.Enum):
         r"""Describes the possible statuses for an invitation between a
         Google Ads customer and another account.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ACCEPTED (2):
+                The invitation is accepted.
+            REQUESTED (3):
+                An invitation has been sent to the other
+                account. A user on the other account may now
+                accept the invitation by setting the status to
+                ACCEPTED.
+            PENDING_APPROVAL (4):
+                This invitation has been sent by a user on
+                the other account. It may be accepted by a user
+                on this account by setting the status to
+                ACCEPTED.
+            REVOKED (5):
+                The invitation is revoked by the user who
+                sent the invitation.
+            REJECTED (6):
+                The invitation has been rejected by the
+                invitee.
+            EXPIRED (7):
+                The invitation has timed out before being
+                accepted by the invitee.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ACCEPTED = 2

@@ -25,12 +25,15 @@ from google.ads.googleads.v18.enums.types import tracking_code_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"TagSnippet",},
+    manifest={
+        "TagSnippet",
+    },
 )
 
 
 class TagSnippet(proto.Message):
     r"""The site tag and event snippet pair for a TrackingCodeType.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -55,21 +58,29 @@ class TagSnippet(proto.Message):
             This field is a member of `oneof`_ ``_event_snippet``.
     """
 
-    type_: tracking_code_type.TrackingCodeTypeEnum.TrackingCodeType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=tracking_code_type.TrackingCodeTypeEnum.TrackingCodeType,
+    type_: tracking_code_type.TrackingCodeTypeEnum.TrackingCodeType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=tracking_code_type.TrackingCodeTypeEnum.TrackingCodeType,
+        )
     )
-    page_format: tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat = proto.Field(
+    page_format: (
+        tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=tracking_code_page_format.TrackingCodePageFormatEnum.TrackingCodePageFormat,
     )
     global_site_tag: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     event_snippet: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
 
 

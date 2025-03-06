@@ -136,6 +136,7 @@ __protobuf__ = proto.module(
 
 class KeywordInfo(proto.Message):
     r"""A keyword criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -149,18 +150,23 @@ class KeywordInfo(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+        )
     )
 
 
 class PlacementInfo(proto.Message):
     r"""A placement criterion. This can be used to modify bids for
     sites when targeting the content network.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -174,7 +180,9 @@ class PlacementInfo(proto.Message):
     """
 
     url: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -183,6 +191,7 @@ class NegativeKeywordListInfo(proto.Message):
     of negative keywords that can be excluded at the account-level.
     Only one negative keyword list criterion can be attached per
     account.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -195,12 +204,15 @@ class NegativeKeywordListInfo(proto.Message):
     """
 
     shared_set: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class MobileAppCategoryInfo(proto.Message):
     r"""A mobile app category criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -212,12 +224,15 @@ class MobileAppCategoryInfo(proto.Message):
     """
 
     mobile_app_category_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class MobileApplicationInfo(proto.Message):
     r"""A mobile application criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -249,15 +264,20 @@ class MobileApplicationInfo(proto.Message):
     """
 
     app_id: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
 
 
 class LocationInfo(proto.Message):
     r"""A location criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -268,24 +288,30 @@ class LocationInfo(proto.Message):
     """
 
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class DeviceInfo(proto.Message):
     r"""A device criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.DeviceEnum.Device):
             Type of the device.
     """
 
     type_: device.DeviceEnum.Device = proto.Field(
-        proto.ENUM, number=1, enum=device.DeviceEnum.Device,
+        proto.ENUM,
+        number=1,
+        enum=device.DeviceEnum.Device,
     )
 
 
 class ListingGroupInfo(proto.Message):
     r"""A listing group criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -308,24 +334,34 @@ class ListingGroupInfo(proto.Message):
             This field is a member of `oneof`_ ``_path``.
     """
 
-    type_: listing_group_type.ListingGroupTypeEnum.ListingGroupType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=listing_group_type.ListingGroupTypeEnum.ListingGroupType,
+    type_: listing_group_type.ListingGroupTypeEnum.ListingGroupType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=listing_group_type.ListingGroupTypeEnum.ListingGroupType,
+        )
     )
     case_value: "ListingDimensionInfo" = proto.Field(
-        proto.MESSAGE, number=2, message="ListingDimensionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="ListingDimensionInfo",
     )
     parent_ad_group_criterion: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     path: "ListingDimensionPath" = proto.Field(
-        proto.MESSAGE, number=5, optional=True, message="ListingDimensionPath",
+        proto.MESSAGE,
+        number=5,
+        optional=True,
+        message="ListingDimensionPath",
     )
 
 
 class ListingDimensionPath(proto.Message):
     r"""The path of dimensions defining a listing group.
+
     Attributes:
         dimensions (MutableSequence[google.ads.googleads.v18.common.types.ListingDimensionInfo]):
             The complete path of dimensions through the
@@ -335,24 +371,30 @@ class ListingDimensionPath(proto.Message):
     """
 
     dimensions: MutableSequence["ListingDimensionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ListingDimensionInfo",
+        proto.MESSAGE,
+        number=1,
+        message="ListingDimensionInfo",
     )
 
 
 class ListingScopeInfo(proto.Message):
     r"""A listing scope criterion.
+
     Attributes:
         dimensions (MutableSequence[google.ads.googleads.v18.common.types.ListingDimensionInfo]):
             Scope of the campaign criterion.
     """
 
     dimensions: MutableSequence["ListingDimensionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ListingDimensionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="ListingDimensionInfo",
     )
 
 
 class ListingDimensionInfo(proto.Message):
     r"""Listing dimensions for listing group criterion.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -470,10 +512,16 @@ class ListingDimensionInfo(proto.Message):
     """
 
     hotel_id: "HotelIdInfo" = proto.Field(
-        proto.MESSAGE, number=2, oneof="dimension", message="HotelIdInfo",
+        proto.MESSAGE,
+        number=2,
+        oneof="dimension",
+        message="HotelIdInfo",
     )
     hotel_class: "HotelClassInfo" = proto.Field(
-        proto.MESSAGE, number=3, oneof="dimension", message="HotelClassInfo",
+        proto.MESSAGE,
+        number=3,
+        oneof="dimension",
+        message="HotelClassInfo",
     )
     hotel_country_region: "HotelCountryRegionInfo" = proto.Field(
         proto.MESSAGE,
@@ -482,10 +530,16 @@ class ListingDimensionInfo(proto.Message):
         message="HotelCountryRegionInfo",
     )
     hotel_state: "HotelStateInfo" = proto.Field(
-        proto.MESSAGE, number=5, oneof="dimension", message="HotelStateInfo",
+        proto.MESSAGE,
+        number=5,
+        oneof="dimension",
+        message="HotelStateInfo",
     )
     hotel_city: "HotelCityInfo" = proto.Field(
-        proto.MESSAGE, number=6, oneof="dimension", message="HotelCityInfo",
+        proto.MESSAGE,
+        number=6,
+        oneof="dimension",
+        message="HotelCityInfo",
     )
     product_category: "ProductCategoryInfo" = proto.Field(
         proto.MESSAGE,
@@ -494,7 +548,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductCategoryInfo",
     )
     product_brand: "ProductBrandInfo" = proto.Field(
-        proto.MESSAGE, number=15, oneof="dimension", message="ProductBrandInfo",
+        proto.MESSAGE,
+        number=15,
+        oneof="dimension",
+        message="ProductBrandInfo",
     )
     product_channel: "ProductChannelInfo" = proto.Field(
         proto.MESSAGE,
@@ -527,7 +584,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductItemIdInfo",
     )
     product_type: "ProductTypeInfo" = proto.Field(
-        proto.MESSAGE, number=12, oneof="dimension", message="ProductTypeInfo",
+        proto.MESSAGE,
+        number=12,
+        oneof="dimension",
+        message="ProductTypeInfo",
     )
     product_grouping: "ProductGroupingInfo" = proto.Field(
         proto.MESSAGE,
@@ -554,7 +614,10 @@ class ListingDimensionInfo(proto.Message):
         message="ProductTypeFullInfo",
     )
     activity_id: "ActivityIdInfo" = proto.Field(
-        proto.MESSAGE, number=21, oneof="dimension", message="ActivityIdInfo",
+        proto.MESSAGE,
+        number=21,
+        oneof="dimension",
+        message="ActivityIdInfo",
     )
     activity_rating: "ActivityRatingInfo" = proto.Field(
         proto.MESSAGE,
@@ -575,7 +638,10 @@ class ListingDimensionInfo(proto.Message):
         message="ActivityStateInfo",
     )
     activity_city: "ActivityCityInfo" = proto.Field(
-        proto.MESSAGE, number=26, oneof="dimension", message="ActivityCityInfo",
+        proto.MESSAGE,
+        number=26,
+        oneof="dimension",
+        message="ActivityCityInfo",
     )
     unknown_listing_dimension: "UnknownListingDimensionInfo" = proto.Field(
         proto.MESSAGE,
@@ -587,6 +653,7 @@ class ListingDimensionInfo(proto.Message):
 
 class HotelIdInfo(proto.Message):
     r"""Advertiser-specific hotel ID.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -597,12 +664,15 @@ class HotelIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class HotelClassInfo(proto.Message):
     r"""Class of the hotel as a number of stars 1 to 5.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -613,12 +683,15 @@ class HotelClassInfo(proto.Message):
     """
 
     value: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
 
 
 class HotelCountryRegionInfo(proto.Message):
     r"""Country or Region the hotel is located in.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -629,12 +702,15 @@ class HotelCountryRegionInfo(proto.Message):
     """
 
     country_region_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class HotelStateInfo(proto.Message):
     r"""State the hotel is located in.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -645,12 +721,15 @@ class HotelStateInfo(proto.Message):
     """
 
     state_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class HotelCityInfo(proto.Message):
     r"""City the hotel is located in.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -661,12 +740,15 @@ class HotelCityInfo(proto.Message):
     """
 
     city_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ProductCategoryInfo(proto.Message):
     r"""Category of a product offer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -683,9 +765,13 @@ class ProductCategoryInfo(proto.Message):
     """
 
     category_id: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
-    level: product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel = proto.Field(
+    level: (
+        product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=product_category_level.ProductCategoryLevelEnum.ProductCategoryLevel,
@@ -694,6 +780,7 @@ class ProductCategoryInfo(proto.Message):
 
 class ProductBrandInfo(proto.Message):
     r"""Brand of the product.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -704,32 +791,40 @@ class ProductBrandInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ProductChannelInfo(proto.Message):
     r"""Locality of a product offer.
+
     Attributes:
         channel (google.ads.googleads.v18.enums.types.ProductChannelEnum.ProductChannel):
             Value of the locality.
     """
 
-    channel: gage_product_channel.ProductChannelEnum.ProductChannel = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=gage_product_channel.ProductChannelEnum.ProductChannel,
+    channel: gage_product_channel.ProductChannelEnum.ProductChannel = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_product_channel.ProductChannelEnum.ProductChannel,
+        )
     )
 
 
 class ProductChannelExclusivityInfo(proto.Message):
     r"""Availability of a product offer.
+
     Attributes:
         channel_exclusivity (google.ads.googleads.v18.enums.types.ProductChannelExclusivityEnum.ProductChannelExclusivity):
             Value of the availability.
     """
 
-    channel_exclusivity: gage_product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity = proto.Field(
+    channel_exclusivity: (
+        gage_product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=gage_product_channel_exclusivity.ProductChannelExclusivityEnum.ProductChannelExclusivity,
@@ -738,20 +833,24 @@ class ProductChannelExclusivityInfo(proto.Message):
 
 class ProductConditionInfo(proto.Message):
     r"""Condition of a product offer.
+
     Attributes:
         condition (google.ads.googleads.v18.enums.types.ProductConditionEnum.ProductCondition):
             Value of the condition.
     """
 
-    condition: gage_product_condition.ProductConditionEnum.ProductCondition = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=gage_product_condition.ProductConditionEnum.ProductCondition,
+    condition: gage_product_condition.ProductConditionEnum.ProductCondition = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_product_condition.ProductConditionEnum.ProductCondition,
+        )
     )
 
 
 class ProductCustomAttributeInfo(proto.Message):
     r"""Custom attribute of a product offer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -764,9 +863,13 @@ class ProductCustomAttributeInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    index: product_custom_attribute_index.ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex = proto.Field(
+    index: (
+        product_custom_attribute_index.ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=product_custom_attribute_index.ProductCustomAttributeIndexEnum.ProductCustomAttributeIndex,
@@ -775,6 +878,7 @@ class ProductCustomAttributeInfo(proto.Message):
 
 class ProductItemIdInfo(proto.Message):
     r"""Item id of a product offer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -785,12 +889,15 @@ class ProductItemIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ProductTypeInfo(proto.Message):
     r"""Type of a product offer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -803,18 +910,23 @@ class ProductTypeInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    level: product_type_level.ProductTypeLevelEnum.ProductTypeLevel = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=product_type_level.ProductTypeLevelEnum.ProductTypeLevel,
+    level: product_type_level.ProductTypeLevelEnum.ProductTypeLevel = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=product_type_level.ProductTypeLevelEnum.ProductTypeLevel,
+        )
     )
 
 
 class ProductGroupingInfo(proto.Message):
     r"""Grouping of a product offer. This listing dimension is
     deprecated and it is supported only in Display campaigns.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -826,13 +938,16 @@ class ProductGroupingInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ProductLabelsInfo(proto.Message):
     r"""Labels of a product offer. This listing dimension is
     deprecated and it is supported only in Display campaigns.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -844,13 +959,16 @@ class ProductLabelsInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ProductLegacyConditionInfo(proto.Message):
     r"""Legacy condition of a product offer. This listing dimension
     is deprecated and it is supported only in Display campaigns.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -862,13 +980,16 @@ class ProductLegacyConditionInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ProductTypeFullInfo(proto.Message):
     r"""Full type of a product offer. This listing dimension is
     deprecated and it is supported only in Display campaigns.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -880,13 +1001,14 @@ class ProductTypeFullInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class UnknownListingDimensionInfo(proto.Message):
-    r"""Unknown listing dimension.
-    """
+    r"""Unknown listing dimension."""
 
 
 class HotelDateSelectionTypeInfo(proto.Message):
@@ -898,7 +1020,9 @@ class HotelDateSelectionTypeInfo(proto.Message):
             Type of the hotel date selection
     """
 
-    type_: hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType = proto.Field(
+    type_: (
+        hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType,
@@ -908,6 +1032,7 @@ class HotelDateSelectionTypeInfo(proto.Message):
 class HotelAdvanceBookingWindowInfo(proto.Message):
     r"""Criterion for number of days prior to the stay the booking is
     being made.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -925,15 +1050,20 @@ class HotelAdvanceBookingWindowInfo(proto.Message):
     """
 
     min_days: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     max_days: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
 class HotelLengthOfStayInfo(proto.Message):
     r"""Criterion for length of hotel stay in nights.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -948,15 +1078,20 @@ class HotelLengthOfStayInfo(proto.Message):
     """
 
     min_nights: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     max_nights: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
 
 
 class HotelCheckInDateRangeInfo(proto.Message):
     r"""Criterion for a check-in date range.
+
     Attributes:
         start_date (str):
             Start date in the YYYY-MM-DD format.
@@ -965,27 +1100,33 @@ class HotelCheckInDateRangeInfo(proto.Message):
     """
 
     start_date: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     end_date: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class HotelCheckInDayInfo(proto.Message):
     r"""Criterion for day of the week the booking is for.
+
     Attributes:
         day_of_week (google.ads.googleads.v18.enums.types.DayOfWeekEnum.DayOfWeek):
             The day of the week.
     """
 
     day_of_week: gage_day_of_week.DayOfWeekEnum.DayOfWeek = proto.Field(
-        proto.ENUM, number=1, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM,
+        number=1,
+        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
 
 
 class ActivityIdInfo(proto.Message):
     r"""Advertiser-specific activity ID.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -996,13 +1137,16 @@ class ActivityIdInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ActivityRatingInfo(proto.Message):
     r"""Rating of the activity as a number 1 to 5, where 5 is the
     best.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1014,12 +1158,15 @@ class ActivityRatingInfo(proto.Message):
     """
 
     value: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
 class ActivityCountryInfo(proto.Message):
     r"""The country where the travel activity is available.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1031,12 +1178,15 @@ class ActivityCountryInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ActivityStateInfo(proto.Message):
     r"""The state where the travel activity is available.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1048,12 +1198,15 @@ class ActivityStateInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class ActivityCityInfo(proto.Message):
     r"""The city where the travel activity is available.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1065,12 +1218,15 @@ class ActivityCityInfo(proto.Message):
     """
 
     value: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class InteractionTypeInfo(proto.Message):
     r"""Criterion for Interaction Type.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.InteractionTypeEnum.InteractionType):
             The interaction type.
@@ -1090,6 +1246,7 @@ class AdScheduleInfo(proto.Message):
     interval within which ads will be shown.
 
     No more than six AdSchedules can be added for the same day.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1131,48 +1288,65 @@ class AdScheduleInfo(proto.Message):
     """
 
     start_minute: minute_of_hour.MinuteOfHourEnum.MinuteOfHour = proto.Field(
-        proto.ENUM, number=1, enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
+        proto.ENUM,
+        number=1,
+        enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
     )
     end_minute: minute_of_hour.MinuteOfHourEnum.MinuteOfHour = proto.Field(
-        proto.ENUM, number=2, enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
+        proto.ENUM,
+        number=2,
+        enum=minute_of_hour.MinuteOfHourEnum.MinuteOfHour,
     )
     start_hour: int = proto.Field(
-        proto.INT32, number=6, optional=True,
+        proto.INT32,
+        number=6,
+        optional=True,
     )
     end_hour: int = proto.Field(
-        proto.INT32, number=7, optional=True,
+        proto.INT32,
+        number=7,
+        optional=True,
     )
     day_of_week: gage_day_of_week.DayOfWeekEnum.DayOfWeek = proto.Field(
-        proto.ENUM, number=5, enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
+        proto.ENUM,
+        number=5,
+        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
 
 
 class AgeRangeInfo(proto.Message):
     r"""An age range criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.AgeRangeTypeEnum.AgeRangeType):
             Type of the age range.
     """
 
     type_: age_range_type.AgeRangeTypeEnum.AgeRangeType = proto.Field(
-        proto.ENUM, number=1, enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
+        proto.ENUM,
+        number=1,
+        enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
     )
 
 
 class GenderInfo(proto.Message):
     r"""A gender criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.GenderTypeEnum.GenderType):
             Type of the gender.
     """
 
     type_: gender_type.GenderTypeEnum.GenderType = proto.Field(
-        proto.ENUM, number=1, enum=gender_type.GenderTypeEnum.GenderType,
+        proto.ENUM,
+        number=1,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
 
 
 class IncomeRangeInfo(proto.Message):
     r"""An income range criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.IncomeRangeTypeEnum.IncomeRangeType):
             Type of the income range.
@@ -1187,20 +1361,24 @@ class IncomeRangeInfo(proto.Message):
 
 class ParentalStatusInfo(proto.Message):
     r"""A parental status criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.ParentalStatusTypeEnum.ParentalStatusType):
             Type of the parental status.
     """
 
-    type_: parental_status_type.ParentalStatusTypeEnum.ParentalStatusType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
+    type_: parental_status_type.ParentalStatusTypeEnum.ParentalStatusType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=parental_status_type.ParentalStatusTypeEnum.ParentalStatusType,
+        )
     )
 
 
 class YouTubeVideoInfo(proto.Message):
     r"""A YouTube Video criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1212,12 +1390,15 @@ class YouTubeVideoInfo(proto.Message):
     """
 
     video_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class YouTubeChannelInfo(proto.Message):
     r"""A YouTube Channel criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1229,13 +1410,16 @@ class YouTubeChannelInfo(proto.Message):
     """
 
     channel_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class UserListInfo(proto.Message):
     r"""A User List criterion. Represents a user list that is defined
     by the advertiser to be targeted.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1247,7 +1431,9 @@ class UserListInfo(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1260,6 +1446,7 @@ class ProximityInfo(proto.Message):
     address and radius. The geo point will be automatically
     computed. Second, by setting a geo point and radius. The address
     is an optional label that won't be validated.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1278,23 +1465,32 @@ class ProximityInfo(proto.Message):
     """
 
     geo_point: "GeoPointInfo" = proto.Field(
-        proto.MESSAGE, number=1, message="GeoPointInfo",
+        proto.MESSAGE,
+        number=1,
+        message="GeoPointInfo",
     )
     radius: float = proto.Field(
-        proto.DOUBLE, number=5, optional=True,
+        proto.DOUBLE,
+        number=5,
+        optional=True,
     )
-    radius_units: proximity_radius_units.ProximityRadiusUnitsEnum.ProximityRadiusUnits = proto.Field(
+    radius_units: (
+        proximity_radius_units.ProximityRadiusUnitsEnum.ProximityRadiusUnits
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=proximity_radius_units.ProximityRadiusUnitsEnum.ProximityRadiusUnits,
     )
     address: "AddressInfo" = proto.Field(
-        proto.MESSAGE, number=4, message="AddressInfo",
+        proto.MESSAGE,
+        number=4,
+        message="AddressInfo",
     )
 
 
 class GeoPointInfo(proto.Message):
     r"""Geo point for proximity criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1309,15 +1505,20 @@ class GeoPointInfo(proto.Message):
     """
 
     longitude_in_micro_degrees: int = proto.Field(
-        proto.INT32, number=3, optional=True,
+        proto.INT32,
+        number=3,
+        optional=True,
     )
     latitude_in_micro_degrees: int = proto.Field(
-        proto.INT32, number=4, optional=True,
+        proto.INT32,
+        number=4,
+        optional=True,
     )
 
 
 class AddressInfo(proto.Message):
     r"""Address for proximity criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1354,25 +1555,39 @@ class AddressInfo(proto.Message):
     """
 
     postal_code: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     province_code: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     province_name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     street_address: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     street_address2: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     city_name: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
 
 
@@ -1380,6 +1595,7 @@ class TopicInfo(proto.Message):
     r"""A topic criterion. Use topics to target or exclude placements
     in the Google Display Network based on the category into which
     the placement falls (for example, "Pets & Animals/Pets/Dogs").
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1397,15 +1613,19 @@ class TopicInfo(proto.Message):
     """
 
     topic_constant: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     path: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 
 class LanguageInfo(proto.Message):
     r"""A language criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1416,7 +1636,9 @@ class LanguageInfo(proto.Message):
     """
 
     language_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
@@ -1428,6 +1650,7 @@ class IpBlockInfo(proto.Message):
      - masks for individual addresses (192.168.0.1/32)
      - masks for Class C networks (192.168.0.1/24)
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1438,27 +1661,33 @@ class IpBlockInfo(proto.Message):
     """
 
     ip_address: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ContentLabelInfo(proto.Message):
     r"""Content Label for category exclusion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.ContentLabelTypeEnum.ContentLabelType):
             Content label type, required for CREATE
             operations.
     """
 
-    type_: content_label_type.ContentLabelTypeEnum.ContentLabelType = proto.Field(
-        proto.ENUM,
-        number=1,
-        enum=content_label_type.ContentLabelTypeEnum.ContentLabelType,
+    type_: content_label_type.ContentLabelTypeEnum.ContentLabelType = (
+        proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=content_label_type.ContentLabelTypeEnum.ContentLabelType,
+        )
     )
 
 
 class CarrierInfo(proto.Message):
     r"""Represents a Carrier Criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1469,12 +1698,15 @@ class CarrierInfo(proto.Message):
     """
 
     carrier_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class UserInterestInfo(proto.Message):
     r"""Represents a particular interest-based topic to be targeted.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1485,13 +1717,16 @@ class UserInterestInfo(proto.Message):
     """
 
     user_interest_category: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class WebpageInfo(proto.Message):
     r"""Represents a criterion for targeting webpages of an
     advertiser's website.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1530,22 +1765,30 @@ class WebpageInfo(proto.Message):
     """
 
     criterion_name: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     conditions: MutableSequence["WebpageConditionInfo"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="WebpageConditionInfo",
+        proto.MESSAGE,
+        number=2,
+        message="WebpageConditionInfo",
     )
     coverage_percentage: float = proto.Field(
-        proto.DOUBLE, number=4,
+        proto.DOUBLE,
+        number=4,
     )
     sample: "WebpageSampleInfo" = proto.Field(
-        proto.MESSAGE, number=5, message="WebpageSampleInfo",
+        proto.MESSAGE,
+        number=5,
+        message="WebpageSampleInfo",
     )
 
 
 class WebpageConditionInfo(proto.Message):
     r"""Logical expression for targeting webpages of an advertiser's
     website.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1560,35 +1803,44 @@ class WebpageConditionInfo(proto.Message):
             This field is a member of `oneof`_ ``_argument``.
     """
 
-    operand: webpage_condition_operand.WebpageConditionOperandEnum.WebpageConditionOperand = proto.Field(
+    operand: (
+        webpage_condition_operand.WebpageConditionOperandEnum.WebpageConditionOperand
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=webpage_condition_operand.WebpageConditionOperandEnum.WebpageConditionOperand,
     )
-    operator: webpage_condition_operator.WebpageConditionOperatorEnum.WebpageConditionOperator = proto.Field(
+    operator: (
+        webpage_condition_operator.WebpageConditionOperatorEnum.WebpageConditionOperator
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=webpage_condition_operator.WebpageConditionOperatorEnum.WebpageConditionOperator,
     )
     argument: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
 class WebpageSampleInfo(proto.Message):
     r"""List of sample urls that match the website target
+
     Attributes:
         sample_urls (MutableSequence[str]):
             Webpage sample urls
     """
 
     sample_urls: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class OperatingSystemVersionInfo(proto.Message):
     r"""Represents an operating system version to be targeted.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1600,18 +1852,23 @@ class OperatingSystemVersionInfo(proto.Message):
     """
 
     operating_system_version_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class AppPaymentModelInfo(proto.Message):
     r"""An app payment model criterion.
+
     Attributes:
         type_ (google.ads.googleads.v18.enums.types.AppPaymentModelTypeEnum.AppPaymentModelType):
             Type of the app payment model.
     """
 
-    type_: app_payment_model_type.AppPaymentModelTypeEnum.AppPaymentModelType = proto.Field(
+    type_: (
+        app_payment_model_type.AppPaymentModelTypeEnum.AppPaymentModelType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=app_payment_model_type.AppPaymentModelTypeEnum.AppPaymentModelType,
@@ -1620,6 +1877,7 @@ class AppPaymentModelInfo(proto.Message):
 
 class MobileDeviceInfo(proto.Message):
     r"""A mobile device criterion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1630,13 +1888,16 @@ class MobileDeviceInfo(proto.Message):
     """
 
     mobile_device_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class CustomAffinityInfo(proto.Message):
     r"""A custom affinity criterion.
     A criterion of this type is only targetable.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1648,13 +1909,16 @@ class CustomAffinityInfo(proto.Message):
     """
 
     custom_affinity: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class CustomIntentInfo(proto.Message):
     r"""A custom intent criterion.
     A criterion of this type is only targetable.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1666,13 +1930,16 @@ class CustomIntentInfo(proto.Message):
     """
 
     custom_intent: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class LocationGroupInfo(proto.Message):
     r"""A radius around a list of locations specified through a feed
     or assetSet.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1728,68 +1995,86 @@ class LocationGroupInfo(proto.Message):
     """
 
     feed: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     radius: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
-    radius_units: location_group_radius_units.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits = proto.Field(
+    radius_units: (
+        location_group_radius_units.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=location_group_radius_units.LocationGroupRadiusUnitsEnum.LocationGroupRadiusUnits,
     )
     feed_item_sets: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     enable_customer_level_location_asset_set: bool = proto.Field(
-        proto.BOOL, number=9, optional=True,
+        proto.BOOL,
+        number=9,
+        optional=True,
     )
     location_group_asset_sets: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
 
 
 class CustomAudienceInfo(proto.Message):
     r"""A custom audience criterion.
+
     Attributes:
         custom_audience (str):
             The CustomAudience resource name.
     """
 
     custom_audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class CombinedAudienceInfo(proto.Message):
     r"""A combined audience criterion.
+
     Attributes:
         combined_audience (str):
             The CombinedAudience resource name.
     """
 
     combined_audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class AudienceInfo(proto.Message):
     r"""An audience criterion.
+
     Attributes:
         audience (str):
             The Audience resource name.
     """
 
     audience: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class KeywordThemeInfo(proto.Message):
     r"""A Smart Campaign keyword theme.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -1813,10 +2098,14 @@ class KeywordThemeInfo(proto.Message):
     """
 
     keyword_theme_constant: str = proto.Field(
-        proto.STRING, number=1, oneof="keyword_theme",
+        proto.STRING,
+        number=1,
+        oneof="keyword_theme",
     )
     free_form_keyword_theme: str = proto.Field(
-        proto.STRING, number=2, oneof="keyword_theme",
+        proto.STRING,
+        number=2,
+        oneof="keyword_theme",
     )
 
 
@@ -1830,7 +2119,8 @@ class LocalServiceIdInfo(proto.Message):
     """
 
     service_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -1847,13 +2137,15 @@ class SearchThemeInfo(proto.Message):
     """
 
     text: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class BrandInfo(proto.Message):
     r"""Represents a Brand Criterion used for targeting based on
     commercial knowledge graph.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1883,15 +2175,23 @@ class BrandInfo(proto.Message):
     """
 
     display_name: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     entity_id: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     primary_url: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
-    rejection_reason: brand_request_rejection_reason.BrandRequestRejectionReasonEnum.BrandRequestRejectionReason = proto.Field(
+    rejection_reason: (
+        brand_request_rejection_reason.BrandRequestRejectionReasonEnum.BrandRequestRejectionReason
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         optional=True,
@@ -1910,6 +2210,7 @@ class BrandListInfo(proto.Message):
     is represented as a SharedSet id type BRAND_HINT. A criterion of
     this type can be either targeted or excluded.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1920,7 +2221,9 @@ class BrandListInfo(proto.Message):
     """
 
     shared_set: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

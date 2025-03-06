@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class ContentCriterionView(proto.Message):
     r"""A content criterion view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the content criterion

@@ -37,6 +37,30 @@ class LocalServicesVerificationStatusEnum(proto.Message):
     class LocalServicesVerificationStatus(proto.Enum):
         r"""Enum describing status of a particular Local Services Ads
         verification category.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Unknown verification status.
+            NEEDS_REVIEW (2):
+                Verification has started, but has not
+                finished.
+            FAILED (3):
+                Verification has failed.
+            PASSED (4):
+                Verification has passed.
+            NOT_APPLICABLE (5):
+                Verification is not applicable.
+            NO_SUBMISSION (6):
+                Verification is required but pending
+                submission.
+            PARTIAL_SUBMISSION (7):
+                Not all required verification has been
+                submitted.
+            PENDING_ESCALATION (8):
+                Verification needs review by Local Services
+                Ads Ops Specialist.
         """
 
         UNSPECIFIED = 0

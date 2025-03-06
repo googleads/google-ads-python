@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ContentCreatorInsightsServiceClient
+from .async_client import ContentCreatorInsightsServiceAsyncClient
 
-__all__ = ("ContentCreatorInsightsServiceClient",)
+__all__ = (
+    "ContentCreatorInsightsServiceClient",
+    "ContentCreatorInsightsServiceAsyncClient",
+)

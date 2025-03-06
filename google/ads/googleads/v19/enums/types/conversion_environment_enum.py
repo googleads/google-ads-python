@@ -35,7 +35,19 @@ class ConversionEnvironmentEnum(proto.Message):
     """
 
     class ConversionEnvironment(proto.Enum):
-        r"""Conversion environment of the uploaded conversion."""
+        r"""Conversion environment of the uploaded conversion.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APP (2):
+                The conversion was recorded on an app.
+            WEB (3):
+                The conversion was recorded on a website.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

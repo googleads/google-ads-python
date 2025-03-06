@@ -58,18 +58,23 @@ class MutateAdGroupCriterionLabelsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AdGroupCriterionLabelOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionLabelOperation",
+    operations: MutableSequence["AdGroupCriterionLabelOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupCriterionLabelOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -106,12 +111,15 @@ class AdGroupCriterionLabelOperation(proto.Message):
         message=ad_group_criterion_label.AdGroupCriterionLabel,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateAdGroupCriterionLabelsResponse(proto.Message):
     r"""Response message for an ad group criterion labels mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -124,24 +132,30 @@ class MutateAdGroupCriterionLabelsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateAdGroupCriterionLabelResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupCriterionLabelResult",
+    results: MutableSequence["MutateAdGroupCriterionLabelResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateAdGroupCriterionLabelResult",
+        )
     )
 
 
 class MutateAdGroupCriterionLabelResult(proto.Message):
     r"""The result for an ad group criterion label mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

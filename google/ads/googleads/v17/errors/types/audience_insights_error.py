@@ -35,7 +35,19 @@ class AudienceInsightsErrorEnum(proto.Message):
     """
 
     class AudienceInsightsError(proto.Enum):
-        r"""Enum describing possible errors from AudienceInsightsService."""
+        r"""Enum describing possible errors from AudienceInsightsService.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DIMENSION_INCOMPATIBLE_WITH_TOPIC_AUDIENCE_COMBINATIONS (2):
+                The dimensions cannot be used with topic
+                audience combinations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DIMENSION_INCOMPATIBLE_WITH_TOPIC_AUDIENCE_COMBINATIONS = 2

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SimulationModificationMethodEnum",},
+    manifest={
+        "SimulationModificationMethodEnum",
+    },
 )
 
 
@@ -35,7 +37,29 @@ class SimulationModificationMethodEnum(proto.Message):
     class SimulationModificationMethod(proto.Enum):
         r"""Enum describing the method by which a simulation modifies a
         field.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            UNIFORM (2):
+                The values in a simulation were applied to
+                all children of a given resource uniformly.
+                Overrides on child resources were not respected.
+            DEFAULT (3):
+                The values in a simulation were applied to
+                the given resource. Overrides on child resources
+                were respected, and traffic estimates do not
+                include these resources.
+            SCALING (4):
+                The values in a simulation were all scaled by
+                the same factor. For example, in a simulated
+                TargetCpa campaign, the campaign target and all
+                ad group targets were scaled by a factor of X.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNIFORM = 2

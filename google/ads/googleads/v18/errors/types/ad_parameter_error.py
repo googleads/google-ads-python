@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AdParameterErrorEnum",},
+    manifest={
+        "AdParameterErrorEnum",
+    },
 )
 
 
 class AdParameterErrorEnum(proto.Message):
-    r"""Container for enum describing possible ad parameter errors.
-    """
+    r"""Container for enum describing possible ad parameter errors."""
 
     class AdParameterError(proto.Enum):
-        r"""Enum describing possible ad parameter errors."""
+        r"""Enum describing possible ad parameter errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            AD_GROUP_CRITERION_MUST_BE_KEYWORD (2):
+                The ad group criterion must be a keyword
+                criterion.
+            INVALID_INSERTION_TEXT_FORMAT (3):
+                The insertion text is invalid.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_GROUP_CRITERION_MUST_BE_KEYWORD = 2

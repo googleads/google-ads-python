@@ -35,7 +35,25 @@ class CustomerAcquisitionOptimizationModeEnum(proto.Message):
     """
 
     class CustomerAcquisitionOptimizationMode(proto.Enum):
-        r"""Possible optimization mode of a customer acquisition goal."""
+        r"""Possible optimization mode of a customer acquisition goal.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            TARGET_ALL_EQUALLY (2):
+                The mode is used when campaign is optimizing
+                equally for existing and new customers, which is
+                the default value.
+            BID_HIGHER_FOR_NEW_CUSTOMER (3):
+                The mode is used when campaign is bidding
+                higher for new customers than existing customer.
+            TARGET_NEW_CUSTOMER (4):
+                The mode is used when campaign is only
+                optimizing for new customers.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

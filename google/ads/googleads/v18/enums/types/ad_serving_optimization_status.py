@@ -22,16 +22,43 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AdServingOptimizationStatusEnum",},
+    manifest={
+        "AdServingOptimizationStatusEnum",
+    },
 )
 
 
 class AdServingOptimizationStatusEnum(proto.Message):
-    r"""Possible ad serving statuses of a campaign.
-    """
+    r"""Possible ad serving statuses of a campaign."""
 
     class AdServingOptimizationStatus(proto.Enum):
-        r"""Enum describing possible serving statuses."""
+        r"""Enum describing possible serving statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            OPTIMIZE (2):
+                Ad serving is optimized based on CTR for the
+                campaign.
+            CONVERSION_OPTIMIZE (3):
+                Ad serving is optimized based on CTR \* Conversion for the
+                campaign. If the campaign is not in the conversion optimizer
+                bidding strategy, it will default to OPTIMIZED.
+            ROTATE (4):
+                Ads are rotated evenly for 90 days, then
+                optimized for clicks.
+            ROTATE_INDEFINITELY (5):
+                Show lower performing ads more evenly with
+                higher performing ads, and do not optimize.
+            UNAVAILABLE (6):
+                Ad serving optimization status is not
+                available.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         OPTIMIZE = 2

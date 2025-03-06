@@ -60,6 +60,7 @@ class MutateCustomerUserAccessRequest(proto.Message):
 
 class CustomerUserAccessOperation(proto.Message):
     r"""A single operation (update, remove) on customer user access.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -105,6 +106,7 @@ class CustomerUserAccessOperation(proto.Message):
 
 class MutateCustomerUserAccessResponse(proto.Message):
     r"""Response message for customer user access mutate.
+
     Attributes:
         result (google.ads.googleads.v19.services.types.MutateCustomerUserAccessResult):
             Result for the mutate.
@@ -119,6 +121,7 @@ class MutateCustomerUserAccessResponse(proto.Message):
 
 class MutateCustomerUserAccessResult(proto.Message):
     r"""The result for the customer user access mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"MobileDeviceTypeEnum",},
+    manifest={
+        "MobileDeviceTypeEnum",
+    },
 )
 
 
 class MobileDeviceTypeEnum(proto.Message):
-    r"""Container for enum describing the types of mobile device.
-    """
+    r"""Container for enum describing the types of mobile device."""
 
     class MobileDeviceType(proto.Enum):
-        r"""The type of mobile device."""
+        r"""The type of mobile device.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MOBILE (2):
+                Mobile phones.
+            TABLET (3):
+                Tablets.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MOBILE = 2

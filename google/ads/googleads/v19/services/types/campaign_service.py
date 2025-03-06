@@ -98,6 +98,7 @@ class MutateCampaignsRequest(proto.Message):
 
 class CampaignOperation(proto.Message):
     r"""A single operation (create, update, remove) on a campaign.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -154,6 +155,7 @@ class CampaignOperation(proto.Message):
 
 class MutateCampaignsResponse(proto.Message):
     r"""Response message for campaign mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -179,6 +181,7 @@ class MutateCampaignsResponse(proto.Message):
 
 class MutateCampaignResult(proto.Message):
     r"""The result for the campaign mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -226,6 +229,7 @@ class EnablePMaxBrandGuidelinesRequest(proto.Message):
 
 class EnableOperation(proto.Message):
     r"""A single enable operation of a campaign.
+
     Attributes:
         campaign (str):
             Required. The resource name of the campaign
@@ -320,6 +324,7 @@ class BrandCampaignAssets(proto.Message):
 
 class EnablePMaxBrandGuidelinesResponse(proto.Message):
     r"""Brand Guidelines campaign enablement response.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.EnablementResult]):
             Campaign enablement results per campaign.
@@ -334,6 +339,7 @@ class EnablePMaxBrandGuidelinesResponse(proto.Message):
 
 class EnablementResult(proto.Message):
     r"""A single enablement result of a campaign.
+
     Attributes:
         campaign (str):
             This indicates the campaign for which

@@ -68,6 +68,7 @@ class ConfigureCampaignLifecycleGoalsRequest(proto.Message):
 
 class CampaignLifecycleGoalOperation(proto.Message):
     r"""A single operation on a campaign lifecycle goal.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -131,6 +132,7 @@ class ConfigureCampaignLifecycleGoalsResponse(proto.Message):
 
 class ConfigureCampaignLifecycleGoalsResult(proto.Message):
     r"""The result for the campaign lifecycle goal configuration.
+
     Attributes:
         resource_name (str):
             Returned for the successful operation.

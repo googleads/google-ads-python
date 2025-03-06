@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ConversionValueRuleServiceClient
+from .async_client import ConversionValueRuleServiceAsyncClient
 
-__all__ = ("ConversionValueRuleServiceClient",)
+__all__ = (
+    "ConversionValueRuleServiceClient",
+    "ConversionValueRuleServiceAsyncClient",
+)

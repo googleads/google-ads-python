@@ -35,7 +35,20 @@ class FeedLinkStatusEnum(proto.Message):
     """
 
     class FeedLinkStatus(proto.Enum):
-        r"""Possible statuses of a feed link."""
+        r"""Possible statuses of a feed link.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Feed link is enabled.
+            REMOVED (3):
+                Feed link has been removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineUserDataJobStatusEnum",},
+    manifest={
+        "OfflineUserDataJobStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,27 @@ class OfflineUserDataJobStatusEnum(proto.Message):
     """
 
     class OfflineUserDataJobStatus(proto.Enum):
-        r"""The status of an offline user data job."""
+        r"""The status of an offline user data job.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The job has been successfully created and
+                pending for uploading.
+            RUNNING (3):
+                Upload(s) have been accepted and data is
+                being processed.
+            SUCCESS (4):
+                Uploaded data has been successfully
+                processed.
+            FAILED (5):
+                Uploaded data has failed to be processed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PENDING = 2

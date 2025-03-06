@@ -35,7 +35,25 @@ class PolicyValidationParameterErrorEnum(proto.Message):
     """
 
     class PolicyValidationParameterError(proto.Enum):
-        r"""Enum describing possible policy validation parameter errors."""
+        r"""Enum describing possible policy validation parameter errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            UNSUPPORTED_AD_TYPE_FOR_IGNORABLE_POLICY_TOPICS (2):
+                Ignorable policy topics are not supported for
+                the ad type.
+            UNSUPPORTED_AD_TYPE_FOR_EXEMPT_POLICY_VIOLATION_KEYS (3):
+                Exempt policy violation keys are not
+                supported for the ad type.
+            CANNOT_SET_BOTH_IGNORABLE_POLICY_TOPICS_AND_EXEMPT_POLICY_VIOLATION_KEYS (4):
+                Cannot set ignorable policy topics and exempt
+                policy violation keys in the same policy
+                violation parameter.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

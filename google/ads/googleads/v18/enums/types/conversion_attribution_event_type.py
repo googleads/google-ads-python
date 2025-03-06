@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionAttributionEventTypeEnum",},
+    manifest={
+        "ConversionAttributionEventTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,21 @@ class ConversionAttributionEventTypeEnum(proto.Message):
     """
 
     class ConversionAttributionEventType(proto.Enum):
-        r"""The event type of conversions that are attributed to."""
+        r"""The event type of conversions that are attributed to.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Represents value unknown in this version.
+            IMPRESSION (2):
+                The conversion is attributed to an
+                impression.
+            INTERACTION (3):
+                The conversion is attributed to an
+                interaction.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IMPRESSION = 2

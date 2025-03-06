@@ -50,6 +50,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAd(proto.Message):
     r"""An ad group ad.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -96,32 +97,47 @@ class AdGroupAd(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    status: ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus,
+    status: ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=ad_group_ad_status.AdGroupAdStatusEnum.AdGroupAdStatus,
+        )
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     ad: gagr_ad.Ad = proto.Field(
-        proto.MESSAGE, number=5, message=gagr_ad.Ad,
+        proto.MESSAGE,
+        number=5,
+        message=gagr_ad.Ad,
     )
     policy_summary: "AdGroupAdPolicySummary" = proto.Field(
-        proto.MESSAGE, number=6, message="AdGroupAdPolicySummary",
+        proto.MESSAGE,
+        number=6,
+        message="AdGroupAdPolicySummary",
     )
     ad_strength: gage_ad_strength.AdStrengthEnum.AdStrength = proto.Field(
-        proto.ENUM, number=7, enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+        proto.ENUM,
+        number=7,
+        enum=gage_ad_strength.AdStrengthEnum.AdStrength,
     )
     action_items: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=13,
+        proto.STRING,
+        number=13,
     )
     labels: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=10,
+        proto.STRING,
+        number=10,
     )
-    primary_status: ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus = proto.Field(
+    primary_status: (
+        ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=16,
         enum=ad_group_ad_primary_status.AdGroupAdPrimaryStatusEnum.AdGroupAdPrimaryStatus,
@@ -136,12 +152,15 @@ class AdGroupAd(proto.Message):
     ad_group_ad_asset_automation_settings: MutableSequence[
         "AdGroupAdAssetAutomationSetting"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=18, message="AdGroupAdAssetAutomationSetting",
+        proto.MESSAGE,
+        number=18,
+        message="AdGroupAdAssetAutomationSetting",
     )
 
 
 class AdGroupAdPolicySummary(proto.Message):
     r"""Contains policy information for an ad.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v18.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for
@@ -155,17 +174,23 @@ class AdGroupAdPolicySummary(proto.Message):
             individual policy topic entries.
     """
 
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,
@@ -174,6 +199,7 @@ class AdGroupAdPolicySummary(proto.Message):
 
 class AdGroupAdAssetAutomationSetting(proto.Message):
     r"""Asset automation setting for an AdGroupAd.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -189,13 +215,17 @@ class AdGroupAdAssetAutomationSetting(proto.Message):
             This field is a member of `oneof`_ ``_asset_automation_status``.
     """
 
-    asset_automation_type: gage_asset_automation_type.AssetAutomationTypeEnum.AssetAutomationType = proto.Field(
+    asset_automation_type: (
+        gage_asset_automation_type.AssetAutomationTypeEnum.AssetAutomationType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         optional=True,
         enum=gage_asset_automation_type.AssetAutomationTypeEnum.AssetAutomationType,
     )
-    asset_automation_status: gage_asset_automation_status.AssetAutomationStatusEnum.AssetAutomationStatus = proto.Field(
+    asset_automation_status: (
+        gage_asset_automation_status.AssetAutomationStatusEnum.AssetAutomationStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         optional=True,

@@ -48,6 +48,7 @@ class UploadClickConversionsRequest(proto.Message):
     r"""Request message for
     [ConversionUploadService.UploadClickConversions][google.ads.googleads.v17.services.ConversionUploadService.UploadClickConversions].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -249,6 +250,7 @@ class UploadCallConversionsResponse(proto.Message):
 
 class ClickConversion(proto.Message):
     r"""A click conversion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -375,14 +377,16 @@ class ClickConversion(proto.Message):
         number=16,
         message="CartData",
     )
-    user_identifiers: MutableSequence[
-        offline_user_data.UserIdentifier
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=17,
-        message=offline_user_data.UserIdentifier,
+    user_identifiers: MutableSequence[offline_user_data.UserIdentifier] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=17,
+            message=offline_user_data.UserIdentifier,
+        )
     )
-    conversion_environment: conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment = proto.Field(
+    conversion_environment: (
+        conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment
+    ) = proto.Field(
         proto.ENUM,
         number=20,
         enum=conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment,
@@ -396,6 +400,7 @@ class ClickConversion(proto.Message):
 
 class CallConversion(proto.Message):
     r"""A call conversion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -492,6 +497,7 @@ class ExternalAttributionData(proto.Message):
     r"""Contains additional information about externally attributed
     conversions.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -521,6 +527,7 @@ class ExternalAttributionData(proto.Message):
 class ClickConversionResult(proto.Message):
     r"""Identifying information for a successfully processed
     ClickConversion.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -579,18 +586,19 @@ class ClickConversionResult(proto.Message):
         number=6,
         optional=True,
     )
-    user_identifiers: MutableSequence[
-        offline_user_data.UserIdentifier
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=7,
-        message=offline_user_data.UserIdentifier,
+    user_identifiers: MutableSequence[offline_user_data.UserIdentifier] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message=offline_user_data.UserIdentifier,
+        )
     )
 
 
 class CallConversionResult(proto.Message):
     r"""Identifying information for a successfully processed
     CallConversionUpload.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -644,6 +652,7 @@ class CallConversionResult(proto.Message):
 
 class CustomVariable(proto.Message):
     r"""A custom variable.
+
     Attributes:
         conversion_custom_variable (str):
             Resource name of the custom variable
@@ -672,6 +681,7 @@ class CustomVariable(proto.Message):
 
 class CartData(proto.Message):
     r"""Contains additional information about cart data.
+
     Attributes:
         merchant_id (int):
             The Merchant Center ID where the items are
@@ -693,6 +703,7 @@ class CartData(proto.Message):
 
     class Item(proto.Message):
         r"""Contains data of the items purchased.
+
         Attributes:
             product_id (str):
                 The shopping id of the item. Must be equal to

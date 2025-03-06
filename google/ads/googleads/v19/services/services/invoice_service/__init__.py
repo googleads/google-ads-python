@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import InvoiceServiceClient
+from .async_client import InvoiceServiceAsyncClient
 
-__all__ = ("InvoiceServiceClient",)
+__all__ = (
+    "InvoiceServiceClient",
+    "InvoiceServiceAsyncClient",
+)

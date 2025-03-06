@@ -35,7 +35,22 @@ class IdentityVerificationErrorEnum(proto.Message):
     """
 
     class IdentityVerificationError(proto.Enum):
-        r"""Enum describing possible identity verification errors."""
+        r"""Enum describing possible identity verification errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NO_EFFECTIVE_BILLING (2):
+                No effective billing linked to this customer.
+            BILLING_NOT_ON_MONTHLY_INVOICING (3):
+                Customer is not on monthly invoicing.
+            VERIFICATION_ALREADY_STARTED (4):
+                Verification for this program type was
+                already started.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

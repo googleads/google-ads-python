@@ -77,15 +77,20 @@ class ProductLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     product_link_id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
-    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = proto.Field(
-        proto.ENUM,
-        number=3,
-        enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+    type_: linked_product_type.LinkedProductTypeEnum.LinkedProductType = (
+        proto.Field(
+            proto.ENUM,
+            number=3,
+            enum=linked_product_type.LinkedProductTypeEnum.LinkedProductType,
+        )
     )
     data_partner: "DataPartnerIdentifier" = proto.Field(
         proto.MESSAGE,
@@ -115,6 +120,7 @@ class ProductLink(proto.Message):
 
 class DataPartnerIdentifier(proto.Message):
     r"""The identifier for Data Partner account.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -129,12 +135,15 @@ class DataPartnerIdentifier(proto.Message):
     """
 
     data_partner_id: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
 class GoogleAdsIdentifier(proto.Message):
     r"""The identifier for Google Ads account.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -149,12 +158,15 @@ class GoogleAdsIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class MerchantCenterIdentifier(proto.Message):
     r"""The identifier for Google Merchant Center account
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -169,13 +181,16 @@ class MerchantCenterIdentifier(proto.Message):
     """
 
     merchant_center_id: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
 
 
 class AdvertisingPartnerIdentifier(proto.Message):
     r"""The identifier for the Advertising Partner Google Ads
     account.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -192,7 +207,9 @@ class AdvertisingPartnerIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 

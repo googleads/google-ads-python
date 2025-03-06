@@ -35,7 +35,23 @@ class AdGroupBidModifierErrorEnum(proto.Message):
     """
 
     class AdGroupBidModifierError(proto.Enum):
-        r"""Enum describing possible ad group bid modifier errors."""
+        r"""Enum describing possible ad group bid modifier errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CRITERION_ID_NOT_SUPPORTED (2):
+                The criterion ID does not support bid
+                modification.
+            CANNOT_OVERRIDE_OPTED_OUT_CAMPAIGN_CRITERION_BID_MODIFIER (3):
+                Cannot override the bid modifier for the
+                given criterion ID if the parent campaign is
+                opted out of the same criterion.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CRITERION_ID_NOT_SUPPORTED = 2

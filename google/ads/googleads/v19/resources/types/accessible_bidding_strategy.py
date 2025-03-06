@@ -151,6 +151,7 @@ class AccessibleBiddingStrategy(proto.Message):
         conversions as possible at the target cost-per-acquisition (CPA)
         you set.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -173,6 +174,7 @@ class AccessibleBiddingStrategy(proto.Message):
         r"""An automated bidding strategy that sets bids so that a
         certain percentage of search ads are shown at the top of the
         first page (or other targeted location).
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -218,6 +220,7 @@ class AccessibleBiddingStrategy(proto.Message):
         r"""An automated bidding strategy that helps you maximize revenue
         while averaging a specific target return on ad spend (ROAS).
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -237,6 +240,7 @@ class AccessibleBiddingStrategy(proto.Message):
     class TargetSpend(proto.Message):
         r"""An automated bid strategy that sets your bids to help get as
         many clicks as possible within your budget.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

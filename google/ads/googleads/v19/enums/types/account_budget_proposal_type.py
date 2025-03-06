@@ -32,7 +32,26 @@ class AccountBudgetProposalTypeEnum(proto.Message):
     r"""Message describing AccountBudgetProposal types."""
 
     class AccountBudgetProposalType(proto.Enum):
-        r"""The possible types of an AccountBudgetProposal."""
+        r"""The possible types of an AccountBudgetProposal.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CREATE (2):
+                Identifies a request to create a new budget.
+            UPDATE (3):
+                Identifies a request to edit an existing
+                budget.
+            END (4):
+                Identifies a request to end a budget that has
+                already started.
+            REMOVE (5):
+                Identifies a request to remove a budget that
+                hasn't started yet.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -24,12 +24,15 @@ from google.ads.googleads.v18.enums.types import campaign_group_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignGroup",},
+    manifest={
+        "CampaignGroup",
+    },
 )
 
 
 class CampaignGroup(proto.Message):
     r"""A campaign group.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the campaign group. Campaign
@@ -55,15 +58,20 @@ class CampaignGroup(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
     name: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
-    status: campaign_group_status.CampaignGroupStatusEnum.CampaignGroupStatus = proto.Field(
+    status: (
+        campaign_group_status.CampaignGroupStatusEnum.CampaignGroupStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=campaign_group_status.CampaignGroupStatusEnum.CampaignGroupStatus,

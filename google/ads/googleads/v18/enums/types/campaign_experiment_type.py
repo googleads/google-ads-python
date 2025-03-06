@@ -22,18 +22,39 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignExperimentTypeEnum",},
+    manifest={
+        "CampaignExperimentTypeEnum",
+    },
 )
 
 
 class CampaignExperimentTypeEnum(proto.Message):
-    r"""Container for enum describing campaign experiment type.
-    """
+    r"""Container for enum describing campaign experiment type."""
 
     class CampaignExperimentType(proto.Enum):
         r"""Indicates if this campaign is a normal campaign,
         a draft campaign, or an experiment campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BASE (2):
+                This is a regular campaign.
+            DRAFT (3):
+                This is a draft version of a campaign.
+                It has some modifications from a base campaign,
+                but it does not serve or accrue metrics.
+            EXPERIMENT (4):
+                This is an experiment version of a campaign.
+                It has some modifications from a base campaign,
+                and a percentage of traffic is being diverted
+                from the BASE campaign to this experiment
+                campaign.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BASE = 2

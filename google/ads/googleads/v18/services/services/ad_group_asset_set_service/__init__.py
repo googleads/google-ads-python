@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AdGroupAssetSetServiceClient
+from .async_client import AdGroupAssetSetServiceAsyncClient
 
-__all__ = ("AdGroupAssetSetServiceClient",)
+__all__ = (
+    "AdGroupAssetSetServiceClient",
+    "AdGroupAssetSetServiceAsyncClient",
+)

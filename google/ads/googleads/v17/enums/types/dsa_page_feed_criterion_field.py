@@ -34,7 +34,21 @@ class DsaPageFeedCriterionFieldEnum(proto.Message):
     class DsaPageFeedCriterionField(proto.Enum):
         r"""Possible values for Dynamic Search Ad Page Feed criterion
         fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PAGE_URL (2):
+                Data Type: URL or URL_LIST. URL of the web page you want to
+                target.
+            LABEL (3):
+                Data Type: STRING_LIST. The labels that will help you target
+                ads within your page feed.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PAGE_URL = 2

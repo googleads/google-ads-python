@@ -69,6 +69,7 @@ __protobuf__ = proto.module(
 
 class OfflineConversionUploadClientSummary(proto.Message):
     r"""Offline conversion upload summary at customer level.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion
@@ -115,12 +116,16 @@ class OfflineConversionUploadClientSummary(proto.Message):
         proto.STRING,
         number=1,
     )
-    client: offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient = proto.Field(
+    client: (
+        offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=offline_event_upload_client_enum.OfflineEventUploadClientEnum.OfflineEventUploadClient,
     )
-    status: offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus = proto.Field(
+    status: (
+        offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=offline_conversion_diagnostic_status_enum.OfflineConversionDiagnosticStatusEnum.OfflineConversionDiagnosticStatus,
@@ -149,19 +154,19 @@ class OfflineConversionUploadClientSummary(proto.Message):
         proto.STRING,
         number=7,
     )
-    daily_summaries: MutableSequence[
-        "OfflineConversionSummary"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=8,
-        message="OfflineConversionSummary",
+    daily_summaries: MutableSequence["OfflineConversionSummary"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=8,
+            message="OfflineConversionSummary",
+        )
     )
-    job_summaries: MutableSequence[
-        "OfflineConversionSummary"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=9,
-        message="OfflineConversionSummary",
+    job_summaries: MutableSequence["OfflineConversionSummary"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message="OfflineConversionSummary",
+        )
     )
     alerts: MutableSequence["OfflineConversionAlert"] = proto.RepeatedField(
         proto.MESSAGE,
@@ -172,6 +177,7 @@ class OfflineConversionUploadClientSummary(proto.Message):
 
 class OfflineConversionSummary(proto.Message):
     r"""Historical upload summary, grouped by upload date or job.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -223,6 +229,7 @@ class OfflineConversionSummary(proto.Message):
 
 class OfflineConversionAlert(proto.Message):
     r"""Alert for offline conversion client summary.
+
     Attributes:
         error (google.ads.googleads.v17.resources.types.OfflineConversionError):
             Output only. Error for offline conversion
@@ -245,6 +252,7 @@ class OfflineConversionAlert(proto.Message):
 
 class OfflineConversionError(proto.Message):
     r"""Possible errors for offline conversion client summary.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -296,19 +304,25 @@ class OfflineConversionError(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
     """
 
-    collection_size_error: gage_collection_size_error.CollectionSizeErrorEnum.CollectionSizeError = proto.Field(
+    collection_size_error: (
+        gage_collection_size_error.CollectionSizeErrorEnum.CollectionSizeError
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         oneof="error_code",
         enum=gage_collection_size_error.CollectionSizeErrorEnum.CollectionSizeError,
     )
-    conversion_adjustment_upload_error: gage_conversion_adjustment_upload_error.ConversionAdjustmentUploadErrorEnum.ConversionAdjustmentUploadError = proto.Field(
+    conversion_adjustment_upload_error: (
+        gage_conversion_adjustment_upload_error.ConversionAdjustmentUploadErrorEnum.ConversionAdjustmentUploadError
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         oneof="error_code",
         enum=gage_conversion_adjustment_upload_error.ConversionAdjustmentUploadErrorEnum.ConversionAdjustmentUploadError,
     )
-    conversion_upload_error: gage_conversion_upload_error.ConversionUploadErrorEnum.ConversionUploadError = proto.Field(
+    conversion_upload_error: (
+        gage_conversion_upload_error.ConversionUploadErrorEnum.ConversionUploadError
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         oneof="error_code",
@@ -340,19 +354,25 @@ class OfflineConversionError(proto.Message):
         oneof="error_code",
         enum=gage_mutate_error.MutateErrorEnum.MutateError,
     )
-    not_allowlisted_error: gage_not_allowlisted_error.NotAllowlistedErrorEnum.NotAllowlistedError = proto.Field(
+    not_allowlisted_error: (
+        gage_not_allowlisted_error.NotAllowlistedErrorEnum.NotAllowlistedError
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         oneof="error_code",
         enum=gage_not_allowlisted_error.NotAllowlistedErrorEnum.NotAllowlistedError,
     )
-    string_format_error: gage_string_format_error.StringFormatErrorEnum.StringFormatError = proto.Field(
+    string_format_error: (
+        gage_string_format_error.StringFormatErrorEnum.StringFormatError
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         oneof="error_code",
         enum=gage_string_format_error.StringFormatErrorEnum.StringFormatError,
     )
-    string_length_error: gage_string_length_error.StringLengthErrorEnum.StringLengthError = proto.Field(
+    string_length_error: (
+        gage_string_length_error.StringLengthErrorEnum.StringLengthError
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         oneof="error_code",

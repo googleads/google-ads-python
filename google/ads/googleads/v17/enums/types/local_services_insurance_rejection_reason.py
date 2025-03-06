@@ -37,7 +37,55 @@ class LocalServicesInsuranceRejectionReasonEnum(proto.Message):
     class LocalServicesInsuranceRejectionReason(proto.Enum):
         r"""Enums describing possible rejection reasons of a local
         services insurance verification artifact.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_NAME_MISMATCH (2):
+                Business name doesn't match business name for
+                the Local Services Ad.
+            INSURANCE_AMOUNT_INSUFFICIENT (3):
+                Insurance amount doesn't meet requirement
+                listed in the legal summaries documentation for
+                that geographic + category ID combination.
+            EXPIRED (4):
+                Insurance document is expired.
+            NO_SIGNATURE (5):
+                Insurance document is missing a signature.
+            NO_POLICY_NUMBER (6):
+                Insurance document is missing a policy
+                number.
+            NO_COMMERCIAL_GENERAL_LIABILITY (7):
+                Commercial General Liability(CGL) box is not
+                marked in the insurance document.
+            EDITABLE_FORMAT (8):
+                Insurance document is in an editable format.
+            CATEGORY_MISMATCH (9):
+                Insurance document does not cover insurance
+                for a particular category.
+            MISSING_EXPIRATION_DATE (10):
+                Insurance document is missing an expiration
+                date.
+            POOR_QUALITY (11):
+                Insurance document is poor quality - blurry
+                images, illegible, etc...
+            POTENTIALLY_EDITED (12):
+                Insurance document is suspected of being
+                edited.
+            WRONG_DOCUMENT_TYPE (13):
+                Insurance document not accepted. For example,
+                documents of insurance proposals, but missing
+                coverages are not accepted.
+            NON_FINAL (14):
+                Insurance document is not final.
+            OTHER (15):
+                Insurance document has another flaw not
+                listed explicitly.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_NAME_MISMATCH = 2

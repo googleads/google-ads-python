@@ -32,6 +32,7 @@ class CampaignSearchTermInsight(proto.Message):
     r"""A Campaign search term view.
     Historical data is available starting March 2023.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

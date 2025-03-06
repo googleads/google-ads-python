@@ -71,12 +71,12 @@ class MutateBiddingDataExclusionsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "BiddingDataExclusionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="BiddingDataExclusionOperation",
+    operations: MutableSequence["BiddingDataExclusionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="BiddingDataExclusionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateBiddingDataExclusionsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -153,6 +155,7 @@ class BiddingDataExclusionOperation(proto.Message):
 
 class MutateBiddingDataExclusionsResponse(proto.Message):
     r"""Response message for data exlusions mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +172,18 @@ class MutateBiddingDataExclusionsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateBiddingDataExclusionsResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateBiddingDataExclusionsResult",
+    results: MutableSequence["MutateBiddingDataExclusionsResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateBiddingDataExclusionsResult",
+        )
     )
 
 
 class MutateBiddingDataExclusionsResult(proto.Message):
     r"""The result for the data exclusion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

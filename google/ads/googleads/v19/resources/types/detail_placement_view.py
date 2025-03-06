@@ -36,6 +36,7 @@ class DetailPlacementView(proto.Message):
     r"""A view with metrics aggregated by ad group and URL or YouTube
     video.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -35,7 +35,20 @@ class AppStoreEnum(proto.Message):
     """
 
     class AppStore(proto.Enum):
-        r"""App store type in an app extension."""
+        r"""App store type in an app extension.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APPLE_ITUNES (2):
+                Apple iTunes.
+            GOOGLE_PLAY (3):
+                Google Play.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         APPLE_ITUNES = 2

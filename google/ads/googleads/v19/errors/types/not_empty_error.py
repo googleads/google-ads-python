@@ -32,7 +32,17 @@ class NotEmptyErrorEnum(proto.Message):
     r"""Container for enum describing possible not empty errors."""
 
     class NotEmptyError(proto.Enum):
-        r"""Enum describing possible not empty errors."""
+        r"""Enum describing possible not empty errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            EMPTY_LIST (2):
+                Empty list.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

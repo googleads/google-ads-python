@@ -32,7 +32,24 @@ class ProductChannelExclusivityEnum(proto.Message):
     r"""Availability of a product offer."""
 
     class ProductChannelExclusivity(proto.Enum):
-        r"""Enum describing the availability of a product offer."""
+        r"""Enum describing the availability of a product offer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SINGLE_CHANNEL (2):
+                The item is sold through one channel only,
+                either local stores or online as indicated by
+                its ProductChannel.
+            MULTI_CHANNEL (3):
+                The item is matched to its online or local
+                stores counterpart, indicating it is available
+                for purchase in both ShoppingProductChannels.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SINGLE_CHANNEL = 2

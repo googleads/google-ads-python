@@ -35,7 +35,18 @@ class SystemManagedResourceSourceEnum(proto.Message):
     """
 
     class SystemManagedResourceSource(proto.Enum):
-        r"""Enum listing the possible system managed entity sources."""
+        r"""Enum listing the possible system managed entity sources.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AD_VARIATIONS (2):
+                Generated ad variations experiment ad.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AD_VARIATIONS = 2

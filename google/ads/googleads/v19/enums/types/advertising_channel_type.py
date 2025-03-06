@@ -32,7 +32,42 @@ class AdvertisingChannelTypeEnum(proto.Message):
     r"""The channel type a campaign may target to serve on."""
 
     class AdvertisingChannelType(proto.Enum):
-        r"""Enum describing the various advertising channel types."""
+        r"""Enum describing the various advertising channel types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SEARCH (2):
+                Search Network. Includes display bundled, and
+                Search+ campaigns.
+            DISPLAY (3):
+                Google Display Network only.
+            SHOPPING (4):
+                Shopping campaigns serve on the shopping
+                property and on google.com search results.
+            HOTEL (5):
+                Hotel Ads campaigns.
+            VIDEO (6):
+                Video campaigns.
+            MULTI_CHANNEL (7):
+                App Campaigns, and App Campaigns for
+                Engagement, that run across multiple channels.
+            LOCAL (8):
+                Local ads campaigns.
+            SMART (9):
+                Smart campaigns.
+            PERFORMANCE_MAX (10):
+                Performance Max campaigns.
+            LOCAL_SERVICES (11):
+                Local services campaigns.
+            TRAVEL (13):
+                Travel campaigns.
+            DEMAND_GEN (14):
+                Demand Gen campaigns.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

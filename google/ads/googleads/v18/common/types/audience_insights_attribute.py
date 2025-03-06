@@ -90,25 +90,33 @@ class AudienceInsightsAttributeMetadata(proto.Message):
             This field is a member of `oneof`_ ``dimension_metadata``.
     """
 
-    dimension: audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension = proto.Field(
+    dimension: (
+        audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=audience_insights_dimension.AudienceInsightsDimensionEnum.AudienceInsightsDimension,
     )
     attribute: "AudienceInsightsAttribute" = proto.Field(
-        proto.MESSAGE, number=2, message="AudienceInsightsAttribute",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceInsightsAttribute",
     )
     display_name: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     display_info: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     potential_youtube_reach: int = proto.Field(
-        proto.INT64, number=8,
+        proto.INT64,
+        number=8,
     )
     subscriber_share: float = proto.Field(
-        proto.DOUBLE, number=9,
+        proto.DOUBLE,
+        number=9,
     )
     youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = proto.Field(
         proto.MESSAGE,
@@ -196,7 +204,10 @@ class AudienceInsightsAttribute(proto.Message):
         message=criteria.AgeRangeInfo,
     )
     gender: criteria.GenderInfo = proto.Field(
-        proto.MESSAGE, number=2, oneof="attribute", message=criteria.GenderInfo,
+        proto.MESSAGE,
+        number=2,
+        oneof="attribute",
+        message=criteria.GenderInfo,
     )
     location: criteria.LocationInfo = proto.Field(
         proto.MESSAGE,
@@ -250,6 +261,7 @@ class AudienceInsightsAttribute(proto.Message):
 
 class AudienceInsightsEntity(proto.Message):
     r"""A Knowledge Graph entity, represented by its machine id.
+
     Attributes:
         knowledge_graph_machine_id (str):
             Required. The machine ID (mid) of the
@@ -257,24 +269,28 @@ class AudienceInsightsEntity(proto.Message):
     """
 
     knowledge_graph_machine_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class AudienceInsightsCategory(proto.Message):
     r"""A Product and Service category.
+
     Attributes:
         category_id (str):
             Required. The criterion ID of the category.
     """
 
     category_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class AudienceInsightsDynamicLineup(proto.Message):
     r"""A YouTube Dynamic Lineup.
+
     Attributes:
         dynamic_lineup_id (str):
             Required. The numeric ID of the dynamic
@@ -282,12 +298,14 @@ class AudienceInsightsDynamicLineup(proto.Message):
     """
 
     dynamic_lineup_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
 class YouTubeChannelAttributeMetadata(proto.Message):
     r"""Metadata associated with a YouTube channel attribute.
+
     Attributes:
         subscriber_count (int):
             The approximate number of subscribers to the
@@ -295,12 +313,14 @@ class YouTubeChannelAttributeMetadata(proto.Message):
     """
 
     subscriber_count: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
 class DynamicLineupAttributeMetadata(proto.Message):
     r"""Metadata associated with a Dynamic Lineup attribute.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -341,34 +361,52 @@ class DynamicLineupAttributeMetadata(proto.Message):
         """
 
         youtube_channel: criteria.YouTubeChannelInfo = proto.Field(
-            proto.MESSAGE, number=1, message=criteria.YouTubeChannelInfo,
+            proto.MESSAGE,
+            number=1,
+            message=criteria.YouTubeChannelInfo,
         )
         display_name: str = proto.Field(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
-        youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = proto.Field(
-            proto.MESSAGE, number=3, message="YouTubeChannelAttributeMetadata",
+        youtube_channel_metadata: "YouTubeChannelAttributeMetadata" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=3,
+                message="YouTubeChannelAttributeMetadata",
+            )
         )
 
     inventory_country: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.LocationInfo,
     )
     median_monthly_inventory: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     channel_count_lower_bound: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     channel_count_upper_bound: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     sample_channels: MutableSequence[SampleChannel] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=SampleChannel,
+        proto.MESSAGE,
+        number=5,
+        message=SampleChannel,
     )
 
 
 class LocationAttributeMetadata(proto.Message):
     r"""Metadata associated with a Location attribute.
+
     Attributes:
         country_location (google.ads.googleads.v18.common.types.LocationInfo):
             The country location that this attribute’s
@@ -376,7 +414,9 @@ class LocationAttributeMetadata(proto.Message):
     """
 
     country_location: criteria.LocationInfo = proto.Field(
-        proto.MESSAGE, number=1, message=criteria.LocationInfo,
+        proto.MESSAGE,
+        number=1,
+        message=criteria.LocationInfo,
     )
 
 

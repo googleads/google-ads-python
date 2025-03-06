@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"ThirdPartyAppAnalyticsLinkErrorEnum",},
+    manifest={
+        "ThirdPartyAppAnalyticsLinkErrorEnum",
+    },
 )
 
 
@@ -35,7 +37,26 @@ class ThirdPartyAppAnalyticsLinkErrorEnum(proto.Message):
     class ThirdPartyAppAnalyticsLinkError(proto.Enum):
         r"""Enum describing possible third party app analytics link
         errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_ANALYTICS_PROVIDER_ID (2):
+                The provided analytics provider ID is
+                invalid.
+            INVALID_MOBILE_APP_ID (3):
+                The provided mobile app ID is invalid.
+            MOBILE_APP_IS_NOT_ENABLED (4):
+                The mobile app corresponding to the provided
+                app ID is not active/enabled.
+            CANNOT_REGENERATE_SHAREABLE_LINK_ID_FOR_REMOVED_LINK (5):
+                Regenerating shareable link ID is only
+                allowed on active links
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_ANALYTICS_PROVIDER_ID = 2

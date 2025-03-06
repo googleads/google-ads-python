@@ -35,7 +35,25 @@ class FeedOriginEnum(proto.Message):
     """
 
     class FeedOrigin(proto.Enum):
-        r"""Possible values for a feed origin."""
+        r"""Possible values for a feed origin.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            USER (2):
+                The FeedAttributes for this Feed are managed
+                by the user. Users can add FeedAttributes to
+                this Feed.
+            GOOGLE (3):
+                The FeedAttributes for a GOOGLE Feed are
+                created by Google. A feed of this type is
+                maintained by Google and will have the correct
+                attributes for the placeholder type of the feed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         USER = 2

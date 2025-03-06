@@ -63,7 +63,9 @@ class AssetSetAsset(proto.Message):
         proto.STRING,
         number=3,
     )
-    status: asset_set_asset_status.AssetSetAssetStatusEnum.AssetSetAssetStatus = proto.Field(
+    status: (
+        asset_set_asset_status.AssetSetAssetStatusEnum.AssetSetAssetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=asset_set_asset_status.AssetSetAssetStatusEnum.AssetSetAssetStatus,

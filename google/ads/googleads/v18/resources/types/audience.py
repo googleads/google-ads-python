@@ -27,7 +27,9 @@ from google.ads.googleads.v18.enums.types import audience_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"Audience",},
+    manifest={
+        "Audience",
+    },
 )
 
 
@@ -36,6 +38,7 @@ class Audience(proto.Message):
     intersect different segment attributes, such as detailed
     demographics and affinities, to create audiences that represent
     sections of your target segments.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -82,10 +85,12 @@ class Audience(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     status: audience_status.AudienceStatusEnum.AudienceStatus = proto.Field(
         proto.ENUM,
@@ -93,18 +98,25 @@ class Audience(proto.Message):
         enum=audience_status.AudienceStatusEnum.AudienceStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     description: str = proto.Field(
-        proto.STRING, number=5,
+        proto.STRING,
+        number=5,
     )
-    dimensions: MutableSequence[
-        audiences.AudienceDimension
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message=audiences.AudienceDimension,
+    dimensions: MutableSequence[audiences.AudienceDimension] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message=audiences.AudienceDimension,
+        )
     )
     exclusion_dimension: audiences.AudienceExclusionDimension = proto.Field(
-        proto.MESSAGE, number=7, message=audiences.AudienceExclusionDimension,
+        proto.MESSAGE,
+        number=7,
+        message=audiences.AudienceExclusionDimension,
     )
     scope: audience_scope.AudienceScopeEnum.AudienceScope = proto.Field(
         proto.ENUM,
@@ -112,7 +124,8 @@ class Audience(proto.Message):
         enum=audience_scope.AudienceScopeEnum.AudienceScope,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
 
 

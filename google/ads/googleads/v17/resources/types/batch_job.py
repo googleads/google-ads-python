@@ -36,6 +36,7 @@ class BatchJob(proto.Message):
     and the results of the job can only be read using
     BatchJobService.ListBatchJobResults.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -72,6 +73,7 @@ class BatchJob(proto.Message):
         r"""Additional information about the batch job. This message is
         also used as metadata returned in batch job Long Running
         Operations.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

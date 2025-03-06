@@ -36,7 +36,56 @@ class VanityPharmaTextEnum(proto.Message):
     """
 
     class VanityPharmaText(proto.Enum):
-        r"""Enum describing possible text."""
+        r"""Enum describing possible text.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PRESCRIPTION_TREATMENT_WEBSITE_EN (2):
+                Prescription treatment website with website
+                content in English.
+            PRESCRIPTION_TREATMENT_WEBSITE_ES (3):
+                Prescription treatment website with website
+                content in Spanish (Sitio de tratamientos con
+                receta).
+            PRESCRIPTION_DEVICE_WEBSITE_EN (4):
+                Prescription device website with website
+                content in English.
+            PRESCRIPTION_DEVICE_WEBSITE_ES (5):
+                Prescription device website with website
+                content in Spanish (Sitio de dispositivos con
+                receta).
+            MEDICAL_DEVICE_WEBSITE_EN (6):
+                Medical device website with website content
+                in English.
+            MEDICAL_DEVICE_WEBSITE_ES (7):
+                Medical device website with website content
+                in Spanish (Sitio de dispositivos médicos).
+            PREVENTATIVE_TREATMENT_WEBSITE_EN (8):
+                Preventative treatment website with website
+                content in English.
+            PREVENTATIVE_TREATMENT_WEBSITE_ES (9):
+                Preventative treatment website with website
+                content in Spanish (Sitio de tratamientos
+                preventivos).
+            PRESCRIPTION_CONTRACEPTION_WEBSITE_EN (10):
+                Prescription contraception website with
+                website content in English.
+            PRESCRIPTION_CONTRACEPTION_WEBSITE_ES (11):
+                Prescription contraception website with
+                website content in Spanish (Sitio de
+                anticonceptivos con receta).
+            PRESCRIPTION_VACCINE_WEBSITE_EN (12):
+                Prescription vaccine website with website
+                content in English.
+            PRESCRIPTION_VACCINE_WEBSITE_ES (13):
+                Prescription vaccine website with website
+                content in Spanish (Sitio de vacunas con
+                receta).
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

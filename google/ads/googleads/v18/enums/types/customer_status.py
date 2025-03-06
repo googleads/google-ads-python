@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerStatusEnum",},
+    manifest={
+        "CustomerStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,29 @@ class CustomerStatusEnum(proto.Message):
     """
 
     class CustomerStatus(proto.Enum):
-        r"""Possible statuses of a customer."""
+        r"""Possible statuses of a customer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Indicates an active account able to serve
+                ads.
+            CANCELED (3):
+                Indicates a canceled account unable to serve
+                ads. Can be reactivated by an admin user.
+            SUSPENDED (4):
+                Indicates a suspended account unable to serve
+                ads. May only be activated by Google support.
+            CLOSED (5):
+                Indicates a closed account unable to serve
+                ads. Test account will also have CLOSED status.
+                Status is permanent and may not be reopened.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

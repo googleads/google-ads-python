@@ -76,7 +76,9 @@ class MutateCustomerRequest(proto.Message):
         proto.BOOL,
         number=5,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -86,6 +88,7 @@ class MutateCustomerRequest(proto.Message):
 class CreateCustomerClientRequest(proto.Message):
     r"""Request message for
     [CustomerService.CreateCustomerClient][google.ads.googleads.v17.services.CustomerService.CreateCustomerClient].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -139,6 +142,7 @@ class CreateCustomerClientRequest(proto.Message):
 
 class CustomerOperation(proto.Message):
     r"""A single update on a customer.
+
     Attributes:
         update (google.ads.googleads.v17.resources.types.Customer):
             Mutate operation. Only updates are supported
@@ -162,6 +166,7 @@ class CustomerOperation(proto.Message):
 
 class CreateCustomerClientResponse(proto.Message):
     r"""Response message for CreateCustomerClient mutate.
+
     Attributes:
         resource_name (str):
             The resource name of the newly created customer. Customer
@@ -184,6 +189,7 @@ class CreateCustomerClientResponse(proto.Message):
 
 class MutateCustomerResponse(proto.Message):
     r"""Response message for customer mutate.
+
     Attributes:
         result (google.ads.googleads.v17.services.types.MutateCustomerResult):
             Result for the mutate.
@@ -198,6 +204,7 @@ class MutateCustomerResponse(proto.Message):
 
 class MutateCustomerResult(proto.Message):
     r"""The result for the customer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

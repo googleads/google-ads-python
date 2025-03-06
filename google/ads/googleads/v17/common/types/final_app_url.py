@@ -34,6 +34,7 @@ class FinalAppUrl(proto.Message):
     r"""A URL for deep linking into an app for the given operating
     system.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -53,7 +54,9 @@ class FinalAppUrl(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    os_type: app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType = proto.Field(
+    os_type: (
+        app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType,

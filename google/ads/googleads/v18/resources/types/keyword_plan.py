@@ -25,7 +25,10 @@ from google.ads.googleads.v18.enums.types import keyword_plan_forecast_interval
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"KeywordPlan", "KeywordPlanForecastPeriod",},
+    manifest={
+        "KeywordPlan",
+        "KeywordPlanForecastPeriod",
+    },
 )
 
 
@@ -33,6 +36,7 @@ class KeywordPlan(proto.Message):
     r"""A Keyword Planner plan.
     Max number of saved keyword plans: 10000.
     It's possible to remove plans if limit is reached.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -59,21 +63,29 @@ class KeywordPlan(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=5, optional=True,
+        proto.INT64,
+        number=5,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     forecast_period: "KeywordPlanForecastPeriod" = proto.Field(
-        proto.MESSAGE, number=4, message="KeywordPlanForecastPeriod",
+        proto.MESSAGE,
+        number=4,
+        message="KeywordPlanForecastPeriod",
     )
 
 
 class KeywordPlanForecastPeriod(proto.Message):
     r"""The forecasting period associated with the keyword plan.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -98,14 +110,19 @@ class KeywordPlanForecastPeriod(proto.Message):
             This field is a member of `oneof`_ ``interval``.
     """
 
-    date_interval: keyword_plan_forecast_interval.KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval = proto.Field(
+    date_interval: (
+        keyword_plan_forecast_interval.KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         oneof="interval",
         enum=keyword_plan_forecast_interval.KeywordPlanForecastIntervalEnum.KeywordPlanForecastInterval,
     )
     date_range: dates.DateRange = proto.Field(
-        proto.MESSAGE, number=2, oneof="interval", message=dates.DateRange,
+        proto.MESSAGE,
+        number=2,
+        oneof="interval",
+        message=dates.DateRange,
     )
 
 

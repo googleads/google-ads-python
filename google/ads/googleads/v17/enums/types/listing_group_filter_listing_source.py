@@ -37,7 +37,22 @@ class ListingGroupFilterListingSourceEnum(proto.Message):
     class ListingGroupFilterListingSource(proto.Enum):
         r"""The source of listings filtered by a listing group filter
         node.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SHOPPING (2):
+                Listings from a Shopping source, like
+                products from Google Merchant Center.
+            WEBPAGE (3):
+                Listings from a webpage source, like URLs
+                from a page feed or from the advertiser web
+                domain.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SHOPPING = 2

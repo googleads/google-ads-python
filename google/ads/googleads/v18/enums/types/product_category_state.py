@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductCategoryStateEnum",},
+    manifest={
+        "ProductCategoryStateEnum",
+    },
 )
 
 
 class ProductCategoryStateEnum(proto.Message):
-    r"""State of the product category.
-    """
+    r"""State of the product category."""
 
     class ProductCategoryState(proto.Enum):
-        r"""Enum describing the state of the product category."""
+        r"""Enum describing the state of the product category.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The category is enabled.
+            OBSOLETE (3):
+                The category is obsolete. Used only for
+                reporting purposes.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

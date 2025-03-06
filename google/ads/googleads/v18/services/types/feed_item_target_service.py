@@ -67,28 +67,36 @@ class MutateFeedItemTargetsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "FeedItemTargetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="FeedItemTargetOperation",
+    operations: MutableSequence["FeedItemTargetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="FeedItemTargetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
 
 
 class FeedItemTargetOperation(proto.Message):
     r"""A single operation (create, remove) on an feed item target.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -118,12 +126,15 @@ class FeedItemTargetOperation(proto.Message):
         message=gagr_feed_item_target.FeedItemTarget,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateFeedItemTargetsResponse(proto.Message):
     r"""Response message for an feed item target mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -136,17 +147,22 @@ class MutateFeedItemTargetsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateFeedItemTargetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateFeedItemTargetResult",
+    results: MutableSequence["MutateFeedItemTargetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateFeedItemTargetResult",
+        )
     )
 
 
 class MutateFeedItemTargetResult(proto.Message):
     r"""The result for the feed item target mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -157,10 +173,13 @@ class MutateFeedItemTargetResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     feed_item_target: gagr_feed_item_target.FeedItemTarget = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_feed_item_target.FeedItemTarget,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_feed_item_target.FeedItemTarget,
     )
 
 

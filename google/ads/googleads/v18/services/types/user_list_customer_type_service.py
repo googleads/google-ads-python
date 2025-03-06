@@ -59,23 +59,29 @@ class MutateUserListCustomerTypesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "UserListCustomerTypeOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="UserListCustomerTypeOperation",
+    operations: MutableSequence["UserListCustomerTypeOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="UserListCustomerTypeOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class UserListCustomerTypeOperation(proto.Message):
     r"""A single mutate operation on the user list customer type.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -107,12 +113,15 @@ class UserListCustomerTypeOperation(proto.Message):
         message=user_list_customer_type.UserListCustomerType,
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateUserListCustomerTypesResponse(proto.Message):
     r"""Response message for a user list customer type mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -125,24 +134,30 @@ class MutateUserListCustomerTypesResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateUserListCustomerTypeResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateUserListCustomerTypeResult",
+    results: MutableSequence["MutateUserListCustomerTypeResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateUserListCustomerTypeResult",
+        )
     )
 
 
 class MutateUserListCustomerTypeResult(proto.Message):
     r"""The result for the user list customer type mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

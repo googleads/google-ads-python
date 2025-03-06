@@ -35,7 +35,22 @@ class ValueRuleGeoLocationMatchTypeEnum(proto.Message):
     """
 
     class ValueRuleGeoLocationMatchType(proto.Enum):
-        r"""Possible geographic location matching types."""
+        r"""Possible geographic location matching types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ANY (2):
+                Either Area of Interest or Location of
+                Presence can be used to match.
+            LOCATION_OF_PRESENCE (3):
+                Only Location of Presence can be used to
+                match.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ANY = 2

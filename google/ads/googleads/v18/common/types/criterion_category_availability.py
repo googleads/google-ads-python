@@ -58,18 +58,23 @@ class CriterionCategoryAvailability(proto.Message):
     """
 
     channel: "CriterionCategoryChannelAvailability" = proto.Field(
-        proto.MESSAGE, number=1, message="CriterionCategoryChannelAvailability",
+        proto.MESSAGE,
+        number=1,
+        message="CriterionCategoryChannelAvailability",
     )
-    locale: MutableSequence[
-        "CriterionCategoryLocaleAvailability"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CriterionCategoryLocaleAvailability",
+    locale: MutableSequence["CriterionCategoryLocaleAvailability"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CriterionCategoryLocaleAvailability",
+        )
     )
 
 
 class CriterionCategoryChannelAvailability(proto.Message):
     r"""Information of advertising channel type and subtypes a
     category is available in.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -97,12 +102,16 @@ class CriterionCategoryChannelAvailability(proto.Message):
             This field is a member of `oneof`_ ``_include_default_channel_sub_type``.
     """
 
-    availability_mode: criterion_category_channel_availability_mode.CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode = proto.Field(
+    availability_mode: (
+        criterion_category_channel_availability_mode.CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=criterion_category_channel_availability_mode.CriterionCategoryChannelAvailabilityModeEnum.CriterionCategoryChannelAvailabilityMode,
     )
-    advertising_channel_type: gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType = proto.Field(
+    advertising_channel_type: (
+        gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=gage_advertising_channel_type.AdvertisingChannelTypeEnum.AdvertisingChannelType,
@@ -115,12 +124,15 @@ class CriterionCategoryChannelAvailability(proto.Message):
         enum=gage_advertising_channel_sub_type.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType,
     )
     include_default_channel_sub_type: bool = proto.Field(
-        proto.BOOL, number=5, optional=True,
+        proto.BOOL,
+        number=5,
+        optional=True,
     )
 
 
 class CriterionCategoryLocaleAvailability(proto.Message):
     r"""Information about which locales a category is available in.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -142,16 +154,22 @@ class CriterionCategoryLocaleAvailability(proto.Message):
             This field is a member of `oneof`_ ``_language_code``.
     """
 
-    availability_mode: criterion_category_locale_availability_mode.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode = proto.Field(
+    availability_mode: (
+        criterion_category_locale_availability_mode.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=criterion_category_locale_availability_mode.CriterionCategoryLocaleAvailabilityModeEnum.CriterionCategoryLocaleAvailabilityMode,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
 
 

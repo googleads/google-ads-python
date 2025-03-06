@@ -64,18 +64,23 @@ class MutateAdGroupExtensionSettingsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AdGroupExtensionSettingOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupExtensionSettingOperation",
+    operations: MutableSequence["AdGroupExtensionSettingOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupExtensionSettingOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -119,32 +124,43 @@ class AdGroupExtensionSettingOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
     )
-    create: gagr_ad_group_extension_setting.AdGroupExtensionSetting = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
+    create: gagr_ad_group_extension_setting.AdGroupExtensionSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
+        )
     )
-    update: gagr_ad_group_extension_setting.AdGroupExtensionSetting = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        oneof="operation",
-        message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
+    update: gagr_ad_group_extension_setting.AdGroupExtensionSetting = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            oneof="operation",
+            message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,
+        )
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateAdGroupExtensionSettingsResponse(proto.Message):
     r"""Response message for an ad group extension setting mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -157,17 +173,22 @@ class MutateAdGroupExtensionSettingsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateAdGroupExtensionSettingResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateAdGroupExtensionSettingResult",
+    results: MutableSequence["MutateAdGroupExtensionSettingResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateAdGroupExtensionSettingResult",
+        )
     )
 
 
 class MutateAdGroupExtensionSettingResult(proto.Message):
     r"""The result for the ad group extension setting mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -178,9 +199,12 @@ class MutateAdGroupExtensionSettingResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    ad_group_extension_setting: gagr_ad_group_extension_setting.AdGroupExtensionSetting = proto.Field(
+    ad_group_extension_setting: (
+        gagr_ad_group_extension_setting.AdGroupExtensionSetting
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_ad_group_extension_setting.AdGroupExtensionSetting,

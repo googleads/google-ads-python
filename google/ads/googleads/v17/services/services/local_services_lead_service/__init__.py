@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import LocalServicesLeadServiceClient
+from .async_client import LocalServicesLeadServiceAsyncClient
 
-__all__ = ("LocalServicesLeadServiceClient",)
+__all__ = (
+    "LocalServicesLeadServiceClient",
+    "LocalServicesLeadServiceAsyncClient",
+)

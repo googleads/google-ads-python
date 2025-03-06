@@ -358,6 +358,7 @@ class AudienceInsightsTopic(proto.Message):
 
 class AudienceInsightsEntity(proto.Message):
     r"""A Knowledge Graph entity, represented by its machine id.
+
     Attributes:
         knowledge_graph_machine_id (str):
             Required. The machine ID (mid) of the
@@ -372,6 +373,7 @@ class AudienceInsightsEntity(proto.Message):
 
 class AudienceInsightsCategory(proto.Message):
     r"""A Product and Service category.
+
     Attributes:
         category_id (str):
             Required. The criterion ID of the category.
@@ -385,6 +387,7 @@ class AudienceInsightsCategory(proto.Message):
 
 class AudienceInsightsDynamicLineup(proto.Message):
     r"""A YouTube Dynamic Lineup.
+
     Attributes:
         dynamic_lineup_id (str):
             Required. The numeric ID of the dynamic
@@ -399,6 +402,7 @@ class AudienceInsightsDynamicLineup(proto.Message):
 
 class YouTubeChannelAttributeMetadata(proto.Message):
     r"""Metadata associated with a YouTube channel attribute.
+
     Attributes:
         subscriber_count (int):
             The approximate number of subscribers to the
@@ -413,6 +417,7 @@ class YouTubeChannelAttributeMetadata(proto.Message):
 
 class YouTubeVideoAttributeMetadata(proto.Message):
     r"""Metadata for a YouTube video attribute.
+
     Attributes:
         thumbnail_url (str):
             The URL of the video thumbnail, prefixed by
@@ -434,6 +439,7 @@ class YouTubeVideoAttributeMetadata(proto.Message):
 
 class DynamicLineupAttributeMetadata(proto.Message):
     r"""Metadata associated with a Dynamic Lineup attribute.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -519,6 +525,7 @@ class DynamicLineupAttributeMetadata(proto.Message):
 
 class LocationAttributeMetadata(proto.Message):
     r"""Metadata associated with a Location attribute.
+
     Attributes:
         country_location (google.ads.googleads.v19.common.types.LocationInfo):
             The country location that this attribute’s
@@ -534,6 +541,7 @@ class LocationAttributeMetadata(proto.Message):
 
 class UserInterestAttributeMetadata(proto.Message):
     r"""Metadata associated with a User Interest attribute.
+
     Attributes:
         user_interest_description (str):
             English language text description of the user
@@ -548,6 +556,7 @@ class UserInterestAttributeMetadata(proto.Message):
 
 class KnowledgeGraphAttributeMetadata(proto.Message):
     r"""Metadata associated with a Knowledge Graph Entity attribute.
+
     Attributes:
         entity_capabilities (MutableSequence[google.ads.googleads.v19.enums.types.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities]):
             The capabilities of the entity used in

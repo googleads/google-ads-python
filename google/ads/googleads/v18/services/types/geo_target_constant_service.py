@@ -73,37 +73,51 @@ class SuggestGeoTargetConstantsRequest(proto.Message):
 
     class LocationNames(proto.Message):
         r"""A list of location names.
+
         Attributes:
             names (MutableSequence[str]):
                 A list of location names.
         """
 
         names: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class GeoTargets(proto.Message):
         r"""A list of geo target constant resource names.
+
         Attributes:
             geo_target_constants (MutableSequence[str]):
                 A list of geo target constant resource names.
         """
 
         geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     locale: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     location_names: LocationNames = proto.Field(
-        proto.MESSAGE, number=1, oneof="query", message=LocationNames,
+        proto.MESSAGE,
+        number=1,
+        oneof="query",
+        message=LocationNames,
     )
     geo_targets: GeoTargets = proto.Field(
-        proto.MESSAGE, number=2, oneof="query", message=GeoTargets,
+        proto.MESSAGE,
+        number=2,
+        oneof="query",
+        message=GeoTargets,
     )
 
 
@@ -119,12 +133,15 @@ class SuggestGeoTargetConstantsResponse(proto.Message):
     geo_target_constant_suggestions: MutableSequence[
         "GeoTargetConstantSuggestion"
     ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="GeoTargetConstantSuggestion",
+        proto.MESSAGE,
+        number=1,
+        message="GeoTargetConstantSuggestion",
     )
 
 
 class GeoTargetConstantSuggestion(proto.Message):
     r"""A geo target constant suggestion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -157,18 +174,26 @@ class GeoTargetConstantSuggestion(proto.Message):
     """
 
     locale: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     reach: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
-    geo_target_constant: gagr_geo_target_constant.GeoTargetConstant = proto.Field(
-        proto.MESSAGE,
-        number=4,
-        message=gagr_geo_target_constant.GeoTargetConstant,
+    geo_target_constant: gagr_geo_target_constant.GeoTargetConstant = (
+        proto.Field(
+            proto.MESSAGE,
+            number=4,
+            message=gagr_geo_target_constant.GeoTargetConstant,
+        )
     )
     geo_target_constant_parents: MutableSequence[
         gagr_geo_target_constant.GeoTargetConstant

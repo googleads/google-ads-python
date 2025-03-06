@@ -28,13 +28,16 @@ from google.ads.googleads.v18.enums.types import user_interest_taxonomy_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"UserInterest",},
+    manifest={
+        "UserInterest",
+    },
 )
 
 
 class UserInterest(proto.Message):
     r"""A user interest: a particular interest-based vertical to be
     targeted.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -70,24 +73,35 @@ class UserInterest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    taxonomy_type: user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType = proto.Field(
+    taxonomy_type: (
+        user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=user_interest_taxonomy_type.UserInterestTaxonomyTypeEnum.UserInterestTaxonomyType,
     )
     user_interest_id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     user_interest_parent: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     launched_to_all: bool = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
     availabilities: MutableSequence[
         criterion_category_availability.CriterionCategoryAvailability

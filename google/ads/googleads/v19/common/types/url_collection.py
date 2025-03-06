@@ -31,6 +31,7 @@ __protobuf__ = proto.module(
 
 class UrlCollection(proto.Message):
     r"""Collection of urls that is tagged with a unique identifier.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

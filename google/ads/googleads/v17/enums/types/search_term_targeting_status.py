@@ -37,7 +37,23 @@ class SearchTermTargetingStatusEnum(proto.Message):
     class SearchTermTargetingStatus(proto.Enum):
         r"""Indicates whether the search term is one of your targeted or
         excluded keywords.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADDED (2):
+                Search term is added to targeted keywords.
+            EXCLUDED (3):
+                Search term matches a negative keyword.
+            ADDED_EXCLUDED (4):
+                Search term has been both added and excluded.
+            NONE (5):
+                Search term is neither targeted nor excluded.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADDED = 2

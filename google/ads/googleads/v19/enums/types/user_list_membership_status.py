@@ -36,7 +36,21 @@ class UserListMembershipStatusEnum(proto.Message):
     """
 
     class UserListMembershipStatus(proto.Enum):
-        r"""Enum containing possible user list membership statuses."""
+        r"""Enum containing possible user list membership statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            OPEN (2):
+                Open status - List is accruing members and
+                can be targeted to.
+            CLOSED (3):
+                Closed status - No new members being added.
+                Cannot be used for targeting.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

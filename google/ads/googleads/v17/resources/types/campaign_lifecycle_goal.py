@@ -36,6 +36,7 @@ __protobuf__ = proto.module(
 
 class CampaignLifecycleGoal(proto.Message):
     r"""Campaign level customer lifecycle goal settings.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer lifecycle goal
@@ -72,6 +73,7 @@ class CampaignLifecycleGoal(proto.Message):
 
 class CustomerAcquisitionGoalSettings(proto.Message):
     r"""The customer acquisition goal settings for the campaign.
+
     Attributes:
         optimization_mode (google.ads.googleads.v17.enums.types.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode):
             Output only. Customer acquisition
@@ -81,7 +83,9 @@ class CustomerAcquisitionGoalSettings(proto.Message):
             customer acquisition goal.
     """
 
-    optimization_mode: customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode = proto.Field(
+    optimization_mode: (
+        customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode,

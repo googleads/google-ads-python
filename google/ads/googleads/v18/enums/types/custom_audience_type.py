@@ -22,16 +22,37 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomAudienceTypeEnum",},
+    manifest={
+        "CustomAudienceTypeEnum",
+    },
 )
 
 
 class CustomAudienceTypeEnum(proto.Message):
-    r"""The types of custom audience.
-    """
+    r"""The types of custom audience."""
 
     class CustomAudienceType(proto.Enum):
-        r"""Enum containing possible custom audience types."""
+        r"""Enum containing possible custom audience types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AUTO (2):
+                Google Ads will auto-select the best
+                interpretation at serving time.
+            INTEREST (3):
+                Matches users by their interests.
+            PURCHASE_INTENT (4):
+                Matches users by topics they are researching
+                or products they are considering for purchase.
+            SEARCH (5):
+                Matches users by what they searched on Google
+                Search.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AUTO = 2

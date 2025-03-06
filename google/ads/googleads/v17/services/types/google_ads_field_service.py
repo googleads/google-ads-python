@@ -103,12 +103,12 @@ class SearchGoogleAdsFieldsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    results: MutableSequence[
-        google_ads_field.GoogleAdsField
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=google_ads_field.GoogleAdsField,
+    results: MutableSequence[google_ads_field.GoogleAdsField] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=google_ads_field.GoogleAdsField,
+        )
     )
     next_page_token: str = proto.Field(
         proto.STRING,

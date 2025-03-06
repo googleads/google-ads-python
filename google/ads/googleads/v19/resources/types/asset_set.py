@@ -97,6 +97,7 @@ class AssetSet(proto.Message):
 
     class MerchantCenterFeed(proto.Message):
         r"""Merchant ID and Feed Label from Google Merchant Center.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -123,6 +124,7 @@ class AssetSet(proto.Message):
     class HotelPropertyData(proto.Message):
         r"""For Performance Max for travel goals campaigns with a Hotel
         Center account link. Read-only.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

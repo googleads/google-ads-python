@@ -32,7 +32,16 @@ class DataLinkTypeEnum(proto.Message):
     r"""Container for enum describing different types of data links."""
 
     class DataLinkType(proto.Enum):
-        r"""Describes the possible data link types."""
+        r"""Describes the possible data link types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            VIDEO (2):
+                A data link to YouTube video.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

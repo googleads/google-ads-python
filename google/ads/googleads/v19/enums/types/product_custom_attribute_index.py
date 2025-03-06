@@ -35,7 +35,25 @@ class ProductCustomAttributeIndexEnum(proto.Message):
     """
 
     class ProductCustomAttributeIndex(proto.Enum):
-        r"""The index of the product custom attribute."""
+        r"""The index of the product custom attribute.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INDEX0 (7):
+                First product custom attribute.
+            INDEX1 (8):
+                Second product custom attribute.
+            INDEX2 (9):
+                Third product custom attribute.
+            INDEX3 (10):
+                Fourth product custom attribute.
+            INDEX4 (11):
+                Fifth product custom attribute.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

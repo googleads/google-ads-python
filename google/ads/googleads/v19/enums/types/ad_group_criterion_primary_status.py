@@ -38,6 +38,24 @@ class AdGroupCriterionPrimaryStatusEnum(proto.Message):
         r"""Enum describing the possible ad group criterion primary
         status. Provides insight into why an ad group criterion is not
         serving or not serving optimally.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The ad group criterion is eligible to serve.
+            PAUSED (3):
+                The ad group criterion is paused.
+            REMOVED (4):
+                The ad group criterion is removed.
+            PENDING (5):
+                The ad group criterion is pending.
+            NOT_ELIGIBLE (6):
+                The ad group criterion is not eligible to
+                serve.
         """
 
         UNSPECIFIED = 0

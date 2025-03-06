@@ -32,7 +32,32 @@ class ChangeEventErrorEnum(proto.Message):
     r"""Container for enum describing possible change event errors."""
 
     class ChangeEventError(proto.Enum):
-        r"""Enum describing possible change event errors."""
+        r"""Enum describing possible change event errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            START_DATE_TOO_OLD (2):
+                The requested start date is too old. It
+                cannot be older than 30 days.
+            CHANGE_DATE_RANGE_INFINITE (3):
+                The change_event search request must specify a finite range
+                filter on change_date_time.
+            CHANGE_DATE_RANGE_NEGATIVE (4):
+                The change event search request has specified
+                invalid date time filters that can never
+                logically produce any valid results (for
+                example, start time after end time).
+            LIMIT_NOT_SPECIFIED (5):
+                The change_event search request must specify a LIMIT.
+            INVALID_LIMIT_CLAUSE (6):
+                The LIMIT specified by change_event request should be less
+                than or equal to 10K.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         START_DATE_TOO_OLD = 2

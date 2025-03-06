@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import DataLinkServiceClient
+from .async_client import DataLinkServiceAsyncClient
 
-__all__ = ("DataLinkServiceClient",)
+__all__ = (
+    "DataLinkServiceClient",
+    "DataLinkServiceAsyncClient",
+)

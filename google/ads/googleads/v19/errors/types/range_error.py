@@ -32,7 +32,19 @@ class RangeErrorEnum(proto.Message):
     r"""Container for enum describing possible range errors."""
 
     class RangeError(proto.Enum):
-        r"""Enum describing possible range errors."""
+        r"""Enum describing possible range errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            TOO_LOW (2):
+                Too low.
+            TOO_HIGH (3):
+                Too high.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

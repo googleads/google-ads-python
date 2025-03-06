@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineUserDataJobFailureReasonEnum",},
+    manifest={
+        "OfflineUserDataJobFailureReasonEnum",
+    },
 )
 
 
@@ -33,7 +35,35 @@ class OfflineUserDataJobFailureReasonEnum(proto.Message):
     """
 
     class OfflineUserDataJobFailureReason(proto.Enum):
-        r"""The failure reason of an offline user data job."""
+        r"""The failure reason of an offline user data job.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INSUFFICIENT_MATCHED_TRANSACTIONS (2):
+                The matched transactions are insufficient.
+            INSUFFICIENT_TRANSACTIONS (3):
+                The uploaded transactions are insufficient.
+            HIGH_AVERAGE_TRANSACTION_VALUE (4):
+                The average transaction value is unusually high for your
+                account. If this is intended, contact support to request an
+                exception. Learn more at
+                https://support.google.com/google-ads/answer/10018944#transaction_value
+            LOW_AVERAGE_TRANSACTION_VALUE (5):
+                The average transaction value is unusually low for your
+                account. If this is intended, contact support to request an
+                exception. Learn more at
+                https://support.google.com/google-ads/answer/10018944#transaction_value
+            NEWLY_OBSERVED_CURRENCY_CODE (6):
+                There's a currency code that you haven't used before in your
+                uploads. If this is intended, contact support to request an
+                exception. Learn more at
+                https://support.google.com/google-ads/answer/10018944#Unrecognized_currency
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INSUFFICIENT_MATCHED_TRANSACTIONS = 2

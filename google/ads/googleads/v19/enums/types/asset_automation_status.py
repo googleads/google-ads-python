@@ -32,7 +32,21 @@ class AssetAutomationStatusEnum(proto.Message):
     r"""Container for enum describing the status of asset automation."""
 
     class AssetAutomationStatus(proto.Enum):
-        r"""The status of asset automation."""
+        r"""The status of asset automation.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used as a return value only. Represents value
+                unknown in this version.
+            OPTED_IN (2):
+                Opted-in will enable generating and serving
+                an asset automation type.
+            OPTED_OUT (3):
+                Opted-out will stop generating and serving an
+                asset automation type.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

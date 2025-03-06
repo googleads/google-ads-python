@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomInterestStatusEnum",},
+    manifest={
+        "CustomInterestStatusEnum",
+    },
 )
 
 
 class CustomInterestStatusEnum(proto.Message):
-    r"""The status of custom interest.
-    """
+    r"""The status of custom interest."""
 
     class CustomInterestStatus(proto.Enum):
-        r"""Enum containing possible custom interest types."""
+        r"""Enum containing possible custom interest types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Enabled status - custom interest is enabled
+                and can be targeted to.
+            REMOVED (3):
+                Removed status - custom interest is removed
+                and cannot be used for targeting.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

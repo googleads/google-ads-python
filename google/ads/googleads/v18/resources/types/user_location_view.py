@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"UserLocationView",},
+    manifest={
+        "UserLocationView",
+    },
 )
 
 
@@ -34,6 +36,7 @@ class UserLocationView(proto.Message):
     actual physical location of the user by targeted or not targeted
     location. If other segment fields are used, you may get more
     than one row per country.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -55,13 +58,18 @@ class UserLocationView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     country_criterion_id: int = proto.Field(
-        proto.INT64, number=4, optional=True,
+        proto.INT64,
+        number=4,
+        optional=True,
     )
     targeting_location: bool = proto.Field(
-        proto.BOOL, number=5, optional=True,
+        proto.BOOL,
+        number=5,
+        optional=True,
     )
 
 

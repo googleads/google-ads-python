@@ -35,7 +35,20 @@ class ShareablePreviewErrorEnum(proto.Message):
     """
 
     class ShareablePreviewError(proto.Enum):
-        r"""Enum describing possible shareable preview errors."""
+        r"""Enum describing possible shareable preview errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            TOO_MANY_ASSET_GROUPS_IN_REQUEST (2):
+                The maximum of 10 asset groups was exceeded.
+            ASSET_GROUP_DOES_NOT_EXIST_UNDER_THIS_CUSTOMER (3):
+                asset group does not exist under this
+                customer.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

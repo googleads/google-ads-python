@@ -25,12 +25,15 @@ from google.ads.googleads.v18.enums.types import label_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"Label",},
+    manifest={
+        "Label",
+    },
 )
 
 
 class Label(proto.Message):
     r"""A label.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -59,19 +62,28 @@ class Label(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=6, optional=True,
+        proto.INT64,
+        number=6,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     status: label_status.LabelStatusEnum.LabelStatus = proto.Field(
-        proto.ENUM, number=4, enum=label_status.LabelStatusEnum.LabelStatus,
+        proto.ENUM,
+        number=4,
+        enum=label_status.LabelStatusEnum.LabelStatus,
     )
     text_label: gagc_text_label.TextLabel = proto.Field(
-        proto.MESSAGE, number=5, message=gagc_text_label.TextLabel,
+        proto.MESSAGE,
+        number=5,
+        message=gagc_text_label.TextLabel,
     )
 
 

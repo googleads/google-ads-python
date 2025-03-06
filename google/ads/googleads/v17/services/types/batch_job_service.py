@@ -71,6 +71,7 @@ class MutateBatchJobRequest(proto.Message):
 
 class BatchJobOperation(proto.Message):
     r"""A single operation on a batch job.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -125,6 +126,7 @@ class MutateBatchJobResponse(proto.Message):
 
 class MutateBatchJobResult(proto.Message):
     r"""The result for the batch job mutate.
+
     Attributes:
         resource_name (str):
             The resource name of the batch job.
@@ -189,12 +191,12 @@ class AddBatchJobOperationsRequest(proto.Message):
         proto.STRING,
         number=2,
     )
-    mutate_operations: MutableSequence[
-        google_ads_service.MutateOperation
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message=google_ads_service.MutateOperation,
+    mutate_operations: MutableSequence[google_ads_service.MutateOperation] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=google_ads_service.MutateOperation,
+        )
     )
 
 
@@ -259,7 +261,9 @@ class ListBatchJobResultsRequest(proto.Message):
         proto.INT32,
         number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -297,6 +301,7 @@ class ListBatchJobResultsResponse(proto.Message):
 
 class BatchJobResult(proto.Message):
     r"""An individual batch job result.
+
     Attributes:
         operation_index (int):
             Index of the mutate operation.

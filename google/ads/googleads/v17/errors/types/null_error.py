@@ -32,7 +32,19 @@ class NullErrorEnum(proto.Message):
     r"""Container for enum describing possible null errors."""
 
     class NullError(proto.Enum):
-        r"""Enum describing possible null errors."""
+        r"""Enum describing possible null errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NULL_CONTENT (2):
+                Specified list/container must not contain any
+                null elements
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NULL_CONTENT = 2

@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAsset(proto.Message):
     r"""A link between an ad group and an asset.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the ad group asset.
@@ -108,7 +109,9 @@ class AdGroupAsset(proto.Message):
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

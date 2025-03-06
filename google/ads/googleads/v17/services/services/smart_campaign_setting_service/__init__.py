@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import SmartCampaignSettingServiceClient
+from .async_client import SmartCampaignSettingServiceAsyncClient
 
-__all__ = ("SmartCampaignSettingServiceClient",)
+__all__ = (
+    "SmartCampaignSettingServiceClient",
+    "SmartCampaignSettingServiceAsyncClient",
+)

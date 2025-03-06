@@ -32,7 +32,10 @@ from google.ads.googleads.v18.enums.types import offline_user_data_job_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineUserDataJob", "OfflineUserDataJobMetadata",},
+    manifest={
+        "OfflineUserDataJob",
+        "OfflineUserDataJobMetadata",
+    },
 )
 
 
@@ -87,33 +90,48 @@ class OfflineUserDataJob(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     external_id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
-    type_: offline_user_data_job_type.OfflineUserDataJobTypeEnum.OfflineUserDataJobType = proto.Field(
+    type_: (
+        offline_user_data_job_type.OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=offline_user_data_job_type.OfflineUserDataJobTypeEnum.OfflineUserDataJobType,
     )
-    status: offline_user_data_job_status.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus = proto.Field(
+    status: (
+        offline_user_data_job_status.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=offline_user_data_job_status.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus,
     )
-    failure_reason: offline_user_data_job_failure_reason.OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason = proto.Field(
+    failure_reason: (
+        offline_user_data_job_failure_reason.OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=offline_user_data_job_failure_reason.OfflineUserDataJobFailureReasonEnum.OfflineUserDataJobFailureReason,
     )
     operation_metadata: "OfflineUserDataJobMetadata" = proto.Field(
-        proto.MESSAGE, number=11, message="OfflineUserDataJobMetadata",
+        proto.MESSAGE,
+        number=11,
+        message="OfflineUserDataJobMetadata",
     )
-    customer_match_user_list_metadata: offline_user_data.CustomerMatchUserListMetadata = proto.Field(
+    customer_match_user_list_metadata: (
+        offline_user_data.CustomerMatchUserListMetadata
+    ) = proto.Field(
         proto.MESSAGE,
         number=7,
         oneof="metadata",
@@ -129,6 +147,7 @@ class OfflineUserDataJob(proto.Message):
 
 class OfflineUserDataJobMetadata(proto.Message):
     r"""Metadata of offline user data job.
+
     Attributes:
         match_rate_range (google.ads.googleads.v18.enums.types.OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange):
             Output only. Match rate of the Customer Match
@@ -139,7 +158,9 @@ class OfflineUserDataJobMetadata(proto.Message):
             "SUCCESS/FAILED".
     """
 
-    match_rate_range: offline_user_data_job_match_rate_range.OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange = proto.Field(
+    match_rate_range: (
+        offline_user_data_job_match_rate_range.OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=offline_user_data_job_match_rate_range.OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange,

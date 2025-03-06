@@ -35,7 +35,19 @@ class KeywordPlanIdeaErrorEnum(proto.Message):
     """
 
     class KeywordPlanIdeaError(proto.Enum):
-        r"""Enum describing possible errors from KeywordPlanIdeaService."""
+        r"""Enum describing possible errors from KeywordPlanIdeaService.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            URL_CRAWL_ERROR (2):
+                Error when crawling the input URL.
+            INVALID_VALUE (3):
+                The input has an invalid value.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

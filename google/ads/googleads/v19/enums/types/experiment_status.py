@@ -32,7 +32,33 @@ class ExperimentStatusEnum(proto.Message):
     r"""Container for enum describing the experiment status."""
 
     class ExperimentStatus(proto.Enum):
-        r"""The status of the experiment."""
+        r"""The status of the experiment.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            ENABLED (2):
+                The experiment is enabled.
+            REMOVED (3):
+                The experiment has been removed.
+            HALTED (4):
+                The experiment has been halted.
+                This status can be set from ENABLED status
+                through API.
+            PROMOTED (5):
+                The experiment will be promoted out of
+                experimental status.
+            SETUP (6):
+                Initial status of the experiment.
+            INITIATED (7):
+                The experiment's campaigns are pending
+                materialization. This status can be set from
+                SETUP status through API.
+            GRADUATED (8):
+                The experiment has been graduated.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

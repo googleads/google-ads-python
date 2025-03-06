@@ -24,13 +24,16 @@ from google.ads.googleads.v18.enums.types import search_term_targeting_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"SearchTermView",},
+    manifest={
+        "SearchTermView",
+    },
 )
 
 
 class SearchTermView(proto.Message):
     r"""A search term view with metrics aggregated by search term at
     the ad group level.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -56,15 +59,22 @@ class SearchTermView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     search_term: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
-    status: search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus = proto.Field(
+    status: (
+        search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus,

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PolicyReviewStatusEnum",},
+    manifest={
+        "PolicyReviewStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,29 @@ class PolicyReviewStatusEnum(proto.Message):
     """
 
     class PolicyReviewStatus(proto.Enum):
-        r"""The possible policy review statuses."""
+        r"""The possible policy review statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            REVIEW_IN_PROGRESS (2):
+                Currently under review.
+            REVIEWED (3):
+                Primary review complete. Other reviews may be
+                continuing.
+            UNDER_APPEAL (4):
+                The resource has been resubmitted for
+                approval or its policy decision has been
+                appealed.
+            ELIGIBLE_MAY_SERVE (5):
+                The resource is eligible and may be serving
+                but could still undergo further review.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REVIEW_IN_PROGRESS = 2

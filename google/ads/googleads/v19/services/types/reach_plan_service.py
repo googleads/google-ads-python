@@ -74,6 +74,7 @@ class ListPlannableLocationsRequest(proto.Message):
 
 class ListPlannableLocationsResponse(proto.Message):
     r"""The list of plannable locations.
+
     Attributes:
         plannable_locations (MutableSequence[google.ads.googleads.v19.services.types.PlannableLocation]):
             The list of locations available for planning.
@@ -93,6 +94,7 @@ class ListPlannableLocationsResponse(proto.Message):
 
 class PlannableLocation(proto.Message):
     r"""A plannable location: country, metro region, province, etc.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -154,6 +156,7 @@ class PlannableLocation(proto.Message):
 
 class ListPlannableProductsRequest(proto.Message):
     r"""Request to list available products in a given location.
+
     Attributes:
         plannable_location_id (str):
             Required. The ID of the selected location for planning. To
@@ -169,6 +172,7 @@ class ListPlannableProductsRequest(proto.Message):
 
 class ListPlannableProductsResponse(proto.Message):
     r"""A response with all available products.
+
     Attributes:
         product_metadata (MutableSequence[google.ads.googleads.v19.services.types.ProductMetadata]):
             The list of products available for planning
@@ -184,6 +188,7 @@ class ListPlannableProductsResponse(proto.Message):
 
 class ProductMetadata(proto.Message):
     r"""The metadata associated with an available plannable product.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -219,6 +224,7 @@ class ProductMetadata(proto.Message):
 
 class PlannableTargeting(proto.Message):
     r"""The targeting for which traffic metrics will be reported.
+
     Attributes:
         age_ranges (MutableSequence[google.ads.googleads.v19.enums.types.ReachPlanAgeRangeEnum.ReachPlanAgeRange]):
             Allowed plannable age ranges for the product
@@ -284,6 +290,7 @@ class PlannableTargeting(proto.Message):
 class GenerateReachForecastRequest(proto.Message):
     r"""Request message for
     [ReachPlanService.GenerateReachForecast][google.ads.googleads.v19.services.ReachPlanService.GenerateReachForecast].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -425,6 +432,7 @@ class GenerateReachForecastRequest(proto.Message):
 
 class EffectiveFrequencyLimit(proto.Message):
     r"""Effective frequency limit.
+
     Attributes:
         effective_frequency_breakdown_limit (int):
             The highest effective frequency value to include in
@@ -465,6 +473,7 @@ class FrequencyCap(proto.Message):
 
 class Targeting(proto.Message):
     r"""The targeting for which traffic metrics will be reported.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -558,6 +567,7 @@ class Targeting(proto.Message):
 
 class CampaignDuration(proto.Message):
     r"""The duration of a planned campaign.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -590,6 +600,7 @@ class CampaignDuration(proto.Message):
 
 class PlannedProduct(proto.Message):
     r"""A product being planned for reach.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -632,6 +643,7 @@ class PlannedProduct(proto.Message):
 
 class GenerateReachForecastResponse(proto.Message):
     r"""Response message containing the generated reach curve.
+
     Attributes:
         on_target_audience_metrics (google.ads.googleads.v19.services.types.OnTargetAudienceMetrics):
             Reference on target audiences for this curve.
@@ -654,6 +666,7 @@ class GenerateReachForecastResponse(proto.Message):
 
 class ReachCurve(proto.Message):
     r"""The reach curve for the planned products.
+
     Attributes:
         reach_forecasts (MutableSequence[google.ads.googleads.v19.services.types.ReachForecast]):
             All points on the reach curve.
@@ -668,6 +681,7 @@ class ReachCurve(proto.Message):
 
 class ReachForecast(proto.Message):
     r"""A point on reach curve.
+
     Attributes:
         cost_micros (int):
             The cost in micros.
@@ -700,6 +714,7 @@ class ReachForecast(proto.Message):
 class Forecast(proto.Message):
     r"""Forecasted traffic metrics for the planned products and
     targeting.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -884,6 +899,7 @@ class PlannedProductReachForecast(proto.Message):
 
 class PlannedProductForecast(proto.Message):
     r"""Forecasted traffic metrics for a planned product.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1028,6 +1044,7 @@ class OnTargetAudienceMetrics(proto.Message):
     -  Gender
     -  AudienceTargeting (only for youtube_audience_size)
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1058,6 +1075,7 @@ class OnTargetAudienceMetrics(proto.Message):
 class EffectiveFrequencyBreakdown(proto.Message):
     r"""A breakdown of the number of unique people reached at a given
     effective frequency.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1119,6 +1137,7 @@ class EffectiveFrequencyBreakdown(proto.Message):
 
 class ForecastMetricOptions(proto.Message):
     r"""Controls forecast metrics to return.
+
     Attributes:
         include_coview (bool):
             Indicates whether to include co-view metrics
@@ -1133,6 +1152,7 @@ class ForecastMetricOptions(proto.Message):
 
 class AudienceTargeting(proto.Message):
     r"""Audience targeting for reach forecast.
+
     Attributes:
         user_interest (MutableSequence[google.ads.googleads.v19.common.types.UserInterestInfo]):
             List of audiences based on user interests to
@@ -1150,6 +1170,7 @@ class AudienceTargeting(proto.Message):
 
 class AdvancedProductTargeting(proto.Message):
     r"""Advanced targeting settings for products.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1187,6 +1208,7 @@ class AdvancedProductTargeting(proto.Message):
 
 class YouTubeSelectSettings(proto.Message):
     r"""Request settings for YouTube Select Lineups
+
     Attributes:
         lineup_id (int):
             Lineup for YouTube Select Targeting.
@@ -1200,6 +1222,7 @@ class YouTubeSelectSettings(proto.Message):
 
 class YouTubeSelectLineUp(proto.Message):
     r"""A Plannable YouTube Select Lineup for product targeting.
+
     Attributes:
         lineup_id (int):
             The ID of the YouTube Select Lineup.
@@ -1265,6 +1288,7 @@ class SurfaceTargeting(proto.Message):
 
 class TargetFrequencySettings(proto.Message):
     r"""Target Frequency settings for a supported product.
+
     Attributes:
         time_unit (google.ads.googleads.v19.enums.types.TargetFrequencyTimeUnitEnum.TargetFrequencyTimeUnit):
             Required. The time unit used to describe the time frame for

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SmartCampaignNotEligibleReasonEnum",},
+    manifest={
+        "SmartCampaignNotEligibleReasonEnum",
+    },
 )
 
 
@@ -33,7 +35,30 @@ class SmartCampaignNotEligibleReasonEnum(proto.Message):
     """
 
     class SmartCampaignNotEligibleReason(proto.Enum):
-        r"""Reasons for why a Smart campaign is not eligible to serve."""
+        r"""Reasons for why a Smart campaign is not eligible to serve.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ACCOUNT_ISSUE (2):
+                The campaign is not eligible to serve because
+                of an issue with the account.
+            BILLING_ISSUE (3):
+                The campaign is not eligible to serve because
+                of a payment issue.
+            BUSINESS_PROFILE_LOCATION_REMOVED (4):
+                The business profile location associated with
+                the campaign has been removed.
+            ALL_ADS_DISAPPROVED (5):
+                All system-generated ads have been disapproved. Consult the
+                policy_summary field in the AdGroupAd resource for more
+                details.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ACCOUNT_ISSUE = 2

@@ -39,6 +39,7 @@ __protobuf__ = proto.module(
 
 class ExtensionFeedItem(proto.Message):
     r"""An extension feed item.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -183,14 +184,16 @@ class ExtensionFeedItem(proto.Message):
         number=27,
         optional=True,
     )
-    ad_schedules: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=16,
-        message=criteria.AdScheduleInfo,
+    ad_schedules: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=16,
+            message=criteria.AdScheduleInfo,
+        )
     )
-    device: feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice = proto.Field(
+    device: (
+        feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         enum=feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice,

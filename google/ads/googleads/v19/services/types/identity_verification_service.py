@@ -102,6 +102,7 @@ class GetIdentityVerificationResponse(proto.Message):
 
 class IdentityVerification(proto.Message):
     r"""An identity verification for a customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

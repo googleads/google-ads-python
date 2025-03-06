@@ -243,12 +243,12 @@ class Asset(proto.Message):
         number=17,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=18,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=18,
+            message=custom_parameter.CustomParameter,
+        )
     )
     final_url_suffix: str = proto.Field(
         proto.STRING,
@@ -386,7 +386,9 @@ class Asset(proto.Message):
         oneof="asset_data",
         message=asset_types.DynamicCustomAsset,
     )
-    dynamic_hotels_and_rentals_asset: asset_types.DynamicHotelsAndRentalsAsset = proto.Field(
+    dynamic_hotels_and_rentals_asset: (
+        asset_types.DynamicHotelsAndRentalsAsset
+    ) = proto.Field(
         proto.MESSAGE,
         number=32,
         oneof="asset_data",
@@ -442,6 +444,7 @@ class AssetFieldTypePolicySummary(proto.Message):
     r"""Contains policy information for an asset under AssetFieldType
     context.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -459,7 +462,9 @@ class AssetFieldTypePolicySummary(proto.Message):
             This field is a member of `oneof`_ ``_policy_summary_info``.
     """
 
-    asset_field_type: gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
+    asset_field_type: (
+        gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         optional=True,
@@ -481,6 +486,7 @@ class AssetFieldTypePolicySummary(proto.Message):
 
 class AssetPolicySummary(proto.Message):
     r"""Contains policy information for an asset.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v17.common.types.PolicyTopicEntry]):
             Output only. The list of policy findings for
@@ -494,19 +500,23 @@ class AssetPolicySummary(proto.Message):
             its individual policy topic entries.
     """
 
-    policy_topic_entries: MutableSequence[
-        policy.PolicyTopicEntry
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=policy.PolicyTopicEntry,
+    policy_topic_entries: MutableSequence[policy.PolicyTopicEntry] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=policy.PolicyTopicEntry,
+        )
     )
-    review_status: policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus = proto.Field(
+    review_status: (
+        policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=policy_review_status.PolicyReviewStatusEnum.PolicyReviewStatus,
     )
-    approval_status: policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus = proto.Field(
+    approval_status: (
+        policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=policy_approval_status.PolicyApprovalStatusEnum.PolicyApprovalStatus,

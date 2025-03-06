@@ -32,7 +32,22 @@ class GeoTargetConstantStatusEnum(proto.Message):
     r"""Container for describing the status of a geo target constant."""
 
     class GeoTargetConstantStatus(proto.Enum):
-        r"""The possible statuses of a geo target constant."""
+        r"""The possible statuses of a geo target constant.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The geo target constant is valid.
+            REMOVAL_PLANNED (3):
+                The geo target constant is obsolete and will
+                be removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -27,12 +27,16 @@ from google.ads.googleads.v18.enums.types import custom_interest_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomInterest", "CustomInterestMember",},
+    manifest={
+        "CustomInterest",
+        "CustomInterestMember",
+    },
 )
 
 
 class CustomInterest(proto.Message):
     r"""A custom interest. This is a list of users by interest.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -72,29 +76,42 @@ class CustomInterest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
-    status: custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus = proto.Field(
+    status: (
+        custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=custom_interest_status.CustomInterestStatusEnum.CustomInterestStatus,
     )
     name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
-    type_: custom_interest_type.CustomInterestTypeEnum.CustomInterestType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=custom_interest_type.CustomInterestTypeEnum.CustomInterestType,
+    type_: custom_interest_type.CustomInterestTypeEnum.CustomInterestType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=custom_interest_type.CustomInterestTypeEnum.CustomInterestType,
+        )
     )
     description: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     members: MutableSequence["CustomInterestMember"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="CustomInterestMember",
+        proto.MESSAGE,
+        number=7,
+        message="CustomInterestMember",
     )
 
 
@@ -102,6 +119,7 @@ class CustomInterestMember(proto.Message):
     r"""A member of custom interest audience. A member can be a
     keyword or url. It is immutable, that is, it can only be created
     or removed but not changed.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -116,13 +134,17 @@ class CustomInterestMember(proto.Message):
             This field is a member of `oneof`_ ``_parameter``.
     """
 
-    member_type: custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType = proto.Field(
+    member_type: (
+        custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=custom_interest_member_type.CustomInterestMemberTypeEnum.CustomInterestMemberType,
     )
     parameter: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

@@ -151,6 +151,7 @@ class AccessibleBiddingStrategy(proto.Message):
         conversions as possible at the target cost-per-acquisition (CPA)
         you set.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -174,6 +175,7 @@ class AccessibleBiddingStrategy(proto.Message):
         certain percentage of search ads are shown at the top of the
         first page (or other targeted location).
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -196,7 +198,9 @@ class AccessibleBiddingStrategy(proto.Message):
                 This field is a member of `oneof`_ ``_cpc_bid_ceiling_micros``.
         """
 
-        location: target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation = proto.Field(
+        location: (
+            target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=target_impression_share_location.TargetImpressionShareLocationEnum.TargetImpressionShareLocation,
@@ -215,6 +219,7 @@ class AccessibleBiddingStrategy(proto.Message):
     class TargetRoas(proto.Message):
         r"""An automated bidding strategy that helps you maximize revenue
         while averaging a specific target return on ad spend (ROAS).
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -235,6 +240,7 @@ class AccessibleBiddingStrategy(proto.Message):
     class TargetSpend(proto.Message):
         r"""An automated bid strategy that sets your bids to help get as
         many clicks as possible within your budget.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -282,10 +288,12 @@ class AccessibleBiddingStrategy(proto.Message):
         proto.STRING,
         number=3,
     )
-    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+    type_: bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=bidding_strategy_type.BiddingStrategyTypeEnum.BiddingStrategyType,
+        )
     )
     owner_customer_id: int = proto.Field(
         proto.INT64,

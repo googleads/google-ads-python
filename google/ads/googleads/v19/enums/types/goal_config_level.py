@@ -35,6 +35,19 @@ class GoalConfigLevelEnum(proto.Message):
         r"""The possible goal config levels. Campaigns automatically
         inherit the effective conversion account's customer goals unless
         they have been configured with their own set of campaign goals.
+
+        Values:
+            UNSPECIFIED (0):
+                The goal config level has not been specified.
+            UNKNOWN (1):
+                The goal config level is not known in this
+                version.
+            CUSTOMER (2):
+                The goal config is defined at the customer
+                level.
+            CAMPAIGN (3):
+                The goal config is defined at the campaign
+                level.
         """
 
         UNSPECIFIED = 0

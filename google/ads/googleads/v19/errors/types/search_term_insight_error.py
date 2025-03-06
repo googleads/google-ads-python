@@ -35,7 +35,33 @@ class SearchTermInsightErrorEnum(proto.Message):
     """
 
     class SearchTermInsightError(proto.Enum):
-        r"""Enum describing possible search term insight errors."""
+        r"""Enum describing possible search term insight errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Name unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            FILTERING_NOT_ALLOWED_WITH_SEGMENTS (2):
+                Search term insights cannot be filtered by
+                metrics when segmenting.
+            LIMIT_NOT_ALLOWED_WITH_SEGMENTS (3):
+                Search term insights cannot have a LIMIT when
+                segmenting.
+            MISSING_FIELD_IN_SELECT_CLAUSE (4):
+                A selected field requires another field to be
+                selected with it.
+            REQUIRES_FILTER_BY_SINGLE_RESOURCE (5):
+                A selected field/resource requires filtering
+                by a single resource.
+            SORTING_NOT_ALLOWED_WITH_SEGMENTS (6):
+                Search term insights cannot be sorted when
+                segmenting.
+            SUMMARY_ROW_NOT_ALLOWED_WITH_SEGMENTS (7):
+                Search term insights cannot have a summary
+                row when segmenting.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

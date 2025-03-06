@@ -32,7 +32,18 @@ class CountryCodeErrorEnum(proto.Message):
     r"""Container for enum describing country code errors."""
 
     class CountryCodeError(proto.Enum):
-        r"""Enum describing country code errors."""
+        r"""Enum describing country code errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_COUNTRY_CODE (2):
+                The country code is invalid.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_COUNTRY_CODE = 2

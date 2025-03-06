@@ -75,6 +75,7 @@ class CriterionCategoryChannelAvailability(proto.Message):
     r"""Information of advertising channel type and subtypes a
     category is available in.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -131,6 +132,7 @@ class CriterionCategoryChannelAvailability(proto.Message):
 
 class CriterionCategoryLocaleAvailability(proto.Message):
     r"""Information about which locales a category is available in.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

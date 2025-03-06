@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"LifecycleGoalValueSettings",},
+    manifest={
+        "LifecycleGoalValueSettings",
+    },
 )
 
 
 class LifecycleGoalValueSettings(proto.Message):
     r"""Lifecycle goal value settings.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -52,10 +55,14 @@ class LifecycleGoalValueSettings(proto.Message):
     """
 
     value: float = proto.Field(
-        proto.DOUBLE, number=1, optional=True,
+        proto.DOUBLE,
+        number=1,
+        optional=True,
     )
     high_lifetime_value: float = proto.Field(
-        proto.DOUBLE, number=2, optional=True,
+        proto.DOUBLE,
+        number=2,
+        optional=True,
     )
 
 

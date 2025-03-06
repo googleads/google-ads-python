@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetSetAssetStatusEnum",},
+    manifest={
+        "AssetSetAssetStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,20 @@ class AssetSetAssetStatusEnum(proto.Message):
     """
 
     class AssetSetAssetStatus(proto.Enum):
-        r"""The possible statuses of an asset set asset."""
+        r"""The possible statuses of an asset set asset.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version. This is a response-only value.
+            ENABLED (2):
+                The asset set asset is enabled.
+            REMOVED (3):
+                The asset set asset is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

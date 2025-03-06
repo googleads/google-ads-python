@@ -26,7 +26,9 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"DistanceView",},
+    manifest={
+        "DistanceView",
+    },
 )
 
 
@@ -36,6 +38,7 @@ class DistanceView(proto.Message):
     DistanceBucket includes all impressions that fall within its
     distance and a single impression will contribute to the metrics
     for all DistanceBuckets that include the user's distance.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -56,15 +59,20 @@ class DistanceView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    distance_bucket: gage_distance_bucket.DistanceBucketEnum.DistanceBucket = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=gage_distance_bucket.DistanceBucketEnum.DistanceBucket,
+    distance_bucket: gage_distance_bucket.DistanceBucketEnum.DistanceBucket = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=gage_distance_bucket.DistanceBucketEnum.DistanceBucket,
+        )
     )
     metric_system: bool = proto.Field(
-        proto.BOOL, number=4, optional=True,
+        proto.BOOL,
+        number=4,
+        optional=True,
     )
 
 

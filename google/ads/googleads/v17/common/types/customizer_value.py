@@ -45,7 +45,9 @@ class CustomizerValue(proto.Message):
             string to make formatting unambiguous.
     """
 
-    type_: customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType = proto.Field(
+    type_: (
+        customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=customizer_attribute_type.CustomizerAttributeTypeEnum.CustomizerAttributeType,

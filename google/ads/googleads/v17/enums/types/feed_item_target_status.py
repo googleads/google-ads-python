@@ -35,7 +35,20 @@ class FeedItemTargetStatusEnum(proto.Message):
     """
 
     class FeedItemTargetStatus(proto.Enum):
-        r"""Possible statuses of a feed item target."""
+        r"""Possible statuses of a feed item target.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Feed item target is enabled.
+            REMOVED (3):
+                Feed item target has been removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import AudienceServiceClient
+from .async_client import AudienceServiceAsyncClient
 
-__all__ = ("AudienceServiceClient",)
+__all__ = (
+    "AudienceServiceClient",
+    "AudienceServiceAsyncClient",
+)

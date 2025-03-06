@@ -37,6 +37,17 @@ class BudgetCampaignAssociationStatusEnum(proto.Message):
     class BudgetCampaignAssociationStatus(proto.Enum):
         r"""Possible statuses of the association between the Budget and
         the Campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                The campaign is currently using the budget.
+            REMOVED (3):
+                The campaign is no longer using the budget.
         """
 
         UNSPECIFIED = 0

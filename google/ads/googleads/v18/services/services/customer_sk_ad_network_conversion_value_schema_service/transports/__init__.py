@@ -17,6 +17,10 @@ from collections import OrderedDict
 
 from .base import CustomerSkAdNetworkConversionValueSchemaServiceTransport
 from .grpc import CustomerSkAdNetworkConversionValueSchemaServiceGrpcTransport
+from .grpc_asyncio import (
+    CustomerSkAdNetworkConversionValueSchemaServiceGrpcAsyncIOTransport,
+)
+
 
 # Compile a registry of transports.
 _transport_registry = (
@@ -25,8 +29,12 @@ _transport_registry = (
 _transport_registry[
     "grpc"
 ] = CustomerSkAdNetworkConversionValueSchemaServiceGrpcTransport
+_transport_registry[
+    "grpc_asyncio"
+] = CustomerSkAdNetworkConversionValueSchemaServiceGrpcAsyncIOTransport
 
 __all__ = (
     "CustomerSkAdNetworkConversionValueSchemaServiceTransport",
     "CustomerSkAdNetworkConversionValueSchemaServiceGrpcTransport",
+    "CustomerSkAdNetworkConversionValueSchemaServiceGrpcAsyncIOTransport",
 )

@@ -71,12 +71,12 @@ class MutateConversionValueRulesRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "ConversionValueRuleOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ConversionValueRuleOperation",
+    operations: MutableSequence["ConversionValueRuleOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionValueRuleOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateConversionValueRulesRequest(proto.Message):
         proto.BOOL,
         number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -166,12 +168,12 @@ class MutateConversionValueRulesResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateConversionValueRuleResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateConversionValueRuleResult",
+    results: MutableSequence["MutateConversionValueRuleResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateConversionValueRuleResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -182,6 +184,7 @@ class MutateConversionValueRulesResponse(proto.Message):
 
 class MutateConversionValueRuleResult(proto.Message):
     r"""The result for the conversion value rule mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

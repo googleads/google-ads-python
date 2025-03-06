@@ -31,12 +31,15 @@ from google.ads.googleads.v18.enums.types import feed_item_target_device
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ExtensionFeedItem",},
+    manifest={
+        "ExtensionFeedItem",
+    },
 )
 
 
 class ExtensionFeedItem(proto.Message):
     r"""An extension feed item.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -156,37 +159,54 @@ class ExtensionFeedItem(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=25, optional=True,
+        proto.INT64,
+        number=25,
+        optional=True,
     )
-    extension_type: gage_extension_type.ExtensionTypeEnum.ExtensionType = proto.Field(
-        proto.ENUM,
-        number=13,
-        enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
+    extension_type: gage_extension_type.ExtensionTypeEnum.ExtensionType = (
+        proto.Field(
+            proto.ENUM,
+            number=13,
+            enum=gage_extension_type.ExtensionTypeEnum.ExtensionType,
+        )
     )
     start_date_time: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     end_date_time: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
-    ad_schedules: MutableSequence[
-        criteria.AdScheduleInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=16, message=criteria.AdScheduleInfo,
+    ad_schedules: MutableSequence[criteria.AdScheduleInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=16,
+            message=criteria.AdScheduleInfo,
+        )
     )
-    device: feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice = proto.Field(
+    device: (
+        feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         enum=feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice,
     )
     targeted_geo_target_constant: str = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     targeted_keyword: criteria.KeywordInfo = proto.Field(
-        proto.MESSAGE, number=22, message=criteria.KeywordInfo,
+        proto.MESSAGE,
+        number=22,
+        message=criteria.KeywordInfo,
     )
     status: feed_item_status.FeedItemStatusEnum.FeedItemStatus = proto.Field(
         proto.ENUM,
@@ -199,11 +219,13 @@ class ExtensionFeedItem(proto.Message):
         oneof="extension",
         message=extensions.SitelinkFeedItem,
     )
-    structured_snippet_feed_item: extensions.StructuredSnippetFeedItem = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        oneof="extension",
-        message=extensions.StructuredSnippetFeedItem,
+    structured_snippet_feed_item: extensions.StructuredSnippetFeedItem = (
+        proto.Field(
+            proto.MESSAGE,
+            number=3,
+            oneof="extension",
+            message=extensions.StructuredSnippetFeedItem,
+        )
     )
     app_feed_item: extensions.AppFeedItem = proto.Field(
         proto.MESSAGE,
@@ -247,11 +269,13 @@ class ExtensionFeedItem(proto.Message):
         oneof="extension",
         message=extensions.LocationFeedItem,
     )
-    affiliate_location_feed_item: extensions.AffiliateLocationFeedItem = proto.Field(
-        proto.MESSAGE,
-        number=15,
-        oneof="extension",
-        message=extensions.AffiliateLocationFeedItem,
+    affiliate_location_feed_item: extensions.AffiliateLocationFeedItem = (
+        proto.Field(
+            proto.MESSAGE,
+            number=15,
+            oneof="extension",
+            message=extensions.AffiliateLocationFeedItem,
+        )
     )
     hotel_callout_feed_item: extensions.HotelCalloutFeedItem = proto.Field(
         proto.MESSAGE,
@@ -266,10 +290,14 @@ class ExtensionFeedItem(proto.Message):
         message=extensions.ImageFeedItem,
     )
     targeted_campaign: str = proto.Field(
-        proto.STRING, number=28, oneof="serving_resource_targeting",
+        proto.STRING,
+        number=28,
+        oneof="serving_resource_targeting",
     )
     targeted_ad_group: str = proto.Field(
-        proto.STRING, number=29, oneof="serving_resource_targeting",
+        proto.STRING,
+        number=29,
+        oneof="serving_resource_targeting",
     )
 
 

@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class ProductGroupView(proto.Message):
     r"""A product group view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the product group view.

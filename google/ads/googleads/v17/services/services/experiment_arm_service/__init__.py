@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ExperimentArmServiceClient
+from .async_client import ExperimentArmServiceAsyncClient
 
-__all__ = ("ExperimentArmServiceClient",)
+__all__ = (
+    "ExperimentArmServiceClient",
+    "ExperimentArmServiceAsyncClient",
+)

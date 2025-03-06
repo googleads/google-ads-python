@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class LeadFormSubmissionData(proto.Message):
     r"""Data from lead form submissions.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the lead form submission
@@ -121,6 +122,7 @@ class LeadFormSubmissionData(proto.Message):
 
 class LeadFormSubmissionField(proto.Message):
     r"""Fields in the submitted lead form.
+
     Attributes:
         field_type (google.ads.googleads.v19.enums.types.LeadFormFieldUserInputTypeEnum.LeadFormFieldUserInputType):
             Output only. Field type for lead form fields.
@@ -144,6 +146,7 @@ class LeadFormSubmissionField(proto.Message):
 
 class CustomLeadFormSubmissionField(proto.Message):
     r"""Fields in the submitted custom question
+
     Attributes:
         question_text (str):
             Output only. Question text for custom

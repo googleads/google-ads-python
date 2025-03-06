@@ -22,18 +22,29 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SpendingLimitTypeEnum",},
+    manifest={
+        "SpendingLimitTypeEnum",
+    },
 )
 
 
 class SpendingLimitTypeEnum(proto.Message):
-    r"""Message describing spending limit types.
-    """
+    r"""Message describing spending limit types."""
 
     class SpendingLimitType(proto.Enum):
         r"""The possible spending limit types used by certain resources
         as an alternative to absolute money values in micros.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INFINITE (2):
+                Infinite, indicates unlimited spending power.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INFINITE = 2

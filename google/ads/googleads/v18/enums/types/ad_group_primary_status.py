@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupPrimaryStatusEnum",},
+    manifest={
+        "AdGroupPrimaryStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,28 @@ class AdGroupPrimaryStatusEnum(proto.Message):
     """
 
     class AdGroupPrimaryStatus(proto.Enum):
-        r"""The possible statuses of an AdGroup."""
+        r"""The possible statuses of an AdGroup.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The ad group is eligible to serve.
+            PAUSED (3):
+                The ad group is paused.
+            REMOVED (4):
+                The ad group is removed.
+            PENDING (5):
+                The ad group may serve in the future.
+            NOT_ELIGIBLE (6):
+                The ad group is not eligible to serve.
+            LIMITED (7):
+                The ad group has limited servability.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ELIGIBLE = 2

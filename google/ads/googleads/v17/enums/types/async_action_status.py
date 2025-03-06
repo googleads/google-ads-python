@@ -35,7 +35,26 @@ class AsyncActionStatusEnum(proto.Message):
     """
 
     class AsyncActionStatus(proto.Enum):
-        r"""The async action status of the experiment."""
+        r"""The async action status of the experiment.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            NOT_STARTED (2):
+                Action has not started.
+            IN_PROGRESS (3):
+                Action is in progress.
+            COMPLETED (4):
+                Action has completed successfully.
+            FAILED (5):
+                Action has failed.
+            COMPLETED_WITH_WARNING (6):
+                Action has completed successfully with
+                warnings.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_STARTED = 2

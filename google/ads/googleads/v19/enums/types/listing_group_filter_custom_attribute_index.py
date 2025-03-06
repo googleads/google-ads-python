@@ -35,7 +35,25 @@ class ListingGroupFilterCustomAttributeIndexEnum(proto.Message):
     """
 
     class ListingGroupFilterCustomAttributeIndex(proto.Enum):
-        r"""The index of customer attributes."""
+        r"""The index of customer attributes.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INDEX0 (2):
+                First listing group filter custom attribute.
+            INDEX1 (3):
+                Second listing group filter custom attribute.
+            INDEX2 (4):
+                Third listing group filter custom attribute.
+            INDEX3 (5):
+                Fourth listing group filter custom attribute.
+            INDEX4 (6):
+                Fifth listing group filter custom attribute.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

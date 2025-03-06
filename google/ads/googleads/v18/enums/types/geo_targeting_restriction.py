@@ -22,18 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"GeoTargetingRestrictionEnum",},
+    manifest={
+        "GeoTargetingRestrictionEnum",
+    },
 )
 
 
 class GeoTargetingRestrictionEnum(proto.Message):
-    r"""Message describing feed item geo targeting restriction.
-    """
+    r"""Message describing feed item geo targeting restriction."""
 
     class GeoTargetingRestriction(proto.Enum):
         r"""A restriction used to determine if the request context's
         geo should be matched.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LOCATION_OF_PRESENCE (2):
+                Indicates that request context should match
+                the physical location of the user.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LOCATION_OF_PRESENCE = 2

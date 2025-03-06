@@ -32,7 +32,22 @@ class AccountBudgetStatusEnum(proto.Message):
     r"""Message describing AccountBudget statuses."""
 
     class AccountBudgetStatus(proto.Enum):
-        r"""The possible statuses of an AccountBudget."""
+        r"""The possible statuses of an AccountBudget.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PENDING (2):
+                The account budget is pending approval.
+            APPROVED (3):
+                The account budget has been approved.
+            CANCELLED (4):
+                The account budget has been cancelled by the
+                user.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

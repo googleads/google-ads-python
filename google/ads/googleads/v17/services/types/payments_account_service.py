@@ -57,12 +57,12 @@ class ListPaymentsAccountsResponse(proto.Message):
             The list of accessible payments accounts.
     """
 
-    payments_accounts: MutableSequence[
-        payments_account.PaymentsAccount
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=payments_account.PaymentsAccount,
+    payments_accounts: MutableSequence[payments_account.PaymentsAccount] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=payments_account.PaymentsAccount,
+        )
     )
 
 

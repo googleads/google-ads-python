@@ -25,12 +25,15 @@ from google.ads.googleads.v18.enums.types import criterion_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerNegativeCriterion",},
+    manifest={
+        "CustomerNegativeCriterion",
+    },
 )
 
 
 class CustomerNegativeCriterion(proto.Message):
     r"""A negative criterion for exclusions at the customer level.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -86,10 +89,13 @@ class CustomerNegativeCriterion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     type_: criterion_type.CriterionTypeEnum.CriterionType = proto.Field(
         proto.ENUM,

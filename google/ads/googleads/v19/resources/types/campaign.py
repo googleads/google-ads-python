@@ -98,6 +98,7 @@ __protobuf__ = proto.module(
 
 class Campaign(proto.Message):
     r"""A campaign.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -542,6 +543,7 @@ class Campaign(proto.Message):
 
     class NetworkSettings(proto.Message):
         r"""The network settings for the campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -613,6 +615,7 @@ class Campaign(proto.Message):
 
     class HotelSettingInfo(proto.Message):
         r"""Campaign-level settings for hotel ads.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -630,6 +633,7 @@ class Campaign(proto.Message):
 
     class DynamicSearchAdsSetting(proto.Message):
         r"""The setting for controlling Dynamic Search Ads (DSA).
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -665,6 +669,7 @@ class Campaign(proto.Message):
         r"""The setting for Shopping campaigns. Defines the universe of
         products that can be advertised by the campaign, and how this
         campaign interacts with other Shopping campaigns.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -748,6 +753,7 @@ class Campaign(proto.Message):
 
     class TrackingSetting(proto.Message):
         r"""Campaign-level settings for tracking information.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -794,6 +800,7 @@ class Campaign(proto.Message):
 
     class LocalCampaignSetting(proto.Message):
         r"""Campaign setting for local campaigns.
+
         Attributes:
             location_source_type (google.ads.googleads.v19.enums.types.LocationSourceTypeEnum.LocationSourceType):
                 The location source type for this local
@@ -810,6 +817,7 @@ class Campaign(proto.Message):
 
     class AppCampaignSetting(proto.Message):
         r"""Campaign-level settings for App Campaigns.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -849,6 +857,7 @@ class Campaign(proto.Message):
 
     class VanityPharma(proto.Message):
         r"""Describes how unbranded pharma ads will be displayed.
+
         Attributes:
             vanity_pharma_display_url_mode (google.ads.googleads.v19.enums.types.VanityPharmaDisplayUrlModeEnum.VanityPharmaDisplayUrlMode):
                 The display mode for vanity pharma URLs.
@@ -911,6 +920,7 @@ class Campaign(proto.Message):
 
     class AudienceSetting(proto.Message):
         r"""Settings for the audience targeting.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -931,6 +941,7 @@ class Campaign(proto.Message):
 
     class LocalServicesCampaignSettings(proto.Message):
         r"""Settings for LocalServicesCampaign subresource.
+
         Attributes:
             category_bids (MutableSequence[google.ads.googleads.v19.resources.types.Campaign.CategoryBid]):
                 Categorical level bids associated with MANUAL_CPA bidding
@@ -947,6 +958,7 @@ class Campaign(proto.Message):
 
     class CategoryBid(proto.Message):
         r"""Category bids in LocalServicesReportingCampaignSettings.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -987,6 +999,7 @@ class Campaign(proto.Message):
 
     class TravelCampaignSettings(proto.Message):
         r"""Settings for Travel campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1005,6 +1018,7 @@ class Campaign(proto.Message):
 
     class DemandGenCampaignSettings(proto.Message):
         r"""Settings for Demand Gen campaign.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1027,6 +1041,7 @@ class Campaign(proto.Message):
 
     class VideoCampaignSettings(proto.Message):
         r"""Settings for Video campaign.
+
         Attributes:
             video_ad_inventory_control (google.ads.googleads.v19.resources.types.Campaign.VideoCampaignSettings.VideoAdInventoryControl):
                 Inventory control for responsive ad
@@ -1038,6 +1053,7 @@ class Campaign(proto.Message):
             determine on which inventories the ads can be shown. This only
             applies for campaigns with the bidding strategies TARGET_CPM and
             FIXED_CPM.
+
 
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1086,6 +1102,7 @@ class Campaign(proto.Message):
     class AssetAutomationSetting(proto.Message):
         r"""Asset automation setting contains pair of AssetAutomationType
         and the asset automation opt-in/out status
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

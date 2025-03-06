@@ -42,6 +42,27 @@ class AssetLinkPrimaryStatusEnum(proto.Message):
         serving due to violation of an alcohol policy. In this case, the
         PrimaryStatus will be returned as PAUSED, since the asset's
         effective status is determined by its paused state.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The asset is eligible to serve.
+            PAUSED (3):
+                The user-specified asset link status is
+                paused.
+            REMOVED (4):
+                The user-specified asset link status is
+                removed.
+            PENDING (5):
+                The asset may serve in the future.
+            LIMITED (6):
+                The asset is serving in a partial capacity.
+            NOT_ELIGIBLE (7):
+                The asset is not eligible to serve.
         """
 
         UNSPECIFIED = 0

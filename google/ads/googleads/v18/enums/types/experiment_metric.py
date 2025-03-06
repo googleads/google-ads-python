@@ -22,16 +22,58 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ExperimentMetricEnum",},
+    manifest={
+        "ExperimentMetricEnum",
+    },
 )
 
 
 class ExperimentMetricEnum(proto.Message):
-    r"""Container for enum describing the type of experiment metric.
-    """
+    r"""Container for enum describing the type of experiment metric."""
 
     class ExperimentMetric(proto.Enum):
-        r"""The type of experiment metric."""
+        r"""The type of experiment metric.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            CLICKS (2):
+                The goal of the experiment is clicks.
+            IMPRESSIONS (3):
+                The goal of the experiment is impressions.
+            COST (4):
+                The goal of the experiment is cost.
+            CONVERSIONS_PER_INTERACTION_RATE (5):
+                The goal of the experiment is conversion
+                rate.
+            COST_PER_CONVERSION (6):
+                The goal of the experiment is cost per
+                conversion.
+            CONVERSIONS_VALUE_PER_COST (7):
+                The goal of the experiment is conversion
+                value per cost.
+            AVERAGE_CPC (8):
+                The goal of the experiment is avg cpc.
+            CTR (9):
+                The goal of the experiment is ctr.
+            INCREMENTAL_CONVERSIONS (10):
+                The goal of the experiment is incremental
+                conversions.
+            COMPLETED_VIDEO_VIEWS (11):
+                The goal of the experiment is completed video
+                views.
+            CUSTOM_ALGORITHMS (12):
+                The goal of the experiment is custom
+                algorithms.
+            CONVERSIONS (13):
+                The goal of the experiment is conversions.
+            CONVERSION_VALUE (14):
+                The goal of the experiment is conversion
+                value.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CLICKS = 2

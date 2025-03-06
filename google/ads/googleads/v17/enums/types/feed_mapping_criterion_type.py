@@ -35,7 +35,22 @@ class FeedMappingCriterionTypeEnum(proto.Message):
     """
 
     class FeedMappingCriterionType(proto.Enum):
-        r"""Possible placeholder types for a feed mapping."""
+        r"""Possible placeholder types for a feed mapping.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LOCATION_EXTENSION_TARGETING (4):
+                Allows campaign targeting at locations within
+                a location feed.
+            DSA_PAGE_FEED (3):
+                Allows url targeting for your dynamic search
+                ads within a page feed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         LOCATION_EXTENSION_TARGETING = 4

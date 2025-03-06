@@ -25,12 +25,15 @@ from google.ads.googleads.v18.enums.types import criterion_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"SharedCriterion",},
+    manifest={
+        "SharedCriterion",
+    },
 )
 
 
 class SharedCriterion(proto.Message):
     r"""A criterion belonging to a shared set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -88,13 +91,18 @@ class SharedCriterion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     shared_set: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
     type_: criterion_type.CriterionTypeEnum.CriterionType = proto.Field(
         proto.ENUM,
@@ -138,7 +146,10 @@ class SharedCriterion(proto.Message):
         message=criteria.MobileApplicationInfo,
     )
     brand: criteria.BrandInfo = proto.Field(
-        proto.MESSAGE, number=12, oneof="criterion", message=criteria.BrandInfo,
+        proto.MESSAGE,
+        number=12,
+        oneof="criterion",
+        message=criteria.BrandInfo,
     )
 
 

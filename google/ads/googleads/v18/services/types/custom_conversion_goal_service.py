@@ -61,17 +61,23 @@ class MutateCustomConversionGoalsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomConversionGoalOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomConversionGoalOperation",
+    operations: MutableSequence["CustomConversionGoalOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomConversionGoalOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -113,7 +119,9 @@ class CustomConversionGoalOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_custom_conversion_goal.CustomConversionGoal = proto.Field(
         proto.MESSAGE,
@@ -128,26 +136,32 @@ class CustomConversionGoalOperation(proto.Message):
         message=gagr_custom_conversion_goal.CustomConversionGoal,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCustomConversionGoalsResponse(proto.Message):
     r"""Response message for a custom conversion goal mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCustomConversionGoalResult]):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateCustomConversionGoalResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateCustomConversionGoalResult",
+    results: MutableSequence["MutateCustomConversionGoalResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomConversionGoalResult",
+        )
     )
 
 
 class MutateCustomConversionGoalResult(proto.Message):
     r"""The result for the custom conversion goal mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -158,12 +172,15 @@ class MutateCustomConversionGoalResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    custom_conversion_goal: gagr_custom_conversion_goal.CustomConversionGoal = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_custom_conversion_goal.CustomConversionGoal,
+    custom_conversion_goal: gagr_custom_conversion_goal.CustomConversionGoal = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_custom_conversion_goal.CustomConversionGoal,
+        )
     )
 
 

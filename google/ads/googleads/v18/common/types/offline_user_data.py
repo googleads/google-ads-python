@@ -48,6 +48,7 @@ __protobuf__ = proto.module(
 
 class OfflineUserAddressInfo(proto.Message):
     r"""Address identifier of offline data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -94,30 +95,45 @@ class OfflineUserAddressInfo(proto.Message):
     """
 
     hashed_first_name: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     hashed_last_name: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     city: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     state: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     postal_code: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     hashed_street_address: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
 
 
 class UserIdentifier(proto.Message):
     r"""User identifying information.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -166,22 +182,32 @@ class UserIdentifier(proto.Message):
             This field is a member of `oneof`_ ``identifier``.
     """
 
-    user_identifier_source: gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource = proto.Field(
+    user_identifier_source: (
+        gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource,
     )
     hashed_email: str = proto.Field(
-        proto.STRING, number=7, oneof="identifier",
+        proto.STRING,
+        number=7,
+        oneof="identifier",
     )
     hashed_phone_number: str = proto.Field(
-        proto.STRING, number=8, oneof="identifier",
+        proto.STRING,
+        number=8,
+        oneof="identifier",
     )
     mobile_id: str = proto.Field(
-        proto.STRING, number=9, oneof="identifier",
+        proto.STRING,
+        number=9,
+        oneof="identifier",
     )
     third_party_user_id: str = proto.Field(
-        proto.STRING, number=10, oneof="identifier",
+        proto.STRING,
+        number=10,
+        oneof="identifier",
     )
     address_info: "OfflineUserAddressInfo" = proto.Field(
         proto.MESSAGE,
@@ -193,6 +219,7 @@ class UserIdentifier(proto.Message):
 
 class TransactionAttribute(proto.Message):
     r"""Attribute of the store sales transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -243,33 +270,50 @@ class TransactionAttribute(proto.Message):
     """
 
     transaction_date_time: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     transaction_amount_micros: float = proto.Field(
-        proto.DOUBLE, number=9, optional=True,
+        proto.DOUBLE,
+        number=9,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     order_id: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     store_attribute: "StoreAttribute" = proto.Field(
-        proto.MESSAGE, number=6, message="StoreAttribute",
+        proto.MESSAGE,
+        number=6,
+        message="StoreAttribute",
     )
     custom_value: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     item_attribute: "ItemAttribute" = proto.Field(
-        proto.MESSAGE, number=14, message="ItemAttribute",
+        proto.MESSAGE,
+        number=14,
+        message="ItemAttribute",
     )
 
 
 class StoreAttribute(proto.Message):
     r"""Store attributes of the transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -281,12 +325,15 @@ class StoreAttribute(proto.Message):
     """
 
     store_code: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 
 class ItemAttribute(proto.Message):
     r"""Item attributes of the transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -313,24 +360,31 @@ class ItemAttribute(proto.Message):
     """
 
     item_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     merchant_id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     country_code: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
     quantity: int = proto.Field(
-        proto.INT64, number=5,
+        proto.INT64,
+        number=5,
     )
 
 
 class UserData(proto.Message):
     r"""User data holding user identifiers and attributes.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -354,22 +408,32 @@ class UserData(proto.Message):
     """
 
     user_identifiers: MutableSequence["UserIdentifier"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="UserIdentifier",
+        proto.MESSAGE,
+        number=1,
+        message="UserIdentifier",
     )
     transaction_attribute: "TransactionAttribute" = proto.Field(
-        proto.MESSAGE, number=2, message="TransactionAttribute",
+        proto.MESSAGE,
+        number=2,
+        message="TransactionAttribute",
     )
     user_attribute: "UserAttribute" = proto.Field(
-        proto.MESSAGE, number=3, message="UserAttribute",
+        proto.MESSAGE,
+        number=3,
+        message="UserAttribute",
     )
     consent: gagc_consent.Consent = proto.Field(
-        proto.MESSAGE, number=4, optional=True, message=gagc_consent.Consent,
+        proto.MESSAGE,
+        number=4,
+        optional=True,
+        message=gagc_consent.Consent,
     )
 
 
 class UserAttribute(proto.Message):
     r"""User attribute, can only be used with CUSTOMER_MATCH_WITH_ATTRIBUTES
     job type.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -427,34 +491,49 @@ class UserAttribute(proto.Message):
     """
 
     lifetime_value_micros: int = proto.Field(
-        proto.INT64, number=1, optional=True,
+        proto.INT64,
+        number=1,
+        optional=True,
     )
     lifetime_value_bucket: int = proto.Field(
-        proto.INT32, number=2, optional=True,
+        proto.INT32,
+        number=2,
+        optional=True,
     )
     last_purchase_date_time: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     average_purchase_count: int = proto.Field(
-        proto.INT32, number=4,
+        proto.INT32,
+        number=4,
     )
     average_purchase_value_micros: int = proto.Field(
-        proto.INT64, number=5,
+        proto.INT64,
+        number=5,
     )
     acquisition_date_time: str = proto.Field(
-        proto.STRING, number=6,
+        proto.STRING,
+        number=6,
     )
     shopping_loyalty: "ShoppingLoyalty" = proto.Field(
-        proto.MESSAGE, number=7, optional=True, message="ShoppingLoyalty",
+        proto.MESSAGE,
+        number=7,
+        optional=True,
+        message="ShoppingLoyalty",
     )
     lifecycle_stage: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     first_purchase_date_time: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     event_attribute: MutableSequence["EventAttribute"] = proto.RepeatedField(
-        proto.MESSAGE, number=10, message="EventAttribute",
+        proto.MESSAGE,
+        number=10,
+        message="EventAttribute",
     )
 
 
@@ -477,18 +556,23 @@ class EventAttribute(proto.Message):
     """
 
     event: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     event_date_time: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     item_attribute: MutableSequence["EventItemAttribute"] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="EventItemAttribute",
+        proto.MESSAGE,
+        number=3,
+        message="EventItemAttribute",
     )
 
 
 class EventItemAttribute(proto.Message):
     r"""Event Item attributes of the Customer Match.
+
     Attributes:
         item_id (str):
             Optional. A unique identifier of a product.
@@ -497,7 +581,8 @@ class EventItemAttribute(proto.Message):
     """
 
     item_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -505,6 +590,7 @@ class ShoppingLoyalty(proto.Message):
     r"""The shopping loyalty related data. Shopping utilizes this
     data to provide users with a better experience.
     Accessible only to merchants on the allow-list.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -520,12 +606,15 @@ class ShoppingLoyalty(proto.Message):
     """
 
     loyalty_tier: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
 
 
 class CustomerMatchUserListMetadata(proto.Message):
     r"""Metadata for customer match user list.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -542,15 +631,21 @@ class CustomerMatchUserListMetadata(proto.Message):
     """
 
     user_list: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     consent: gagc_consent.Consent = proto.Field(
-        proto.MESSAGE, number=3, optional=True, message=gagc_consent.Consent,
+        proto.MESSAGE,
+        number=3,
+        optional=True,
+        message=gagc_consent.Consent,
     )
 
 
 class StoreSalesMetadata(proto.Message):
     r"""Metadata for Store Sales Direct.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -586,16 +681,24 @@ class StoreSalesMetadata(proto.Message):
     """
 
     loyalty_fraction: float = proto.Field(
-        proto.DOUBLE, number=5, optional=True,
+        proto.DOUBLE,
+        number=5,
+        optional=True,
     )
     transaction_upload_fraction: float = proto.Field(
-        proto.DOUBLE, number=6, optional=True,
+        proto.DOUBLE,
+        number=6,
+        optional=True,
     )
     custom_key: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     third_party_metadata: "StoreSalesThirdPartyMetadata" = proto.Field(
-        proto.MESSAGE, number=3, message="StoreSalesThirdPartyMetadata",
+        proto.MESSAGE,
+        number=3,
+        message="StoreSalesThirdPartyMetadata",
     )
 
 
@@ -604,6 +707,7 @@ class StoreSalesThirdPartyMetadata(proto.Message):
     This product is only for customers on the allow-list. Contact
     your Google business development representative for details on
     the upload configuration.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -652,22 +756,34 @@ class StoreSalesThirdPartyMetadata(proto.Message):
     """
 
     advertiser_upload_date_time: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     valid_transaction_fraction: float = proto.Field(
-        proto.DOUBLE, number=8, optional=True,
+        proto.DOUBLE,
+        number=8,
+        optional=True,
     )
     partner_match_fraction: float = proto.Field(
-        proto.DOUBLE, number=9, optional=True,
+        proto.DOUBLE,
+        number=9,
+        optional=True,
     )
     partner_upload_fraction: float = proto.Field(
-        proto.DOUBLE, number=10, optional=True,
+        proto.DOUBLE,
+        number=10,
+        optional=True,
     )
     bridge_map_version_id: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     partner_id: int = proto.Field(
-        proto.INT64, number=12, optional=True,
+        proto.INT64,
+        number=12,
+        optional=True,
     )
 
 

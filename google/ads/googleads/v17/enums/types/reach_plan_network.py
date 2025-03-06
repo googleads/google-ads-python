@@ -32,7 +32,23 @@ class ReachPlanNetworkEnum(proto.Message):
     r"""Container for enum describing plannable networks."""
 
     class ReachPlanNetwork(proto.Enum):
-        r"""Possible plannable network values."""
+        r"""Possible plannable network values.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used as a return value only. Represents value
+                unknown in this version.
+            YOUTUBE (2):
+                YouTube network.
+            GOOGLE_VIDEO_PARTNERS (3):
+                Google Video Partners (GVP) network.
+            YOUTUBE_AND_GOOGLE_VIDEO_PARTNERS (4):
+                A combination of the YouTube network and the
+                Google Video Partners network.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         YOUTUBE = 2

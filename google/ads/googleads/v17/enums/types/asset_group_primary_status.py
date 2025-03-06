@@ -38,7 +38,28 @@ class AssetGroupPrimaryStatusEnum(proto.Message):
         r"""Enum describing the possible asset group primary status.
         Provides insights into why an asset group is not serving or not
         serving optimally.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The asset group is eligible to serve.
+            PAUSED (3):
+                The asset group is paused.
+            REMOVED (4):
+                The asset group is removed.
+            NOT_ELIGIBLE (5):
+                The asset group is not eligible to serve.
+            LIMITED (6):
+                The asset group has limited servability.
+            PENDING (7):
+                The asset group is pending approval and may
+                serve in the future.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ELIGIBLE = 2

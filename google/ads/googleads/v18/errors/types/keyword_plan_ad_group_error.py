@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"KeywordPlanAdGroupErrorEnum",},
+    manifest={
+        "KeywordPlanAdGroupErrorEnum",
+    },
 )
 
 
@@ -35,7 +37,23 @@ class KeywordPlanAdGroupErrorEnum(proto.Message):
     class KeywordPlanAdGroupError(proto.Enum):
         r"""Enum describing possible errors from applying a keyword plan
         ad group.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_NAME (2):
+                The keyword plan ad group name is missing,
+                empty, longer than allowed limit or contains
+                invalid chars.
+            DUPLICATE_NAME (3):
+                The keyword plan ad group name is duplicate
+                to an existing keyword plan AdGroup name or
+                other keyword plan AdGroup name in the request.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_NAME = 2

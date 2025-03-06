@@ -32,7 +32,21 @@ class ListOperationErrorEnum(proto.Message):
     r"""Container for enum describing possible list operation errors."""
 
     class ListOperationError(proto.Enum):
-        r"""Enum describing possible list operation errors."""
+        r"""Enum describing possible list operation errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            REQUIRED_FIELD_MISSING (7):
+                Field required in value is missing.
+            DUPLICATE_VALUES (8):
+                Duplicate or identical value is sent in
+                multiple list operations.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REQUIRED_FIELD_MISSING = 7

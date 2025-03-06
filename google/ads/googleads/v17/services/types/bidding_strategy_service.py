@@ -71,12 +71,12 @@ class MutateBiddingStrategiesRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "BiddingStrategyOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="BiddingStrategyOperation",
+    operations: MutableSequence["BiddingStrategyOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="BiddingStrategyOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateBiddingStrategiesRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -153,6 +155,7 @@ class BiddingStrategyOperation(proto.Message):
 
 class MutateBiddingStrategiesResponse(proto.Message):
     r"""Response message for bidding strategy mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -169,17 +172,18 @@ class MutateBiddingStrategiesResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateBiddingStrategyResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateBiddingStrategyResult",
+    results: MutableSequence["MutateBiddingStrategyResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateBiddingStrategyResult",
+        )
     )
 
 
 class MutateBiddingStrategyResult(proto.Message):
     r"""The result for the bidding strategy mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

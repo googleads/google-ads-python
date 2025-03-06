@@ -35,7 +35,71 @@ class CampaignBudgetErrorEnum(proto.Message):
     """
 
     class CampaignBudgetError(proto.Enum):
-        r"""Enum describing possible campaign budget errors."""
+        r"""Enum describing possible campaign budget errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CAMPAIGN_BUDGET_CANNOT_BE_SHARED (17):
+                The campaign budget cannot be shared.
+            CAMPAIGN_BUDGET_REMOVED (2):
+                The requested campaign budget no longer
+                exists.
+            CAMPAIGN_BUDGET_IN_USE (3):
+                The campaign budget is associated with at
+                least one campaign, and so the campaign budget
+                cannot be removed.
+            CAMPAIGN_BUDGET_PERIOD_NOT_AVAILABLE (4):
+                Customer is not on the allow-list for this
+                campaign budget period.
+            CANNOT_MODIFY_FIELD_OF_IMPLICITLY_SHARED_CAMPAIGN_BUDGET (6):
+                This field is not mutable on implicitly
+                shared campaign budgets
+            CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_IMPLICITLY_SHARED (7):
+                Cannot change explicitly shared campaign
+                budgets back to implicitly shared ones.
+            CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_EXPLICITLY_SHARED_WITHOUT_NAME (8):
+                An implicit campaign budget without a name
+                cannot be changed to explicitly shared campaign
+                budget.
+            CANNOT_UPDATE_CAMPAIGN_BUDGET_TO_EXPLICITLY_SHARED (9):
+                Cannot change an implicitly shared campaign
+                budget to an explicitly shared one.
+            CANNOT_USE_IMPLICITLY_SHARED_CAMPAIGN_BUDGET_WITH_MULTIPLE_CAMPAIGNS (10):
+                Only explicitly shared campaign budgets can
+                be used with multiple campaigns.
+            DUPLICATE_NAME (11):
+                A campaign budget with this name already
+                exists.
+            MONEY_AMOUNT_IN_WRONG_CURRENCY (12):
+                A money amount was not in the expected
+                currency.
+            MONEY_AMOUNT_LESS_THAN_CURRENCY_MINIMUM_CPC (13):
+                A money amount was less than the minimum CPC
+                for currency.
+            MONEY_AMOUNT_TOO_LARGE (14):
+                A money amount was greater than the maximum
+                allowed.
+            NEGATIVE_MONEY_AMOUNT (15):
+                A money amount was negative.
+            NON_MULTIPLE_OF_MINIMUM_CURRENCY_UNIT (16):
+                A money amount was not a multiple of a
+                minimum unit.
+            TOTAL_BUDGET_AMOUNT_MUST_BE_UNSET_FOR_BUDGET_PERIOD_DAILY (18):
+                Total budget amount must be unset when
+                BudgetPeriod is DAILY.
+            INVALID_PERIOD (19):
+                The period of the budget is not allowed.
+            CANNOT_USE_ACCELERATED_DELIVERY_MODE (20):
+                Cannot use accelerated delivery method on
+                this budget.
+            BUDGET_AMOUNT_MUST_BE_UNSET_FOR_CUSTOM_BUDGET_PERIOD (21):
+                Budget amount must be unset when BudgetPeriod
+                is CUSTOM.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

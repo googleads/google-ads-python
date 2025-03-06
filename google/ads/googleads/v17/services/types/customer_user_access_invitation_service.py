@@ -85,11 +85,13 @@ class CustomerUserAccessInvitationOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
     """
 
-    create: customer_user_access_invitation.CustomerUserAccessInvitation = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=customer_user_access_invitation.CustomerUserAccessInvitation,
+    create: customer_user_access_invitation.CustomerUserAccessInvitation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=customer_user_access_invitation.CustomerUserAccessInvitation,
+        )
     )
     remove: str = proto.Field(
         proto.STRING,
@@ -100,6 +102,7 @@ class CustomerUserAccessInvitationOperation(proto.Message):
 
 class MutateCustomerUserAccessInvitationResponse(proto.Message):
     r"""Response message for access invitation mutate.
+
     Attributes:
         result (google.ads.googleads.v17.services.types.MutateCustomerUserAccessInvitationResult):
             Result for the mutate.
@@ -114,6 +117,7 @@ class MutateCustomerUserAccessInvitationResponse(proto.Message):
 
 class MutateCustomerUserAccessInvitationResult(proto.Message):
     r"""The result for the access invitation mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

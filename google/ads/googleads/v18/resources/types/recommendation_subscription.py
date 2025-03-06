@@ -27,12 +27,15 @@ from google.ads.googleads.v18.enums.types import recommendation_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"RecommendationSubscription",},
+    manifest={
+        "RecommendationSubscription",
+    },
 )
 
 
 class RecommendationSubscription(proto.Message):
     r"""Recommendation Subscription resource
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -67,20 +70,29 @@ class RecommendationSubscription(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    type_: recommendation_type.RecommendationTypeEnum.RecommendationType = proto.Field(
-        proto.ENUM,
-        number=2,
-        enum=recommendation_type.RecommendationTypeEnum.RecommendationType,
+    type_: recommendation_type.RecommendationTypeEnum.RecommendationType = (
+        proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=recommendation_type.RecommendationTypeEnum.RecommendationType,
+        )
     )
     create_date_time: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     modify_date_time: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
-    status: recommendation_subscription_status.RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus = proto.Field(
+    status: (
+        recommendation_subscription_status.RecommendationSubscriptionStatusEnum.RecommendationSubscriptionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         optional=True,

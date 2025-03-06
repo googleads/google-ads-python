@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ShareablePreviewServiceClient
+from .async_client import ShareablePreviewServiceAsyncClient
 
-__all__ = ("ShareablePreviewServiceClient",)
+__all__ = (
+    "ShareablePreviewServiceClient",
+    "ShareablePreviewServiceAsyncClient",
+)

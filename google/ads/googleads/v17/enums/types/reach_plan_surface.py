@@ -36,7 +36,25 @@ class ReachPlanSurfaceEnum(proto.Message):
     """
 
     class ReachPlanSurface(proto.Enum):
-        r"""Surfaces available to target in reach forecasts."""
+        r"""Surfaces available to target in reach forecasts.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            IN_FEED (2):
+                In-Feed ad surface.
+            IN_STREAM_BUMPER (3):
+                In-Stream bumper ad surface.
+            IN_STREAM_NON_SKIPPABLE (4):
+                In-Stream non-skippable ad surface.
+            IN_STREAM_SKIPPABLE (5):
+                In-Stream skippable ad surface.
+            SHORTS (6):
+                Shorts ad surface.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IN_FEED = 2

@@ -35,7 +35,30 @@ class ConversionCustomVariableStatusEnum(proto.Message):
     """
 
     class ConversionCustomVariableStatus(proto.Enum):
-        r"""Possible statuses of a conversion custom variable."""
+        r"""Possible statuses of a conversion custom variable.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ACTIVATION_NEEDED (2):
+                The conversion custom variable is pending
+                activation and will not accrue stats until set
+                to ENABLED.
+
+                This status can't be used in CREATE and UPDATE
+                requests.
+            ENABLED (3):
+                The conversion custom variable is enabled and
+                will accrue stats.
+            PAUSED (4):
+                The conversion custom variable is paused and
+                will not accrue stats until set to ENABLED
+                again.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ACTIVATION_NEEDED = 2

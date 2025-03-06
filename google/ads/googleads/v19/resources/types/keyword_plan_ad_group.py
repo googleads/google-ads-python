@@ -32,6 +32,7 @@ class KeywordPlanAdGroup(proto.Message):
     r"""A Keyword Planner ad group.
     Max number of keyword plan ad groups per plan: 200.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

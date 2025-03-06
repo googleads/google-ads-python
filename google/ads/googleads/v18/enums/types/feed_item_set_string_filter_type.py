@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemSetStringFilterTypeEnum",},
+    manifest={
+        "FeedItemSetStringFilterTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class FeedItemSetStringFilterTypeEnum(proto.Message):
     """
 
     class FeedItemSetStringFilterType(proto.Enum):
-        r"""describe the possible types for a FeedItemSetStringFilter."""
+        r"""describe the possible types for a FeedItemSetStringFilter.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            EXACT (2):
+                The dynamic set filter will use exact string
+                matching.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EXACT = 2

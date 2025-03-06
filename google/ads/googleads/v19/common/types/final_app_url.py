@@ -34,6 +34,7 @@ class FinalAppUrl(proto.Message):
     r"""A URL for deep linking into an app for the given operating
     system.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

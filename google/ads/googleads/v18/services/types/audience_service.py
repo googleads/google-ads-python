@@ -66,18 +66,25 @@ class MutateAudiencesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["AudienceOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AudienceOperation",
+        proto.MESSAGE,
+        number=2,
+        message="AudienceOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -86,6 +93,7 @@ class MutateAudiencesRequest(proto.Message):
 
 class MutateAudiencesResponse(proto.Message):
     r"""Response message for an audience mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateAudienceResult]):
             All results for the mutate.
@@ -98,15 +106,20 @@ class MutateAudiencesResponse(proto.Message):
     """
 
     results: MutableSequence["MutateAudienceResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="MutateAudienceResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateAudienceResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class AudienceOperation(proto.Message):
     r"""A single operation (create, update) on an audience.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -131,7 +144,9 @@ class AudienceOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_audience.Audience = proto.Field(
         proto.MESSAGE,
@@ -149,6 +164,7 @@ class AudienceOperation(proto.Message):
 
 class MutateAudienceResult(proto.Message):
     r"""The result for the audience mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -159,10 +175,13 @@ class MutateAudienceResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     audience: gagr_audience.Audience = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_audience.Audience,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_audience.Audience,
     )
 
 

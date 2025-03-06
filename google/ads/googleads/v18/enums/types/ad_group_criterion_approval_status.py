@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupCriterionApprovalStatusEnum",},
+    manifest={
+        "AdGroupCriterionApprovalStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,23 @@ class AdGroupCriterionApprovalStatusEnum(proto.Message):
     """
 
     class AdGroupCriterionApprovalStatus(proto.Enum):
-        r"""Enumerates AdGroupCriterion approval statuses."""
+        r"""Enumerates AdGroupCriterion approval statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            APPROVED (2):
+                Approved.
+            DISAPPROVED (3):
+                Disapproved.
+            PENDING_REVIEW (4):
+                Pending Review.
+            UNDER_REVIEW (5):
+                Under review.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         APPROVED = 2

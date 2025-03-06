@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class MutateBillingSetupRequest(proto.Message):
     r"""Request message for billing setup mutate operations.
+
     Attributes:
         customer_id (str):
             Required. Id of the customer to apply the
@@ -44,10 +45,13 @@ class MutateBillingSetupRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operation: "BillingSetupOperation" = proto.Field(
-        proto.MESSAGE, number=2, message="BillingSetupOperation",
+        proto.MESSAGE,
+        number=2,
+        message="BillingSetupOperation",
     )
 
 
@@ -84,12 +88,15 @@ class BillingSetupOperation(proto.Message):
         message=billing_setup.BillingSetup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=1, oneof="operation",
+        proto.STRING,
+        number=1,
+        oneof="operation",
     )
 
 
 class MutateBillingSetupResponse(proto.Message):
     r"""Response message for a billing setup operation.
+
     Attributes:
         result (google.ads.googleads.v18.services.types.MutateBillingSetupResult):
             A result that identifies the resource
@@ -97,19 +104,23 @@ class MutateBillingSetupResponse(proto.Message):
     """
 
     result: "MutateBillingSetupResult" = proto.Field(
-        proto.MESSAGE, number=1, message="MutateBillingSetupResult",
+        proto.MESSAGE,
+        number=1,
+        message="MutateBillingSetupResult",
     )
 
 
 class MutateBillingSetupResult(proto.Message):
     r"""Result for a single billing setup mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

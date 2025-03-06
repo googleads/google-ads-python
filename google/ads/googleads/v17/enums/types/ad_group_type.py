@@ -36,7 +36,59 @@ class AdGroupTypeEnum(proto.Message):
     """
 
     class AdGroupType(proto.Enum):
-        r"""Enum listing the possible types of an ad group."""
+        r"""Enum listing the possible types of an ad group.
+
+        Values:
+            UNSPECIFIED (0):
+                The type has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            SEARCH_STANDARD (2):
+                The default ad group type for Search
+                campaigns.
+            DISPLAY_STANDARD (3):
+                The default ad group type for Display
+                campaigns.
+            SHOPPING_PRODUCT_ADS (4):
+                The ad group type for Shopping campaigns
+                serving standard product ads.
+            HOTEL_ADS (6):
+                The default ad group type for Hotel
+                campaigns.
+            SHOPPING_SMART_ADS (7):
+                The type for ad groups in Smart Shopping
+                campaigns.
+            VIDEO_BUMPER (8):
+                Short unskippable in-stream video ads.
+            VIDEO_TRUE_VIEW_IN_STREAM (9):
+                TrueView (skippable) in-stream video ads.
+            VIDEO_TRUE_VIEW_IN_DISPLAY (10):
+                TrueView in-display video ads.
+            VIDEO_NON_SKIPPABLE_IN_STREAM (11):
+                Unskippable in-stream video ads.
+            VIDEO_OUTSTREAM (12):
+                Outstream video ads.
+            SEARCH_DYNAMIC_ADS (13):
+                Ad group type for Dynamic Search Ads ad
+                groups.
+            SHOPPING_COMPARISON_LISTING_ADS (14):
+                The type for ad groups in Shopping Comparison
+                Listing campaigns.
+            PROMOTED_HOTEL_ADS (15):
+                The ad group type for Promoted Hotel ad
+                groups.
+            VIDEO_RESPONSIVE (16):
+                Video responsive ad groups.
+            VIDEO_EFFICIENT_REACH (17):
+                Video efficient reach ad groups.
+            SMART_CAMPAIGN_ADS (18):
+                Ad group type for Smart campaigns.
+            TRAVEL_ADS (19):
+                Ad group type for Travel campaigns.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH_STANDARD = 2

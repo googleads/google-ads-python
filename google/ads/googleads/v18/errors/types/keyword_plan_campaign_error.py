@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"KeywordPlanCampaignErrorEnum",},
+    manifest={
+        "KeywordPlanCampaignErrorEnum",
+    },
 )
 
 
@@ -35,7 +37,35 @@ class KeywordPlanCampaignErrorEnum(proto.Message):
     class KeywordPlanCampaignError(proto.Enum):
         r"""Enum describing possible errors from applying a keyword plan
         campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_NAME (2):
+                A keyword plan campaign name is missing,
+                empty, longer than allowed limit or contains
+                invalid chars.
+            INVALID_LANGUAGES (3):
+                A keyword plan campaign contains one or more
+                untargetable languages.
+            INVALID_GEOS (4):
+                A keyword plan campaign contains one or more
+                invalid geo targets.
+            DUPLICATE_NAME (5):
+                The keyword plan campaign name is duplicate
+                to an existing keyword plan campaign name or
+                other keyword plan campaign name in the request.
+            MAX_GEOS_EXCEEDED (6):
+                The number of geo targets in the keyword plan
+                campaign exceeds limits.
+            MAX_LANGUAGES_EXCEEDED (7):
+                The number of languages in the keyword plan
+                campaign exceeds limits.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_NAME = 2

@@ -48,6 +48,7 @@ __protobuf__ = proto.module(
 
 class OfflineUserAddressInfo(proto.Message):
     r"""Address identifier of offline data.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -132,6 +133,7 @@ class OfflineUserAddressInfo(proto.Message):
 
 class UserIdentifier(proto.Message):
     r"""User identifying information.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -180,7 +182,9 @@ class UserIdentifier(proto.Message):
             This field is a member of `oneof`_ ``identifier``.
     """
 
-    user_identifier_source: gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource = proto.Field(
+    user_identifier_source: (
+        gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_user_identifier_source.UserIdentifierSourceEnum.UserIdentifierSource,
@@ -215,6 +219,7 @@ class UserIdentifier(proto.Message):
 
 class TransactionAttribute(proto.Message):
     r"""Attribute of the store sales transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -308,6 +313,7 @@ class TransactionAttribute(proto.Message):
 
 class StoreAttribute(proto.Message):
     r"""Store attributes of the transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -327,6 +333,7 @@ class StoreAttribute(proto.Message):
 
 class ItemAttribute(proto.Message):
     r"""Item attributes of the transaction.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -377,6 +384,7 @@ class ItemAttribute(proto.Message):
 
 class UserData(proto.Message):
     r"""User data holding user identifiers and attributes.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -425,6 +433,7 @@ class UserData(proto.Message):
 class UserAttribute(proto.Message):
     r"""User attribute, can only be used with CUSTOMER_MATCH_WITH_ATTRIBUTES
     job type.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -563,6 +572,7 @@ class EventAttribute(proto.Message):
 
 class EventItemAttribute(proto.Message):
     r"""Event Item attributes of the Customer Match.
+
     Attributes:
         item_id (str):
             Optional. A unique identifier of a product.
@@ -580,6 +590,7 @@ class ShoppingLoyalty(proto.Message):
     r"""The shopping loyalty related data. Shopping utilizes this
     data to provide users with a better experience.
     Accessible only to merchants on the allow-list.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -603,6 +614,7 @@ class ShoppingLoyalty(proto.Message):
 
 class CustomerMatchUserListMetadata(proto.Message):
     r"""Metadata for customer match user list.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -633,6 +645,7 @@ class CustomerMatchUserListMetadata(proto.Message):
 
 class StoreSalesMetadata(proto.Message):
     r"""Metadata for Store Sales Direct.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -694,6 +707,7 @@ class StoreSalesThirdPartyMetadata(proto.Message):
     This product is only for customers on the allow-list. Contact
     your Google business development representative for details on
     the upload configuration.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

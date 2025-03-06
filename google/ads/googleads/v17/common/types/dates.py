@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class DateRange(proto.Message):
     r"""A date range.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -87,6 +88,7 @@ class YearMonthRange(proto.Message):
 
 class YearMonth(proto.Message):
     r"""Year month.
+
     Attributes:
         year (int):
             The year (for example, 2020).

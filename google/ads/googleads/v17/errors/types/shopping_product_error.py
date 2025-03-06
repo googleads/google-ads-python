@@ -35,7 +35,22 @@ class ShoppingProductErrorEnum(proto.Message):
     """
 
     class ShoppingProductError(proto.Enum):
-        r"""Enum describing possible errors querying shopping product."""
+        r"""Enum describing possible errors querying shopping product.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            MISSING_CAMPAIGN_FILTER (2):
+                A filter on the ``campaign`` resource name is missing.
+            MISSING_AD_GROUP_FILTER (3):
+                A filter on the ``ad_group`` resource name is missing.
+            UNSUPPORTED_DATE_SEGMENTATION (4):
+                Date segmentation is not supported.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MISSING_CAMPAIGN_FILTER = 2

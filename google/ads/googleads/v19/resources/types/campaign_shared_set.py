@@ -34,6 +34,7 @@ class CampaignSharedSet(proto.Message):
     r"""CampaignSharedSets are used for managing the shared sets
     associated with a campaign.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

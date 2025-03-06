@@ -527,6 +527,7 @@ class GoogleAdsFailure(proto.Message):
 
 class GoogleAdsError(proto.Message):
     r"""GoogleAds-specific error.
+
     Attributes:
         error_code (google.ads.googleads.v19.errors.types.ErrorCode):
             An enum value that indicates which error
@@ -572,6 +573,7 @@ class GoogleAdsError(proto.Message):
 
 class ErrorCode(proto.Message):
     r"""The error reason represented by type and enum.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -2508,6 +2510,7 @@ class ErrorLocation(proto.Message):
 
     class FieldPathElement(proto.Message):
         r"""A part of a field path.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -2541,6 +2544,7 @@ class ErrorLocation(proto.Message):
 
 class ErrorDetails(proto.Message):
     r"""Additional error details.
+
     Attributes:
         unpublished_error_code (str):
             The error code that should have been
@@ -2649,6 +2653,7 @@ class PolicyFindingDetails(proto.Message):
 
 class QuotaErrorDetails(proto.Message):
     r"""Additional quota error details when there is QuotaError.
+
     Attributes:
         rate_scope (google.ads.googleads.v19.errors.types.QuotaErrorDetails.QuotaRateScope):
             The rate scope of the quota limit.
@@ -2662,7 +2667,19 @@ class QuotaErrorDetails(proto.Message):
     """
 
     class QuotaRateScope(proto.Enum):
-        r"""Enum of possible scopes that quota buckets belong to."""
+        r"""Enum of possible scopes that quota buckets belong to.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified enum
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ACCOUNT (2):
+                Per customer account quota
+            DEVELOPER (3):
+                Per project or DevToken quota
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

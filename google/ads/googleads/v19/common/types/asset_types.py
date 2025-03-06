@@ -100,6 +100,7 @@ __protobuf__ = proto.module(
 
 class YoutubeVideoAsset(proto.Message):
     r"""A YouTube asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -125,6 +126,7 @@ class YoutubeVideoAsset(proto.Message):
 
 class MediaBundleAsset(proto.Message):
     r"""A MediaBundle asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -148,6 +150,7 @@ class MediaBundleAsset(proto.Message):
 
 class ImageAsset(proto.Message):
     r"""An Image asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -192,6 +195,7 @@ class ImageDimension(proto.Message):
     r"""Metadata for an image at a certain size, either original or
     resized.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -229,6 +233,7 @@ class ImageDimension(proto.Message):
 
 class TextAsset(proto.Message):
     r"""A Text asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -247,6 +252,7 @@ class TextAsset(proto.Message):
 
 class LeadFormAsset(proto.Message):
     r"""A Lead Form asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -399,6 +405,7 @@ class LeadFormAsset(proto.Message):
 
 class LeadFormField(proto.Message):
     r"""One input field instance within a form.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -452,6 +459,7 @@ class LeadFormField(proto.Message):
 
 class LeadFormCustomQuestionField(proto.Message):
     r"""One custom question input field instance within a form.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -516,6 +524,7 @@ class LeadFormSingleChoiceAnswers(proto.Message):
 
 class LeadFormDeliveryMethod(proto.Message):
     r"""A configuration of how leads are delivered to the advertiser.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -538,6 +547,7 @@ class WebhookDelivery(proto.Message):
     to an endpoint they specify. The requests contain JSON matching
     a schema that Google publishes as part of form ads
     documentation.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -586,6 +596,7 @@ class BookOnGoogleAsset(proto.Message):
 
 class PromotionAsset(proto.Message):
     r"""A Promotion asset.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -717,6 +728,7 @@ class PromotionAsset(proto.Message):
 
 class CalloutAsset(proto.Message):
     r"""A Callout asset.
+
     Attributes:
         callout_text (str):
             Required. The callout text.
@@ -758,6 +770,7 @@ class CalloutAsset(proto.Message):
 
 class StructuredSnippetAsset(proto.Message):
     r"""A Structured Snippet asset.
+
     Attributes:
         header (str):
             Required. The header of the snippet.
@@ -784,6 +797,7 @@ class StructuredSnippetAsset(proto.Message):
 
 class SitelinkAsset(proto.Message):
     r"""A Sitelink asset.
+
     Attributes:
         link_text (str):
             Required. URL display text for the sitelink.
@@ -843,6 +857,7 @@ class SitelinkAsset(proto.Message):
 
 class PageFeedAsset(proto.Message):
     r"""A Page Feed asset.
+
     Attributes:
         page_url (str):
             Required. The webpage that advertisers want
@@ -863,6 +878,7 @@ class PageFeedAsset(proto.Message):
 
 class DynamicEducationAsset(proto.Message):
     r"""A Dynamic Education asset.
+
     Attributes:
         program_id (str):
             Required. Program ID which can be any
@@ -978,6 +994,7 @@ class DynamicEducationAsset(proto.Message):
 
 class MobileAppAsset(proto.Message):
     r"""An asset representing a mobile app.
+
     Attributes:
         app_id (str):
             Required. A string that uniquely identifies a
@@ -1026,6 +1043,7 @@ class MobileAppAsset(proto.Message):
 
 class HotelCalloutAsset(proto.Message):
     r"""An asset representing a hotel callout.
+
     Attributes:
         text (str):
             Required. The text of the hotel callout
@@ -1048,6 +1066,7 @@ class HotelCalloutAsset(proto.Message):
 
 class CallAsset(proto.Message):
     r"""A Call asset.
+
     Attributes:
         country_code (str):
             Required. Two-letter country code of the
@@ -1102,6 +1121,7 @@ class CallAsset(proto.Message):
 
 class PriceAsset(proto.Message):
     r"""An asset representing a list of price offers.
+
     Attributes:
         type_ (google.ads.googleads.v19.enums.types.PriceExtensionTypeEnum.PriceExtensionType):
             Required. The type of the price asset.
@@ -1143,6 +1163,7 @@ class PriceAsset(proto.Message):
 
 class PriceOffering(proto.Message):
     r"""A single price offering within a PriceAsset.
+
     Attributes:
         header (str):
             Required. The header of the price offering.
@@ -1197,6 +1218,7 @@ class PriceOffering(proto.Message):
 
 class CallToActionAsset(proto.Message):
     r"""A call to action asset.
+
     Attributes:
         call_to_action (google.ads.googleads.v19.enums.types.CallToActionTypeEnum.CallToActionType):
             Call to action.
@@ -1213,6 +1235,7 @@ class CallToActionAsset(proto.Message):
 
 class DynamicRealEstateAsset(proto.Message):
     r"""A dynamic real estate asset.
+
     Attributes:
         listing_id (str):
             Required. Listing ID which can be any
@@ -1335,6 +1358,7 @@ class DynamicRealEstateAsset(proto.Message):
 
 class DynamicCustomAsset(proto.Message):
     r"""A dynamic custom asset.
+
     Attributes:
         id (str):
             Required. ID which can be any sequence of
@@ -1478,6 +1502,7 @@ class DynamicCustomAsset(proto.Message):
 
 class DynamicHotelsAndRentalsAsset(proto.Message):
     r"""A dynamic hotels and rentals asset.
+
     Attributes:
         property_id (str):
             Required. Property ID which can be any
@@ -1618,6 +1643,7 @@ class DynamicHotelsAndRentalsAsset(proto.Message):
 
 class DynamicFlightsAsset(proto.Message):
     r"""A dynamic flights asset.
+
     Attributes:
         destination_id (str):
             Required. Destination ID which can be any
@@ -1745,6 +1771,7 @@ class DynamicFlightsAsset(proto.Message):
 
 class DemandGenCarouselCardAsset(proto.Message):
     r"""A Demand Gen Carousel Card asset.
+
     Attributes:
         marketing_image_asset (str):
             Asset resource name of the associated 1.91:1
@@ -1787,6 +1814,7 @@ class DemandGenCarouselCardAsset(proto.Message):
 
 class DynamicTravelAsset(proto.Message):
     r"""A dynamic travel asset.
+
     Attributes:
         destination_id (str):
             Required. Destination ID which can be any
@@ -1927,6 +1955,7 @@ class DynamicTravelAsset(proto.Message):
 
 class DynamicLocalAsset(proto.Message):
     r"""A dynamic local asset.
+
     Attributes:
         deal_id (str):
             Required. Deal ID which can be any sequence
@@ -2059,6 +2088,7 @@ class DynamicLocalAsset(proto.Message):
 
 class DynamicJobsAsset(proto.Message):
     r"""A dynamic jobs asset.
+
     Attributes:
         job_id (str):
             Required. Job ID which can be any sequence of
@@ -2170,6 +2200,7 @@ class DynamicJobsAsset(proto.Message):
 
 class LocationAsset(proto.Message):
     r"""A location asset.
+
     Attributes:
         place_id (str):
             Place IDs uniquely identify a place in the
@@ -2247,6 +2278,7 @@ class BusinessProfileLocation(proto.Message):
 
 class HotelPropertyAsset(proto.Message):
     r"""A hotel property asset.
+
     Attributes:
         place_id (str):
             Place IDs uniquely identify a place in the
@@ -2275,6 +2307,7 @@ class HotelPropertyAsset(proto.Message):
 
 class BusinessMessageAsset(proto.Message):
     r"""A business message asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -2322,6 +2355,7 @@ class BusinessMessageAsset(proto.Message):
 
 class WhatsappBusinessMessageInfo(proto.Message):
     r"""Whatsapp information to use for messaging.
+
     Attributes:
         country_code (str):
             Required. Two-letter country code of the
@@ -2344,6 +2378,7 @@ class WhatsappBusinessMessageInfo(proto.Message):
 
 class BusinessMessageCallToActionInfo(proto.Message):
     r"""Display information that encourages the user to take action.
+
     Attributes:
         call_to_action_selection (google.ads.googleads.v19.enums.types.BusinessMessageCallToActionTypeEnum.BusinessMessageCallToActionType):
             Required. Pre-defined call to action text.
@@ -2369,6 +2404,7 @@ class BusinessMessageCallToActionInfo(proto.Message):
 
 class AppDeepLinkAsset(proto.Message):
     r"""An app deep link asset
+
     Attributes:
         app_deep_link_uri (str):
             The uri for the app deep link, The uri can be

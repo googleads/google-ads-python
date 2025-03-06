@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ParentalStatusView",},
+    manifest={
+        "ParentalStatusView",
+    },
 )
 
 
 class ParentalStatusView(proto.Message):
     r"""A parental status view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the parental status view.
@@ -37,7 +40,8 @@ class ParentalStatusView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

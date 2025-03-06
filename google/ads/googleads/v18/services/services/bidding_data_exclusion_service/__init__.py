@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BiddingDataExclusionServiceClient
+from .async_client import BiddingDataExclusionServiceAsyncClient
 
-__all__ = ("BiddingDataExclusionServiceClient",)
+__all__ = (
+    "BiddingDataExclusionServiceClient",
+    "BiddingDataExclusionServiceAsyncClient",
+)

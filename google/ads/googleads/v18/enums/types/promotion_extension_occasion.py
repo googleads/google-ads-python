@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PromotionExtensionOccasionEnum",},
+    manifest={
+        "PromotionExtensionOccasionEnum",
+    },
 )
 
 
@@ -35,7 +37,90 @@ class PromotionExtensionOccasionEnum(proto.Message):
     """
 
     class PromotionExtensionOccasion(proto.Enum):
-        r"""A promotion extension occasion."""
+        r"""A promotion extension occasion.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NEW_YEARS (2):
+                New Year's.
+            CHINESE_NEW_YEAR (3):
+                Chinese New Year.
+            VALENTINES_DAY (4):
+                Valentine's Day.
+            EASTER (5):
+                Easter.
+            MOTHERS_DAY (6):
+                Mother's Day.
+            FATHERS_DAY (7):
+                Father's Day.
+            LABOR_DAY (8):
+                Labor Day.
+            BACK_TO_SCHOOL (9):
+                Back To School.
+            HALLOWEEN (10):
+                Halloween.
+            BLACK_FRIDAY (11):
+                Black Friday.
+            CYBER_MONDAY (12):
+                Cyber Monday.
+            CHRISTMAS (13):
+                Christmas.
+            BOXING_DAY (14):
+                Boxing Day.
+            INDEPENDENCE_DAY (15):
+                Independence Day in any country.
+            NATIONAL_DAY (16):
+                National Day in any country.
+            END_OF_SEASON (17):
+                End of any season.
+            WINTER_SALE (18):
+                Winter Sale.
+            SUMMER_SALE (19):
+                Summer sale.
+            FALL_SALE (20):
+                Fall Sale.
+            SPRING_SALE (21):
+                Spring Sale.
+            RAMADAN (22):
+                Ramadan.
+            EID_AL_FITR (23):
+                Eid al-Fitr.
+            EID_AL_ADHA (24):
+                Eid al-Adha.
+            SINGLES_DAY (25):
+                Singles Day.
+            WOMENS_DAY (26):
+                Women's Day.
+            HOLI (27):
+                Holi.
+            PARENTS_DAY (28):
+                Parent's Day.
+            ST_NICHOLAS_DAY (29):
+                St. Nicholas Day.
+            CARNIVAL (30):
+                Carnival.
+            EPIPHANY (31):
+                Epiphany, also known as Three Kings' Day.
+            ROSH_HASHANAH (32):
+                Rosh Hashanah.
+            PASSOVER (33):
+                Passover.
+            HANUKKAH (34):
+                Hanukkah.
+            DIWALI (35):
+                Diwali.
+            NAVRATRI (36):
+                Navratri.
+            SONGKRAN (37):
+                Available in Thai: Songkran.
+            YEAR_END_GIFT (38):
+                Available in Japanese: Year-end Gift.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NEW_YEARS = 2

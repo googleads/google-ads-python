@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import criterion_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignCriterion",},
+    manifest={
+        "CampaignCriterion",
+    },
 )
 
 
 class CampaignCriterion(proto.Message):
     r"""A campaign criterion.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -207,29 +210,41 @@ class CampaignCriterion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=37, optional=True,
+        proto.STRING,
+        number=37,
+        optional=True,
     )
     criterion_id: int = proto.Field(
-        proto.INT64, number=38, optional=True,
+        proto.INT64,
+        number=38,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=43,
+        proto.STRING,
+        number=43,
     )
     bid_modifier: float = proto.Field(
-        proto.FLOAT, number=39, optional=True,
+        proto.FLOAT,
+        number=39,
+        optional=True,
     )
     negative: bool = proto.Field(
-        proto.BOOL, number=40, optional=True,
+        proto.BOOL,
+        number=40,
+        optional=True,
     )
     type_: criterion_type.CriterionTypeEnum.CriterionType = proto.Field(
         proto.ENUM,
         number=6,
         enum=criterion_type.CriterionTypeEnum.CriterionType,
     )
-    status: campaign_criterion_status.CampaignCriterionStatusEnum.CampaignCriterionStatus = proto.Field(
+    status: (
+        campaign_criterion_status.CampaignCriterionStatusEnum.CampaignCriterionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=35,
         enum=campaign_criterion_status.CampaignCriterionStatusEnum.CampaignCriterionStatus,
@@ -325,7 +340,10 @@ class CampaignCriterion(proto.Message):
         message=criteria.ProximityInfo,
     )
     topic: criteria.TopicInfo = proto.Field(
-        proto.MESSAGE, number=24, oneof="criterion", message=criteria.TopicInfo,
+        proto.MESSAGE,
+        number=24,
+        oneof="criterion",
+        message=criteria.TopicInfo,
     )
     listing_scope: criteria.ListingScopeInfo = proto.Field(
         proto.MESSAGE,

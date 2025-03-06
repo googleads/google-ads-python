@@ -38,7 +38,19 @@ class ConversionActionCountingTypeEnum(proto.Message):
         r"""Indicates how conversions for this action will be counted.
         For more information, see
         https://support.google.com/google-ads/answer/3438531.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ONE_PER_CLICK (2):
+                Count only one conversion per click.
+            MANY_PER_CLICK (3):
+                Count all conversions per click.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ONE_PER_CLICK = 2

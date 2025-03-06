@@ -34,6 +34,7 @@ class SearchTermView(proto.Message):
     r"""A search term view with metrics aggregated by search term at
     the ad group level.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -71,7 +72,9 @@ class SearchTermView(proto.Message):
         number=6,
         optional=True,
     )
-    status: search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus = proto.Field(
+    status: (
+        search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=search_term_targeting_status.SearchTermTargetingStatusEnum.SearchTermTargetingStatus,

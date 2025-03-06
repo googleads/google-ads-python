@@ -24,13 +24,16 @@ from google.ads.googleads.v18.enums.types import keyword_match_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"KeywordPlanCampaignKeyword",},
+    manifest={
+        "KeywordPlanCampaignKeyword",
+    },
 )
 
 
 class KeywordPlanCampaignKeyword(proto.Message):
     r"""A Keyword Plan Campaign keyword.
     Only negative keywords are supported for Campaign Keyword.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -66,24 +69,35 @@ class KeywordPlanCampaignKeyword(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keyword_plan_campaign: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=9, optional=True,
+        proto.INT64,
+        number=9,
+        optional=True,
     )
     text: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
-    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+    match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
+        )
     )
     negative: bool = proto.Field(
-        proto.BOOL, number=11, optional=True,
+        proto.BOOL,
+        number=11,
+        optional=True,
     )
 
 

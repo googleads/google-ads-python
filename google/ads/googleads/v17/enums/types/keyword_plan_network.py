@@ -35,7 +35,19 @@ class KeywordPlanNetworkEnum(proto.Message):
     """
 
     class KeywordPlanNetwork(proto.Enum):
-        r"""Enumerates keyword plan forecastable network types."""
+        r"""Enumerates keyword plan forecastable network types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            GOOGLE_SEARCH (2):
+                Google Search.
+            GOOGLE_SEARCH_AND_PARTNERS (3):
+                Google Search + Search partners.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GOOGLE_SEARCH = 2

@@ -35,7 +35,22 @@ class ParentalStatusTypeEnum(proto.Message):
     """
 
     class ParentalStatusType(proto.Enum):
-        r"""The type of parental statuses (for example, not a parent)."""
+        r"""The type of parental statuses (for example, not a parent).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PARENT (300):
+                Parent.
+            NOT_A_PARENT (301):
+                Not a parent.
+            UNDETERMINED (302):
+                Undetermined parental status.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PARENT = 300

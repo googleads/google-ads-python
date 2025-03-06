@@ -37,6 +37,7 @@ class KeywordPlan(proto.Message):
     Max number of saved keyword plans: 10000.
     It's possible to remove plans if limit is reached.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -84,6 +85,7 @@ class KeywordPlan(proto.Message):
 
 class KeywordPlanForecastPeriod(proto.Message):
     r"""The forecasting period associated with the keyword plan.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

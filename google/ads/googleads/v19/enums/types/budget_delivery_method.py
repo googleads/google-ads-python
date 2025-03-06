@@ -35,7 +35,21 @@ class BudgetDeliveryMethodEnum(proto.Message):
     """
 
     class BudgetDeliveryMethod(proto.Enum):
-        r"""Possible delivery methods of a Budget."""
+        r"""Possible delivery methods of a Budget.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            STANDARD (2):
+                The budget server will throttle serving
+                evenly across the entire time period.
+            ACCELERATED (3):
+                The budget server will not throttle serving,
+                and ads will serve as fast as possible.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

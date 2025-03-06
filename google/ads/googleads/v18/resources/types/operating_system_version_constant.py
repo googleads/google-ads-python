@@ -26,7 +26,9 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"OperatingSystemVersionConstant",},
+    manifest={
+        "OperatingSystemVersionConstant",
+    },
 )
 
 
@@ -34,6 +36,7 @@ class OperatingSystemVersionConstant(proto.Message):
     r"""A mobile operating system version or a range of versions, depending
     on ``operator_type``. List of available mobile platforms at
     https://developers.google.com/google-ads/api/reference/data/codes-formats#mobile-platforms
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -68,21 +71,32 @@ class OperatingSystemVersionConstant(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=7, optional=True,
+        proto.INT64,
+        number=7,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     os_major_version: int = proto.Field(
-        proto.INT32, number=9, optional=True,
+        proto.INT32,
+        number=9,
+        optional=True,
     )
     os_minor_version: int = proto.Field(
-        proto.INT32, number=10, optional=True,
+        proto.INT32,
+        number=10,
+        optional=True,
     )
-    operator_type: operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType = proto.Field(
+    operator_type: (
+        operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType,

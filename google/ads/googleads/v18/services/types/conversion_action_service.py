@@ -68,20 +68,27 @@ class MutateConversionActionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "ConversionActionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionActionOperation",
+    operations: MutableSequence["ConversionActionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionActionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -123,7 +130,9 @@ class ConversionActionOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_conversion_action.ConversionAction = proto.Field(
         proto.MESSAGE,
@@ -138,7 +147,9 @@ class ConversionActionOperation(proto.Message):
         message=gagr_conversion_action.ConversionAction,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -158,17 +169,22 @@ class MutateConversionActionsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateConversionActionResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateConversionActionResult",
+    results: MutableSequence["MutateConversionActionResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateConversionActionResult",
+        )
     )
 
 
 class MutateConversionActionResult(proto.Message):
     r"""The result for the conversion action mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -179,7 +195,8 @@ class MutateConversionActionResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversion_action: gagr_conversion_action.ConversionAction = proto.Field(
         proto.MESSAGE,

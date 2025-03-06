@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BrandSuggestionServiceClient
+from .async_client import BrandSuggestionServiceAsyncClient
 
-__all__ = ("BrandSuggestionServiceClient",)
+__all__ = (
+    "BrandSuggestionServiceClient",
+    "BrandSuggestionServiceAsyncClient",
+)

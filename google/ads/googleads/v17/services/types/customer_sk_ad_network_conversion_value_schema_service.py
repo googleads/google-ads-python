@@ -46,7 +46,9 @@ class CustomerSkAdNetworkConversionValueSchemaOperation(proto.Message):
             have a valid resource name.
     """
 
-    update: customer_sk_ad_network_conversion_value_schema.CustomerSkAdNetworkConversionValueSchema = proto.Field(
+    update: (
+        customer_sk_ad_network_conversion_value_schema.CustomerSkAdNetworkConversionValueSchema
+    ) = proto.Field(
         proto.MESSAGE,
         number=1,
         message=customer_sk_ad_network_conversion_value_schema.CustomerSkAdNetworkConversionValueSchema,

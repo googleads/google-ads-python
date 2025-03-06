@@ -71,12 +71,12 @@ class MutateCampaignExtensionSettingsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CampaignExtensionSettingOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CampaignExtensionSettingOperation",
+    operations: MutableSequence["CampaignExtensionSettingOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CampaignExtensionSettingOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -86,7 +86,9 @@ class MutateCampaignExtensionSettingsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -158,6 +160,7 @@ class CampaignExtensionSettingOperation(proto.Message):
 
 class MutateCampaignExtensionSettingsResponse(proto.Message):
     r"""Response message for a campaign extension setting mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -174,17 +177,18 @@ class MutateCampaignExtensionSettingsResponse(proto.Message):
         number=3,
         message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateCampaignExtensionSettingResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="MutateCampaignExtensionSettingResult",
+    results: MutableSequence["MutateCampaignExtensionSettingResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCampaignExtensionSettingResult",
+        )
     )
 
 
 class MutateCampaignExtensionSettingResult(proto.Message):
     r"""The result for the campaign extension setting mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -198,7 +202,9 @@ class MutateCampaignExtensionSettingResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    campaign_extension_setting: gagr_campaign_extension_setting.CampaignExtensionSetting = proto.Field(
+    campaign_extension_setting: (
+        gagr_campaign_extension_setting.CampaignExtensionSetting
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_campaign_extension_setting.CampaignExtensionSetting,

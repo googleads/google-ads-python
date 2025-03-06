@@ -56,7 +56,9 @@ class StartIdentityVerificationRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    verification_program: identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram = proto.Field(
+    verification_program: (
+        identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram,
@@ -89,17 +91,18 @@ class GetIdentityVerificationResponse(proto.Message):
             customer.
     """
 
-    identity_verification: MutableSequence[
-        "IdentityVerification"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="IdentityVerification",
+    identity_verification: MutableSequence["IdentityVerification"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="IdentityVerification",
+        )
     )
 
 
 class IdentityVerification(proto.Message):
     r"""An identity verification for a customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -117,7 +120,9 @@ class IdentityVerification(proto.Message):
             This field is a member of `oneof`_ ``_verification_progress``.
     """
 
-    verification_program: identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram = proto.Field(
+    verification_program: (
+        identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram,
@@ -153,7 +158,9 @@ class IdentityVerificationProgress(proto.Message):
             for the given verification program type.
     """
 
-    program_status: identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus = proto.Field(
+    program_status: (
+        identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus,

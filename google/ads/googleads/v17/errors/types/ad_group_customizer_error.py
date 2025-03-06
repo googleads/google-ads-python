@@ -35,7 +35,16 @@ class AdGroupCustomizerErrorEnum(proto.Message):
     """
 
     class AdGroupCustomizerError(proto.Enum):
-        r"""Enum describing possible ad group customizer errors."""
+        r"""Enum describing possible ad group customizer errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
 

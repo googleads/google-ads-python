@@ -69,7 +69,9 @@ class CampaignCustomizer(proto.Message):
         proto.STRING,
         number=3,
     )
-    status: customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus = proto.Field(
+    status: (
+        customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus,

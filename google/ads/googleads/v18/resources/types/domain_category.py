@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"DomainCategory",},
+    manifest={
+        "DomainCategory",
+    },
 )
 
 
@@ -32,6 +34,7 @@ class DomainCategory(proto.Message):
     categories will be generated for the domain. The categories can
     be targeted using WebpageConditionInfo. See:
     https://support.google.com/google-ads/answer/2471185
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -95,31 +98,48 @@ class DomainCategory(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     category: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     language_code: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     domain: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     coverage_fraction: float = proto.Field(
-        proto.DOUBLE, number=14, optional=True,
+        proto.DOUBLE,
+        number=14,
+        optional=True,
     )
     category_rank: int = proto.Field(
-        proto.INT64, number=15, optional=True,
+        proto.INT64,
+        number=15,
+        optional=True,
     )
     has_children: bool = proto.Field(
-        proto.BOOL, number=16, optional=True,
+        proto.BOOL,
+        number=16,
+        optional=True,
     )
     recommended_cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=17, optional=True,
+        proto.INT64,
+        number=17,
+        optional=True,
     )
 
 

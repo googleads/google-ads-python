@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AppUrlOperatingSystemTypeEnum",},
+    manifest={
+        "AppUrlOperatingSystemTypeEnum",
+    },
 )
 
 
 class AppUrlOperatingSystemTypeEnum(proto.Message):
-    r"""The possible OS types for a deeplink AppUrl.
-    """
+    r"""The possible OS types for a deeplink AppUrl."""
 
     class AppUrlOperatingSystemType(proto.Enum):
-        r"""Operating System"""
+        r"""Operating System
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            IOS (2):
+                The Apple IOS operating system.
+            ANDROID (3):
+                The Android operating system.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IOS = 2

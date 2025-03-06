@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineUserDataJobTypeEnum",},
+    manifest={
+        "OfflineUserDataJobTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,24 @@ class OfflineUserDataJobTypeEnum(proto.Message):
     """
 
     class OfflineUserDataJobType(proto.Enum):
-        r"""The type of an offline user data job."""
+        r"""The type of an offline user data job.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            STORE_SALES_UPLOAD_FIRST_PARTY (2):
+                Store Sales Direct data for self service.
+            STORE_SALES_UPLOAD_THIRD_PARTY (3):
+                Store Sales Direct data for third party.
+            CUSTOMER_MATCH_USER_LIST (4):
+                Customer Match user list data.
+            CUSTOMER_MATCH_WITH_ATTRIBUTES (5):
+                Customer Match with attribute data.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         STORE_SALES_UPLOAD_FIRST_PARTY = 2

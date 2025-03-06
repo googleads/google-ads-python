@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import BiddingSeasonalityAdjustmentServiceClient
+from .async_client import BiddingSeasonalityAdjustmentServiceAsyncClient
 
-__all__ = ("BiddingSeasonalityAdjustmentServiceClient",)
+__all__ = (
+    "BiddingSeasonalityAdjustmentServiceClient",
+    "BiddingSeasonalityAdjustmentServiceAsyncClient",
+)

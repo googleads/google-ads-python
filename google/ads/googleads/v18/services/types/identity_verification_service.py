@@ -53,9 +53,12 @@ class StartIdentityVerificationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    verification_program: identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram = proto.Field(
+    verification_program: (
+        identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram,
@@ -73,7 +76,8 @@ class GetIdentityVerificationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -87,15 +91,18 @@ class GetIdentityVerificationResponse(proto.Message):
             customer.
     """
 
-    identity_verification: MutableSequence[
-        "IdentityVerification"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="IdentityVerification",
+    identity_verification: MutableSequence["IdentityVerification"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="IdentityVerification",
+        )
     )
 
 
 class IdentityVerification(proto.Message):
     r"""An identity verification for a customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -113,16 +120,20 @@ class IdentityVerification(proto.Message):
             This field is a member of `oneof`_ ``_verification_progress``.
     """
 
-    verification_program: identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram = proto.Field(
+    verification_program: (
+        identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=identity_verification_program.IdentityVerificationProgramEnum.IdentityVerificationProgram,
     )
-    identity_verification_requirement: "IdentityVerificationRequirement" = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        optional=True,
-        message="IdentityVerificationRequirement",
+    identity_verification_requirement: "IdentityVerificationRequirement" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            optional=True,
+            message="IdentityVerificationRequirement",
+        )
     )
     verification_progress: "IdentityVerificationProgress" = proto.Field(
         proto.MESSAGE,
@@ -147,16 +158,20 @@ class IdentityVerificationProgress(proto.Message):
             for the given verification program type.
     """
 
-    program_status: identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus = proto.Field(
+    program_status: (
+        identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=identity_verification_program_status.IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus,
     )
     invitation_link_expiration_time: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     action_url: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
 
 
@@ -173,10 +188,12 @@ class IdentityVerificationRequirement(proto.Message):
     """
 
     verification_start_deadline_time: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     verification_completion_deadline_time: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

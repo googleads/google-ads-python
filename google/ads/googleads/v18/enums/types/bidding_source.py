@@ -22,19 +22,36 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"BiddingSourceEnum",},
+    manifest={
+        "BiddingSourceEnum",
+    },
 )
 
 
 class BiddingSourceEnum(proto.Message):
-    r"""Container for enum describing possible bidding sources.
-    """
+    r"""Container for enum describing possible bidding sources."""
 
     class BiddingSource(proto.Enum):
         r"""Indicates where a bid or target is defined. For example, an
         ad group criterion may define a cpc bid directly, or it can
         inherit its cpc bid from the ad group.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CAMPAIGN_BIDDING_STRATEGY (5):
+                Effective bid or target is inherited from
+                campaign bidding strategy.
+            AD_GROUP (6):
+                The bid or target is defined on the ad group.
+            AD_GROUP_CRITERION (7):
+                The bid or target is defined on the ad group
+                criterion.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CAMPAIGN_BIDDING_STRATEGY = 5

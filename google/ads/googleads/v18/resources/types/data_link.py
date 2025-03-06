@@ -25,13 +25,17 @@ from google.ads.googleads.v18.enums.types import data_link_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"DataLink", "YoutubeVideoIdentifier",},
+    manifest={
+        "DataLink",
+        "YoutubeVideoIdentifier",
+    },
 )
 
 
 class DataLink(proto.Message):
     r"""Represents the data sharing connection between  a Google
     Ads customer and another product's data.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -62,16 +66,23 @@ class DataLink(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     product_link_id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     data_link_id: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
     type_: data_link_type.DataLinkTypeEnum.DataLinkType = proto.Field(
-        proto.ENUM, number=4, enum=data_link_type.DataLinkTypeEnum.DataLinkType,
+        proto.ENUM,
+        number=4,
+        enum=data_link_type.DataLinkTypeEnum.DataLinkType,
     )
     status: data_link_status.DataLinkStatusEnum.DataLinkStatus = proto.Field(
         proto.ENUM,
@@ -88,6 +99,7 @@ class DataLink(proto.Message):
 
 class YoutubeVideoIdentifier(proto.Message):
     r"""The identifier for YouTube video
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -109,10 +121,14 @@ class YoutubeVideoIdentifier(proto.Message):
     """
 
     channel_id: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     video_id: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 

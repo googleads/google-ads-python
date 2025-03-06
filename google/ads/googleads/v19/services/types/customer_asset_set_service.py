@@ -96,6 +96,7 @@ class MutateCustomerAssetSetsRequest(proto.Message):
 
 class CustomerAssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on a customer asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -132,6 +133,7 @@ class CustomerAssetSetOperation(proto.Message):
 
 class MutateCustomerAssetSetsResponse(proto.Message):
     r"""Response message for a customer asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCustomerAssetSetResult]):
             All results for the mutate.
@@ -159,6 +161,7 @@ class MutateCustomerAssetSetsResponse(proto.Message):
 
 class MutateCustomerAssetSetResult(proto.Message):
     r"""The result for the customer asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -57,6 +57,7 @@ __protobuf__ = proto.module(
 
 class AppFeedItem(proto.Message):
     r"""Represents an App extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -125,12 +126,12 @@ class AppFeedItem(proto.Message):
         number=13,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=7,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message=custom_parameter.CustomParameter,
+        )
     )
     final_url_suffix: str = proto.Field(
         proto.STRING,
@@ -141,6 +142,7 @@ class AppFeedItem(proto.Message):
 
 class CallFeedItem(proto.Message):
     r"""Represents a Call extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -205,7 +207,9 @@ class CallFeedItem(proto.Message):
         number=11,
         optional=True,
     )
-    call_conversion_reporting_state: gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState = proto.Field(
+    call_conversion_reporting_state: (
+        gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_call_conversion_reporting_state.CallConversionReportingStateEnum.CallConversionReportingState,
@@ -214,6 +218,7 @@ class CallFeedItem(proto.Message):
 
 class CalloutFeedItem(proto.Message):
     r"""Represents a callout extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -234,6 +239,7 @@ class CalloutFeedItem(proto.Message):
 
 class LocationFeedItem(proto.Message):
     r"""Represents a location extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -315,6 +321,7 @@ class LocationFeedItem(proto.Message):
 
 class AffiliateLocationFeedItem(proto.Message):
     r"""Represents an affiliate location extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -417,6 +424,7 @@ class TextMessageFeedItem(proto.Message):
     r"""An extension that users can click on to send a text message
     to the advertiser.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -476,6 +484,7 @@ class TextMessageFeedItem(proto.Message):
 
 class PriceFeedItem(proto.Message):
     r"""Represents a Price extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -510,7 +519,9 @@ class PriceFeedItem(proto.Message):
             enum=price_extension_type.PriceExtensionTypeEnum.PriceExtensionType,
         )
     )
-    price_qualifier: price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier = proto.Field(
+    price_qualifier: (
+        price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=price_extension_price_qualifier.PriceExtensionPriceQualifierEnum.PriceExtensionPriceQualifier,
@@ -539,6 +550,7 @@ class PriceFeedItem(proto.Message):
 
 class PriceOffer(proto.Message):
     r"""Represents one price offer in a price extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -577,7 +589,9 @@ class PriceOffer(proto.Message):
         number=3,
         message=feed_common.Money,
     )
-    unit: price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit = proto.Field(
+    unit: (
+        price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=price_extension_price_unit.PriceExtensionPriceUnitEnum.PriceExtensionPriceUnit,
@@ -594,6 +608,7 @@ class PriceOffer(proto.Message):
 
 class PromotionFeedItem(proto.Message):
     r"""Represents a Promotion extension.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -677,7 +692,9 @@ class PromotionFeedItem(proto.Message):
         number=16,
         optional=True,
     )
-    discount_modifier: promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier = proto.Field(
+    discount_modifier: (
+        promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=promotion_extension_discount_modifier.PromotionExtensionDiscountModifierEnum.PromotionExtensionDiscountModifier,
@@ -692,7 +709,9 @@ class PromotionFeedItem(proto.Message):
         number=20,
         optional=True,
     )
-    occasion: promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion = proto.Field(
+    occasion: (
+        promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=promotion_extension_occasion.PromotionExtensionOccasionEnum.PromotionExtensionOccasion,
@@ -710,12 +729,12 @@ class PromotionFeedItem(proto.Message):
         number=23,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=13,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=13,
+            message=custom_parameter.CustomParameter,
+        )
     )
     final_url_suffix: str = proto.Field(
         proto.STRING,
@@ -753,6 +772,7 @@ class PromotionFeedItem(proto.Message):
 
 class StructuredSnippetFeedItem(proto.Message):
     r"""Represents a structured snippet extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -779,6 +799,7 @@ class StructuredSnippetFeedItem(proto.Message):
 
 class SitelinkFeedItem(proto.Message):
     r"""Represents a sitelink.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -851,12 +872,12 @@ class SitelinkFeedItem(proto.Message):
         number=14,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=7,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message=custom_parameter.CustomParameter,
+        )
     )
     final_url_suffix: str = proto.Field(
         proto.STRING,
@@ -867,6 +888,7 @@ class SitelinkFeedItem(proto.Message):
 
 class HotelCalloutFeedItem(proto.Message):
     r"""Represents a hotel callout extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -897,6 +919,7 @@ class HotelCalloutFeedItem(proto.Message):
 
 class ImageFeedItem(proto.Message):
     r"""Represents an advertiser provided image extension.
+
     Attributes:
         image_asset (str):
             Required. Resource name of the image asset.

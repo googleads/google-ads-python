@@ -22,16 +22,33 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"OfflineEventUploadClientEnum",},
+    manifest={
+        "OfflineEventUploadClientEnum",
+    },
 )
 
 
 class OfflineEventUploadClientEnum(proto.Message):
-    r"""All possible clients for an offline upload event.
-    """
+    r"""All possible clients for an offline upload event."""
 
     class OfflineEventUploadClient(proto.Enum):
-        r"""Type of client."""
+        r"""Type of client.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            GOOGLE_ADS_API (2):
+                Google Ads API.
+            GOOGLE_ADS_WEB_CLIENT (3):
+                Google Ads web client, which could include
+                multiple sources like Ads UI, SFTP, etc.
+            ADS_DATA_CONNECTOR (4):
+                Connection platform.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GOOGLE_ADS_API = 2

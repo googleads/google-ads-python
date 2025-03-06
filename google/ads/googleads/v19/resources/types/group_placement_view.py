@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class GroupPlacementView(proto.Message):
     r"""A group placement view.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

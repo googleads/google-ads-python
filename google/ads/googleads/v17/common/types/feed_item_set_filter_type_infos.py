@@ -76,7 +76,9 @@ class BusinessNameFilter(proto.Message):
         proto.STRING,
         number=1,
     )
-    filter_type: feed_item_set_string_filter_type.FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType = proto.Field(
+    filter_type: (
+        feed_item_set_string_filter_type.FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=feed_item_set_string_filter_type.FeedItemSetStringFilterTypeEnum.FeedItemSetStringFilterType,

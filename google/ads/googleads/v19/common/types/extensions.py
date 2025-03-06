@@ -38,6 +38,7 @@ __protobuf__ = proto.module(
 
 class CallFeedItem(proto.Message):
     r"""Represents a Call extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -113,6 +114,7 @@ class CallFeedItem(proto.Message):
 
 class CalloutFeedItem(proto.Message):
     r"""Represents a callout extension.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -133,6 +135,7 @@ class CalloutFeedItem(proto.Message):
 
 class SitelinkFeedItem(proto.Message):
     r"""Represents a sitelink.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

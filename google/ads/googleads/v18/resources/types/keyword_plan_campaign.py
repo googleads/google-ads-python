@@ -27,13 +27,17 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"KeywordPlanCampaign", "KeywordPlanGeoTarget",},
+    manifest={
+        "KeywordPlanCampaign",
+        "KeywordPlanGeoTarget",
+    },
 )
 
 
 class KeywordPlanCampaign(proto.Message):
     r"""A Keyword Plan campaign.
     Max number of keyword plan campaigns per plan allowed: 1.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -82,35 +86,50 @@ class KeywordPlanCampaign(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     keyword_plan: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     name: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     language_constants: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
-    keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
+    keyword_plan_network: (
+        gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
     )
     cpc_bid_micros: int = proto.Field(
-        proto.INT64, number=13, optional=True,
+        proto.INT64,
+        number=13,
+        optional=True,
     )
     geo_targets: MutableSequence["KeywordPlanGeoTarget"] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="KeywordPlanGeoTarget",
+        proto.MESSAGE,
+        number=8,
+        message="KeywordPlanGeoTarget",
     )
 
 
 class KeywordPlanGeoTarget(proto.Message):
     r"""A geo target.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -122,7 +141,9 @@ class KeywordPlanGeoTarget(proto.Message):
     """
 
     geo_target_constant: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
 
 

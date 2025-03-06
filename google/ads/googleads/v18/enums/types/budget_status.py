@@ -22,16 +22,30 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"BudgetStatusEnum",},
+    manifest={
+        "BudgetStatusEnum",
+    },
 )
 
 
 class BudgetStatusEnum(proto.Message):
-    r"""Message describing a Budget status
-    """
+    r"""Message describing a Budget status"""
 
     class BudgetStatus(proto.Enum):
-        r"""Possible statuses of a Budget."""
+        r"""Possible statuses of a Budget.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Budget is enabled.
+            REMOVED (3):
+                Budget is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

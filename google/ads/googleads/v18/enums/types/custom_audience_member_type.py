@@ -22,16 +22,37 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomAudienceMemberTypeEnum",},
+    manifest={
+        "CustomAudienceMemberTypeEnum",
+    },
 )
 
 
 class CustomAudienceMemberTypeEnum(proto.Message):
-    r"""The type of custom audience member.
-    """
+    r"""The type of custom audience member."""
 
     class CustomAudienceMemberType(proto.Enum):
-        r"""Enum containing possible custom audience member types."""
+        r"""Enum containing possible custom audience member types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            KEYWORD (2):
+                Users whose interests or actions are
+                described by a keyword.
+            URL (3):
+                Users who have interests related to the
+                website's content.
+            PLACE_CATEGORY (4):
+                Users who visit place types described by a
+                place category.
+            APP (5):
+                Users who have installed a mobile app.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         KEYWORD = 2

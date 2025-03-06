@@ -35,7 +35,15 @@ class CampaignCustomizerErrorEnum(proto.Message):
     """
 
     class CampaignCustomizerError(proto.Enum):
-        r"""Enum describing possible campaign customizer errors."""
+        r"""Enum describing possible campaign customizer errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

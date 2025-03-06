@@ -35,6 +35,22 @@ class ConversionAdjustmentTypeEnum(proto.Message):
         r"""The different actions advertisers can take to adjust the
         conversions that they already reported. Retractions negate a
         conversion. Restatements change the value of a conversion.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Represents value unknown in this version.
+            RETRACTION (2):
+                Negates a conversion so that its total value
+                and count are both zero.
+            RESTATEMENT (3):
+                Changes the value of a conversion.
+            ENHANCEMENT (4):
+                Supplements an existing conversion with
+                provided user identifiers and user agent, which
+                can be used by Google to enhance the conversion
+                count.
         """
 
         UNSPECIFIED = 0

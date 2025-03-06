@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ConversionCustomVariableServiceClient
+from .async_client import ConversionCustomVariableServiceAsyncClient
 
-__all__ = ("ConversionCustomVariableServiceClient",)
+__all__ = (
+    "ConversionCustomVariableServiceClient",
+    "ConversionCustomVariableServiceAsyncClient",
+)

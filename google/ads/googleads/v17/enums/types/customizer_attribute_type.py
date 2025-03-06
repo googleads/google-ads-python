@@ -35,7 +35,26 @@ class CustomizerAttributeTypeEnum(proto.Message):
     """
 
     class CustomizerAttributeType(proto.Enum):
-        r"""The possible types of a customizer attribute."""
+        r"""The possible types of a customizer attribute.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+            TEXT (2):
+                Text customizer.
+            NUMBER (3):
+                Number customizer.
+            PRICE (4):
+                Price customizer consisting of a number and a
+                currency.
+            PERCENT (5):
+                Percentage customizer consisting of a number
+                and a '%'.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TEXT = 2

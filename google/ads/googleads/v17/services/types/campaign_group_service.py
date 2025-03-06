@@ -84,7 +84,9 @@ class MutateCampaignGroupsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -151,6 +153,7 @@ class CampaignGroupOperation(proto.Message):
 
 class MutateCampaignGroupsResponse(proto.Message):
     r"""Response message for campaign group mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCampaignGroupResult]):
             All results for the mutate.
@@ -176,6 +179,7 @@ class MutateCampaignGroupsResponse(proto.Message):
 
 class MutateCampaignGroupResult(proto.Message):
     r"""The result for the campaign group mutate.
+
     Attributes:
         resource_name (str):
             Required. Returned for successful operations.

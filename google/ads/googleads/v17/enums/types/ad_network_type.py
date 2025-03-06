@@ -32,7 +32,27 @@ class AdNetworkTypeEnum(proto.Message):
     r"""Container for enumeration of Google Ads network types."""
 
     class AdNetworkType(proto.Enum):
-        r"""Enumerates Google Ads network types."""
+        r"""Enumerates Google Ads network types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            SEARCH (2):
+                Google search.
+            SEARCH_PARTNERS (3):
+                Search partners.
+            CONTENT (4):
+                Display Network.
+            MIXED (7):
+                Cross-network.
+            YOUTUBE (8):
+                YouTube
+            GOOGLE_TV (9):
+                Google TV
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH = 2

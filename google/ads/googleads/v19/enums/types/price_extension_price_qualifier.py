@@ -35,7 +35,21 @@ class PriceExtensionPriceQualifierEnum(proto.Message):
     """
 
     class PriceExtensionPriceQualifier(proto.Enum):
-        r"""Enums of price extension price qualifier."""
+        r"""Enums of price extension price qualifier.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            FROM (2):
+                'From' qualifier for the price.
+            UP_TO (3):
+                'Up to' qualifier for the price.
+            AVERAGE (4):
+                'Average' qualifier for the price.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

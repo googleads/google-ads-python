@@ -39,6 +39,7 @@ class GeographicView(proto.Message):
     segment fields are used, you may get more than one row per
     country.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

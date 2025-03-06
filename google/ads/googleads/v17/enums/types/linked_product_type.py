@@ -37,7 +37,26 @@ class LinkedProductTypeEnum(proto.Message):
     class LinkedProductType(proto.Enum):
         r"""Describes the possible link types for a link between a Google
         Ads customer and another product.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DATA_PARTNER (2):
+                A link to Data partner.
+            GOOGLE_ADS (3):
+                A link to Google Ads.
+            HOTEL_CENTER (7):
+                A link to Hotel Center.
+            MERCHANT_CENTER (8):
+                A link to Google Merchant Center.
+            ADVERTISING_PARTNER (9):
+                A link to the Google Ads account of the
+                advertising partner.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DATA_PARTNER = 2

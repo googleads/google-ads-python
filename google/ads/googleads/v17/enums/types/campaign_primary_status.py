@@ -39,7 +39,39 @@ class CampaignPrimaryStatusEnum(proto.Message):
         Provides insight into why a campaign is not serving or not
         serving optimally. Modification to the campaign and its related
         entities might take a while to be reflected in this status.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ELIGIBLE (2):
+                The campaign is eligible to serve.
+            PAUSED (3):
+                The user-specified campaign status is paused.
+            REMOVED (4):
+                The user-specified campaign status is
+                removed.
+            ENDED (5):
+                The user-specified time for this campaign to
+                end has passed.
+            PENDING (6):
+                The campaign may serve in the future.
+            MISCONFIGURED (7):
+                The campaign or its associated entities have
+                incorrect user-specified settings.
+            LIMITED (8):
+                The campaign or its associated entities are
+                limited by user-specified settings.
+            LEARNING (9):
+                The automated bidding system is adjusting to
+                user-specified changes to the campaign or
+                associated entities.
+            NOT_ELIGIBLE (10):
+                The campaign is not eligible to serve.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ELIGIBLE = 2

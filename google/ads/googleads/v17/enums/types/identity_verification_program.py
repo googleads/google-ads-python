@@ -32,7 +32,18 @@ class IdentityVerificationProgramEnum(proto.Message):
     r"""Container for IdentityVerificationProgram."""
 
     class IdentityVerificationProgram(proto.Enum):
-        r"""Type of identity verification program."""
+        r"""Type of identity verification program.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            ADVERTISER_IDENTITY_VERIFICATION (2):
+                Advertiser submits documents to verify their
+                identity.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADVERTISER_IDENTITY_VERIFICATION = 2

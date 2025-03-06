@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ChainRelationshipTypeEnum",},
+    manifest={
+        "ChainRelationshipTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,20 @@ class ChainRelationshipTypeEnum(proto.Message):
     """
 
     class ChainRelationshipType(proto.Enum):
-        r"""Possible types of a relationship."""
+        r"""Possible types of a relationship.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AUTO_DEALERS (2):
+                Auto dealer relationship.
+            GENERAL_RETAILERS (3):
+                General retailer relationship.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AUTO_DEALERS = 2

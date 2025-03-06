@@ -22,16 +22,51 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"PriceExtensionTypeEnum",},
+    manifest={
+        "PriceExtensionTypeEnum",
+    },
 )
 
 
 class PriceExtensionTypeEnum(proto.Message):
-    r"""Container for enum describing types for a price extension.
-    """
+    r"""Container for enum describing types for a price extension."""
 
     class PriceExtensionType(proto.Enum):
-        r"""Price extension type."""
+        r"""Price extension type.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BRANDS (2):
+                The type for showing a list of brands.
+            EVENTS (3):
+                The type for showing a list of events.
+            LOCATIONS (4):
+                The type for showing locations relevant to
+                your business.
+            NEIGHBORHOODS (5):
+                The type for showing sub-regions or districts
+                within a city or region.
+            PRODUCT_CATEGORIES (6):
+                The type for showing a collection of product
+                categories.
+            PRODUCT_TIERS (7):
+                The type for showing a collection of related
+                product tiers.
+            SERVICES (8):
+                The type for showing a collection of services
+                offered by your business.
+            SERVICE_CATEGORIES (9):
+                The type for showing a collection of service
+                categories.
+            SERVICE_TIERS (10):
+                The type for showing a collection of related
+                service tiers.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BRANDS = 2

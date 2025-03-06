@@ -27,13 +27,16 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignAggregateAssetView",},
+    manifest={
+        "CampaignAggregateAssetView",
+    },
 )
 
 
 class CampaignAggregateAssetView(proto.Message):
     r"""A campaign-level aggregate asset view that shows where the
     asset is linked, performamce of the asset and stats.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -64,13 +67,18 @@ class CampaignAggregateAssetView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     asset: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
     asset_source: gage_asset_source.AssetSourceEnum.AssetSource = proto.Field(
         proto.ENUM,
@@ -78,11 +86,13 @@ class CampaignAggregateAssetView(proto.Message):
         optional=True,
         enum=gage_asset_source.AssetSourceEnum.AssetSource,
     )
-    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = proto.Field(
-        proto.ENUM,
-        number=5,
-        optional=True,
-        enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+    field_type: asset_field_type.AssetFieldTypeEnum.AssetFieldType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            optional=True,
+            enum=asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
     )
 
 

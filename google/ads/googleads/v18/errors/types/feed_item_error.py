@@ -22,16 +22,51 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"FeedItemErrorEnum",},
+    manifest={
+        "FeedItemErrorEnum",
+    },
 )
 
 
 class FeedItemErrorEnum(proto.Message):
-    r"""Container for enum describing possible feed item errors.
-    """
+    r"""Container for enum describing possible feed item errors."""
 
     class FeedItemError(proto.Enum):
-        r"""Enum describing possible feed item errors."""
+        r"""Enum describing possible feed item errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CANNOT_CONVERT_ATTRIBUTE_VALUE_FROM_STRING (2):
+                Cannot convert the feed attribute value from
+                string to its real type.
+            CANNOT_OPERATE_ON_REMOVED_FEED_ITEM (3):
+                Cannot operate on removed feed item.
+            DATE_TIME_MUST_BE_IN_ACCOUNT_TIME_ZONE (4):
+                Date time zone does not match the account's
+                time zone.
+            KEY_ATTRIBUTES_NOT_FOUND (5):
+                Feed item with the key attributes could not
+                be found.
+            INVALID_URL (6):
+                Url feed attribute value is not valid.
+            MISSING_KEY_ATTRIBUTES (7):
+                Some key attributes are missing.
+            KEY_ATTRIBUTES_NOT_UNIQUE (8):
+                Feed item has same key attributes as another
+                feed item.
+            CANNOT_MODIFY_KEY_ATTRIBUTE_VALUE (9):
+                Cannot modify key attributes on an existing
+                feed item.
+            SIZE_TOO_LARGE_FOR_MULTI_VALUE_ATTRIBUTE (10):
+                The feed attribute value is too large.
+            LEGACY_FEED_TYPE_READ_ONLY (11):
+                Feed is read only.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CANNOT_CONVERT_ATTRIBUTE_VALUE_FROM_STRING = 2

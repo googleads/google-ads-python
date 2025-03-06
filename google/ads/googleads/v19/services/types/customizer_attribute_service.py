@@ -143,6 +143,7 @@ class CustomizerAttributeOperation(proto.Message):
 
 class MutateCustomizerAttributesResponse(proto.Message):
     r"""Response message for a customizer attribute mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCustomizerAttributeResult]):
             All results for the mutate.
@@ -170,6 +171,7 @@ class MutateCustomizerAttributesResponse(proto.Message):
 
 class MutateCustomizerAttributeResult(proto.Message):
     r"""The result for the customizer attribute mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

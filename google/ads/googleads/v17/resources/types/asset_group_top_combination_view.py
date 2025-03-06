@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class AssetGroupTopCombinationView(proto.Message):
     r"""A view on the usage of ad group ad asset combination.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the asset group top
@@ -60,17 +61,18 @@ class AssetGroupTopCombinationView(proto.Message):
 
 class AssetGroupAssetCombinationData(proto.Message):
     r"""Asset group asset combination data
+
     Attributes:
         asset_combination_served_assets (MutableSequence[google.ads.googleads.v17.common.types.AssetUsage]):
             Output only. Served assets.
     """
 
-    asset_combination_served_assets: MutableSequence[
-        asset_usage.AssetUsage
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message=asset_usage.AssetUsage,
+    asset_combination_served_assets: MutableSequence[asset_usage.AssetUsage] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message=asset_usage.AssetUsage,
+        )
     )
 
 

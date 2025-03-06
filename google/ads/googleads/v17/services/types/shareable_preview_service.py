@@ -53,17 +53,18 @@ class GenerateShareablePreviewsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    shareable_previews: MutableSequence[
-        "ShareablePreview"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ShareablePreview",
+    shareable_previews: MutableSequence["ShareablePreview"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ShareablePreview",
+        )
     )
 
 
 class ShareablePreview(proto.Message):
     r"""A shareable preview with its identifier.
+
     Attributes:
         asset_group_identifier (google.ads.googleads.v17.services.types.AssetGroupIdentifier):
             Required. Asset group of the shareable
@@ -79,6 +80,7 @@ class ShareablePreview(proto.Message):
 
 class AssetGroupIdentifier(proto.Message):
     r"""Asset group of the shareable preview.
+
     Attributes:
         asset_group_id (int):
             Required. The asset group identifier.
@@ -108,6 +110,7 @@ class GenerateShareablePreviewsResponse(proto.Message):
 
 class ShareablePreviewOrError(proto.Message):
     r"""Result of the generate shareable preview.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -149,6 +152,7 @@ class ShareablePreviewOrError(proto.Message):
 
 class ShareablePreviewResult(proto.Message):
     r"""Message to hold a shareable preview result.
+
     Attributes:
         shareable_preview_url (str):
             The shareable preview URL.

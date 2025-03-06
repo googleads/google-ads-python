@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"LocalServicesEmployeeStatusEnum",},
+    manifest={
+        "LocalServicesEmployeeStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,22 @@ class LocalServicesEmployeeStatusEnum(proto.Message):
     """
 
     class LocalServicesEmployeeStatus(proto.Enum):
-        r"""Enums describing statuses of a local services employee."""
+        r"""Enums describing statuses of a local services employee.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Employee is not removed, and employee status
+                is active.
+            REMOVED (3):
+                Employee is removed. Used to delete an
+                employee from the business.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

@@ -32,7 +32,17 @@ class EnumErrorEnum(proto.Message):
     r"""Container for enum describing possible enum errors."""
 
     class EnumError(proto.Enum):
-        r"""Enum describing possible enum errors."""
+        r"""Enum describing possible enum errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            ENUM_VALUE_NOT_PERMITTED (3):
+                The enum value is not permitted.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

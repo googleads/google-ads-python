@@ -26,7 +26,10 @@ from google.ads.googleads.v18.enums.types import matching_function_operator
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"MatchingFunction", "Operand",},
+    manifest={
+        "MatchingFunction",
+        "Operand",
+    },
 )
 
 
@@ -34,6 +37,7 @@ class MatchingFunction(proto.Message):
     r"""Matching function associated with a
     CustomerFeed, CampaignFeed, or AdGroupFeed. The matching
     function is used to filter the set of feed items selected.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -72,23 +76,32 @@ class MatchingFunction(proto.Message):
     """
 
     function_string: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
-    operator: matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator = proto.Field(
+    operator: (
+        matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=matching_function_operator.MatchingFunctionOperatorEnum.MatchingFunctionOperator,
     )
     left_operands: MutableSequence["Operand"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="Operand",
+        proto.MESSAGE,
+        number=2,
+        message="Operand",
     )
     right_operands: MutableSequence["Operand"] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="Operand",
+        proto.MESSAGE,
+        number=3,
+        message="Operand",
     )
 
 
 class Operand(proto.Message):
     r"""An operand in a matching function.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -120,6 +133,7 @@ class Operand(proto.Message):
 
     class ConstantOperand(proto.Message):
         r"""A constant operand in a matching function.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other
@@ -151,21 +165,30 @@ class Operand(proto.Message):
         """
 
         string_value: str = proto.Field(
-            proto.STRING, number=5, oneof="constant_operand_value",
+            proto.STRING,
+            number=5,
+            oneof="constant_operand_value",
         )
         long_value: int = proto.Field(
-            proto.INT64, number=6, oneof="constant_operand_value",
+            proto.INT64,
+            number=6,
+            oneof="constant_operand_value",
         )
         boolean_value: bool = proto.Field(
-            proto.BOOL, number=7, oneof="constant_operand_value",
+            proto.BOOL,
+            number=7,
+            oneof="constant_operand_value",
         )
         double_value: float = proto.Field(
-            proto.DOUBLE, number=8, oneof="constant_operand_value",
+            proto.DOUBLE,
+            number=8,
+            oneof="constant_operand_value",
         )
 
     class FeedAttributeOperand(proto.Message):
         r"""A feed attribute operand in a matching function.
         Used to represent a feed attribute in feed.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -182,10 +205,14 @@ class Operand(proto.Message):
         """
 
         feed_id: int = proto.Field(
-            proto.INT64, number=3, optional=True,
+            proto.INT64,
+            number=3,
+            optional=True,
         )
         feed_attribute_id: int = proto.Field(
-            proto.INT64, number=4, optional=True,
+            proto.INT64,
+            number=4,
+            optional=True,
         )
 
     class FunctionOperand(proto.Message):
@@ -198,7 +225,9 @@ class Operand(proto.Message):
         """
 
         matching_function: "MatchingFunction" = proto.Field(
-            proto.MESSAGE, number=1, message="MatchingFunction",
+            proto.MESSAGE,
+            number=1,
+            message="MatchingFunction",
         )
 
     class RequestContextOperand(proto.Message):
@@ -211,7 +240,9 @@ class Operand(proto.Message):
                 context.
         """
 
-        context_type: matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType = proto.Field(
+        context_type: (
+            matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=matching_function_context_type.MatchingFunctionContextTypeEnum.MatchingFunctionContextType,

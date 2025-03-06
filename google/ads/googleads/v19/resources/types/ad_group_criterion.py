@@ -306,6 +306,7 @@ class AdGroupCriterion(proto.Message):
 
     class QualityInfo(proto.Message):
         r"""A container for ad group criterion quality information.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -357,6 +358,7 @@ class AdGroupCriterion(proto.Message):
 
     class PositionEstimates(proto.Message):
         r"""Estimates for criterion bids at various positions.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:

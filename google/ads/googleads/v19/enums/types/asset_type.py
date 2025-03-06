@@ -32,7 +32,73 @@ class AssetTypeEnum(proto.Message):
     r"""Container for enum describing the types of asset."""
 
     class AssetType(proto.Enum):
-        r"""Enum describing possible types of asset."""
+        r"""Enum describing possible types of asset.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            YOUTUBE_VIDEO (2):
+                YouTube video asset.
+            MEDIA_BUNDLE (3):
+                Media bundle asset.
+            IMAGE (4):
+                Image asset.
+            TEXT (5):
+                Text asset.
+            LEAD_FORM (6):
+                Lead form asset.
+            BOOK_ON_GOOGLE (7):
+                Book on Google asset.
+            PROMOTION (8):
+                Promotion asset.
+            CALLOUT (9):
+                Callout asset.
+            STRUCTURED_SNIPPET (10):
+                Structured Snippet asset.
+            SITELINK (11):
+                Sitelink asset.
+            PAGE_FEED (12):
+                Page Feed asset.
+            DYNAMIC_EDUCATION (13):
+                Dynamic Education asset.
+            MOBILE_APP (14):
+                Mobile app asset.
+            HOTEL_CALLOUT (15):
+                Hotel callout asset.
+            CALL (16):
+                Call asset.
+            PRICE (17):
+                Price asset.
+            CALL_TO_ACTION (18):
+                Call to action asset.
+            DYNAMIC_REAL_ESTATE (19):
+                Dynamic real estate asset.
+            DYNAMIC_CUSTOM (20):
+                Dynamic custom asset.
+            DYNAMIC_HOTELS_AND_RENTALS (21):
+                Dynamic hotels and rentals asset.
+            DYNAMIC_FLIGHTS (22):
+                Dynamic flights asset.
+            DYNAMIC_TRAVEL (24):
+                Dynamic travel asset.
+            DYNAMIC_LOCAL (25):
+                Dynamic local asset.
+            DYNAMIC_JOBS (26):
+                Dynamic jobs asset.
+            LOCATION (27):
+                Location asset.
+            HOTEL_PROPERTY (28):
+                Hotel property asset.
+            DEMAND_GEN_CAROUSEL_CARD (29):
+                Demand Gen Carousel Card asset.
+            BUSINESS_MESSAGE (30):
+                Business message asset.
+            APP_DEEP_LINK (31):
+                App deep link asset.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

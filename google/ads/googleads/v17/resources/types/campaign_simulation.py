@@ -121,7 +121,9 @@ class CampaignSimulation(proto.Message):
         number=3,
         enum=simulation_type.SimulationTypeEnum.SimulationType,
     )
-    modification_method: simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod = proto.Field(
+    modification_method: (
+        simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=simulation_modification_method.SimulationModificationMethodEnum.SimulationModificationMethod,
@@ -156,7 +158,9 @@ class CampaignSimulation(proto.Message):
             message=simulation.TargetRoasSimulationPointList,
         )
     )
-    target_impression_share_point_list: simulation.TargetImpressionShareSimulationPointList = proto.Field(
+    target_impression_share_point_list: (
+        simulation.TargetImpressionShareSimulationPointList
+    ) = proto.Field(
         proto.MESSAGE,
         number=10,
         oneof="point_list",

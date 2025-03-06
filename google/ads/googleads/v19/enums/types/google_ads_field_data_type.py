@@ -34,6 +34,66 @@ class GoogleAdsFieldDataTypeEnum(proto.Message):
     class GoogleAdsFieldDataType(proto.Enum):
         r"""These are the various types a GoogleAdsService artifact may
         take on.
+
+        Values:
+            UNSPECIFIED (0):
+                Unspecified
+            UNKNOWN (1):
+                Unknown
+            BOOLEAN (2):
+                Maps to google.protobuf.BoolValue
+
+                Applicable operators:  =, !=
+            DATE (3):
+                Maps to google.protobuf.StringValue. It can
+                be compared using the set of operators specific
+                to dates however.
+
+                Applicable operators:  =, <, >, <=, >=, BETWEEN,
+                DURING, and IN
+            DOUBLE (4):
+                Maps to google.protobuf.DoubleValue
+
+                Applicable operators:  =, !=, <, >, IN, NOT IN
+            ENUM (5):
+                Maps to an enum. It's specific definition can be found at
+                type_url.
+
+                Applicable operators: =, !=, IN, NOT IN
+            FLOAT (6):
+                Maps to google.protobuf.FloatValue
+
+                Applicable operators:  =, !=, <, >, IN, NOT IN
+            INT32 (7):
+                Maps to google.protobuf.Int32Value
+
+                Applicable operators:  =, !=, <, >, <=, >=,
+                BETWEEN, IN, NOT IN
+            INT64 (8):
+                Maps to google.protobuf.Int64Value
+
+                Applicable operators:  =, !=, <, >, <=, >=,
+                BETWEEN, IN, NOT IN
+            MESSAGE (9):
+                Maps to a protocol buffer message type. The data type's
+                details can be found in type_url.
+
+                No operators work with MESSAGE fields.
+            RESOURCE_NAME (10):
+                Maps to google.protobuf.StringValue. Represents the resource
+                name (unique id) of a resource or one of its foreign keys.
+
+                No operators work with RESOURCE_NAME fields.
+            STRING (11):
+                Maps to google.protobuf.StringValue.
+
+                Applicable operators:  =, !=, LIKE, NOT LIKE,
+                IN, NOT IN
+            UINT64 (12):
+                Maps to google.protobuf.UInt64Value
+
+                Applicable operators:  =, !=, <, >, <=, >=,
+                BETWEEN, IN, NOT IN
         """
 
         UNSPECIFIED = 0

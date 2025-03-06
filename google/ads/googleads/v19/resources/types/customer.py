@@ -48,6 +48,7 @@ __protobuf__ = proto.module(
 
 class Customer(proto.Message):
     r"""A customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -321,6 +322,7 @@ class CallReportingSetting(proto.Message):
     r"""Call reporting setting for a customer. Only mutable in an ``update``
     operation.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -362,6 +364,7 @@ class CallReportingSetting(proto.Message):
 class ConversionTrackingSetting(proto.Message):
     r"""A collection of customer-wide settings related to Google Ads
     Conversion Tracking.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -441,6 +444,7 @@ class ConversionTrackingSetting(proto.Message):
 
 class RemarketingSetting(proto.Message):
     r"""Remarketing setting for a customer.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -459,6 +463,7 @@ class RemarketingSetting(proto.Message):
 
 class CustomerAgreementSetting(proto.Message):
     r"""Customer Agreement Setting for a customer.
+
     Attributes:
         accepted_lead_form_terms (bool):
             Output only. Whether the customer has
@@ -473,6 +478,7 @@ class CustomerAgreementSetting(proto.Message):
 
 class LocalServicesSettings(proto.Message):
     r"""Settings for Local Services customer.
+
     Attributes:
         granular_license_statuses (MutableSequence[google.ads.googleads.v19.resources.types.GranularLicenseStatus]):
             Output only. A read-only list of geo vertical
@@ -500,6 +506,7 @@ class LocalServicesSettings(proto.Message):
 
 class GranularLicenseStatus(proto.Message):
     r"""License status at geo + vertical level.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -548,6 +555,7 @@ class GranularLicenseStatus(proto.Message):
 
 class GranularInsuranceStatus(proto.Message):
     r"""Insurance status at geo + vertical level.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

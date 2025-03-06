@@ -49,10 +49,13 @@ class AppendLeadConversationRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversations: MutableSequence["Conversation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="Conversation",
+        proto.MESSAGE,
+        number=2,
+        message="Conversation",
     )
 
 
@@ -67,12 +70,15 @@ class AppendLeadConversationResponse(proto.Message):
     """
 
     responses: MutableSequence["ConversationOrError"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ConversationOrError",
+        proto.MESSAGE,
+        number=1,
+        message="ConversationOrError",
     )
 
 
 class Conversation(proto.Message):
     r"""Details of the conversation that needs to be appended.
+
     Attributes:
         local_services_lead (str):
             Required. The resource name of the local
@@ -84,15 +90,18 @@ class Conversation(proto.Message):
     """
 
     local_services_lead: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     text: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class ConversationOrError(proto.Message):
     r"""Result of the append conversation operation.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -114,7 +123,9 @@ class ConversationOrError(proto.Message):
     """
 
     local_services_lead_conversation: str = proto.Field(
-        proto.STRING, number=1, oneof="append_lead_conversation_response",
+        proto.STRING,
+        number=1,
+        oneof="append_lead_conversation_response",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,

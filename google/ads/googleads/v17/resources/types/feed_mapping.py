@@ -66,6 +66,7 @@ __protobuf__ = proto.module(
 
 class FeedMapping(proto.Message):
     r"""A feed mapping.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -118,12 +119,12 @@ class FeedMapping(proto.Message):
         number=7,
         optional=True,
     )
-    attribute_field_mappings: MutableSequence[
-        "AttributeFieldMapping"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=5,
-        message="AttributeFieldMapping",
+    attribute_field_mappings: MutableSequence["AttributeFieldMapping"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=5,
+            message="AttributeFieldMapping",
+        )
     )
     status: feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus = (
         proto.Field(
@@ -132,13 +133,17 @@ class FeedMapping(proto.Message):
             enum=feed_mapping_status.FeedMappingStatusEnum.FeedMappingStatus,
         )
     )
-    placeholder_type: gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType = proto.Field(
+    placeholder_type: (
+        gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         oneof="target",
         enum=gage_placeholder_type.PlaceholderTypeEnum.PlaceholderType,
     )
-    criterion_type: feed_mapping_criterion_type.FeedMappingCriterionTypeEnum.FeedMappingCriterionType = proto.Field(
+    criterion_type: (
+        feed_mapping_criterion_type.FeedMappingCriterionTypeEnum.FeedMappingCriterionType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         oneof="target",
@@ -274,133 +279,177 @@ class AttributeFieldMapping(proto.Message):
         number=25,
         optional=True,
     )
-    sitelink_field: sitelink_placeholder_field.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField = proto.Field(
+    sitelink_field: (
+        sitelink_placeholder_field.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         oneof="field",
         enum=sitelink_placeholder_field.SitelinkPlaceholderFieldEnum.SitelinkPlaceholderField,
     )
-    call_field: call_placeholder_field.CallPlaceholderFieldEnum.CallPlaceholderField = proto.Field(
+    call_field: (
+        call_placeholder_field.CallPlaceholderFieldEnum.CallPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         oneof="field",
         enum=call_placeholder_field.CallPlaceholderFieldEnum.CallPlaceholderField,
     )
-    app_field: app_placeholder_field.AppPlaceholderFieldEnum.AppPlaceholderField = proto.Field(
+    app_field: (
+        app_placeholder_field.AppPlaceholderFieldEnum.AppPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         oneof="field",
         enum=app_placeholder_field.AppPlaceholderFieldEnum.AppPlaceholderField,
     )
-    location_field: location_placeholder_field.LocationPlaceholderFieldEnum.LocationPlaceholderField = proto.Field(
+    location_field: (
+        location_placeholder_field.LocationPlaceholderFieldEnum.LocationPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         oneof="field",
         enum=location_placeholder_field.LocationPlaceholderFieldEnum.LocationPlaceholderField,
     )
-    affiliate_location_field: affiliate_location_placeholder_field.AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField = proto.Field(
+    affiliate_location_field: (
+        affiliate_location_placeholder_field.AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         oneof="field",
         enum=affiliate_location_placeholder_field.AffiliateLocationPlaceholderFieldEnum.AffiliateLocationPlaceholderField,
     )
-    callout_field: callout_placeholder_field.CalloutPlaceholderFieldEnum.CalloutPlaceholderField = proto.Field(
+    callout_field: (
+        callout_placeholder_field.CalloutPlaceholderFieldEnum.CalloutPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         oneof="field",
         enum=callout_placeholder_field.CalloutPlaceholderFieldEnum.CalloutPlaceholderField,
     )
-    structured_snippet_field: structured_snippet_placeholder_field.StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField = proto.Field(
+    structured_snippet_field: (
+        structured_snippet_placeholder_field.StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         oneof="field",
         enum=structured_snippet_placeholder_field.StructuredSnippetPlaceholderFieldEnum.StructuredSnippetPlaceholderField,
     )
-    message_field: message_placeholder_field.MessagePlaceholderFieldEnum.MessagePlaceholderField = proto.Field(
+    message_field: (
+        message_placeholder_field.MessagePlaceholderFieldEnum.MessagePlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=10,
         oneof="field",
         enum=message_placeholder_field.MessagePlaceholderFieldEnum.MessagePlaceholderField,
     )
-    price_field: price_placeholder_field.PricePlaceholderFieldEnum.PricePlaceholderField = proto.Field(
+    price_field: (
+        price_placeholder_field.PricePlaceholderFieldEnum.PricePlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=11,
         oneof="field",
         enum=price_placeholder_field.PricePlaceholderFieldEnum.PricePlaceholderField,
     )
-    promotion_field: promotion_placeholder_field.PromotionPlaceholderFieldEnum.PromotionPlaceholderField = proto.Field(
+    promotion_field: (
+        promotion_placeholder_field.PromotionPlaceholderFieldEnum.PromotionPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         oneof="field",
         enum=promotion_placeholder_field.PromotionPlaceholderFieldEnum.PromotionPlaceholderField,
     )
-    ad_customizer_field: ad_customizer_placeholder_field.AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField = proto.Field(
+    ad_customizer_field: (
+        ad_customizer_placeholder_field.AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=13,
         oneof="field",
         enum=ad_customizer_placeholder_field.AdCustomizerPlaceholderFieldEnum.AdCustomizerPlaceholderField,
     )
-    dsa_page_feed_field: dsa_page_feed_criterion_field.DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField = proto.Field(
+    dsa_page_feed_field: (
+        dsa_page_feed_criterion_field.DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField
+    ) = proto.Field(
         proto.ENUM,
         number=14,
         oneof="field",
         enum=dsa_page_feed_criterion_field.DsaPageFeedCriterionFieldEnum.DsaPageFeedCriterionField,
     )
-    location_extension_targeting_field: location_extension_targeting_criterion_field.LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField = proto.Field(
+    location_extension_targeting_field: (
+        location_extension_targeting_criterion_field.LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField
+    ) = proto.Field(
         proto.ENUM,
         number=15,
         oneof="field",
         enum=location_extension_targeting_criterion_field.LocationExtensionTargetingCriterionFieldEnum.LocationExtensionTargetingCriterionField,
     )
-    education_field: education_placeholder_field.EducationPlaceholderFieldEnum.EducationPlaceholderField = proto.Field(
+    education_field: (
+        education_placeholder_field.EducationPlaceholderFieldEnum.EducationPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=16,
         oneof="field",
         enum=education_placeholder_field.EducationPlaceholderFieldEnum.EducationPlaceholderField,
     )
-    flight_field: flight_placeholder_field.FlightPlaceholderFieldEnum.FlightPlaceholderField = proto.Field(
+    flight_field: (
+        flight_placeholder_field.FlightPlaceholderFieldEnum.FlightPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         oneof="field",
         enum=flight_placeholder_field.FlightPlaceholderFieldEnum.FlightPlaceholderField,
     )
-    custom_field: custom_placeholder_field.CustomPlaceholderFieldEnum.CustomPlaceholderField = proto.Field(
+    custom_field: (
+        custom_placeholder_field.CustomPlaceholderFieldEnum.CustomPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=18,
         oneof="field",
         enum=custom_placeholder_field.CustomPlaceholderFieldEnum.CustomPlaceholderField,
     )
-    hotel_field: hotel_placeholder_field.HotelPlaceholderFieldEnum.HotelPlaceholderField = proto.Field(
+    hotel_field: (
+        hotel_placeholder_field.HotelPlaceholderFieldEnum.HotelPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=19,
         oneof="field",
         enum=hotel_placeholder_field.HotelPlaceholderFieldEnum.HotelPlaceholderField,
     )
-    real_estate_field: real_estate_placeholder_field.RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField = proto.Field(
+    real_estate_field: (
+        real_estate_placeholder_field.RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=20,
         oneof="field",
         enum=real_estate_placeholder_field.RealEstatePlaceholderFieldEnum.RealEstatePlaceholderField,
     )
-    travel_field: travel_placeholder_field.TravelPlaceholderFieldEnum.TravelPlaceholderField = proto.Field(
+    travel_field: (
+        travel_placeholder_field.TravelPlaceholderFieldEnum.TravelPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=21,
         oneof="field",
         enum=travel_placeholder_field.TravelPlaceholderFieldEnum.TravelPlaceholderField,
     )
-    local_field: local_placeholder_field.LocalPlaceholderFieldEnum.LocalPlaceholderField = proto.Field(
+    local_field: (
+        local_placeholder_field.LocalPlaceholderFieldEnum.LocalPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=22,
         oneof="field",
         enum=local_placeholder_field.LocalPlaceholderFieldEnum.LocalPlaceholderField,
     )
-    job_field: job_placeholder_field.JobPlaceholderFieldEnum.JobPlaceholderField = proto.Field(
+    job_field: (
+        job_placeholder_field.JobPlaceholderFieldEnum.JobPlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=23,
         oneof="field",
         enum=job_placeholder_field.JobPlaceholderFieldEnum.JobPlaceholderField,
     )
-    image_field: image_placeholder_field.ImagePlaceholderFieldEnum.ImagePlaceholderField = proto.Field(
+    image_field: (
+        image_placeholder_field.ImagePlaceholderFieldEnum.ImagePlaceholderField
+    ) = proto.Field(
         proto.ENUM,
         number=26,
         oneof="field",

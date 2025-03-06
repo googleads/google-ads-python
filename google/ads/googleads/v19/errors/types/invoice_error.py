@@ -32,7 +32,30 @@ class InvoiceErrorEnum(proto.Message):
     r"""Container for enum describing possible invoice errors."""
 
     class InvoiceError(proto.Enum):
-        r"""Enum describing possible invoice errors."""
+        r"""Enum describing possible invoice errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            YEAR_MONTH_TOO_OLD (2):
+                Cannot request invoices issued before
+                2019-01-01.
+            NOT_INVOICED_CUSTOMER (3):
+                Cannot request invoices for customer who
+                doesn't receive invoices.
+            BILLING_SETUP_NOT_APPROVED (4):
+                Cannot request invoices for a non approved
+                billing setup.
+            BILLING_SETUP_NOT_ON_MONTHLY_INVOICING (5):
+                Cannot request invoices for a billing setup
+                that is not on monthly invoicing.
+            NON_SERVING_CUSTOMER (6):
+                Cannot request invoices for a non serving
+                customer.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

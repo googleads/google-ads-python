@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class FeedItemTarget(proto.Message):
     r"""A feed item target.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -101,7 +102,9 @@ class FeedItemTarget(proto.Message):
         number=12,
         optional=True,
     )
-    feed_item_target_type: gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType = proto.Field(
+    feed_item_target_type: (
+        gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_feed_item_target_type.FeedItemTargetTypeEnum.FeedItemTargetType,
@@ -111,7 +114,9 @@ class FeedItemTarget(proto.Message):
         number=13,
         optional=True,
     )
-    status: feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus = proto.Field(
+    status: (
+        feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=11,
         enum=feed_item_target_status.FeedItemTargetStatusEnum.FeedItemTargetStatus,
@@ -137,7 +142,9 @@ class FeedItemTarget(proto.Message):
         number=16,
         oneof="target",
     )
-    device: feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice = proto.Field(
+    device: (
+        feed_item_target_device.FeedItemTargetDeviceEnum.FeedItemTargetDevice
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         oneof="target",

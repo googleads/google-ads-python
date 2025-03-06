@@ -32,7 +32,27 @@ class AdCustomizerErrorEnum(proto.Message):
     r"""Container for enum describing possible ad customizer errors."""
 
     class AdCustomizerError(proto.Enum):
-        r"""Enum describing possible ad customizer errors."""
+        r"""Enum describing possible ad customizer errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            COUNTDOWN_INVALID_DATE_FORMAT (2):
+                Invalid date argument in countdown function.
+            COUNTDOWN_DATE_IN_PAST (3):
+                Countdown end date is in the past.
+            COUNTDOWN_INVALID_LOCALE (4):
+                Invalid locale string in countdown function.
+            COUNTDOWN_INVALID_START_DAYS_BEFORE (5):
+                Days-before argument to countdown function is
+                not positive.
+            UNKNOWN_USER_LIST (6):
+                A user list referenced in an IF function does
+                not exist.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

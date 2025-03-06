@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"FunctionParsingErrorEnum",},
+    manifest={
+        "FunctionParsingErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,39 @@ class FunctionParsingErrorEnum(proto.Message):
     """
 
     class FunctionParsingError(proto.Enum):
-        r"""Enum describing possible function parsing errors."""
+        r"""Enum describing possible function parsing errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NO_MORE_INPUT (2):
+                Unexpected end of function string.
+            EXPECTED_CHARACTER (3):
+                Could not find an expected character.
+            UNEXPECTED_SEPARATOR (4):
+                Unexpected separator character.
+            UNMATCHED_LEFT_BRACKET (5):
+                Unmatched left bracket or parenthesis.
+            UNMATCHED_RIGHT_BRACKET (6):
+                Unmatched right bracket or parenthesis.
+            TOO_MANY_NESTED_FUNCTIONS (7):
+                Functions are nested too deeply.
+            MISSING_RIGHT_HAND_OPERAND (8):
+                Missing right-hand-side operand.
+            INVALID_OPERATOR_NAME (9):
+                Invalid operator/function name.
+            FEED_ATTRIBUTE_OPERAND_ARGUMENT_NOT_INTEGER (10):
+                Feed attribute operand's argument is not an
+                integer.
+            NO_OPERANDS (11):
+                Missing function operands.
+            TOO_MANY_OPERANDS (12):
+                Function had too many operands.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NO_MORE_INPUT = 2

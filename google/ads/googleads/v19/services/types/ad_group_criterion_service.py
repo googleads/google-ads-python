@@ -173,6 +173,7 @@ class AdGroupCriterionOperation(proto.Message):
 
 class MutateAdGroupCriteriaResponse(proto.Message):
     r"""Response message for an ad group criterion mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -200,6 +201,7 @@ class MutateAdGroupCriteriaResponse(proto.Message):
 
 class MutateAdGroupCriterionResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

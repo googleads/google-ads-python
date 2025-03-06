@@ -35,7 +35,21 @@ class CampaignStatusEnum(proto.Message):
     """
 
     class CampaignStatus(proto.Enum):
-        r"""Possible statuses of a campaign."""
+        r"""Possible statuses of a campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Campaign is active and can show ads.
+            PAUSED (3):
+                Campaign has been paused by the user.
+            REMOVED (4):
+                Campaign has been removed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

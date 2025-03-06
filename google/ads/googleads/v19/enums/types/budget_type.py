@@ -32,7 +32,42 @@ class BudgetTypeEnum(proto.Message):
     r"""Describes Budget types."""
 
     class BudgetType(proto.Enum):
-        r"""Possible Budget types."""
+        r"""Possible Budget types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            STANDARD (2):
+                Budget type for standard Google Ads usage.
+                Caps daily spend at two times the specified
+                budget amount. Full details:
+                https://support.google.com/google-ads/answer/6385083
+            FIXED_CPA (4):
+                Budget type with a fixed cost-per-acquisition (conversion).
+                Full details:
+                https://support.google.com/google-ads/answer/7528254
+
+                This type is only supported by campaigns with
+                AdvertisingChannelType.DISPLAY (excluding
+                AdvertisingChannelSubType.DISPLAY_GMAIL),
+                BiddingStrategyType.TARGET_CPA and PaymentMode.CONVERSIONS.
+            SMART_CAMPAIGN (5):
+                Budget type for Smart Campaign. Full details:
+                https://support.google.com/google-ads/answer/7653509
+
+                This type is only supported by campaigns with
+                AdvertisingChannelType.SMART and
+                AdvertisingChannelSubType.SMART_CAMPAIGN.
+            LOCAL_SERVICES (6):
+                Budget type for Local Services Campaign. Full details:
+                https://support.google.com/localservices/answer/7434558
+
+                This type is only supported by campaigns with
+                AdvertisingChannelType.LOCAL_SERVICES.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

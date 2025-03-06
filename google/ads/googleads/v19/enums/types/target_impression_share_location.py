@@ -36,7 +36,21 @@ class TargetImpressionShareLocationEnum(proto.Message):
     """
 
     class TargetImpressionShareLocation(proto.Enum):
-        r"""Enum describing possible goals."""
+        r"""Enum describing possible goals.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ANYWHERE_ON_PAGE (2):
+                Any location on the web page.
+            TOP_OF_PAGE (3):
+                Top box of ads.
+            ABSOLUTE_TOP_OF_PAGE (4):
+                Top slot in the top box of ads.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

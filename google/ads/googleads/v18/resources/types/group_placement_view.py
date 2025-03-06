@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"GroupPlacementView",},
+    manifest={
+        "GroupPlacementView",
+    },
 )
 
 
 class GroupPlacementView(proto.Message):
     r"""A group placement view.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -64,21 +67,30 @@ class GroupPlacementView(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     placement: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     display_name: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     target_url: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
-    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = proto.Field(
-        proto.ENUM,
-        number=5,
-        enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+    placement_type: gage_placement_type.PlacementTypeEnum.PlacementType = (
+        proto.Field(
+            proto.ENUM,
+            number=5,
+            enum=gage_placement_type.PlacementTypeEnum.PlacementType,
+        )
     )
 
 

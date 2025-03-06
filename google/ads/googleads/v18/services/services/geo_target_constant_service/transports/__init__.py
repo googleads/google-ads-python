@@ -17,14 +17,20 @@ from collections import OrderedDict
 
 from .base import GeoTargetConstantServiceTransport
 from .grpc import GeoTargetConstantServiceGrpcTransport
+from .grpc_asyncio import GeoTargetConstantServiceGrpcAsyncIOTransport
+
 
 # Compile a registry of transports.
 _transport_registry = (
     OrderedDict()
 )  # type: Dict[str, Type[GeoTargetConstantServiceTransport]]
 _transport_registry["grpc"] = GeoTargetConstantServiceGrpcTransport
+_transport_registry[
+    "grpc_asyncio"
+] = GeoTargetConstantServiceGrpcAsyncIOTransport
 
 __all__ = (
     "GeoTargetConstantServiceTransport",
     "GeoTargetConstantServiceGrpcTransport",
+    "GeoTargetConstantServiceGrpcAsyncIOTransport",
 )

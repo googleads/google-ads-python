@@ -61,19 +61,23 @@ class MutateConversionGoalCampaignConfigsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "ConversionGoalCampaignConfigOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="ConversionGoalCampaignConfigOperation",
+    operations: MutableSequence["ConversionGoalCampaignConfigOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionGoalCampaignConfigOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -83,6 +87,7 @@ class MutateConversionGoalCampaignConfigsRequest(proto.Message):
 class ConversionGoalCampaignConfigOperation(proto.Message):
     r"""A single operation (update) on a conversion goal campaign
     config.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -99,9 +104,13 @@ class ConversionGoalCampaignConfigOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=2, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=2,
+        message=field_mask_pb2.FieldMask,
     )
-    update: gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig = proto.Field(
+    update: (
+        gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig
+    ) = proto.Field(
         proto.MESSAGE,
         number=1,
         oneof="operation",
@@ -118,17 +127,18 @@ class MutateConversionGoalCampaignConfigsResponse(proto.Message):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateConversionGoalCampaignConfigResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateConversionGoalCampaignConfigResult",
+    results: MutableSequence["MutateConversionGoalCampaignConfigResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateConversionGoalCampaignConfigResult",
+        )
     )
 
 
 class MutateConversionGoalCampaignConfigResult(proto.Message):
     r"""The result for the conversion goal campaign config mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -139,9 +149,12 @@ class MutateConversionGoalCampaignConfigResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    conversion_goal_campaign_config: gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig = proto.Field(
+    conversion_goal_campaign_config: (
+        gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_conversion_goal_campaign_config.ConversionGoalCampaignConfig,

@@ -164,7 +164,9 @@ class GenerateKeywordIdeasRequest(proto.Message):
         proto.INT32,
         number=13,
     )
-    keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
+    keyword_plan_network: (
+        gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
@@ -218,6 +220,7 @@ class GenerateKeywordIdeasRequest(proto.Message):
 
 class KeywordAndUrlSeed(proto.Message):
     r"""Keyword And Url Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -243,6 +246,7 @@ class KeywordAndUrlSeed(proto.Message):
 
 class KeywordSeed(proto.Message):
     r"""Keyword Seed
+
     Attributes:
         keywords (MutableSequence[str]):
             Requires at least one keyword.
@@ -256,6 +260,7 @@ class KeywordSeed(proto.Message):
 
 class SiteSeed(proto.Message):
     r"""Site Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -276,6 +281,7 @@ class SiteSeed(proto.Message):
 
 class UrlSeed(proto.Message):
     r"""Url Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -320,7 +326,9 @@ class GenerateKeywordIdeaResponse(proto.Message):
         number=1,
         message="GenerateKeywordIdeaResult",
     )
-    aggregate_metric_results: keyword_plan_common.KeywordPlanAggregateMetricResults = proto.Field(
+    aggregate_metric_results: (
+        keyword_plan_common.KeywordPlanAggregateMetricResults
+    ) = proto.Field(
         proto.MESSAGE,
         number=4,
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
@@ -337,6 +345,7 @@ class GenerateKeywordIdeaResponse(proto.Message):
 
 class GenerateKeywordIdeaResult(proto.Message):
     r"""The result of generating keyword ideas.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -389,6 +398,7 @@ class GenerateKeywordIdeaResult(proto.Message):
 class GenerateKeywordHistoricalMetricsRequest(proto.Message):
     r"""Request message for
     [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v17.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -449,7 +459,9 @@ class GenerateKeywordHistoricalMetricsRequest(proto.Message):
         proto.STRING,
         number=6,
     )
-    keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
+    keyword_plan_network: (
+        gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
@@ -482,14 +494,16 @@ class GenerateKeywordHistoricalMetricsResponse(proto.Message):
             The aggregate metrics for all keywords.
     """
 
-    results: MutableSequence[
-        "GenerateKeywordHistoricalMetricsResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="GenerateKeywordHistoricalMetricsResult",
+    results: MutableSequence["GenerateKeywordHistoricalMetricsResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="GenerateKeywordHistoricalMetricsResult",
+        )
     )
-    aggregate_metric_results: keyword_plan_common.KeywordPlanAggregateMetricResults = proto.Field(
+    aggregate_metric_results: (
+        keyword_plan_common.KeywordPlanAggregateMetricResults
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=keyword_plan_common.KeywordPlanAggregateMetricResults,
@@ -498,6 +512,7 @@ class GenerateKeywordHistoricalMetricsResponse(proto.Message):
 
 class GenerateKeywordHistoricalMetricsResult(proto.Message):
     r"""The result of generating keyword historical metrics.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -587,12 +602,12 @@ class GenerateAdGroupThemesResponse(proto.Message):
         number=1,
         message="AdGroupKeywordSuggestion",
     )
-    unusable_ad_groups: MutableSequence[
-        "UnusableAdGroup"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="UnusableAdGroup",
+    unusable_ad_groups: MutableSequence["UnusableAdGroup"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="UnusableAdGroup",
+        )
     )
 
 
@@ -624,7 +639,9 @@ class AdGroupKeywordSuggestion(proto.Message):
         proto.STRING,
         number=2,
     )
-    suggested_match_type: keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType = proto.Field(
+    suggested_match_type: (
+        keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=keyword_match_type.KeywordMatchTypeEnum.KeywordMatchType,
@@ -670,6 +687,7 @@ class UnusableAdGroup(proto.Message):
 class GenerateKeywordForecastMetricsRequest(proto.Message):
     r"""Request message for
     [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -720,6 +738,7 @@ class GenerateKeywordForecastMetricsRequest(proto.Message):
 
 class CampaignToForecast(proto.Message):
     r"""A campaign to do a keyword campaign forecast.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -757,6 +776,7 @@ class CampaignToForecast(proto.Message):
 
     class CampaignBiddingStrategy(proto.Message):
         r"""Supported bidding strategies for new campaign forecasts.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other
@@ -796,7 +816,9 @@ class CampaignToForecast(proto.Message):
                 message="MaximizeClicksBiddingStrategy",
             )
         )
-        maximize_conversions_bidding_strategy: "MaximizeConversionsBiddingStrategy" = proto.Field(
+        maximize_conversions_bidding_strategy: (
+            "MaximizeConversionsBiddingStrategy"
+        ) = proto.Field(
             proto.MESSAGE,
             number=3,
             oneof="bidding_strategy",
@@ -807,24 +829,26 @@ class CampaignToForecast(proto.Message):
         proto.STRING,
         number=1,
     )
-    geo_modifiers: MutableSequence[
-        "CriterionBidModifier"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CriterionBidModifier",
+    geo_modifiers: MutableSequence["CriterionBidModifier"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CriterionBidModifier",
+        )
     )
-    keyword_plan_network: gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork = proto.Field(
+    keyword_plan_network: (
+        gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_keyword_plan_network.KeywordPlanNetworkEnum.KeywordPlanNetwork,
     )
-    negative_keywords: MutableSequence[
-        criteria.KeywordInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=4,
-        message=criteria.KeywordInfo,
+    negative_keywords: MutableSequence[criteria.KeywordInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message=criteria.KeywordInfo,
+        )
     )
     bidding_strategy: CampaignBiddingStrategy = proto.Field(
         proto.MESSAGE,
@@ -845,6 +869,7 @@ class CampaignToForecast(proto.Message):
 
 class ForecastAdGroup(proto.Message):
     r"""An ad group that is part of a campaign to be forecasted.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -875,17 +900,18 @@ class ForecastAdGroup(proto.Message):
         number=2,
         message="BiddableKeyword",
     )
-    negative_keywords: MutableSequence[
-        criteria.KeywordInfo
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=3,
-        message=criteria.KeywordInfo,
+    negative_keywords: MutableSequence[criteria.KeywordInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=criteria.KeywordInfo,
+        )
     )
 
 
 class BiddableKeyword(proto.Message):
     r"""A biddable keyword part of an ad group.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -917,6 +943,7 @@ class BiddableKeyword(proto.Message):
 
 class CriterionBidModifier(proto.Message):
     r"""Location Criterion bid modifier.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -944,6 +971,7 @@ class CriterionBidModifier(proto.Message):
 
 class ManualCpcBiddingStrategy(proto.Message):
     r"""Manual CPC Bidding Strategy.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -974,6 +1002,7 @@ class ManualCpcBiddingStrategy(proto.Message):
 
 class MaximizeClicksBiddingStrategy(proto.Message):
     r"""Maximize Clicks Bidding Strategy.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1002,6 +1031,7 @@ class MaximizeClicksBiddingStrategy(proto.Message):
 
 class MaximizeConversionsBiddingStrategy(proto.Message):
     r"""Maximize Conversions Bidding Strategy.
+
     Attributes:
         daily_target_spend_micros (int):
             Required. The daily target spend in micros to
@@ -1018,6 +1048,7 @@ class MaximizeConversionsBiddingStrategy(proto.Message):
 class GenerateKeywordForecastMetricsResponse(proto.Message):
     r"""Response message for
     [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1038,6 +1069,7 @@ class GenerateKeywordForecastMetricsResponse(proto.Message):
 
 class KeywordForecastMetrics(proto.Message):
     r"""The forecast metrics for the planless keyword campaign.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

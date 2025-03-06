@@ -26,12 +26,15 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionGoalCampaignConfig",},
+    manifest={
+        "ConversionGoalCampaignConfig",
+    },
 )
 
 
 class ConversionGoalCampaignConfig(proto.Message):
     r"""Conversion goal settings for a Campaign.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion goal campaign
@@ -51,18 +54,23 @@ class ConversionGoalCampaignConfig(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
-    goal_config_level: gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel = proto.Field(
+    goal_config_level: (
+        gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel,
     )
     custom_conversion_goal: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 

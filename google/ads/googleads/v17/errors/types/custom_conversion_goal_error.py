@@ -35,7 +35,34 @@ class CustomConversionGoalErrorEnum(proto.Message):
     """
 
     class CustomConversionGoalError(proto.Enum):
-        r"""Enum describing possible custom conversion goal errors."""
+        r"""Enum describing possible custom conversion goal errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_CONVERSION_ACTION (2):
+                Cannot find a conversion action with the
+                specified id.
+            CONVERSION_ACTION_NOT_ENABLED (3):
+                The conversion action is not enabled so it
+                cannot be included in a custom conversion goal.
+            CANNOT_REMOVE_LINKED_CUSTOM_CONVERSION_GOAL (4):
+                The custom conversion goal cannot be removed
+                because it's linked to a campaign.
+            CUSTOM_GOAL_DUPLICATE_NAME (5):
+                Custom goal with the same name already
+                exists.
+            DUPLICATE_CONVERSION_ACTION_LIST (6):
+                Custom goal with the same conversion action
+                list already exists.
+            NON_BIDDABLE_CONVERSION_ACTION_NOT_ELIGIBLE_FOR_CUSTOM_GOAL (7):
+                Conversion types that cannot be biddable
+                should not be included in custom goal.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_CONVERSION_ACTION = 2

@@ -59,7 +59,8 @@ class CreateOfflineUserDataJobRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     job: offline_user_data_job.OfflineUserDataJob = proto.Field(
         proto.MESSAGE,
@@ -67,10 +68,12 @@ class CreateOfflineUserDataJobRequest(proto.Message):
         message=offline_user_data_job.OfflineUserDataJob,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     enable_match_rate_range_preview: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
 
 
@@ -84,7 +87,8 @@ class CreateOfflineUserDataJobResponse(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 
@@ -102,16 +106,19 @@ class RunOfflineUserDataJobRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=2,
+        proto.BOOL,
+        number=2,
     )
 
 
 class AddOfflineUserDataJobOperationsRequest(proto.Message):
     r"""Request message for
     [OfflineUserDataJobService.AddOfflineUserDataJobOperations][google.ads.googleads.v18.services.OfflineUserDataJobService.AddOfflineUserDataJobOperations].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -140,21 +147,29 @@ class AddOfflineUserDataJobOperationsRequest(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     enable_partial_failure: bool = proto.Field(
-        proto.BOOL, number=4, optional=True,
+        proto.BOOL,
+        number=4,
+        optional=True,
     )
     enable_warnings: bool = proto.Field(
-        proto.BOOL, number=6, optional=True,
+        proto.BOOL,
+        number=6,
+        optional=True,
     )
-    operations: MutableSequence[
-        "OfflineUserDataJobOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=3, message="OfflineUserDataJobOperation",
+    operations: MutableSequence["OfflineUserDataJobOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message="OfflineUserDataJobOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
 
 
@@ -201,7 +216,9 @@ class OfflineUserDataJobOperation(proto.Message):
         message=offline_user_data.UserData,
     )
     remove_all: bool = proto.Field(
-        proto.BOOL, number=3, oneof="operation",
+        proto.BOOL,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -223,10 +240,14 @@ class AddOfflineUserDataJobOperationsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     warning: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 

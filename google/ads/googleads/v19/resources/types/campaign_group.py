@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class CampaignGroup(proto.Message):
     r"""A campaign group.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the campaign group. Campaign

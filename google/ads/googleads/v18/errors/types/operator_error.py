@@ -22,16 +22,28 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"OperatorErrorEnum",},
+    manifest={
+        "OperatorErrorEnum",
+    },
 )
 
 
 class OperatorErrorEnum(proto.Message):
-    r"""Container for enum describing possible operator errors.
-    """
+    r"""Container for enum describing possible operator errors."""
 
     class OperatorError(proto.Enum):
-        r"""Enum describing possible operator errors."""
+        r"""Enum describing possible operator errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            OPERATOR_NOT_SUPPORTED (2):
+                Operator not supported.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         OPERATOR_NOT_SUPPORTED = 2

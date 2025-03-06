@@ -296,7 +296,9 @@ class ChangeEvent(proto.Message):
         proto.STRING,
         number=2,
     )
-    change_resource_type: change_event_resource_type.ChangeEventResourceTypeEnum.ChangeEventResourceType = proto.Field(
+    change_resource_type: (
+        change_event_resource_type.ChangeEventResourceTypeEnum.ChangeEventResourceType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=change_event_resource_type.ChangeEventResourceTypeEnum.ChangeEventResourceType,
@@ -326,7 +328,9 @@ class ChangeEvent(proto.Message):
         number=8,
         message=ChangedResource,
     )
-    resource_change_operation: gage_resource_change_operation.ResourceChangeOperationEnum.ResourceChangeOperation = proto.Field(
+    resource_change_operation: (
+        gage_resource_change_operation.ResourceChangeOperationEnum.ResourceChangeOperation
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=gage_resource_change_operation.ResourceChangeOperationEnum.ResourceChangeOperation,

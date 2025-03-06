@@ -68,6 +68,7 @@ class ConfigureCustomerLifecycleGoalsRequest(proto.Message):
 
 class CustomerLifecycleGoalOperation(proto.Message):
     r"""A single operation on a customer lifecycle goal.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -129,6 +130,7 @@ class ConfigureCustomerLifecycleGoalsResponse(proto.Message):
 
 class ConfigureCustomerLifecycleGoalsResult(proto.Message):
     r"""The result for the customer lifecycle goal configuration.
+
     Attributes:
         resource_name (str):
             Returned for the successful operation.

@@ -155,6 +155,7 @@ class BiddingStrategyOperation(proto.Message):
 
 class MutateBiddingStrategiesResponse(proto.Message):
     r"""Response message for bidding strategy mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -182,6 +183,7 @@ class MutateBiddingStrategiesResponse(proto.Message):
 
 class MutateBiddingStrategyResult(proto.Message):
     r"""The result for the bidding strategy mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

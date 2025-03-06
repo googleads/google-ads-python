@@ -59,18 +59,23 @@ class MutateKeywordPlanAdGroupsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "KeywordPlanAdGroupOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="KeywordPlanAdGroupOperation",
+    operations: MutableSequence["KeywordPlanAdGroupOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="KeywordPlanAdGroupOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -109,7 +114,9 @@ class KeywordPlanAdGroupOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: keyword_plan_ad_group.KeywordPlanAdGroup = proto.Field(
         proto.MESSAGE,
@@ -124,12 +131,15 @@ class KeywordPlanAdGroupOperation(proto.Message):
         message=keyword_plan_ad_group.KeywordPlanAdGroup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateKeywordPlanAdGroupsResponse(proto.Message):
     r"""Response message for a Keyword Plan ad group mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -144,24 +154,30 @@ class MutateKeywordPlanAdGroupsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateKeywordPlanAdGroupResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateKeywordPlanAdGroupResult",
+    results: MutableSequence["MutateKeywordPlanAdGroupResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateKeywordPlanAdGroupResult",
+        )
     )
 
 
 class MutateKeywordPlanAdGroupResult(proto.Message):
     r"""The result for the Keyword Plan ad group mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

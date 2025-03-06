@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomizerAttributeErrorEnum",},
+    manifest={
+        "CustomizerAttributeErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,19 @@ class CustomizerAttributeErrorEnum(proto.Message):
     """
 
     class CustomizerAttributeError(proto.Enum):
-        r"""Enum describing possible customizer attribute errors."""
+        r"""Enum describing possible customizer attribute errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            DUPLICATE_CUSTOMIZER_ATTRIBUTE_NAME (2):
+                CustomizerAttribute name matches that of
+                another active CustomizerAttribute.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DUPLICATE_CUSTOMIZER_ATTRIBUTE_NAME = 2

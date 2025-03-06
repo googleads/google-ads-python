@@ -35,6 +35,7 @@ class DomainCategory(proto.Message):
     be targeted using WebpageConditionInfo. See:
     https://support.google.com/google-ads/answer/2471185
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

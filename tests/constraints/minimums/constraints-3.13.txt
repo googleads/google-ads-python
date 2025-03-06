@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+# This constraints file is required for unit tests.
+# List all library dependencies and extras in this file.
+google-auth-oauthlib==1.0.0
+google-api-core==2.22.0
+proto-plus==1.25.0
+protobuf==5.26.1
+googleapis-common-protos==1.63.2
+grpcio==1.66.2
+grpcio-status==1.66.2

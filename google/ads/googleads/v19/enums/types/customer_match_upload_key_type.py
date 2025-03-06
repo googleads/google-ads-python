@@ -35,7 +35,25 @@ class CustomerMatchUploadKeyTypeEnum(proto.Message):
     """
 
     class CustomerMatchUploadKeyType(proto.Enum):
-        r"""Enum describing possible customer match upload key types."""
+        r"""Enum describing possible customer match upload key types.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CONTACT_INFO (2):
+                Members are matched from customer info such
+                as email address, phone number or physical
+                address.
+            CRM_ID (3):
+                Members are matched from a user id generated
+                and assigned by the advertiser.
+            MOBILE_ADVERTISING_ID (4):
+                Members are matched from mobile advertising
+                ids.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

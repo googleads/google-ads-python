@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"PolicyFindingErrorEnum",},
+    manifest={
+        "PolicyFindingErrorEnum",
+    },
 )
 
 
 class PolicyFindingErrorEnum(proto.Message):
-    r"""Container for enum describing possible policy finding errors.
-    """
+    r"""Container for enum describing possible policy finding errors."""
 
     class PolicyFindingError(proto.Enum):
-        r"""Enum describing possible policy finding errors."""
+        r"""Enum describing possible policy finding errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            POLICY_FINDING (2):
+                The resource has been disapproved since the
+                policy summary includes policy topics of type
+                PROHIBITED.
+            POLICY_TOPIC_NOT_FOUND (3):
+                The given policy topic does not exist.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         POLICY_FINDING = 2

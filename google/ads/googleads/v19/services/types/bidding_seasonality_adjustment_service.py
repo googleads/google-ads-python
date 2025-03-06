@@ -159,6 +159,7 @@ class BiddingSeasonalityAdjustmentOperation(proto.Message):
 
 class MutateBiddingSeasonalityAdjustmentsResponse(proto.Message):
     r"""Response message for seasonality adjustments mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -186,6 +187,7 @@ class MutateBiddingSeasonalityAdjustmentsResponse(proto.Message):
 
 class MutateBiddingSeasonalityAdjustmentsResult(proto.Message):
     r"""The result for the seasonality adjustment mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class ConversionGoalCampaignConfig(proto.Message):
     r"""Conversion goal settings for a Campaign.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion goal campaign
@@ -60,7 +61,9 @@ class ConversionGoalCampaignConfig(proto.Message):
         proto.STRING,
         number=2,
     )
-    goal_config_level: gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel = proto.Field(
+    goal_config_level: (
+        gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_goal_config_level.GoalConfigLevelEnum.GoalConfigLevel,

@@ -283,7 +283,9 @@ class AccountBudget(proto.Message):
             number=12,
             optional=True,
         )
-        proposal_type: account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType = proto.Field(
+        proposal_type: (
+            account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=account_budget_proposal_type.AccountBudgetProposalTypeEnum.AccountBudgetProposalType,
@@ -329,7 +331,9 @@ class AccountBudget(proto.Message):
             number=16,
             oneof="spending_limit",
         )
-        spending_limit_type: gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+        spending_limit_type: (
+            gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+        ) = proto.Field(
             proto.ENUM,
             number=8,
             oneof="spending_limit",
@@ -350,7 +354,9 @@ class AccountBudget(proto.Message):
         number=24,
         optional=True,
     )
-    status: account_budget_status.AccountBudgetStatusEnum.AccountBudgetStatus = proto.Field(
+    status: (
+        account_budget_status.AccountBudgetStatusEnum.AccountBudgetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=account_budget_status.AccountBudgetStatusEnum.AccountBudgetStatus,
@@ -420,7 +426,9 @@ class AccountBudget(proto.Message):
         number=30,
         oneof="proposed_spending_limit",
     )
-    proposed_spending_limit_type: gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+    proposed_spending_limit_type: (
+        gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+    ) = proto.Field(
         proto.ENUM,
         number=13,
         oneof="proposed_spending_limit",
@@ -431,7 +439,9 @@ class AccountBudget(proto.Message):
         number=31,
         oneof="approved_spending_limit",
     )
-    approved_spending_limit_type: gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+    approved_spending_limit_type: (
+        gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+    ) = proto.Field(
         proto.ENUM,
         number=15,
         oneof="approved_spending_limit",
@@ -442,7 +452,9 @@ class AccountBudget(proto.Message):
         number=32,
         oneof="adjusted_spending_limit",
     )
-    adjusted_spending_limit_type: gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType = proto.Field(
+    adjusted_spending_limit_type: (
+        gage_spending_limit_type.SpendingLimitTypeEnum.SpendingLimitType
+    ) = proto.Field(
         proto.ENUM,
         number=17,
         oneof="adjusted_spending_limit",

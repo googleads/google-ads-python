@@ -22,16 +22,38 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"ProductLinkErrorEnum",},
+    manifest={
+        "ProductLinkErrorEnum",
+    },
 )
 
 
 class ProductLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible ProductLink errors.
-    """
+    r"""Container for enum describing possible ProductLink errors."""
 
     class ProductLinkError(proto.Enum):
-        r"""Enum describing possible ProductLink errors."""
+        r"""Enum describing possible ProductLink errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_OPERATION (2):
+                The requested operation is invalid. For
+                example, you are not allowed to remove a link
+                from a partner account.
+            CREATION_NOT_PERMITTED (3):
+                The creation request is not permitted.
+            INVITATION_EXISTS (4):
+                A link cannot be created because a pending
+                link already exists.
+            LINK_EXISTS (5):
+                A link cannot be created because an active
+                link already exists.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_OPERATION = 2

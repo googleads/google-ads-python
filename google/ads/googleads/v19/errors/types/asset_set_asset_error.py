@@ -35,7 +35,29 @@ class AssetSetAssetErrorEnum(proto.Message):
     """
 
     class AssetSetAssetError(proto.Enum):
-        r"""Enum describing possible asset set asset errors."""
+        r"""Enum describing possible asset set asset errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_ASSET_TYPE (2):
+                The asset type is not eligible to be linked
+                to the specific type of asset set.
+            INVALID_ASSET_SET_TYPE (3):
+                The asset set type is not eligible to contain
+                the specified type of assets.
+            DUPLICATE_EXTERNAL_KEY (4):
+                The asset contains duplicate external key
+                with another asset in the asset set.
+            PARENT_LINKAGE_DOES_NOT_EXIST (5):
+                When attaching a Location typed Asset to a
+                LocationGroup typed AssetSet, the AssetSetAsset
+                linkage between the parent LocationSync AssetSet
+                and the Asset doesn't exist.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

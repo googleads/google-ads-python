@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class IncomeRangeView(proto.Message):
     r"""An income range view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the income range view.

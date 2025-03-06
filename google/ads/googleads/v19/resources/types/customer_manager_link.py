@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class CustomerManagerLink(proto.Message):
     r"""Represents customer-manager link relationship.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

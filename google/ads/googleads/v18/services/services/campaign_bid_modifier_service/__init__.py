@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import CampaignBidModifierServiceClient
+from .async_client import CampaignBidModifierServiceAsyncClient
 
-__all__ = ("CampaignBidModifierServiceClient",)
+__all__ = (
+    "CampaignBidModifierServiceClient",
+    "CampaignBidModifierServiceAsyncClient",
+)

@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
 
 class CampaignAsset(proto.Message):
     r"""A link between a Campaign and an Asset.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -116,7 +117,9 @@ class CampaignAsset(proto.Message):
         number=5,
         enum=asset_link_status.AssetLinkStatusEnum.AssetLinkStatus,
     )
-    primary_status: asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus = proto.Field(
+    primary_status: (
+        asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=9,
         enum=asset_link_primary_status.AssetLinkPrimaryStatusEnum.AssetLinkPrimaryStatus,

@@ -38,6 +38,7 @@ __protobuf__ = proto.module(
 
 class ConversionValueRule(proto.Message):
     r"""A conversion value rule
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion value rule.
@@ -74,6 +75,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAction(proto.Message):
         r"""Action applied when rule is applied.
+
         Attributes:
             operation (google.ads.googleads.v19.enums.types.ValueRuleOperationEnum.ValueRuleOperation):
                 Specifies applied operation.
@@ -95,6 +97,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleGeoLocationCondition(proto.Message):
         r"""Condition on Geo dimension.
+
         Attributes:
             excluded_geo_target_constants (MutableSequence[str]):
                 Geo locations that advertisers want to
@@ -135,6 +138,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleDeviceCondition(proto.Message):
         r"""Condition on Device dimension.
+
         Attributes:
             device_types (MutableSequence[google.ads.googleads.v19.enums.types.ValueRuleDeviceTypeEnum.ValueRuleDeviceType]):
                 Value for device type condition.
@@ -150,6 +154,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAudienceCondition(proto.Message):
         r"""Condition on Audience dimension.
+
         Attributes:
             user_lists (MutableSequence[str]):
                 User Lists.
@@ -168,6 +173,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleItineraryCondition(proto.Message):
         r"""Condition on Itinerary dimension.
+
         Attributes:
             advance_booking_window (google.ads.googleads.v19.resources.types.ConversionValueRule.ValueRuleItineraryAdvanceBookingWindow):
                 Range for the number of days between the date
@@ -206,6 +212,7 @@ class ConversionValueRule(proto.Message):
         r"""Range for the number of days between the date of the booking
         and the start of the itinerary.
 
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -234,6 +241,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleItineraryTravelLength(proto.Message):
         r"""Range for the itinerary length in number of nights.
+
         Attributes:
             min_nights (int):
                 Minimum number of nights between the start

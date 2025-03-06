@@ -35,7 +35,20 @@ class LocalServicesEmployeeTypeEnum(proto.Message):
     """
 
     class LocalServicesEmployeeType(proto.Enum):
-        r"""Enums describing types of a local services employee."""
+        r"""Enums describing types of a local services employee.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_OWNER (2):
+                Represents the owner of the business.
+            EMPLOYEE (3):
+                Represents an employee of the business.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_OWNER = 2

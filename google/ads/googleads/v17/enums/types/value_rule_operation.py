@@ -35,7 +35,22 @@ class ValueRuleOperationEnum(proto.Message):
     """
 
     class ValueRuleOperation(proto.Enum):
-        r"""Possible operations of the action of a conversion value rule."""
+        r"""Possible operations of the action of a conversion value rule.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ADD (2):
+                Add provided value to conversion value.
+            MULTIPLY (3):
+                Multiply conversion value by provided value.
+            SET (4):
+                Set conversion value to provided value.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ADD = 2

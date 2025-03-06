@@ -32,7 +32,23 @@ class UserListDateRuleItemOperatorEnum(proto.Message):
     r"""Supported rule operator for date type."""
 
     class UserListDateRuleItemOperator(proto.Enum):
-        r"""Enum describing possible user list date rule item operators."""
+        r"""Enum describing possible user list date rule item operators.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EQUALS (2):
+                Equals.
+            NOT_EQUALS (3):
+                Not Equals.
+            BEFORE (4):
+                Before.
+            AFTER (5):
+                After.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

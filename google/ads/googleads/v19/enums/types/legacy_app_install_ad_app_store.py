@@ -35,7 +35,25 @@ class LegacyAppInstallAdAppStoreEnum(proto.Message):
     """
 
     class LegacyAppInstallAdAppStore(proto.Enum):
-        r"""App store type in a legacy app install ad."""
+        r"""App store type in a legacy app install ad.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            APPLE_APP_STORE (2):
+                Apple iTunes.
+            GOOGLE_PLAY (3):
+                Google Play.
+            WINDOWS_STORE (4):
+                Windows Store.
+            WINDOWS_PHONE_STORE (5):
+                Windows Phone Store.
+            CN_APP_STORE (6):
+                The app is hosted in a Chinese app store.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

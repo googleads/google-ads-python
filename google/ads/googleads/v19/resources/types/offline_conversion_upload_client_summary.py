@@ -69,6 +69,7 @@ __protobuf__ = proto.module(
 
 class OfflineConversionUploadClientSummary(proto.Message):
     r"""Offline conversion upload summary at customer level.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the offline conversion
@@ -176,6 +177,7 @@ class OfflineConversionUploadClientSummary(proto.Message):
 
 class OfflineConversionSummary(proto.Message):
     r"""Historical upload summary, grouped by upload date or job.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -227,6 +229,7 @@ class OfflineConversionSummary(proto.Message):
 
 class OfflineConversionAlert(proto.Message):
     r"""Alert for offline conversion client summary.
+
     Attributes:
         error (google.ads.googleads.v19.resources.types.OfflineConversionError):
             Output only. Error for offline conversion
@@ -249,6 +252,7 @@ class OfflineConversionAlert(proto.Message):
 
 class OfflineConversionError(proto.Message):
     r"""Possible errors for offline conversion client summary.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

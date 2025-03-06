@@ -40,6 +40,23 @@ class CriterionCategoryChannelAvailabilityModeEnum(proto.Message):
     class CriterionCategoryChannelAvailabilityMode(proto.Enum):
         r"""Enum containing the possible
         CriterionCategoryChannelAvailabilityMode.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ALL_CHANNELS (2):
+                The category is available to campaigns of all
+                channel types and subtypes.
+            CHANNEL_TYPE_AND_ALL_SUBTYPES (3):
+                The category is available to campaigns of a
+                specific channel type, including all subtypes
+                under it.
+            CHANNEL_TYPE_AND_SUBSET_SUBTYPES (4):
+                The category is available to campaigns of a
+                specific channel type and subtype(s).
         """
 
         UNSPECIFIED = 0

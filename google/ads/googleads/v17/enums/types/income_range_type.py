@@ -37,7 +37,29 @@ class IncomeRangeTypeEnum(proto.Message):
     class IncomeRangeType(proto.Enum):
         r"""The type of demographic income ranges (for example, between
         0% to 50%).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INCOME_RANGE_0_50 (510001):
+                0%-50%.
+            INCOME_RANGE_50_60 (510002):
+                50% to 60%.
+            INCOME_RANGE_60_70 (510003):
+                60% to 70%.
+            INCOME_RANGE_70_80 (510004):
+                70% to 80%.
+            INCOME_RANGE_80_90 (510005):
+                80% to 90%.
+            INCOME_RANGE_90_UP (510006):
+                Greater than 90%.
+            INCOME_RANGE_UNDETERMINED (510000):
+                Undetermined income range.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INCOME_RANGE_0_50 = 510001

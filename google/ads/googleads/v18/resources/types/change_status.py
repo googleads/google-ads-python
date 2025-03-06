@@ -25,13 +25,16 @@ from google.ads.googleads.v18.enums.types import change_status_resource_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ChangeStatus",},
+    manifest={
+        "ChangeStatus",
+    },
 )
 
 
 class ChangeStatus(proto.Message):
     r"""Describes the status of returned resource. ChangeStatus could
     have up to 3 minutes delay to reflect a new change.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -130,74 +133,109 @@ class ChangeStatus(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     last_change_date_time: str = proto.Field(
-        proto.STRING, number=24, optional=True,
+        proto.STRING,
+        number=24,
+        optional=True,
     )
-    resource_type: change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType = proto.Field(
+    resource_type: (
+        change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=change_status_resource_type.ChangeStatusResourceTypeEnum.ChangeStatusResourceType,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
     ad_group: str = proto.Field(
-        proto.STRING, number=18, optional=True,
+        proto.STRING,
+        number=18,
+        optional=True,
     )
-    resource_status: change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation = proto.Field(
+    resource_status: (
+        change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=change_status_operation.ChangeStatusOperationEnum.ChangeStatusOperation,
     )
     ad_group_ad: str = proto.Field(
-        proto.STRING, number=25, optional=True,
+        proto.STRING,
+        number=25,
+        optional=True,
     )
     ad_group_criterion: str = proto.Field(
-        proto.STRING, number=26, optional=True,
+        proto.STRING,
+        number=26,
+        optional=True,
     )
     campaign_criterion: str = proto.Field(
-        proto.STRING, number=27, optional=True,
+        proto.STRING,
+        number=27,
+        optional=True,
     )
     feed: str = proto.Field(
-        proto.STRING, number=28, optional=True,
+        proto.STRING,
+        number=28,
+        optional=True,
     )
     feed_item: str = proto.Field(
-        proto.STRING, number=29, optional=True,
+        proto.STRING,
+        number=29,
+        optional=True,
     )
     ad_group_feed: str = proto.Field(
-        proto.STRING, number=30, optional=True,
+        proto.STRING,
+        number=30,
+        optional=True,
     )
     campaign_feed: str = proto.Field(
-        proto.STRING, number=31, optional=True,
+        proto.STRING,
+        number=31,
+        optional=True,
     )
     ad_group_bid_modifier: str = proto.Field(
-        proto.STRING, number=32, optional=True,
+        proto.STRING,
+        number=32,
+        optional=True,
     )
     shared_set: str = proto.Field(
-        proto.STRING, number=33,
+        proto.STRING,
+        number=33,
     )
     campaign_shared_set: str = proto.Field(
-        proto.STRING, number=34,
+        proto.STRING,
+        number=34,
     )
     asset: str = proto.Field(
-        proto.STRING, number=35,
+        proto.STRING,
+        number=35,
     )
     customer_asset: str = proto.Field(
-        proto.STRING, number=36,
+        proto.STRING,
+        number=36,
     )
     campaign_asset: str = proto.Field(
-        proto.STRING, number=37,
+        proto.STRING,
+        number=37,
     )
     ad_group_asset: str = proto.Field(
-        proto.STRING, number=38,
+        proto.STRING,
+        number=38,
     )
     combined_audience: str = proto.Field(
-        proto.STRING, number=40,
+        proto.STRING,
+        number=40,
     )
     asset_group: str = proto.Field(
-        proto.STRING, number=41,
+        proto.STRING,
+        number=41,
     )
 
 

@@ -93,6 +93,7 @@ class MutateAdGroupsRequest(proto.Message):
 
 class AdGroupOperation(proto.Message):
     r"""A single operation (create, update, remove) on an ad group.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -149,6 +150,7 @@ class AdGroupOperation(proto.Message):
 
 class MutateAdGroupsResponse(proto.Message):
     r"""Response message for an ad group mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -174,6 +176,7 @@ class MutateAdGroupsResponse(proto.Message):
 
 class MutateAdGroupResult(proto.Message):
     r"""The result for the ad group mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

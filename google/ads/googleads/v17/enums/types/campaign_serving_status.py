@@ -32,7 +32,27 @@ class CampaignServingStatusEnum(proto.Message):
     r"""Message describing Campaign serving statuses."""
 
     class CampaignServingStatus(proto.Enum):
-        r"""Possible serving statuses of a campaign."""
+        r"""Possible serving statuses of a campaign.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            SERVING (2):
+                Serving.
+            NONE (3):
+                None.
+            ENDED (4):
+                Ended.
+            PENDING (5):
+                Pending.
+            SUSPENDED (6):
+                Suspended.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SERVING = 2

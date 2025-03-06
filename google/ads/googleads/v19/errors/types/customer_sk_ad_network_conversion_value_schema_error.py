@@ -37,6 +37,29 @@ class CustomerSkAdNetworkConversionValueSchemaErrorEnum(proto.Message):
     class CustomerSkAdNetworkConversionValueSchemaError(proto.Enum):
         r"""Enum describing possible
         CustomerSkAdNetworkConversionValueSchema errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_LINK_ID (2):
+                The customer link ID provided is invalid.
+            INVALID_APP_ID (3):
+                The app ID provided is invalid.
+            INVALID_SCHEMA (4):
+                The conversion value schema provided is
+                invalid.
+            LINK_CODE_NOT_FOUND (5):
+                The customer link id provided could not be
+                found.
+            INVALID_EVENT_COUNTER (7):
+                The SkAdNetwork event counter provided is
+                invalid.
+            INVALID_EVENT_NAME (8):
+                The SkAdNetwork event name provided is
+                invalid.
         """
 
         UNSPECIFIED = 0

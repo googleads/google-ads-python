@@ -32,7 +32,26 @@ class DatabaseErrorEnum(proto.Message):
     r"""Container for enum describing possible database errors."""
 
     class DatabaseError(proto.Enum):
-        r"""Enum describing possible database errors."""
+        r"""Enum describing possible database errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CONCURRENT_MODIFICATION (2):
+                Multiple requests were attempting to modify
+                the same resource at once. Retry the request.
+            DATA_CONSTRAINT_VIOLATION (3):
+                The request conflicted with existing data.
+                This error will usually be replaced with a more
+                specific error if the request is retried.
+            REQUEST_TOO_LARGE (4):
+                The data written is too large. Split the
+                request into smaller requests.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CONCURRENT_MODIFICATION = 2

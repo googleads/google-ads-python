@@ -22,18 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"TimeTypeEnum",},
+    manifest={
+        "TimeTypeEnum",
+    },
 )
 
 
 class TimeTypeEnum(proto.Message):
-    r"""Message describing time types.
-    """
+    r"""Message describing time types."""
 
     class TimeType(proto.Enum):
         r"""The possible time types used by certain resources as an
         alternative to absolute timestamps.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            NOW (2):
+                As soon as possible.
+            FOREVER (3):
+                An infinite point in the future.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOW = 2

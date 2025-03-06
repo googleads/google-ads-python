@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class AndroidPrivacySharedKeyGoogleCampaign(proto.Message):
     r"""An Android privacy shared key view for Google campaign key.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Android privacy shared
@@ -68,7 +69,9 @@ class AndroidPrivacySharedKeyGoogleCampaign(proto.Message):
         proto.INT64,
         number=2,
     )
-    android_privacy_interaction_type: gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType = proto.Field(
+    android_privacy_interaction_type: (
+        gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=gage_android_privacy_interaction_type.AndroidPrivacyInteractionTypeEnum.AndroidPrivacyInteractionType,

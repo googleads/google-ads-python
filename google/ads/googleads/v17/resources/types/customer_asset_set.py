@@ -64,10 +64,12 @@ class CustomerAssetSet(proto.Message):
         proto.STRING,
         number=3,
     )
-    status: asset_set_link_status.AssetSetLinkStatusEnum.AssetSetLinkStatus = proto.Field(
-        proto.ENUM,
-        number=4,
-        enum=asset_set_link_status.AssetSetLinkStatusEnum.AssetSetLinkStatus,
+    status: asset_set_link_status.AssetSetLinkStatusEnum.AssetSetLinkStatus = (
+        proto.Field(
+            proto.ENUM,
+            number=4,
+            enum=asset_set_link_status.AssetSetLinkStatusEnum.AssetSetLinkStatus,
+        )
     )
 
 

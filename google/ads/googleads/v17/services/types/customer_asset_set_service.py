@@ -70,12 +70,12 @@ class MutateCustomerAssetSetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "CustomerAssetSetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="CustomerAssetSetOperation",
+    operations: MutableSequence["CustomerAssetSetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerAssetSetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -85,7 +85,9 @@ class MutateCustomerAssetSetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -94,6 +96,7 @@ class MutateCustomerAssetSetsRequest(proto.Message):
 
 class CustomerAssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on a customer asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -130,6 +133,7 @@ class CustomerAssetSetOperation(proto.Message):
 
 class MutateCustomerAssetSetsResponse(proto.Message):
     r"""Response message for a customer asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateCustomerAssetSetResult]):
             All results for the mutate.
@@ -141,12 +145,12 @@ class MutateCustomerAssetSetsResponse(proto.Message):
             level error.
     """
 
-    results: MutableSequence[
-        "MutateCustomerAssetSetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateCustomerAssetSetResult",
+    results: MutableSequence["MutateCustomerAssetSetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateCustomerAssetSetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -157,6 +161,7 @@ class MutateCustomerAssetSetsResponse(proto.Message):
 
 class MutateCustomerAssetSetResult(proto.Message):
     r"""The result for the customer asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

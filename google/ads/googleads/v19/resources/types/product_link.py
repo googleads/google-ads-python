@@ -120,6 +120,7 @@ class ProductLink(proto.Message):
 
 class DataPartnerIdentifier(proto.Message):
     r"""The identifier for Data Partner account.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -142,6 +143,7 @@ class DataPartnerIdentifier(proto.Message):
 
 class GoogleAdsIdentifier(proto.Message):
     r"""The identifier for Google Ads account.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -164,6 +166,7 @@ class GoogleAdsIdentifier(proto.Message):
 
 class MerchantCenterIdentifier(proto.Message):
     r"""The identifier for Google Merchant Center account
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -187,6 +190,7 @@ class MerchantCenterIdentifier(proto.Message):
 class AdvertisingPartnerIdentifier(proto.Message):
     r"""The identifier for the Advertising Partner Google Ads
     account.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

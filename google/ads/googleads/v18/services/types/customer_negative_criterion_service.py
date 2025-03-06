@@ -67,20 +67,27 @@ class MutateCustomerNegativeCriteriaRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomerNegativeCriterionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomerNegativeCriterionOperation",
+    operations: MutableSequence["CustomerNegativeCriterionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomerNegativeCriterionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -113,19 +120,24 @@ class CustomerNegativeCriterionOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
     """
 
-    create: gagr_customer_negative_criterion.CustomerNegativeCriterion = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=gagr_customer_negative_criterion.CustomerNegativeCriterion,
+    create: gagr_customer_negative_criterion.CustomerNegativeCriterion = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=gagr_customer_negative_criterion.CustomerNegativeCriterion,
+        )
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateCustomerNegativeCriteriaResponse(proto.Message):
     r"""Response message for customer negative criterion mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -138,17 +150,22 @@ class MutateCustomerNegativeCriteriaResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
-    results: MutableSequence[
-        "MutateCustomerNegativeCriteriaResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCustomerNegativeCriteriaResult",
+    results: MutableSequence["MutateCustomerNegativeCriteriaResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCustomerNegativeCriteriaResult",
+        )
     )
 
 
 class MutateCustomerNegativeCriteriaResult(proto.Message):
     r"""The result for the criterion mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -159,9 +176,12 @@ class MutateCustomerNegativeCriteriaResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    customer_negative_criterion: gagr_customer_negative_criterion.CustomerNegativeCriterion = proto.Field(
+    customer_negative_criterion: (
+        gagr_customer_negative_criterion.CustomerNegativeCriterion
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_customer_negative_criterion.CustomerNegativeCriterion,

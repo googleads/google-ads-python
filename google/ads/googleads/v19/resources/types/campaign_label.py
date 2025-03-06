@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class CampaignLabel(proto.Message):
     r"""Represents a relationship between a campaign and a label.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -35,7 +35,23 @@ class ListingGroupFilterTypeEnum(proto.Message):
     """
 
     class ListingGroupFilterType(proto.Enum):
-        r"""The type of the listing group filter."""
+        r"""The type of the listing group filter.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            SUBDIVISION (2):
+                Subdivision of products along some listing
+                dimensions.
+            UNIT_INCLUDED (3):
+                An included listing group filter leaf node.
+            UNIT_EXCLUDED (4):
+                An excluded listing group filter leaf node.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SUBDIVISION = 2

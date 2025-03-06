@@ -22,16 +22,32 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomAudienceStatusEnum",},
+    manifest={
+        "CustomAudienceStatusEnum",
+    },
 )
 
 
 class CustomAudienceStatusEnum(proto.Message):
-    r"""The status of custom audience.
-    """
+    r"""The status of custom audience."""
 
     class CustomAudienceStatus(proto.Enum):
-        r"""Enum containing possible custom audience statuses."""
+        r"""Enum containing possible custom audience statuses.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ENABLED (2):
+                Enabled status - custom audience is enabled
+                and can be targeted.
+            REMOVED (3):
+                Removed status - custom audience is removed
+                and cannot be used for targeting.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

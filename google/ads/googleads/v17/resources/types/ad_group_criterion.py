@@ -306,6 +306,7 @@ class AdGroupCriterion(proto.Message):
 
     class QualityInfo(proto.Message):
         r"""A container for ad group criterion quality information.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -333,17 +334,23 @@ class AdGroupCriterion(proto.Message):
             number=5,
             optional=True,
         )
-        creative_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+        creative_quality_score: (
+            quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
         )
-        post_click_quality_score: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+        post_click_quality_score: (
+            quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+        ) = proto.Field(
             proto.ENUM,
             number=3,
             enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
         )
-        search_predicted_ctr: quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket = proto.Field(
+        search_predicted_ctr: (
+            quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket
+        ) = proto.Field(
             proto.ENUM,
             number=4,
             enum=quality_score_bucket.QualityScoreBucketEnum.QualityScoreBucket,
@@ -351,6 +358,7 @@ class AdGroupCriterion(proto.Message):
 
     class PositionEstimates(proto.Message):
         r"""Estimates for criterion bids at various positions.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -426,7 +434,9 @@ class AdGroupCriterion(proto.Message):
         proto.STRING,
         number=77,
     )
-    status: ad_group_criterion_status.AdGroupCriterionStatusEnum.AdGroupCriterionStatus = proto.Field(
+    status: (
+        ad_group_criterion_status.AdGroupCriterionStatusEnum.AdGroupCriterionStatus
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=ad_group_criterion_status.AdGroupCriterionStatusEnum.AdGroupCriterionStatus,
@@ -451,12 +461,16 @@ class AdGroupCriterion(proto.Message):
         number=58,
         optional=True,
     )
-    system_serving_status: criterion_system_serving_status.CriterionSystemServingStatusEnum.CriterionSystemServingStatus = proto.Field(
+    system_serving_status: (
+        criterion_system_serving_status.CriterionSystemServingStatusEnum.CriterionSystemServingStatus
+    ) = proto.Field(
         proto.ENUM,
         number=52,
         enum=criterion_system_serving_status.CriterionSystemServingStatusEnum.CriterionSystemServingStatus,
     )
-    approval_status: ad_group_criterion_approval_status.AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus = proto.Field(
+    approval_status: (
+        ad_group_criterion_approval_status.AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus
+    ) = proto.Field(
         proto.ENUM,
         number=53,
         enum=ad_group_criterion_approval_status.AdGroupCriterionApprovalStatusEnum.AdGroupCriterionApprovalStatus,
@@ -535,7 +549,9 @@ class AdGroupCriterion(proto.Message):
             enum=bidding_source.BiddingSourceEnum.BiddingSource,
         )
     )
-    effective_percent_cpc_bid_source: bidding_source.BiddingSourceEnum.BiddingSource = proto.Field(
+    effective_percent_cpc_bid_source: (
+        bidding_source.BiddingSourceEnum.BiddingSource
+    ) = proto.Field(
         proto.ENUM,
         number=35,
         enum=bidding_source.BiddingSourceEnum.BiddingSource,
@@ -563,14 +579,16 @@ class AdGroupCriterion(proto.Message):
         number=73,
         optional=True,
     )
-    url_custom_parameters: MutableSequence[
-        custom_parameter.CustomParameter
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=14,
-        message=custom_parameter.CustomParameter,
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=14,
+            message=custom_parameter.CustomParameter,
+        )
     )
-    primary_status: ad_group_criterion_primary_status.AdGroupCriterionPrimaryStatusEnum.AdGroupCriterionPrimaryStatus = proto.Field(
+    primary_status: (
+        ad_group_criterion_primary_status.AdGroupCriterionPrimaryStatusEnum.AdGroupCriterionPrimaryStatus
+    ) = proto.Field(
         proto.ENUM,
         number=85,
         optional=True,

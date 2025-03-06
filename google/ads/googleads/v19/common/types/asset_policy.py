@@ -44,6 +44,7 @@ __protobuf__ = proto.module(
 
 class AdAssetPolicySummary(proto.Message):
     r"""Contains policy information for an asset inside an ad.
+
     Attributes:
         policy_topic_entries (MutableSequence[google.ads.googleads.v19.common.types.PolicyTopicEntry]):
             The list of policy findings for this asset.
@@ -87,6 +88,7 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
     ASSET_DISAPPROVED, the details field will contain additional
     information about the offline evaluation errors which led to the
     asset being disapproved.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -133,6 +135,7 @@ class AssetLinkPrimaryStatusDetails(proto.Message):
 
 class AssetDisapproved(proto.Message):
     r"""Details related to AssetLinkPrimaryStatusReasonPB.ASSET_DISAPPROVED
+
     Attributes:
         offline_evaluation_error_reasons (MutableSequence[google.ads.googleads.v19.enums.types.AssetOfflineEvaluationErrorReasonsEnum.AssetOfflineEvaluationErrorReasons]):
             Provides the quality evaluation disapproval

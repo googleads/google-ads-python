@@ -35,7 +35,20 @@ class PartialFailureErrorEnum(proto.Message):
     """
 
     class PartialFailureError(proto.Enum):
-        r"""Enum describing possible partial failure errors."""
+        r"""Enum describing possible partial failure errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            PARTIAL_FAILURE_MODE_REQUIRED (2):
+                The partial failure field was false in the
+                request. This method requires this field be set
+                to true.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PARTIAL_FAILURE_MODE_REQUIRED = 2

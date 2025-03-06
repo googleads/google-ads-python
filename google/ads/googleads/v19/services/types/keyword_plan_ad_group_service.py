@@ -139,6 +139,7 @@ class KeywordPlanAdGroupOperation(proto.Message):
 
 class MutateKeywordPlanAdGroupsResponse(proto.Message):
     r"""Response message for a Keyword Plan ad group mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -168,6 +169,7 @@ class MutateKeywordPlanAdGroupsResponse(proto.Message):
 
 class MutateKeywordPlanAdGroupResult(proto.Message):
     r"""The result for the Keyword Plan ad group mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

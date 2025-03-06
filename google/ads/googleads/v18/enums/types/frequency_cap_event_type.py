@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"FrequencyCapEventTypeEnum",},
+    manifest={
+        "FrequencyCapEventTypeEnum",
+    },
 )
 
 
@@ -35,7 +37,19 @@ class FrequencyCapEventTypeEnum(proto.Message):
     class FrequencyCapEventType(proto.Enum):
         r"""The type of event that the cap applies to (for example,
         impression).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            IMPRESSION (2):
+                The cap applies on ad impressions.
+            VIDEO_VIEW (3):
+                The cap applies on video ad views.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IMPRESSION = 2

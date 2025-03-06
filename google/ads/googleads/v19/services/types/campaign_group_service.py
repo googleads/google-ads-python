@@ -153,6 +153,7 @@ class CampaignGroupOperation(proto.Message):
 
 class MutateCampaignGroupsResponse(proto.Message):
     r"""Response message for campaign group mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v19.services.types.MutateCampaignGroupResult]):
             All results for the mutate.
@@ -178,6 +179,7 @@ class MutateCampaignGroupsResponse(proto.Message):
 
 class MutateCampaignGroupResult(proto.Message):
     r"""The result for the campaign group mutate.
+
     Attributes:
         resource_name (str):
             Required. Returned for successful operations.

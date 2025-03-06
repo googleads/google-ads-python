@@ -32,6 +32,7 @@ __protobuf__ = proto.module(
 
 class GeoTargetConstant(proto.Message):
     r"""A geo target constant.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -100,7 +101,9 @@ class GeoTargetConstant(proto.Message):
         number=13,
         optional=True,
     )
-    status: geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus = proto.Field(
+    status: (
+        geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=geo_target_constant_status.GeoTargetConstantStatusEnum.GeoTargetConstantStatus,

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignDraftStatusEnum",},
+    manifest={
+        "CampaignDraftStatusEnum",
+    },
 )
 
 
@@ -33,7 +35,37 @@ class CampaignDraftStatusEnum(proto.Message):
     """
 
     class CampaignDraftStatus(proto.Enum):
-        r"""Possible statuses of a campaign draft."""
+        r"""Possible statuses of a campaign draft.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PROPOSED (2):
+                Initial state of the draft, the advertiser
+                can start adding changes with no effect on
+                serving.
+            REMOVED (3):
+                The campaign draft is removed.
+            PROMOTING (5):
+                Advertiser requested to promote draft's
+                changes back into the original campaign.
+                Advertiser can poll the long running operation
+                returned by the promote action to see the status
+                of the promotion.
+            PROMOTED (4):
+                The process to merge changes in the draft
+                back to the original campaign has completed
+                successfully.
+            PROMOTE_FAILED (6):
+                The promotion failed after it was partially
+                applied. Promote cannot be attempted again
+                safely, so the issue must be corrected in the
+                original campaign.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         PROPOSED = 2

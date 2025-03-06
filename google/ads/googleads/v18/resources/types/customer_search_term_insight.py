@@ -22,13 +22,16 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerSearchTermInsight",},
+    manifest={
+        "CustomerSearchTermInsight",
+    },
 )
 
 
 class CustomerSearchTermInsight(proto.Message):
     r"""A Customer search term view.
     Historical data is available starting March 2023.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -53,13 +56,18 @@ class CustomerSearchTermInsight(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     category_label: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     id: int = proto.Field(
-        proto.INT64, number=3, optional=True,
+        proto.INT64,
+        number=3,
+        optional=True,
     )
 
 

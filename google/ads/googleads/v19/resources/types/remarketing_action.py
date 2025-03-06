@@ -37,6 +37,7 @@ class RemarketingAction(proto.Message):
     (product page, shopping cart page, purchase page, general site
     visit) on an advertiser's website.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

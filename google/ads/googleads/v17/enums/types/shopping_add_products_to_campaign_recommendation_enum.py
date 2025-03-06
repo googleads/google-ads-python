@@ -37,7 +37,28 @@ class ShoppingAddProductsToCampaignRecommendationEnum(proto.Message):
     class Reason(proto.Enum):
         r"""Issues that results in a shopping campaign targeting zero
         products.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MERCHANT_CENTER_ACCOUNT_HAS_NO_SUBMITTED_PRODUCTS (2):
+                The Merchant Center account does not have any
+                submitted products.
+            MERCHANT_CENTER_ACCOUNT_HAS_NO_SUBMITTED_PRODUCTS_IN_FEED (3):
+                The Merchant Center account does not have any
+                submitted products in the feed.
+            ADS_ACCOUNT_EXCLUDES_OFFERS_FROM_CAMPAIGN (4):
+                The Google Ads account has active campaign
+                filters that prevents inclusion of offers in the
+                campaign.
+            ALL_PRODUCTS_ARE_EXCLUDED_FROM_CAMPAIGN (5):
+                All products available have been explicitly
+                excluded from being targeted by the campaign.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MERCHANT_CENTER_ACCOUNT_HAS_NO_SUBMITTED_PRODUCTS = 2

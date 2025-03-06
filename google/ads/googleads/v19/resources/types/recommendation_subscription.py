@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class RecommendationSubscription(proto.Message):
     r"""Recommendation Subscription resource
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

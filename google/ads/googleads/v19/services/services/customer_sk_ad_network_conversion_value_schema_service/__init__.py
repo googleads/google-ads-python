@@ -14,5 +14,11 @@
 # limitations under the License.
 #
 from .client import CustomerSkAdNetworkConversionValueSchemaServiceClient
+from .async_client import (
+    CustomerSkAdNetworkConversionValueSchemaServiceAsyncClient,
+)
 
-__all__ = ("CustomerSkAdNetworkConversionValueSchemaServiceClient",)
+__all__ = (
+    "CustomerSkAdNetworkConversionValueSchemaServiceClient",
+    "CustomerSkAdNetworkConversionValueSchemaServiceAsyncClient",
+)

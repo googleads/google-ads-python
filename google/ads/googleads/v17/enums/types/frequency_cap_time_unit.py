@@ -35,7 +35,22 @@ class FrequencyCapTimeUnitEnum(proto.Message):
     """
 
     class FrequencyCapTimeUnit(proto.Enum):
-        r"""Unit of time the cap is defined at (for example, day, week)."""
+        r"""Unit of time the cap is defined at (for example, day, week).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DAY (2):
+                The cap would define limit per one day.
+            WEEK (3):
+                The cap would define limit per one week.
+            MONTH (4):
+                The cap would define limit per one month.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DAY = 2

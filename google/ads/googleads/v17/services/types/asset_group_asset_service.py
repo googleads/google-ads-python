@@ -62,12 +62,12 @@ class MutateAssetGroupAssetsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "AssetGroupAssetOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="AssetGroupAssetOperation",
+    operations: MutableSequence["AssetGroupAssetOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AssetGroupAssetOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -81,6 +81,7 @@ class MutateAssetGroupAssetsRequest(proto.Message):
 
 class AssetGroupAssetOperation(proto.Message):
     r"""A single operation (create, remove) on an asset group asset.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -136,6 +137,7 @@ class AssetGroupAssetOperation(proto.Message):
 
 class MutateAssetGroupAssetsResponse(proto.Message):
     r"""Response message for an asset group asset mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateAssetGroupAssetResult]):
             All results for the mutate.
@@ -147,12 +149,12 @@ class MutateAssetGroupAssetsResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateAssetGroupAssetResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateAssetGroupAssetResult",
+    results: MutableSequence["MutateAssetGroupAssetResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAssetGroupAssetResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -163,6 +165,7 @@ class MutateAssetGroupAssetsResponse(proto.Message):
 
 class MutateAssetGroupAssetResult(proto.Message):
     r"""The result for the asset group asset mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -81,6 +81,7 @@ class MutateRemarketingActionsRequest(proto.Message):
 
 class RemarketingActionOperation(proto.Message):
     r"""A single operation (create, update) on a remarketing action.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -125,6 +126,7 @@ class RemarketingActionOperation(proto.Message):
 
 class MutateRemarketingActionsResponse(proto.Message):
     r"""Response message for remarketing action mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -152,6 +154,7 @@ class MutateRemarketingActionsResponse(proto.Message):
 
 class MutateRemarketingActionResult(proto.Message):
     r"""The result for the remarketing action mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

@@ -47,6 +47,7 @@ __protobuf__ = proto.module(
 
 class Recommendation(proto.Message):
     r"""A recommendation.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -402,6 +403,7 @@ class Recommendation(proto.Message):
 
     class MerchantInfo(proto.Message):
         r"""The Merchant Center account details.
+
         Attributes:
             id (int):
                 Output only. The Merchant Center account ID.
@@ -455,6 +457,7 @@ class Recommendation(proto.Message):
         r"""Weekly account performance metrics. For some recommendation
         types, these are averaged over the past 90-day period and hence
         can be fractional.
+
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -522,6 +525,7 @@ class Recommendation(proto.Message):
 
     class CampaignBudgetRecommendation(proto.Message):
         r"""The budget recommendation for budget constrained campaigns.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -543,6 +547,7 @@ class Recommendation(proto.Message):
 
         class CampaignBudgetRecommendationOption(proto.Message):
             r"""The impact estimates for a given budget amount.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -587,6 +592,7 @@ class Recommendation(proto.Message):
 
     class KeywordRecommendation(proto.Message):
         r"""The keyword recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -644,6 +650,7 @@ class Recommendation(proto.Message):
 
     class TextAdRecommendation(proto.Message):
         r"""The text ad recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -681,6 +688,7 @@ class Recommendation(proto.Message):
 
     class TargetCpaOptInRecommendation(proto.Message):
         r"""The Target CPA opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -697,6 +705,7 @@ class Recommendation(proto.Message):
 
         class TargetCpaOptInRecommendationOption(proto.Message):
             r"""The Target CPA opt-in option with impact estimate.
+
             .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
             Attributes:
@@ -758,6 +767,7 @@ class Recommendation(proto.Message):
 
     class MaximizeConversionsOptInRecommendation(proto.Message):
         r"""The Maximize Conversions Opt-In recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -782,6 +792,7 @@ class Recommendation(proto.Message):
 
     class MaximizeClicksOptInRecommendation(proto.Message):
         r"""The Maximize Clicks opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -804,6 +815,7 @@ class Recommendation(proto.Message):
 
     class CalloutAssetRecommendation(proto.Message):
         r"""The callout asset recommendation.
+
         Attributes:
             recommended_campaign_callout_assets (MutableSequence[google.ads.googleads.v19.resources.types.Asset]):
                 Output only. New callout extension assets
@@ -830,6 +842,7 @@ class Recommendation(proto.Message):
 
     class SitelinkAssetRecommendation(proto.Message):
         r"""The sitelink asset recommendation.
+
         Attributes:
             recommended_campaign_sitelink_assets (MutableSequence[google.ads.googleads.v19.resources.types.Asset]):
                 Output only. New sitelink assets recommended
@@ -859,6 +872,7 @@ class Recommendation(proto.Message):
 
     class KeywordMatchTypeRecommendation(proto.Message):
         r"""The keyword match type recommendation.
+
         Attributes:
             keyword (google.ads.googleads.v19.common.types.KeywordInfo):
                 Output only. The existing keyword where the
@@ -882,6 +896,7 @@ class Recommendation(proto.Message):
 
     class MoveUnusedBudgetRecommendation(proto.Message):
         r"""The move unused budget recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -909,6 +924,7 @@ class Recommendation(proto.Message):
 
     class TargetRoasOptInRecommendation(proto.Message):
         r"""The Target ROAS opt-in recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -941,6 +957,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdAssetRecommendation(proto.Message):
         r"""The add responsive search ad asset recommendation.
+
         Attributes:
             current_ad (google.ads.googleads.v19.resources.types.Ad):
                 Output only. The current ad to be updated.
@@ -963,6 +980,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdImproveAdStrengthRecommendation(proto.Message):
         r"""The responsive search ad improve ad strength recommendation.
+
         Attributes:
             current_ad (google.ads.googleads.v19.resources.types.Ad):
                 Output only. The current ad to be updated.
@@ -983,6 +1001,7 @@ class Recommendation(proto.Message):
 
     class ResponsiveSearchAdRecommendation(proto.Message):
         r"""The add responsive search ad recommendation.
+
         Attributes:
             ad (google.ads.googleads.v19.resources.types.Ad):
                 Output only. Recommended ad.
@@ -996,6 +1015,7 @@ class Recommendation(proto.Message):
 
     class UseBroadMatchKeywordRecommendation(proto.Message):
         r"""The use broad match keyword recommendation.
+
         Attributes:
             keyword (MutableSequence[google.ads.googleads.v19.common.types.KeywordInfo]):
                 Output only. Sample of keywords to be
@@ -1062,6 +1082,7 @@ class Recommendation(proto.Message):
 
     class RaiseTargetCpaBidTooLowRecommendation(proto.Message):
         r"""The raise target CPA bid too low recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1101,6 +1122,7 @@ class Recommendation(proto.Message):
 
     class ForecastingSetTargetRoasRecommendation(proto.Message):
         r"""The forecasting set target ROAS recommendation.
+
         Attributes:
             recommended_target_roas (float):
                 Output only. The recommended target ROAS
@@ -1304,6 +1326,7 @@ class Recommendation(proto.Message):
 
     class TargetAdjustmentInfo(proto.Message):
         r"""Information of a target adjustment recommendation.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1339,6 +1362,7 @@ class Recommendation(proto.Message):
 
     class RaiseTargetCpaRecommendation(proto.Message):
         r"""Recommendation to raise Target CPA.
+
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
@@ -1369,6 +1393,7 @@ class Recommendation(proto.Message):
 
     class LowerTargetRoasRecommendation(proto.Message):
         r"""Recommendation to lower Target ROAS.
+
         Attributes:
             target_adjustment (google.ads.googleads.v19.resources.types.Recommendation.TargetAdjustmentInfo):
                 Output only. The relevant information
@@ -1455,6 +1480,7 @@ class Recommendation(proto.Message):
 
     class ForecastingSetTargetCpaRecommendation(proto.Message):
         r"""The set target CPA recommendations.
+
         Attributes:
             recommended_target_cpa_micros (int):
                 Output only. The recommended target CPA.
@@ -1542,6 +1568,7 @@ class Recommendation(proto.Message):
 
     class AccountInfo(proto.Message):
         r"""Wrapper for information about a Google Ads account.
+
         Attributes:
             customer_id (int):
                 Output only. The customer ID of the account.
@@ -1561,6 +1588,7 @@ class Recommendation(proto.Message):
 
     class CustomAudienceOptInRecommendation(proto.Message):
         r"""The Custom Audience Opt In recommendation.
+
         Attributes:
             keywords (MutableSequence[google.ads.googleads.v19.common.types.KeywordInfo]):
                 Output only. The list of keywords to use for
@@ -1578,6 +1606,7 @@ class Recommendation(proto.Message):
 
     class ImproveDemandGenAdStrengthRecommendation(proto.Message):
         r"""The improve Demand Gen ad strength recommendation.
+
         Attributes:
             ad (str):
                 Output only. The resource name of the ad that

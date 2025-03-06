@@ -34,6 +34,7 @@ class CampaignBidModifier(proto.Message):
     r"""Represents a bid-modifiable only criterion at the campaign
     level.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

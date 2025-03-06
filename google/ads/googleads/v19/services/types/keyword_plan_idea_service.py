@@ -220,6 +220,7 @@ class GenerateKeywordIdeasRequest(proto.Message):
 
 class KeywordAndUrlSeed(proto.Message):
     r"""Keyword And Url Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -246,6 +247,7 @@ class KeywordAndUrlSeed(proto.Message):
 
 class KeywordSeed(proto.Message):
     r"""Keyword Seed
+
     Attributes:
         keywords (MutableSequence[str]):
             Requires at least one keyword and no more
@@ -260,6 +262,7 @@ class KeywordSeed(proto.Message):
 
 class SiteSeed(proto.Message):
     r"""Site Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -280,6 +283,7 @@ class SiteSeed(proto.Message):
 
 class UrlSeed(proto.Message):
     r"""Url Seed
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -343,6 +347,7 @@ class GenerateKeywordIdeaResponse(proto.Message):
 
 class GenerateKeywordIdeaResult(proto.Message):
     r"""The result of generating keyword ideas.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -395,6 +400,7 @@ class GenerateKeywordIdeaResult(proto.Message):
 class GenerateKeywordHistoricalMetricsRequest(proto.Message):
     r"""Request message for
     [KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics][google.ads.googleads.v19.services.KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -508,6 +514,7 @@ class GenerateKeywordHistoricalMetricsResponse(proto.Message):
 
 class GenerateKeywordHistoricalMetricsResult(proto.Message):
     r"""The result of generating keyword historical metrics.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -683,6 +690,7 @@ class GenerateKeywordForecastMetricsRequest(proto.Message):
     r"""Request message for
     [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -732,6 +740,7 @@ class GenerateKeywordForecastMetricsRequest(proto.Message):
 
 class CampaignToForecast(proto.Message):
     r"""A campaign to do a keyword campaign forecast.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -769,6 +778,7 @@ class CampaignToForecast(proto.Message):
 
     class CampaignBiddingStrategy(proto.Message):
         r"""Supported bidding strategies for new campaign forecasts.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other
@@ -861,6 +871,7 @@ class CampaignToForecast(proto.Message):
 
 class ForecastAdGroup(proto.Message):
     r"""An ad group that is part of a campaign to be forecasted.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -902,6 +913,7 @@ class ForecastAdGroup(proto.Message):
 
 class BiddableKeyword(proto.Message):
     r"""A biddable keyword part of an ad group.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -933,6 +945,7 @@ class BiddableKeyword(proto.Message):
 
 class CriterionBidModifier(proto.Message):
     r"""Location Criterion bid modifier.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -960,6 +973,7 @@ class CriterionBidModifier(proto.Message):
 
 class ManualCpcBiddingStrategy(proto.Message):
     r"""Manual CPC Bidding Strategy.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -990,6 +1004,7 @@ class ManualCpcBiddingStrategy(proto.Message):
 
 class MaximizeClicksBiddingStrategy(proto.Message):
     r"""Maximize Clicks Bidding Strategy.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -1018,6 +1033,7 @@ class MaximizeClicksBiddingStrategy(proto.Message):
 
 class MaximizeConversionsBiddingStrategy(proto.Message):
     r"""Maximize Conversions Bidding Strategy.
+
     Attributes:
         daily_target_spend_micros (int):
             Required. The daily target spend in micros to
@@ -1034,6 +1050,7 @@ class MaximizeConversionsBiddingStrategy(proto.Message):
 class GenerateKeywordForecastMetricsResponse(proto.Message):
     r"""Response message for
     [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1054,6 +1071,7 @@ class GenerateKeywordForecastMetricsResponse(proto.Message):
 
 class KeywordForecastMetrics(proto.Message):
     r"""The forecast metrics for the planless keyword campaign.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

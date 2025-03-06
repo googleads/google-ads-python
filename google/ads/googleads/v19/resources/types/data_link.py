@@ -36,6 +36,7 @@ class DataLink(proto.Message):
     r"""Represents the data sharing connection between  a Google
     Ads customer and another product's data.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -98,6 +99,7 @@ class DataLink(proto.Message):
 
 class YoutubeVideoIdentifier(proto.Message):
     r"""The identifier for YouTube video
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

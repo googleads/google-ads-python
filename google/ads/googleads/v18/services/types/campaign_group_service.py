@@ -68,18 +68,25 @@ class MutateCampaignGroupsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     operations: MutableSequence["CampaignGroupOperation"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CampaignGroupOperation",
+        proto.MESSAGE,
+        number=2,
+        message="CampaignGroupOperation",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -121,7 +128,9 @@ class CampaignGroupOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_campaign_group.CampaignGroup = proto.Field(
         proto.MESSAGE,
@@ -136,12 +145,15 @@ class CampaignGroupOperation(proto.Message):
         message=gagr_campaign_group.CampaignGroup,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
 class MutateCampaignGroupsResponse(proto.Message):
     r"""Response message for campaign group mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCampaignGroupResult]):
             All results for the mutate.
@@ -154,15 +166,20 @@ class MutateCampaignGroupsResponse(proto.Message):
     """
 
     results: MutableSequence["MutateCampaignGroupResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCampaignGroupResult",
+        proto.MESSAGE,
+        number=2,
+        message="MutateCampaignGroupResult",
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
 
 
 class MutateCampaignGroupResult(proto.Message):
     r"""The result for the campaign group mutate.
+
     Attributes:
         resource_name (str):
             Required. Returned for successful operations.
@@ -173,10 +190,13 @@ class MutateCampaignGroupResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign_group: gagr_campaign_group.CampaignGroup = proto.Field(
-        proto.MESSAGE, number=2, message=gagr_campaign_group.CampaignGroup,
+        proto.MESSAGE,
+        number=2,
+        message=gagr_campaign_group.CampaignGroup,
     )
 
 

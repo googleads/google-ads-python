@@ -22,16 +22,28 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"IdErrorEnum",},
+    manifest={
+        "IdErrorEnum",
+    },
 )
 
 
 class IdErrorEnum(proto.Message):
-    r"""Container for enum describing possible ID errors.
-    """
+    r"""Container for enum describing possible ID errors."""
 
     class IdError(proto.Enum):
-        r"""Enum describing possible ID errors."""
+        r"""Enum describing possible ID errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            NOT_FOUND (2):
+                ID not found
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NOT_FOUND = 2

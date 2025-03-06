@@ -32,7 +32,29 @@ class UserInterestTaxonomyTypeEnum(proto.Message):
     r"""Message describing a UserInterestTaxonomyType."""
 
     class UserInterestTaxonomyType(proto.Enum):
-        r"""Enum containing the possible UserInterestTaxonomyTypes."""
+        r"""Enum containing the possible UserInterestTaxonomyTypes.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            AFFINITY (2):
+                The affinity for this user interest.
+            IN_MARKET (3):
+                The market for this user interest.
+            MOBILE_APP_INSTALL_USER (4):
+                Users known to have installed applications in
+                the specified categories.
+            VERTICAL_GEO (5):
+                The geographical location of the
+                interest-based vertical.
+            NEW_SMART_PHONE_USER (6):
+                User interest criteria for new smart phone
+                users.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         AFFINITY = 2

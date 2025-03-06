@@ -22,16 +22,33 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignCriterionStatusEnum",},
+    manifest={
+        "CampaignCriterionStatusEnum",
+    },
 )
 
 
 class CampaignCriterionStatusEnum(proto.Message):
-    r"""Message describing CampaignCriterion statuses.
-    """
+    r"""Message describing CampaignCriterion statuses."""
 
     class CampaignCriterionStatus(proto.Enum):
-        r"""The possible statuses of a CampaignCriterion."""
+        r"""The possible statuses of a CampaignCriterion.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The campaign criterion is enabled.
+            PAUSED (3):
+                The campaign criterion is paused.
+            REMOVED (4):
+                The campaign criterion is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

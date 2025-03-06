@@ -35,7 +35,21 @@ class AdGroupAdRotationModeEnum(proto.Message):
     """
 
     class AdGroupAdRotationMode(proto.Enum):
-        r"""The possible ad rotation modes of an ad group."""
+        r"""The possible ad rotation modes of an ad group.
+
+        Values:
+            UNSPECIFIED (0):
+                The ad rotation mode has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            OPTIMIZE (2):
+                Optimize ad group ads based on clicks or
+                conversions.
+            ROTATE_FOREVER (3):
+                Rotate evenly forever.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

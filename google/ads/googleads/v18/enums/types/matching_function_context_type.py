@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"MatchingFunctionContextTypeEnum",},
+    manifest={
+        "MatchingFunctionContextTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,23 @@ class MatchingFunctionContextTypeEnum(proto.Message):
     """
 
     class MatchingFunctionContextType(proto.Enum):
-        r"""Possible context types for an operand in a matching function."""
+        r"""Possible context types for an operand in a matching function.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            FEED_ITEM_ID (2):
+                Feed item id in the request context.
+            DEVICE_NAME (3):
+                The device being used (possible values are
+                'Desktop' or 'Mobile').
+            FEED_ITEM_SET_ID (4):
+                Feed item set id in the request context.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         FEED_ITEM_ID = 2

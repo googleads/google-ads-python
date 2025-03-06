@@ -32,7 +32,17 @@ class KeywordPlanAggregateMetricTypeEnum(proto.Message):
     r"""The enumeration of keyword plan aggregate metric types."""
 
     class KeywordPlanAggregateMetricType(proto.Enum):
-        r"""Aggregate fields."""
+        r"""Aggregate fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            DEVICE (2):
+                The device breakdown of aggregate search
+                volume.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

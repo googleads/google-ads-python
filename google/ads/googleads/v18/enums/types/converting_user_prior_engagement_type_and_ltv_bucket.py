@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ConvertingUserPriorEngagementTypeAndLtvBucketEnum",},
+    manifest={
+        "ConvertingUserPriorEngagementTypeAndLtvBucketEnum",
+    },
 )
 
 
@@ -35,7 +37,24 @@ class ConvertingUserPriorEngagementTypeAndLtvBucketEnum(proto.Message):
     class ConvertingUserPriorEngagementTypeAndLtvBucket(proto.Enum):
         r"""Enumerates converting user prior engagement types and
         lifetime-value bucket
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            NEW (2):
+                Converting user is new to the advertiser.
+            RETURNING (3):
+                Converting user is returning to the
+                advertiser. Definition of returning differs
+                among conversion types, such as a second store
+                visit versus a second online purchase.
+            NEW_AND_HIGH_LTV (4):
+                Converting user is new to the advertiser and
+                has high lifetime value.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         NEW = 2

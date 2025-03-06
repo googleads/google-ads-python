@@ -68,20 +68,27 @@ class MutateConversionValueRulesRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "ConversionValueRuleOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ConversionValueRuleOperation",
+    operations: MutableSequence["ConversionValueRuleOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ConversionValueRuleOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -123,7 +130,9 @@ class ConversionValueRuleOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: gagr_conversion_value_rule.ConversionValueRule = proto.Field(
         proto.MESSAGE,
@@ -138,7 +147,9 @@ class ConversionValueRuleOperation(proto.Message):
         message=gagr_conversion_value_rule.ConversionValueRule,
     )
     remove: str = proto.Field(
-        proto.STRING, number=3, oneof="operation",
+        proto.STRING,
+        number=3,
+        oneof="operation",
     )
 
 
@@ -157,18 +168,23 @@ class MutateConversionValueRulesResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateConversionValueRuleResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateConversionValueRuleResult",
+    results: MutableSequence["MutateConversionValueRuleResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateConversionValueRuleResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=3, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=3,
+        message=status_pb2.Status,
     )
 
 
 class MutateConversionValueRuleResult(proto.Message):
     r"""The result for the conversion value rule mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -179,12 +195,15 @@ class MutateConversionValueRuleResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    conversion_value_rule: gagr_conversion_value_rule.ConversionValueRule = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=gagr_conversion_value_rule.ConversionValueRule,
+    conversion_value_rule: gagr_conversion_value_rule.ConversionValueRule = (
+        proto.Field(
+            proto.MESSAGE,
+            number=2,
+            message=gagr_conversion_value_rule.ConversionValueRule,
+        )
     )
 
 

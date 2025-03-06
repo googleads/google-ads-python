@@ -37,6 +37,7 @@ class OperatingSystemVersionConstant(proto.Message):
     on ``operator_type``. List of available mobile platforms at
     https://developers.google.com/google-ads/api/reference/data/codes-formats#mobile-platforms
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -93,7 +94,9 @@ class OperatingSystemVersionConstant(proto.Message):
         number=10,
         optional=True,
     )
-    operator_type: operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType = proto.Field(
+    operator_type: (
+        operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType
+    ) = proto.Field(
         proto.ENUM,
         number=6,
         enum=operating_system_version_operator_type.OperatingSystemVersionOperatorTypeEnum.OperatingSystemVersionOperatorType,

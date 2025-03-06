@@ -32,7 +32,36 @@ class PaymentModeEnum(proto.Message):
     r"""Container for enum describing possible payment modes."""
 
     class PaymentMode(proto.Enum):
-        r"""Enum describing possible payment modes."""
+        r"""Enum describing possible payment modes.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CLICKS (4):
+                Pay per interaction.
+            CONVERSION_VALUE (5):
+                Pay per conversion value. This mode is only
+                supported by campaigns with
+                AdvertisingChannelType.HOTEL,
+                BiddingStrategyType.COMMISSION, and
+                BudgetType.STANDARD.
+            CONVERSIONS (6):
+                Pay per conversion. This mode is only supported by campaigns
+                with AdvertisingChannelType.DISPLAY (excluding
+                AdvertisingChannelSubType.DISPLAY_GMAIL),
+                BiddingStrategyType.TARGET_CPA, and BudgetType.FIXED_CPA.
+                The customer must also be eligible for this mode. See
+                Customer.eligibility_failure_reasons for details.
+            GUEST_STAY (7):
+                Pay per guest stay value. This mode is only
+                supported by campaigns with
+                AdvertisingChannelType.HOTEL,
+                BiddingStrategyType.COMMISSION, and
+                BudgetType.STANDARD.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

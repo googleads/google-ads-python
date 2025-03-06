@@ -140,6 +140,7 @@ class SmartCampaignSuggestionInfo(proto.Message):
 
     class LocationList(proto.Message):
         r"""A list of locations.
+
         Attributes:
             locations (MutableSequence[google.ads.googleads.v19.common.types.LocationInfo]):
                 Required. Locations.
@@ -153,6 +154,7 @@ class SmartCampaignSuggestionInfo(proto.Message):
 
     class BusinessContext(proto.Message):
         r"""A context that describes a business.
+
         Attributes:
             business_name (str):
                 Optional. The name of the business.
@@ -216,6 +218,7 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
     Depending on whether the system could suggest the options, either
     all of the options or none of them might be returned.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -235,6 +238,7 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
 
     class Metrics(proto.Message):
         r"""Performance metrics for a given budget option.
+
         Attributes:
             min_daily_clicks (int):
                 The estimated min daily clicks.
@@ -253,6 +257,7 @@ class SuggestSmartCampaignBudgetOptionsResponse(proto.Message):
 
     class BudgetOption(proto.Message):
         r"""Smart Campaign budget option.
+
         Attributes:
             daily_amount_micros (int):
                 The amount of the budget, in the local
@@ -381,6 +386,7 @@ class SuggestKeywordThemesResponse(proto.Message):
 
     class KeywordTheme(proto.Message):
         r"""A Smart campaign keyword theme suggestion.
+
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
         Setting any member of the oneof automatically clears all other

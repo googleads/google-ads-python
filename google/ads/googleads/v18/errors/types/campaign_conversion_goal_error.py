@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignConversionGoalErrorEnum",},
+    manifest={
+        "CampaignConversionGoalErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,22 @@ class CampaignConversionGoalErrorEnum(proto.Message):
     """
 
     class CampaignConversionGoalError(proto.Enum):
-        r"""Enum describing possible campaign conversion goal errors."""
+        r"""Enum describing possible campaign conversion goal errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CANNOT_USE_CAMPAIGN_GOAL_FOR_SEARCH_ADS_360_MANAGED_CAMPAIGN (2):
+                Campaign is managed by Search Ads 360 but
+                uses Unified Goal.
+            CANNOT_USE_STORE_SALE_GOAL_FOR_PERFORMANCE_MAX_CAMPAIGN (3):
+                Performance Max campaign cannot use an
+                included store sale campaign goal.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CANNOT_USE_CAMPAIGN_GOAL_FOR_SEARCH_ADS_360_MANAGED_CAMPAIGN = 2

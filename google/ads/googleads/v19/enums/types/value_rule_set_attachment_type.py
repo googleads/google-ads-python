@@ -35,7 +35,19 @@ class ValueRuleSetAttachmentTypeEnum(proto.Message):
     """
 
     class ValueRuleSetAttachmentType(proto.Enum):
-        r"""Possible level where a value rule set is attached."""
+        r"""Possible level where a value rule set is attached.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CUSTOMER (2):
+                Attached to the customer.
+            CAMPAIGN (3):
+                Attached to a campaign.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

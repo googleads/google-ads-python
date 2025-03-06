@@ -13,8 +13,11 @@
 # limitations under the License.
 
 import nox
+import os
+import pathlib
 
-PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
@@ -36,6 +39,12 @@ COVERAGE_COMMAND = [
     "--omit=.nox/*,examples/*,*/__init__.py",
 ]
 FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
+TEST_DEPENDENCIES = [
+    "pyfakefs>=5.0.0,<6.0",
+    "coverage==6.5.0",
+]
+CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
+CONSTRAINTS_DIR = os.path.join(CURRENT_DIR, "tests", "constraints")
 
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -43,10 +52,7 @@ FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
 def tests(session, protobuf_implementation):
     session.install(".")
     # modules for testing
-    session.install(
-        "pyfakefs>=5.0.0,<6.0",
-        "coverage==6.5.0",
-    )
+    session.install(*TEST_DEPENDENCIES)
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
@@ -62,21 +68,19 @@ def tests(session, protobuf_implementation):
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
 def tests_minimum_dependency_versions(session, protobuf_implementation):
+    if session.python == "3.13":
+        # If running Python 3.13 use the constraints file intended for it.
+        filename = "constraints-3.13.txt"
+    else:
+        # If runnning a Python version other than 3.13 then use the constraints
+        # file intended for all versions previous to 3.13.
+        # TODO: Update this when new major versions of Python are adopted.
+        filename = "constraints-<3.13.txt"
+
+    constraints_file = os.path.join(CONSTRAINTS_DIR, "minimums", filename)
+
     session.install(".")
-    # modules for testing
-    session.install(
-        "pyfakefs>=5.0.0,<6.0",
-        "coverage==6.5.0",
-        # Google-published dependencies pinned to the
-        # lowest possible version supported.
-        "google-api-core==2.13.0",
-        "proto-plus==1.22.3",
-        "protobuf==4.25.0",
-        "google-auth-oauthlib==0.3.0",
-        "googleapis-common-protos==1.56.3",
-        "grpcio==1.59.0",
-        "grpcio-status==1.59.0",
-    )
+    session.install(*TEST_DEPENDENCIES, "-c", constraints_file)
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,

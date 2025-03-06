@@ -32,7 +32,18 @@ class CalloutPlaceholderFieldEnum(proto.Message):
     r"""Values for Callout placeholder fields."""
 
     class CalloutPlaceholderField(proto.Enum):
-        r"""Possible values for Callout placeholder fields."""
+        r"""Possible values for Callout placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            CALLOUT_TEXT (2):
+                Data Type: STRING. Callout text.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CALLOUT_TEXT = 2

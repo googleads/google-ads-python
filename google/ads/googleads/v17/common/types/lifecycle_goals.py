@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class LifecycleGoalValueSettings(proto.Message):
     r"""Lifecycle goal value settings.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

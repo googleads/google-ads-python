@@ -37,6 +37,7 @@ class SuggestBrandsRequest(proto.Message):
     r"""Request message for
     [BrandSuggestionService.SuggestBrands][google.ads.googleads.v17.services.BrandSuggestionService.SuggestBrands].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -88,6 +89,7 @@ class SuggestBrandsResponse(proto.Message):
 
 class BrandSuggestion(proto.Message):
     r"""Information of brand suggestion.
+
     Attributes:
         id (str):
             Id for the brand. It would be CKG MID for

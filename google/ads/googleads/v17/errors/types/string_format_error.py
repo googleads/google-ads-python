@@ -32,7 +32,22 @@ class StringFormatErrorEnum(proto.Message):
     r"""Container for enum describing possible string format errors."""
 
     class StringFormatError(proto.Enum):
-        r"""Enum describing possible string format errors."""
+        r"""Enum describing possible string format errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            ILLEGAL_CHARS (2):
+                The input string value contains disallowed
+                characters.
+            INVALID_FORMAT (3):
+                The input string value is invalid for the
+                associated field.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ILLEGAL_CHARS = 2

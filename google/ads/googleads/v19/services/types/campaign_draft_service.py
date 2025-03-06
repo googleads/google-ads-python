@@ -180,6 +180,7 @@ class CampaignDraftOperation(proto.Message):
 
 class MutateCampaignDraftsResponse(proto.Message):
     r"""Response message for campaign draft mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -205,6 +206,7 @@ class MutateCampaignDraftsResponse(proto.Message):
 
 class MutateCampaignDraftResult(proto.Message):
     r"""The result for the campaign draft mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

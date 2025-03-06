@@ -35,7 +35,22 @@ class WebpageConditionOperatorEnum(proto.Message):
     """
 
     class WebpageConditionOperator(proto.Enum):
-        r"""The webpage condition operator in webpage criterion."""
+        r"""The webpage condition operator in webpage criterion.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EQUALS (2):
+                The argument web condition is equal to the
+                compared web condition.
+            CONTAINS (3):
+                The argument web condition is part of the
+                compared web condition.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EQUALS = 2

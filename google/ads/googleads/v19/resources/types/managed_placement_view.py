@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class ManagedPlacementView(proto.Message):
     r"""A managed placement view.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the Managed Placement

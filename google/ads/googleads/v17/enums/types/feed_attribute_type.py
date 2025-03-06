@@ -35,7 +35,42 @@ class FeedAttributeTypeEnum(proto.Message):
     """
 
     class FeedAttributeType(proto.Enum):
-        r"""Possible data types for a feed attribute."""
+        r"""Possible data types for a feed attribute.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            INT64 (2):
+                Int64.
+            DOUBLE (3):
+                Double.
+            STRING (4):
+                String.
+            BOOLEAN (5):
+                Boolean.
+            URL (6):
+                Url.
+            DATE_TIME (7):
+                Datetime.
+            INT64_LIST (8):
+                Int64 list.
+            DOUBLE_LIST (9):
+                Double (8 bytes) list.
+            STRING_LIST (10):
+                String list.
+            BOOLEAN_LIST (11):
+                Boolean list.
+            URL_LIST (12):
+                Url list.
+            DATE_TIME_LIST (13):
+                Datetime list.
+            PRICE (14):
+                Price.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INT64 = 2

@@ -24,13 +24,16 @@ from google.ads.googleads.v18.enums.types import app_url_operating_system_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.common",
     marshal="google.ads.googleads.v18",
-    manifest={"FinalAppUrl",},
+    manifest={
+        "FinalAppUrl",
+    },
 )
 
 
 class FinalAppUrl(proto.Message):
     r"""A URL for deep linking into an app for the given operating
     system.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -51,13 +54,17 @@ class FinalAppUrl(proto.Message):
             This field is a member of `oneof`_ ``_url``.
     """
 
-    os_type: app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType = proto.Field(
+    os_type: (
+        app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=app_url_operating_system_type.AppUrlOperatingSystemTypeEnum.AppUrlOperatingSystemType,
     )
     url: str = proto.Field(
-        proto.STRING, number=3, optional=True,
+        proto.STRING,
+        number=3,
+        optional=True,
     )
 
 

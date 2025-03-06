@@ -82,7 +82,9 @@ class MutateAssetSetsRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -91,6 +93,7 @@ class MutateAssetSetsRequest(proto.Message):
 
 class AssetSetOperation(proto.Message):
     r"""A single operation (create, remove) on an asset set.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -146,6 +149,7 @@ class AssetSetOperation(proto.Message):
 
 class MutateAssetSetsResponse(proto.Message):
     r"""Response message for an asset set mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v17.services.types.MutateAssetSetResult]):
             All results for the mutate.
@@ -171,6 +175,7 @@ class MutateAssetSetsResponse(proto.Message):
 
 class MutateAssetSetResult(proto.Message):
     r"""The result for the asset set mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.

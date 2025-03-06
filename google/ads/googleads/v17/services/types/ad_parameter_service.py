@@ -84,7 +84,9 @@ class MutateAdParametersRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -93,6 +95,7 @@ class MutateAdParametersRequest(proto.Message):
 
 class AdParameterOperation(proto.Message):
     r"""A single operation (create, update, remove) on ad parameter.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -149,6 +152,7 @@ class AdParameterOperation(proto.Message):
 
 class MutateAdParametersResponse(proto.Message):
     r"""Response message for an ad parameter mutate.
+
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
             Errors that pertain to operation failures in the partial
@@ -174,6 +178,7 @@ class MutateAdParametersResponse(proto.Message):
 
 class MutateAdParameterResult(proto.Message):
     r"""The result for the ad parameter mutate.
+
     Attributes:
         resource_name (str):
             The resource name returned for successful

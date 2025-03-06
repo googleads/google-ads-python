@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AssetGroupSignalErrorEnum",},
+    manifest={
+        "AssetGroupSignalErrorEnum",
+    },
 )
 
 
@@ -33,7 +35,31 @@ class AssetGroupSignalErrorEnum(proto.Message):
     """
 
     class AssetGroupSignalError(proto.Enum):
-        r"""Enum describing possible asset group signal errors."""
+        r"""Enum describing possible asset group signal errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            TOO_MANY_WORDS (2):
+                The number of words in the Search Theme
+                signal exceed the allowed maximum. You can add
+                up to 10 words in a keyword. See
+                https://support.google.com/google-ads/answer/7476658
+                for details.
+            SEARCH_THEME_POLICY_VIOLATION (3):
+                The search theme requested to be added
+                violates certain policy. See
+                https://support.google.com/adspolicy/answer/6008942.
+            AUDIENCE_WITH_WRONG_ASSET_GROUP_ID (4):
+                The asset group referenced by the asset group
+                signal does not match the asset group referenced
+                by the audience being used in the asset group
+                signal.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TOO_MANY_WORDS = 2

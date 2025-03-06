@@ -37,7 +37,19 @@ class TrackingCodePageFormatEnum(proto.Message):
     class TrackingCodePageFormat(proto.Enum):
         r"""The format of the web page where the tracking tag and snippet
         will be installed.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            HTML (2):
+                Standard HTML page format.
+            AMP (3):
+                Google AMP page format.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         HTML = 2

@@ -22,16 +22,44 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"CustomerFeedErrorEnum",},
+    manifest={
+        "CustomerFeedErrorEnum",
+    },
 )
 
 
 class CustomerFeedErrorEnum(proto.Message):
-    r"""Container for enum describing possible customer feed errors.
-    """
+    r"""Container for enum describing possible customer feed errors."""
 
     class CustomerFeedError(proto.Enum):
-        r"""Enum describing possible customer feed errors."""
+        r"""Enum describing possible customer feed errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE (2):
+                An active feed already exists for this
+                customer and place holder type.
+            CANNOT_CREATE_FOR_REMOVED_FEED (3):
+                The specified feed is removed.
+            CANNOT_CREATE_ALREADY_EXISTING_CUSTOMER_FEED (4):
+                The CustomerFeed already exists. Update
+                should be used to modify the existing
+                CustomerFeed.
+            CANNOT_MODIFY_REMOVED_CUSTOMER_FEED (5):
+                Cannot update removed customer feed.
+            INVALID_PLACEHOLDER_TYPE (6):
+                Invalid placeholder type.
+            MISSING_FEEDMAPPING_FOR_PLACEHOLDER_TYPE (7):
+                Feed mapping for this placeholder type does
+                not exist.
+            PLACEHOLDER_TYPE_NOT_ALLOWED_ON_CUSTOMER_FEED (8):
+                Placeholder not allowed at the account level.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         FEED_ALREADY_EXISTS_FOR_PLACEHOLDER_TYPE = 2

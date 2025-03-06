@@ -32,7 +32,20 @@ class AudienceScopeEnum(proto.Message):
     r"""Defines the scope an audience can be used in."""
 
     class AudienceScope(proto.Enum):
-        r"""Enum containing possible audience scope values."""
+        r"""Enum containing possible audience scope values.
+
+        Values:
+            UNSPECIFIED (0):
+                The scope has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+            CUSTOMER (2):
+                The audience is scoped at the customer level.
+            ASSET_GROUP (3):
+                The audience is scoped under a specific
+                AssetGroup.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

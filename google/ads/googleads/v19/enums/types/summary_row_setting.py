@@ -32,7 +32,24 @@ class SummaryRowSettingEnum(proto.Message):
     r"""Indicates summary row setting in request parameter."""
 
     class SummaryRowSetting(proto.Enum):
-        r"""Enum describing return summary row settings."""
+        r"""Enum describing return summary row settings.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Represent unknown values of return summary
+                row.
+            NO_SUMMARY_ROW (2):
+                Do not return summary row.
+            SUMMARY_ROW_WITH_RESULTS (3):
+                Return summary row along with results. The
+                summary row will be returned in the last batch
+                alone (last batch will contain no results).
+            SUMMARY_ROW_ONLY (4):
+                Return summary row only and return no
+                results.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

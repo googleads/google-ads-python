@@ -22,16 +22,44 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"SmartCampaignErrorEnum",},
+    manifest={
+        "SmartCampaignErrorEnum",
+    },
 )
 
 
 class SmartCampaignErrorEnum(proto.Message):
-    r"""Container for enum describing possible Smart campaign errors.
-    """
+    r"""Container for enum describing possible Smart campaign errors."""
 
     class SmartCampaignError(proto.Enum):
-        r"""Enum describing possible Smart campaign errors."""
+        r"""Enum describing possible Smart campaign errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_BUSINESS_LOCATION_ID (2):
+                The business location id is invalid.
+            INVALID_CAMPAIGN (3):
+                The SmartCampaignSetting resource is only
+                applicable for campaigns with advertising
+                channel type SMART.
+            BUSINESS_NAME_OR_BUSINESS_LOCATION_ID_MISSING (4):
+                The business name or business location id is
+                required.
+            REQUIRED_SUGGESTION_FIELD_MISSING (5):
+                A Smart campaign suggestion request field is
+                required.
+            GEO_TARGETS_REQUIRED (6):
+                A location list or proximity is required.
+            CANNOT_DETERMINE_SUGGESTION_LOCALE (7):
+                The locale could not be determined.
+            FINAL_URL_NOT_CRAWLABLE (8):
+                The final URL could not be crawled.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_BUSINESS_LOCATION_ID = 2

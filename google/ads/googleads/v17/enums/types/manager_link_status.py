@@ -35,7 +35,29 @@ class ManagerLinkStatusEnum(proto.Message):
     """
 
     class ManagerLinkStatus(proto.Enum):
-        r"""Possible statuses of a link."""
+        r"""Possible statuses of a link.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ACTIVE (2):
+                Indicates current in-effect relationship
+            INACTIVE (3):
+                Indicates terminated relationship
+            PENDING (4):
+                Indicates relationship has been requested by
+                manager, but the client hasn't accepted yet.
+            REFUSED (5):
+                Relationship was requested by the manager,
+                but the client has refused.
+            CANCELED (6):
+                Indicates relationship has been requested by
+                manager, but manager canceled it.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ACTIVE = 2

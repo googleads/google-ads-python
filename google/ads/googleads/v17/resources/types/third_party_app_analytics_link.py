@@ -32,6 +32,7 @@ class ThirdPartyAppAnalyticsLink(proto.Message):
     r"""A data sharing connection, allowing the import of third party
     app analytics into a Google Ads Customer.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

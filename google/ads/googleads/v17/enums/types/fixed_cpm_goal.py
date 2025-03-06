@@ -35,7 +35,23 @@ class FixedCpmGoalEnum(proto.Message):
     """
 
     class FixedCpmGoal(proto.Enum):
-        r"""Enum describing the goal of the Fixed CPM bidding strategy."""
+        r"""Enum describing the goal of the Fixed CPM bidding strategy.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            REACH (2):
+                Maximize reach, that is the number of users
+                who saw the ads in this campaign.
+            TARGET_FREQUENCY (3):
+                Target Frequency CPM bidder. Optimize bidding
+                to reach a single user with the requested
+                frequency.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         REACH = 2

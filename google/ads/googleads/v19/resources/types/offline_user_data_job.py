@@ -147,6 +147,7 @@ class OfflineUserDataJob(proto.Message):
 
 class OfflineUserDataJobMetadata(proto.Message):
     r"""Metadata of offline user data job.
+
     Attributes:
         match_rate_range (google.ads.googleads.v19.enums.types.OfflineUserDataJobMatchRateRangeEnum.OfflineUserDataJobMatchRateRange):
             Output only. Match rate of the Customer Match

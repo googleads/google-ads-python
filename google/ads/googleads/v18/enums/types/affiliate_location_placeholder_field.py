@@ -22,16 +22,56 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AffiliateLocationPlaceholderFieldEnum",},
+    manifest={
+        "AffiliateLocationPlaceholderFieldEnum",
+    },
 )
 
 
 class AffiliateLocationPlaceholderFieldEnum(proto.Message):
-    r"""Values for Affiliate Location placeholder fields.
-    """
+    r"""Values for Affiliate Location placeholder fields."""
 
     class AffiliateLocationPlaceholderField(proto.Enum):
-        r"""Possible values for Affiliate Location placeholder fields."""
+        r"""Possible values for Affiliate Location placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            BUSINESS_NAME (2):
+                Data Type: STRING. The name of the business.
+            ADDRESS_LINE_1 (3):
+                Data Type: STRING. Line 1 of the business
+                address.
+            ADDRESS_LINE_2 (4):
+                Data Type: STRING. Line 2 of the business
+                address.
+            CITY (5):
+                Data Type: STRING. City of the business
+                address.
+            PROVINCE (6):
+                Data Type: STRING. Province of the business
+                address.
+            POSTAL_CODE (7):
+                Data Type: STRING. Postal code of the
+                business address.
+            COUNTRY_CODE (8):
+                Data Type: STRING. Country code of the
+                business address.
+            PHONE_NUMBER (9):
+                Data Type: STRING. Phone number of the
+                business.
+            LANGUAGE_CODE (10):
+                Data Type: STRING. Language code of the
+                business.
+            CHAIN_ID (11):
+                Data Type: INT64. ID of the chain.
+            CHAIN_NAME (12):
+                Data Type: STRING. Name of the chain.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         BUSINESS_NAME = 2

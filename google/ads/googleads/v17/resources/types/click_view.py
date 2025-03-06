@@ -39,6 +39,7 @@ class ClickView(proto.Message):
     filter limiting the results to one day and can be requested for
     dates back to 90 days before the time of the request.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

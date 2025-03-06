@@ -22,16 +22,39 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"MediaTypeEnum",},
+    manifest={
+        "MediaTypeEnum",
+    },
 )
 
 
 class MediaTypeEnum(proto.Message):
-    r"""Container for enum describing the types of media.
-    """
+    r"""Container for enum describing the types of media."""
 
     class MediaType(proto.Enum):
-        r"""The type of media."""
+        r"""The type of media.
+
+        Values:
+            UNSPECIFIED (0):
+                The media type has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            IMAGE (2):
+                Static image, used for image ad.
+            ICON (3):
+                Small image, used for map ad.
+            MEDIA_BUNDLE (4):
+                ZIP file, used in fields of template ads.
+            AUDIO (5):
+                Audio file.
+            VIDEO (6):
+                Video file.
+            DYNAMIC_IMAGE (7):
+                Animated image, such as animated GIF.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IMAGE = 2

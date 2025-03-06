@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"GenderTypeEnum",},
+    manifest={
+        "GenderTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,22 @@ class GenderTypeEnum(proto.Message):
     """
 
     class GenderType(proto.Enum):
-        r"""The type of demographic genders (for example, female)."""
+        r"""The type of demographic genders (for example, female).
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MALE (10):
+                Male.
+            FEMALE (11):
+                Female.
+            UNDETERMINED (20):
+                Undetermined gender.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MALE = 10

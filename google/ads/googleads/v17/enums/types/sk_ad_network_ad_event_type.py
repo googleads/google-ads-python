@@ -32,7 +32,22 @@ class SkAdNetworkAdEventTypeEnum(proto.Message):
     r"""Container for enumeration of SkAdNetwork ad event types."""
 
     class SkAdNetworkAdEventType(proto.Enum):
-        r"""Enumerates SkAdNetwork ad event types"""
+        r"""Enumerates SkAdNetwork ad event types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            UNAVAILABLE (2):
+                The value was not present in the postback or
+                we do not have this data for other reasons.
+            INTERACTION (3):
+                The user interacted with the ad.
+            VIEW (4):
+                The user viewed the ad.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNAVAILABLE = 2

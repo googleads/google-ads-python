@@ -67,20 +67,27 @@ class MutateAdGroupCriterionCustomizersRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "AdGroupCriterionCustomizerOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="AdGroupCriterionCustomizerOperation",
+    operations: MutableSequence["AdGroupCriterionCustomizerOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="AdGroupCriterionCustomizerOperation",
+        )
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -114,19 +121,24 @@ class AdGroupCriterionCustomizerOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
     """
 
-    create: gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="operation",
-        message=gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer,
+    create: gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer = (
+        proto.Field(
+            proto.MESSAGE,
+            number=1,
+            oneof="operation",
+            message=gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer,
+        )
     )
     remove: str = proto.Field(
-        proto.STRING, number=2, oneof="operation",
+        proto.STRING,
+        number=2,
+        oneof="operation",
     )
 
 
 class MutateAdGroupCriterionCustomizersResponse(proto.Message):
     r"""Response message for an ad group criterion customizer mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateAdGroupCriterionCustomizerResult]):
             All results for the mutate.
@@ -138,20 +150,23 @@ class MutateAdGroupCriterionCustomizersResponse(proto.Message):
             an RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateAdGroupCriterionCustomizerResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateAdGroupCriterionCustomizerResult",
+    results: MutableSequence["MutateAdGroupCriterionCustomizerResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateAdGroupCriterionCustomizerResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=2, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=2,
+        message=status_pb2.Status,
     )
 
 
 class MutateAdGroupCriterionCustomizerResult(proto.Message):
     r"""The result for the ad group criterion customizer mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
@@ -162,9 +177,12 @@ class MutateAdGroupCriterionCustomizerResult(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    ad_group_criterion_customizer: gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer = proto.Field(
+    ad_group_criterion_customizer: (
+        gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_ad_group_criterion_customizer.AdGroupCriterionCustomizer,

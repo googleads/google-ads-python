@@ -43,6 +43,7 @@ class LocalServicesLead(proto.Message):
     messages or books service from advertiser.
     More info: https://ads.google.com/local-services-ads
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -122,7 +123,9 @@ class LocalServicesLead(proto.Message):
             enum=local_services_lead_type.LocalServicesLeadTypeEnum.LeadType,
         )
     )
-    lead_status: local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus = proto.Field(
+    lead_status: (
+        local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=local_services_lead_status.LocalServicesLeadStatusEnum.LeadStatus,
@@ -155,6 +158,7 @@ class LocalServicesLead(proto.Message):
 
 class ContactDetails(proto.Message):
     r"""Fields containing consumer contact details.
+
     Attributes:
         phone_number (str):
             Output only. Consumer phone number in E164
@@ -209,6 +213,7 @@ class Note(proto.Message):
 
 class CreditDetails(proto.Message):
     r"""Represents the credit details of a lead.
+
     Attributes:
         credit_state (google.ads.googleads.v17.enums.types.LocalServicesCreditStateEnum.CreditState):
             Output only. Credit state of the lead.
@@ -220,7 +225,9 @@ class CreditDetails(proto.Message):
             09:15:00" or "2018-02-01 14:34:30".
     """
 
-    credit_state: local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState = proto.Field(
+    credit_state: (
+        local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=local_services_lead_credit_state.LocalServicesCreditStateEnum.CreditState,

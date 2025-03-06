@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import RemarketingActionServiceClient
+from .async_client import RemarketingActionServiceAsyncClient
 
-__all__ = ("RemarketingActionServiceClient",)
+__all__ = (
+    "RemarketingActionServiceClient",
+    "RemarketingActionServiceAsyncClient",
+)

@@ -35,7 +35,30 @@ class KeywordPlanConceptGroupTypeEnum(proto.Message):
     """
 
     class KeywordPlanConceptGroupType(proto.Enum):
-        r"""Enumerates keyword plan concept group types."""
+        r"""Enumerates keyword plan concept group types.
+
+        Values:
+            UNSPECIFIED (0):
+                The concept group classification different
+                from brand/non-brand. This is a catch all bucket
+                for all classifications that are none of the
+                below.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            BRAND (2):
+                The concept group classification is based on
+                BRAND.
+            OTHER_BRANDS (3):
+                The concept group classification based on
+                BRAND, that didn't fit well with the BRAND
+                classifications. These are generally outliers
+                and can have very few keywords in this type of
+                classification.
+            NON_BRAND (4):
+                These concept group classification is not
+                based on BRAND. This is returned for generic
+                keywords that don't have a brand association.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -32,7 +32,61 @@ class UserListSizeRangeEnum(proto.Message):
     r"""Size range in terms of number of users of a UserList."""
 
     class UserListSizeRange(proto.Enum):
-        r"""Enum containing possible user list size ranges."""
+        r"""Enum containing possible user list size ranges.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LESS_THAN_FIVE_HUNDRED (2):
+                User list has less than 500 users.
+            LESS_THAN_ONE_THOUSAND (3):
+                User list has number of users in range of 500
+                to 1000.
+            ONE_THOUSAND_TO_TEN_THOUSAND (4):
+                User list has number of users in range of
+                1000 to 10000.
+            TEN_THOUSAND_TO_FIFTY_THOUSAND (5):
+                User list has number of users in range of
+                10000 to 50000.
+            FIFTY_THOUSAND_TO_ONE_HUNDRED_THOUSAND (6):
+                User list has number of users in range of
+                50000 to 100000.
+            ONE_HUNDRED_THOUSAND_TO_THREE_HUNDRED_THOUSAND (7):
+                User list has number of users in range of
+                100000 to 300000.
+            THREE_HUNDRED_THOUSAND_TO_FIVE_HUNDRED_THOUSAND (8):
+                User list has number of users in range of
+                300000 to 500000.
+            FIVE_HUNDRED_THOUSAND_TO_ONE_MILLION (9):
+                User list has number of users in range of
+                500000 to 1 million.
+            ONE_MILLION_TO_TWO_MILLION (10):
+                User list has number of users in range of 1
+                to 2 millions.
+            TWO_MILLION_TO_THREE_MILLION (11):
+                User list has number of users in range of 2
+                to 3 millions.
+            THREE_MILLION_TO_FIVE_MILLION (12):
+                User list has number of users in range of 3
+                to 5 millions.
+            FIVE_MILLION_TO_TEN_MILLION (13):
+                User list has number of users in range of 5
+                to 10 millions.
+            TEN_MILLION_TO_TWENTY_MILLION (14):
+                User list has number of users in range of 10
+                to 20 millions.
+            TWENTY_MILLION_TO_THIRTY_MILLION (15):
+                User list has number of users in range of 20
+                to 30 millions.
+            THIRTY_MILLION_TO_FIFTY_MILLION (16):
+                User list has number of users in range of 30
+                to 50 millions.
+            OVER_FIFTY_MILLION (17):
+                User list has over 50 million users.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

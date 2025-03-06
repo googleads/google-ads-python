@@ -35,7 +35,19 @@ class CampaignSharedSetErrorEnum(proto.Message):
     """
 
     class CampaignSharedSetError(proto.Enum):
-        r"""Enum describing possible campaign shared set errors."""
+        r"""Enum describing possible campaign shared set errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            SHARED_SET_ACCESS_DENIED (2):
+                The shared set belongs to another customer
+                and permission isn't granted.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SHARED_SET_ACCESS_DENIED = 2

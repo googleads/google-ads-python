@@ -37,7 +37,22 @@ class PolicyTopicEvidenceDestinationNotWorkingDeviceEnum(proto.Message):
     class PolicyTopicEvidenceDestinationNotWorkingDevice(proto.Enum):
         r"""The possible policy topic evidence destination not working
         devices.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            DESKTOP (2):
+                Landing page doesn't work on desktop device.
+            ANDROID (3):
+                Landing page doesn't work on Android device.
+            IOS (4):
+                Landing page doesn't work on iOS device.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DESKTOP = 2

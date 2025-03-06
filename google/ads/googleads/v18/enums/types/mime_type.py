@@ -22,16 +22,51 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"MimeTypeEnum",},
+    manifest={
+        "MimeTypeEnum",
+    },
 )
 
 
 class MimeTypeEnum(proto.Message):
-    r"""Container for enum describing the mime types.
-    """
+    r"""Container for enum describing the mime types."""
 
     class MimeType(proto.Enum):
-        r"""The mime type"""
+        r"""The mime type
+
+        Values:
+            UNSPECIFIED (0):
+                The mime type has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            IMAGE_JPEG (2):
+                MIME type of image/jpeg.
+            IMAGE_GIF (3):
+                MIME type of image/gif.
+            IMAGE_PNG (4):
+                MIME type of image/png.
+            FLASH (5):
+                MIME type of application/x-shockwave-flash.
+            TEXT_HTML (6):
+                MIME type of text/html.
+            PDF (7):
+                MIME type of application/pdf.
+            MSWORD (8):
+                MIME type of application/msword.
+            MSEXCEL (9):
+                MIME type of application/vnd.ms-excel.
+            RTF (10):
+                MIME type of application/rtf.
+            AUDIO_WAV (11):
+                MIME type of audio/wav.
+            AUDIO_MP3 (12):
+                MIME type of audio/mp3.
+            HTML5_AD_ZIP (13):
+                MIME type of application/x-html5-ad-zip.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         IMAGE_JPEG = 2

@@ -37,7 +37,17 @@ class AffiliateLocationFeedRelationshipTypeEnum(proto.Message):
     class AffiliateLocationFeedRelationshipType(proto.Enum):
         r"""Possible values for a relationship type for an affiliate
         location feed.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            GENERAL_RETAILER (2):
+                General retailer relationship.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         GENERAL_RETAILER = 2

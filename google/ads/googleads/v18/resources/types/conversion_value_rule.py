@@ -30,12 +30,15 @@ from google.ads.googleads.v18.enums.types import value_rule_operation
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionValueRule",},
+    manifest={
+        "ConversionValueRule",
+    },
 )
 
 
 class ConversionValueRule(proto.Message):
     r"""A conversion value rule
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the conversion value rule.
@@ -72,6 +75,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAction(proto.Message):
         r"""Action applied when rule is applied.
+
         Attributes:
             operation (google.ads.googleads.v18.enums.types.ValueRuleOperationEnum.ValueRuleOperation):
                 Specifies applied operation.
@@ -79,17 +83,21 @@ class ConversionValueRule(proto.Message):
                 Specifies applied value.
         """
 
-        operation: value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation = proto.Field(
+        operation: (
+            value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation
+        ) = proto.Field(
             proto.ENUM,
             number=1,
             enum=value_rule_operation.ValueRuleOperationEnum.ValueRuleOperation,
         )
         value: float = proto.Field(
-            proto.DOUBLE, number=2,
+            proto.DOUBLE,
+            number=2,
         )
 
     class ValueRuleGeoLocationCondition(proto.Message):
         r"""Condition on Geo dimension.
+
         Attributes:
             excluded_geo_target_constants (MutableSequence[str]):
                 Geo locations that advertisers want to
@@ -103,20 +111,26 @@ class ConversionValueRule(proto.Message):
                 Included Geo location match type.
         """
 
-        excluded_geo_target_constants: MutableSequence[
-            str
-        ] = proto.RepeatedField(
-            proto.STRING, number=1,
+        excluded_geo_target_constants: MutableSequence[str] = (
+            proto.RepeatedField(
+                proto.STRING,
+                number=1,
+            )
         )
-        excluded_geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
+        excluded_geo_match_type: (
+            value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+        ) = proto.Field(
             proto.ENUM,
             number=2,
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
         )
         geo_target_constants: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=3,
+            proto.STRING,
+            number=3,
         )
-        geo_match_type: value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType = proto.Field(
+        geo_match_type: (
+            value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType
+        ) = proto.Field(
             proto.ENUM,
             number=4,
             enum=value_rule_geo_location_match_type.ValueRuleGeoLocationMatchTypeEnum.ValueRuleGeoLocationMatchType,
@@ -124,6 +138,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleDeviceCondition(proto.Message):
         r"""Condition on Device dimension.
+
         Attributes:
             device_types (MutableSequence[google.ads.googleads.v18.enums.types.ValueRuleDeviceTypeEnum.ValueRuleDeviceType]):
                 Value for device type condition.
@@ -139,6 +154,7 @@ class ConversionValueRule(proto.Message):
 
     class ValueRuleAudienceCondition(proto.Message):
         r"""Condition on Audience dimension.
+
         Attributes:
             user_lists (MutableSequence[str]):
                 User Lists.
@@ -147,14 +163,17 @@ class ConversionValueRule(proto.Message):
         """
 
         user_lists: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         user_interests: MutableSequence[str] = proto.RepeatedField(
-            proto.STRING, number=2,
+            proto.STRING,
+            number=2,
         )
 
     class ValueRuleItineraryCondition(proto.Message):
         r"""Condition on Itinerary dimension.
+
         Attributes:
             advance_booking_window (google.ads.googleads.v18.resources.types.ConversionValueRule.ValueRuleItineraryAdvanceBookingWindow):
                 Range for the number of days between the date
@@ -167,17 +186,23 @@ class ConversionValueRule(proto.Message):
                 itinerary's travel can start.
         """
 
-        advance_booking_window: "ConversionValueRule.ValueRuleItineraryAdvanceBookingWindow" = proto.Field(
+        advance_booking_window: (
+            "ConversionValueRule.ValueRuleItineraryAdvanceBookingWindow"
+        ) = proto.Field(
             proto.MESSAGE,
             number=1,
             message="ConversionValueRule.ValueRuleItineraryAdvanceBookingWindow",
         )
-        travel_length: "ConversionValueRule.ValueRuleItineraryTravelLength" = proto.Field(
-            proto.MESSAGE,
-            number=2,
-            message="ConversionValueRule.ValueRuleItineraryTravelLength",
+        travel_length: "ConversionValueRule.ValueRuleItineraryTravelLength" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=2,
+                message="ConversionValueRule.ValueRuleItineraryTravelLength",
+            )
         )
-        travel_start_day: "ConversionValueRule.ValueRuleItineraryTravelStartDay" = proto.Field(
+        travel_start_day: (
+            "ConversionValueRule.ValueRuleItineraryTravelStartDay"
+        ) = proto.Field(
             proto.MESSAGE,
             number=3,
             message="ConversionValueRule.ValueRuleItineraryTravelStartDay",
@@ -197,14 +222,17 @@ class ConversionValueRule(proto.Message):
         """
 
         min_days: int = proto.Field(
-            proto.INT32, number=1,
+            proto.INT32,
+            number=1,
         )
         max_days: int = proto.Field(
-            proto.INT32, number=2,
+            proto.INT32,
+            number=2,
         )
 
     class ValueRuleItineraryTravelLength(proto.Message):
         r"""Range for the itinerary length in number of nights.
+
         Attributes:
             min_nights (int):
                 Minimum number of nights between the start
@@ -215,10 +243,12 @@ class ConversionValueRule(proto.Message):
         """
 
         min_nights: int = proto.Field(
-            proto.INT32, number=1,
+            proto.INT32,
+            number=1,
         )
         max_nights: int = proto.Field(
-            proto.INT32, number=2,
+            proto.INT32,
+            number=2,
         )
 
     class ValueRuleItineraryTravelStartDay(proto.Message):
@@ -243,52 +273,74 @@ class ConversionValueRule(proto.Message):
         """
 
         monday: bool = proto.Field(
-            proto.BOOL, number=1,
+            proto.BOOL,
+            number=1,
         )
         tuesday: bool = proto.Field(
-            proto.BOOL, number=2,
+            proto.BOOL,
+            number=2,
         )
         wednesday: bool = proto.Field(
-            proto.BOOL, number=3,
+            proto.BOOL,
+            number=3,
         )
         thursday: bool = proto.Field(
-            proto.BOOL, number=4,
+            proto.BOOL,
+            number=4,
         )
         friday: bool = proto.Field(
-            proto.BOOL, number=5,
+            proto.BOOL,
+            number=5,
         )
         saturday: bool = proto.Field(
-            proto.BOOL, number=6,
+            proto.BOOL,
+            number=6,
         )
         sunday: bool = proto.Field(
-            proto.BOOL, number=7,
+            proto.BOOL,
+            number=7,
         )
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     action: ValueRuleAction = proto.Field(
-        proto.MESSAGE, number=3, message=ValueRuleAction,
+        proto.MESSAGE,
+        number=3,
+        message=ValueRuleAction,
     )
     geo_location_condition: ValueRuleGeoLocationCondition = proto.Field(
-        proto.MESSAGE, number=4, message=ValueRuleGeoLocationCondition,
+        proto.MESSAGE,
+        number=4,
+        message=ValueRuleGeoLocationCondition,
     )
     device_condition: ValueRuleDeviceCondition = proto.Field(
-        proto.MESSAGE, number=5, message=ValueRuleDeviceCondition,
+        proto.MESSAGE,
+        number=5,
+        message=ValueRuleDeviceCondition,
     )
     audience_condition: ValueRuleAudienceCondition = proto.Field(
-        proto.MESSAGE, number=6, message=ValueRuleAudienceCondition,
+        proto.MESSAGE,
+        number=6,
+        message=ValueRuleAudienceCondition,
     )
     itinerary_condition: ValueRuleItineraryCondition = proto.Field(
-        proto.MESSAGE, number=9, message=ValueRuleItineraryCondition,
+        proto.MESSAGE,
+        number=9,
+        message=ValueRuleItineraryCondition,
     )
     owner_customer: str = proto.Field(
-        proto.STRING, number=7,
+        proto.STRING,
+        number=7,
     )
-    status: conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus = proto.Field(
+    status: (
+        conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus
+    ) = proto.Field(
         proto.ENUM,
         number=8,
         enum=conversion_value_rule_status.ConversionValueRuleStatusEnum.ConversionValueRuleStatus,

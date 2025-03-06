@@ -25,13 +25,16 @@ from google.ads.googleads.v18.enums.types import customizer_value_status
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupCriterionCustomizer",},
+    manifest={
+        "AdGroupCriterionCustomizer",
+    },
 )
 
 
 class AdGroupCriterionCustomizer(proto.Message):
     r"""A customizer value for the associated CustomizerAttribute at
     the AdGroupCriterion level.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -62,21 +65,29 @@ class AdGroupCriterionCustomizer(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     ad_group_criterion: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     customizer_attribute: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    status: customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus = proto.Field(
+    status: (
+        customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=customizer_value_status.CustomizerValueStatusEnum.CustomizerValueStatus,
     )
     value: customizer_value.CustomizerValue = proto.Field(
-        proto.MESSAGE, number=5, message=customizer_value.CustomizerValue,
+        proto.MESSAGE,
+        number=5,
+        message=customizer_value.CustomizerValue,
     )
 
 

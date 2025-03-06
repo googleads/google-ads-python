@@ -48,6 +48,7 @@ class UploadClickConversionsRequest(proto.Message):
     r"""Request message for
     [ConversionUploadService.UploadClickConversions][google.ads.googleads.v18.services.ConversionUploadService.UploadClickConversions].
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -105,22 +106,30 @@ class UploadClickConversionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversions: MutableSequence["ClickConversion"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ClickConversion",
+        proto.MESSAGE,
+        number=2,
+        message="ClickConversion",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
     debug_enabled: bool = proto.Field(
-        proto.BOOL, number=5,
+        proto.BOOL,
+        number=5,
     )
     job_id: int = proto.Field(
-        proto.INT32, number=6, optional=True,
+        proto.INT32,
+        number=6,
+        optional=True,
     )
 
 
@@ -147,13 +156,18 @@ class UploadClickConversionsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results: MutableSequence["ClickConversionResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ClickConversionResult",
+        proto.MESSAGE,
+        number=2,
+        message="ClickConversionResult",
     )
     job_id: int = proto.Field(
-        proto.INT64, number=3,
+        proto.INT64,
+        number=3,
     )
 
 
@@ -184,16 +198,21 @@ class UploadCallConversionsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     conversions: MutableSequence["CallConversion"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CallConversion",
+        proto.MESSAGE,
+        number=2,
+        message="CallConversion",
     )
     partial_failure: bool = proto.Field(
-        proto.BOOL, number=3,
+        proto.BOOL,
+        number=3,
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
@@ -218,15 +237,20 @@ class UploadCallConversionsResponse(proto.Message):
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
-        proto.MESSAGE, number=1, message=status_pb2.Status,
+        proto.MESSAGE,
+        number=1,
+        message=status_pb2.Status,
     )
     results: MutableSequence["CallConversionResult"] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CallConversionResult",
+        proto.MESSAGE,
+        number=2,
+        message="CallConversionResult",
     )
 
 
 class ClickConversion(proto.Message):
     r"""A click conversion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -301,55 +325,82 @@ class ClickConversion(proto.Message):
     """
 
     gclid: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     gbraid: str = proto.Field(
-        proto.STRING, number=18,
+        proto.STRING,
+        number=18,
     )
     wbraid: str = proto.Field(
-        proto.STRING, number=19,
+        proto.STRING,
+        number=19,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     conversion_date_time: str = proto.Field(
-        proto.STRING, number=11, optional=True,
+        proto.STRING,
+        number=11,
+        optional=True,
     )
     conversion_value: float = proto.Field(
-        proto.DOUBLE, number=12, optional=True,
+        proto.DOUBLE,
+        number=12,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     order_id: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     external_attribution_data: "ExternalAttributionData" = proto.Field(
-        proto.MESSAGE, number=7, message="ExternalAttributionData",
+        proto.MESSAGE,
+        number=7,
+        message="ExternalAttributionData",
     )
     custom_variables: MutableSequence["CustomVariable"] = proto.RepeatedField(
-        proto.MESSAGE, number=15, message="CustomVariable",
+        proto.MESSAGE,
+        number=15,
+        message="CustomVariable",
     )
     cart_data: "CartData" = proto.Field(
-        proto.MESSAGE, number=16, message="CartData",
+        proto.MESSAGE,
+        number=16,
+        message="CartData",
     )
-    user_identifiers: MutableSequence[
-        offline_user_data.UserIdentifier
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=17, message=offline_user_data.UserIdentifier,
+    user_identifiers: MutableSequence[offline_user_data.UserIdentifier] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=17,
+            message=offline_user_data.UserIdentifier,
+        )
     )
-    conversion_environment: conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment = proto.Field(
+    conversion_environment: (
+        conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment
+    ) = proto.Field(
         proto.ENUM,
         number=20,
         enum=conversion_environment_enum.ConversionEnvironmentEnum.ConversionEnvironment,
     )
     consent: gagc_consent.Consent = proto.Field(
-        proto.MESSAGE, number=23, message=gagc_consent.Consent,
+        proto.MESSAGE,
+        number=23,
+        message=gagc_consent.Consent,
     )
 
 
 class CallConversion(proto.Message):
     r"""A call conversion.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -401,34 +452,51 @@ class CallConversion(proto.Message):
     """
 
     caller_id: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     call_start_date_time: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     conversion_date_time: str = proto.Field(
-        proto.STRING, number=10, optional=True,
+        proto.STRING,
+        number=10,
+        optional=True,
     )
     conversion_value: float = proto.Field(
-        proto.DOUBLE, number=11, optional=True,
+        proto.DOUBLE,
+        number=11,
+        optional=True,
     )
     currency_code: str = proto.Field(
-        proto.STRING, number=12, optional=True,
+        proto.STRING,
+        number=12,
+        optional=True,
     )
     custom_variables: MutableSequence["CustomVariable"] = proto.RepeatedField(
-        proto.MESSAGE, number=13, message="CustomVariable",
+        proto.MESSAGE,
+        number=13,
+        message="CustomVariable",
     )
     consent: gagc_consent.Consent = proto.Field(
-        proto.MESSAGE, number=14, message=gagc_consent.Consent,
+        proto.MESSAGE,
+        number=14,
+        message=gagc_consent.Consent,
     )
 
 
 class ExternalAttributionData(proto.Message):
     r"""Contains additional information about externally attributed
     conversions.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -445,16 +513,21 @@ class ExternalAttributionData(proto.Message):
     """
 
     external_attribution_credit: float = proto.Field(
-        proto.DOUBLE, number=3, optional=True,
+        proto.DOUBLE,
+        number=3,
+        optional=True,
     )
     external_attribution_model: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
 
 
 class ClickConversionResult(proto.Message):
     r"""Identifying information for a successfully processed
     ClickConversion.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -491,30 +564,41 @@ class ClickConversionResult(proto.Message):
     """
 
     gclid: str = proto.Field(
-        proto.STRING, number=4, optional=True,
+        proto.STRING,
+        number=4,
+        optional=True,
     )
     gbraid: str = proto.Field(
-        proto.STRING, number=8,
+        proto.STRING,
+        number=8,
     )
     wbraid: str = proto.Field(
-        proto.STRING, number=9,
+        proto.STRING,
+        number=9,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     conversion_date_time: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
-    user_identifiers: MutableSequence[
-        offline_user_data.UserIdentifier
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message=offline_user_data.UserIdentifier,
+    user_identifiers: MutableSequence[offline_user_data.UserIdentifier] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message=offline_user_data.UserIdentifier,
+        )
     )
 
 
 class CallConversionResult(proto.Message):
     r"""Identifying information for a successfully processed
     CallConversionUpload.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -545,21 +629,30 @@ class CallConversionResult(proto.Message):
     """
 
     caller_id: str = proto.Field(
-        proto.STRING, number=5, optional=True,
+        proto.STRING,
+        number=5,
+        optional=True,
     )
     call_start_date_time: str = proto.Field(
-        proto.STRING, number=6, optional=True,
+        proto.STRING,
+        number=6,
+        optional=True,
     )
     conversion_action: str = proto.Field(
-        proto.STRING, number=7, optional=True,
+        proto.STRING,
+        number=7,
+        optional=True,
     )
     conversion_date_time: str = proto.Field(
-        proto.STRING, number=8, optional=True,
+        proto.STRING,
+        number=8,
+        optional=True,
     )
 
 
 class CustomVariable(proto.Message):
     r"""A custom variable.
+
     Attributes:
         conversion_custom_variable (str):
             Resource name of the custom variable
@@ -577,15 +670,18 @@ class CustomVariable(proto.Message):
     """
 
     conversion_custom_variable: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     value: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 
 class CartData(proto.Message):
     r"""Contains additional information about cart data.
+
     Attributes:
         merchant_id (int):
             The Merchant Center ID where the items are
@@ -607,6 +703,7 @@ class CartData(proto.Message):
 
     class Item(proto.Message):
         r"""Contains data of the items purchased.
+
         Attributes:
             product_id (str):
                 The shopping id of the item. Must be equal to
@@ -621,29 +718,38 @@ class CartData(proto.Message):
         """
 
         product_id: str = proto.Field(
-            proto.STRING, number=1,
+            proto.STRING,
+            number=1,
         )
         quantity: int = proto.Field(
-            proto.INT32, number=2,
+            proto.INT32,
+            number=2,
         )
         unit_price: float = proto.Field(
-            proto.DOUBLE, number=3,
+            proto.DOUBLE,
+            number=3,
         )
 
     merchant_id: int = proto.Field(
-        proto.INT64, number=6,
+        proto.INT64,
+        number=6,
     )
     feed_country_code: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
     feed_language_code: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     local_transaction_cost: float = proto.Field(
-        proto.DOUBLE, number=4,
+        proto.DOUBLE,
+        number=4,
     )
     items: MutableSequence[Item] = proto.RepeatedField(
-        proto.MESSAGE, number=5, message=Item,
+        proto.MESSAGE,
+        number=5,
+        message=Item,
     )
 
 

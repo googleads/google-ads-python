@@ -123,6 +123,7 @@ class GenerateCreatorInsightsRequest(proto.Message):
 
     class SearchBrand(proto.Message):
         r"""The brand used to search for top creators.
+
         Attributes:
             brand_entities (MutableSequence[google.ads.googleads.v19.common.types.AudienceInsightsAttribute]):
                 Optional. One or more Knowledge Graph
@@ -149,6 +150,7 @@ class GenerateCreatorInsightsRequest(proto.Message):
 
     class YouTubeChannels(proto.Message):
         r"""A collection of YouTube Channels.
+
         Attributes:
             youtube_channels (MutableSequence[google.ads.googleads.v19.common.types.YouTubeChannelInfo]):
                 Optional. The YouTube Channel IDs to fetch
@@ -295,6 +297,7 @@ class GenerateTrendingInsightsResponse(proto.Message):
 
 class YouTubeCreatorInsights(proto.Message):
     r"""A YouTube creator and the insights for this creator.
+
     Attributes:
         creator_name (str):
             The name of the creator.
@@ -317,6 +320,7 @@ class YouTubeCreatorInsights(proto.Message):
 
 class YouTubeMetrics(proto.Message):
     r"""YouTube Channel metrics.
+
     Attributes:
         subscriber_count (int):
             The number of subscribers.
@@ -471,6 +475,7 @@ class SearchTopics(proto.Message):
 
 class TrendInsight(proto.Message):
     r"""A trend insight for a given attribute.
+
     Attributes:
         trend_attribute (google.ads.googleads.v19.common.types.AudienceInsightsAttributeMetadata):
             The attribute this trend is for.
@@ -502,6 +507,7 @@ class TrendInsight(proto.Message):
 
 class TrendInsightMetrics(proto.Message):
     r"""Metrics associated with a trend insight.
+
     Attributes:
         views_count (int):
             The number of views for this trend.

@@ -32,7 +32,22 @@ class BudgetPeriodEnum(proto.Message):
     r"""Message describing Budget period."""
 
     class BudgetPeriod(proto.Enum):
-        r"""Possible period of a Budget."""
+        r"""Possible period of a Budget.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DAILY (2):
+                Daily budget.
+            CUSTOM_PERIOD (5):
+                Custom budget, added back in V5. Custom budget can be used
+                with total_amount to specify lifetime budget limit. See:
+                https://support.google.com/google-ads/answer/6385083 for
+                more info.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

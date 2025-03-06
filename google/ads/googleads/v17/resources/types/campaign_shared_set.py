@@ -34,6 +34,7 @@ class CampaignSharedSet(proto.Message):
     r"""CampaignSharedSets are used for managing the shared sets
     associated with a campaign.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -78,7 +79,9 @@ class CampaignSharedSet(proto.Message):
         number=6,
         optional=True,
     )
-    status: campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus = proto.Field(
+    status: (
+        campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=campaign_shared_set_status.CampaignSharedSetStatusEnum.CampaignSharedSetStatus,

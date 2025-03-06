@@ -34,6 +34,7 @@ __protobuf__ = proto.module(
 
 class GoogleAdsField(proto.Message):
     r"""A field or resource (artifact) used by GoogleAdsService.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -118,7 +119,9 @@ class GoogleAdsField(proto.Message):
         number=21,
         optional=True,
     )
-    category: google_ads_field_category.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory = proto.Field(
+    category: (
+        google_ads_field_category.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=google_ads_field_category.GoogleAdsFieldCategoryEnum.GoogleAdsFieldCategory,
@@ -158,7 +161,9 @@ class GoogleAdsField(proto.Message):
         proto.STRING,
         number=29,
     )
-    data_type: google_ads_field_data_type.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType = proto.Field(
+    data_type: (
+        google_ads_field_data_type.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType
+    ) = proto.Field(
         proto.ENUM,
         number=12,
         enum=google_ads_field_data_type.GoogleAdsFieldDataTypeEnum.GoogleAdsFieldDataType,

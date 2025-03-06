@@ -22,12 +22,15 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"QualifyingQuestion",},
+    manifest={
+        "QualifyingQuestion",
+    },
 )
 
 
 class QualifyingQuestion(proto.Message):
     r"""Qualifying Questions for Lead Form.
+
     Attributes:
         resource_name (str):
             Output only. The resource name of the
@@ -44,16 +47,20 @@ class QualifyingQuestion(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     qualifying_question_id: int = proto.Field(
-        proto.INT64, number=2,
+        proto.INT64,
+        number=2,
     )
     locale: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
     text: str = proto.Field(
-        proto.STRING, number=4,
+        proto.STRING,
+        number=4,
     )
 
 

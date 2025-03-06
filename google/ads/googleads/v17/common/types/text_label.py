@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class TextLabel(proto.Message):
     r"""A type of label displaying text on a colored background.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

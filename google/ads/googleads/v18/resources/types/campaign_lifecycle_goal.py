@@ -27,12 +27,16 @@ from google.ads.googleads.v18.enums.types import (
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"CampaignLifecycleGoal", "CustomerAcquisitionGoalSettings",},
+    manifest={
+        "CampaignLifecycleGoal",
+        "CustomerAcquisitionGoalSettings",
+    },
 )
 
 
 class CampaignLifecycleGoal(proto.Message):
     r"""Campaign level customer lifecycle goal settings.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the customer lifecycle goal
@@ -51,18 +55,25 @@ class CampaignLifecycleGoal(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     campaign: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
-    customer_acquisition_goal_settings: "CustomerAcquisitionGoalSettings" = proto.Field(
-        proto.MESSAGE, number=3, message="CustomerAcquisitionGoalSettings",
+    customer_acquisition_goal_settings: "CustomerAcquisitionGoalSettings" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=3,
+            message="CustomerAcquisitionGoalSettings",
+        )
     )
 
 
 class CustomerAcquisitionGoalSettings(proto.Message):
     r"""The customer acquisition goal settings for the campaign.
+
     Attributes:
         optimization_mode (google.ads.googleads.v18.enums.types.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode):
             Output only. Customer acquisition
@@ -72,7 +83,9 @@ class CustomerAcquisitionGoalSettings(proto.Message):
             customer acquisition goal.
     """
 
-    optimization_mode: customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode = proto.Field(
+    optimization_mode: (
+        customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode
+    ) = proto.Field(
         proto.ENUM,
         number=1,
         enum=customer_acquisition_optimization_mode.CustomerAcquisitionOptimizationModeEnum.CustomerAcquisitionOptimizationMode,

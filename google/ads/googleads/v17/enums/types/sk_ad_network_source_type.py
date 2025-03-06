@@ -32,7 +32,23 @@ class SkAdNetworkSourceTypeEnum(proto.Message):
     r"""Container for enumeration of SkAdNetwork source types."""
 
     class SkAdNetworkSourceType(proto.Enum):
-        r"""Enumerates SkAdNetwork source types"""
+        r"""Enumerates SkAdNetwork source types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            UNAVAILABLE (2):
+                The source app ID or source domain was not
+                present in the postback or we do not have this
+                data for other reasons.
+            WEBSITE (3):
+                The ad was shown on a webpage.
+            MOBILE_APPLICATION (4):
+                The ad was shown on an app.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNAVAILABLE = 2

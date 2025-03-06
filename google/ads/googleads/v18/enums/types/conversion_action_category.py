@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"ConversionActionCategoryEnum",},
+    manifest={
+        "ConversionActionCategoryEnum",
+    },
 )
 
 
@@ -35,7 +37,79 @@ class ConversionActionCategoryEnum(proto.Message):
     class ConversionActionCategory(proto.Enum):
         r"""The category of conversions that are associated with a
         ConversionAction.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            DEFAULT (2):
+                Default category.
+            PAGE_VIEW (3):
+                User visiting a page.
+            PURCHASE (4):
+                Purchase, sales, or "order placed" event.
+            SIGNUP (5):
+                Signup user action.
+            DOWNLOAD (7):
+                Software download action (as for an app).
+            ADD_TO_CART (8):
+                The addition of items to a shopping cart or
+                bag on an advertiser site.
+            BEGIN_CHECKOUT (9):
+                When someone enters the checkout flow on an
+                advertiser site.
+            SUBSCRIBE_PAID (10):
+                The start of a paid subscription for a
+                product or service.
+            PHONE_CALL_LEAD (11):
+                A call to indicate interest in an
+                advertiser's offering.
+            IMPORTED_LEAD (12):
+                A lead conversion imported from an external
+                source into Google Ads.
+            SUBMIT_LEAD_FORM (13):
+                A submission of a form on an advertiser site
+                indicating business interest.
+            BOOK_APPOINTMENT (14):
+                A booking of an appointment with an
+                advertiser's business.
+            REQUEST_QUOTE (15):
+                A quote or price estimate request.
+            GET_DIRECTIONS (16):
+                A search for an advertiser's business
+                location with intention to visit.
+            OUTBOUND_CLICK (17):
+                A click to an advertiser's partner's site.
+            CONTACT (18):
+                A call, SMS, email, chat or other type of
+                contact to an advertiser.
+            ENGAGEMENT (19):
+                A website engagement event such as long site
+                time or a Google Analytics (GA) Smart Goal.
+                Intended to be used for GA, Firebase, GA Gold
+                goal imports.
+            STORE_VISIT (20):
+                A visit to a physical store location.
+            STORE_SALE (21):
+                A sale occurring in a physical store.
+            QUALIFIED_LEAD (22):
+                A lead conversion imported from an external
+                source into Google Ads, that has been further
+                qualified by the advertiser (marketing/sales
+                team). In the lead-to-sale journey, advertisers
+                get leads, then act on them by reaching out to
+                the consumer. If the consumer is interested and
+                may end up buying their product, the advertiser
+                marks such leads as "qualified leads".
+            CONVERTED_LEAD (23):
+                A lead conversion imported from an external
+                source into Google Ads, that has further
+                completed a chosen stage as defined by the lead
+                gen advertiser.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DEFAULT = 2

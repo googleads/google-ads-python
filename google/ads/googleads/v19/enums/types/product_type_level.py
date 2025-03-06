@@ -32,7 +32,25 @@ class ProductTypeLevelEnum(proto.Message):
     r"""Level of the type of a product offer."""
 
     class ProductTypeLevel(proto.Enum):
-        r"""Enum describing the level of the type of a product offer."""
+        r"""Enum describing the level of the type of a product offer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            LEVEL1 (7):
+                Level 1.
+            LEVEL2 (8):
+                Level 2.
+            LEVEL3 (9):
+                Level 3.
+            LEVEL4 (10):
+                Level 4.
+            LEVEL5 (11):
+                Level 5.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

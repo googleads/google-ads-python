@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"CallTypeEnum",},
+    manifest={
+        "CallTypeEnum",
+    },
 )
 
 
@@ -33,7 +35,20 @@ class CallTypeEnum(proto.Message):
     """
 
     class CallType(proto.Enum):
-        r"""Possible types of property from where the call was made."""
+        r"""Possible types of property from where the call was made.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            MANUALLY_DIALED (2):
+                The phone call was manually dialed.
+            HIGH_END_MOBILE_SEARCH (3):
+                The phone call was a mobile click-to-call.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         MANUALLY_DIALED = 2

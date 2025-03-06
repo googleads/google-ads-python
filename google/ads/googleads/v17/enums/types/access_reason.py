@@ -35,7 +35,26 @@ class AccessReasonEnum(proto.Message):
     """
 
     class AccessReason(proto.Enum):
-        r"""Enum describing possible access reasons."""
+        r"""Enum describing possible access reasons.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            OWNED (2):
+                The resource is owned by the user.
+            SHARED (3):
+                The resource is shared to the user.
+            LICENSED (4):
+                The resource is licensed to the user.
+            SUBSCRIBED (5):
+                The user subscribed to the resource.
+            AFFILIATED (6):
+                The resource is accessible to the user.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         OWNED = 2

@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AndroidPrivacyNetworkTypeEnum",},
+    manifest={
+        "AndroidPrivacyNetworkTypeEnum",
+    },
 )
 
 
 class AndroidPrivacyNetworkTypeEnum(proto.Message):
-    r"""The network type enum for Android privacy shared key.
-    """
+    r"""The network type enum for Android privacy shared key."""
 
     class AndroidPrivacyNetworkType(proto.Enum):
-        r"""Enumerates network types"""
+        r"""Enumerates network types
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                The value is unknown in this version.
+            SEARCH (2):
+                Search Network.
+            DISPLAY (3):
+                Display Network.
+            YOUTUBE (4):
+                YouTube Network.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         SEARCH = 2

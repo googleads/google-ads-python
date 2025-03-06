@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"SeasonalityEventScopeEnum",},
+    manifest={
+        "SeasonalityEventScopeEnum",
+    },
 )
 
 
@@ -34,7 +36,29 @@ class SeasonalityEventScopeEnum(proto.Message):
     """
 
     class SeasonalityEventScope(proto.Enum):
-        r"""The possible scopes of a Seasonality Event."""
+        r"""The possible scopes of a Seasonality Event.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            CUSTOMER (2):
+                The seasonality event is applied to all the
+                customer's traffic for supported advertising
+                channel types and device types. The CUSTOMER
+                scope cannot be used in mutates.
+            CAMPAIGN (4):
+                The seasonality event is applied to all
+                specified campaigns.
+            CHANNEL (5):
+                The seasonality event is applied to all
+                campaigns that belong to specified channel
+                types.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CUSTOMER = 2

@@ -32,7 +32,20 @@ class ListingGroupFilterProductChannelEnum(proto.Message):
     r"""Locality of a product offer."""
 
     class ListingGroupFilterProductChannel(proto.Enum):
-        r"""Enum describing the locality of a product offer."""
+        r"""Enum describing the locality of a product offer.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            ONLINE (2):
+                The item is sold online.
+            LOCAL (3):
+                The item is sold in local stores.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ONLINE = 2

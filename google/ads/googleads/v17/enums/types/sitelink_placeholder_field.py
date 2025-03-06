@@ -32,7 +32,37 @@ class SitelinkPlaceholderFieldEnum(proto.Message):
     r"""Values for Sitelink placeholder fields."""
 
     class SitelinkPlaceholderField(proto.Enum):
-        r"""Possible values for Sitelink placeholder fields."""
+        r"""Possible values for Sitelink placeholder fields.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            TEXT (2):
+                Data Type: STRING. The link text for your
+                sitelink.
+            LINE_1 (3):
+                Data Type: STRING. First line of the sitelink
+                description.
+            LINE_2 (4):
+                Data Type: STRING. Second line of the
+                sitelink description.
+            FINAL_URLS (5):
+                Data Type: URL_LIST. Final URLs for the sitelink when using
+                Upgraded URLs.
+            FINAL_MOBILE_URLS (6):
+                Data Type: URL_LIST. Final Mobile URLs for the sitelink when
+                using Upgraded URLs.
+            TRACKING_URL (7):
+                Data Type: URL. Tracking template for the
+                sitelink when using Upgraded URLs.
+            FINAL_URL_SUFFIX (8):
+                Data Type: STRING. Final URL suffix for
+                sitelink when using parallel tracking.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TEXT = 2

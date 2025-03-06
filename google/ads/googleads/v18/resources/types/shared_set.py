@@ -25,13 +25,16 @@ from google.ads.googleads.v18.enums.types import shared_set_type
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.resources",
     marshal="google.ads.googleads.v18",
-    manifest={"SharedSet",},
+    manifest={
+        "SharedSet",
+    },
 )
 
 
 class SharedSet(proto.Message):
     r"""SharedSets are used for sharing criterion exclusions across
     multiple campaigns.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -74,10 +77,13 @@ class SharedSet(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=8, optional=True,
+        proto.INT64,
+        number=8,
+        optional=True,
     )
     type_: shared_set_type.SharedSetTypeEnum.SharedSetType = proto.Field(
         proto.ENUM,
@@ -85,7 +91,9 @@ class SharedSet(proto.Message):
         enum=shared_set_type.SharedSetTypeEnum.SharedSetType,
     )
     name: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     status: shared_set_status.SharedSetStatusEnum.SharedSetStatus = proto.Field(
         proto.ENUM,
@@ -93,10 +101,14 @@ class SharedSet(proto.Message):
         enum=shared_set_status.SharedSetStatusEnum.SharedSetStatus,
     )
     member_count: int = proto.Field(
-        proto.INT64, number=10, optional=True,
+        proto.INT64,
+        number=10,
+        optional=True,
     )
     reference_count: int = proto.Field(
-        proto.INT64, number=11, optional=True,
+        proto.INT64,
+        number=11,
+        optional=True,
     )
 
 

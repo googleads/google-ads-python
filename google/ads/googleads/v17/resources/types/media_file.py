@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class MediaFile(proto.Message):
     r"""A media file.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -156,6 +157,7 @@ class MediaFile(proto.Message):
 
 class MediaImage(proto.Message):
     r"""Encapsulates an Image.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -196,6 +198,7 @@ class MediaBundle(proto.Message):
     r"""Represents a ZIP archive media the content of which contains
     HTML5 assets.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -226,6 +229,7 @@ class MediaBundle(proto.Message):
 
 class MediaAudio(proto.Message):
     r"""Encapsulates an Audio.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -245,6 +249,7 @@ class MediaAudio(proto.Message):
 
 class MediaVideo(proto.Message):
     r"""Encapsulates a Video.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

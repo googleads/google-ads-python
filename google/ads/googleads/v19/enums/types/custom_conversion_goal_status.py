@@ -35,7 +35,19 @@ class CustomConversionGoalStatusEnum(proto.Message):
     """
 
     class CustomConversionGoalStatus(proto.Enum):
-        r"""The possible statuses of a custom conversion goal."""
+        r"""The possible statuses of a custom conversion goal.
+
+        Values:
+            UNSPECIFIED (0):
+                The status has not been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+            ENABLED (2):
+                The custom conversion goal is enabled.
+            REMOVED (3):
+                The custom conversion goal is removed.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

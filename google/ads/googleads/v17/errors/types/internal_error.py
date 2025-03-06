@@ -32,7 +32,29 @@ class InternalErrorEnum(proto.Message):
     r"""Container for enum describing possible internal errors."""
 
     class InternalError(proto.Enum):
-        r"""Enum describing possible internal errors."""
+        r"""Enum describing possible internal errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INTERNAL_ERROR (2):
+                Google Ads API encountered unexpected
+                internal error.
+            ERROR_CODE_NOT_PUBLISHED (3):
+                The intended error code doesn't exist in
+                specified API version. It will be released in a
+                future API version.
+            TRANSIENT_ERROR (4):
+                Google Ads API encountered an unexpected
+                transient error. The user should retry their
+                request in these cases.
+            DEADLINE_EXCEEDED (5):
+                The request took longer than a deadline.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INTERNAL_ERROR = 2

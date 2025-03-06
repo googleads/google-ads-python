@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class LanguageConstant(proto.Message):
     r"""A language.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

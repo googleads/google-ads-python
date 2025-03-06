@@ -32,7 +32,20 @@ class HeaderErrorEnum(proto.Message):
     r"""Container for enum describing possible header errors."""
 
     class HeaderError(proto.Enum):
-        r"""Enum describing possible header errors."""
+        r"""Enum describing possible header errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_LOGIN_CUSTOMER_ID (3):
+                The login customer ID could not be validated.
+            INVALID_LINKED_CUSTOMER_ID (7):
+                The linked customer ID could not be
+                validated.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

@@ -22,16 +22,31 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AccountLinkErrorEnum",},
+    manifest={
+        "AccountLinkErrorEnum",
+    },
 )
 
 
 class AccountLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible account link errors.
-    """
+    r"""Container for enum describing possible account link errors."""
 
     class AccountLinkError(proto.Enum):
-        r"""Enum describing possible account link errors."""
+        r"""Enum describing possible account link errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            INVALID_STATUS (2):
+                The new link status is invalid.
+            PERMISSION_DENIED (3):
+                The authenticated user doesn't have the
+                permission to do the change.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_STATUS = 2

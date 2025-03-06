@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class KeywordThemeConstant(proto.Message):
     r"""A Smart Campaign keyword theme constant.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -22,7 +22,9 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"BrandRequestRejectionReasonEnum",},
+    manifest={
+        "BrandRequestRejectionReasonEnum",
+    },
 )
 
 
@@ -33,7 +35,27 @@ class BrandRequestRejectionReasonEnum(proto.Message):
     """
 
     class BrandRequestRejectionReason(proto.Enum):
-        r"""Enumeration of different brand request rejection reasons."""
+        r"""Enumeration of different brand request rejection reasons.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            EXISTING_BRAND (2):
+                Brand is already present in the commercial
+                brand set.
+            EXISTING_BRAND_VARIANT (3):
+                Brand is already present in the commercial
+                brand set, but is a variant.
+            INCORRECT_INFORMATION (4):
+                Brand information is not correct (eg: URL and
+                name don't match).
+            NOT_A_BRAND (5):
+                Not a valid brand as per Google policy.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         EXISTING_BRAND = 2

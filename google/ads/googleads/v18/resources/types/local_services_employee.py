@@ -37,6 +37,7 @@ __protobuf__ = proto.module(
 
 class LocalServicesEmployee(proto.Message):
     r"""A local services employee resource.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -111,67 +112,98 @@ class LocalServicesEmployee(proto.Message):
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     id: int = proto.Field(
-        proto.INT64, number=2, optional=True,
+        proto.INT64,
+        number=2,
+        optional=True,
     )
     creation_date_time: str = proto.Field(
-        proto.STRING, number=3,
+        proto.STRING,
+        number=3,
     )
-    status: local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus = proto.Field(
+    status: (
+        local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus
+    ) = proto.Field(
         proto.ENUM,
         number=4,
         enum=local_services_employee_status.LocalServicesEmployeeStatusEnum.LocalServicesEmployeeStatus,
     )
-    type_: local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType = proto.Field(
+    type_: (
+        local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=local_services_employee_type.LocalServicesEmployeeTypeEnum.LocalServicesEmployeeType,
     )
-    university_degrees: MutableSequence[
-        "UniversityDegree"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=6, message="UniversityDegree",
+    university_degrees: MutableSequence["UniversityDegree"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message="UniversityDegree",
+        )
     )
     residencies: MutableSequence["Residency"] = proto.RepeatedField(
-        proto.MESSAGE, number=7, message="Residency",
+        proto.MESSAGE,
+        number=7,
+        message="Residency",
     )
     fellowships: MutableSequence["Fellowship"] = proto.RepeatedField(
-        proto.MESSAGE, number=8, message="Fellowship",
+        proto.MESSAGE,
+        number=8,
+        message="Fellowship",
     )
     job_title: str = proto.Field(
-        proto.STRING, number=9, optional=True,
+        proto.STRING,
+        number=9,
+        optional=True,
     )
     year_started_practicing: int = proto.Field(
-        proto.INT32, number=10, optional=True,
+        proto.INT32,
+        number=10,
+        optional=True,
     )
     languages_spoken: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=11,
+        proto.STRING,
+        number=11,
     )
     category_ids: MutableSequence[str] = proto.RepeatedField(
-        proto.STRING, number=12,
+        proto.STRING,
+        number=12,
     )
     national_provider_id_number: str = proto.Field(
-        proto.STRING, number=13, optional=True,
+        proto.STRING,
+        number=13,
+        optional=True,
     )
     email_address: str = proto.Field(
-        proto.STRING, number=14, optional=True,
+        proto.STRING,
+        number=14,
+        optional=True,
     )
     first_name: str = proto.Field(
-        proto.STRING, number=15, optional=True,
+        proto.STRING,
+        number=15,
+        optional=True,
     )
     middle_name: str = proto.Field(
-        proto.STRING, number=16, optional=True,
+        proto.STRING,
+        number=16,
+        optional=True,
     )
     last_name: str = proto.Field(
-        proto.STRING, number=17, optional=True,
+        proto.STRING,
+        number=17,
+        optional=True,
     )
 
 
 class UniversityDegree(proto.Message):
     r"""A list of degrees this employee has obtained, and wants to
     feature.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -192,13 +224,19 @@ class UniversityDegree(proto.Message):
     """
 
     institution_name: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     degree: str = proto.Field(
-        proto.STRING, number=2, optional=True,
+        proto.STRING,
+        number=2,
+        optional=True,
     )
     graduation_year: int = proto.Field(
-        proto.INT32, number=3, optional=True,
+        proto.INT32,
+        number=3,
+        optional=True,
     )
 
 
@@ -207,6 +245,7 @@ class Residency(proto.Message):
     Residency is a stage of graduate medical education in which a
     qualified medical professional practices under the supervision
     of a senior clinician.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -223,10 +262,14 @@ class Residency(proto.Message):
     """
 
     institution_name: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     completion_year: int = proto.Field(
-        proto.INT32, number=2, optional=True,
+        proto.INT32,
+        number=2,
+        optional=True,
     )
 
 
@@ -234,6 +277,7 @@ class Fellowship(proto.Message):
     r"""Details about the employee's medical Fellowship.
     Fellowship is a period of medical training that the professional
     undertakes after finishing their residency.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -250,10 +294,14 @@ class Fellowship(proto.Message):
     """
 
     institution_name: str = proto.Field(
-        proto.STRING, number=1, optional=True,
+        proto.STRING,
+        number=1,
+        optional=True,
     )
     completion_year: int = proto.Field(
-        proto.INT32, number=2, optional=True,
+        proto.INT32,
+        number=2,
+        optional=True,
     )
 
 

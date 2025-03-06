@@ -22,16 +22,29 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.errors",
     marshal="google.ads.googleads.v18",
-    manifest={"AdxErrorEnum",},
+    manifest={
+        "AdxErrorEnum",
+    },
 )
 
 
 class AdxErrorEnum(proto.Message):
-    r"""Container for enum describing possible adx errors.
-    """
+    r"""Container for enum describing possible adx errors."""
 
     class AdxError(proto.Enum):
-        r"""Enum describing possible adx errors."""
+        r"""Enum describing possible adx errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            UNSUPPORTED_FEATURE (2):
+                Attempt to use non-AdX feature by AdX
+                customer.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         UNSUPPORTED_FEATURE = 2

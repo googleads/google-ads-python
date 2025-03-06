@@ -38,6 +38,7 @@ class FrequencyCapEntry(proto.Message):
     set of ads) can be shown to a user over a particular time
     period.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -68,6 +69,7 @@ class FrequencyCapKey(proto.Message):
     r"""A group of fields used as keys for a frequency cap.
     There can be no more than one frequency cap with the same key.
 
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -94,12 +96,16 @@ class FrequencyCapKey(proto.Message):
             enum=frequency_cap_level.FrequencyCapLevelEnum.FrequencyCapLevel,
         )
     )
-    event_type: frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType = proto.Field(
+    event_type: (
+        frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType
+    ) = proto.Field(
         proto.ENUM,
         number=3,
         enum=frequency_cap_event_type.FrequencyCapEventTypeEnum.FrequencyCapEventType,
     )
-    time_unit: frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit = proto.Field(
+    time_unit: (
+        frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit
+    ) = proto.Field(
         proto.ENUM,
         number=2,
         enum=frequency_cap_time_unit.FrequencyCapTimeUnitEnum.FrequencyCapTimeUnit,

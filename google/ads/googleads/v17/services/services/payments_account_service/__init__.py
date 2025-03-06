@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import PaymentsAccountServiceClient
+from .async_client import PaymentsAccountServiceAsyncClient
 
-__all__ = ("PaymentsAccountServiceClient",)
+__all__ = (
+    "PaymentsAccountServiceClient",
+    "PaymentsAccountServiceAsyncClient",
+)

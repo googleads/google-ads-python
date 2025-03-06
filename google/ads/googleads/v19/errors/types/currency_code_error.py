@@ -32,7 +32,17 @@ class CurrencyCodeErrorEnum(proto.Message):
     r"""Container for enum describing possible currency code errors."""
 
     class CurrencyCodeError(proto.Enum):
-        r"""Enum describing possible currency code errors."""
+        r"""Enum describing possible currency code errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            UNSUPPORTED (2):
+                The currency code is not supported.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

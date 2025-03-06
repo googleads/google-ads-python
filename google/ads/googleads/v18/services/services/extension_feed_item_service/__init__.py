@@ -14,5 +14,9 @@
 # limitations under the License.
 #
 from .client import ExtensionFeedItemServiceClient
+from .async_client import ExtensionFeedItemServiceAsyncClient
 
-__all__ = ("ExtensionFeedItemServiceClient",)
+__all__ = (
+    "ExtensionFeedItemServiceClient",
+    "ExtensionFeedItemServiceAsyncClient",
+)

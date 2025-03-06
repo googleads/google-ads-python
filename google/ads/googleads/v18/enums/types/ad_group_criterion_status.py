@@ -22,16 +22,33 @@ import proto  # type: ignore
 __protobuf__ = proto.module(
     package="google.ads.googleads.v18.enums",
     marshal="google.ads.googleads.v18",
-    manifest={"AdGroupCriterionStatusEnum",},
+    manifest={
+        "AdGroupCriterionStatusEnum",
+    },
 )
 
 
 class AdGroupCriterionStatusEnum(proto.Message):
-    r"""Message describing AdGroupCriterion statuses.
-    """
+    r"""Message describing AdGroupCriterion statuses."""
 
     class AdGroupCriterionStatus(proto.Enum):
-        r"""The possible statuses of an AdGroupCriterion."""
+        r"""The possible statuses of an AdGroupCriterion.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            ENABLED (2):
+                The ad group criterion is enabled.
+            PAUSED (3):
+                The ad group criterion is paused.
+            REMOVED (4):
+                The ad group criterion is removed.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         ENABLED = 2

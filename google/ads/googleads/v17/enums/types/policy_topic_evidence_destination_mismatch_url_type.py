@@ -37,7 +37,28 @@ class PolicyTopicEvidenceDestinationMismatchUrlTypeEnum(proto.Message):
     class PolicyTopicEvidenceDestinationMismatchUrlType(proto.Enum):
         r"""The possible policy topic evidence destination mismatch url
         types.
+
+        Values:
+            UNSPECIFIED (0):
+                No value has been specified.
+            UNKNOWN (1):
+                The received value is not known in this
+                version.
+                This is a response-only value.
+            DISPLAY_URL (2):
+                The display url.
+            FINAL_URL (3):
+                The final url.
+            FINAL_MOBILE_URL (4):
+                The final mobile url.
+            TRACKING_URL (5):
+                The tracking url template, with substituted
+                desktop url.
+            MOBILE_TRACKING_URL (6):
+                The tracking url template, with substituted
+                mobile url.
         """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         DISPLAY_URL = 2

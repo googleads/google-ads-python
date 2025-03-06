@@ -73,12 +73,12 @@ class MutateRecommendationSubscriptionRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    operations: MutableSequence[
-        "RecommendationSubscriptionOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message="RecommendationSubscriptionOperation",
+    operations: MutableSequence["RecommendationSubscriptionOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="RecommendationSubscriptionOperation",
+        )
     )
     partial_failure: bool = proto.Field(
         proto.BOOL,
@@ -88,7 +88,9 @@ class MutateRecommendationSubscriptionRequest(proto.Message):
         proto.BOOL,
         number=4,
     )
-    response_content_type: gage_response_content_type.ResponseContentTypeEnum.ResponseContentType = proto.Field(
+    response_content_type: (
+        gage_response_content_type.ResponseContentTypeEnum.ResponseContentType
+    ) = proto.Field(
         proto.ENUM,
         number=5,
         enum=gage_response_content_type.ResponseContentTypeEnum.ResponseContentType,
@@ -161,12 +163,12 @@ class MutateRecommendationSubscriptionResponse(proto.Message):
             the RPC level error.
     """
 
-    results: MutableSequence[
-        "MutateRecommendationSubscriptionResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="MutateRecommendationSubscriptionResult",
+    results: MutableSequence["MutateRecommendationSubscriptionResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="MutateRecommendationSubscriptionResult",
+        )
     )
     partial_failure_error: status_pb2.Status = proto.Field(
         proto.MESSAGE,
@@ -193,7 +195,9 @@ class MutateRecommendationSubscriptionResult(proto.Message):
         proto.STRING,
         number=1,
     )
-    recommendation_subscription: gagr_recommendation_subscription.RecommendationSubscription = proto.Field(
+    recommendation_subscription: (
+        gagr_recommendation_subscription.RecommendationSubscription
+    ) = proto.Field(
         proto.MESSAGE,
         number=2,
         message=gagr_recommendation_subscription.RecommendationSubscription,

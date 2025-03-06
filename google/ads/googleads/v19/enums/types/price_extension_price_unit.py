@@ -32,7 +32,27 @@ class PriceExtensionPriceUnitEnum(proto.Message):
     r"""Container for enum describing price extension price unit."""
 
     class PriceExtensionPriceUnit(proto.Enum):
-        r"""Price extension price unit."""
+        r"""Price extension price unit.
+
+        Values:
+            UNSPECIFIED (0):
+                Not specified.
+            UNKNOWN (1):
+                Used for return value only. Represents value
+                unknown in this version.
+            PER_HOUR (2):
+                Per hour.
+            PER_DAY (3):
+                Per day.
+            PER_WEEK (4):
+                Per week.
+            PER_MONTH (5):
+                Per month.
+            PER_YEAR (6):
+                Per year.
+            PER_NIGHT (7):
+                Per night.
+        """
 
         UNSPECIFIED = 0
         UNKNOWN = 1

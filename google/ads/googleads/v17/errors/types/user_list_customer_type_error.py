@@ -35,7 +35,44 @@ class UserListCustomerTypeErrorEnum(proto.Message):
     """
 
     class UserListCustomerTypeError(proto.Enum):
-        r"""Enum describing possible user list customer type errors."""
+        r"""Enum describing possible user list customer type errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            CONFLICTING_CUSTOMER_TYPES (2):
+                Cannot add the conflicting customer types to
+                the same user list. Conflicting labels:
+
+                1. Purchasers - Converted Leads
+                2. Purchasers - Qualified Leads
+                3. Purchasers - Cart Abandoners
+                4. Qualified Leads - Converted Leads
+                5. Disengaged customers - Converted Leads
+                6. Disengaged customers - Qualified Leads
+                7. Disengaged customers- Cart Abandoners
+            NO_ACCESS_TO_USER_LIST (3):
+                The account does not have access to the user
+                list.
+            USERLIST_NOT_ELIGIBLE (4):
+                The given user list is not eligible for applying customer
+                types. The user list must belong to one of the following
+                types: CRM_BASED, RULE_BASED, ADVERTISER_DATA_MODEL_BASED,
+                GCN.
+            CONVERSION_TRACKING_NOT_ENABLED_OR_NOT_MCC_MANAGER_ACCOUNT (5):
+                To edit the user list customer type,
+                conversion tracking must be enabled in your
+                account. If cross-tracking is enabled, your
+                account must be a MCC manager account to modify
+                user list customer types. More info at
+                https://support.google.com/google-ads/answer/3030657
+            TOO_MANY_USER_LISTS_FOR_THE_CUSTOMER_TYPE (6):
+                Too many user lists for the customer type.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         CONFLICTING_CUSTOMER_TYPES = 2

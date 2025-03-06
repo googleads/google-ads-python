@@ -35,7 +35,20 @@ class CollectionSizeErrorEnum(proto.Message):
     """
 
     class CollectionSizeError(proto.Enum):
-        r"""Enum describing possible collection size errors."""
+        r"""Enum describing possible collection size errors.
+
+        Values:
+            UNSPECIFIED (0):
+                Enum unspecified.
+            UNKNOWN (1):
+                The received error code is not known in this
+                version.
+            TOO_FEW (2):
+                Too few.
+            TOO_MANY (3):
+                Too many.
+        """
+
         UNSPECIFIED = 0
         UNKNOWN = 1
         TOO_FEW = 2

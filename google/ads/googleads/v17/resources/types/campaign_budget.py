@@ -35,6 +35,7 @@ __protobuf__ = proto.module(
 
 class CampaignBudget(proto.Message):
     r"""A campaign budget.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -214,7 +215,9 @@ class CampaignBudget(proto.Message):
         number=6,
         enum=budget_status.BudgetStatusEnum.BudgetStatus,
     )
-    delivery_method: budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod = proto.Field(
+    delivery_method: (
+        budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod
+    ) = proto.Field(
         proto.ENUM,
         number=7,
         enum=budget_delivery_method.BudgetDeliveryMethodEnum.BudgetDeliveryMethod,

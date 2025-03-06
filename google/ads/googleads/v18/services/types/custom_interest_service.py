@@ -52,20 +52,25 @@ class MutateCustomInterestsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    operations: MutableSequence[
-        "CustomInterestOperation"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="CustomInterestOperation",
+    operations: MutableSequence["CustomInterestOperation"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="CustomInterestOperation",
+        )
     )
     validate_only: bool = proto.Field(
-        proto.BOOL, number=4,
+        proto.BOOL,
+        number=4,
     )
 
 
 class CustomInterestOperation(proto.Message):
     r"""A single operation (create, update) on a custom interest.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -90,7 +95,9 @@ class CustomInterestOperation(proto.Message):
     """
 
     update_mask: field_mask_pb2.FieldMask = proto.Field(
-        proto.MESSAGE, number=4, message=field_mask_pb2.FieldMask,
+        proto.MESSAGE,
+        number=4,
+        message=field_mask_pb2.FieldMask,
     )
     create: custom_interest.CustomInterest = proto.Field(
         proto.MESSAGE,
@@ -108,27 +115,32 @@ class CustomInterestOperation(proto.Message):
 
 class MutateCustomInterestsResponse(proto.Message):
     r"""Response message for custom interest mutate.
+
     Attributes:
         results (MutableSequence[google.ads.googleads.v18.services.types.MutateCustomInterestResult]):
             All results for the mutate.
     """
 
-    results: MutableSequence[
-        "MutateCustomInterestResult"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="MutateCustomInterestResult",
+    results: MutableSequence["MutateCustomInterestResult"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="MutateCustomInterestResult",
+        )
     )
 
 
 class MutateCustomInterestResult(proto.Message):
     r"""The result for the custom interest mutate.
+
     Attributes:
         resource_name (str):
             Returned for successful operations.
     """
 
     resource_name: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
 
 

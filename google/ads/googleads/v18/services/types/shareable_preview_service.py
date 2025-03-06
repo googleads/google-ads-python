@@ -50,17 +50,21 @@ class GenerateShareablePreviewsRequest(proto.Message):
     """
 
     customer_id: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
-    shareable_previews: MutableSequence[
-        "ShareablePreview"
-    ] = proto.RepeatedField(
-        proto.MESSAGE, number=2, message="ShareablePreview",
+    shareable_previews: MutableSequence["ShareablePreview"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="ShareablePreview",
+        )
     )
 
 
 class ShareablePreview(proto.Message):
     r"""A shareable preview with its identifier.
+
     Attributes:
         asset_group_identifier (google.ads.googleads.v18.services.types.AssetGroupIdentifier):
             Required. Asset group of the shareable
@@ -68,19 +72,23 @@ class ShareablePreview(proto.Message):
     """
 
     asset_group_identifier: "AssetGroupIdentifier" = proto.Field(
-        proto.MESSAGE, number=1, message="AssetGroupIdentifier",
+        proto.MESSAGE,
+        number=1,
+        message="AssetGroupIdentifier",
     )
 
 
 class AssetGroupIdentifier(proto.Message):
     r"""Asset group of the shareable preview.
+
     Attributes:
         asset_group_id (int):
             Required. The asset group identifier.
     """
 
     asset_group_id: int = proto.Field(
-        proto.INT64, number=1,
+        proto.INT64,
+        number=1,
     )
 
 
@@ -94,12 +102,15 @@ class GenerateShareablePreviewsResponse(proto.Message):
     """
 
     responses: MutableSequence["ShareablePreviewOrError"] = proto.RepeatedField(
-        proto.MESSAGE, number=1, message="ShareablePreviewOrError",
+        proto.MESSAGE,
+        number=1,
+        message="ShareablePreviewOrError",
     )
 
 
 class ShareablePreviewOrError(proto.Message):
     r"""Result of the generate shareable preview.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other
@@ -121,7 +132,9 @@ class ShareablePreviewOrError(proto.Message):
     """
 
     asset_group_identifier: "AssetGroupIdentifier" = proto.Field(
-        proto.MESSAGE, number=3, message="AssetGroupIdentifier",
+        proto.MESSAGE,
+        number=3,
+        message="AssetGroupIdentifier",
     )
     shareable_preview_result: "ShareablePreviewResult" = proto.Field(
         proto.MESSAGE,
@@ -139,6 +152,7 @@ class ShareablePreviewOrError(proto.Message):
 
 class ShareablePreviewResult(proto.Message):
     r"""Message to hold a shareable preview result.
+
     Attributes:
         shareable_preview_url (str):
             The shareable preview URL.
@@ -148,10 +162,12 @@ class ShareablePreviewResult(proto.Message):
     """
 
     shareable_preview_url: str = proto.Field(
-        proto.STRING, number=1,
+        proto.STRING,
+        number=1,
     )
     expiration_date_time: str = proto.Field(
-        proto.STRING, number=2,
+        proto.STRING,
+        number=2,
     )
 
 

@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
 
 class DynamicSearchAdsSearchTermView(proto.Message):
     r"""A dynamic search ads search term view.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

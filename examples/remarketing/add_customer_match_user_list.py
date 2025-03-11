@@ -114,10 +114,8 @@ def create_customer_match_user_list(client, customer_id):
     user_list.crm_based_user_list.upload_key_type = (
         client.enums.CustomerMatchUploadKeyTypeEnum.CONTACT_INFO
     )
-    # Customer Match user lists can set an unlimited membership life span;
-    # to do so, use the special life span value 10000. Otherwise, membership
-    # life span must be between 0 and 540 days inclusive. See:
-    # https://developers.devsite.corp.google.com/google-ads/api/reference/rpc/latest/UserList#membership_life_span
+    # Membership life span must be between 0 and 540 days inclusive. See:
+    # https://developers.google.com/google-ads/api/reference/rpc/latest/UserList#membership_life_span
     # Sets the membership life span to 30 days.
     user_list.membership_life_span = 30
 

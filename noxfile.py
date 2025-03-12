@@ -75,7 +75,7 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
         # If runnning a Python version other than 3.13 then use the constraints
         # file intended for all versions previous to 3.13.
         # TODO: Update this when new major versions of Python are adopted.
-        filename = "constraints-<3.13.txt"
+        filename = "constraints-less-than-3.13.txt"
 
     constraints_file = os.path.join(CONSTRAINTS_DIR, "minimums", filename)
 

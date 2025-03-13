@@ -1,3 +1,8 @@
+* 26.0.1
+- Rename constraints file to resolve install issues on Windows
+- Update add_customer_match_user_list.py to remove mention of unlimited list expiry (#921)
+- Fix issue importing types defined in service protos
+
 * 26.0.0
 - Migrate to default GAPIC templates
 - Migrate from setup.py to pyproject.toml

@@ -19,7 +19,7 @@ Use this example to get budget recommendations during campaign creation workflow
 This example uses the following: 
 1) Performance Max for the campaign type
 2) United States for the geo targeting 
-3) Maximize Conversions Value for the bidding strategy
+3) Maximize Conversion Value for the bidding strategy
 
 To get impact metrics for a custom budget, run get_recommendation_impact_metrics.py.
 """
@@ -60,26 +60,22 @@ def main(client, customer_id):
 
     # Get budget recommendations with their associated impact metrics.
     for rec in recommendations:
-        # Check if the API responded with recommendations
-        if hasattr(rec, 'campaign_budget_recommendation'):
-            campaign_budget_rec = rec.campaign_budget_recommendation
-            # Loop through the budget options in the campaign budget recommendation
-            # to compile a list of budget amounts and their respective potential 
-            # impact metrics. If you have a campaign creation interface, 
-            # you could display this information for end users to decide which 
-            # budget amount best aligns with their goals.
-            for budget_option in campaign_budget_rec.budget_options:
-                impact = budget_option.impact
-                budget_amount = budget_option.budget_amount_micros
-                if budget_amount > 0:
-                    budget_data = {
-                        "budget_amount": round((budget_amount/1000000), 2),
-                        "potential_metrics": impact.potential_metrics
-                    }
-                    budget_recommendations_list.append(budget_data)
-                    budget_amounts.append(round((budget_amount/1000000), 2))
-        else:
-            print("campaign_budget_recommendation not found for this account.")
+        campaign_budget_rec = rec.campaign_budget_recommendation
+        # Loop through the budget options in the campaign budget recommendation
+        # to compile a list of budget amounts and their respective potential 
+        # impact metrics. If you have a campaign creation interface, 
+        # you could display this information for end users to decide which 
+        # budget amount best aligns with their goals.
+        for budget_option in campaign_budget_rec.budget_options:
+            impact = budget_option.impact
+            budget_amount = budget_option.budget_amount_micros
+            if budget_amount > 0:
+                budget_data = {
+                    "budget_amount": round((budget_amount/1000000), 2),
+                    "potential_metrics": impact.potential_metrics
+                }
+                budget_recommendations_list.append(budget_data)
+                budget_amounts.append(round((budget_amount/1000000), 2))
     
     print(f"budget_recommendations_list:\n{budget_recommendations_list}")
     """

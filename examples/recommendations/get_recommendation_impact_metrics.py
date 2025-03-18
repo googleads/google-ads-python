@@ -49,6 +49,7 @@ def main(client, customer_id, user_provided_budget_amount):
     request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
     request.positive_locations_ids = [2840]  # 2840 is for United States
     request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    # Multiply the user-provided budget by 1,000,000 to convert to micros, as required for current_budget
     request.budget_info.current_budget = round((user_provided_budget_amount*1000000), 2)
 
     results = recommendation_service.generate_recommendations(request)

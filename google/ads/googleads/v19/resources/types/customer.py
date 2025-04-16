@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -114,8 +114,8 @@ class Customer(proto.Message):
             Call reporting setting for a customer. Only mutable in an
             ``update`` operation.
         conversion_tracking_setting (google.ads.googleads.v19.resources.types.ConversionTrackingSetting):
-            Output only. Conversion tracking setting for
-            a customer.
+            Immutable. Conversion tracking setting for a
+            customer.
         remarketing_setting (google.ads.googleads.v19.resources.types.RemarketingSetting):
             Output only. Remarketing setting for a
             customer.
@@ -406,9 +406,9 @@ class ConversionTrackingSetting(proto.Message):
             inherited from the manager. This field is
             read-only.
         google_ads_conversion_customer (str):
-            Output only. The resource name of the
-            customer where conversions are created and
-            managed. This field is read-only.
+            Immutable. The resource name of the customer
+            where conversions are created and managed. This
+            field is read-only.
     """
 
     conversion_tracking_id: int = proto.Field(

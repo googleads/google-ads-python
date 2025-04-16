@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,6 +57,7 @@ from .ad_type_infos import (
     VideoOutstreamAdInfo,
     VideoResponsiveAdInfo,
     VideoTrueViewInStreamAdInfo,
+    YouTubeAudioAdInfo,
 )
 from .asset_policy import (
     AdAssetPolicySummary,
@@ -116,7 +117,9 @@ from .asset_types import (
     WhatsappBusinessMessageInfo,
     YoutubeVideoAsset,
 )
-from .asset_usage import AssetUsage
+from .asset_usage import (
+    AssetUsage,
+)
 from .audience_insights_attribute import (
     AudienceInsightsAttribute,
     AudienceInsightsAttributeMetadata,
@@ -168,8 +171,12 @@ from .bidding import (
     TargetRoas,
     TargetSpend,
 )
-from .click_location import ClickLocation
-from .consent import Consent
+from .click_location import (
+    ClickLocation,
+)
+from .consent import (
+    Consent,
+)
 from .criteria import (
     ActivityCityInfo,
     ActivityCountryInfo,
@@ -251,8 +258,12 @@ from .criterion_category_availability import (
     CriterionCategoryChannelAvailability,
     CriterionCategoryLocaleAvailability,
 )
-from .custom_parameter import CustomParameter
-from .customizer_value import CustomizerValue
+from .custom_parameter import (
+    CustomParameter,
+)
+from .customizer_value import (
+    CustomizerValue,
+)
 from .dates import (
     DateRange,
     YearMonth,
@@ -263,8 +274,12 @@ from .extensions import (
     CalloutFeedItem,
     SitelinkFeedItem,
 )
-from .feed_common import Money
-from .final_app_url import FinalAppUrl
+from .feed_common import (
+    Money,
+)
+from .final_app_url import (
+    FinalAppUrl,
+)
 from .frequency_cap import (
     FrequencyCapEntry,
     FrequencyCapKey,
@@ -280,9 +295,15 @@ from .keyword_plan_common import (
     KeywordPlanHistoricalMetrics,
     MonthlySearchVolume,
 )
-from .lifecycle_goals import LifecycleGoalValueSettings
-from .local_services import LocalServicesDocumentReadOnly
-from .metric_goal import MetricGoal
+from .lifecycle_goals import (
+    LifecycleGoalValueSettings,
+)
+from .local_services import (
+    LocalServicesDocumentReadOnly,
+)
+from .metric_goal import (
+    MetricGoal,
+)
 from .metrics import (
     Metrics,
     SearchVolumeRange,
@@ -309,8 +330,12 @@ from .policy import (
     PolicyValidationParameter,
     PolicyViolationKey,
 )
-from .policy_summary import PolicySummary
-from .real_time_bidding_setting import RealTimeBiddingSetting
+from .policy_summary import (
+    PolicySummary,
+)
+from .real_time_bidding_setting import (
+    RealTimeBiddingSetting,
+)
 from .segments import (
     AssetInteractionTarget,
     BudgetCampaignAssociationStatus,
@@ -334,14 +359,20 @@ from .simulation import (
     TargetRoasSimulationPoint,
     TargetRoasSimulationPointList,
 )
-from .tag_snippet import TagSnippet
+from .tag_snippet import (
+    TagSnippet,
+)
 from .targeting_setting import (
     TargetingSetting,
     TargetRestriction,
     TargetRestrictionOperation,
 )
-from .text_label import TextLabel
-from .url_collection import UrlCollection
+from .text_label import (
+    TextLabel,
+)
+from .url_collection import (
+    UrlCollection,
+)
 from .user_lists import (
     BasicUserListInfo,
     CrmBasedUserListInfo,
@@ -361,7 +392,9 @@ from .user_lists import (
     UserListRuleItemInfo,
     UserListStringRuleItemInfo,
 )
-from .value import Value
+from .value import (
+    Value,
+)
 
 __all__ = (
     "AdAppDeepLinkAsset",
@@ -405,6 +438,7 @@ __all__ = (
     "VideoOutstreamAdInfo",
     "VideoResponsiveAdInfo",
     "VideoTrueViewInStreamAdInfo",
+    "YouTubeAudioAdInfo",
     "AdAssetPolicySummary",
     "AssetDisapproved",
     "AssetLinkPrimaryStatusDetails",

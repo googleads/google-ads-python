@@ -2360,6 +2360,11 @@
               "methods": [
                 "append_lead_conversation"
               ]
+            },
+            "ProvideLeadFeedback": {
+              "methods": [
+                "provide_lead_feedback"
+              ]
             }
           }
         },
@@ -2369,6 +2374,11 @@
             "AppendLeadConversation": {
               "methods": [
                 "append_lead_conversation"
+              ]
+            },
+            "ProvideLeadFeedback": {
+              "methods": [
+                "provide_lead_feedback"
               ]
             }
           }
@@ -2526,6 +2536,11 @@
         "grpc": {
           "libraryClient": "ReachPlanServiceClient",
           "rpcs": {
+            "GenerateConversionRates": {
+              "methods": [
+                "generate_conversion_rates"
+              ]
+            },
             "GenerateReachForecast": {
               "methods": [
                 "generate_reach_forecast"
@@ -2546,6 +2561,11 @@
         "grpc-async": {
           "libraryClient": "ReachPlanServiceAsyncClient",
           "rpcs": {
+            "GenerateConversionRates": {
+              "methods": [
+                "generate_conversion_rates"
+              ]
+            },
             "GenerateReachForecast": {
               "methods": [
                 "generate_reach_forecast"

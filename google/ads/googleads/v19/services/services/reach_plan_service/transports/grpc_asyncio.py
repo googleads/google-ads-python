@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -351,6 +351,42 @@ class ReachPlanServiceGrpcAsyncIOTransport(ReachPlanServiceTransport):
         return self._grpc_channel
 
     @property
+    def generate_conversion_rates(
+        self,
+    ) -> Callable[
+        [reach_plan_service.GenerateConversionRatesRequest],
+        Awaitable[reach_plan_service.GenerateConversionRatesResponse],
+    ]:
+        r"""Return a callable for the generate conversion rates method over gRPC.
+
+        Returns a collection of conversion rate suggestions for
+        supported plannable products.
+
+        List of thrown errors: `AuthenticationError <>`__
+        `AuthorizationError <>`__ `HeaderError <>`__
+        `InternalError <>`__ `QuotaError <>`__ `RequestError <>`__
+
+        Returns:
+            Callable[[~.GenerateConversionRatesRequest],
+                    Awaitable[~.GenerateConversionRatesResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_conversion_rates" not in self._stubs:
+            self._stubs["generate_conversion_rates"] = (
+                self._logged_channel.unary_unary(
+                    "/google.ads.googleads.v19.services.ReachPlanService/GenerateConversionRates",
+                    request_serializer=reach_plan_service.GenerateConversionRatesRequest.serialize,
+                    response_deserializer=reach_plan_service.GenerateConversionRatesResponse.deserialize,
+                )
+            )
+        return self._stubs["generate_conversion_rates"]
+
+    @property
     def list_plannable_locations(
         self,
     ) -> Callable[
@@ -461,6 +497,11 @@ class ReachPlanServiceGrpcAsyncIOTransport(ReachPlanServiceTransport):
     def _prep_wrapped_messages(self, client_info):
         """Precompute the wrapped methods, overriding the base class method to use async wrappers."""
         self._wrapped_methods = {
+            self.generate_conversion_rates: self._wrap_method(
+                self.generate_conversion_rates,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.list_plannable_locations: self._wrap_method(
                 self.list_plannable_locations,
                 default_timeout=None,

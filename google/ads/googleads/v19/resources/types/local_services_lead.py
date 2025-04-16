@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -93,6 +93,9 @@ class LocalServicesLead(proto.Message):
             Output only. Credit details of the lead.
 
             This field is a member of `oneof`_ ``_credit_details``.
+        lead_feedback_submitted (bool):
+            Output only. True if the advertiser submitted
+            feedback for the lead.
     """
 
     resource_name: str = proto.Field(
@@ -153,6 +156,10 @@ class LocalServicesLead(proto.Message):
         number=12,
         optional=True,
         message="CreditDetails",
+    )
+    lead_feedback_submitted: bool = proto.Field(
+        proto.BOOL,
+        number=13,
     )
 
 

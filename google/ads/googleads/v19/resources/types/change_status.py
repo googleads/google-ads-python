@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -110,6 +110,9 @@ class ChangeStatus(proto.Message):
         asset_group (str):
             Output only. The AssetGroup affected by this
             change.
+        campaign_budget (str):
+            Output only. The CampaignBudget affected by
+            this change.
     """
 
     resource_name: str = proto.Field(
@@ -196,6 +199,10 @@ class ChangeStatus(proto.Message):
     asset_group: str = proto.Field(
         proto.STRING,
         number=41,
+    )
+    campaign_budget: str = proto.Field(
+        proto.STRING,
+        number=42,
     )
 
 

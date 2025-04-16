@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,6 +101,8 @@ class AuthenticationErrorEnum(proto.Message):
                 The Cloud organization associated with the
                 project is not associated with the developer
                 token.
+            DEVELOPER_TOKEN_INVALID (29):
+                The developer token is not valid.
         """
 
         UNSPECIFIED = 0
@@ -126,6 +128,7 @@ class AuthenticationErrorEnum(proto.Message):
         ORGANIZATION_NOT_RECOGNIZED = 26
         ORGANIZATION_NOT_APPROVED = 27
         ORGANIZATION_NOT_ASSOCIATED_WITH_DEVELOPER_TOKEN = 28
+        DEVELOPER_TOKEN_INVALID = 29
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

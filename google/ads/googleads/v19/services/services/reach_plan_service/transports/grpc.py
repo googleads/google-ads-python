@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,12 +75,11 @@ class _LoggingClientInterceptor(
                 f"Sending request for {client_call_details.method}",
                 extra={
                     "serviceName": "google.ads.googleads.v19.services.ReachPlanService",
-                    "rpcName": client_call_details.method,
+                    "rpcName": str(client_call_details.method),
                     "request": grpc_request,
                     "metadata": grpc_request["metadata"],
                 },
             )
-
         response = continuation(client_call_details, request)
         if logging_enabled:  # pragma: NO COVER
             response_metadata = response.trailing_metadata()
@@ -344,6 +343,42 @@ class ReachPlanServiceGrpcTransport(ReachPlanServiceTransport):
     def grpc_channel(self) -> grpc.Channel:
         """Return the channel designed to connect to this service."""
         return self._grpc_channel
+
+    @property
+    def generate_conversion_rates(
+        self,
+    ) -> Callable[
+        [reach_plan_service.GenerateConversionRatesRequest],
+        reach_plan_service.GenerateConversionRatesResponse,
+    ]:
+        r"""Return a callable for the generate conversion rates method over gRPC.
+
+        Returns a collection of conversion rate suggestions for
+        supported plannable products.
+
+        List of thrown errors: `AuthenticationError <>`__
+        `AuthorizationError <>`__ `HeaderError <>`__
+        `InternalError <>`__ `QuotaError <>`__ `RequestError <>`__
+
+        Returns:
+            Callable[[~.GenerateConversionRatesRequest],
+                    ~.GenerateConversionRatesResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_conversion_rates" not in self._stubs:
+            self._stubs["generate_conversion_rates"] = (
+                self._logged_channel.unary_unary(
+                    "/google.ads.googleads.v19.services.ReachPlanService/GenerateConversionRates",
+                    request_serializer=reach_plan_service.GenerateConversionRatesRequest.serialize,
+                    response_deserializer=reach_plan_service.GenerateConversionRatesResponse.deserialize,
+                )
+            )
+        return self._stubs["generate_conversion_rates"]
 
     @property
     def list_plannable_locations(

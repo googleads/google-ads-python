@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,6 +105,8 @@ class AdTypeEnum(proto.Message):
                 Demand Gen video responsive ad.
             DEMAND_GEN_PRODUCT_AD (39):
                 Demand Gen product ad.
+            YOUTUBE_AUDIO_AD (44):
+                YouTube Audio ad.
         """
 
         UNSPECIFIED = 0
@@ -140,6 +142,7 @@ class AdTypeEnum(proto.Message):
         TRAVEL_AD = 37
         DEMAND_GEN_VIDEO_RESPONSIVE_AD = 42
         DEMAND_GEN_PRODUCT_AD = 39
+        YOUTUBE_AUDIO_AD = 44
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

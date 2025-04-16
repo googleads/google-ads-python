@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,6 +48,7 @@ __protobuf__ = proto.module(
         "VideoTrueViewInStreamAdInfo",
         "VideoOutstreamAdInfo",
         "InFeedVideoAdInfo",
+        "YouTubeAudioAdInfo",
         "VideoAdInfo",
         "VideoResponsiveAdInfo",
         "ResponsiveSearchAdInfo",
@@ -515,6 +516,10 @@ class InFeedVideoAdInfo(proto.Message):
     )
 
 
+class YouTubeAudioAdInfo(proto.Message):
+    r"""Representation of YouTube Audio ad format."""
+
+
 class VideoAdInfo(proto.Message):
     r"""A video ad.
 
@@ -546,6 +551,10 @@ class VideoAdInfo(proto.Message):
             This field is a member of `oneof`_ ``format``.
         in_feed (google.ads.googleads.v19.common.types.InFeedVideoAdInfo):
             In-feed video ad format.
+
+            This field is a member of `oneof`_ ``format``.
+        audio (google.ads.googleads.v19.common.types.YouTubeAudioAdInfo):
+            YouTube Audio ad format.
 
             This field is a member of `oneof`_ ``format``.
     """
@@ -584,6 +593,12 @@ class VideoAdInfo(proto.Message):
         number=9,
         oneof="format",
         message="InFeedVideoAdInfo",
+    )
+    audio: "YouTubeAudioAdInfo" = proto.Field(
+        proto.MESSAGE,
+        number=10,
+        oneof="format",
+        message="YouTubeAudioAdInfo",
     )
 
 

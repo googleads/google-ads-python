@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,6 +85,8 @@ class AdGroupTypeEnum(proto.Message):
                 Ad group type for Smart campaigns.
             TRAVEL_ADS (19):
                 Ad group type for Travel campaigns.
+            YOUTUBE_AUDIO (20):
+                Ad group type for YouTube Audio campaigns.
         """
 
         UNSPECIFIED = 0
@@ -105,6 +107,7 @@ class AdGroupTypeEnum(proto.Message):
         VIDEO_EFFICIENT_REACH = 17
         SMART_CAMPAIGN_ADS = 18
         TRAVEL_ADS = 19
+        YOUTUBE_AUDIO = 20
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

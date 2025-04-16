@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,7 @@ from .types.ad_type_infos import VideoNonSkippableInStreamAdInfo
 from .types.ad_type_infos import VideoOutstreamAdInfo
 from .types.ad_type_infos import VideoResponsiveAdInfo
 from .types.ad_type_infos import VideoTrueViewInStreamAdInfo
+from .types.ad_type_infos import YouTubeAudioAdInfo
 from .types.asset_policy import AdAssetPolicySummary
 from .types.asset_policy import AssetDisapproved
 from .types.asset_policy import AssetLinkPrimaryStatusDetails
@@ -633,6 +634,7 @@ __all__ = (
     "WhatsappBusinessMessageInfo",
     "YearMonth",
     "YearMonthRange",
+    "YouTubeAudioAdInfo",
     "YouTubeChannelAttributeMetadata",
     "YouTubeChannelInfo",
     "YouTubeVideoAttributeMetadata",

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -380,11 +380,48 @@ class LocalServicesLeadServiceGrpcAsyncIOTransport(
             )
         return self._stubs["append_lead_conversation"]
 
+    @property
+    def provide_lead_feedback(
+        self,
+    ) -> Callable[
+        [local_services_lead_service.ProvideLeadFeedbackRequest],
+        Awaitable[local_services_lead_service.ProvideLeadFeedbackResponse],
+    ]:
+        r"""Return a callable for the provide lead feedback method over gRPC.
+
+        RPC to provide feedback on Local Services Lead
+        resources.
+
+        Returns:
+            Callable[[~.ProvideLeadFeedbackRequest],
+                    Awaitable[~.ProvideLeadFeedbackResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "provide_lead_feedback" not in self._stubs:
+            self._stubs["provide_lead_feedback"] = (
+                self._logged_channel.unary_unary(
+                    "/google.ads.googleads.v19.services.LocalServicesLeadService/ProvideLeadFeedback",
+                    request_serializer=local_services_lead_service.ProvideLeadFeedbackRequest.serialize,
+                    response_deserializer=local_services_lead_service.ProvideLeadFeedbackResponse.deserialize,
+                )
+            )
+        return self._stubs["provide_lead_feedback"]
+
     def _prep_wrapped_messages(self, client_info):
         """Precompute the wrapped methods, overriding the base class method to use async wrappers."""
         self._wrapped_methods = {
             self.append_lead_conversation: self._wrap_method(
                 self.append_lead_conversation,
+                default_timeout=None,
+                client_info=client_info,
+            ),
+            self.provide_lead_feedback: self._wrap_method(
+                self.provide_lead_feedback,
                 default_timeout=None,
                 client_info=client_info,
             ),

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -291,6 +291,97 @@ class ReachPlanServiceAsyncClient:
                     }
                 ),
             )
+
+    async def generate_conversion_rates(
+        self,
+        request: Optional[
+            Union[reach_plan_service.GenerateConversionRatesRequest, dict]
+        ] = None,
+        *,
+        customer_id: Optional[str] = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
+    ) -> reach_plan_service.GenerateConversionRatesResponse:
+        r"""Returns a collection of conversion rate suggestions for
+        supported plannable products.
+
+        List of thrown errors: `AuthenticationError <>`__
+        `AuthorizationError <>`__ `HeaderError <>`__
+        `InternalError <>`__ `QuotaError <>`__ `RequestError <>`__
+
+        Args:
+            request (Optional[Union[google.ads.googleads.v19.services.types.GenerateConversionRatesRequest, dict]]):
+                The request object. Request message for
+                [ReachPlanService.GenerateConversionRates][google.ads.googleads.v19.services.ReachPlanService.GenerateConversionRates].
+            customer_id (:class:`str`):
+                Required. The ID of the customer. A
+                conversion rate based on the historical
+                data of this customer may be suggested.
+
+                This corresponds to the ``customer_id`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry_async.AsyncRetry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, Union[str, bytes]]]): Key/value pairs which should be
+                sent along with the request as metadata. Normally, each value must be of type `str`,
+                but for metadata keys ending with the suffix `-bin`, the corresponding values must
+                be of type `bytes`.
+
+        Returns:
+            google.ads.googleads.v19.services.types.GenerateConversionRatesResponse:
+                Response message for
+                   [ReachPlanService.GenerateConversionRates][google.ads.googleads.v19.services.ReachPlanService.GenerateConversionRates],
+                   containing conversion rate suggestions for supported
+                   plannable products.
+
+        """
+        # Create or coerce a protobuf request object.
+        # - Quick check: If we got a request object, we should *not* have
+        #   gotten any keyword arguments that map to the request.
+        flattened_params = [customer_id]
+        has_flattened_params = (
+            len([param for param in flattened_params if param is not None]) > 0
+        )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # - Use the request object if provided (there's no risk of modifying the input as
+        #   there are no flattened fields), or create one.
+        if not isinstance(
+            request, reach_plan_service.GenerateConversionRatesRequest
+        ):
+            request = reach_plan_service.GenerateConversionRatesRequest(request)
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+        if customer_id is not None:
+            request.customer_id = customer_id
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._client._transport._wrapped_methods[
+            self._client._transport.generate_conversion_rates
+        ]
+
+        # Validate the universe domain.
+        self._client._validate_universe_domain()
+
+        # Send the request.
+        response = await rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
+
+        # Done; return the response.
+        return response
 
     async def list_plannable_locations(
         self,

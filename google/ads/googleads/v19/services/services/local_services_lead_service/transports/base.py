@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -137,6 +137,11 @@ class LocalServicesLeadServiceTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.provide_lead_feedback: gapic_v1.method.wrap_method(
+                self.provide_lead_feedback,
+                default_timeout=None,
+                client_info=client_info,
+            ),
         }
 
     def close(self):
@@ -158,6 +163,18 @@ class LocalServicesLeadServiceTransport(abc.ABC):
             Awaitable[
                 local_services_lead_service.AppendLeadConversationResponse
             ],
+        ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def provide_lead_feedback(
+        self,
+    ) -> Callable[
+        [local_services_lead_service.ProvideLeadFeedbackRequest],
+        Union[
+            local_services_lead_service.ProvideLeadFeedbackResponse,
+            Awaitable[local_services_lead_service.ProvideLeadFeedbackResponse],
         ],
     ]:
         raise NotImplementedError()

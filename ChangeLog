@@ -1,3 +1,9 @@
+* 26.1.0
+- Google Ads API v19_1 release.
+- Add two new examples for budget recommendations.
+- Fix bug in normalize_and_hash function in enhanced conversions examples.
+- Update enhanced conversions for leads example to include session attributes.
+
 * 26.0.1
 - Rename constraints file to resolve install issues on Windows
 - Update add_customer_match_user_list.py to remove mention of unlimited list expiry (#921)

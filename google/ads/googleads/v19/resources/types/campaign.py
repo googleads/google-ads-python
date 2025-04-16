@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -189,6 +189,8 @@ class Campaign(proto.Message):
             Settings for Demand Gen campaign.
         video_campaign_settings (google.ads.googleads.v19.resources.types.Campaign.VideoCampaignSettings):
             Settings for Video campaign.
+        pmax_campaign_settings (google.ads.googleads.v19.resources.types.Campaign.PmaxCampaignSettings):
+            Settings for Performance Max campaign.
         real_time_bidding_setting (google.ads.googleads.v19.common.types.RealTimeBiddingSetting):
             Settings for Real-Time Bidding, a feature
             only available for campaigns targeting the Ad
@@ -1099,6 +1101,42 @@ class Campaign(proto.Message):
             message="Campaign.VideoCampaignSettings.VideoAdInventoryControl",
         )
 
+    class PmaxCampaignSettings(proto.Message):
+        r"""Settings for Performance Max campaigns.
+
+        Attributes:
+            brand_targeting_overrides (google.ads.googleads.v19.resources.types.Campaign.PmaxCampaignSettings.BrandTargetingOverrides):
+                Overrides of brand targeting for various ad
+                types.
+        """
+
+        class BrandTargetingOverrides(proto.Message):
+            r"""Overrides of brand targeting for various ad types.
+
+            .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+            Attributes:
+                ignore_exclusions_for_shopping_ads (bool):
+                    If true, brand exclusions are ignored for
+                    Shopping ads.
+
+                    This field is a member of `oneof`_ ``_ignore_exclusions_for_shopping_ads``.
+            """
+
+            ignore_exclusions_for_shopping_ads: bool = proto.Field(
+                proto.BOOL,
+                number=1,
+                optional=True,
+            )
+
+        brand_targeting_overrides: (
+            "Campaign.PmaxCampaignSettings.BrandTargetingOverrides"
+        ) = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="Campaign.PmaxCampaignSettings.BrandTargetingOverrides",
+        )
+
     class AssetAutomationSetting(proto.Message):
         r"""Asset automation setting contains pair of AssetAutomationType
         and the asset automation opt-in/out status
@@ -1271,6 +1309,11 @@ class Campaign(proto.Message):
         proto.MESSAGE,
         number=94,
         message=VideoCampaignSettings,
+    )
+    pmax_campaign_settings: PmaxCampaignSettings = proto.Field(
+        proto.MESSAGE,
+        number=97,
+        message=PmaxCampaignSettings,
     )
     real_time_bidding_setting: (
         gagc_real_time_bidding_setting.RealTimeBiddingSetting

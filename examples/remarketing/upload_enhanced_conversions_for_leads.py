@@ -39,6 +39,8 @@ def main(
     order_id,
     gclid,
     ad_user_data_consent,
+    session_attributes_encoded=None,
+    session_attributes_dict=None,
 ):
     """The main method that creates all necessary entities for the example.
 
@@ -52,7 +54,19 @@ def main(
         gclid: The Google click ID for the click.
         ad_user_data_consent: The consent status for ad user data for all
             members in the job.
+        session_attributes_encoded: a str token of encoded session atttributes.
+            Only one of session_attributes_encoded or session_attributes_dict
+            should be passed.
+        session_attributes_dict: a dict[str, str] of session attribute
+            key value pairs. Only one of session_attributes_encoded or
+            session_attributes_dict should be passed.
     """
+    if session_attributes_encoded and session_attributes_dict:
+        raise ValueError(
+            "Only one of 'session_attributes_encoded' or "
+            "'session_attributes_dict' can be set."
+        )
+
     # [START add_user_identifiers]
     # Extract user email and phone from the raw data, normalize and hash it,
     # then wrap it in UserIdentifier objects. Create a separate UserIdentifier
@@ -146,7 +160,22 @@ def main(
         click_conversion.consent.ad_user_data = client.enums.ConsentStatusEnum[
             raw_record["ad_user_data_consent"]
         ]
-        # [END add_conversion_details]
+
+    # [START add_session_attributes]
+    # Set one of the session_attributes_encoded or
+    # session_attributes_key_value_pairs fields if either are provided.
+    if session_attributes_encoded:
+        click_conversion.session_attributes_encoded = session_attributes_encoded
+    elif session_attributes_dict:
+        for key, value in session_attributes_dict.items():
+            pair = client.get_type("SessionAttributeKeyValuePair")
+            pair.session_attribute_key = key
+            pair.session_attribute_value = value
+            click_conversion.session_attributes_key_value_pairs.key_value_pairs.append(
+                pair
+            )
+            # [END add_session_attributes]
+            # [END add_conversion_details]
 
     # [START upload_conversion]
     # Creates the conversion upload service client.
@@ -230,6 +259,10 @@ def normalize_and_hash(s):
 
 
 if __name__ == "__main__":
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
         "to your ads."
@@ -278,7 +311,7 @@ if __name__ == "__main__":
         help="the Google click ID (gclid) for the click.",
     )
     parser.add_argument(
-        "-d",
+        "-n",
         "--ad_user_data_consent",
         type=str,
         choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
@@ -287,11 +320,35 @@ if __name__ == "__main__":
             "the job."
         ),
     )
+    # A mutually exclusive group means that session_attributes_encoded and
+    # session_attributes_key_value_pairs cannot be passed in at the same time.
+    session_attributes = parser.add_mutually_exclusive_group()
+    session_attributes.add_argument(
+        "-e",
+        "--session_attributes_encoded",
+        type=str,
+        default=None,
+        help=("A session attributes token."),
+    )
+    session_attributes.add_argument(
+        "-k",
+        "--session_attributes_key_value_pairs",
+        nargs="+",
+        type=str,
+        default=None,
+        help=(
+            "A space-delimited list of session attribute key value pairs. Each "
+            "pair should be separated by an equal sign, for example: "
+            "'-k gad_campaignid=12345 gad_source=1'"
+        ),
+    )
     args = parser.parse_args()
 
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    if args.session_attributes_key_value_pairs:
+        # Convert the string-based input to a dict
+        session_attributes_dict = dict(
+            pair.split("=") for pair in args.session_attributes_key_value_pairs
+        )
 
     try:
         main(
@@ -303,6 +360,11 @@ if __name__ == "__main__":
             args.order_id,
             args.gclid,
             args.ad_user_data_consent,
+            # Only one of 'session_attributes_encoded' or
+            # 'session_attributes_dict' can be passed at a time. If both are
+            # passed the example will fail with a ValueError.
+            session_attributes_encoded=args.session_attributes_encoded,
+            session_attributes_dict=session_attributes_dict,
         )
     except GoogleAdsException as ex:
         print(

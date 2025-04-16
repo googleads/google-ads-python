@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ __protobuf__ = proto.module(
 
 
 class AssetGroupTopCombinationView(proto.Message):
-    r"""A view on the usage of ad group ad asset combination.
+    r"""A view on the usage of asset group asset top combinations.
 
     Attributes:
         resource_name (str):

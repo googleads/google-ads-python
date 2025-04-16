@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,6 +54,8 @@ class ChangeStatusResourceTypeEnum(proto.Message):
                 A Campaign resource change.
             CAMPAIGN_CRITERION (7):
                 A CampaignCriterion resource change.
+            CAMPAIGN_BUDGET (8):
+                A CampaignBudget resource change.
             FEED (9):
                 A Feed resource change.
             FEED_ITEM (10):
@@ -80,6 +82,10 @@ class ChangeStatusResourceTypeEnum(proto.Message):
                 A CombinedAudience resource change.
             ASSET_GROUP (21):
                 An AssetGroup resource change.
+            ASSET_SET (22):
+                An AssetSet resource change.
+            CAMPAIGN_ASSET_SET (23):
+                A CampaignAssetSet resource change.
         """
 
         UNSPECIFIED = 0
@@ -89,6 +95,7 @@ class ChangeStatusResourceTypeEnum(proto.Message):
         AD_GROUP_CRITERION = 5
         CAMPAIGN = 6
         CAMPAIGN_CRITERION = 7
+        CAMPAIGN_BUDGET = 8
         FEED = 9
         FEED_ITEM = 10
         AD_GROUP_FEED = 11
@@ -102,6 +109,8 @@ class ChangeStatusResourceTypeEnum(proto.Message):
         AD_GROUP_ASSET = 19
         COMBINED_AUDIENCE = 20
         ASSET_GROUP = 21
+        ASSET_SET = 22
+        CAMPAIGN_ASSET_SET = 23
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

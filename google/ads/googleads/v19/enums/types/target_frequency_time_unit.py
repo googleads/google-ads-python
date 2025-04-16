@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,11 +47,15 @@ class TargetFrequencyTimeUnitEnum(proto.Message):
             WEEKLY (2):
                 Optimize bidding to reach Target Frequency in
                 a week.
+            MONTHLY (3):
+                Optimize bidding to reach Target Frequency in
+                a month.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
         WEEKLY = 2
+        MONTHLY = 3
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

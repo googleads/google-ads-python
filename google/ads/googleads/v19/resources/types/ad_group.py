@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,8 @@ from google.ads.googleads.v19.enums.types import ad_group_type
 from google.ads.googleads.v19.enums.types import asset_field_type
 from google.ads.googleads.v19.enums.types import asset_set_type
 from google.ads.googleads.v19.enums.types import bidding_source
+from google.ads.googleads.v19.enums.types import demand_gen_channel_config
+from google.ads.googleads.v19.enums.types import demand_gen_channel_strategy
 from google.ads.googleads.v19.enums.types import targeting_dimension
 
 
@@ -237,6 +239,8 @@ class AdGroup(proto.Message):
         primary_status_reasons (MutableSequence[google.ads.googleads.v19.enums.types.AdGroupPrimaryStatusReasonEnum.AdGroupPrimaryStatusReason]):
             Output only. Provides reasons for why an ad
             group is not serving or not serving optimally.
+        demand_gen_ad_group_settings (google.ads.googleads.v19.resources.types.AdGroup.DemandGenAdGroupSettings):
+            Settings for Demand Gen ad groups.
     """
 
     class AudienceSetting(proto.Message):
@@ -253,6 +257,118 @@ class AdGroup(proto.Message):
         use_audience_grouped: bool = proto.Field(
             proto.BOOL,
             number=1,
+        )
+
+    class DemandGenAdGroupSettings(proto.Message):
+        r"""Settings for Demand Gen ad groups.
+
+        Attributes:
+            channel_controls (google.ads.googleads.v19.resources.types.AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls):
+                Channel controls for Demand Gen ad groups.
+        """
+
+        class DemandGenChannelControls(proto.Message):
+            r"""Channel controls for Demand Gen ad groups.
+
+            This message has `oneof`_ fields (mutually exclusive fields).
+            For each oneof, at most one member field can be set at the same time.
+            Setting any member of the oneof automatically clears all other
+            members.
+
+            .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+            Attributes:
+                channel_config (google.ads.googleads.v19.enums.types.DemandGenChannelConfigEnum.DemandGenChannelConfig):
+                    Output only. Channel configuration reflecting
+                    which field in the oneof is populated.
+                channel_strategy (google.ads.googleads.v19.enums.types.DemandGenChannelStrategyEnum.DemandGenChannelStrategy):
+                    High level channel strategy.
+
+                    This field is a member of `oneof`_ ``channel_configuration``.
+                selected_channels (google.ads.googleads.v19.resources.types.AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls.DemandGenSelectedChannels):
+                    Explicitly selected channels. This field
+                    should be set with at least one true value when
+                    present.
+
+                    This field is a member of `oneof`_ ``channel_configuration``.
+            """
+
+            class DemandGenSelectedChannels(proto.Message):
+                r"""Explicitly selected channels for channel controls in Demand
+                Gen ad groups.
+
+                Attributes:
+                    youtube_in_stream (bool):
+                        Whether to enable ads on the YouTube
+                        In-Stream channel.
+                    youtube_in_feed (bool):
+                        Whether to enable ads on the YouTube In-Feed
+                        channel.
+                    youtube_shorts (bool):
+                        Whether to enable ads on the YouTube Shorts
+                        channel.
+                    discover (bool):
+                        Whether to enable ads on the Discover
+                        channel.
+                    gmail (bool):
+                        Whether to enable ads on the Gmail channel.
+                    display (bool):
+                        Whether to enable ads on the Display channel.
+                """
+
+                youtube_in_stream: bool = proto.Field(
+                    proto.BOOL,
+                    number=1,
+                )
+                youtube_in_feed: bool = proto.Field(
+                    proto.BOOL,
+                    number=2,
+                )
+                youtube_shorts: bool = proto.Field(
+                    proto.BOOL,
+                    number=3,
+                )
+                discover: bool = proto.Field(
+                    proto.BOOL,
+                    number=4,
+                )
+                gmail: bool = proto.Field(
+                    proto.BOOL,
+                    number=5,
+                )
+                display: bool = proto.Field(
+                    proto.BOOL,
+                    number=6,
+                )
+
+            channel_config: (
+                demand_gen_channel_config.DemandGenChannelConfigEnum.DemandGenChannelConfig
+            ) = proto.Field(
+                proto.ENUM,
+                number=1,
+                enum=demand_gen_channel_config.DemandGenChannelConfigEnum.DemandGenChannelConfig,
+            )
+            channel_strategy: (
+                demand_gen_channel_strategy.DemandGenChannelStrategyEnum.DemandGenChannelStrategy
+            ) = proto.Field(
+                proto.ENUM,
+                number=2,
+                oneof="channel_configuration",
+                enum=demand_gen_channel_strategy.DemandGenChannelStrategyEnum.DemandGenChannelStrategy,
+            )
+            selected_channels: "AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls.DemandGenSelectedChannels" = proto.Field(
+                proto.MESSAGE,
+                number=3,
+                oneof="channel_configuration",
+                message="AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls.DemandGenSelectedChannels",
+            )
+
+        channel_controls: (
+            "AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls"
+        ) = proto.Field(
+            proto.MESSAGE,
+            number=1,
+            message="AdGroup.DemandGenAdGroupSettings.DemandGenChannelControls",
         )
 
     resource_name: str = proto.Field(
@@ -443,6 +559,11 @@ class AdGroup(proto.Message):
         proto.ENUM,
         number=63,
         enum=ad_group_primary_status_reason.AdGroupPrimaryStatusReasonEnum.AdGroupPrimaryStatusReason,
+    )
+    demand_gen_ad_group_settings: DemandGenAdGroupSettings = proto.Field(
+        proto.MESSAGE,
+        number=91,
+        message=DemandGenAdGroupSettings,
     )
 
 

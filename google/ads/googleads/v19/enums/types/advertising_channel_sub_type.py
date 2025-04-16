@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,6 +90,8 @@ class AdvertisingChannelSubTypeEnum(proto.Message):
                 bidding strategy.
             TRAVEL_ACTIVITIES (20):
                 Travel Activities campaigns.
+            YOUTUBE_AUDIO (22):
+                YouTube Audio campaigns.
         """
 
         UNSPECIFIED = 0
@@ -112,6 +114,7 @@ class AdvertisingChannelSubTypeEnum(proto.Message):
         APP_CAMPAIGN_FOR_PRE_REGISTRATION = 18
         VIDEO_REACH_TARGET_FREQUENCY = 19
         TRAVEL_ACTIVITIES = 20
+        YOUTUBE_AUDIO = 22
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

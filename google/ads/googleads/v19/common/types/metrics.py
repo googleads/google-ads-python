@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -311,6 +311,12 @@ class Metrics(proto.Message):
             Number of in-app actions.
 
             This field is a member of `oneof`_ ``_biddable_app_post_install_conversions``.
+        biddable_cohort_app_post_install_conversions (float):
+            Participated in-app actions. The number of in
+            app actions that come directly or indirectly
+            from the campaign.
+
+            This field is a member of `oneof`_ ``_biddable_cohort_app_post_install_conversions``.
         benchmark_ctr (float):
             An indication on how other advertisers'
             Shopping ads for similar products are performing
@@ -1700,6 +1706,23 @@ class Metrics(proto.Message):
             video views for in shorts formats.
 
             This field is a member of `oneof`_ ``_video_view_rate_shorts``.
+        coviewed_impressions (int):
+            All co-viewed impressions represent the total number of
+            people who saw your ad. This includes people who are signed
+            into their Google Account, as well as other people who are
+            watching the same ad on a connected TV. This metric is only
+            available for the Campaign resource with adjusted_age_range
+            and adjusted_gender segments. These segmentations are
+            mandatory to get the all coviewed impressions.
+
+            This field is a member of `oneof`_ ``_coviewed_impressions``.
+        primary_impressions (int):
+            Primary impression is counted each time your ad is served.
+            This metric is only available for the Campaign resource with
+            adjusted_age_range and adjusted_gender segments. These
+            segmentations are mandatory to get the primary impressions.
+
+            This field is a member of `oneof`_ ``_primary_impressions``.
     """
 
     absolute_top_impression_percentage: float = proto.Field(
@@ -1899,6 +1922,11 @@ class Metrics(proto.Message):
     biddable_app_post_install_conversions: float = proto.Field(
         proto.DOUBLE,
         number=255,
+        optional=True,
+    )
+    biddable_cohort_app_post_install_conversions: float = proto.Field(
+        proto.DOUBLE,
+        number=378,
         optional=True,
     )
     benchmark_ctr: float = proto.Field(
@@ -2742,6 +2770,16 @@ class Metrics(proto.Message):
     video_view_rate_shorts: float = proto.Field(
         proto.DOUBLE,
         number=369,
+        optional=True,
+    )
+    coviewed_impressions: int = proto.Field(
+        proto.INT64,
+        number=380,
+        optional=True,
+    )
+    primary_impressions: int = proto.Field(
+        proto.INT64,
+        number=381,
         optional=True,
     )
 

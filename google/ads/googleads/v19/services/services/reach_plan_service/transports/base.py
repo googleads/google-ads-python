@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -132,6 +132,11 @@ class ReachPlanServiceTransport(abc.ABC):
     def _prep_wrapped_messages(self, client_info):
         # Precompute the wrapped methods.
         self._wrapped_methods = {
+            self.generate_conversion_rates: gapic_v1.method.wrap_method(
+                self.generate_conversion_rates,
+                default_timeout=None,
+                client_info=client_info,
+            ),
             self.list_plannable_locations: gapic_v1.method.wrap_method(
                 self.list_plannable_locations,
                 default_timeout=None,
@@ -156,6 +161,18 @@ class ReachPlanServiceTransport(abc.ABC):
              Only call this method if the transport is NOT shared
              with other clients - this may cause errors in other clients!
         """
+        raise NotImplementedError()
+
+    @property
+    def generate_conversion_rates(
+        self,
+    ) -> Callable[
+        [reach_plan_service.GenerateConversionRatesRequest],
+        Union[
+            reach_plan_service.GenerateConversionRatesResponse,
+            Awaitable[reach_plan_service.GenerateConversionRatesResponse],
+        ],
+    ]:
         raise NotImplementedError()
 
     @property

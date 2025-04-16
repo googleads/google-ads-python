@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -464,6 +464,9 @@ class CriterionErrorEnum(proto.Message):
             ONLY_EXCLUSION_BRAND_LIST_ALLOWED_FOR_CAMPAIGN_TYPE (158):
                 Brand list can only be negatively targeted
                 for the campaign type.
+            LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN (166):
+                Cannot positively target locations outside of
+                restricted area for campaign.
         """
 
         UNSPECIFIED = 0
@@ -616,6 +619,7 @@ class CriterionErrorEnum(proto.Message):
         BRAND_SHARED_SET_DOES_NOT_EXIST = 156
         CANNOT_ADD_REMOVED_BRAND_SHARED_SET = 157
         ONLY_EXCLUSION_BRAND_LIST_ALLOWED_FOR_CAMPAIGN_TYPE = 158
+        LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN = 166
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

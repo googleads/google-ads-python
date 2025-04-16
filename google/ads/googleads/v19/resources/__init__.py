@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -61,6 +61,8 @@ from .types.asset import Asset
 from .types.asset import AssetFieldTypePolicySummary
 from .types.asset import AssetPolicySummary
 from .types.asset_field_type_view import AssetFieldTypeView
+from .types.asset_group import AdStrengthActionItem
+from .types.asset_group import AssetCoverage
 from .types.asset_group import AssetGroup
 from .types.asset_group_asset import AssetGroupAsset
 from .types.asset_group_listing_group_filter import AssetGroupListingGroupFilter
@@ -320,6 +322,7 @@ __all__ = (
     "AdGroupSimulation",
     "AdParameter",
     "AdScheduleView",
+    "AdStrengthActionItem",
     "AdvertisingPartnerIdentifier",
     "AdvertisingPartnerLinkInvitationIdentifier",
     "AgeRangeView",
@@ -327,6 +330,7 @@ __all__ = (
     "AndroidPrivacySharedKeyGoogleCampaign",
     "AndroidPrivacySharedKeyGoogleNetworkType",
     "Asset",
+    "AssetCoverage",
     "AssetFieldTypePolicySummary",
     "AssetFieldTypeView",
     "AssetGroup",

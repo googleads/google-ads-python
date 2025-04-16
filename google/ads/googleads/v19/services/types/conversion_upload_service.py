@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import proto  # type: ignore
 
 from google.ads.googleads.v19.common.types import consent as gagc_consent
 from google.ads.googleads.v19.common.types import offline_user_data
+from google.ads.googleads.v19.enums.types import conversion_customer_type
 from google.ads.googleads.v19.enums.types import conversion_environment_enum
 from google.rpc import status_pb2  # type: ignore
 
@@ -40,6 +41,8 @@ __protobuf__ = proto.module(
         "CallConversionResult",
         "CustomVariable",
         "CartData",
+        "SessionAttributeKeyValuePair",
+        "SessionAttributesKeyValuePairs",
     },
 )
 
@@ -251,6 +254,11 @@ class UploadCallConversionsResponse(proto.Message):
 class ClickConversion(proto.Message):
     r"""A click conversion.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -322,6 +330,23 @@ class ClickConversion(proto.Message):
             on, for example, App or Web.
         consent (google.ads.googleads.v19.common.types.Consent):
             The consent setting for the event.
+        customer_type (google.ads.googleads.v19.enums.types.ConversionCustomerTypeEnum.ConversionCustomerType):
+            Type of the customer associated with the
+            conversion (new or returning). Accessible only
+            to customers on the allow-list.
+        session_attributes_encoded (bytes):
+            The session attributes for the event, represented as a
+            base64-encoded JSON string. The content should be generated
+            by Google-provided library. To set session attributes
+            individually, use session_attributes_key_value_pairs
+            instead.
+
+            This field is a member of `oneof`_ ``session_attributes``.
+        session_attributes_key_value_pairs (google.ads.googleads.v19.services.types.SessionAttributesKeyValuePairs):
+            The session attributes for the event,
+            represented as key-value pairs.
+
+            This field is a member of `oneof`_ ``session_attributes``.
     """
 
     gclid: str = proto.Field(
@@ -395,6 +420,26 @@ class ClickConversion(proto.Message):
         proto.MESSAGE,
         number=23,
         message=gagc_consent.Consent,
+    )
+    customer_type: (
+        conversion_customer_type.ConversionCustomerTypeEnum.ConversionCustomerType
+    ) = proto.Field(
+        proto.ENUM,
+        number=26,
+        enum=conversion_customer_type.ConversionCustomerTypeEnum.ConversionCustomerType,
+    )
+    session_attributes_encoded: bytes = proto.Field(
+        proto.BYTES,
+        number=24,
+        oneof="session_attributes",
+    )
+    session_attributes_key_value_pairs: "SessionAttributesKeyValuePairs" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=25,
+            oneof="session_attributes",
+            message="SessionAttributesKeyValuePairs",
+        )
     )
 
 
@@ -750,6 +795,45 @@ class CartData(proto.Message):
         proto.MESSAGE,
         number=5,
         message=Item,
+    )
+
+
+class SessionAttributeKeyValuePair(proto.Message):
+    r"""Contains one session attribute of the conversion.
+
+    Attributes:
+        session_attribute_key (str):
+            Required. The name of the session attribute.
+        session_attribute_value (str):
+            Required. The value of the session attribute.
+    """
+
+    session_attribute_key: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    session_attribute_value: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+
+
+class SessionAttributesKeyValuePairs(proto.Message):
+    r"""Contains session attributes of the conversion, represented as
+    key-value pairs.
+
+    Attributes:
+        key_value_pairs (MutableSequence[google.ads.googleads.v19.services.types.SessionAttributeKeyValuePair]):
+            Required. The session attributes for the
+            conversion.
+    """
+
+    key_value_pairs: MutableSequence["SessionAttributeKeyValuePair"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="SessionAttributeKeyValuePair",
+        )
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,8 +35,10 @@ __protobuf__ = proto.module(
 
 
 class BiddingDataExclusion(proto.Message):
-    r"""Represents a bidding data exclusion. Cannot be used in
+    r"""Represents a bidding data exclusion. Bidding data exclusions
+    can be set in client accounts only, and cannot be used in
     manager accounts.
+
     See "About data exclusions" at
     https://support.google.com/google-ads/answer/10370710.
 

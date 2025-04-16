@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -127,6 +127,9 @@ class AssetFieldTypeEnum(proto.Message):
             BUSINESS_MESSAGE (31):
                 The asset is linked for use as a Business
                 Message.
+            TALL_PORTRAIT_MARKETING_IMAGE (32):
+                The asset is linked for use as a tall
+                portrait marketing image.
         """
 
         UNSPECIFIED = 0
@@ -160,6 +163,7 @@ class AssetFieldTypeEnum(proto.Message):
         HOTEL_PROPERTY = 28
         DEMAND_GEN_CAROUSEL_CARD = 30
         BUSINESS_MESSAGE = 31
+        TALL_PORTRAIT_MARKETING_IMAGE = 32
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,12 +75,11 @@ class _LoggingClientInterceptor(
                 f"Sending request for {client_call_details.method}",
                 extra={
                     "serviceName": "google.ads.googleads.v19.services.LocalServicesLeadService",
-                    "rpcName": client_call_details.method,
+                    "rpcName": str(client_call_details.method),
                     "request": grpc_request,
                     "metadata": grpc_request["metadata"],
                 },
             )
-
         response = continuation(client_call_details, request)
         if logging_enabled:  # pragma: NO COVER
             response_metadata = response.trailing_metadata()
@@ -372,6 +371,38 @@ class LocalServicesLeadServiceGrpcTransport(LocalServicesLeadServiceTransport):
                 )
             )
         return self._stubs["append_lead_conversation"]
+
+    @property
+    def provide_lead_feedback(
+        self,
+    ) -> Callable[
+        [local_services_lead_service.ProvideLeadFeedbackRequest],
+        local_services_lead_service.ProvideLeadFeedbackResponse,
+    ]:
+        r"""Return a callable for the provide lead feedback method over gRPC.
+
+        RPC to provide feedback on Local Services Lead
+        resources.
+
+        Returns:
+            Callable[[~.ProvideLeadFeedbackRequest],
+                    ~.ProvideLeadFeedbackResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "provide_lead_feedback" not in self._stubs:
+            self._stubs["provide_lead_feedback"] = (
+                self._logged_channel.unary_unary(
+                    "/google.ads.googleads.v19.services.LocalServicesLeadService/ProvideLeadFeedback",
+                    request_serializer=local_services_lead_service.ProvideLeadFeedbackRequest.serialize,
+                    response_deserializer=local_services_lead_service.ProvideLeadFeedbackResponse.deserialize,
+                )
+            )
+        return self._stubs["provide_lead_feedback"]
 
     def close(self):
         self._logged_channel.close()

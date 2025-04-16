@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ from google.ads.googleads.v19.enums.types import (
 from google.ads.googleads.v19.enums.types import (
     ad_network_type as gage_ad_network_type,
 )
+from google.ads.googleads.v19.enums.types import age_range_type
 from google.ads.googleads.v19.enums.types import (
     budget_campaign_association_status as gage_budget_campaign_association_status,
 )
@@ -55,6 +56,7 @@ from google.ads.googleads.v19.enums.types import device as gage_device
 from google.ads.googleads.v19.enums.types import (
     external_conversion_source as gage_external_conversion_source,
 )
+from google.ads.googleads.v19.enums.types import gender_type
 from google.ads.googleads.v19.enums.types import (
     hotel_date_selection_type as gage_hotel_date_selection_type,
 )
@@ -594,6 +596,20 @@ class Segments(proto.Message):
             the user is a new customer or a returning
             customer. This segmentation is typically used to
             measure the impact of customer acquisition goal.
+        adjusted_age_range (google.ads.googleads.v19.enums.types.AgeRangeTypeEnum.AgeRangeType):
+            Adjusted age range. This is the age range of the user after
+            applying modeling to get more accurate age and gender
+            information. Currently, both adjusted_age_range and
+            adjusted_gender need to be selected together to get valid
+            reach stats. These segmentations are only available for
+            allowlisted customers.
+        adjusted_gender (google.ads.googleads.v19.enums.types.GenderTypeEnum.GenderType):
+            Adjusted gender. This is the gender of the user after
+            applying modeling to get more accurate age and gender
+            information. Currently, both adjusted_age_range and
+            adjusted_gender need to be selected together to get valid
+            reach stats. These segmentations are only available for
+            allowlisted customers.
     """
 
     activity_account_id: int = proto.Field(
@@ -1204,6 +1220,18 @@ class Segments(proto.Message):
         proto.ENUM,
         number=160,
         enum=converting_user_prior_engagement_type_and_ltv_bucket.ConvertingUserPriorEngagementTypeAndLtvBucketEnum.ConvertingUserPriorEngagementTypeAndLtvBucket,
+    )
+    adjusted_age_range: age_range_type.AgeRangeTypeEnum.AgeRangeType = (
+        proto.Field(
+            proto.ENUM,
+            number=196,
+            enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
+        )
+    )
+    adjusted_gender: gender_type.GenderTypeEnum.GenderType = proto.Field(
+        proto.ENUM,
+        number=197,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
 
 

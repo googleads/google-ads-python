@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ from .types.ad_serving_optimization_status import (
     AdServingOptimizationStatusEnum,
 )
 from .types.ad_strength import AdStrengthEnum
+from .types.ad_strength_action_item_type import AdStrengthActionItemTypeEnum
 from .types.ad_type import AdTypeEnum
 from .types.advertising_channel_sub_type import AdvertisingChannelSubTypeEnum
 from .types.advertising_channel_type import AdvertisingChannelTypeEnum
@@ -71,6 +72,9 @@ from .types.app_payment_model_type import AppPaymentModelTypeEnum
 from .types.app_url_operating_system_type import AppUrlOperatingSystemTypeEnum
 from .types.asset_automation_status import AssetAutomationStatusEnum
 from .types.asset_automation_type import AssetAutomationTypeEnum
+from .types.asset_coverage_video_aspect_ratio_requirement import (
+    AssetCoverageVideoAspectRatioRequirementEnum,
+)
 from .types.asset_field_type import AssetFieldTypeEnum
 from .types.asset_group_primary_status import AssetGroupPrimaryStatusEnum
 from .types.asset_group_primary_status_reason import (
@@ -170,6 +174,7 @@ from .types.conversion_attribution_event_type import (
 from .types.conversion_custom_variable_status import (
     ConversionCustomVariableStatusEnum,
 )
+from .types.conversion_customer_type import ConversionCustomerTypeEnum
 from .types.conversion_environment_enum import ConversionEnvironmentEnum
 from .types.conversion_lag_bucket import ConversionLagBucketEnum
 from .types.conversion_or_adjustment_lag_bucket import (
@@ -219,6 +224,8 @@ from .types.data_driven_model_status import DataDrivenModelStatusEnum
 from .types.data_link_status import DataLinkStatusEnum
 from .types.data_link_type import DataLinkTypeEnum
 from .types.day_of_week import DayOfWeekEnum
+from .types.demand_gen_channel_config import DemandGenChannelConfigEnum
+from .types.demand_gen_channel_strategy import DemandGenChannelStrategyEnum
 from .types.device import DeviceEnum
 from .types.display_ad_format_setting import DisplayAdFormatSettingEnum
 from .types.display_upload_product_type import DisplayUploadProductTypeEnum
@@ -327,8 +334,20 @@ from .types.local_services_employee_type import LocalServicesEmployeeTypeEnum
 from .types.local_services_insurance_rejection_reason import (
     LocalServicesInsuranceRejectionReasonEnum,
 )
+from .types.local_services_lead_credit_issuance_decision import (
+    LocalServicesLeadCreditIssuanceDecisionEnum,
+)
 from .types.local_services_lead_credit_state import LocalServicesCreditStateEnum
 from .types.local_services_lead_status import LocalServicesLeadStatusEnum
+from .types.local_services_lead_survey_answer import (
+    LocalServicesLeadSurveyAnswerEnum,
+)
+from .types.local_services_lead_survey_dissatisfied_reason import (
+    LocalServicesLeadSurveyDissatisfiedReasonEnum,
+)
+from .types.local_services_lead_survey_satisfied_reason import (
+    LocalServicesLeadSurveySatisfiedReasonEnum,
+)
 from .types.local_services_lead_type import LocalServicesLeadTypeEnum
 from .types.local_services_license_rejection_reason import (
     LocalServicesLicenseRejectionReasonEnum,
@@ -420,6 +439,9 @@ from .types.promotion_extension_occasion import PromotionExtensionOccasionEnum
 from .types.proximity_radius_units import ProximityRadiusUnitsEnum
 from .types.quality_score_bucket import QualityScoreBucketEnum
 from .types.reach_plan_age_range import ReachPlanAgeRangeEnum
+from .types.reach_plan_conversion_rate_model import (
+    ReachPlanConversionRateModelEnum,
+)
 from .types.reach_plan_network import ReachPlanNetworkEnum
 from .types.reach_plan_surface import ReachPlanSurfaceEnum
 from .types.recommendation_subscription_status import (
@@ -541,6 +563,7 @@ __all__ = (
     "AdGroupTypeEnum",
     "AdNetworkTypeEnum",
     "AdServingOptimizationStatusEnum",
+    "AdStrengthActionItemTypeEnum",
     "AdStrengthEnum",
     "AdTypeEnum",
     "AdvertisingChannelSubTypeEnum",
@@ -555,6 +578,7 @@ __all__ = (
     "AppUrlOperatingSystemTypeEnum",
     "AssetAutomationStatusEnum",
     "AssetAutomationTypeEnum",
+    "AssetCoverageVideoAspectRatioRequirementEnum",
     "AssetFieldTypeEnum",
     "AssetGroupPrimaryStatusEnum",
     "AssetGroupPrimaryStatusReasonEnum",
@@ -624,6 +648,7 @@ __all__ = (
     "ConversionAdjustmentTypeEnum",
     "ConversionAttributionEventTypeEnum",
     "ConversionCustomVariableStatusEnum",
+    "ConversionCustomerTypeEnum",
     "ConversionEnvironmentEnum",
     "ConversionLagBucketEnum",
     "ConversionOrAdjustmentLagBucketEnum",
@@ -655,6 +680,8 @@ __all__ = (
     "DataLinkStatusEnum",
     "DataLinkTypeEnum",
     "DayOfWeekEnum",
+    "DemandGenChannelConfigEnum",
+    "DemandGenChannelStrategyEnum",
     "DeviceEnum",
     "DisplayAdFormatSettingEnum",
     "DisplayUploadProductTypeEnum",
@@ -720,7 +747,11 @@ __all__ = (
     "LocalServicesEmployeeTypeEnum",
     "LocalServicesInsuranceRejectionReasonEnum",
     "LocalServicesLeadConversationTypeEnum",
+    "LocalServicesLeadCreditIssuanceDecisionEnum",
     "LocalServicesLeadStatusEnum",
+    "LocalServicesLeadSurveyAnswerEnum",
+    "LocalServicesLeadSurveyDissatisfiedReasonEnum",
+    "LocalServicesLeadSurveySatisfiedReasonEnum",
     "LocalServicesLeadTypeEnum",
     "LocalServicesLicenseRejectionReasonEnum",
     "LocalServicesParticipantTypeEnum",
@@ -778,6 +809,7 @@ __all__ = (
     "ProximityRadiusUnitsEnum",
     "QualityScoreBucketEnum",
     "ReachPlanAgeRangeEnum",
+    "ReachPlanConversionRateModelEnum",
     "ReachPlanNetworkEnum",
     "ReachPlanSurfaceEnum",
     "RecommendationSubscriptionStatusEnum",

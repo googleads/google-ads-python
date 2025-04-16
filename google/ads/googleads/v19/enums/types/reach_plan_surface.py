@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,6 +43,10 @@ class ReachPlanSurfaceEnum(proto.Message):
                 Not specified.
             UNKNOWN (1):
                 The value is unknown in this version.
+            DISCOVER_FEED (7):
+                Discover feed ad surface.
+            GMAIL (8):
+                Gmail ad surface.
             IN_FEED (2):
                 In-Feed ad surface.
             IN_STREAM_BUMPER (3):
@@ -57,6 +61,8 @@ class ReachPlanSurfaceEnum(proto.Message):
 
         UNSPECIFIED = 0
         UNKNOWN = 1
+        DISCOVER_FEED = 7
+        GMAIL = 8
         IN_FEED = 2
         IN_STREAM_BUMPER = 3
         IN_STREAM_NON_SKIPPABLE = 4

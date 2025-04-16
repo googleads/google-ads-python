@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -358,7 +358,7 @@ class BiddingDataExclusionServiceAsyncClient:
 
         Returns:
             google.ads.googleads.v19.services.types.MutateBiddingDataExclusionsResponse:
-                Response message for data exlusions
+                Response message for data exclusions
                 mutate.
 
         """

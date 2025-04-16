@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -391,6 +391,75 @@ class LocalServicesLeadServiceAsyncClient:
         metadata = tuple(metadata) + (
             gapic_v1.routing_header.to_grpc_metadata(
                 (("customer_id", request.customer_id),)
+            ),
+        )
+
+        # Validate the universe domain.
+        self._client._validate_universe_domain()
+
+        # Send the request.
+        response = await rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
+
+        # Done; return the response.
+        return response
+
+    async def provide_lead_feedback(
+        self,
+        request: Optional[
+            Union[local_services_lead_service.ProvideLeadFeedbackRequest, dict]
+        ] = None,
+        *,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
+    ) -> local_services_lead_service.ProvideLeadFeedbackResponse:
+        r"""RPC to provide feedback on Local Services Lead
+        resources.
+
+        Args:
+            request (Optional[Union[google.ads.googleads.v19.services.types.ProvideLeadFeedbackRequest, dict]]):
+                The request object. Request message for
+                [LocalServicesLeadService.ProvideLeadFeedback][google.ads.googleads.v19.services.LocalServicesLeadService.ProvideLeadFeedback].
+            retry (google.api_core.retry_async.AsyncRetry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, Union[str, bytes]]]): Key/value pairs which should be
+                sent along with the request as metadata. Normally, each value must be of type `str`,
+                but for metadata keys ending with the suffix `-bin`, the corresponding values must
+                be of type `bytes`.
+
+        Returns:
+            google.ads.googleads.v19.services.types.ProvideLeadFeedbackResponse:
+                Response message for
+                   [LocalServicesLeadService.ProvideLeadFeedback][google.ads.googleads.v19.services.LocalServicesLeadService.ProvideLeadFeedback].
+
+        """
+        # Create or coerce a protobuf request object.
+        # - Use the request object if provided (there's no risk of modifying the input as
+        #   there are no flattened fields), or create one.
+        if not isinstance(
+            request, local_services_lead_service.ProvideLeadFeedbackRequest
+        ):
+            request = local_services_lead_service.ProvideLeadFeedbackRequest(
+                request
+            )
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._client._transport._wrapped_methods[
+            self._client._transport.provide_lead_feedback
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("resource_name", request.resource_name),)
             ),
         )
 

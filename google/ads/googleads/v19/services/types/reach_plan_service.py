@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,9 @@ from google.ads.googleads.v19.common.types import criteria
 from google.ads.googleads.v19.common.types import dates
 from google.ads.googleads.v19.enums.types import frequency_cap_time_unit
 from google.ads.googleads.v19.enums.types import reach_plan_age_range
+from google.ads.googleads.v19.enums.types import (
+    reach_plan_conversion_rate_model,
+)
 from google.ads.googleads.v19.enums.types import reach_plan_network
 from google.ads.googleads.v19.enums.types import reach_plan_surface
 from google.ads.googleads.v19.enums.types import target_frequency_time_unit
@@ -32,6 +35,9 @@ __protobuf__ = proto.module(
     package="google.ads.googleads.v19.services",
     marshal="google.ads.googleads.v19",
     manifest={
+        "GenerateConversionRatesRequest",
+        "GenerateConversionRatesResponse",
+        "ConversionRateSuggestion",
         "ListPlannableLocationsRequest",
         "ListPlannableLocationsResponse",
         "PlannableLocation",
@@ -63,6 +69,92 @@ __protobuf__ = proto.module(
         "TargetFrequencySettings",
     },
 )
+
+
+class GenerateConversionRatesRequest(proto.Message):
+    r"""Request message for
+    [ReachPlanService.GenerateConversionRates][google.ads.googleads.v19.services.ReachPlanService.GenerateConversionRates].
+
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        customer_id (str):
+            Required. The ID of the customer. A
+            conversion rate based on the historical data of
+            this customer may be suggested.
+        customer_reach_group (str):
+            The name of the customer being planned for.
+            This is a user-defined value.
+
+            This field is a member of `oneof`_ ``_customer_reach_group``.
+    """
+
+    customer_id: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    customer_reach_group: str = proto.Field(
+        proto.STRING,
+        number=2,
+        optional=True,
+    )
+
+
+class GenerateConversionRatesResponse(proto.Message):
+    r"""Response message for
+    [ReachPlanService.GenerateConversionRates][google.ads.googleads.v19.services.ReachPlanService.GenerateConversionRates],
+    containing conversion rate suggestions for supported plannable
+    products.
+
+    Attributes:
+        conversion_rate_suggestions (MutableSequence[google.ads.googleads.v19.services.types.ConversionRateSuggestion]):
+            A list containing conversion rate
+            suggestions. Each repeated element will have an
+            associated product code. Multiple suggestions
+            may share the same product code.
+    """
+
+    conversion_rate_suggestions: MutableSequence["ConversionRateSuggestion"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="ConversionRateSuggestion",
+        )
+    )
+
+
+class ConversionRateSuggestion(proto.Message):
+    r"""A conversion rate suggestion.
+
+    Attributes:
+        conversion_rate_model (google.ads.googleads.v19.enums.types.ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel):
+            Model type used to calculate the suggested
+            conversion rate.
+        plannable_product_code (str):
+            The code associated with the plannable product (for example:
+            DEMAND_GEN). To list all plannable product codes, use
+            [ReachPlanService.ListPlannableProducts][google.ads.googleads.v19.services.ReachPlanService.ListPlannableProducts].
+        conversion_rate (float):
+            The suggested conversion rate. The value is
+            between 0 and 1 (exclusive).
+    """
+
+    conversion_rate_model: (
+        reach_plan_conversion_rate_model.ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel
+    ) = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=reach_plan_conversion_rate_model.ReachPlanConversionRateModelEnum.ReachPlanConversionRateModel,
+    )
+    plannable_product_code: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    conversion_rate: float = proto.Field(
+        proto.DOUBLE,
+        number=3,
+    )
 
 
 class ListPlannableLocationsRequest(proto.Message):
@@ -618,6 +710,14 @@ class PlannedProduct(proto.Message):
             000 000 micros.
 
             This field is a member of `oneof`_ ``_budget_micros``.
+        conversion_rate (float):
+            Conversion rate as a decimal between 0 and 1, exclusive. For
+            example: if 2% of ad interactions are expected to lead to
+            conversions, conversion_rate should be 0.02. This field is
+            required for DEMAND_GEN plannable products. It is not
+            supported for other plannable products.
+
+            This field is a member of `oneof`_ ``_conversion_rate``.
         advanced_product_targeting (google.ads.googleads.v19.services.types.AdvancedProductTargeting):
             Targeting settings for the selected product. To list the
             available targeting for each product use
@@ -632,6 +732,11 @@ class PlannedProduct(proto.Message):
     budget_micros: int = proto.Field(
         proto.INT64,
         number=4,
+        optional=True,
+    )
+    conversion_rate: float = proto.Field(
+        proto.DOUBLE,
+        number=6,
         optional=True,
     )
     advanced_product_targeting: "AdvancedProductTargeting" = proto.Field(
@@ -802,6 +907,14 @@ class Forecast(proto.Message):
             for more information on views.
 
             This field is a member of `oneof`_ ``_views``.
+        conversions (float):
+            The number of conversions. This metric is only available for
+            DEMAND_GEN plannable products.
+
+            See https://support.google.com/google-ads/answer/2375431 for
+            more information on conversions.
+
+            This field is a member of `oneof`_ ``_conversions``.
     """
 
     on_target_reach: int = proto.Field(
@@ -859,6 +972,11 @@ class Forecast(proto.Message):
     views: int = proto.Field(
         proto.INT64,
         number=15,
+        optional=True,
+    )
+    conversions: float = proto.Field(
+        proto.DOUBLE,
+        number=16,
         optional=True,
     )
 
@@ -980,6 +1098,14 @@ class PlannedProductForecast(proto.Message):
             for more information on views.
 
             This field is a member of `oneof`_ ``_views``.
+        conversions (float):
+            The number of conversions. This metric is only available for
+            DEMAND_GEN plannable products.
+
+            See https://support.google.com/google-ads/answer/2375431 for
+            more information on conversions.
+
+            This field is a member of `oneof`_ ``_conversions``.
     """
 
     on_target_reach: int = proto.Field(
@@ -1031,6 +1157,11 @@ class PlannedProductForecast(proto.Message):
     views: int = proto.Field(
         proto.INT64,
         number=11,
+        optional=True,
+    )
+    conversions: float = proto.Field(
+        proto.DOUBLE,
+        number=12,
         optional=True,
     )
 

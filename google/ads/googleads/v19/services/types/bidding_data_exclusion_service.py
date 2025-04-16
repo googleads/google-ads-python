@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -154,7 +154,7 @@ class BiddingDataExclusionOperation(proto.Message):
 
 
 class MutateBiddingDataExclusionsResponse(proto.Message):
-    r"""Response message for data exlusions mutate.
+    r"""Response message for data exclusions mutate.
 
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):

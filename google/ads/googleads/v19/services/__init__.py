@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -357,6 +357,8 @@ from .types.conversion_upload_service import (
     ClickConversionResult,
     CustomVariable,
     ExternalAttributionData,
+    SessionAttributeKeyValuePair,
+    SessionAttributesKeyValuePairs,
     UploadCallConversionsRequest,
     UploadCallConversionsResponse,
     UploadClickConversionsRequest,
@@ -616,6 +618,10 @@ from .types.local_services_lead_service import (
     AppendLeadConversationResponse,
     Conversation,
     ConversationOrError,
+    ProvideLeadFeedbackRequest,
+    ProvideLeadFeedbackResponse,
+    SurveyDissatisfied,
+    SurveySatisfied,
 )
 from .types.offline_user_data_job_service import (
     AddOfflineUserDataJobOperationsRequest,
@@ -647,11 +653,14 @@ from .types.reach_plan_service import (
     AdvancedProductTargeting,
     AudienceTargeting,
     CampaignDuration,
+    ConversionRateSuggestion,
     EffectiveFrequencyBreakdown,
     EffectiveFrequencyLimit,
     Forecast,
     ForecastMetricOptions,
     FrequencyCap,
+    GenerateConversionRatesRequest,
+    GenerateConversionRatesResponse,
     GenerateReachForecastRequest,
     GenerateReachForecastResponse,
     ListPlannableLocationsRequest,
@@ -1015,6 +1024,8 @@ __all__ = (
     "ClickConversionResult",
     "CustomVariable",
     "ExternalAttributionData",
+    "SessionAttributeKeyValuePair",
+    "SessionAttributesKeyValuePairs",
     "UploadCallConversionsRequest",
     "UploadCallConversionsResponse",
     "UploadClickConversionsRequest",
@@ -1202,6 +1213,10 @@ __all__ = (
     "AppendLeadConversationResponse",
     "Conversation",
     "ConversationOrError",
+    "ProvideLeadFeedbackRequest",
+    "ProvideLeadFeedbackResponse",
+    "SurveyDissatisfied",
+    "SurveySatisfied",
     "AddOfflineUserDataJobOperationsRequest",
     "AddOfflineUserDataJobOperationsResponse",
     "CreateOfflineUserDataJobRequest",
@@ -1223,11 +1238,14 @@ __all__ = (
     "AdvancedProductTargeting",
     "AudienceTargeting",
     "CampaignDuration",
+    "ConversionRateSuggestion",
     "EffectiveFrequencyBreakdown",
     "EffectiveFrequencyLimit",
     "Forecast",
     "ForecastMetricOptions",
     "FrequencyCap",
+    "GenerateConversionRatesRequest",
+    "GenerateConversionRatesResponse",
     "GenerateReachForecastRequest",
     "GenerateReachForecastResponse",
     "ListPlannableLocationsRequest",

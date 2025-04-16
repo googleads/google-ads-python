@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,13 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v19.enums.types import ad_strength as gage_ad_strength
+from google.ads.googleads.v19.enums.types import ad_strength_action_item_type
+from google.ads.googleads.v19.enums.types import (
+    asset_coverage_video_aspect_ratio_requirement,
+)
+from google.ads.googleads.v19.enums.types import (
+    asset_field_type as gage_asset_field_type,
+)
 from google.ads.googleads.v19.enums.types import asset_group_primary_status
 from google.ads.googleads.v19.enums.types import (
     asset_group_primary_status_reason,
@@ -32,6 +39,8 @@ __protobuf__ = proto.module(
     marshal="google.ads.googleads.v19",
     manifest={
         "AssetGroup",
+        "AssetCoverage",
+        "AdStrengthActionItem",
     },
 )
 
@@ -90,6 +99,9 @@ class AssetGroup(proto.Message):
         ad_strength (google.ads.googleads.v19.enums.types.AdStrengthEnum.AdStrength):
             Output only. Overall ad strength of this
             asset group.
+        asset_coverage (google.ads.googleads.v19.resources.types.AssetCoverage):
+            Output only. The asset coverage of this asset
+            group.
     """
 
     resource_name: str = proto.Field(
@@ -149,6 +161,102 @@ class AssetGroup(proto.Message):
         proto.ENUM,
         number=10,
         enum=gage_ad_strength.AdStrengthEnum.AdStrength,
+    )
+    asset_coverage: "AssetCoverage" = proto.Field(
+        proto.MESSAGE,
+        number=13,
+        message="AssetCoverage",
+    )
+
+
+class AssetCoverage(proto.Message):
+    r"""Information about the asset coverage of an asset group.
+
+    Attributes:
+        ad_strength_action_items (MutableSequence[google.ads.googleads.v19.resources.types.AdStrengthActionItem]):
+            Output only. A list of action items to
+            improve the ad strength of an asset group.
+    """
+
+    ad_strength_action_items: MutableSequence["AdStrengthActionItem"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AdStrengthActionItem",
+        )
+    )
+
+
+class AdStrengthActionItem(proto.Message):
+    r"""An action item to improve the ad strength of an asset group.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        action_item_type (google.ads.googleads.v19.enums.types.AdStrengthActionItemTypeEnum.AdStrengthActionItemType):
+            Output only. The action item type.
+        add_asset_details (google.ads.googleads.v19.resources.types.AdStrengthActionItem.AddAssetDetails):
+            Output only. The action item details for action item type
+            ADD_ASSET.
+
+            This field is a member of `oneof`_ ``action_details``.
+    """
+
+    class AddAssetDetails(proto.Message):
+        r"""The details of the asset to add.
+
+        .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+        Attributes:
+            asset_field_type (google.ads.googleads.v19.enums.types.AssetFieldTypeEnum.AssetFieldType):
+                Output only. The asset field type of the
+                asset(s) to add.
+            asset_count (int):
+                Output only. The number of assets to add.
+
+                This field is a member of `oneof`_ ``_asset_count``.
+            video_aspect_ratio_requirement (google.ads.googleads.v19.enums.types.AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement):
+                Output only. For video field types, the required aspect
+                ratio of the video. When unset and asset_field_type is
+                YOUTUBE_VIDEO, the system recommends the advertiser upload
+                any YouTube video, regardless of aspect ratio.
+
+                This field is a member of `oneof`_ ``_video_aspect_ratio_requirement``.
+        """
+
+        asset_field_type: (
+            gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType
+        ) = proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gage_asset_field_type.AssetFieldTypeEnum.AssetFieldType,
+        )
+        asset_count: int = proto.Field(
+            proto.INT32,
+            number=2,
+            optional=True,
+        )
+        video_aspect_ratio_requirement: (
+            asset_coverage_video_aspect_ratio_requirement.AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement
+        ) = proto.Field(
+            proto.ENUM,
+            number=3,
+            optional=True,
+            enum=asset_coverage_video_aspect_ratio_requirement.AssetCoverageVideoAspectRatioRequirementEnum.AssetCoverageVideoAspectRatioRequirement,
+        )
+
+    action_item_type: (
+        ad_strength_action_item_type.AdStrengthActionItemTypeEnum.AdStrengthActionItemType
+    ) = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=ad_strength_action_item_type.AdStrengthActionItemTypeEnum.AdStrengthActionItemType,
+    )
+    add_asset_details: AddAssetDetails = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        oneof="action_details",
+        message=AddAssetDetails,
     )
 
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -313,6 +313,11 @@ class CampaignErrorEnum(proto.Message):
                 a product feed must meet this requirement only
                 when there are assets that are linked to the
                 campaign's asset groups.
+            BRAND_TARGETING_OVERRIDES_NOT_SUPPORTED (97):
+                This campaign does not support brand
+                targeting overrides. Brand targeting overrides
+                are only supported for Performance Max campaigns
+                that have a product feed.
             BRAND_GUIDELINES_NOT_ENABLED_FOR_CAMPAIGN (98):
                 Brand Guideline fields can only be set for
                 campaigns that have Brand Guidelines enabled.
@@ -429,6 +434,7 @@ class CampaignErrorEnum(proto.Message):
         CANNOT_ENABLE_BROAD_MATCH_FOR_PROMOTING_TRIAL_CAMPAIGN = 94
         REQUIRED_BUSINESS_NAME_ASSET_NOT_LINKED = 95
         REQUIRED_LOGO_ASSET_NOT_LINKED = 96
+        BRAND_TARGETING_OVERRIDES_NOT_SUPPORTED = 97
         BRAND_GUIDELINES_NOT_ENABLED_FOR_CAMPAIGN = 98
         BRAND_GUIDELINES_MAIN_AND_ACCENT_COLORS_REQUIRED = 99
         BRAND_GUIDELINES_COLOR_INVALID_FORMAT = 100

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1453,11 +1453,19 @@ class Recommendation(proto.Message):
         Attributes:
             asset_group (str):
                 Output only. The asset group resource name.
+            ad_strength (google.ads.googleads.v19.enums.types.AdStrengthEnum.AdStrength):
+                Output only. The current ad strength score of
+                the asset group.
         """
 
         asset_group: str = proto.Field(
             proto.STRING,
             number=1,
+        )
+        ad_strength: gage_ad_strength.AdStrengthEnum.AdStrength = proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=gage_ad_strength.AdStrengthEnum.AdStrength,
         )
 
     class MigrateDynamicSearchAdsCampaignToPerformanceMaxRecommendation(

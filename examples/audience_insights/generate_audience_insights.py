@@ -82,23 +82,15 @@ def audience_composition_insights(
     request = client.get_type("GenerateAudienceCompositionInsightsRequest")
     request.customer_id = customer_id
 
-    request.audience = client.get_type("InsightsAudience")
-    location_info = client.get_type("LocationInfo")
-    location_info.geo_target_constant = f"geoTargetConstants/{location_info}"
-    request.audience.country_locations.append(location_info)
-
     insights_info = client.get_type("InsightsAudienceAttributeGroup")
     attributes = client.get_type("AudienceInsightsAttribute")
-    user_interests_info = client.get_type("UserInterestInfo")
-    user_interest_category = googleads_service.user_interest_path(
+    attributes.user_interest.user_interest_category = googleads_service.user_interest_path(
         customer_id, user_interest
     )
-    user_interests_info.user_interest_category = user_interest_category
-    attributes.user_interest = user_interests_info
+
     insights_info.attributes.append(attributes)
     request.audience.topic_audience_combinations.append(insights_info)
 
-    request.audience = client.get_type("InsightsAudience")
     location_info = client.get_type("LocationInfo")
     location_info.geo_target_constant = (
         googleads_service.geo_target_constant_path(location_id)

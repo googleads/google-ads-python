@@ -126,7 +126,6 @@ def generate_suggested_targeting_insights(
     googleads_service,
     customer_id,
     location_id,
-    :q
     custom_name
 ):
     """Returns a collection of targeting insights (e.g.targetable audiences)

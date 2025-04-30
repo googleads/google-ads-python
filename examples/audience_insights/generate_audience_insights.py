@@ -35,16 +35,24 @@ def main(client, customer_id, custom_name):
     user_interest_category = "92948"  # Technology
     # Initialize appropriate services.
     audience_insights_service = client.get_service("AudienceInsightsService")
+    googleads_service = client.get_service("GoogleAdsService")
+
     audience_composition_insights(
         client,
         audience_insights_service,
+        googleads_service,
         customer_id,
         location_id,
         user_interest_category,
-        custom_name,
+        custom_name,:query_text
     )
     generate_suggested_targeting_insights(
-        client, audience_insights_service, customer_id, location_id, custom_name
+        client,
+        audience_insights_service,
+        googleads_service,
+        customer_id,
+        location_id,
+        custom_name
     )
     list_audience_insights_attributes(
         client,
@@ -59,10 +67,11 @@ def main(client, customer_id, custom_name):
 def audience_composition_insights(
     client,
     audience_insights_service,
+    googleads_service,
     customer_id,
     location_id,
     user_interest,
-    custom_name,
+    custom_name
 ):
     """Returns a collection of attributes represented in an audience of interest.
 
@@ -73,12 +82,12 @@ def audience_composition_insights(
         client: an initialized GoogleAdsClient instance.
         audience_insights_service: an initialized AudienceInsightsService
           instance.
+        googleads_service: an initialized GoogleAds Service instance.
         customer_id: The customer ID for the audience insights service.
         location_id: The location ID for the audience of interest.
         user_interest: The criterion ID of the category.
         custom_name: custom defined name.
     """
-    googleads_service = client.get_service("GoogleAdsService")
     request = client.get_type("GenerateAudienceCompositionInsightsRequest")
     request.customer_id = customer_id
 
@@ -112,7 +121,13 @@ def audience_composition_insights(
 
 # [START targeted_insights]
 def generate_suggested_targeting_insights(
-    client, audience_insights_service, customer_id, location_id, custom_name
+    client,
+    audience_insights_service,
+    googleads_service,
+    customer_id,
+    location_id,
+    :q
+    custom_name
 ):
     """Returns a collection of targeting insights (e.g.targetable audiences)
         that are relevant to the requested audience.
@@ -121,6 +136,7 @@ def generate_suggested_targeting_insights(
         client: an initialized GoogleAdsClient instance.
         audience_insights_service: an initialized AudienceInsightsService
           instance.
+        googleads_service: an initialized GoogleAds Service instance.
         customer_id: The customer ID for the audience insights service.
         location_id: The location ID for the audience of interest.
         custom_name: custom defined name.
@@ -130,10 +146,11 @@ def generate_suggested_targeting_insights(
     request.customer_id = customer_id
     request.customer_insights_group = custom_name
 
-    audience_definition = client.get_type("InsightsAudienceDefinition")
-    audience = client.get_type("InsightsAudience")
+    audience_definition = request.audience_definition
     location_info = client.get_type("LocationInfo")
-    location_info.geo_target_constant = f"geoTargetConstants/{location_id}"
+    location_info.geo_target_constant = (
+        googleads_service.geo_target_constant_path(location_id)
+    )
     audience_definition.audience.country_locations.append(location_info)
 
     request.audience_definition = audience_definition
@@ -166,7 +183,9 @@ def list_audience_insights_attributes(
     kg_dimension = client.enums.AudienceInsightsDimensionEnum.KNOWLEDGE_GRAPH
     request.dimensions = [category_dimension, kg_dimension]
     request.customer_insights_group = custom_name
-    response = audience_insights_service.list_audience_insights_attributes
+    response = audience_insights_service.list_audience_insights_attributes(
+        request=request
+    )
     for attribute in response.attributes:
         if attribute.dimension == 3:
             print(attribute.attribute.entity.knowledge_graph_machine_id)

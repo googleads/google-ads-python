@@ -44,7 +44,7 @@ def main(client, customer_id, custom_name):
         customer_id,
         location_id,
         user_interest_category,
-        custom_name,:query_text
+        custom_name
     )
     generate_suggested_targeting_insights(
         client,
@@ -59,7 +59,7 @@ def main(client, customer_id, custom_name):
         audience_insights_service,
         customer_id,
         product_name,
-        custom_name,
+        custom_name
     )
 
 

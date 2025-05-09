@@ -31,7 +31,7 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v19", "v18", "v17"]
+_VALID_API_VERSIONS = ["v19", "v18"]
 _MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 

@@ -9,7 +9,7 @@ Build Status
 
 Requirements
 ------------
-* Python 3.8+
+* Python 3.9+
 
 Installation
 ------------
@@ -41,7 +41,7 @@ Version `21.2.0`_ of this library *lowered* the minimum version for some
 dependencies in order to improve compatibility with other applications and
 packages that rely on `protobuf`_ version 3.
 
-Note that using protobuf 3 will cause performance degredations in this library,
+Note that using protobuf 3 will cause performance degradations in this library,
 so you may experience slower response times. For optimal performance we
 recommend using protobuf versions 4.21.5 or higher.
 

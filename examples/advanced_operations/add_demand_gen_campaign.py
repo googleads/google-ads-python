@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ https://developers.google.com/google-ads/api/docs/demand-gen/overview
 """
 
 import argparse
-import requests
 import sys
 from uuid import uuid4
 
+from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
@@ -341,7 +341,7 @@ def create_image_asset_operation(
     # name will be dropped silently.
     asset.name = asset_name
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
-    asset.image_asset.data = requests.get(url).content
+    asset.image_asset.data = get_image_bytes_from_url(url)
 
     return mutate_operation
 

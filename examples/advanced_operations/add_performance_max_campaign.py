@@ -33,11 +33,10 @@ from datetime import datetime, timedelta
 import sys
 from uuid import uuid4
 
+from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-
-import requests
 
 
 # We specify temporary IDs that are specific to a single mutate request.
@@ -106,10 +105,12 @@ def main(client, customer_id, audience_id, brand_guidelines_enabled):
         client,
         customer_id,
     )
-    performance_max_campaign_operation = create_performance_max_campaign_operation(
-        client,
-        customer_id,
-        brand_guidelines_enabled,
+    performance_max_campaign_operation = (
+        create_performance_max_campaign_operation(
+            client,
+            customer_id,
+            brand_guidelines_enabled,
+        )
     )
     campaign_criterion_operations = create_campaign_criterion_operations(
         client,
@@ -170,7 +171,9 @@ def create_campaign_budget_operation(
     campaign_budget.name = f"Performance Max campaign budget #{uuid4()}"
     # The budget period already defaults to DAILY.
     campaign_budget.amount_micros = 50000000
-    campaign_budget.delivery_method = client.enums.BudgetDeliveryMethodEnum.STANDARD
+    campaign_budget.delivery_method = (
+        client.enums.BudgetDeliveryMethodEnum.STANDARD
+    )
     # A Performance Max campaign cannot use a shared campaign budget.
     campaign_budget.explicitly_shared = False
 
@@ -444,7 +447,9 @@ def create_asset_group_operation(
     for resource_name in description_asset_resource_names:
         mutate_operation = client.get_type("MutateOperation")
         asset_group_asset = mutate_operation.asset_group_asset_operation.create
-        asset_group_asset.field_type = client.enums.AssetFieldTypeEnum.DESCRIPTION
+        asset_group_asset.field_type = (
+            client.enums.AssetFieldTypeEnum.DESCRIPTION
+        )
         asset_group_asset.asset_group = asset_group_service.asset_group_path(
             customer_id,
             _ASSET_GROUP_TEMPORARY_ID,
@@ -530,7 +535,9 @@ def create_and_link_text_asset(client, customer_id, text, field_type):
         customer_id,
         _ASSET_GROUP_TEMPORARY_ID,
     )
-    asset_group_asset.asset = asset_service.asset_path(customer_id, next_temp_id)
+    asset_group_asset.asset = asset_service.asset_path(
+        customer_id, next_temp_id
+    )
     operations.append(mutate_operation)
 
     next_temp_id -= 1
@@ -539,7 +546,9 @@ def create_and_link_text_asset(client, customer_id, text, field_type):
 
 
 # [START add_performance_max_campaign_8]
-def create_and_link_image_asset(client, customer_id, url, field_type, asset_name):
+def create_and_link_image_asset(
+    client, customer_id, url, field_type, asset_name
+):
     """Creates a list of MutateOperations that create a new linked image asset.
 
     Args:
@@ -566,7 +575,7 @@ def create_and_link_image_asset(client, customer_id, url, field_type, asset_name
     # name, the new name will be dropped silently.
     asset.name = asset_name
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
-    asset.image_asset.data = get_image_bytes(url)
+    asset.image_asset.data = get_image_bytes_from_url(url)
     operations.append(mutate_operation)
 
     # Create an AssetGroupAsset to link the Asset to the AssetGroup.
@@ -577,7 +586,9 @@ def create_and_link_image_asset(client, customer_id, url, field_type, asset_name
         customer_id,
         _ASSET_GROUP_TEMPORARY_ID,
     )
-    asset_group_asset.asset = asset_service.asset_path(customer_id, next_temp_id)
+    asset_group_asset.asset = asset_service.asset_path(
+        customer_id, next_temp_id
+    )
     operations.append(mutate_operation)
 
     next_temp_id -= 1
@@ -586,7 +597,12 @@ def create_and_link_image_asset(client, customer_id, url, field_type, asset_name
 
 
 def create_and_link_brand_assets(
-    client, customer_id, brand_guidelines_enabled, business_name, logo_url, logo_name
+    client,
+    customer_id,
+    brand_guidelines_enabled,
+    business_name,
+    logo_url,
+    logo_name,
 ):
     """Creates a list of MutateOperations that create linked brand assets.
 
@@ -612,7 +628,9 @@ def create_and_link_brand_assets(
 
     text_mutate_operation = client.get_type("MutateOperation")
     text_asset = text_mutate_operation.asset_operation.create
-    text_asset.resource_name = asset_service.asset_path(customer_id, text_asset_temp_id)
+    text_asset.resource_name = asset_service.asset_path(
+        customer_id, text_asset_temp_id
+    )
     text_asset.text_asset.text = business_name
     operations.append(text_mutate_operation)
 
@@ -630,7 +648,7 @@ def create_and_link_brand_assets(
     # name, the new name will be dropped silently.
     image_asset.name = logo_name
     image_asset.type_ = client.enums.AssetTypeEnum.IMAGE
-    image_asset.image_asset.data = get_image_bytes(logo_url)
+    image_asset.image_asset.data = get_image_bytes_from_url(logo_url)
     operations.append(image_mutate_operation)
 
     if brand_guidelines_enabled:
@@ -653,7 +671,9 @@ def create_and_link_brand_assets(
         operations.append(business_name_mutate_operation)
 
         logo_mutate_operation = client.get_type("MutateOperation")
-        logo_campaign_asset = logo_mutate_operation.campaign_asset_operation.create
+        logo_campaign_asset = (
+            logo_mutate_operation.campaign_asset_operation.create
+        )
         logo_campaign_asset.field_type = client.enums.AssetFieldTypeEnum.LOGO
         logo_campaign_asset.campaign = campaign_service.campaign_path(
             customer_id, _PERFORMANCE_MAX_CAMPAIGN_TEMPORARY_ID
@@ -690,9 +710,11 @@ def create_and_link_brand_assets(
             logo_mutate_operation.asset_group_asset_operation.create
         )
         logo_asset_group_asset.field_type = client.enums.AssetFieldTypeEnum.LOGO
-        logo_asset_group_asset.asset_group = asset_group_service.asset_group_path(
-            customer_id,
-            _ASSET_GROUP_TEMPORARY_ID,
+        logo_asset_group_asset.asset_group = (
+            asset_group_service.asset_group_path(
+                customer_id,
+                _ASSET_GROUP_TEMPORARY_ID,
+            )
         )
         logo_asset_group_asset.asset = asset_service.asset_path(
             customer_id, image_asset_temp_id
@@ -700,19 +722,6 @@ def create_and_link_brand_assets(
         operations.append(logo_mutate_operation)
 
     return operations
-
-
-def get_image_bytes(url):
-    """Loads image data from a URL.
-
-    Args:
-        url: a URL str.
-
-    Returns:
-        Images bytes loaded from the given URL.
-    """
-    response = requests.get(url)
-    return response.content
 
 
 def print_response_details(response):

@@ -24,21 +24,40 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import (
+    BiddableKeyword,
+    CriterionBidModifier,
+    ForecastAdGroup,
+    KeywordInfo,
+)
+from google.ads.googleads.v19.enums.types import (
+    KeywordMatchTypeEnum,
+    KeywordPlanNetworkEnum,
+)
+from google.ads.googleads.v19.resources.types import CampaignToForecast
+from google.ads.googleads.v19.services.types import (
+    GoogleAdsService,
+    KeywordPlanIdeaService,
+    GenerateKeywordForecastMetricsRequest,
+    GenerateKeywordForecastMetricsResponse,
+)
 
 
 # [START generate_forecast_metrics]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    campaign_to_forecast = create_campaign_to_forecast(client)
+    campaign_to_forecast: CampaignToForecast = create_campaign_to_forecast(
+        client
+    )
     generate_forecast_metrics(client, customer_id, campaign_to_forecast)
 
 
-def create_campaign_to_forecast(client):
+def create_campaign_to_forecast(client: GoogleAdsClient) -> CampaignToForecast:
     """Creates the campaign to forecast.
 
     A campaign to forecast lets you try out various configurations and keywords
@@ -53,9 +72,11 @@ def create_campaign_to_forecast(client):
     Returns:
         An CampaignToForecast instance.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
     # Create a campaign to forecast.
-    campaign_to_forecast = client.get_type("CampaignToForecast")
+    campaign_to_forecast: CampaignToForecast = client.get_type(
+        "CampaignToForecast"
+    )
     campaign_to_forecast.keyword_plan_network = (
         client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
     )
@@ -67,7 +88,9 @@ def create_campaign_to_forecast(client):
 
     # For the list of geo target IDs, see:
     # https://developers.google.com/google-ads/api/reference/data/geotargets
-    criterion_bid_modifier = client.get_type("CriterionBidModifier")
+    criterion_bid_modifier: CriterionBidModifier = client.get_type(
+        "CriterionBidModifier"
+    )
     # Geo target constant 2840 is for USA.
     criterion_bid_modifier.geo_target_constant = (
         googleads_service.geo_target_constant_path("2840")
@@ -83,24 +106,24 @@ def create_campaign_to_forecast(client):
 
     # Create forecast ad groups based on themes such as creative relevance,
     # product category, or cost per click.
-    forecast_ad_group = client.get_type("ForecastAdGroup")
+    forecast_ad_group: ForecastAdGroup = client.get_type("ForecastAdGroup")
 
     # Create and configure three BiddableKeyword instances.
-    biddable_keyword_1 = client.get_type("BiddableKeyword")
+    biddable_keyword_1: BiddableKeyword = client.get_type("BiddableKeyword")
     biddable_keyword_1.max_cpc_bid_micros = 2500000
     biddable_keyword_1.keyword.text = "mars cruise"
     biddable_keyword_1.keyword.match_type = (
         client.enums.KeywordMatchTypeEnum.BROAD
     )
 
-    biddable_keyword_2 = client.get_type("BiddableKeyword")
+    biddable_keyword_2: BiddableKeyword = client.get_type("BiddableKeyword")
     biddable_keyword_2.max_cpc_bid_micros = 1500000
     biddable_keyword_2.keyword.text = "cheap cruise"
     biddable_keyword_2.keyword.match_type = (
         client.enums.KeywordMatchTypeEnum.PHRASE
     )
 
-    biddable_keyword_3 = client.get_type("BiddableKeyword")
+    biddable_keyword_3: BiddableKeyword = client.get_type("BiddableKeyword")
     biddable_keyword_3.max_cpc_bid_micros = 1990000
     biddable_keyword_3.keyword.text = "cheap cruise"
     biddable_keyword_3.keyword.match_type = (
@@ -114,7 +137,7 @@ def create_campaign_to_forecast(client):
 
     # Create and configure a negative keyword, then add it to the forecast ad
     # group.
-    negative_keyword = client.get_type("KeywordInfo")
+    negative_keyword: KeywordInfo = client.get_type("KeywordInfo")
     negative_keyword.text = "moon walk"
     negative_keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
     forecast_ad_group.negative_keywords.append(negative_keyword)
@@ -124,7 +147,11 @@ def create_campaign_to_forecast(client):
     return campaign_to_forecast
 
 
-def generate_forecast_metrics(client, customer_id, campaign_to_forecast):
+def generate_forecast_metrics(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_to_forecast: CampaignToForecast,
+) -> None:
     """Generates forecast metrics and prints the results.
 
     Args:
@@ -132,21 +159,29 @@ def generate_forecast_metrics(client, customer_id, campaign_to_forecast):
         customer_id: a client customer ID.
         campaign_to_forecast: a CampaignToForecast to generate metrics for.
     """
-    keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    request = client.get_type("GenerateKeywordForecastMetricsRequest")
+    keyword_plan_idea_service: KeywordPlanIdeaService = client.get_service(
+        "KeywordPlanIdeaService"
+    )
+    request: GenerateKeywordForecastMetricsRequest = client.get_type(
+        "GenerateKeywordForecastMetricsRequest"
+    )
     request.customer_id = customer_id
     request.campaign = campaign_to_forecast
     # Set the forecast range. Repeat forecasts with different horizons to get a
     # holistic picture.
     # Set the forecast start date to tomorrow.
-    tomorrow = datetime.now() + timedelta(days=1)
+    tomorrow: datetime = datetime.now() + timedelta(days=1)
     request.forecast_period.start_date = tomorrow.strftime("%Y-%m-%d")
     # Set the forecast end date to 30 days from today.
-    thirty_days_from_now = datetime.now() + timedelta(days=30)
-    request.forecast_period.end_date = thirty_days_from_now.strftime("%Y-%m-%d")
+    thirty_days_from_now: datetime = datetime.now() + timedelta(days=30)
+    request.forecast_period.end_date = thirty_days_from_now.strftime(
+        "%Y-%m-%d"
+    )
 
-    response = keyword_plan_idea_service.generate_keyword_forecast_metrics(
-        request=request
+    response: GenerateKeywordForecastMetricsResponse = (
+        keyword_plan_idea_service.generate_keyword_forecast_metrics(
+            request=request
+        )
     )
 
     metrics = response.campaign_forecast_metrics
@@ -173,7 +208,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

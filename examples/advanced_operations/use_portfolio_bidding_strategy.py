@@ -21,17 +21,43 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AdvertisingChannelTypeEnum,
+    BudgetDeliveryMethodEnum,
+    CampaignStatusEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    BiddingStrategy,
+    Campaign,
+    CampaignBudget,
+)
+from google.ads.googleads.v19.services.types import (
+    BiddingStrategyService,
+    CampaignBudgetService,
+    CampaignService,
+)
+from google.ads.googleads.v19.types import (
+    BiddingStrategyOperation,
+    CampaignBudgetOperation,
+    CampaignOperation,
+)
 
 
-def main(client, customer_id):
-    campaign_budget_service = client.get_service("CampaignBudgetService")
-    bidding_strategy_service = client.get_service("BiddingStrategyService")
-    campaign_service = client.get_service("CampaignService")
+def main(client: GoogleAdsClient, customer_id: str) -> None:
+    campaign_budget_service: CampaignBudgetService = client.get_service(
+        "CampaignBudgetService"
+    )
+    bidding_strategy_service: BiddingStrategyService = client.get_service(
+        "BiddingStrategyService"
+    )
+    campaign_service: CampaignService = client.get_service("CampaignService")
 
     # [START use_portfolio_bidding_strategy]
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
-    campaign_budget = campaign_budget_operation.create
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
@@ -40,6 +66,7 @@ def main(client, customer_id):
     campaign_budget.explicitly_shared = True
 
     # Add budget.
+    campaign_budget_id: str = ""
     try:
         campaign_budget_response = (
             campaign_budget_service.mutate_campaign_budgets(
@@ -54,13 +81,16 @@ def main(client, customer_id):
 
     # [START use_portfolio_bidding_strategy_1]
     # Create a portfolio bidding strategy.
-    bidding_strategy_operation = client.get_type("BiddingStrategyOperation")
-    bidding_strategy = bidding_strategy_operation.create
+    bidding_strategy_operation: BiddingStrategyOperation = client.get_type(
+        "BiddingStrategyOperation"
+    )
+    bidding_strategy: BiddingStrategy = bidding_strategy_operation.create
     bidding_strategy.name = f"Enhanced CPC {uuid.uuid4()}"
     target_spend = bidding_strategy.target_spend
     target_spend.cpc_bid_ceiling_micros = 2000000
 
     # Add portfolio bidding strategy.
+    bidding_strategy_id: str = ""
     try:
         bidding_strategy_response = (
             bidding_strategy_service.mutate_bidding_strategies(
@@ -75,8 +105,8 @@ def main(client, customer_id):
 
     # [START use_portfolio_bidding_strategy_2]
     # Create campaign.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.create
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise {uuid.uuid4()}"
     campaign.advertising_channel_type = (
         client.enums.AdvertisingChannelTypeEnum.SEARCH
@@ -109,7 +139,7 @@ def main(client, customer_id):
         handle_googleads_exception(ex)
 
 
-def handle_googleads_exception(exception):
+def handle_googleads_exception(exception: GoogleAdsException) -> None:
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -138,6 +168,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id)

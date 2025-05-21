@@ -23,15 +23,20 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import (
+    ChangeStatus,
+    SearchGoogleAdsRequest,
+)
 
 
 # [START get_change_summary]
-def main(client, customer_id):
-    ads_service = client.get_service("GoogleAdsService")
+def main(client: GoogleAdsClient, customer_id: str) -> None:
+    ads_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
     # Construct a query to find information about changed resources in your
     # account.
-    query = """
+    query: str = """
         SELECT
           change_status.resource_name,
           change_status.last_change_date_time,
@@ -47,15 +52,18 @@ def main(client, customer_id):
         ORDER BY change_status.last_change_date_time
         LIMIT 10000"""
 
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
     response = ads_service.search(request=search_request)
 
     for row in response:
-        cs = row.change_status
-        resource_type = cs.resource_type.name
+        cs: ChangeStatus = row.change_status
+        resource_type: str = cs.resource_type.name
+        resource_name: str
         if resource_type == "AD_GROUP":
             resource_name = cs.ad_group
         elif resource_type == "AD_GROUP_AD":
@@ -69,7 +77,7 @@ def main(client, customer_id):
         else:
             resource_name = "UNKNOWN"
 
-        resource_status = cs.resource_status.name
+        resource_status: str = cs.resource_status.name
         print(
             f"On '{cs.last_change_date_time}', change status "
             f"'{cs.resource_name}' shows that a resource type of "

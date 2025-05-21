@@ -23,10 +23,19 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import KeywordPlanHistoricalMetrics
+from google.ads.googleads.v19.enums.types import KeywordPlanNetworkEnum
+from google.ads.googleads.v19.services.types import (
+    GoogleAdsService,
+    KeywordPlanIdeaService,
+    GenerateKeywordHistoricalMetricsRequest,
+    GenerateKeywordHistoricalMetricsResponse,
+    GenerateKeywordHistoricalMetricsResult,
+)
 
 
 # [START generate_historical_metrics]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -36,18 +45,24 @@ def main(client, customer_id):
     generate_historical_metrics(client, customer_id)
 
 
-def generate_historical_metrics(client, customer_id):
+def generate_historical_metrics(
+    client: GoogleAdsClient, customer_id: str
+) -> None:
     """Generates historical metrics and prints the results.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    request = client.get_type("GenerateKeywordHistoricalMetricsRequest")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    keyword_plan_idea_service: KeywordPlanIdeaService = client.get_service(
+        "KeywordPlanIdeaService"
+    )
+    request: GenerateKeywordHistoricalMetricsRequest = client.get_type(
+        "GenerateKeywordHistoricalMetricsRequest"
+    )
     request.customer_id = customer_id
-    request.keywords = ["mars cruise", "cheap cruise", "jupiter cruise"]
+    request.keywords.extend(["mars cruise", "cheap cruise", "jupiter cruise"])
     # Geo target constant 2840 is for USA.
     request.geo_target_constants.append(
         googleads_service.geo_target_constant_path("2840")
@@ -60,17 +75,20 @@ def generate_historical_metrics(client, customer_id):
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#languages
     request.language = googleads_service.language_constant_path("1000")
 
-    response = keyword_plan_idea_service.generate_keyword_historical_metrics(
-        request=request
+    response: GenerateKeywordHistoricalMetricsResponse = (
+        keyword_plan_idea_service.generate_keyword_historical_metrics(
+            request=request
+        )
     )
 
+    result: GenerateKeywordHistoricalMetricsResult
     for result in response.results:
-        metrics = result.keyword_metrics
+        metrics: KeywordPlanHistoricalMetrics = result.keyword_metrics
         # These metrics include those for both the search query and any variants
         # included in the response.
         print(
             f"The search query '{result.text}' (and the following variants: "
-            f"'{result.close_variants if result.close_variants else 'None'}'), "
+            f"'{''.join(result.close_variants) if result.close_variants else 'None'}'), "
             "generated the following historical metrics:\n"
         )
 
@@ -79,7 +97,7 @@ def generate_historical_metrics(client, customer_id):
         print(f"\tApproximate monthly searches: {metrics.avg_monthly_searches}")
 
         # The competition level for this search query.
-        print(f"\tCompetition level: {metrics.competition}")
+        print(f"\tCompetition level: {metrics.competition.name}")
 
         # The competition index for the query in the range [0, 100]. This shows
         # how competitive ad placement is for a keyword. The level of
@@ -127,7 +145,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

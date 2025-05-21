@@ -19,25 +19,59 @@ https://developers.google.com/google-ads/api/docs/demand-gen/overview
 
 import argparse
 import sys
+from typing import List
 from uuid import uuid4
 
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AdGroupAdStatusEnum,
+    AdGroupStatusEnum,
+    AdvertisingChannelTypeEnum,
+    AssetTypeEnum,
+    BiddingStrategyTypeEnum,
+    BudgetDeliveryMethodEnum,
+    CampaignStatusEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    Ad,
+    AdGroup,
+    AdGroupAd,
+    AdImageAsset,
+    AdTextAsset,
+    AdVideoAsset,
+    Asset,
+    Campaign,
+    CampaignBudget,
+    DemandGenVideoResponsiveAdInfo,
+)
+from google.ads.googleads.v19.services.types import (
+    AssetOperation,
+    CampaignBudgetOperation,
+    CampaignOperation,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupAdOperation,
+    AdGroupOperation,
+    MutateOperation,
+)
+
 
 # Temporary IDs for resources.
-BUDGET_TEMPORARY_ID = -1
-CAMPAIGN_TEMPORARY_ID = -2
-AD_GROUP_TEMPORARY_ID = -3
-VIDEO_ASSET_TEMPORARY_ID = -4
-LOGO_ASSET_TEMPORARY_ID = -5
+BUDGET_TEMPORARY_ID: int = -1
+CAMPAIGN_TEMPORARY_ID: int = -2
+AD_GROUP_TEMPORARY_ID: int = -3
+VIDEO_ASSET_TEMPORARY_ID: int = -4
+LOGO_ASSET_TEMPORARY_ID: int = -5
 
 # URLs for assets
-DEFAULT_LOGO_IMAGE_URL = "https://gaagl.page.link/bjYi"
-DEFAULT_FINAL_URL = "http://example.com/demand_gen"
+DEFAULT_LOGO_IMAGE_URL: str = "https://gaagl.page.link/bjYi"
+DEFAULT_FINAL_URL: str = "http://example.com/demand_gen"
 
 
-def main(client: GoogleAdsClient, customer_id: str, video_id: str):
+def main(client: GoogleAdsClient, customer_id: str, video_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -45,21 +79,23 @@ def main(client: GoogleAdsClient, customer_id: str, video_id: str):
         customer_id: The Google Ads customer ID.
         video_id: The YouTube ID of a video to use in an ad.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsService = client.get_service(
+        "GoogleAdsService"
+    )
 
-    budget_resource_name = googleads_service.campaign_budget_path(
+    budget_resource_name: str = googleads_service.campaign_budget_path(
         customer_id, BUDGET_TEMPORARY_ID
     )
-    campaign_resource_name = googleads_service.campaign_path(
+    campaign_resource_name: str = googleads_service.campaign_path(
         customer_id, CAMPAIGN_TEMPORARY_ID
     )
-    ad_group_resource_name = googleads_service.ad_group_path(
+    ad_group_resource_name: str = googleads_service.ad_group_path(
         customer_id, AD_GROUP_TEMPORARY_ID
     )
-    video_asset_resource_name = googleads_service.asset_path(
+    video_asset_resource_name: str = googleads_service.asset_path(
         customer_id, VIDEO_ASSET_TEMPORARY_ID
     )
-    logo_asset_resource_name = googleads_service.asset_path(
+    logo_asset_resource_name: str = googleads_service.asset_path(
         customer_id, LOGO_ASSET_TEMPORARY_ID
     )
 
@@ -71,7 +107,7 @@ def main(client: GoogleAdsClient, customer_id: str, video_id: str):
     # single Mutate request; the entities will either all complete successfully
     # or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
-    mutate_operations = [
+    mutate_operations: List[MutateOperation] = [
         # It's important to create these entities in this order because they
         # depend on each other, for example the ad group depends on the
         # campaign, and the ad group ad depends on the ad group.
@@ -105,7 +141,7 @@ def main(client: GoogleAdsClient, customer_id: str, video_id: str):
 
 def create_campaign_budget_operation(
     client: GoogleAdsClient, budget_resource_name: str
-):
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new CampaignBudget.
 
     A temporary ID will be assigned to this campaign budget so that it can be
@@ -118,9 +154,11 @@ def create_campaign_budget_operation(
     Returns:
         A MutateOperation for creating a CampaignBudget.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    campaign_budget_operation = mutate_operation.campaign_budget_operation
-    campaign_budget = campaign_budget_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    campaign_budget_operation: CampaignBudgetOperation = (
+        mutate_operation.campaign_budget_operation
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Demand Gen campaign budget {uuid4()}"
     # The budget period already defaults to DAILY.
     campaign_budget.amount_micros = 50_000_000
@@ -141,7 +179,7 @@ def create_demand_gen_campaign_operation(
     client: GoogleAdsClient,
     campaign_resource_name: str,
     budget_resource_name: str,
-):
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new Campaign.
 
     A temporary ID will be assigned to this campaign so that it can be
@@ -155,9 +193,9 @@ def create_demand_gen_campaign_operation(
     Returns:
         A MutateOperation for creating a Campaign.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    campaign_operation = mutate_operation.campaign_operation
-    campaign = campaign_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    campaign_operation: CampaignOperation = mutate_operation.campaign_operation
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Demand Gen #{uuid4()}"
     # Set the campaign status as PAUSED. The campaign is the only entity in the
     # mutate request that should have its status set.
@@ -184,7 +222,7 @@ def create_ad_group_operation(
     client: GoogleAdsClient,
     ad_group_resource_name: str,
     campaign_resource_name: str,
-):
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new AdGroup.
 
     Args:
@@ -196,10 +234,10 @@ def create_ad_group_operation(
     Returns:
         A MutateOperation for creating an AdGroup.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    ad_group_operation = mutate_operation.ad_group_operation
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    ad_group_operation: AdGroupOperation = mutate_operation.ad_group_operation
     # Creates an ad group.
-    ad_group = ad_group_operation.create
+    ad_group: AdGroup = ad_group_operation.create
     ad_group.resource_name = ad_group_resource_name
     ad_group.name = f"Earth to Mars Cruises #{uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
@@ -229,7 +267,7 @@ def create_asset_operations(
     video_asset_resource_name: str,
     video_id: str,
     logo_asset_resource_name: str,
-):
+) -> List[MutateOperation]:
     """Creates a list of MutateOperations that create new Assets.
 
     Args:
@@ -261,7 +299,7 @@ def create_demand_gen_ad_operation(
     ad_group_resource_name: str,
     video_asset_resource_name: str,
     logo_asset_resource_name: str,
-):
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new Demand Gen Ad.
 
     Args:
@@ -273,44 +311,48 @@ def create_demand_gen_ad_operation(
     Returns:
         A MutateOperation for creating an AdGroupAd.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    ad_group_ad_operation = mutate_operation.ad_group_ad_operation
-    ad_group_ad = ad_group_ad_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    ad_group_ad_operation: AdGroupAdOperation = (
+        mutate_operation.ad_group_ad_operation
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
 
-    ad = ad_group_ad.ad
+    ad: Ad = ad_group_ad.ad
     ad.name = "Demand gen multi asset ad"
     ad.final_urls.append(DEFAULT_FINAL_URL)
 
-    demand_gen_ad = ad.demand_gen_video_responsive_ad
+    demand_gen_ad: DemandGenVideoResponsiveAdInfo = (
+        ad.demand_gen_video_responsive_ad
+    )
     # Ensure business_name is an AssetLink and assign text to its text_asset.text
     demand_gen_ad.business_name.text = "Interplanetary Cruises"
     # If it needs to be an AssetLink to a text asset,
     # that would require creating another asset.
 
     # Create AssetLink for video
-    video_asset_link = client.get_type("AdVideoAsset")
+    video_asset_link: AdVideoAsset = client.get_type("AdVideoAsset")
     video_asset_link.asset = video_asset_resource_name
     demand_gen_ad.videos.append(video_asset_link)
 
     # Create AssetLink for logo
-    logo_image_asset_link = client.get_type("AdImageAsset")
+    logo_image_asset_link: AdImageAsset = client.get_type("AdImageAsset")
     logo_image_asset_link.asset = logo_asset_resource_name
     demand_gen_ad.logo_images.append(logo_image_asset_link)
 
     # Create AssetLink for headline
-    headline_asset_link = client.get_type("AdTextAsset")
+    headline_asset_link: AdTextAsset = client.get_type("AdTextAsset")
     headline_asset_link.text = "Interplanetary cruises"
     demand_gen_ad.headlines.append(headline_asset_link)
 
     # Create AssetLink for long headline
-    long_headline_asset_link = client.get_type("AdTextAsset")
+    long_headline_asset_link: AdTextAsset = client.get_type("AdTextAsset")
     long_headline_asset_link.text = "Travel the World"
     demand_gen_ad.long_headlines.append(long_headline_asset_link)
 
     # Create AssetLink for description
-    description_asset_link = client.get_type("AdTextAsset")
+    description_asset_link: AdTextAsset = client.get_type("AdTextAsset")
     description_asset_link.text = "Book now for an extra discount"
     demand_gen_ad.descriptions.append(description_asset_link)
 
@@ -320,7 +362,7 @@ def create_demand_gen_ad_operation(
 
 def create_image_asset_operation(
     client: GoogleAdsClient, asset_resource_name: str, url: str, asset_name: str
-):
+) -> MutateOperation:
     """Creates a MutateOperation for a new image asset.
 
     Args:
@@ -332,9 +374,9 @@ def create_image_asset_operation(
     Returns:
         A MutateOperation for creating an image asset.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    asset_operation = mutate_operation.asset_operation
-    asset = asset_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    asset_operation: AssetOperation = mutate_operation.asset_operation
+    asset: Asset = asset_operation.create
     asset.resource_name = asset_resource_name
     # Provide a unique friendly name to identify your asset. When there is an
     # existing image asset with the same content but a different name, the new
@@ -351,7 +393,7 @@ def create_video_asset_operation(
     asset_resource_name: str,
     video_id: str,
     asset_name: str,
-):
+) -> MutateOperation:
     """Creates a MutateOperation for a new video asset.
 
     Args:
@@ -363,9 +405,9 @@ def create_video_asset_operation(
     Returns:
         A MutateOperation for creating a video asset.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    asset_operation = mutate_operation.asset_operation
-    asset = asset_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    asset_operation: AssetOperation = mutate_operation.asset_operation
+    asset: Asset = asset_operation.create
     asset.resource_name = asset_resource_name
     asset.name = asset_name
     asset.type_ = client.enums.AssetTypeEnum.YOUTUBE_VIDEO
@@ -395,7 +437,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.video_id)

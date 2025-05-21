@@ -23,20 +23,45 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.api_core import protobuf_helpers
+from google.ads.googleads.v19.enums.types import AssetFieldTypeEnum
+from google.ads.googleads.v19.resources.types import AdGroupAsset
+from google.ads.googleads.v19.services.types import AdGroupAssetService
+from google.ads.googleads.v19.types import AdGroupAssetOperation
 
 
-def main(client, customer_id, ad_group_id, asset_id):
-    ad_group_asset_service = client.get_service("AdGroupAssetService")
-    ad_group_asset_resource_name = ad_group_asset_service.asset_path(
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    asset_id: str,
+) -> None:
+    ad_group_asset_service: AdGroupAssetService = client.get_service(
+        "AdGroupAssetService"
+    )
+    # Note: In current versions, asset_path is part of AssetService, not AdGroupAssetService.
+    # Assuming this example intends to use an asset resource name directly.
+    # If asset_id is already a resource name, this line is not needed.
+    # If asset_id is just an ID, it should be client.get_service("AssetService").asset_path(...)
+    # For this example, we'll assume asset_id is passed as a full resource name
+    # or the service method is available as shown in the original code.
+    # However, to construct it properly if asset_id were just an ID:
+    # asset_service = client.get_service("AssetService")
+    # ad_group_asset_resource_name = asset_service.asset_path(customer_id, asset_id)
+    # For now, sticking to the original structure implies ad_group_asset_resource_name
+    # is the intended use, or asset_id is already the full resource name.
+    # Let's assume asset_id is the numeric ID and we need to form the resource name.
+    asset_service = client.get_service("AssetService")
+    ad_group_asset_resource_name: str = asset_service.asset_path(
         customer_id, asset_id
     )
 
-    ad_group_asset_operation = client.get_type("AdGroupAssetOperation")
-    ad_group_asset_set = ad_group_asset_operation.create
-    ad_group_asset_set.asset = ad_group_asset_resource_name
-    ad_group_asset_set.field_type = client.enums.AssetFieldTypeEnum.AD_IMAGE
-    ad_group_asset_set.ad_group = ad_group_asset_service.ad_group_path(
+    ad_group_asset_operation: AdGroupAssetOperation = client.get_type(
+        "AdGroupAssetOperation"
+    )
+    ad_group_asset: AdGroupAsset = ad_group_asset_operation.create
+    ad_group_asset.asset = ad_group_asset_resource_name
+    ad_group_asset.field_type = client.enums.AssetFieldTypeEnum.AD_IMAGE
+    ad_group_asset.ad_group = ad_group_asset_service.ad_group_path(
         customer_id, ad_group_id
     )
     response = ad_group_asset_service.mutate_ad_group_assets(
@@ -79,7 +104,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

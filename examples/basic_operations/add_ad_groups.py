@@ -24,15 +24,25 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AdGroupStatusEnum,
+    AdGroupTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import AdGroup
+from google.ads.googleads.v19.services.types import (
+    AdGroupService,
+    CampaignService,
+)
+from google.ads.googleads.v19.types import AdGroupOperation
 
 
-def main(client, customer_id, campaign_id):
-    ad_group_service = client.get_service("AdGroupService")
-    campaign_service = client.get_service("CampaignService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
+    campaign_service: CampaignService = client.get_service("CampaignService")
 
     # Create ad group.
-    ad_group_operation = client.get_type("AdGroupOperation")
-    ad_group = ad_group_operation.create
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruises {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_service.campaign_path(customer_id, campaign_id)
@@ -65,7 +75,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

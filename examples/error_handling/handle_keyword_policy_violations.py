@@ -27,12 +27,29 @@ non-violating keyword.
 
 import argparse
 import sys
+from typing import List, Optional, Tuple
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import PolicyViolationKey
+from google.ads.googleads.v19.enums.types import (
+    AdGroupCriterionStatusEnum,
+    KeywordMatchTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import AdGroupCriterion
+from google.ads.googleads.v19.services.types import (
+    AdGroupCriterionService,
+    AdGroupService,
+)
+from google.ads.googleads.v19.types import AdGroupCriterionOperation
 
 
-def main(client, customer_id, ad_group_id, keyword_text):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    keyword_text: str,
+) -> None:
     """Demonstrates how to request an exemption for keyword policy violations.
 
     Args:
@@ -42,17 +59,20 @@ def main(client, customer_id, ad_group_id, keyword_text):
         keyword_text: The keyword text to add.
     """
 
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionService = client.get_service(
+        "AdGroupCriterionService"
+    )
 
-    (
-        googleads_exception,
-        ad_group_criterion_operation,
-    ) = create_keyword_criterion(
-        client,
-        ad_group_criterion_service,
-        customer_id,
-        ad_group_id,
-        keyword_text,
+    googleads_exception: Optional[GoogleAdsException]
+    ad_group_criterion_operation: AdGroupCriterionOperation
+    googleads_exception, ad_group_criterion_operation = (
+        create_keyword_criterion(
+            client,
+            ad_group_criterion_service,
+            customer_id,
+            ad_group_id,
+            keyword_text,
+        )
     )
 
     try:
@@ -60,8 +80,8 @@ def main(client, customer_id, ad_group_id, keyword_text):
         # your keyword contains many policy violations, but not all of them are
         # exemptible, the request will not be sent.
         if googleads_exception is not None:
-            exempt_policy_violation_keys = fetch_exempt_policy_violation_keys(
-                googleads_exception
+            exempt_policy_violation_keys: List[PolicyViolationKey] = (
+                fetch_exempt_policy_violation_keys(googleads_exception)
             )
             request_exemption(
                 customer_id,
@@ -83,8 +103,12 @@ def main(client, customer_id, ad_group_id, keyword_text):
 
 
 def create_keyword_criterion(
-    client, ad_group_criterion_service, customer_id, ad_group_id, keyword_text
-):
+    client: GoogleAdsClient,
+    ad_group_criterion_service: AdGroupCriterionService,
+    customer_id: str,
+    ad_group_id: str,
+    keyword_text: str,
+) -> Tuple[Optional[GoogleAdsException], AdGroupCriterionOperation]:
     """Attempts to add a keyword criterion to an ad group.
 
     Args:
@@ -99,11 +123,14 @@ def create_keyword_criterion(
         successful) and the modified operation.
     """
     # Constructs an ad group criterion using the keyword text provided.
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
-    ad_group_criterion = ad_group_criterion_operation.create
-    ad_group_criterion.ad_group = client.get_service(
-        "AdGroupService"
-    ).ad_group_path(customer_id, ad_group_id)
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    ad_group_criterion: AdGroupCriterion = ad_group_criterion_operation.create
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
+    ad_group_criterion.ad_group = ad_group_service.ad_group_path(
+        customer_id, ad_group_id
+    )
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = keyword_text
     ad_group_criterion.keyword.match_type = (
@@ -129,7 +156,9 @@ def create_keyword_criterion(
 
 
 # [START handle_keyword_policy_violations]
-def fetch_exempt_policy_violation_keys(googleads_exception):
+def fetch_exempt_policy_violation_keys(
+    googleads_exception: GoogleAdsException,
+) -> List[PolicyViolationKey]:
     """Collects all policy violation keys that can be exempted.
 
     Args:
@@ -138,7 +167,7 @@ def fetch_exempt_policy_violation_keys(googleads_exception):
     Returns:
         A list of policy violation keys.
     """
-    exempt_policy_violation_keys = []
+    exempt_policy_violation_keys: List[PolicyViolationKey] = []
 
     print("Google Ads failure details:")
     for error in googleads_exception.failure.errors:
@@ -151,7 +180,9 @@ def fetch_exempt_policy_violation_keys(googleads_exception):
             policy_violation_details = error.details.policy_violation_details
             print(
                 "\tPolicy violation details:\n"
-                f"\t\tExternal policy name: '{policy_violation_details}'\n"
+                # Note: this will be of type PolicyViolationDetails.
+                # This is not the same as the identically named message used earlier.
+                f"\t\tExternal policy name: '{policy_violation_details.external_policy_name}'\n"
                 "\t\tExternal policy description: "
                 f"'{policy_violation_details.external_policy_description}'\n"
                 f"\t\tIs exemptible? '{policy_violation_details.is_exemptible}'"
@@ -191,11 +222,11 @@ def fetch_exempt_policy_violation_keys(googleads_exception):
 
 # [START handle_keyword_policy_violations_1]
 def request_exemption(
-    customer_id,
-    ad_group_criterion_service,
-    ad_group_criterion_operation,
-    exempt_policy_violation_keys,
-):
+    customer_id: str,
+    ad_group_criterion_service: AdGroupCriterionService,
+    ad_group_criterion_operation: AdGroupCriterionOperation,
+    exempt_policy_violation_keys: List[PolicyViolationKey],
+) -> None:
     """Sends exemption requests for creating a keyword.
 
     Args:
@@ -256,7 +287,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(
         googleads_client, args.customer_id, args.ad_group_id, args.keyword_text

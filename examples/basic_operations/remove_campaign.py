@@ -20,13 +20,17 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import CampaignService
+from google.ads.googleads.v19.types import CampaignOperation
 
 
-def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService")
-    campaign_operation = client.get_type("CampaignOperation")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
 
-    resource_name = campaign_service.campaign_path(customer_id, campaign_id)
+    resource_name: str = campaign_service.campaign_path(
+        customer_id, campaign_id
+    )
     campaign_operation.remove = resource_name
 
     campaign_response = campaign_service.mutate_campaigns(
@@ -55,7 +59,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

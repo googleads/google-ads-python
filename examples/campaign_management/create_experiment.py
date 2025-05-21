@@ -22,14 +22,40 @@ experiment.
 import argparse
 import sys
 import uuid
-from venv import create
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    ExperimentStatusEnum,
+    ExperimentTypeEnum,
+    ResponseContentTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    Campaign,
+    Experiment,
+    ExperimentArm,
+)
+from google.ads.googleads.v19.services.types import (
+    CampaignService,
+    ExperimentArmService,
+    ExperimentService,
+)
+from google.ads.googleads.v19.types import (
+    CampaignOperation,
+    ExperimentArmOperation,
+    ExperimentOperation,
+    MutateExperimentArmsRequest,
+    MutateExperimentArmsResponse,
+    MutateExperimentsResponse,
+)
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 
-def main(client, customer_id, base_campaign_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, base_campaign_id: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -38,21 +64,31 @@ def main(client, customer_id, base_campaign_id):
         base_campaign_id: the campaign ID to associate with the control arm of
           the experiment.
     """
-    experiment = create_experiment_resource(client, customer_id)
-    draft_campaign = create_experiment_arms(
-        client, customer_id, base_campaign_id, experiment
+    experiment_resource_name: str = create_experiment_resource(
+        client, customer_id
+    )
+    draft_campaign_resource_name: str = create_experiment_arms(
+        client, customer_id, base_campaign_id, experiment_resource_name
     )
 
-    modify_draft_campaign(client, customer_id, draft_campaign)
+    modify_draft_campaign(
+        client, customer_id, draft_campaign_resource_name
+    )
 
     # When you're done setting up the experiment and arms and modifying the
     # draft campaign, this will begin the experiment.
-    experiment_service = client.get_service("ExperimentService")
-    experiment_service.schedule_experiment(resource_name=experiment)
+    experiment_service: ExperimentService = client.get_service(
+        "ExperimentService"
+    )
+    experiment_service.schedule_experiment(
+        resource_name=experiment_resource_name
+    )
 
 
 # [START create_experiment_1]
-def create_experiment_resource(client, customer_id):
+def create_experiment_resource(
+    client: GoogleAdsClient, customer_id: str
+) -> str:
     """Creates a new experiment resource.
 
     Args:
@@ -62,20 +98,26 @@ def create_experiment_resource(client, customer_id):
     Returns:
         the resource name for the new experiment.
     """
-    experiment_operation = client.get_type("ExperimentOperation")
-    experiment = experiment_operation.create
+    experiment_operation: ExperimentOperation = client.get_type(
+        "ExperimentOperation"
+    )
+    experiment: Experiment = experiment_operation.create
 
     experiment.name = f"Example Experiment #{uuid.uuid4()}"
     experiment.type_ = client.enums.ExperimentTypeEnum.SEARCH_CUSTOM
     experiment.suffix = "[experiment]"
     experiment.status = client.enums.ExperimentStatusEnum.SETUP
 
-    experiment_service = client.get_service("ExperimentService")
-    response = experiment_service.mutate_experiments(
-        customer_id=customer_id, operations=[experiment_operation]
+    experiment_service: ExperimentService = client.get_service(
+        "ExperimentService"
+    )
+    response: MutateExperimentsResponse = (
+        experiment_service.mutate_experiments(
+            customer_id=customer_id, operations=[experiment_operation]
+        )
     )
 
-    experiment_resource_name = response.results[0].resource_name
+    experiment_resource_name: str = response.results[0].resource_name
     print(f"Created experiment with resource name {experiment_resource_name}")
 
     return experiment_resource_name
@@ -83,7 +125,12 @@ def create_experiment_resource(client, customer_id):
 
 
 # [START create_experiment_2]
-def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
+def create_experiment_arms(
+    client: GoogleAdsClient,
+    customer_id: str,
+    base_campaign_id: str,
+    experiment_resource_name: str,
+) -> str:
     """Creates a control and treatment experiment arms.
 
     Args:
@@ -91,23 +138,25 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
         customer_id: a client customer ID.
         base_campaign_id: the campaign ID to associate with the control arm of
           the experiment.
-        experiment: the resource name for an experiment.
+        experiment_resource_name: the resource name for an experiment.
 
     Returns:
-        the resource name for the new treatment experiment arm.
+        the resource name for the new treatment experiment arm's draft campaign.
     """
-    operations = []
+    operations: List[ExperimentArmOperation] = []
 
-    campaign_service = client.get_service("CampaignService")
+    campaign_service: CampaignService = client.get_service("CampaignService")
 
     # The "control" arm references an already-existing campaign.
-    operation_1 = client.get_type("ExperimentArmOperation")
-    exa_1 = operation_1.create
+    operation_1: ExperimentArmOperation = client.get_type(
+        "ExperimentArmOperation"
+    )
+    exa_1: ExperimentArm = operation_1.create
     exa_1.control = True
     exa_1.campaigns.append(
         campaign_service.campaign_path(customer_id, base_campaign_id)
     )
-    exa_1.experiment = experiment
+    exa_1.experiment = experiment_resource_name
     exa_1.name = "control arm"
     exa_1.traffic_split = 40
     operations.append(operation_1)
@@ -115,25 +164,33 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
     # The non-"control" arm, also called a "treatment" arm, will automatically
     # generate draft campaigns that you can modify before starting the
     # experiment.
-    operation_2 = client.get_type("ExperimentArmOperation")
-    exa_2 = operation_2.create
+    operation_2: ExperimentArmOperation = client.get_type(
+        "ExperimentArmOperation"
+    )
+    exa_2: ExperimentArm = operation_2.create
     exa_2.control = False
-    exa_2.experiment = experiment
+    exa_2.experiment = experiment_resource_name
     exa_2.name = "experiment arm"
     exa_2.traffic_split = 60
     operations.append(operation_2)
 
-    experiment_arm_service = client.get_service("ExperimentArmService")
-    request = client.get_type("MutateExperimentArmsRequest")
+    experiment_arm_service: ExperimentArmService = client.get_service(
+        "ExperimentArmService"
+    )
+    request: MutateExperimentArmsRequest = client.get_type(
+        "MutateExperimentArmsRequest"
+    )
     request.customer_id = customer_id
-    request.operations = operations
+    request.operations.extend(operations)
     # We want to fetch the draft campaign IDs from the treatment arm, so the
     # easiest way to do that is to have the response return the newly created
     # entities.
     request.response_content_type = (
         client.enums.ResponseContentTypeEnum.MUTABLE_RESOURCE
     )
-    response = experiment_arm_service.mutate_experiment_arms(request=request)
+    response: MutateExperimentArmsResponse = (
+        experiment_arm_service.mutate_experiment_arms(request=request)
+    )
 
     # Results always return in the order that you specify them in the request.
     # Since we created the treatment arm second, it will be the second result.
@@ -151,18 +208,20 @@ def create_experiment_arms(client, customer_id, base_campaign_id, experiment):
     # [END create_experiment_2]
 
 
-def modify_draft_campaign(client, customer_id, draft_campaign):
+def modify_draft_campaign(
+    client: GoogleAdsClient, customer_id: str, draft_campaign_resource_name: str
+) -> None:
     """Modifies the given in-design campaign.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        draft_campaign: the resource name for an in-design campaign.
+        draft_campaign_resource_name: the resource name for an in-design campaign.
     """
-    campaign_service = client.get_service("CampaignService")
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.update
-    campaign.resource_name = draft_campaign
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.update
+    campaign.resource_name = draft_campaign_resource_name
 
     # You can change anything you like about the campaign. These are the changes
     # you're testing by doing this experiment. Here we just change the name for
@@ -170,16 +229,16 @@ def modify_draft_campaign(client, customer_id, draft_campaign):
     # meaningful parts of the campaign.
     campaign.name = f"Modified Campaign Name #{uuid.uuid4()}"
 
-    client.copy_from(
-        campaign_operation.update_mask,
-        protobuf_helpers.field_mask(None, campaign._pb),
-    )
+    # Create a field mask using the FieldMask type.
+    field_mask = FieldMask()
+    field_mask.paths.append("name")
+    client.copy_from(campaign_operation.update_mask, field_mask)
 
     campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
     )
 
-    print(f"Updated name for campaign {draft_campaign}")
+    print(f"Updated name for campaign {draft_campaign_resource_name}")
 
 
 if __name__ == "__main__":
@@ -205,7 +264,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.base_campaign_id)

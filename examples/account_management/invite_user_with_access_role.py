@@ -23,9 +23,22 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import AccessRoleEnum
+from google.ads.googleads.v19.services.types import (
+    CustomerUserAccessInvitationService,
+)
+from google.ads.googleads.v19.types import (
+    CustomerUserAccessInvitation,
+    CustomerUserAccessInvitationOperation,
+)
 
 
-def main(client, customer_id, email_address, access_role):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    email_address: str,
+    access_role: str,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -34,12 +47,14 @@ def main(client, customer_id, email_address, access_role):
         email_address: The email address for the user receiving the invitation.
         access_role: The desired access role for the invitee.
     """
-    service = client.get_service("CustomerUserAccessInvitationService")
+    service: CustomerUserAccessInvitationService = client.get_service(
+        "CustomerUserAccessInvitationService"
+    )
     # [START invite_user_with_access_role]
-    invitation_operation = client.get_type(
+    invitation_operation: CustomerUserAccessInvitationOperation = client.get_type(
         "CustomerUserAccessInvitationOperation"
     )
-    invitation = invitation_operation.create
+    invitation: CustomerUserAccessInvitation = invitation_operation.create
     invitation.email_address = email_address
     invitation.access_role = client.enums.AccessRoleEnum[access_role].value
 
@@ -83,14 +98,16 @@ if __name__ == "__main__":
         "--access_role",
         type=str,
         required=True,
-        choices=[e.name for e in googleads_client.enums.AccessRoleEnum],
+        choices=[e.name for e in AccessRoleEnum],
         help="The updated user access role.",
     )
     args = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

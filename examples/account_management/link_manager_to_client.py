@@ -18,26 +18,43 @@ import argparse
 import sys
 
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import ManagerLinkStatusEnum
+from google.ads.googleads.v19.services.types import (
+    CustomerClientLinkService,
+    CustomerManagerLinkService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    CustomerClientLink,
+    CustomerClientLinkOperation,
+    CustomerManagerLink,
+    CustomerManagerLinkOperation,
+)
 
 
 # [START link_manager_to_client]
-def main(client, customer_id, manager_customer_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, manager_customer_id: str
+) -> None:
     # This example assumes that the same credentials will work for both
     # customers, but that may not be the case. If you need to use different
     # credentials for each customer, then you may either update the client
     # configuration or instantiate two clients, where at least one points to
     # a specific configuration file so that both clients don't read the same
     # file located in the $HOME dir.
-    customer_client_link_service = client.get_service(
+    customer_client_link_service: CustomerClientLinkService = client.get_service(
         "CustomerClientLinkService"
     )
 
     # Extend an invitation to the client while authenticating as the manager.
-    client_link_operation = client.get_type("CustomerClientLinkOperation")
-    client_link = client_link_operation.create
+    client_link_operation: CustomerClientLinkOperation = client.get_type(
+        "CustomerClientLinkOperation"
+    )
+    client_link: CustomerClientLink = client_link_operation.create
     client_link.client_customer = customer_client_link_service.customer_path(
         customer_id
     )
@@ -46,7 +63,7 @@ def main(client, customer_id, manager_customer_id):
     response = customer_client_link_service.mutate_customer_client_link(
         customer_id=manager_customer_id, operation=client_link_operation
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(
         f'Extended an invitation from customer "{manager_customer_id}" to '
@@ -58,33 +75,45 @@ def main(client, customer_id, manager_customer_id):
     # the resource name for the link from the client side. Note that since we
     # are filtering by resource_name, a unique identifier, only one
     # customer_client_link resource will be returned in the response
-    query = f'''
+    query: str = f"""
         SELECT
             customer_client_link.manager_link_id
         FROM
             customer_client_link
         WHERE
-            customer_client_link.resource_name = "{resource_name}"'''
+            customer_client_link.resource_name = "{resource_name}"
+    """
 
-    ga_service = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    manager_link_id: int = -1  # Initialize with a default value
 
     try:
-        response = ga_service.search(
+        search_response = ga_service.search(
             customer_id=manager_customer_id, query=query
         )
         # Since the googleads_service.search method returns an iterator we need
         # to initialize an iteration in order to retrieve results, even though
         # we know the query will only return a single row.
-        for row in response.result:
+        for row in search_response:  # Iterate directly over search_response
             manager_link_id = row.customer_client_link.manager_link_id
+            break  # Found the ID, no need to iterate further
     except GoogleAdsException as ex:
-        handle_googleads_exception(ex)
+        # This is not a defined function in this file, so commenting out.
+        # handle_googleads_exception(ex)
+        print(f"GoogleAdsException: {ex}")
+        sys.exit(1)
 
-    customer_manager_link_service = client.get_service(
+    if manager_link_id == -1:
+        print(f"Could not find manager_link_id for resource: {resource_name}")
+        sys.exit(1)
+
+    customer_manager_link_service: CustomerManagerLinkService = client.get_service(
         "CustomerManagerLinkService"
     )
-    manager_link_operation = client.get_type("CustomerManagerLinkOperation")
-    manager_link = manager_link_operation.update
+    manager_link_operation: CustomerManagerLinkOperation = client.get_type(
+        "CustomerManagerLinkOperation"
+    )
+    manager_link: CustomerManagerLink = manager_link_operation.update
     manager_link.resource_name = (
         customer_manager_link_service.customer_manager_link_path(
             customer_id,
@@ -94,9 +123,12 @@ def main(client, customer_id, manager_customer_id):
     )
 
     manager_link.status = client.enums.ManagerLinkStatusEnum.ACTIVE
+    # Create a field mask using the FieldMask type.
+    update_mask = FieldMask()
+    update_mask.paths.append("status")
     client.copy_from(
         manager_link_operation.update_mask,
-        protobuf_helpers.field_mask(None, manager_link._pb),
+        update_mask,
     )
 
     response = customer_manager_link_service.mutate_customer_manager_link(

@@ -23,16 +23,33 @@ account access levels.
 
 import argparse
 import sys
+from typing import List, Optional
+
+from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import AccessRoleEnum
+from google.ads.googleads.v19.services.types import (
+    CustomerUserAccessService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    CustomerUserAccess,
+    CustomerUserAccessOperation,
+    SearchGoogleAdsRequest,
+)
 
-from google.api_core import protobuf_helpers
-
-_ACCESS_ROLES = ["ADMIN", "STANDARD", "READ_ONLY", "EMAIL_ONLY"]
+_ACCESS_ROLES: List[str] = ["ADMIN", "STANDARD", "READ_ONLY", "EMAIL_ONLY"]
 
 
-def main(client, customer_id, email_address, access_role):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    email_address: str,
+    access_role: str,
+) -> None:
     """Runs the example.
 
     Args:
@@ -43,13 +60,15 @@ def main(client, customer_id, email_address, access_role):
       access_role: The updated access role.
     """
 
-    user_id = get_user_access(client, customer_id, email_address)
+    user_id: Optional[int] = get_user_access(client, customer_id, email_address)
 
     if user_id:
         modify_user_access(client, customer_id, user_id, access_role)
 
 
-def get_user_access(client, customer_id, email_address):
+def get_user_access(
+    client: GoogleAdsClient, customer_id: str, email_address: str
+) -> Optional[int]:
     """Gets the customer user access given an email address.
 
     Args:
@@ -61,12 +80,12 @@ def get_user_access(client, customer_id, email_address):
     Returns:
       The user ID integer if a customer is found, otherwise None.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
     # Creates a query that retrieves all customer user accesses.
     # Use the LIKE query for filtering to ignore the text case for email
     # address when searching for a match.
-    query = f"""
+    query: str = f"""
         SELECT
           customer_user_access.user_id,
           customer_user_access.email_address,
@@ -75,18 +94,23 @@ def get_user_access(client, customer_id, email_address):
         FROM customer_user_access
         WHERE customer_user_access.email_address LIKE '{email_address}'"""
 
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
     response = googleads_service.search(request=search_request)
 
     try:
-        user_access = next(iter(response)).customer_user_access
+        # Directly access the customer_user_access attribute from the row.
+        user_access: CustomerUserAccess = next(
+            iter(response)
+        ).customer_user_access
         print(
             "Customer user access with "
             f"User ID = '{user_access.user_id}', "
-            f"Access Role = '{user_access.access_role}', and "
+            f"Access Role = '{user_access.access_role.name}', and "  # Use .name for enums
             f"Creation Time = {user_access.access_creation_date_time} "
             f"was found in Customer ID: {customer_id}."
         )
@@ -98,7 +122,9 @@ def get_user_access(client, customer_id, email_address):
         return None
 
 
-def modify_user_access(client, customer_id, user_id, access_role):
+def modify_user_access(
+    client: GoogleAdsClient, customer_id: str, user_id: int, access_role: str
+) -> None:
     """Modifies the user access role to a specified value.
 
     Args:
@@ -107,21 +133,27 @@ def modify_user_access(client, customer_id, user_id, access_role):
       user_id: ID of the user whose access role is being modified.
       access_role: The updated access role.
     """
-    customer_user_access_service = client.get_service(
+    customer_user_access_service: CustomerUserAccessService = client.get_service(
         "CustomerUserAccessService"
     )
-    customer_user_access_op = client.get_type("CustomerUserAccessOperation")
-    access_role_enum = client.enums.AccessRoleEnum
-    customer_user_access = customer_user_access_op.update
+    customer_user_access_op: CustomerUserAccessOperation = client.get_type(
+        "CustomerUserAccessOperation"
+    )
+    access_role_enum: AccessRoleEnum = client.enums.AccessRoleEnum
+    customer_user_access: CustomerUserAccess = customer_user_access_op.update
     customer_user_access.resource_name = (
         customer_user_access_service.customer_user_access_path(
-            customer_id, user_id
+            customer_id, str(user_id)  # user_id needs to be a string here
         )
     )
     customer_user_access.access_role = getattr(access_role_enum, access_role)
+
+    # Create a field mask using the FieldMask type.
+    update_mask = FieldMask()
+    update_mask.paths.append("access_role")
     client.copy_from(
         customer_user_access_op.update_mask,
-        protobuf_helpers.field_mask(None, customer_user_access._pb),
+        update_mask,
     )
 
     response = customer_user_access_service.mutate_customer_user_access(
@@ -167,7 +199,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
     try:
         main(
             googleads_client,

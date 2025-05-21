@@ -22,13 +22,37 @@ customizer attributes to populate dynamic data.
 import argparse
 from datetime import datetime
 import sys
+from typing import List
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    CustomizerAttributeTypeEnum,
+    ServedAssetFieldTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    AdGroupAd,
+    AdGroupCustomizer,
+    AdTextAsset,
+    CustomizerAttribute,
+)
+from google.ads.googleads.v19.services.types import (
+    AdGroupAdService,
+    AdGroupCustomizerService,
+    CustomizerAttributeService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupAdOperation,
+    AdGroupCustomizerOperation,
+    CustomizerAttributeOperation,
+)
 
 
-def main(client, customer_id, ad_group_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -36,13 +60,13 @@ def main(client, customer_id, ad_group_id):
         customer_id: a client customer ID.
         ad_group_id: an ad group ID.
     """
-    text_customizer_name = f"Planet_{uuid4().hex[:8]}"
-    price_customizer_name = f"Price_{uuid4().hex[:8]}"
+    text_customizer_name: str = f"Planet_{uuid4().hex[:8]}"
+    price_customizer_name: str = f"Price_{uuid4().hex[:8]}"
 
-    text_customizer_resource_name = create_text_customizer_attribute(
+    text_customizer_resource_name: str = create_text_customizer_attribute(
         client, customer_id, text_customizer_name
     )
-    price_customizer_resource_name = create_price_customizer_attribute(
+    price_customizer_resource_name: str = create_price_customizer_attribute(
         client, customer_id, price_customizer_name
     )
     link_customizer_attributes(
@@ -62,7 +86,9 @@ def main(client, customer_id, ad_group_id):
 
 
 # [START add_ad_customizer]
-def create_text_customizer_attribute(client, customer_id, customizer_name):
+def create_text_customizer_attribute(
+    client: GoogleAdsClient, customer_id: str, customizer_name: str
+) -> str:
     """Creates a text customizer attribute and returns its resource name.
 
     Args:
@@ -73,14 +99,16 @@ def create_text_customizer_attribute(client, customer_id, customizer_name):
     Returns:
         a resource name for a text customizer attribute.
     """
-    customizer_attribute_service = client.get_service(
+    customizer_attribute_service: CustomizerAttributeService = client.get_service(
         "CustomizerAttributeService"
     )
 
     # Creates a text customizer attribute. The customizer attribute name is
     # arbitrary and will be used as a placeholder in the ad text fields.
-    operation = client.get_type("CustomizerAttributeOperation")
-    text_attribute = operation.create
+    operation: CustomizerAttributeOperation = client.get_type(
+        "CustomizerAttributeOperation"
+    )
+    text_attribute: CustomizerAttribute = operation.create
     text_attribute.name = customizer_name
     text_attribute.type_ = client.enums.CustomizerAttributeTypeEnum.TEXT
 
@@ -88,7 +116,7 @@ def create_text_customizer_attribute(client, customer_id, customizer_name):
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Added text customizer attribute with resource name '{resource_name}'"
     )
@@ -97,7 +125,9 @@ def create_text_customizer_attribute(client, customer_id, customizer_name):
 
 
 # [START add_ad_customizer_1]
-def create_price_customizer_attribute(client, customer_id, customizer_name):
+def create_price_customizer_attribute(
+    client: GoogleAdsClient, customer_id: str, customizer_name: str
+) -> str:
     """Creates a price customizer attribute and returns its resource name.
 
     Args:
@@ -108,14 +138,16 @@ def create_price_customizer_attribute(client, customer_id, customizer_name):
     Returns:
         a resource name for a text customizer attribute.
     """
-    customizer_attribute_service = client.get_service(
+    customizer_attribute_service: CustomizerAttributeService = client.get_service(
         "CustomizerAttributeService"
     )
 
     # Creates a price customizer attribute. The customizer attribute name is
     # arbitrary and will be used as a placeholder in the ad text fields.
-    operation = client.get_type("CustomizerAttributeOperation")
-    price_attribute = operation.create
+    operation: CustomizerAttributeOperation = client.get_type(
+        "CustomizerAttributeOperation"
+    )
+    price_attribute: CustomizerAttribute = operation.create
     price_attribute.name = customizer_name
     price_attribute.type_ = client.enums.CustomizerAttributeTypeEnum.PRICE
 
@@ -123,7 +155,7 @@ def create_price_customizer_attribute(client, customer_id, customizer_name):
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Added price customizer attribute with resource name '{resource_name}'"
     )
@@ -133,12 +165,12 @@ def create_price_customizer_attribute(client, customer_id, customizer_name):
 
 # [START add_ad_customizer_2]
 def link_customizer_attributes(
-    client,
-    customer_id,
-    ad_group_id,
-    text_customizer_resource_name,
-    price_customizer_resource_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    text_customizer_resource_name: str,
+    price_customizer_resource_name: str,
+) -> None:
     """Restricts the ad customizer attributes to work with a specific ad group.
 
     This prevents the customizer attributes from being used elsewhere and makes
@@ -151,13 +183,17 @@ def link_customizer_attributes(
         text_customizer_resource_name: the resource name of the text customizer attribute.
         price_customizer_resource_name: the resource name of the price customizer attribute.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    ad_group_customizer_service = client.get_service("AdGroupCustomizerService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    ad_group_customizer_service: AdGroupCustomizerService = client.get_service(
+        "AdGroupCustomizerService"
+    )
 
     # Binds the text attribute customizer to a specific ad group to make sure
     # it will only be used to customize ads inside that ad group.
-    mars_operation = client.get_type("AdGroupCustomizerOperation")
-    mars_customizer = mars_operation.create
+    mars_operation: AdGroupCustomizerOperation = client.get_type(
+        "AdGroupCustomizerOperation"
+    )
+    mars_customizer: AdGroupCustomizer = mars_operation.create
     mars_customizer.customizer_attribute = text_customizer_resource_name
     mars_customizer.value.type_ = client.enums.CustomizerAttributeTypeEnum.TEXT
     mars_customizer.value.string_value = "Mars"
@@ -167,8 +203,10 @@ def link_customizer_attributes(
 
     # Binds the price attribute customizer to a specific ad group to make sure
     # it will only be used to customize ads inside that ad group.
-    price_operation = client.get_type("AdGroupCustomizerOperation")
-    price_customizer = price_operation.create
+    price_operation: AdGroupCustomizerOperation = client.get_type(
+        "AdGroupCustomizerOperation"
+    )
+    price_customizer: AdGroupCustomizer = price_operation.create
     price_customizer.customizer_attribute = price_customizer_resource_name
     price_customizer.value.type_ = (
         client.enums.CustomizerAttributeTypeEnum.PRICE
@@ -192,12 +230,12 @@ def link_customizer_attributes(
 
 # [START add_ad_customizer_3]
 def create_ad_with_customizations(
-    client,
-    customer_id,
-    ad_group_id,
-    text_customizer_name,
-    price_customizer_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    text_customizer_name: str,
+    price_customizer_name: str,
+) -> None:
     """Creates a responsive search ad (RSA).
 
     The RSA uses the ad customizer attributes to populate the placeholders.
@@ -209,41 +247,43 @@ def create_ad_with_customizations(
         text_customizer_name: name of the text customizer.
         price_customizer_name: name of the price customizer.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    ad_group_ad_service: AdGroupAdService = client.get_service(
+        "AdGroupAdService"
+    )
 
     # Creates a responsive search ad using the attribute customizer names as
     # placeholders and default values to be used in case there are no attribute
     # customizer values.
-    operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = operation.create
+    operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
+    ad_group_ad: AdGroupAd = operation.create
     ad_group_ad.ad.final_urls.append("https://www.example.com")
     ad_group_ad.ad_group = googleads_service.ad_group_path(
         customer_id, ad_group_id
     )
 
-    headline_1 = client.get_type("AdTextAsset")
+    headline_1: AdTextAsset = client.get_type("AdTextAsset")
     headline_1.text = (
         f"Luxury cruise to {{CUSTOMIZER.{text_customizer_name}:Venus}}"
     )
     headline_1.pinned_field = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
 
-    headline_2 = client.get_type("AdTextAsset")
+    headline_2: AdTextAsset = client.get_type("AdTextAsset")
     headline_2.text = f"Only {{CUSTOMIZER.{price_customizer_name}:10.0€}}"
 
-    headline_3 = client.get_type("AdTextAsset")
+    headline_3: AdTextAsset = client.get_type("AdTextAsset")
     headline_3.text = f"Cruise to {{CUSTOMIZER.{text_customizer_name}:Venus}} for {{CUSTOMIZER.{price_customizer_name}:10.0€}}"
 
     ad_group_ad.ad.responsive_search_ad.headlines.extend(
         [headline_1, headline_2, headline_3]
     )
 
-    description_1 = client.get_type("AdTextAsset")
+    description_1: AdTextAsset = client.get_type("AdTextAsset")
     description_1.text = (
         f"Tickets are only {{CUSTOMIZER.{price_customizer_name}:10.0€}}!"
     )
 
-    description_2 = client.get_type("AdTextAsset")
+    description_2: AdTextAsset = client.get_type("AdTextAsset")
     description_2.text = (
         f"Buy your tickets to {{CUSTOMIZER.{text_customizer_name}:Venus}} now!"
     )
@@ -255,7 +295,7 @@ def create_ad_with_customizations(
     response = ad_group_ad_service.mutate_ad_group_ads(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Added an ad with resource name '{resource_name}'")
     # [END add_ad_customizer_3]
 
@@ -287,7 +327,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

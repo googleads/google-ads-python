@@ -17,14 +17,20 @@
 
 import argparse
 import sys
+from typing import Optional
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import SearchGoogleAdsRequest
 
 
-def main(client, customer_id, ad_group_id=None):
-    ga_service = client.get_service("GoogleAdsService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: Optional[str] = None
+) -> None:
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
-    query = """
+    query: str = """
         SELECT
           campaign.id,
           ad_group.id,
@@ -47,7 +53,9 @@ def main(client, customer_id, ad_group_id=None):
     # Limit results to 10,000 rows as the number of bid modifiers can be large.
     query += " LIMIT 10000"
 
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
@@ -116,7 +124,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

@@ -17,13 +17,30 @@
 
 import argparse
 import sys
+from typing import List, Optional
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import PriceAsset, PriceOffering
+from google.ads.googleads.v19.enums.types import (
+    AssetFieldTypeEnum,
+    PriceExtensionPriceQualifierEnum,
+    PriceExtensionPriceUnitEnum,
+    PriceExtensionTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import Asset, CustomerAsset
+from google.ads.googleads.v19.services.types import (
+    AssetService,
+    CustomerAssetService,
+)
+from google.ads.googleads.v19.types import (
+    AssetOperation,
+    CustomerAssetOperation,
+)
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -31,13 +48,13 @@ def main(client, customer_id):
         customer_id: a client customer ID.
     """
     # Create a new price asset.
-    price_asset_resource_name = create_price_asset(client, customer_id)
+    price_asset_resource_name: str = create_price_asset(client, customer_id)
 
     # Add the new price asset to the account.
     add_asset_to_account(client, customer_id, price_asset_resource_name)
 
 
-def create_price_asset(client, customer_id):
+def create_price_asset(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a price asset and returns its resource name.
 
     Args:
@@ -48,14 +65,14 @@ def create_price_asset(client, customer_id):
         a PriceAsset resource name.
     """
     # Create an asset operation.
-    asset_operation = client.get_type("AssetOperation")
+    asset_operation: AssetOperation = client.get_type("AssetOperation")
     # Create an asset.
-    asset = asset_operation.create
+    asset: Asset = asset_operation.create
     asset.name = f"Price Asset #{uuid4()}"
     asset.tracking_url_template = "http://tracker.example.com/?u={lpurl}"
 
     # Create the price asset.
-    price_asset = asset.price_asset
+    price_asset: PriceAsset = asset.price_asset
     price_asset.type_ = client.enums.PriceExtensionTypeEnum.SERVICES
     # Price qualifier is optional.
     price_asset.price_qualifier = (
@@ -89,7 +106,7 @@ def create_price_asset(client, customer_id):
                 "Skin Care Package",
                 "Four times a month",
                 "http://www.example.com/skincarepackage",
-                None,
+                None,  # final_mobile_url is optional
                 250000000,  # 250 USD
                 "USD",
                 client.enums.PriceExtensionPriceUnitEnum.PER_MONTH,
@@ -98,11 +115,11 @@ def create_price_asset(client, customer_id):
     )
 
     # Issue a mutate request to create the price asset.
-    asset_service = client.get_service("AssetService")
+    asset_service: AssetService = client.get_service("AssetService")
     response = asset_service.mutate_assets(
         customer_id=customer_id, operations=[asset_operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f"Created a price asset with resource name '{resource_name}'.")
 
@@ -110,15 +127,15 @@ def create_price_asset(client, customer_id):
 
 
 def create_price_offering(
-    client,
-    header,
-    description,
-    final_url,
-    final_mobile_url,
-    price_in_micros,
-    currency_code,
-    unit,
-):
+    client: GoogleAdsClient,
+    header: str,
+    description: str,
+    final_url: str,
+    final_mobile_url: Optional[str],
+    price_in_micros: int,
+    currency_code: str,
+    unit: PriceExtensionPriceUnitEnum,
+) -> PriceOffering:
     """Creates a PriceOffering instance and returns it.
 
     Args:
@@ -134,7 +151,7 @@ def create_price_offering(
     Returns:
         A PriceOffering instance.
     """
-    price_offering = client.get_type("PriceOffering")
+    price_offering: PriceOffering = client.get_type("PriceOffering")
     price_offering.header = header
     price_offering.description = description
     price_offering.final_url = final_url
@@ -149,7 +166,9 @@ def create_price_offering(
     return price_offering
 
 
-def add_asset_to_account(client, customer_id, price_asset_resource_name):
+def add_asset_to_account(
+    client: GoogleAdsClient, customer_id: str, price_asset_resource_name: str
+) -> None:
     """Adds a new Asset to the given user account.
 
     Adding the Asset to an account allows it to serve in all campaigns under
@@ -162,18 +181,22 @@ def add_asset_to_account(client, customer_id, price_asset_resource_name):
             a PriceAsset.
     """
     # Create a customer asset operation.
-    customer_asset_operation = client.get_type("CustomerAssetOperation")
+    customer_asset_operation: CustomerAssetOperation = client.get_type(
+        "CustomerAssetOperation"
+    )
     # Create a customer asset, set its type to PRICE and attach price asset.
-    asset = customer_asset_operation.create
-    asset.field_type = client.enums.AssetFieldTypeEnum.PRICE
-    asset.asset = price_asset_resource_name
+    customer_asset: CustomerAsset = customer_asset_operation.create
+    customer_asset.field_type = client.enums.AssetFieldTypeEnum.PRICE
+    customer_asset.asset = price_asset_resource_name
 
     # Issue a mutate request to create the customer asset.
-    customer_asset_service = client.get_service("CustomerAssetService")
+    customer_asset_service: CustomerAssetService = client.get_service(
+        "CustomerAssetService"
+    )
     response = customer_asset_service.mutate_customer_assets(
         customer_id=customer_id, operations=[customer_asset_operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(
         "Created customer asset with resource name "
@@ -197,7 +220,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

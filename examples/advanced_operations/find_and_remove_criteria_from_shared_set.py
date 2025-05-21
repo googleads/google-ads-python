@@ -17,25 +17,41 @@
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import CriterionTypeEnum
+from google.ads.googleads.v19.resources.types import SharedCriterion
+from google.ads.googleads.v19.services.types import (
+    GoogleAdsService,
+    SharedCriterionService,
+)
+from google.ads.googleads.v19.types import (
+    SearchGoogleAdsRequest,
+    SharedCriterionOperation,
+)
 
 
-def main(client, customer_id, campaign_id):
-    ga_service = client.get_service("GoogleAdsService")
-    shared_criterion_service = client.get_service("SharedCriterionService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    shared_criterion_service: SharedCriterionService = client.get_service(
+        "SharedCriterionService"
+    )
 
     # First, retrieve all shared sets associated with the campaign.
-    shared_sets_query = f"""
+    shared_sets_query: str = f"""
         SELECT
           shared_set.id,
           shared_set.name
         FROM campaign_shared_set
         WHERE campaign.id = {campaign_id}"""
 
+    shared_set_ids: List[str] = []
     try:
-        shared_set_search_request = client.get_type("SearchGoogleAdsRequest")
+        shared_set_search_request: SearchGoogleAdsRequest = client.get_type(
+            "SearchGoogleAdsRequest"
+        )
         shared_set_search_request.customer_id = customer_id
         shared_set_search_request.query = shared_sets_query
 
@@ -43,7 +59,6 @@ def main(client, customer_id, campaign_id):
             request=shared_set_search_request
         )
 
-        shared_set_ids = []
         for row in shared_set_response:
             shared_set = row.shared_set
             shared_set_ids.append(str(shared_set.id))
@@ -55,8 +70,8 @@ def main(client, customer_id, campaign_id):
         handle_googleads_exception(ex)
 
     # Next, retrieve shared criteria for all found shared sets.
-    ids = ", ".join(shared_set_ids)
-    shared_criteria_query = f"""
+    ids: str = ", ".join(shared_set_ids)
+    shared_criteria_query: str = f"""
         SELECT
           shared_criterion.type,
           shared_criterion.keyword.text,
@@ -65,9 +80,10 @@ def main(client, customer_id, campaign_id):
         FROM shared_criterion
         WHERE shared_set.id IN ({ids})"""
 
+    criterion_ids: List[str] = []
     try:
-        shared_criteria_search_request = client.get_type(
-            "SearchGoogleAdsRequest"
+        shared_criteria_search_request: SearchGoogleAdsRequest = (
+            client.get_type("SearchGoogleAdsRequest")
         )
         shared_criteria_search_request.customer_id = customer_id
         shared_criteria_search_request.query = shared_criteria_query
@@ -75,31 +91,34 @@ def main(client, customer_id, campaign_id):
         shared_criteria_response = ga_service.search(
             request=shared_criteria_search_request
         )
+
+        criterion_type_enum: CriterionTypeEnum = client.enums.CriterionTypeEnum
+        for row in shared_criteria_response:
+            shared_criterion: SharedCriterion = row.shared_criterion
+            shared_criterion_resource_name: str = (
+                shared_criterion.resource_name
+            )
+
+            if shared_criterion.type_ == criterion_type_enum.KEYWORD:
+                keyword = shared_criterion.keyword
+                print(
+                    "Shared criterion with resource name "
+                    f'"{shared_criterion_resource_name}" for negative keyword '
+                    f'with text "{keyword.text}" and match type '
+                    f'"{keyword.match_type.name}" was found.'
+                )
+
+            criterion_ids.append(shared_criterion_resource_name)
     except GoogleAdsException as ex:
         handle_googleads_exception(ex)
 
-    criterion_type_enum = client.enums.CriterionTypeEnum
-    criterion_ids = []
-    for row in shared_criteria_response:
-        shared_criterion = row.shared_criterion
-        shared_criterion_resource_name = shared_criterion.resource_name
-
-        if shared_criterion.type_ == criterion_type_enum.KEYWORD:
-            keyword = shared_criterion.keyword
-            print(
-                "Shared criterion with resource name "
-                f'"{shared_criterion_resource_name}" for negative keyword '
-                f'with text "{keyword.text}" and match type '
-                f'"{keyword.match_type.name}" was found.'
-            )
-
-        criterion_ids.append(shared_criterion_resource_name)
-
-    operations = []
+    operations: List[SharedCriterionOperation] = []
 
     # Finally, remove the criteria.
     for criteria_id in criterion_ids:
-        shared_criterion_operation = client.get_type("SharedCriterionOperation")
+        shared_criterion_operation: SharedCriterionOperation = client.get_type(
+            "SharedCriterionOperation"
+        )
         shared_criterion_operation.remove = criteria_id
         operations.append(shared_criterion_operation)
 
@@ -114,7 +133,7 @@ def main(client, customer_id, campaign_id):
         handle_googleads_exception(ex)
 
 
-def handle_googleads_exception(exception):
+def handle_googleads_exception(exception: GoogleAdsException) -> None:
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -149,6 +168,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id, args.campaign_id)

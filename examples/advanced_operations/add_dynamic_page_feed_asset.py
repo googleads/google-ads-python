@@ -17,17 +17,49 @@
 import argparse
 import resource
 import sys
+from typing import List, Optional
 
 from examples.utils.example_helpers import get_printable_datetime
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
+from google.ads.googleads.v19.enums.types import (
+    AssetSetTypeEnum,
+    WebpageConditionOperandEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    AdGroupCriterion,
+    Asset,
+    AssetSet,
+    AssetSetAsset,
+    CampaignAssetSet,
+    WebpageConditionInfo,
+)
+from google.ads.googleads.v19.services.types import (
+    AdGroupCriterionService,
+    AssetService,
+    AssetSetAssetService,
+    AssetSetService,
+    CampaignAssetSetService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupCriterionOperation,
+    AssetOperation,
+    AssetSetAssetOperation,
+    AssetSetOperation,
+    CampaignAssetSetOperation,
+)
 
 # The label for the DSA page URLs.
-DSA_PAGE_URL_LABEL = "discounts"
+DSA_PAGE_URL_LABEL: str = "discounts"
 
 
-def main(client, customer_id, campaign_id, ad_group_id):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    ad_group_id: Optional[str],
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -37,7 +69,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
         ad_group_id: the ID for an Ad Group.
     """
     # Creates assets.
-    asset_resource_names = create_assets(
+    asset_resource_names: List[str] = create_assets(
         client, customer_id, DSA_PAGE_URL_LABEL
     )
 
@@ -45,7 +77,7 @@ def main(client, customer_id, campaign_id, ad_group_id):
     # associated with a campaign.
     # Note: do not confuse this with an asset group. An asset group replaces ad
     # groups in some types of campaigns.
-    asset_set_resource_name = create_asset_set(client, customer_id)
+    asset_set_resource_name: str = create_asset_set(client, customer_id)
 
     # Adds the assets to the asset set
     add_assets_to_asset_set(
@@ -63,7 +95,9 @@ def main(client, customer_id, campaign_id, ad_group_id):
 
 
 # [START add_asset]
-def create_assets(client, customer_id, dsa_page_url_label):
+def create_assets(
+    client: GoogleAdsClient, customer_id: str, dsa_page_url_label: str
+) -> List[str]:
     """Creates assets to be used in a DSA page feed.
 
     Args:
@@ -74,18 +108,18 @@ def create_assets(client, customer_id, dsa_page_url_label):
     Returns:
         a list of the created assets' resource names.
     """
-    urls = [
+    urls: List[str] = [
         "http://www.example.com/discounts/rental-cars",
         "http://www.example.com/discounts/hotel-deals",
         "http://www.example.com/discounts/flight-deals",
     ]
-    operations = []
+    operations: List[AssetOperation] = []
 
     # Creates one asset per URL.
     for url in urls:
         # Creates an asset operation and adds it to the list of operations.
-        operation = client.get_type("AssetOperation")
-        asset = operation.create
+        operation: AssetOperation = client.get_type("AssetOperation")
+        asset: Asset = operation.create
         page_feed_asset = asset.page_feed_asset
         page_feed_asset.page_url = url
         # Recommended: adds labels to the asset. These labels can be used later
@@ -94,16 +128,16 @@ def create_assets(client, customer_id, dsa_page_url_label):
         operations.append(operation)
 
     # Issues a mutate request to add the assets and prints its information.
-    asset_service = client.get_service("AssetService")
+    asset_service: AssetService = client.get_service("AssetService")
     response = asset_service.mutate_assets(
         customer_id=customer_id, operations=operations
     )
 
     print(f"Added {len(response.results)} assets:")
 
-    resource_names = []
+    resource_names: List[str] = []
     for result in response.results:
-        resource_name = result.resource_name
+        resource_name: str = result.resource_name
         print(f"\tCreated an asset with resource name: '{resource_name}'")
         resource_names.append(resource_name)
 
@@ -112,7 +146,7 @@ def create_assets(client, customer_id, dsa_page_url_label):
 
 
 # [START add_asset_set]
-def create_asset_set(client, customer_id):
+def create_asset_set(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates an asset set.
 
     Args:
@@ -122,20 +156,20 @@ def create_asset_set(client, customer_id):
     Returns:
         the created asset set's resource name.
     """
-    operation = client.get_type("AssetSetOperation")
+    operation: AssetSetOperation = client.get_type("AssetSetOperation")
     # Creates an asset set which will be used to link the dynamic page feed
     # assets to a campaign.
-    asset_set = operation.create
+    asset_set: AssetSet = operation.create
     asset_set.name = f"My dynamic page feed {get_printable_datetime()}"
     asset_set.type_ = client.enums.AssetSetTypeEnum.PAGE_FEED
 
     # Issues a mutate request to add the asset set and prints its information.
-    asset_set_service = client.get_service("AssetSetService")
+    asset_set_service: AssetSetService = client.get_service("AssetSetService")
     response = asset_set_service.mutate_asset_sets(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created an asset set with resource name: '{resource_name}'")
     return resource_name
     # [END add_asset_set]
@@ -143,8 +177,11 @@ def create_asset_set(client, customer_id):
 
 # [START add_asset_set_asset]
 def add_assets_to_asset_set(
-    client, customer_id, asset_resource_names, asset_set_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    asset_resource_names: List[str],
+    asset_set_resource_name: str,
+) -> None:
     """Adds assets to an asset set by creating an asset set asset link.
 
     Args:
@@ -153,19 +190,23 @@ def add_assets_to_asset_set(
         asset_resource_names: a list of asset resource names.
         asset_set_resource_name: a resource name for an asset set.
     """
-    operations = []
+    operations: List[AssetSetAssetOperation] = []
     for resource_name in asset_resource_names:
         # Creates an asset set asset operation and adds it to the list of
         # operations.
-        operation = client.get_type("AssetSetAssetOperation")
-        asset_set_asset = operation.create
+        operation: AssetSetAssetOperation = client.get_type(
+            "AssetSetAssetOperation"
+        )
+        asset_set_asset: AssetSetAsset = operation.create
         asset_set_asset.asset = resource_name
         asset_set_asset.asset_set = asset_set_resource_name
         operations.append(operation)
 
     # Issues a mutate request to add the asset set assets and prints its
     # information.
-    asset_set_asset_service = client.get_service("AssetSetAssetService")
+    asset_set_asset_service: AssetSetAssetService = client.get_service(
+        "AssetSetAssetService"
+    )
     response = asset_set_asset_service.mutate_asset_set_assets(
         customer_id=customer_id, operations=operations
     )
@@ -182,8 +223,11 @@ def add_assets_to_asset_set(
 
 # [START add_campaign_asset_set]
 def link_asset_set_to_campaign(
-    client, customer_id, campaign_id, asset_set_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    asset_set_resource_name: str,
+) -> None:
     """Links the asset set to the campaign by creating a campaign asset set.
 
     Args:
@@ -192,28 +236,37 @@ def link_asset_set_to_campaign(
         campaign_id: the ID for a Campaign.
         asset_set_resource_name: a resource name for an asset set.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
     # Creates a campaign asset set representing the link between an asset set
     # and a campaign.
-    operation = client.get_type("CampaignAssetSetOperation")
-    campaign_asset_set = operation.create
+    operation: CampaignAssetSetOperation = client.get_type(
+        "CampaignAssetSetOperation"
+    )
+    campaign_asset_set: CampaignAssetSet = operation.create
     campaign_asset_set.asset_set = asset_set_resource_name
     campaign_asset_set.campaign = googleads_service.campaign_path(
         customer_id, campaign_id
     )
 
-    campaign_asset_set_service = client.get_service("CampaignAssetSetService")
+    campaign_asset_set_service: CampaignAssetSetService = client.get_service(
+        "CampaignAssetSetService"
+    )
     response = campaign_asset_set_service.mutate_campaign_asset_sets(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created a campaign asset set with resource name: '{resource_name}'")
     # [END add_campaign_asset_set]
 
 
 # [START add_dsa_target]
-def add_dsa_target(client, customer_id, ad_group_id, dsa_page_url_label):
+def add_dsa_target(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    dsa_page_url_label: str,
+) -> None:
     """Creates an ad group criterion targeting the DSA label.
 
     Args:
@@ -222,10 +275,12 @@ def add_dsa_target(client, customer_id, ad_group_id, dsa_page_url_label):
         ad_group_id: the ID for an Ad Group.
         dsa_page_url_label: the label for the DSA page URLs.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
     # Creates the ad group criterion.
-    operation = client.get_type("AdGroupCriterionOperation")
-    criterion = operation.create
+    operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    criterion: AdGroupCriterion = operation.create
     criterion.ad_group = googleads_service.ad_group_path(
         customer_id, ad_group_id
     )
@@ -236,7 +291,9 @@ def add_dsa_target(client, customer_id, ad_group_id, dsa_page_url_label):
     # Creates the webpage condition info that targets an advertiser's webpages
     # based on the custom label specified by the DSA page URL label
     # (e.g. "discounts").
-    webpage_condition = client.get_type("WebpageConditionInfo")
+    webpage_condition: WebpageConditionInfo = client.get_type(
+        "WebpageConditionInfo"
+    )
     webpage_condition.operand = (
         client.enums.WebpageConditionOperandEnum.CUSTOM_LABEL
     )
@@ -245,7 +302,9 @@ def add_dsa_target(client, customer_id, ad_group_id, dsa_page_url_label):
 
     # Issues a mutate request to add the ad group criterion and prints its
     # information.
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionService = client.get_service(
+        "AdGroupCriterionService"
+    )
     response = ad_group_criterion_service.mutate_ad_group_criteria(
         customer_id=customer_id, operations=[operation]
     )
@@ -288,7 +347,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

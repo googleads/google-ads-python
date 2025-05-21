@@ -17,18 +17,40 @@
 
 import argparse
 import sys
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import AdScheduleInfo
+from google.ads.googleads.v19.enums.types import (
+    AssetFieldTypeEnum,
+    CallConversionReportingStateEnum,
+    DayOfWeekEnum,
+    MinuteOfHourEnum,
+)
+from google.ads.googleads.v19.resources.types import CallAsset, CustomerAsset
+from google.ads.googleads.v19.services.types import (
+    AssetService,
+    CustomerAssetService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    AssetOperation,
+    CustomerAssetOperation,
+)
 
 # Country code is a two-letter ISO-3166 code, for a list of all codes see:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-17
-_DEFAULT_PHONE_COUNTRY = "US"
+_DEFAULT_PHONE_COUNTRY: str = "US"
 
 
 def main(
-    client, customer_id, phone_number, phone_country, conversion_action_id
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    phone_number: str,
+    phone_country: str,
+    conversion_action_id: Optional[str],
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -38,15 +60,19 @@ def main(
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
     """
-    asset_resource_name = add_call_asset(
+    asset_resource_name: str = add_call_asset(
         client, customer_id, phone_number, phone_country, conversion_action_id
     )
     link_asset_to_account(client, customer_id, asset_resource_name)
 
 
 def add_call_asset(
-    client, customer_id, phone_number, phone_country, conversion_action_id
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    phone_number: str,
+    phone_country: str,
+    conversion_action_id: Optional[str],
+) -> str:
     """Creates a new asset for the call.
 
     Args:
@@ -59,13 +85,13 @@ def add_call_asset(
     Returns:
         a resource name for a new call asset.
     """
-    operation = client.get_type("AssetOperation")
+    operation: AssetOperation = client.get_type("AssetOperation")
     # Creates the call asset.
-    asset = operation.create.call_asset
+    asset: CallAsset = operation.create.call_asset
     asset.country_code = phone_country
     asset.phone_number = phone_number
     # Optional: Specifies day and time intervals for which the asset may serve.
-    ad_schedule = client.get_type("AdScheduleInfo")
+    ad_schedule: AdScheduleInfo = client.get_type("AdScheduleInfo")
     # Sets the day of this schedule as Monday.
     ad_schedule.day_of_week = client.enums.DayOfWeekEnum.MONDAY
     # Sets the start hour to 9am.
@@ -80,7 +106,9 @@ def add_call_asset(
 
     # Sets the conversion action ID if provided.
     if conversion_action_id:
-        googleads_service = client.get_service("GoogleAdsService")
+        googleads_service: GoogleAdsService = client.get_service(
+            "GoogleAdsService"
+        )
         asset.call_conversion_action = googleads_service.conversion_action_path(
             customer_id, conversion_action_id
         )
@@ -89,17 +117,19 @@ def add_call_asset(
         )
 
     # Issues a mutate request to add the asset.
-    asset_service = client.get_service("AssetService")
+    asset_service: AssetService = client.get_service("AssetService")
     response = asset_service.mutate_assets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created a call asset with resource name: '{resource_name}'")
 
     return resource_name
 
 
-def link_asset_to_account(client, customer_id, asset_resource_name):
+def link_asset_to_account(
+    client: GoogleAdsClient, customer_id: str, asset_resource_name: str
+) -> None:
     """Links the call asset at the account level to serve in eligible campaigns.
 
     Args:
@@ -107,16 +137,20 @@ def link_asset_to_account(client, customer_id, asset_resource_name):
         customer_id: a client customer ID.
         asset_resource_name: a resource name for the call asset.
     """
-    operation = client.get_type("CustomerAssetOperation")
-    customer_asset = operation.create
+    operation: CustomerAssetOperation = client.get_type(
+        "CustomerAssetOperation"
+    )
+    customer_asset: CustomerAsset = operation.create
     customer_asset.asset = asset_resource_name
     customer_asset.field_type = client.enums.AssetFieldTypeEnum.CALL
 
-    customer_asset_service = client.get_service("CustomerAssetService")
+    customer_asset_service: CustomerAssetService = client.get_service(
+        "CustomerAssetService"
+    )
     response = customer_asset_service.mutate_customer_assets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created a customer asset with resource name: '{resource_name}'")
 
 
@@ -161,7 +195,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

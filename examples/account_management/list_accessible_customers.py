@@ -22,20 +22,31 @@ documentation: https://developers.google.com/google-ads/api/docs/concepts/call-s
 
 
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.customer_service.client import (
+    CustomerServiceClient,
+)
+from google.ads.googleads.v19.services.types import (
+    ListAccessibleCustomersResponse,
+)
 
 
 # [START list_accessible_customers]
-def main(client):
-    customer_service = client.get_service("CustomerService")
+def main(client: GoogleAdsClient) -> None:
+    customer_service: CustomerServiceClient = client.get_service(
+        "CustomerService"
+    )
 
-    accessible_customers = customer_service.list_accessible_customers()
-    result_total = len(accessible_customers.resource_names)
+    accessible_customers: ListAccessibleCustomersResponse = (
+        customer_service.list_accessible_customers()
+    )
+    result_total: int = len(accessible_customers.resource_names)
     print(f"Total results: {result_total}")
 
-    resource_names = accessible_customers.resource_names
+    resource_names: List[str] = accessible_customers.resource_names
     for resource_name in resource_names:
         print(f'Customer resource name: "{resource_name}"')
     # [END list_accessible_customers]
@@ -44,7 +55,9 @@ def main(client):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client)

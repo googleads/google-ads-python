@@ -23,24 +23,37 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import AdGroupStatusEnum
+from google.ads.googleads.v19.resources.types import AdGroup
+from google.ads.googleads.v19.services.types import AdGroupService
+from google.ads.googleads.v19.types import AdGroupOperation
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 
 # [START update_ad_group]
-def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
-    ad_group_service = client.get_service("AdGroupService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    cpc_bid_micro_amount: int,
+) -> None:
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
 
     # Create ad group operation.
-    ad_group_operation = client.get_type("AdGroupOperation")
-    ad_group = ad_group_operation.update
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.update
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group.status = client.enums.AdGroupStatusEnum.PAUSED
     ad_group.cpc_bid_micros = cpc_bid_micro_amount
+    # Create a field mask using the FieldMask type.
+    field_mask = FieldMask()
+    field_mask.paths.extend(["status", "cpc_bid_micros"])
     client.copy_from(
         ad_group_operation.update_mask,
-        protobuf_helpers.field_mask(None, ad_group._pb),
+        field_mask,
     )
 
     # Update the ad group.
@@ -81,7 +94,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

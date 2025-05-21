@@ -25,31 +25,81 @@ https://support.google.com/google-ads/answer/7684791
 import argparse
 import sys
 import uuid
+from typing import List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AdGroupAdStatusEnum,
+    AdGroupCriterionStatusEnum,
+    AdGroupStatusEnum,
+    AdGroupTypeEnum,
+    AdvertisingChannelTypeEnum,
+    BudgetDeliveryMethodEnum,
+    CampaignStatusEnum,
+    CustomizerAttributeTypeEnum,
+    KeywordMatchTypeEnum,
+    ServedAssetFieldTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    AdGroup,
+    AdGroupAd,
+    AdGroupCriterion,
+    AdTextAsset,
+    Campaign,
+    CampaignBudget,
+    CampaignCriterion,
+    CustomizerAttribute,
+    CustomerCustomizer,
+)
+from google.ads.googleads.v19.services.types import (
+    AdGroupAdService,
+    AdGroupCriterionService,
+    AdGroupService,
+    CampaignBudgetService,
+    CampaignCriterionService,
+    CampaignService,
+    CustomizerAttributeService,
+    CustomerCustomizerService,
+    GeoTargetConstantService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupAdOperation,
+    AdGroupCriterionOperation,
+    AdGroupOperation,
+    CampaignBudgetOperation,
+    CampaignCriterionOperation,
+    CampaignOperation,
+    CustomizerAttributeOperation,
+    CustomerCustomizerOperation,
+    SuggestGeoTargetConstantsRequest,
+)
 
 # Keywords from user.
-KEYWORD_TEXT_EXACT = "example of exact match"
-KEYWORD_TEXT_PHRASE = "example of phrase match"
-KEYWORD_TEXT_BROAD = "example of broad match"
+KEYWORD_TEXT_EXACT: str = "example of exact match"
+KEYWORD_TEXT_PHRASE: str = "example of phrase match"
+KEYWORD_TEXT_BROAD: str = "example of broad match"
 
 # Geo targeting from user.
-GEO_LOCATION_1 = "Buenos aires"
-GEO_LOCATION_2 = "San Isidro"
-GEO_LOCATION_3 = "Mar del Plata"
+GEO_LOCATION_1: str = "Buenos aires"
+GEO_LOCATION_2: str = "San Isidro"
+GEO_LOCATION_3: str = "Mar del Plata"
 
 # LOCALE and COUNTRY_CODE are used for geo targeting.
 # LOCALE is using ISO 639-1 format. If an invalid LOCALE is given,
 # 'es' is used by default.
-LOCALE = "es"
+LOCALE: str = "es"
 
 # A list of country codes can be referenced here:
 # https://developers.google.com/google-ads/api/reference/data/geotargets
-COUNTRY_CODE = "AR"
+COUNTRY_CODE: str = "AR"
 
 
-def main(client, customer_id, customizer_attribute_name=None):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    customizer_attribute_name: Optional[str] = None,
+) -> None:
     """
     The main method that creates all necessary entities for the example.
 
@@ -60,8 +110,10 @@ def main(client, customer_id, customizer_attribute_name=None):
             created
     """
     if customizer_attribute_name:
-        customizer_attribute_resource_name = create_customizer_attribute(
-            client, customer_id, customizer_attribute_name
+        customizer_attribute_resource_name: str = (
+            create_customizer_attribute(
+                client, customer_id, customizer_attribute_name
+            )
         )
 
         link_customizer_attribute_to_customer(
@@ -69,13 +121,13 @@ def main(client, customer_id, customizer_attribute_name=None):
         )
 
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget = create_campaign_budget(client, customer_id)
+    campaign_budget: str = create_campaign_budget(client, customer_id)
 
-    campaign_resource_name = create_campaign(
+    campaign_resource_name: str = create_campaign(
         client, customer_id, campaign_budget
     )
 
-    ad_group_resource_name = create_ad_group(
+    ad_group_resource_name: str = create_ad_group(
         client, customer_id, campaign_resource_name
     )
 
@@ -88,7 +140,9 @@ def main(client, customer_id, customizer_attribute_name=None):
     add_geo_targeting(client, customer_id, campaign_resource_name)
 
 
-def create_customizer_attribute(client, customer_id, customizer_attribute_name):
+def create_customizer_attribute(
+    client: GoogleAdsClient, customer_id: str, customizer_attribute_name: str
+) -> str:
     """Creates a customizer attribute with the given customizer attribute name.
 
     Args:
@@ -101,9 +155,11 @@ def create_customizer_attribute(client, customer_id, customizer_attribute_name):
     """
     # Create a customizer attribute operation for creating a customizer
     # attribute.
-    operation = client.get_type("CustomizerAttributeOperation")
+    operation: CustomizerAttributeOperation = client.get_type(
+        "CustomizerAttributeOperation"
+    )
     # Create a customizer attribute with the specified name.
-    customizer_attribute = operation.create
+    customizer_attribute: CustomizerAttribute = operation.create
     customizer_attribute.name = customizer_attribute_name
     # Specify the type to be 'PRICE' so that we can dynamically customize the
     # part of the ad's description that is a price of a product/service we
@@ -112,13 +168,13 @@ def create_customizer_attribute(client, customer_id, customizer_attribute_name):
 
     # Issue a mutate request to add the customizer attribute and prints its
     # information.
-    customizer_attribute_service = client.get_service(
-        "CustomizerAttributeService"
+    customizer_attribute_service: CustomizerAttributeService = (
+        client.get_service("CustomizerAttributeService")
     )
     response = customizer_attribute_service.mutate_customizer_attributes(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f"Added a customizer attribute with resource name: '{resource_name}'")
 
@@ -126,8 +182,10 @@ def create_customizer_attribute(client, customer_id, customizer_attribute_name):
 
 
 def link_customizer_attribute_to_customer(
-    client, customer_id, customizer_attribute_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    customizer_attribute_resource_name: str,
+) -> None:
     """Links the customizer attribute to the customer.
 
     Args:
@@ -137,10 +195,12 @@ def link_customizer_attribute_to_customer(
             attribute.
     """
     # Create a customer customizer operation.
-    operation = client.get_type("CustomerCustomizerOperation")
+    operation: CustomerCustomizerOperation = client.get_type(
+        "CustomerCustomizerOperation"
+    )
     # Create a customer customizer with the value to be used in the responsive
     # search ad.
-    customer_customizer = operation.create
+    customer_customizer: CustomerCustomizer = operation.create
     customer_customizer.customizer_attribute = (
         customizer_attribute_resource_name
     )
@@ -151,7 +211,7 @@ def link_customizer_attribute_to_customer(
     # when the ad serves.
     customer_customizer.value.string_value = "100USD"
 
-    customer_customizer_service = client.get_service(
+    customer_customizer_service: CustomerCustomizerService = client.get_service(
         "CustomerCustomizerService"
     )
     # Issue a mutate request to create the customer customizer and prints its
@@ -159,14 +219,18 @@ def link_customizer_attribute_to_customer(
     response = customer_customizer_service.mutate_customer_customizers(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(
         f"Added a customer customizer to the customer with resource name: '{resource_name}'"
     )
 
 
-def create_ad_text_asset(client, text, pinned_field=None):
+def create_ad_text_asset(
+    client: GoogleAdsClient,
+    text: str,
+    pinned_field: Optional[ServedAssetFieldTypeEnum] = None,
+) -> AdTextAsset:
     """Create an AdTextAsset.
 
     Args:
@@ -177,7 +241,7 @@ def create_ad_text_asset(client, text, pinned_field=None):
     Returns:
         An AdTextAsset.
     """
-    ad_text_asset = client.get_type("AdTextAsset")
+    ad_text_asset: AdTextAsset = client.get_type("AdTextAsset")
     ad_text_asset.text = text
     if pinned_field:
         ad_text_asset.pinned_field = pinned_field
@@ -185,8 +249,8 @@ def create_ad_text_asset(client, text, pinned_field=None):
 
 
 def create_ad_text_asset_with_customizer(
-    client, customizer_attribute_resource_name
-):
+    client: GoogleAdsClient, customizer_attribute_resource_name: str
+) -> AdTextAsset:
     """Create an AdTextAsset.
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -195,7 +259,7 @@ def create_ad_text_asset_with_customizer(
     Returns:
         An AdTextAsset.
     """
-    ad_text_asset = client.get_type("AdTextAsset")
+    ad_text_asset: AdTextAsset = client.get_type("AdTextAsset")
 
     # Create this particular description using the ad customizer. Visit
     # https://developers.google.com/google-ads/api/docs/ads/customize-responsive-search-ads#ad_customizers_in_responsive_search_ads
@@ -209,7 +273,7 @@ def create_ad_text_asset_with_customizer(
     return ad_text_asset
 
 
-def create_campaign_budget(client, customer_id):
+def create_campaign_budget(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates campaign budget resource.
 
     Args:
@@ -220,9 +284,13 @@ def create_campaign_budget(client, customer_id):
       Campaign budget resource name.
     """
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget_service = client.get_service("CampaignBudgetService")
-    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
-    campaign_budget = campaign_budget_operation.create
+    campaign_budget_service: CampaignBudgetService = client.get_service(
+        "CampaignBudgetService"
+    )
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Campaign budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
@@ -237,7 +305,9 @@ def create_campaign_budget(client, customer_id):
     return campaign_budget_response.results[0].resource_name
 
 
-def create_campaign(client, customer_id, campaign_budget):
+def create_campaign(
+    client: GoogleAdsClient, customer_id: str, campaign_budget: str
+) -> str:
     """Creates campaign resource.
 
     Args:
@@ -248,9 +318,9 @@ def create_campaign(client, customer_id, campaign_budget):
     Returns:
       Campaign resource name.
     """
-    campaign_service = client.get_service("CampaignService")
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.create
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Testing RSA via API {uuid.uuid4()}"
     campaign.advertising_channel_type = (
         client.enums.AdvertisingChannelTypeEnum.SEARCH
@@ -289,12 +359,14 @@ def create_campaign(client, customer_id, campaign_budget):
     campaign_response = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
     )
-    resource_name = campaign_response.results[0].resource_name
+    resource_name: str = campaign_response.results[0].resource_name
     print(f"Created campaign {resource_name}.")
     return resource_name
 
 
-def create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(
+    client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
+) -> str:
     """Creates ad group.
 
     Args:
@@ -305,10 +377,10 @@ def create_ad_group(client, customer_id, campaign_resource_name):
     Returns:
       Ad group ID.
     """
-    ad_group_service = client.get_service("AdGroupService")
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
 
-    ad_group_operation = client.get_type("AdGroupOperation")
-    ad_group = ad_group_operation.create
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.create
     ad_group.name = f"Testing RSA via API {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
@@ -321,14 +393,17 @@ def create_ad_group(client, customer_id, campaign_resource_name):
     ad_group_response = ad_group_service.mutate_ad_groups(
         customer_id=customer_id, operations=[ad_group_operation]
     )
-    ad_group_resource_name = ad_group_response.results[0].resource_name
+    ad_group_resource_name: str = ad_group_response.results[0].resource_name
     print(f"Created ad group {ad_group_resource_name}.")
     return ad_group_resource_name
 
 
 def create_ad_group_ad(
-    client, customer_id, ad_group_resource_name, customizer_attribute_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_resource_name: str,
+    customizer_attribute_name: Optional[str],
+) -> None:
     """Creates ad group ad.
 
     Args:
@@ -341,10 +416,14 @@ def create_ad_group_ad(
     Returns:
       Ad group ad resource name.
     """
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdService = client.get_service(
+        "AdGroupAdService"
+    )
 
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = ad_group_ad_operation.create
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
     ad_group_ad.ad_group = ad_group_resource_name
 
@@ -359,8 +438,10 @@ def create_ad_group_ad(
     # rotated and the ones that perform best will be used more often.
 
     # Headline 1
-    served_asset_enum = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
-    pinned_headline = create_ad_text_asset(
+    served_asset_enum: ServedAssetFieldTypeEnum = (
+        client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
+    )
+    pinned_headline: AdTextAsset = create_ad_text_asset(
         client, "Headline 1 testing", served_asset_enum
     )
 
@@ -374,8 +455,10 @@ def create_ad_group_ad(
     )
 
     # Description 1 and 2
-    description_1 = create_ad_text_asset(client, "Desc 1 testing")
-    description_2 = None
+    description_1: AdTextAsset = create_ad_text_asset(
+        client, "Desc 1 testing"
+    )
+    description_2: Optional[AdTextAsset] = None
 
     if customizer_attribute_name:
         description_2 = create_ad_text_asset_with_customizer(
@@ -407,7 +490,9 @@ def create_ad_group_ad(
         )
 
 
-def add_keywords(client, customer_id, ad_group_resource_name):
+def add_keywords(
+    client: GoogleAdsClient, customer_id: str, ad_group_resource_name: str
+) -> None:
     """Creates keywords.
 
     Creates 3 keyword match types: EXACT, PHRASE, and BROAD.
@@ -422,12 +507,16 @@ def add_keywords(client, customer_id, ad_group_resource_name):
       customer_id: a client customer ID.
       ad_group_resource_name: an ad group resource name.
     """
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionService = client.get_service(
+        "AdGroupCriterionService"
+    )
 
-    operations = []
+    operations: List[AdGroupCriterionOperation] = []
     # Create keyword 1.
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
-    ad_group_criterion = ad_group_criterion_operation.create
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    ad_group_criterion: AdGroupCriterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.keyword.text = KEYWORD_TEXT_EXACT
@@ -493,7 +582,9 @@ def add_keywords(client, customer_id, ad_group_resource_name):
         print("Created keyword " f"{result.resource_name}.")
 
 
-def add_geo_targeting(client, customer_id, campaign_resource_name):
+def add_geo_targeting(
+    client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
+) -> None:
     """Creates geo targets.
 
     Args:
@@ -504,12 +595,16 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
     Returns:
       Geo targets.
     """
-    geo_target_constant_service = client.get_service("GeoTargetConstantService")
+    geo_target_constant_service: GeoTargetConstantService = client.get_service(
+        "GeoTargetConstantService"
+    )
 
     # Search by location names from
     # GeoTargetConstantService.suggest_geo_target_constants() and directly
     # apply GeoTargetConstant.resource_name.
-    gtc_request = client.get_type("SuggestGeoTargetConstantsRequest")
+    gtc_request: SuggestGeoTargetConstantsRequest = client.get_type(
+        "SuggestGeoTargetConstantsRequest"
+    )
     gtc_request.locale = LOCALE
     gtc_request.country_code = COUNTRY_CODE
 
@@ -522,7 +617,7 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
         gtc_request
     )
 
-    operations = []
+    operations: List[CampaignCriterionOperation] = []
     for suggestion in results.geo_target_constant_suggestions:
         print(
             "geo_target_constant: "
@@ -532,17 +627,21 @@ def add_geo_targeting(client, customer_id, campaign_resource_name):
             f"from search term ({suggestion.search_term})."
         )
         # Create the campaign criterion for location targeting.
-        campaign_criterion_operation = client.get_type(
-            "CampaignCriterionOperation"
+        campaign_criterion_operation: CampaignCriterionOperation = (
+            client.get_type("CampaignCriterionOperation")
         )
-        campaign_criterion = campaign_criterion_operation.create
+        campaign_criterion: CampaignCriterion = (
+            campaign_criterion_operation.create
+        )
         campaign_criterion.campaign = campaign_resource_name
         campaign_criterion.location.geo_target_constant = (
             suggestion.geo_target_constant.resource_name
         )
         operations.append(campaign_criterion_operation)
 
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
+    campaign_criterion_service: CampaignCriterionService = client.get_service(
+        "CampaignCriterionService"
+    )
     campaign_criterion_response = (
         campaign_criterion_service.mutate_campaign_criteria(
             customer_id=customer_id, operations=[*operations]
@@ -588,7 +687,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

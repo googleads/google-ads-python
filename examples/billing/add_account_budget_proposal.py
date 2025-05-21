@@ -21,22 +21,35 @@ To get account budget proposal, run get_account_budget_proposals.py
 import argparse
 import sys
 
-
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AccountBudgetProposalTypeEnum,
+    TimeTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import AccountBudgetProposal
+from google.ads.googleads.v19.services.types import (
+    AccountBudgetProposalService,
+    BillingSetupService,
+)
+from google.ads.googleads.v19.types import AccountBudgetProposalOperation
 
 
 # [START add_account_budget_proposal]
-def main(client, customer_id, billing_setup_id):
-    account_budget_proposal_service = client.get_service(
-        "AccountBudgetProposalService"
+def main(
+    client: GoogleAdsClient, customer_id: str, billing_setup_id: str
+) -> None:
+    account_budget_proposal_service: AccountBudgetProposalService = (
+        client.get_service("AccountBudgetProposalService")
     )
-    billing_setup_service = client.get_service("BillingSetupService")
+    billing_setup_service: BillingSetupService = client.get_service(
+        "BillingSetupService"
+    )
 
-    account_budget_proposal_operation = client.get_type(
-        "AccountBudgetProposalOperation"
+    account_budget_proposal_operation: AccountBudgetProposalOperation = (
+        client.get_type("AccountBudgetProposalOperation")
     )
-    proposal = account_budget_proposal_operation.create
+    proposal: AccountBudgetProposal = account_budget_proposal_operation.create
 
     proposal.proposal_type = client.enums.AccountBudgetProposalTypeEnum.CREATE
     proposal.billing_setup = billing_setup_service.billing_setup_path(
@@ -100,7 +113,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.billing_setup_id)

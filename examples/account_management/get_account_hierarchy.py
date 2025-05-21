@@ -24,12 +24,20 @@ for each accessible customer.
 
 import argparse
 import sys
+from typing import Any, Dict, List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import (
+    CustomerService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import CustomerClient
 
 
-def main(client, login_customer_id=None):
+def main(
+    client: GoogleAdsClient, login_customer_id: Optional[str] = None
+) -> None:
     """Gets the account hierarchy of the given MCC and login customer ID.
 
     Args:
@@ -40,15 +48,15 @@ def main(client, login_customer_id=None):
     """
 
     # Gets instances of the GoogleAdsService and CustomerService clients.
-    googleads_service = client.get_service("GoogleAdsService")
-    customer_service = client.get_service("CustomerService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    customer_service: CustomerService = client.get_service("CustomerService")
 
     # A collection of customer IDs to handle.
-    seed_customer_ids = []
+    seed_customer_ids: List[str] = []
 
     # Creates a query that retrieves all child accounts of the manager
     # specified in search calls below.
-    query = """
+    query: str = """
         SELECT
           customer_client.client_customer,
           customer_client.level,
@@ -85,20 +93,23 @@ def main(client, login_customer_id=None):
     for seed_customer_id in seed_customer_ids:
         # Performs a breadth-first search to build a Dictionary that maps
         # managers to their child accounts (customerIdsToChildAccounts).
-        unprocessed_customer_ids = [seed_customer_id]
-        customer_ids_to_child_accounts = dict()
-        root_customer_client = None
+        unprocessed_customer_ids: List[str] = [seed_customer_id]
+        customer_ids_to_child_accounts: Dict[int, List[CustomerClient]] = dict()
+        root_customer_client: Optional[CustomerClient] = None
 
         while unprocessed_customer_ids:
-            customer_id = int(unprocessed_customer_ids.pop(0))
+            customer_id_str: str = unprocessed_customer_ids.pop(0)
+            # The query needs the customer ID as a string, but we also need it
+            # as an int to use as a key in customer_ids_to_child_accounts.
+            customer_id: int = int(customer_id_str)
             response = googleads_service.search(
-                customer_id=str(customer_id), query=query
+                customer_id=customer_id_str, query=query
             )
 
             # Iterates over all rows in all pages to get all customer
             # clients under the specified customer's hierarchy.
             for googleads_row in response:
-                customer_client = googleads_row.customer_client
+                customer_client: CustomerClient = googleads_row.customer_client
 
                 # The customer client that with level 0 is the specified
                 # customer.
@@ -111,10 +122,11 @@ def main(client, login_customer_id=None):
                 # manager account, the above query will be run against them
                 # to create a Dictionary of managers mapped to their child
                 # accounts for printing the hierarchy afterwards.
-                if customer_id not in customer_ids_to_child_accounts:
-                    customer_ids_to_child_accounts[customer_id] = []
+                current_manager_id: int = customer_id
+                if current_manager_id not in customer_ids_to_child_accounts:
+                    customer_ids_to_child_accounts[current_manager_id] = []
 
-                customer_ids_to_child_accounts[customer_id].append(
+                customer_ids_to_child_accounts[current_manager_id].append(
                     customer_client
                 )
 
@@ -122,11 +134,14 @@ def main(client, login_customer_id=None):
                     # A customer can be managed by multiple managers, so to
                     # prevent visiting the same customer many times, we
                     # need to check if it's already in the Dictionary.
+                    #
+                    # We also need to make sure that we are adding the ID as a
+                    # string.
                     if (
                         customer_client.id not in customer_ids_to_child_accounts
                         and customer_client.level == 1
                     ):
-                        unprocessed_customer_ids.append(customer_client.id)
+                        unprocessed_customer_ids.append(str(customer_client.id))
 
         if root_customer_client is not None:
             print(
@@ -145,8 +160,10 @@ def main(client, login_customer_id=None):
 
 
 def print_account_hierarchy(
-    customer_client, customer_ids_to_child_accounts, depth
-):
+    customer_client: CustomerClient,
+    customer_ids_to_child_accounts: Dict[int, List[CustomerClient]],
+    depth: int,
+) -> None:
     """Prints the specified account's hierarchy using recursion.
 
     Args:
@@ -160,7 +177,7 @@ def print_account_hierarchy(
     if depth == 0:
         print("Customer ID (Descriptive Name, Currency Code, Time Zone)")
 
-    customer_id = customer_client.id
+    customer_id: int = customer_client.id
     print("-" * (depth * 2), end="")
     print(
         f"{customer_id} ({customer_client.descriptive_name}, "

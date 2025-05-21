@@ -19,20 +19,24 @@ Google Cloud Logging using a custom logging interceptor.
 
 import argparse
 import sys
+from typing import Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import GoogleAdsRow
+
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Instantiate the GoogleAdsService object with a custom interceptor.
-    ga_service = client.get_service(
+    ga_service: GoogleAdsService = client.get_service(
         "GoogleAdsService",
         interceptors=[CloudLoggingInterceptor(api_version="v19")],
     )
 
-    query = """
+    query: str = """
         SELECT
           campaign.id,
           campaign.name
@@ -41,13 +45,16 @@ def main(client, customer_id):
         LIMIT 10"""
 
     # Issues a search request using streaming.
-    stream = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream: Iterable[GoogleAdsRow] = ga_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
+    google_ads_row: GoogleAdsRow
     for batch in stream:
-        for row in batch.results:
+        for google_ads_row in batch.results:
             print(
-                f"Campaign with ID {row.campaign.id} and name "
-                f'"{row.campaign.name}" was found.'
+                f"Campaign with ID {google_ads_row.campaign.id} and name "
+                f'"{google_ads_row.campaign.name}" was found.'
             )
 
 
@@ -67,7 +74,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

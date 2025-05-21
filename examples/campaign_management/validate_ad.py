@@ -25,46 +25,76 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import (
+    AdTextAsset,
+    ResponsiveSearchAdInfo,
+)
+from google.ads.googleads.v19.enums.types import (
+    AdGroupAdStatusEnum,
+    ServedAssetFieldTypeEnum,
+    PolicyFindingErrorEnum,
+)
+from google.ads.googleads.v19.resources.types import Ad, AdGroupAd
+from google.ads.googleads.v19.services.types import (
+    AdGroupAdService,
+    AdGroupService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsRequest,
+)
 
 
-def main(client, customer_id, ad_group_id):
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = ad_group_ad_operation.create
-    ad_group_service = client.get_service("AdGroupService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
     ad_group_ad.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
-    ad_group_ad.ad.final_urls.append("http://www.example.com/")
+    ad: Ad = ad_group_ad.ad
+    ad.final_urls.append("http://www.example.com/")
 
     # Create a responsive search ad.
-    headline_1 = client.get_type("AdTextAsset")
+    responsive_search_ad_info: ResponsiveSearchAdInfo = (
+        ad.responsive_search_ad
+    )
+    headline_1: AdTextAsset = client.get_type("AdTextAsset")
     headline_1.text = "Visit the Red Planet in style."
     headline_1.pinned_field = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
-    ad_group_ad.ad.responsive_search_ad.headlines.append(headline_1)
+    responsive_search_ad_info.headlines.append(headline_1)
 
-    headline_2 = client.get_type("AdTextAsset")
+    headline_2: AdTextAsset = client.get_type("AdTextAsset")
     headline_2.text = "An interplanetary adventure"
-    ad_group_ad.ad.responsive_search_ad.headlines.append(headline_2)
+    responsive_search_ad_info.headlines.append(headline_2)
 
     # Adds a headline that will trigger a policy violation to demonstrate
     # error handling.
-    headline_3 = client.get_type("AdTextAsset")
+    headline_3: AdTextAsset = client.get_type("AdTextAsset")
     headline_3.text = "Low-gravity fun for everyone!!"
-    ad_group_ad.ad.responsive_search_ad.headlines.append(headline_3)
+    responsive_search_ad_info.headlines.append(headline_3)
 
-    description_1 = client.get_type("AdTextAsset")
+    description_1: AdTextAsset = client.get_type("AdTextAsset")
     description_1.text = "Luxury Cruise to Mars"
-    ad_group_ad.ad.responsive_search_ad.descriptions.append(description_1)
+    responsive_search_ad_info.descriptions.append(description_1)
 
-    description_2 = client.get_type("AdTextAsset")
+    description_2: AdTextAsset = client.get_type("AdTextAsset")
     description_2.text = "Book your ticket now"
-    ad_group_ad.ad.responsive_search_ad.descriptions.append(description_2)
+    responsive_search_ad_info.descriptions.append(description_2)
 
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdService = client.get_service(
+        "AdGroupAdService"
+    )
     # Attempt the mutate with validate_only=True.
     try:
-        request = client.get_type("MutateAdGroupAdsRequest")
+        request: MutateAdGroupAdsRequest = client.get_type(
+            "MutateAdGroupAdsRequest"
+        )
         request.customer_id = customer_id
         request.operations.append(ad_group_ad_operation)
         request.partial_failure = False
@@ -72,6 +102,7 @@ def main(client, customer_id, ad_group_id):
         # This request will trigger a POLICY_FINDING error, which is handled
         # in the below except block.
         ad_group_ad_service.mutate_ad_group_ads(request=request)
+        print("Responsive search ad successfully validated.")
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
@@ -81,11 +112,11 @@ def main(client, customer_id, ad_group_id):
             "There may have been validation error(s) while adding responsive "
             "search ad."
         )
-        policy_error_enum = client.get_type(
+        policy_error_enum: PolicyFindingErrorEnum = client.get_type(
             "PolicyFindingErrorEnum"
         ).PolicyFindingError.POLICY_FINDING
 
-        count = 1
+        count: int = 1
         for error in ex.failure.errors:
             # Note: Policy violation errors are returned as PolicyFindingErrors.
             # For additional details, see
@@ -135,6 +166,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id, args.ad_group_id)

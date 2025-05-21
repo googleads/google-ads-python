@@ -21,23 +21,53 @@ Note that the keywords will be attached to the specified campaign.
 import argparse
 import sys
 import uuid
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    KeywordMatchTypeEnum,
+    SharedSetTypeEnum,
+)
+from google.ads.googleads.v19.resources.types import (
+    CampaignSharedSet,
+    SharedCriterion,
+    SharedSet,
+)
+from google.ads.googleads.v19.services.types import (
+    CampaignService,
+    CampaignSharedSetService,
+    SharedCriterionService,
+    SharedSetService,
+)
+from google.ads.googleads.v19.types import (
+    CampaignSharedSetOperation,
+    SharedCriterionOperation,
+    SharedSetOperation,
+)
 
 
-def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService")
-    shared_set_service = client.get_service("SharedSetService")
-    shared_criterion_service = client.get_service("SharedCriterionService")
-    campaign_shared_set_service = client.get_service("CampaignSharedSetService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    shared_set_service: SharedSetService = client.get_service(
+        "SharedSetService"
+    )
+    shared_criterion_service: SharedCriterionService = client.get_service(
+        "SharedCriterionService"
+    )
+    campaign_shared_set_service: CampaignSharedSetService = client.get_service(
+        "CampaignSharedSetService"
+    )
 
     # Create shared negative keyword set.
-    shared_set_operation = client.get_type("SharedSetOperation")
-    shared_set = shared_set_operation.create
+    shared_set_operation: SharedSetOperation = client.get_type(
+        "SharedSetOperation"
+    )
+    shared_set: SharedSet = shared_set_operation.create
     shared_set.name = f"API Negative keyword list - {uuid.uuid4()}"
     shared_set.type_ = client.enums.SharedSetTypeEnum.NEGATIVE_KEYWORDS
 
+    shared_set_resource_name: str = ""
     try:
         shared_set_response = shared_set_service.mutate_shared_sets(
             customer_id=customer_id, operations=[shared_set_operation]
@@ -49,11 +79,13 @@ def main(client, customer_id, campaign_id):
         handle_googleads_exception(ex)
 
     # Keywords to create a shared set of.
-    keywords = ["mars cruise", "mars hotels"]
-    shared_criteria_operations = []
+    keywords: List[str] = ["mars cruise", "mars hotels"]
+    shared_criteria_operations: List[SharedCriterionOperation] = []
     for keyword in keywords:
-        shared_criterion_operation = client.get_type("SharedCriterionOperation")
-        shared_criterion = shared_criterion_operation.create
+        shared_criterion_operation: SharedCriterionOperation = client.get_type(
+            "SharedCriterionOperation"
+        )
+        shared_criterion: SharedCriterion = shared_criterion_operation.create
         shared_criterion.keyword.text = keyword
         shared_criterion.keyword.match_type = (
             client.enums.KeywordMatchTypeEnum.BROAD
@@ -65,23 +97,25 @@ def main(client, customer_id, campaign_id):
             customer_id=customer_id, operations=shared_criteria_operations
         )
 
-        for shared_criterion in response.results:
+        for shared_criterion_result in response.results:
             print(
                 "Created shared criterion "
-                f'"{shared_criterion.resource_name}".'
+                f'"{shared_criterion_result.resource_name}".'
             )
     except GoogleAdsException as ex:
         handle_googleads_exception(ex)
 
-    campaign_set_operation = client.get_type("CampaignSharedSetOperation")
-    campaign_set = campaign_set_operation.create
+    campaign_set_operation: CampaignSharedSetOperation = client.get_type(
+        "CampaignSharedSetOperation"
+    )
+    campaign_set: CampaignSharedSet = campaign_set_operation.create
     campaign_set.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
     campaign_set.shared_set = shared_set_resource_name
 
     try:
-        campaign_shared_set_resource_name = (
+        campaign_shared_set_response = (
             campaign_shared_set_service.mutate_campaign_shared_sets(
                 customer_id=customer_id, operations=[campaign_set_operation]
             )
@@ -89,13 +123,13 @@ def main(client, customer_id, campaign_id):
 
         print(
             "Created campaign shared set "
-            '"{campaign_shared_set_resource_name.results[0].resource_name}".'
+            f'"{campaign_shared_set_response.results[0].resource_name}".'
         )
     except GoogleAdsException as ex:
         handle_googleads_exception(ex)
 
 
-def handle_googleads_exception(exception):
+def handle_googleads_exception(exception: GoogleAdsException) -> None:
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -130,6 +164,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id, args.campaign_id)

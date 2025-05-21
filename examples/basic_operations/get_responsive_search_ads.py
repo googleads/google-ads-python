@@ -20,15 +20,26 @@ To get ad groups, run basic_operations/get_ad_groups.py.
 
 import argparse
 import sys
+from typing import List, Optional, Sequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import AdTextAsset
+from google.ads.googleads.v19.resources.types import Ad
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import (
+    GoogleAdsRow,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
+)
 
 
-def main(client, customer_id, ad_group_id=None):
-    ga_service = client.get_service("GoogleAdsService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: Optional[str] = None
+) -> None:
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
-    query = '''
+    query: str = '''
         SELECT ad_group.id, ad_group_ad.ad.id,
         ad_group_ad.ad.responsive_search_ad.headlines,
         ad_group_ad.ad.responsive_search_ad.descriptions,
@@ -41,25 +52,29 @@ def main(client, customer_id, ad_group_id=None):
     if ad_group_id:
         query += f" AND ad_group.id = {ad_group_id}"
 
-    ga_search_request = client.get_type("SearchGoogleAdsRequest")
+    ga_search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     ga_search_request.customer_id = customer_id
     ga_search_request.query = query
-    results = ga_service.search(request=ga_search_request)
+    results: SearchGoogleAdsResponse = ga_service.search(
+        request=ga_search_request
+    )
 
-    one_found = False
-
-    for row in results:
+    one_found: bool = False
+    google_ads_row: GoogleAdsRow
+    for google_ads_row in results:
         one_found = True
-        ad = row.ad_group_ad.ad
+        ad: Ad = google_ads_row.ad_group_ad.ad
         print(
             "Responsive search ad with resource name "
-            f'"{ad.resource_name}", status {row.ad_group_ad.status.name} '
+            f'"{ad.resource_name}", status {google_ads_row.ad_group_ad.status.name} '
             "was found."
         )
-        headlines = "\n".join(
+        headlines: str = "\n".join(
             ad_text_assets_to_strs(ad.responsive_search_ad.headlines)
         )
-        descriptions = "\n".join(
+        descriptions: str = "\n".join(
             ad_text_assets_to_strs(ad.responsive_search_ad.descriptions)
         )
         print(f"Headlines:\n{headlines}\nDescriptions:\n{descriptions}\n")
@@ -68,9 +83,10 @@ def main(client, customer_id, ad_group_id=None):
         print("No responsive search ads were found.")
 
 
-def ad_text_assets_to_strs(assets):
+def ad_text_assets_to_strs(assets: Sequence[AdTextAsset]) -> List[str]:
     """Converts a list of AdTextAssets to a list of user-friendly strings."""
-    s = []
+    s: List[str] = []
+    asset: AdTextAsset
     for asset in assets:
         s.append(f"\t {asset.text} pinned to {asset.pinned_field.name}")
     return s
@@ -100,7 +116,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

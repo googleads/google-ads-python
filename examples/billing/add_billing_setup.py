@@ -27,15 +27,28 @@ manager account and is linked to a customer account via a billing setup.
 import argparse
 from datetime import datetime, timedelta
 import sys
+from typing import Iterable, List, Optional
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types import BillingSetup
+from google.ads.googleads.v19.services.types import (
+    BillingSetupService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    BillingSetupOperation,
+    GoogleAdsRow,
+)
 
 
 def main(
-    client, customer_id, payments_account_id=None, payments_profile_id=None
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    payments_account_id: Optional[str] = None,
+    payments_profile_id: Optional[str] = None,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -47,13 +60,17 @@ def main(
             account and to the new billing setup. If provided it must be
             formatted as "1234-5678-9012".
     """
-    billing_setup = create_billing_setup(
+    billing_setup: BillingSetup = create_billing_setup(
         client, customer_id, payments_account_id, payments_profile_id
     )
     set_billing_setup_date_times(client, customer_id, billing_setup)
-    billing_setup_operation = client.get_type("BillingSetupOperation")
+    billing_setup_operation: BillingSetupOperation = client.get_type(
+        "BillingSetupOperation"
+    )
     client.copy_from(billing_setup_operation.create, billing_setup)
-    billing_setup_service = client.get_service("BillingSetupService")
+    billing_setup_service: BillingSetupService = client.get_service(
+        "BillingSetupService"
+    )
     response = billing_setup_service.mutate_billing_setup(
         customer_id=customer_id, operation=billing_setup_operation
     )
@@ -64,8 +81,11 @@ def main(
 
 
 def create_billing_setup(
-    client, customer_id, payments_account_id=None, payments_profile_id=None
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    payments_account_id: Optional[str] = None,
+    payments_profile_id: Optional[str] = None,
+) -> BillingSetup:
     """Creates and returns a new billing setup instance.
 
     The new billing setup will have its payment details populated. One of the
@@ -83,18 +103,23 @@ def create_billing_setup(
     Returns:
         A newly created BillingSetup instance.
     """
-    billing_setup = client.get_type("BillingSetup")
+    billing_setup: BillingSetup = client.get_type("BillingSetup")
+    billing_setup_service: BillingSetupService = client.get_service(
+        "BillingSetupService"
+    )
 
     # Sets the appropriate payments account field.
-    if payments_account_id != None:
+    if payments_account_id is not None:
         # If a payments account ID has been provided, set the payments_account
         # field to the full resource name of the given payments account ID.
         # You can list available payments accounts via the
         # PaymentsAccountService's ListPaymentsAccounts method.
-        billing_setup.payments_account = client.get_service(
-            "BillingSetupService"
-        ).payments_account_path(customer_id, payments_account_id)
-    elif payments_profile_id != None:
+        billing_setup.payments_account = (
+            billing_setup_service.payments_account_path(
+                customer_id, payments_account_id
+            )
+        )
+    elif payments_profile_id is not None:
         # Otherwise, create a new payments account by setting the
         # payments_account_info field
         # See https://support.google.com/google-ads/answer/7268503
@@ -105,11 +130,17 @@ def create_billing_setup(
         billing_setup.payments_account_info.payments_profile_id = (
             payments_profile_id
         )
+    # If both payments_account_id and payments_profile_id are None,
+    # this will result in an error by the API. The calling code (main)
+    # ensures that at least one is provided due to the mutually exclusive group
+    # in argparse.
 
     return billing_setup
 
 
-def set_billing_setup_date_times(client, customer_id, billing_setup):
+def set_billing_setup_date_times(
+    client: GoogleAdsClient, customer_id: str, billing_setup: BillingSetup
+) -> None:
     """Sets the starting and ending date times for the new billing setup.
 
     Queries the customer's account to see if there are any approved billing
@@ -126,7 +157,7 @@ def set_billing_setup_date_times(client, customer_id, billing_setup):
     # The query to search existing approved billing setups in the end date time
     # descending order. See get_billing_setup.py for a more detailed example of
     # how to retrieve billing setups.
-    query = """
+    query: str = """
       SELECT
         billing_setup.end_date_time
       FROM billing_setup
@@ -134,43 +165,50 @@ def set_billing_setup_date_times(client, customer_id, billing_setup):
       ORDER BY billing_setup.end_date_time DESC
       LIMIT 1"""
 
-    ga_service = client.get_service("GoogleAdsService")
-    stream = ga_service.search_stream(customer_id=customer_id, query=query)
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    stream: Iterable[GoogleAdsRow] = ga_service.search_stream(
+        customer_id=customer_id, query=query
+    )
     # Coercing the response iterator to a list causes the stream to be fully
     # consumed so that we can easily access the last row in the request.
-    batches = list(stream)
+    batches: List[GoogleAdsRow] = list(stream)
+    start_date: datetime
     # Checks if any results were included in the response.
     if batches:
         # Retrieves the ending_date_time of the last BillingSetup.
-        last_batch = batches[0]
-        last_row = last_batch.results[0]
-        last_ending_date_time = last_row.billing_setup.end_date_time
+        last_batch: GoogleAdsRow = batches[0]
+        # Ensure results exist in the batch
+        if not last_batch.results:
+            start_date = datetime.now()
+        else:
+            last_row: GoogleAdsRow = last_batch.results[0]
+            last_ending_date_time: str = last_row.billing_setup.end_date_time
 
-        if not last_ending_date_time:
-            # A null ending date time indicates that the current billing setup
-            # is set to run indefinitely. Billing setups cannot overlap, so
-            # throw an exception in this case.
-            raise Exception(
-                "Cannot set starting and ending date times for the new billing "
-                "setup; the latest existing billing setup is set to run "
-                "indefinitely."
-            )
+            if not last_ending_date_time:
+                # A null ending date time indicates that the current billing setup
+                # is set to run indefinitely. Billing setups cannot overlap, so
+                # throw an exception in this case.
+                raise Exception(
+                    "Cannot set starting and ending date times for the new billing "
+                    "setup; the latest existing billing setup is set to run "
+                    "indefinitely."
+                )
 
-        try:
-            # BillingSetup.end_date_time is a string that can be in the format
-            # %Y-%m-%d or %Y-%m-%d %H:%M:%S. This checks for the first format.
-            end_date_time_obj = datetime.strptime(
-                last_ending_date_time, "%Y-%m-%d"
-            )
-        except ValueError:
-            # If a ValueError is raised then the end_date_time string is in the
-            # second format that includes hours, minutes and seconds.
-            end_date_time_obj = datetime.strptime(
-                last_ending_date_time, "%Y-%m-%d %H:%M:%S"
-            )
+            try:
+                # BillingSetup.end_date_time is a string that can be in the format
+                # %Y-%m-%d or %Y-%m-%d %H:%M:%S. This checks for the first format.
+                end_date_time_obj: datetime = datetime.strptime(
+                    last_ending_date_time, "%Y-%m-%d"
+                )
+            except ValueError:
+                # If a ValueError is raised then the end_date_time string is in the
+                # second format that includes hours, minutes and seconds.
+                end_date_time_obj = datetime.strptime(
+                    last_ending_date_time, "%Y-%m-%d %H:%M:%S"
+                )
 
-        # Sets the new billing setup start date to one day after the end date.
-        start_date = end_date_time_obj + timedelta(days=1)
+            # Sets the new billing setup start date to one day after the end date.
+            start_date = end_date_time_obj + timedelta(days=1)
     else:
         # If there are no BillingSetup objects to retrieve, the only acceptable
         # start date time is today.
@@ -222,7 +260,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

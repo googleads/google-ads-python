@@ -20,12 +20,19 @@ If required and not already started, it also starts the verification process.
 
 import argparse
 import sys
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    IdentityVerificationProgramEnum,
+    IdentityVerificationProgramStatusEnum,
+)
+from google.ads.googleads.v19.services.types import IdentityVerificationService
+from google.ads.googleads.v19.types import IdentityVerification
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -33,11 +40,17 @@ def main(client, customer_id):
         customer_id: The client customer ID str.
     """
     # Retrieve the current advertiser identity verification status.
-    identity_verification = get_identity_verification(client, customer_id)
+    identity_verification: Optional[IdentityVerification] = (
+        get_identity_verification(client, customer_id)
+    )
 
     if identity_verification:
-        status = identity_verification.verification_progress.program_status
-        status_enum = client.enums.IdentityVerificationProgramStatusEnum
+        status: IdentityVerificationProgramStatusEnum = (
+            identity_verification.verification_progress.program_status
+        )
+        status_enum: IdentityVerificationProgramStatusEnum = (
+            client.enums.IdentityVerificationProgramStatusEnum
+        )
 
         if status == status_enum.UNSPECIFIED:
             # Starts an identity verification session.
@@ -75,7 +88,9 @@ def main(client, customer_id):
 
 
 # [START verify_advertiser_identity_1]
-def get_identity_verification(client, customer_id):
+def get_identity_verification(
+    client: GoogleAdsClient, customer_id: str
+) -> Optional[IdentityVerification]:
     """Retrieves the status of the advertiser identity verification process.
 
     Args:
@@ -85,37 +100,47 @@ def get_identity_verification(client, customer_id):
     Returns:
         either an IdentityVerification instance, or None
     """
-    service = client.get_service("IdentityVerificationService")
+    service: IdentityVerificationService = client.get_service(
+        "IdentityVerificationService"
+    )
     response = service.get_identity_verification(customer_id=customer_id)
 
     # Check if the response contains any indentity verifications. If not, then
     # None will be returned.
     if response.identity_verification:
-        identity_verification = response.identity_verification[0]
-        deadline = (
+        identity_verification: IdentityVerification = response.identity_verification[
+            0
+        ]
+        deadline: str = (
             identity_verification.identity_verification_requirement.verification_completion_deadline_time
         )
-        progress = identity_verification.verification_progress.program_status
+        progress: IdentityVerificationProgramStatusEnum = (
+            identity_verification.verification_progress.program_status
+        )
 
         print(
             f"Account {customer_id} has a verification completion deadline "
-            f"of {deadline} and status {progress} for advertiser identity "
+            f"of {deadline} and status {progress.name} for advertiser identity "  # Use .name for enum
             "verification."
         )
 
         return identity_verification
+    else:
+        return None
         # [END verify_advertiser_identity_1]
 
 
 # [START verify_advertiser_identity_2]
-def start_identity_verification(client, customer_id):
+def start_identity_verification(client: GoogleAdsClient, customer_id: str) -> None:
     """Starts the identity verification process.
 
     Args:
         client: An initialized GoogleAdsClient instance.
         customer_id: The client customer ID str.
     """
-    service = client.get_service("IdentityVerificationService")
+    service: IdentityVerificationService = client.get_service(
+        "IdentityVerificationService"
+    )
     # Sends a request to start the identity verification process.
     service.start_identity_verification(
         customer_id=customer_id,
@@ -144,7 +169,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

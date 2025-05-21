@@ -19,13 +19,26 @@ This example assumes that a label has already been prepared.
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types import CampaignLabel
+from google.ads.googleads.v19.services.types import (
+    CampaignLabelService,
+    CampaignService,
+    LabelService,
+)
+from google.ads.googleads.v19.types import CampaignLabelOperation
 
 
 # [START add_campaign_labels]
-def main(client, customer_id, label_id, campaign_ids):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    label_id: str,
+    campaign_ids: List[str],
+) -> None:
     """This code example adds a campaign label to a list of campaigns.
 
     Args:
@@ -36,22 +49,26 @@ def main(client, customer_id, label_id, campaign_ids):
     """
 
     # Get an instance of CampaignLabelService client.
-    campaign_label_service = client.get_service("CampaignLabelService")
-    campaign_service = client.get_service("CampaignService")
-    label_service = client.get_service("LabelService")
+    campaign_label_service: CampaignLabelService = client.get_service(
+        "CampaignLabelService"
+    )
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    label_service: LabelService = client.get_service("LabelService")
 
     # Build the resource name of the label to be added across the campaigns.
-    label_resource_name = label_service.label_path(customer_id, label_id)
+    label_resource_name: str = label_service.label_path(customer_id, label_id)
 
-    operations = []
+    operations: List[CampaignLabelOperation] = []
 
-    for campaign_id in campaign_ids:
-        campaign_resource_name = campaign_service.campaign_path(
-            customer_id, campaign_id
+    for campaign_id_str in campaign_ids:
+        campaign_resource_name: str = campaign_service.campaign_path(
+            customer_id, campaign_id_str
         )
-        campaign_label_operation = client.get_type("CampaignLabelOperation")
+        campaign_label_operation: CampaignLabelOperation = client.get_type(
+            "CampaignLabelOperation"
+        )
 
-        campaign_label = campaign_label_operation.create
+        campaign_label: CampaignLabel = campaign_label_operation.create
         campaign_label.campaign = campaign_resource_name
         campaign_label.label = label_resource_name
         operations.append(campaign_label_operation)
@@ -97,7 +114,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
     try:
         main(
             googleads_client, args.customer_id, args.label_id, args.campaign_ids

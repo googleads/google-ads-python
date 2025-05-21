@@ -25,21 +25,39 @@ application.
 
 import argparse
 from time import sleep
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    AdGroupCriterionStatusEnum,
+    KeywordMatchTypeEnum,
+    QuotaErrorEnum,
+)
+from google.ads.googleads.v19.resources.types import AdGroupCriterion
+from google.ads.googleads.v19.services.types import (
+    AdGroupCriterionService,
+    AdGroupService,
+)
+from google.ads.googleads.v19.types import (
+    AdGroupCriterionOperation,
+    MutateAdGroupCriteriaRequest,
+    MutateAdGroupCriteriaResponse,
+)
 
 # Number of requests to be run.
-NUM_REQUESTS = 5
+NUM_REQUESTS: int = 5
 # Number of keywords to be validated in each API call.
-NUM_KEYWORDS = 100
+NUM_KEYWORDS: int = 100
 # Number of retries to be run in case of a RateExceededError.
-NUM_RETRIES = 3
+NUM_RETRIES: int = 3
 # Minimum number of seconds to wait before a retry.
-RETRY_SECONDS = 10
+RETRY_SECONDS: int = 10
 
 
-def main(client, customer_id, ad_group_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
     """Runs the example code, which shows how to handle rate exceeded errors.
 
     Args:
@@ -47,18 +65,26 @@ def main(client, customer_id, ad_group_id):
         customer_id: A valid customer account ID.
         ad_group_id: The ad group ID to validate keywords from.
     """
-    quota_error_enum = client.get_type("QuotaErrorEnum").QuotaError
-    resource_exhausted = quota_error_enum.RESOURCE_EXHAUSTED
-    temp_resource_exhausted = quota_error_enum.RESOURCE_TEMPORARILY_EXHAUSTED
+    quota_error_enum_type: QuotaErrorEnum = client.get_type(
+        "QuotaErrorEnum"
+    ).QuotaError
+    resource_exhausted: QuotaErrorEnum = (
+        quota_error_enum_type.RESOURCE_EXHAUSTED
+    )
+    temp_resource_exhausted: QuotaErrorEnum = (
+        quota_error_enum_type.RESOURCE_TEMPORARILY_EXHAUSTED
+    )
 
     for i in range(NUM_REQUESTS):
-        operations = create_ad_group_criterion_operations(
-            client, customer_id, ad_group_id, i
+        operations: List[AdGroupCriterionOperation] = (
+            create_ad_group_criterion_operations(
+                client, customer_id, ad_group_id, i
+            )
         )
 
         try:
-            retry_count = 0
-            retry_seconds = RETRY_SECONDS
+            retry_count: int = 0
+            retry_seconds: int = RETRY_SECONDS
 
             while retry_count < NUM_RETRIES:
                 try:
@@ -67,7 +93,7 @@ def main(client, customer_id, ad_group_id):
                     )
                     break
                 except GoogleAdsException as ex:
-                    has_rate_exceeded_error = False
+                    has_rate_exceeded_error: bool = False
                     for googleads_error in ex.failure.errors:
                         # Checks if any of the errors are
                         # QuotaError.RESOURCE_EXHAUSTED or
@@ -78,7 +104,7 @@ def main(client, customer_id, ad_group_id):
                             or quota_error == temp_resource_exhausted
                         ):
                             print(
-                                "Received rate exceeded error, retry after"
+                                "Received rate exceeded error, retry after "
                                 f"{retry_seconds} seconds."
                             )
                             sleep(retry_seconds)
@@ -106,8 +132,11 @@ def main(client, customer_id, ad_group_id):
 
 
 def create_ad_group_criterion_operations(
-    client, customer_id, ad_group_id, request_index
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    request_index: int,
+) -> List[AdGroupCriterionOperation]:
     """Creates ad group criterion operations.
 
     The number of operations created depends on the number of keywords this
@@ -124,30 +153,40 @@ def create_ad_group_criterion_operations(
     Returns:
         A list of AdGroupCriterionOperation instances.
     """
-    ad_group_service = client.get_service("AdGroupService")
-    status = client.enums.AdGroupCriterionStatusEnum.ENABLED
-    match_type = client.enums.KeywordMatchTypeEnum.EXACT
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
+    status_enum: AdGroupCriterionStatusEnum = (
+        client.enums.AdGroupCriterionStatusEnum.ENABLED
+    )
+    match_type_enum: KeywordMatchTypeEnum = (
+        client.enums.KeywordMatchTypeEnum.EXACT
+    )
 
-    operations = []
+    operations: List[AdGroupCriterionOperation] = []
     for i in range(NUM_KEYWORDS):
-        ad_group_criterion_operation = client.get_type(
-            "AdGroupCriterionOperation"
+        ad_group_criterion_operation: AdGroupCriterionOperation = (
+            client.get_type("AdGroupCriterionOperation")
         )
-        ad_group_criterion = ad_group_criterion_operation.create
+        ad_group_criterion: AdGroupCriterion = (
+            ad_group_criterion_operation.create
+        )
         ad_group_criterion.ad_group = ad_group_service.ad_group_path(
             customer_id, ad_group_id
         )
-        ad_group_criterion.status = status
+        ad_group_criterion.status = status_enum
         ad_group_criterion.keyword.text = (
             f"mars cruise req {request_index} seed {i}"
         )
-        ad_group_criterion.keyword.match_type = match_type
+        ad_group_criterion.keyword.match_type = match_type_enum
         operations.append(ad_group_criterion_operation)
 
     return operations
 
 
-def request_mutate_and_display_result(client, customer_id, operations):
+def request_mutate_and_display_result(
+    client: GoogleAdsClient,
+    customer_id: str,
+    operations: List[AdGroupCriterionOperation],
+) -> None:
     """Mutates a set of ad group criteria as a dry-run and displays the results.
 
     The request is sent with validate_only set to true, so no actual mutations
@@ -158,17 +197,23 @@ def request_mutate_and_display_result(client, customer_id, operations):
         customer_id: A valid customer account ID.
         operations: a list of AdGroupCriterionOperation instances.
     """
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
-    request = client.get_type("MutateAdGroupCriteriaRequest")
+    ad_group_criterion_service: AdGroupCriterionService = client.get_service(
+        "AdGroupCriterionService"
+    )
+    request: MutateAdGroupCriteriaRequest = client.get_type(
+        "MutateAdGroupCriteriaRequest"
+    )
     request.customer_id = customer_id
-    request.operations = operations
+    request.operations.extend(operations)
     request.validate_only = True
-    response = ad_group_criterion_service.mutate_ad_group_criteria(
-        request=request
+    response: MutateAdGroupCriteriaResponse = (
+        ad_group_criterion_service.mutate_ad_group_criteria(request=request)
     )
     print(f"Added {len(response.results)} ad group criteria:")
-    for ad_group_criterion in response.results:
-        print(f"Resource name: '{ad_group_criterion.resource_name}'")
+    for ad_group_criterion_result in response.results:
+        print(
+            f"Resource name: '{ad_group_criterion_result.resource_name}'"
+        )
 
 
 if __name__ == "__main__":
@@ -194,6 +239,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id, args.ad_group_id)

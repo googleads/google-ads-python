@@ -25,19 +25,37 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import ManualCpc
+from google.ads.googleads.v19.enums.types import (
+    AdvertisingChannelTypeEnum,
+    BudgetDeliveryMethodEnum,
+    CampaignStatusEnum,
+)
+from google.ads.googleads.v19.resources.types import Campaign, CampaignBudget
+from google.ads.googleads.v19.services.types import (
+    CampaignBudgetService,
+    CampaignService,
+)
+from google.ads.googleads.v19.types import (
+    CampaignBudgetOperation,
+    CampaignOperation,
+)
+
+_DATE_FORMAT: str = "%Y%m%d"
 
 
-_DATE_FORMAT = "%Y%m%d"
-
-
-def main(client, customer_id):
-    campaign_budget_service = client.get_service("CampaignBudgetService")
-    campaign_service = client.get_service("CampaignService")
+def main(client: GoogleAdsClient, customer_id: str) -> None:
+    campaign_budget_service: CampaignBudgetService = client.get_service(
+        "CampaignBudgetService"
+    )
+    campaign_service: CampaignService = client.get_service("CampaignService")
 
     # [START add_campaigns]
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
-    campaign_budget = campaign_budget_operation.create
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
@@ -45,20 +63,30 @@ def main(client, customer_id):
     campaign_budget.amount_micros = 500000
 
     # Add budget.
+    campaign_budget_resource_name: str = ""
     try:
         campaign_budget_response = (
             campaign_budget_service.mutate_campaign_budgets(
                 customer_id=customer_id, operations=[campaign_budget_operation]
             )
         )
+        campaign_budget_resource_name = campaign_budget_response.results[
+            0
+        ].resource_name
     except GoogleAdsException as ex:
         handle_googleads_exception(ex)
         # [END add_campaigns]
+        # Ensure that campaign_budget_resource_name is set even in case of exception
+        # to avoid further errors, though the script will exit in handle_googleads_exception.
+        # If it's critical to continue, this might need more sophisticated error handling.
+        if not campaign_budget_resource_name:
+            sys.exit(1)
+
 
     # [START add_campaigns_1]
     # Create campaign.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.create
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise {uuid.uuid4()}"
     campaign.advertising_channel_type = (
         client.enums.AdvertisingChannelTypeEnum.SEARCH
@@ -71,7 +99,7 @@ def main(client, customer_id):
 
     # Set the bidding strategy and budget.
     campaign.manual_cpc = client.get_type("ManualCpc")
-    campaign.campaign_budget = campaign_budget_response.results[0].resource_name
+    campaign.campaign_budget = campaign_budget_resource_name
 
     # Set the campaign network options.
     campaign.network_settings.target_google_search = True
@@ -83,11 +111,13 @@ def main(client, customer_id):
     # [END add_campaigns_1]
 
     # Optional: Set the start date.
-    start_time = datetime.date.today() + datetime.timedelta(days=1)
+    start_time: datetime.date = datetime.date.today() + datetime.timedelta(
+        days=1
+    )
     campaign.start_date = datetime.date.strftime(start_time, _DATE_FORMAT)
 
     # Optional: Set the end date.
-    end_time = start_time + datetime.timedelta(weeks=4)
+    end_time: datetime.date = start_time + datetime.timedelta(weeks=4)
     campaign.end_date = datetime.date.strftime(end_time, _DATE_FORMAT)
 
     # Add the campaign.
@@ -100,7 +130,7 @@ def main(client, customer_id):
         handle_googleads_exception(ex)
 
 
-def handle_googleads_exception(exception):
+def handle_googleads_exception(exception: GoogleAdsException) -> None:
     print(
         f'Request with ID "{exception.request_id}" failed with status '
         f'"{exception.error.code().name}" and includes the following errors:'
@@ -129,6 +159,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id)

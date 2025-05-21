@@ -19,23 +19,42 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types import CampaignCriterion
+from google.ads.googleads.v19.services.types import CampaignCriterionService
+from google.ads.googleads.v19.types import CampaignCriterionOperation
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 
-def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
-
-    criterion_rname = campaign_criterion_service.campaign_criterion_path(
-        customer_id, campaign_id, criterion_id
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    criterion_id: str,
+    bid_modifier_value: float,
+) -> None:
+    campaign_criterion_service: CampaignCriterionService = client.get_service(
+        "CampaignCriterionService"
     )
 
-    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
-    campaign_criterion = campaign_criterion_operation.update
+    criterion_rname: str = (
+        campaign_criterion_service.campaign_criterion_path(
+            customer_id, campaign_id, criterion_id
+        )
+    )
+
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
+        "CampaignCriterionOperation"
+    )
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
     campaign_criterion.bid_modifier = bid_modifier_value
+    # Create a field mask using the FieldMask type.
+    field_mask = FieldMask()
+    field_mask.paths.append("bid_modifier")
     client.copy_from(
         campaign_criterion_operation.update_mask,
-        protobuf_helpers.field_mask(None, campaign_criterion._pb),
+        field_mask,
     )
 
     campaign_criterion_response = (
@@ -88,7 +107,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

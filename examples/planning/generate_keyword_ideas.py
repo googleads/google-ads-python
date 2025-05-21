@@ -17,35 +17,59 @@
 
 import argparse
 import sys
+from typing import List, Optional
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    KeywordPlanCompetitionLevelEnum,
+    KeywordPlanNetworkEnum,
+)
+from google.ads.googleads.v19.services.types import (
+    GeoTargetConstantService,
+    GoogleAdsService,
+    KeywordPlanIdeaService,
+    GenerateKeywordIdeasRequest,
+    GenerateKeywordIdeaResult,
+)
+from google.ads.googleads.v19.types import GenerateKeywordIdeasResponse
 
 # Location IDs are listed here:
 # https://developers.google.com/google-ads/api/reference/data/geotargets
 # and they can also be retrieved using the GeoTargetConstantService as shown
 # here: https://developers.google.com/google-ads/api/docs/targeting/location-targeting
-_DEFAULT_LOCATION_IDS = ["1023191"]  # location ID for New York, NY
+_DEFAULT_LOCATION_IDS: List[str] = ["1023191"]  # location ID for New York, NY
 # A language criterion ID. For example, specify 1000 for English. For more
 # information on determining this value, see the below link:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
-_DEFAULT_LANGUAGE_ID = "1000"  # language ID for English
+_DEFAULT_LANGUAGE_ID: str = "1000"  # language ID for English
 
 
 # [START generate_keyword_ideas]
 def main(
-    client, customer_id, location_ids, language_id, keyword_texts, page_url
-):
-    keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    keyword_competition_level_enum = (
-        client.enums.KeywordPlanCompetitionLevelEnum
+    client: GoogleAdsClient,
+    customer_id: str,
+    location_ids: List[str],
+    language_id: str,
+    keyword_texts: Optional[List[str]],
+    page_url: Optional[str],
+) -> None:
+    keyword_plan_idea_service: KeywordPlanIdeaService = client.get_service(
+        "KeywordPlanIdeaService"
     )
-    keyword_plan_network = (
+    # keyword_competition_level_enum is not used in the current version of the code.
+    # If it were to be used, its type would be:
+    # keyword_competition_level_enum: KeywordPlanCompetitionLevelEnum = (
+    #     client.enums.KeywordPlanCompetitionLevelEnum
+    # )
+    keyword_plan_network: KeywordPlanNetworkEnum = (
         client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH_AND_PARTNERS
     )
-    location_rns = map_locations_ids_to_resource_names(client, location_ids)
-    language_rn = client.get_service("GoogleAdsService").language_constant_path(
-        language_id
+    location_rns: List[str] = map_locations_ids_to_resource_names(
+        client, location_ids
     )
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    language_rn: str = googleads_service.language_constant_path(language_id)
 
     # Either keywords or a page_url are required to generate keyword ideas
     # so this raises an error if neither are provided.
@@ -58,10 +82,12 @@ def main(
     # Only one of the fields "url_seed", "keyword_seed", or
     # "keyword_and_url_seed" can be set on the request, depending on whether
     # keywords, a page_url or both were passed to this function.
-    request = client.get_type("GenerateKeywordIdeasRequest")
+    request: GenerateKeywordIdeasRequest = client.get_type(
+        "GenerateKeywordIdeasRequest"
+    )
     request.customer_id = customer_id
     request.language = language_rn
-    request.geo_target_constants = location_rns
+    request.geo_target_constants.extend(location_rns)
     request.include_adult_keywords = False
     request.keyword_plan_network = keyword_plan_network
 
@@ -83,12 +109,13 @@ def main(
         request.keyword_and_url_seed.url = page_url
         request.keyword_and_url_seed.keywords.extend(keyword_texts)
 
-    keyword_ideas = keyword_plan_idea_service.generate_keyword_ideas(
-        request=request
+    keyword_ideas: GenerateKeywordIdeasResponse = (
+        keyword_plan_idea_service.generate_keyword_ideas(request=request)
     )
 
+    idea: GenerateKeywordIdeaResult
     for idea in keyword_ideas:
-        competition_value = idea.keyword_idea_metrics.competition.name
+        competition_value: str = idea.keyword_idea_metrics.competition.name
         print(
             f'Keyword idea text "{idea.text}" has '
             f'"{idea.keyword_idea_metrics.avg_monthly_searches}" '
@@ -98,7 +125,9 @@ def main(
     # [END generate_keyword_ideas]
 
 
-def map_locations_ids_to_resource_names(client, location_ids):
+def map_locations_ids_to_resource_names(
+    client: GoogleAdsClient, location_ids: List[str]
+) -> List[str]:
     """Converts a list of location IDs to resource names.
 
     Args:
@@ -108,9 +137,13 @@ def map_locations_ids_to_resource_names(client, location_ids):
     Returns:
         a list of resource name strings using the given location IDs.
     """
-    build_resource_name = client.get_service(
+    geo_target_constant_service: GeoTargetConstantService = client.get_service(
         "GeoTargetConstantService"
-    ).geo_target_constant_path
+    )
+    # build_resource_name is a function, so its type is Callable.
+    # However, since it's used immediately, explicit typing might be verbose.
+    # For simplicity, we'll let it be inferred or use Any if needed.
+    build_resource_name = geo_target_constant_service.geo_target_constant_path
     return [build_resource_name(location_id) for location_id in location_ids]
 
 
@@ -170,7 +203,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

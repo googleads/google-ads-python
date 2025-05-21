@@ -36,6 +36,7 @@ import os
 import re
 import socket
 import sys
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import unquote
 
 # If using Web flow, the redirect URL must match exactly what’s configured in GCP for
@@ -43,13 +44,13 @@ from urllib.parse import unquote
 # is not explicitly set in GCP.
 from google_auth_oauthlib.flow import Flow
 
-_SCOPE = "https://www.googleapis.com/auth/adwords"
-_SERVER = "127.0.0.1"
-_PORT = 8080
-_REDIRECT_URI = f"http://{_SERVER}:{_PORT}"
+_SCOPE: str = "https://www.googleapis.com/auth/adwords"
+_SERVER: str = "127.0.0.1"
+_PORT: int = 8080
+_REDIRECT_URI: str = f"http://{_SERVER}:{_PORT}"
 
 
-def main(client_secrets_path, scopes):
+def main(client_secrets_path: str, scopes: List[str]) -> None:
     """The main method, starts a basic server and initializes an auth request.
 
     Args:
@@ -58,13 +59,17 @@ def main(client_secrets_path, scopes):
         scopes: a list of API scopes to include in the auth request, see:
             https://developers.google.com/identity/protocols/oauth2/scopes
     """
-    flow = Flow.from_client_secrets_file(client_secrets_path, scopes=scopes)
+    flow: Flow = Flow.from_client_secrets_file(
+        client_secrets_path, scopes=scopes
+    )
     flow.redirect_uri = _REDIRECT_URI
 
     # Create an anti-forgery state token as described here:
     # https://developers.google.com/identity/protocols/OpenIDConnect#createxsrftoken
-    passthrough_val = hashlib.sha256(os.urandom(1024)).hexdigest()
+    passthrough_val: str = hashlib.sha256(os.urandom(1024)).hexdigest()
 
+    authorization_url: str
+    state: str
     authorization_url, state = flow.authorization_url(
         access_type="offline",
         state=passthrough_val,
@@ -82,11 +87,11 @@ def main(client_secrets_path, scopes):
 
     # Retrieves an authorization code by opening a socket to receive the
     # redirect request and parsing the query parameters set in the URL.
-    code = unquote(get_authorization_code(passthrough_val))
+    code: str = unquote(get_authorization_code(passthrough_val))
 
     # Pass the code back into the OAuth module to get a refresh token.
     flow.fetch_token(code=code)
-    refresh_token = flow.credentials.refresh_token
+    refresh_token: Optional[str] = flow.credentials.refresh_token
 
     print(f"\nYour refresh token is: {refresh_token}\n")
     print(
@@ -96,7 +101,7 @@ def main(client_secrets_path, scopes):
     )
 
 
-def get_authorization_code(passthrough_val):
+def get_authorization_code(passthrough_val: str) -> str:
     """Opens a socket to handle a single HTTP request containing auth tokens.
 
     Args:
@@ -107,20 +112,25 @@ def get_authorization_code(passthrough_val):
         a str access token from the Google Auth service.
     """
     # Open a socket at _SERVER:_PORT and listen for a request
-    sock = socket.socket()
+    sock: socket.socket = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind((_SERVER, _PORT))
     sock.listen(1)
+    connection: socket.socket
+    address: Tuple[str, int]
     connection, address = sock.accept()
-    data = connection.recv(1024)
+    data: bytes = connection.recv(1024)
     # Parse the raw request to retrieve the URL query parameters.
-    params = parse_raw_query_params(data)
+    params: Dict[str, str] = parse_raw_query_params(data)
+    message: str = ""
+    retrieved_code: Optional[str] = None
 
     try:
-        if not params.get("code"):
+        retrieved_code = params.get("code")
+        if not retrieved_code:
             # If no code is present in the query params then there will be an
             # error message with more details.
-            error = params.get("error")
+            error: Optional[str] = params.get("error")
             message = f"Failed to retrieve authorization code. Error: {error}"
             raise ValueError(message)
         elif params.get("state") != passthrough_val:
@@ -132,7 +142,7 @@ def get_authorization_code(passthrough_val):
         print(error)
         sys.exit(1)
     finally:
-        response = (
+        response: str = (
             "HTTP/1.1 200 OK\n"
             "Content-Type: text/html\n\n"
             f"<b>{message}</b>"
@@ -142,10 +152,14 @@ def get_authorization_code(passthrough_val):
         connection.sendall(response.encode())
         connection.close()
 
-    return params.get("code")
+    # This assertion is added to satisfy mypy that retrieved_code is not None.
+    # In reality, if retrieved_code is None, the program would have exited
+    # in the try block.
+    assert retrieved_code is not None, "Authorization code not retrieved."
+    return retrieved_code
 
 
-def parse_raw_query_params(data):
+def parse_raw_query_params(data: bytes) -> Dict[str, str]:
     """Parses a raw HTTP request to extract its query params as a dict.
 
     Note that this logic is likely irrelevant if you're building OAuth logic
@@ -159,12 +173,15 @@ def parse_raw_query_params(data):
         a dict of query parameter key value pairs.
     """
     # Decode the request into a utf-8 encoded string
-    decoded = data.decode("utf-8")
+    decoded: str = data.decode("utf-8")
     # Use a regular expression to extract the URL query parameters string
-    match = re.search(r"GET\s\/\?(.*) ", decoded)
-    params = match.group(1)
+    match: Optional[re.Match[str]] = re.search(r"GET\s\/\?(.*) ", decoded)
+    # Ensure match is not None before trying to access group
+    if match is None:
+        raise ValueError("Could not parse GET request from data.")
+    params_str: str = match.group(1)
     # Split the parameters to isolate the key/value pairs
-    pairs = [pair.split("=") for pair in params.split("&")]
+    pairs: List[List[str]] = [pair.split("=") for pair in params_str.split("&")]
     # Convert pairs to a dict to make it easy to access the values
     return {key: val for key, val in pairs}
 
@@ -201,7 +218,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    configured_scopes = [_SCOPE]
+    configured_scopes: List[str] = [_SCOPE]
 
     if args.additional_scopes:
         configured_scopes.extend(args.additional_scopes)

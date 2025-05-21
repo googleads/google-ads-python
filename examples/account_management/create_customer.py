@@ -27,11 +27,13 @@ from datetime import datetime
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import CustomerService
+from google.ads.googleads.v19.types import Customer
 
 # [START create_customer]
-def main(client, manager_customer_id):
-    customer_service = client.get_service("CustomerService")
-    customer = client.get_type("Customer")
+def main(client: GoogleAdsClient, manager_customer_id: str) -> None:
+    customer_service: CustomerService = client.get_service("CustomerService")
+    customer: Customer = client.get_type("Customer")
     now = datetime.today().strftime("%Y%m%d %H:%M:%S")
     customer.descriptive_name = f"Account created with CustomerService on {now}"
     # For a list of valid currency codes and time zones see this documentation:

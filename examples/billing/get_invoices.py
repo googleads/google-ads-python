@@ -18,12 +18,21 @@
 import argparse
 from datetime import date, timedelta
 import sys
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types import Invoice
+from google.ads.googleads.v19.services.types import (
+    GoogleAdsService,
+    InvoiceService,
+)
+from google.ads.googleads.v19.services.types import ListInvoicesResponse
 
 
-def main(client, customer_id, billing_setup_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, billing_setup_id: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -33,12 +42,14 @@ def main(client, customer_id, billing_setup_id):
     """
 
     # The last day of last month.
-    last_month = date.today().replace(day=1) - timedelta(days=1)
+    last_month: date = date.today().replace(day=1) - timedelta(days=1)
+    invoice_service: InvoiceService = client.get_service("InvoiceService")
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
     # [START get_invoices]
     # Issues a request to list invoices.
-    response = client.get_service("InvoiceService").list_invoices(
+    response: ListInvoicesResponse = invoice_service.list_invoices(
         customer_id=customer_id,
-        billing_setup=client.get_service("GoogleAdsService").billing_setup_path(
+        billing_setup=googleads_service.billing_setup_path(
             customer_id, billing_setup_id
         ),
         # The year needs to be 2019 or later, per the docs:
@@ -49,12 +60,13 @@ def main(client, customer_id, billing_setup_id):
     # [END get_invoices]
 
     # [START get_invoices_1]
+    invoice: Invoice
     for invoice in response.invoices:
         print(
             f"""
 - Found the invoice {invoice.resource_name}
     ID (also known as Invoice Number): '{invoice.id}'
-    Type: {invoice.type_}
+    Type: {invoice.type_.name}
     Billing setup ID: '{invoice.billing_setup}'
     Payments account ID (also known as Billing Account Number): '{invoice.payments_account_id}'
     Payments profile ID (also known as Billing ID): '{invoice.payments_profile_id}'
@@ -70,7 +82,7 @@ def main(client, customer_id, billing_setup_id):
         subtotal {_micros_to_currency(invoice.regulatory_costs_subtotal_amount_micros)}
         tax {_micros_to_currency(invoice.regulatory_costs_tax_amount_micros)}
         total {_micros_to_currency(invoice.regulatory_costs_total_amount_micros)}
-    Replaced invoices: {invoice.replaced_invoices.join(", ") if invoice.replaced_invoices else "none"}
+    Replaced invoices: {', '.join(invoice.replaced_invoices) if invoice.replaced_invoices else "none"}
     Amounts:
         subtotal {_micros_to_currency(invoice.subtotal_amount_micros)}
         tax {_micros_to_currency(invoice.tax_amount_micros)}
@@ -100,7 +112,7 @@ def main(client, customer_id, billing_setup_id):
             # [END get_invoices_1]
 
 
-def micros_to_currency(micros):
+def micros_to_currency(micros: Optional[int]) -> Optional[float]:
     return micros / 1000000.0 if micros is not None else None
 
 
@@ -127,7 +139,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.billing_setup_id)

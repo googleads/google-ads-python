@@ -17,14 +17,24 @@
 
 import argparse
 import sys
+from typing import Iterable
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import PolicyApprovalStatusEnum
+from google.ads.googleads.v19.resources.types import Ad, AdGroupAd
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import (
+    GoogleAdsRow,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
+)
 
 
-def main(client, customer_id, campaign_id):
-    ga_service = client.get_service("GoogleAdsService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
-    query = f"""
+    query: str = f"""
         SELECT
           ad_group_ad.ad.id,
           ad_group_ad.ad.type,
@@ -35,22 +45,25 @@ def main(client, customer_id, campaign_id):
           campaign.id = {campaign_id}
           AND ad_group_ad.policy_summary.approval_status = DISAPPROVED"""
 
-    request = client.get_type("SearchGoogleAdsRequest")
+    request: SearchGoogleAdsRequest = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
     request.search_settings.return_total_results_count = True
     request.query = query
 
-    results = ga_service.search(request=request)
+    results: SearchGoogleAdsResponse = ga_service.search(request=request)
 
-    disapproved_enum = client.enums.PolicyApprovalStatusEnum.DISAPPROVED
+    disapproved_enum: PolicyApprovalStatusEnum = (
+        client.enums.PolicyApprovalStatusEnum.DISAPPROVED
+    )
 
     print("Disapproved ads:")
 
     # Iterate over all ads in all rows returned and count disapproved ads.
-    for row in results:
-        ad_group_ad = row.ad_group_ad
-        ad = ad_group_ad.ad
-        policy_summary = ad_group_ad.policy_summary
+    google_ads_row: GoogleAdsRow
+    for google_ads_row in results:
+        ad_group_ad_data: AdGroupAd = google_ads_row.ad_group_ad
+        ad: Ad = ad_group_ad_data.ad
+        policy_summary = ad_group_ad_data.policy_summary
 
         if not policy_summary.approval_status == disapproved_enum:
             continue
@@ -64,11 +77,11 @@ def main(client, customer_id, campaign_id):
         for entry in policy_summary.policy_topic_entries:
             print(f'\ttopic: "{entry.topic}", type "{entry.type_.name}"')
 
-        # Display the attributes and values that triggered the policy
-        # topic.
-        for evidence in entry.evidences:
-            for index, text in enumerate(evidence.text_list.texts):
-                print(f"\t\tevidence text[{index}]: {text}")
+            # Display the attributes and values that triggered the policy
+            # topic.
+            for evidence in entry.evidences:
+                for index, text in enumerate(evidence.text_list.texts):
+                    print(f"\t\tevidence text[{index}]: {text}")
 
     print(f"\nNumber of disapproved ads found: {results.total_results_count}")
 
@@ -95,7 +108,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

@@ -24,12 +24,31 @@ import sys
 from uuid import uuid4
 
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types import (
+    BiddingStrategy,
+    Campaign,
+)
+from google.ads.googleads.v19.services.types import (
+    BiddingStrategyService,
+    CampaignService,
+    GoogleAdsService,
+)
+from google.ads.googleads.v19.types import (
+    BiddingStrategyOperation,
+    CampaignOperation,
+)
 
 
-def main(client, customer_id, manager_customer_id, campaign_id):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    manager_customer_id: str,
+    campaign_id: str,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -39,7 +58,7 @@ def main(client, customer_id, manager_customer_id, campaign_id):
         campaign_id: The ID of an existing campaign in the client customer's
             account.
     """
-    bidding_strategy_resource_name = create_bidding_strategy(
+    bidding_strategy_resource_name: str = create_bidding_strategy(
         client, manager_customer_id
     )
     list_manager_owned_bidding_strategies(client, manager_customer_id)
@@ -50,7 +69,9 @@ def main(client, customer_id, manager_customer_id, campaign_id):
 
 
 # [START create_cross_account_strategy]
-def create_bidding_strategy(client, manager_customer_id):
+def create_bidding_strategy(
+    client: GoogleAdsClient, manager_customer_id: str
+) -> str:
     """Creates a new cross-account bidding strategy in the manager account.
 
     The cross-account bidding strategy is of type TargetSpend (Maximize Clicks).
@@ -62,12 +83,16 @@ def create_bidding_strategy(client, manager_customer_id):
     Returns:
         The ID of the newly created bidding strategy.
     """
-    bidding_strategy_service = client.get_service("BiddingStrategyService")
+    bidding_strategy_service: BiddingStrategyService = client.get_service(
+        "BiddingStrategyService"
+    )
     # Creates a portfolio bidding strategy.
     # [START set_currency_code]
     # Constructs an operation that will create a portfolio bidding strategy.
-    bidding_strategy_operation = client.get_type("BiddingStrategyOperation")
-    bidding_strategy = bidding_strategy_operation.create
+    bidding_strategy_operation: BiddingStrategyOperation = client.get_type(
+        "BiddingStrategyOperation"
+    )
+    bidding_strategy: BiddingStrategy = bidding_strategy_operation.create
     bidding_strategy.name = f"Maximize Clicks #{uuid4()}"
     # Sets target_spend to an empty TargetSpend object without setting any
     # of its nested fields.
@@ -83,7 +108,7 @@ def create_bidding_strategy(client, manager_customer_id):
     )
 
     # Prints the resource name of the created cross-account bidding strategy.
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created cross-account bidding strategy: '{resource_name}'")
 
     return resource_name
@@ -91,15 +116,17 @@ def create_bidding_strategy(client, manager_customer_id):
 
 
 # [START list_manager_strategies]
-def list_manager_owned_bidding_strategies(client, manager_customer_id):
+def list_manager_owned_bidding_strategies(
+    client: GoogleAdsClient, manager_customer_id: str
+) -> None:
     """List all cross-account bidding strategies in the manager account.
 
     Args:
         client: An initialized GoogleAdsClient instance.
         manager_customer_id: A manager customer ID.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    query = """
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    query: str = """
         SELECT
           bidding_strategy.id,
           bidding_strategy.name,
@@ -120,18 +147,20 @@ def list_manager_owned_bidding_strategies(client, manager_customer_id):
     )
     for response in stream:
         for row in response.results:
-            bs = row.bidding_strategy
+            bs: BiddingStrategy = row.bidding_strategy
             print(
                 f"\tID: {bs.id}\n"
                 f"\tName: {bs.name}\n"
-                f"\tStrategy type: {bs.type_}\n"
+                f"\tStrategy type: {bs.type_.name}\n"  # Use .name for enums
                 f"\tCurrency: {bs.currency_code}\n\n"
             )
             # [END list_manager_strategies]
 
 
 # [START list_accessible_strategies]
-def list_customer_accessible_bidding_strategies(client, customer_id):
+def list_customer_accessible_bidding_strategies(
+    client: GoogleAdsClient, customer_id: str
+) -> None:
     """Lists all bidding strategies available to the client account.
 
     This includes both portfolio bidding strategies owned by account and
@@ -141,8 +170,8 @@ def list_customer_accessible_bidding_strategies(client, customer_id):
         client: An initialized GoogleAdsClient instance.
         customer_id: A client customer ID.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    query = """
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
+    query: str = """
         SELECT
           accessible_bidding_strategy.id,
           accessible_bidding_strategy.name,
@@ -171,7 +200,7 @@ def list_customer_accessible_bidding_strategies(client, customer_id):
             print(
                 f"\tID: {bs.id}\n"
                 f"\tName: {bs.name}\n"
-                f"\tStrategy type: {bs.type_}\n"
+                f"\tStrategy type: {bs.type_.name}\n"  # Use .name for enums
                 f"\tOwner customer ID: {bs.owner_customer_id}\n"
                 f"\tOwner description: {bs.owner_descriptive_name}\n\n"
             )
@@ -180,8 +209,11 @@ def list_customer_accessible_bidding_strategies(client, customer_id):
 
 # [START attach_strategy]
 def attach_cross_account_bidding_strategy_to_campaign(
-    client, customer_id, campaign_id, bidding_strategy_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    bidding_strategy_resource_name: str,
+) -> None:
     """Attaches the cross-account bidding strategy to the given campaign.
 
     Args:
@@ -191,17 +223,17 @@ def attach_cross_account_bidding_strategy_to_campaign(
             account.
         bidding_strategy_resource_name: The ID of a bidding strategy
     """
-    campaign_service = client.get_service("CampaignService")
-    bidding_strategy_service = client.get_service("BiddingStrategyService")
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.update
+    campaign_service: CampaignService = client.get_service("CampaignService")
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.update
     campaign.resource_name = campaign_service.campaign_path(
         customer_id, campaign_id
     )
     campaign.bidding_strategy = bidding_strategy_resource_name
-    campaign_operation.update_mask = protobuf_helpers.field_mask(
-        None, campaign._pb
-    )
+    # Create a field mask to specify which fields are being updated.
+    field_mask = FieldMask()
+    field_mask.paths.append("bidding_strategy")
+    client.copy_from(campaign_operation.update_mask, field_mask)
 
     # Sends the operation in a mutate request.
     response = campaign_service.mutate_campaigns(
@@ -245,7 +277,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

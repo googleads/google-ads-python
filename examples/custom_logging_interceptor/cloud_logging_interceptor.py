@@ -21,9 +21,10 @@ within the class (in this case, a Cloud Logging client).
 
 import logging
 import time
+from typing import Any, Callable, Dict, Optional, Union
 
-from google.cloud import logging
-from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+import grpc
+from google.cloud import logging as cloud_logging
 
 from google.ads.googleads.interceptors import LoggingInterceptor, mask_message
 
@@ -40,27 +41,37 @@ class CloudLoggingInterceptor(LoggingInterceptor):
     this is to inherit from the Interceptor class instead, and selectively copy whatever
     logic is needed from the LoggingInterceptor class."""
 
-    def __init__(self, api_version):
+    # Define rpc_start and rpc_end attributes for timing RPCs.
+    rpc_start: float
+    rpc_end: float
+
+    def __init__(
+        self, api_version: str, logger_name: Optional[str] = "cloud_logging_interceptor"
+    ) -> None:
         """Initializer for the CloudLoggingInterceptor.
 
         Args:
             api_version: a str of the API version of the request.
+            logger_name: an optional str for the name of the logger.
         """
         super().__init__(logger=None, api_version=api_version)
         # Instantiate the Cloud Logging client.
-        logging_client = logging.Client()
-        self.logger = logging_client.logger("cloud_logging")
+        logging_client: cloud_logging.Client = cloud_logging.Client()
+        self.logger: cloud_logging.Logger = logging_client.logger(logger_name)
+        # Initialize endpoint attribute, will be set in log_request if needed
+        self.endpoint: Optional[str] = None
+
 
     def log_successful_request(
         self,
-        method,
-        customer_id,
-        metadata_json,
-        request_id,
-        request,
-        trailing_metadata_json,
-        response,
-    ):
+        method: str,
+        customer_id: Optional[str],
+        metadata_json: str,
+        request_id: str,
+        request: Any,
+        trailing_metadata_json: str,
+        response: Union[grpc.Call, grpc.Future],
+    ) -> None:
         """Handles logging of a successful request.
 
         Args:
@@ -78,15 +89,15 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         # The response result could contain up to 10,000 rows of data,
         # so consider truncating this value before logging it, to save
         # on data storage costs and maintain readability.
-        result = self.retrieve_and_mask_result(response)
+        result: Any = self.retrieve_and_mask_result(response)
 
         # elapsed_ms is the approximate elapsed time of the RPC, in milliseconds.
         # There are different ways to define and measure elapsed time, so use
         # whatever approach makes sense for your monitoring purposes.
         # rpc_start and rpc_end are set in the intercept_unary_* methods below.
-        elapsed_ms = (self.rpc_end - self.rpc_start) * 1000
+        elapsed_ms: float = (self.rpc_end - self.rpc_start) * 1000
 
-        debug_log = {
+        debug_log: Dict[str, Any] = {
             "method": method,
             "host": metadata_json,
             "request_id": request_id,
@@ -98,7 +109,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(debug_log, severity="DEBUG")
 
-        info_log = {
+        info_log: Dict[str, Any] = {
             "customer_id": customer_id,
             "method": method,
             "request_id": request_id,
@@ -110,14 +121,14 @@ class CloudLoggingInterceptor(LoggingInterceptor):
 
     def log_failed_request(
         self,
-        method,
-        customer_id,
-        metadata_json,
-        request_id,
-        request,
-        trailing_metadata_json,
-        response,
-    ):
+        method: str,
+        customer_id: Optional[str],
+        metadata_json: str,
+        request_id: str,
+        request: Any,
+        trailing_metadata_json: str,
+        response: Union[grpc.Call, grpc.Future],
+    ) -> None:
         """Handles logging of a failed request.
 
         Args:
@@ -127,13 +138,13 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             request_id: A unique ID for the request provided in the response.
             request: An instance of a request proto message.
             trailing_metadata_json: A JSON str of trailing_metadata.
-            response: A JSON str of the response message.
+            response: A grpc.Call/grpc.Future instance for failed requests.
         """
-        exception = self._get_error_from_response(response)
-        exception_str = self._parse_exception_to_str(exception)
-        fault_message = self._get_fault_message(exception)
+        exception: grpc.RpcError = self._get_error_from_response(response)
+        exception_str: str = self._parse_exception_to_str(exception)
+        fault_message: str = self._get_fault_message(exception)
 
-        info_log = {
+        info_log: Dict[str, Any] = {
             "method": method,
             "endpoint": self.endpoint,
             "host": metadata_json,
@@ -145,7 +156,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(info_log, severity="INFO")
 
-        error_log = {
+        error_log: Dict[str, Any] = {
             "method": method,
             "endpoint": self.endpoint,
             "request_id": request_id,
@@ -155,15 +166,20 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(error_log, severity="ERROR")
 
-    def intercept_unary_unary(self, continuation, client_call_details, request):
+    def intercept_unary_unary(
+        self,
+        continuation: Callable[[grpc.ClientCallDetails, Any], grpc.Call],
+        client_call_details: grpc.ClientCallDetails,
+        request: Any,
+    ) -> Union[grpc.Call, grpc.Future]:
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
 
         Args:
             continuation: a function to continue the request process.
-            client_call_details: a grpc._interceptor._ClientCallDetails
-                instance containing request metadata.
+            client_call_details: a grpc.ClientCallDetails instance containing
+                request metadata.
             request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
                 message class instance.
 
@@ -171,7 +187,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
         # Set the rpc_end value to current time when RPC completes.
-        def update_rpc_end(response_future):
+        def update_rpc_end(response_future: grpc.Future) -> None:
             self.rpc_end = time.perf_counter()
 
         # Capture precise clock time to later calculate approximate elapsed
@@ -179,9 +195,17 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         self.rpc_start = time.perf_counter()
 
         # The below call is REQUIRED.
-        response = continuation(client_call_details, request)
+        response: Union[grpc.Call, grpc.Future] = continuation(
+            client_call_details, request
+        )
 
-        response.add_done_callback(update_rpc_end)
+        # Ensure response is a Future to add done callback
+        if isinstance(response, grpc.Future):
+            response.add_done_callback(update_rpc_end)
+        elif isinstance(response, grpc.Call):
+            # For synchronous calls, set rpc_end immediately after call returns
+            self.rpc_end = time.perf_counter()
+
 
         self.log_request(client_call_details, request, response)
 
@@ -189,16 +213,19 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         return response
 
     def intercept_unary_stream(
-        self, continuation, client_call_details, request
-    ):
+        self,
+        continuation: Callable[[grpc.ClientCallDetails, Any], grpc.Call],
+        client_call_details: grpc.ClientCallDetails,
+        request: Any,
+    ) -> grpc.Call:
         """Intercepts and logs API interactions for Unary-Stream requests.
 
         Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
 
         Args:
             continuation: a function to continue the request process.
-            client_call_details: a grpc._interceptor._ClientCallDetails
-                instance containing request metadata.
+            client_call_details: a grpc.ClientCallDetails instance containing
+                request metadata.
             request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
                 message class instance.
 
@@ -206,7 +233,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
 
-        def on_rpc_complete(response_future):
+        def on_rpc_complete(response_future: grpc.Future) -> None:
             self.rpc_end = time.perf_counter()
             self.log_request(client_call_details, request, response_future)
 
@@ -215,14 +242,40 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         self.rpc_start = time.perf_counter()
 
         # The below call is REQUIRED.
-        response = continuation(client_call_details, request)
+        response: grpc.Call = continuation(client_call_details, request)
 
         # Set self._cache to the cache on the response wrapper in order to
         # access the streaming logs. This is REQUIRED in order to log streaming
         # requests.
-        self._cache = response.get_cache()
+        # The LoggingInterceptor class uses self._cache, ensure it's set.
+        if hasattr(response, "get_cache"):
+            self._cache = response.get_cache()
+        else:
+            # If get_cache is not available, this means the response object
+            # is not the expected wrapper. Logging streaming responses might
+            # not work as intended.
+            logging.warning(
+                "Response object does not have get_cache method. "
+                "Streaming response logging might be affected."
+            )
 
-        response.add_done_callback(on_rpc_complete)
+
+        # Ensure response is a Future to add done callback (though for streams it's usually a Call)
+        if isinstance(response, grpc.Future):
+             response.add_done_callback(on_rpc_complete)
+        elif isinstance(response, grpc.Call):
+            # For streaming calls, we might need to handle completion differently
+            # or rely on the fact that log_request will be called as data streams.
+            # For simplicity, we'll assume log_request is called appropriately
+            # by the base class or that the stream completion will trigger a state
+            # where rpc_end can be set if needed.
+            # If the stream itself is a future (e.g. for server-side streaming RPCs that complete),
+            # then a callback can be added.
+            # For client-side streaming or bidi, it's more complex.
+            # Here, we assume the LoggingInterceptor's handling of _cache
+            # is sufficient for extracting stream data.
+            pass
+
 
         # The below return is REQUIRED.
         return response

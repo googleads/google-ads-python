@@ -21,16 +21,21 @@ To get campaigns, run get_campaigns.py.
 import argparse
 import sys
 
-from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import CampaignStatusEnum
+from google.ads.googleads.v19.resources.types import Campaign
+from google.ads.googleads.v19.services.types import CampaignService
+from google.ads.googleads.v19.types import CampaignOperation
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 
-def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    campaign_service: CampaignService = client.get_service("CampaignService")
     # Create campaign operation.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.update
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.update
 
     campaign.resource_name = campaign_service.campaign_path(
         customer_id, campaign_id
@@ -40,9 +45,12 @@ def main(client, customer_id, campaign_id):
 
     campaign.network_settings.target_search_network = False
     # Retrieve a FieldMask for the fields configured in the campaign.
+    # Create a field mask using the FieldMask type.
+    field_mask = FieldMask()
+    field_mask.paths.extend(["status", "network_settings.target_search_network"])
     client.copy_from(
         campaign_operation.update_mask,
-        protobuf_helpers.field_mask(None, campaign._pb),
+        field_mask,
     )
 
     campaign_response = campaign_service.mutate_campaigns(
@@ -71,7 +79,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

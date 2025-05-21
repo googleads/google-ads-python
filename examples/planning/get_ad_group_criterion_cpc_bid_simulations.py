@@ -20,16 +20,26 @@ To get ad groups, run get_ad_groups.py.
 
 import argparse
 import sys
+from typing import Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import CpcBidSimulationPointList, CpcBidSimulationPoint
+from google.ads.googleads.v19.resources.types import AdGroupCriterionSimulation
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import (
+    GoogleAdsRow,
+    SearchGoogleAdsStreamResponse,  # Corrected from SearchPagedResponse
+)
 
 
 # [START get_ad_group_criterion_cpc_bid_simulations]
-def main(client, customer_id, ad_group_id):
-    googleads_service = client.get_service("GoogleAdsService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
+    googleads_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
-    query = f"""
+    query: str = f"""
         SELECT
           ad_group_criterion_simulation.ad_group_id,
           ad_group_criterion_simulation.criterion_id,
@@ -42,15 +52,20 @@ def main(client, customer_id, ad_group_id):
           AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
     # Issues a search request using streaming.
-    stream = googleads_service.search_stream(
-        customer_id=customer_id, query=query
+    # The response type for search_stream is an Iterable of SearchGoogleAdsStreamResponse
+    stream: Iterable[SearchGoogleAdsStreamResponse] = (
+        googleads_service.search_stream(customer_id=customer_id, query=query)
     )
 
     # Iterates over all rows in all messages and prints the requested field
     # values for the ad group criterion CPC bid simulation in each row.
+    batch: SearchGoogleAdsStreamResponse
     for batch in stream:
+        row: GoogleAdsRow
         for row in batch.results:
-            simulation = row.ad_group_criterion_simulation
+            simulation: AdGroupCriterionSimulation = (
+                row.ad_group_criterion_simulation
+            )
 
             print(
                 "found ad group criterion CPC bid simulation for "
@@ -60,7 +75,11 @@ def main(client, customer_id, ad_group_id):
                 f"end date {simulation.end_date}"
             )
 
-            for point in simulation.cpc_bid_point_list.points:
+            point_list: CpcBidSimulationPointList = (
+                simulation.cpc_bid_point_list
+            )
+            point: CpcBidSimulationPoint
+            for point in point_list.points:
                 print(
                     f"\tbid: {point.cpc_bid_micros} => "
                     f"clicks: {point.clicks}",
@@ -100,7 +119,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

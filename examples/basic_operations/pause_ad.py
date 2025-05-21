@@ -21,14 +21,27 @@ import sys
 from google.api_core import protobuf_helpers
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import AdGroupStatusEnum
+from google.ads.googleads.v19.resources.types import AdGroupAd
+from google.ads.googleads.v19.services.types import AdGroupAdService
+from google.ads.googleads.v19.types import AdGroupAdOperation
 
 
-def main(client, customer_id, ad_group_id, ad_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    ad_id: str,
+) -> None:
+    ad_group_ad_service: AdGroupAdService = client.get_service(
+        "AdGroupAdService"
+    )
 
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
 
-    ad_group_ad = ad_group_ad_operation.update
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.update
     ad_group_ad.resource_name = ad_group_ad_service.ad_group_ad_path(
         customer_id, ad_group_id, ad_id
     )
@@ -69,7 +82,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id, args.ad_id)

@@ -28,17 +28,28 @@ Examples:
 """
 import argparse
 import csv
-import sys
 import os
+import sys
+from typing import Iterable, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import GoogleAdsService
+from google.ads.googleads.v19.types import (
+    GoogleAdsRow,
+    SearchGoogleAdsStreamRequest,
+    SearchGoogleAdsStreamResponse,
+)
+
+_DEFAULT_FILE_NAME: str = "campaign_report_to_csv_results.csv"
 
 
-_DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
-
-
-def main(client, customer_id, output_file, write_headers):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    output_file: str,
+    write_headers: bool,
+) -> None:
     """Writes rows returned from a search_stream request to a CSV file.
     Args:
         client: An initialized GoogleAdsClient instance.
@@ -46,11 +57,11 @@ def main(client, customer_id, output_file, write_headers):
         output_file (str): Filename of the file to write the report data to.
         write_headers (bool): From argparse, True if arg is provided.
     """
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(file_dir, output_file)
-    ga_service = client.get_service("GoogleAdsService")
+    file_dir: str = os.path.dirname(os.path.abspath(__file__))
+    file_path: str = os.path.join(file_dir, output_file)
+    ga_service: GoogleAdsService = client.get_service("GoogleAdsService")
 
-    query = """
+    query: str = """
         SELECT
           customer.descriptive_name,
           segments.date,
@@ -65,16 +76,20 @@ def main(client, customer_id, output_file, write_headers):
         LIMIT 25"""
 
     # Issues a search request using streaming.
-    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request: SearchGoogleAdsStreamRequest = client.get_type(
+        "SearchGoogleAdsStreamRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
-    stream = ga_service.search_stream(search_request)
+    stream: Iterable[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
+        search_request
+    )
 
     with open(file_path, "w", newline="") as f:
         writer = csv.writer(f)
 
         # Define a list of headers for the first row.
-        headers = [
+        headers: List[str] = [
             "Account",
             "Date",
             "Campaign",
@@ -87,18 +102,20 @@ def main(client, customer_id, output_file, write_headers):
         if write_headers:
             writer.writerow(headers)
 
+        batch: SearchGoogleAdsStreamResponse
         for batch in stream:
-            for row in batch.results:
+            google_ads_row: GoogleAdsRow
+            for google_ads_row in batch.results:
                 # Use the CSV writer to write the individual GoogleAdsRow
                 # fields returned in the SearchGoogleAdsStreamResponse.
                 writer.writerow(
                     [
-                        row.customer.descriptive_name,
-                        row.segments.date,
-                        row.campaign.name,
-                        row.metrics.impressions,
-                        row.metrics.clicks,
-                        row.metrics.cost_micros,
+                        google_ads_row.customer.descriptive_name,
+                        google_ads_row.segments.date,
+                        google_ads_row.campaign.name,
+                        google_ads_row.metrics.impressions,
+                        google_ads_row.metrics.clicks,
+                        google_ads_row.metrics.cost_micros,
                     ]
                 )
 
@@ -140,7 +157,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

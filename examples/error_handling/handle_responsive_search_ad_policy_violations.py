@@ -21,12 +21,35 @@ errors, the example will stop instead of trying sending an exemption request.
 import argparse
 import sys
 import uuid
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types import (
+    AdTextAsset,
+    ResponsiveSearchAdInfo,
+)
+from google.ads.googleads.v19.enums.types import (
+    AdGroupAdStatusEnum,
+    PolicyFindingErrorEnum,
+)
+from google.ads.googleads.v19.errors.types import (
+    ErrorDetails,
+    GoogleAdsError,
+    PolicyFindingDetails,
+    PolicyTopicEntry,
+)
+from google.ads.googleads.v19.resources.types import AdGroupAd
+from google.ads.googleads.v19.services.types import (
+    AdGroupAdService,
+    AdGroupService,
+)
+from google.ads.googleads.v19.types import AdGroupAdOperation
 
 
-def main(client, customer_id, ad_group_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
@@ -34,12 +57,14 @@ def main(client, customer_id, ad_group_id):
         customer_id: The customer ID for which to add the responsive search ad.
         ad_group_id: The ad group ID to which to add a responsive search ad.
     """
-    ad_group_ad_service_client = client.get_service("AdGroupAdService")
-    ad_group_ad_operation = create_responsive_search_ad(
-        client, ad_group_ad_service_client, customer_id, ad_group_id
+    ad_group_ad_service_client: AdGroupAdService = client.get_service(
+        "AdGroupAdService"
+    )
+    ad_group_ad_operation: AdGroupAdOperation = create_responsive_search_ad(
+        client, customer_id, ad_group_id
     )
 
-    ignorable_policy_topics = []
+    ignorable_policy_topics: List[str] = []
     try:
         # Try sending a mutate request to add the ad group ad.
         ad_group_ad_service_client.mutate_ad_group_ads(
@@ -52,6 +77,12 @@ def main(client, customer_id, ad_group_id):
             client, googleads_exception
         )
 
+    # If there are no ignorable policy topics, it means the exception was either
+    # not a policy finding error, or it was non-exemptible.
+    # In either case, there's nothing more to do.
+    if not ignorable_policy_topics:
+        return
+
     request_exemption(
         customer_id,
         ad_group_ad_service_client,
@@ -61,38 +92,42 @@ def main(client, customer_id, ad_group_id):
 
 
 def create_responsive_search_ad(
-    client, ad_group_ad_service_client, customer_id, ad_group_id
-):
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> AdGroupAdOperation:
     """Create a responsive search ad that includes a policy violation.
 
     Args:
         client: The GoogleAds client instance.
-        ad_group_ad_service_client: The AdGroupAdService client instance.
         customer_id: The customer ID for which to add the responsive search ad.
         ad_group_id: The ad group ID to which to add a responsive search ad.
 
     Returns:
         The attempted AdGroupAdOperation instance.
     """
-    ad_group_resource_name = client.get_service("AdGroupService").ad_group_path(
+    ad_group_service: AdGroupService = client.get_service("AdGroupService")
+    ad_group_resource_name: str = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
 
     # Creates an operation and ad group ad to create and hold the above ad.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = ad_group_ad_operation.create
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to PAUSED to prevent it from immediately serving.
     # Set to ENABLED once you've added targeting and the ad are ready to serve.
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     # Sets the responsive search ad info on an ad.
-    responsive_search_ad_info = ad_group_ad.ad.responsive_search_ad
+    responsive_search_ad_info: ResponsiveSearchAdInfo = (
+        ad_group_ad.ad.responsive_search_ad
+    )
 
-    headline_1 = client.get_type("AdTextAsset")
+    headline_1: AdTextAsset = client.get_type("AdTextAsset")
     headline_1.text = f"Cruise to Mars #{str(uuid.uuid4())[0:13]}"
-    headline_2 = client.get_type("AdTextAsset")
+    headline_2: AdTextAsset = client.get_type("AdTextAsset")
     headline_2.text = "Best Space Cruise Line"
-    headline_3 = client.get_type("AdTextAsset")
+    headline_3: AdTextAsset = client.get_type("AdTextAsset")
     headline_3.text = "Experience the Stars"
     responsive_search_ad_info.headlines.extend(
         [headline_1, headline_2, headline_3]
@@ -100,9 +135,9 @@ def create_responsive_search_ad(
 
     # Intentionally use an ad text that violates policy by having too many
     # exclamation marks.
-    description_1 = client.get_type("AdTextAsset")
+    description_1: AdTextAsset = client.get_type("AdTextAsset")
     description_1.text = "Buy your tickets now!!!!!!!"
-    description_2 = client.get_type("AdTextAsset")
+    description_2: AdTextAsset = client.get_type("AdTextAsset")
     description_2.text = "Visit the Red Planet"
     responsive_search_ad_info.descriptions.extend(
         [description_1, description_2]
@@ -114,7 +149,9 @@ def create_responsive_search_ad(
 
 
 # [START handle_responsive_search_ad_policy_violations]
-def fetch_ignorable_policy_topics(client, googleads_exception):
+def fetch_ignorable_policy_topics(
+    client: GoogleAdsClient, googleads_exception: GoogleAdsException
+) -> List[str]:
     """Collects all ignorable policy topics to be sent for exemption request.
 
     Args:
@@ -125,44 +162,52 @@ def fetch_ignorable_policy_topics(client, googleads_exception):
     Returns:
         A list of ignorable policy topics.
     """
-    ignorable_policy_topics = []
+    ignorable_policy_topics: List[str] = []
+    policy_finding_error_enum: PolicyFindingErrorEnum = client.get_type(
+        "PolicyFindingErrorEnum"
+    ).PolicyFindingError
 
     print("Google Ads failure details:")
+    error: GoogleAdsError
     for error in googleads_exception.failure.errors:
         if (
             error.error_code.policy_finding_error
-            != client.get_type(
-                "PolicyFindingErrorEnum"
-            ).PolicyFindingError.POLICY_FINDING
+            != policy_finding_error_enum.POLICY_FINDING
         ):
             print(
                 "This example supports sending exemption request for the "
                 "policy finding error only."
             )
+            # If the error is not a policy finding error, raise the exception.
             raise googleads_exception
 
         print(f"\t{error.error_code.policy_finding_error}: {error.message}")
 
-        if (
-            error.details is not None
-            and error.details.policy_finding_details is not None
-        ):
-            policy_finding_details = error.details.policy_finding_details
+        details: ErrorDetails = error.details
+        if details and details.policy_finding_details:
+            policy_finding_details: PolicyFindingDetails = (
+                details.policy_finding_details
+            )
             print("\tPolicy finding details:")
 
+            policy_topic_entry: PolicyTopicEntry
             for (
                 policy_topic_entry
             ) in policy_finding_details.policy_topic_entries:
                 ignorable_policy_topics.append(policy_topic_entry.topic)
                 print(f"\t\tPolicy topic name: '{policy_topic_entry.topic}'")
                 print(
-                    f"\t\tPolicy topic entry type: '{policy_topic_entry.type_}'"
+                    f"\t\tPolicy topic entry type: '{policy_topic_entry.type_.name}'"
                 )
                 # For the sake of brevity, we exclude printing "policy topic
                 # evidences" and "policy topic constraints" here. You can fetch
                 # those data by calling:
                 # - policy_topic_entry.evidences
                 # - policy_topic_entry.constraints
+        else:
+            # Not all policy finding errors have details.
+            print("\tNo policy finding details found.")
+
 
     return ignorable_policy_topics
     # [END handle_responsive_search_ad_policy_violations]
@@ -170,11 +215,11 @@ def fetch_ignorable_policy_topics(client, googleads_exception):
 
 # [START handle_responsive_search_ad_policy_violations_1]
 def request_exemption(
-    customer_id,
-    ad_group_ad_service_client,
-    ad_group_ad_operation,
-    ignorable_policy_topics,
-):
+    customer_id: str,
+    ad_group_ad_service_client: AdGroupAdService,
+    ad_group_ad_operation: AdGroupAdOperation,
+    ignorable_policy_topics: List[str],
+) -> None:
     """Sends exemption requests for creating a responsive search ad.
 
     Args:
@@ -226,7 +271,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

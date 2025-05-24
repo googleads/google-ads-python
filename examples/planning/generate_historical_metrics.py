@@ -20,13 +20,14 @@ https://developers.google.com/google-ads/api/docs/keyword-planning/generate-hist
 
 import argparse
 import sys
+from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START generate_historical_metrics]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -36,16 +37,16 @@ def main(client, customer_id):
     generate_historical_metrics(client, customer_id)
 
 
-def generate_historical_metrics(client, customer_id):
+def generate_historical_metrics(client: GoogleAdsClient, customer_id: str) -> None:
     """Generates historical metrics and prints the results.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    request = client.get_type("GenerateKeywordHistoricalMetricsRequest")
+    googleads_service: Any = client.get_service("GoogleAdsService")
+    keyword_plan_idea_service: Any = client.get_service("KeywordPlanIdeaService")
+    request: Any = client.get_type("GenerateKeywordHistoricalMetricsRequest")
     request.customer_id = customer_id
     request.keywords = ["mars cruise", "cheap cruise", "jupiter cruise"]
     # Geo target constant 2840 is for USA.
@@ -60,12 +61,12 @@ def generate_historical_metrics(client, customer_id):
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#languages
     request.language = googleads_service.language_constant_path("1000")
 
-    response = keyword_plan_idea_service.generate_keyword_historical_metrics(
+    response: Any = keyword_plan_idea_service.generate_keyword_historical_metrics(
         request=request
     )
 
     for result in response.results:
-        metrics = result.keyword_metrics
+        metrics: Any = result.keyword_metrics
         # These metrics include those for both the search query and any variants
         # included in the response.
         print(
@@ -123,11 +124,13 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

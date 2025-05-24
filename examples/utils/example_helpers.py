@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 import requests
 
 
-def get_printable_datetime():
+def get_printable_datetime() -> str:
     """Generates a string for the current date and time in local time zone.
 
     The datetime string has the following format, where the trailing "sZ"
@@ -37,7 +37,7 @@ def get_printable_datetime():
     )
 
 
-def get_image_bytes_from_url(url: str):
+def get_image_bytes_from_url(url: str) -> bytes:
     """Retrieves the raw bytes of an image from a url.
 
     Args:

@@ -25,18 +25,15 @@ https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsRequest
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamRequest
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
 from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry
 
 
-_CLIENT_TIMEOUT_SECONDS: int = 5 * 60  # 5 minutes.
+_CLIENT_TIMEOUT_SECONDS = 5 * 60  # 5 minutes.
 _QUERY: str = "SELECT campaign.id FROM campaign"
 
 
@@ -56,16 +53,14 @@ def make_server_streaming_call(
         client: An initialized GoogleAds client.
         customer_id: The str Google Ads customer ID.
     """
-    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
-    campaign_ids: list[str] = []
+    ga_service = client.get_service("GoogleAdsService")
+    campaign_ids: List[str] = []
 
     try:
-        search_request: SearchGoogleAdsStreamRequest = client.get_type(
-            "SearchGoogleAdsStreamRequest"
-        )
+        search_request = client.get_type("SearchGoogleAdsStreamRequest")
         search_request.customer_id = customer_id
         search_request.query = _QUERY
-        stream: SearchGoogleAdsStreamResponse = ga_service.search_stream(
+        stream = ga_service.search_stream(
             request=search_request,
             # When making any request, an optional "timeout" parameter can be
             # provided to specify a client-side response deadline in seconds.
@@ -80,7 +75,7 @@ def make_server_streaming_call(
                 campaign_ids.append(row.campaign.id)
 
         print("The server streaming call completed before the timeout.")
-    except DeadlineExceeded:
+    except DeadlineExceeded as ex:
         print("The server streaming call did not complete before the timeout.")
         sys.exit(1)
     except GoogleAdsException as ex:
@@ -107,16 +102,14 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
         client: An initialized GoogleAds client.
         customer_id: The Google Ads customer ID.
     """
-    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
-    campaign_ids: list[str] = []
+    ga_service = client.get_service("GoogleAdsService")
+    campaign_ids: List[str] = []
 
     try:
-        search_request: SearchGoogleAdsRequest = client.get_type(
-            "SearchGoogleAdsRequest"
-        )
+        search_request = client.get_type("SearchGoogleAdsRequest")
         search_request.customer_id = customer_id
         search_request.query = _QUERY
-        results: SearchGoogleAdsStreamResponse = ga_service.search(
+        results = ga_service.search(
             request=search_request,
             # When making any request, an optional "retry" parameter can be
             # provided to specify its retry behavior. Complete information about
@@ -144,7 +137,7 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
             campaign_ids.append(row.campaign.id)
 
         print("The unary call completed before the timeout.")
-    except DeadlineExceeded:
+    except DeadlineExceeded as ex:
         print("The unary call did not complete before the timeout.")
         sys.exit(1)
     except GoogleAdsException as ex:

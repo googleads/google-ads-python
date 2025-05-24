@@ -23,9 +23,6 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.ad_group_asset_service import AdGroupAssetServiceClient
-from google.ads.googleads.v19.services.types.ad_group_asset_service import MutateAdGroupAssetsResponse
-from google.ads.googleads.v19.services.types.google_ads_service import GoogleAdsServiceClient
 from google.api_core import protobuf_helpers
 
 
@@ -35,9 +32,7 @@ def main(
     ad_group_id: str,
     asset_id: str,
 ) -> None:
-    ad_group_asset_service: AdGroupAssetServiceClient = client.get_service(
-        "AdGroupAssetService"
-    )
+    ad_group_asset_service = client.get_service("AdGroupAssetService")
     ad_group_asset_resource_name: str = ad_group_asset_service.asset_path(
         customer_id, asset_id
     )
@@ -49,10 +44,8 @@ def main(
     ad_group_asset_set.ad_group = ad_group_asset_service.ad_group_path(
         customer_id, ad_group_id
     )
-    response: MutateAdGroupAssetsResponse = (
-        ad_group_asset_service.mutate_ad_group_assets(
-            customer_id=customer_id, operations=[ad_group_asset_operation]
-        )
+    response = ad_group_asset_service.mutate_ad_group_assets(
+        customer_id=customer_id, operations=[ad_group_asset_operation]
     )
 
     for result in response.results:

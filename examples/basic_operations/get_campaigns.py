@@ -20,16 +20,24 @@ To add campaigns, run add_campaigns.py.
 
 import argparse
 import sys
+from typing import Iterator
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v19.services.types.google_ads_service import (
+    SearchGoogleAdsStreamResponse,
+    GoogleAdsRow,
+)
 
 
 # [START get_campaigns]
-def main(client, customer_id):
-    ga_service = client.get_service("GoogleAdsService")
+def main(client: GoogleAdsClient, customer_id: str) -> None:
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    query = """
+    query: str = """
         SELECT
           campaign.id,
           campaign.name
@@ -37,9 +45,12 @@ def main(client, customer_id):
         ORDER BY campaign.id"""
 
     # Issues a search request using streaming.
-    stream = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream: Iterator[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
     for batch in stream:
+        row: GoogleAdsRow
         for row in batch.results:
             print(
                 f"Campaign with ID {row.campaign.id} and name "
@@ -60,11 +71,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id)

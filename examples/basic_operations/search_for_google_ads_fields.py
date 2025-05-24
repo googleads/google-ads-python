@@ -23,11 +23,22 @@ campaign) or a field (such as metrics.impressions, campaign.id).
 
 import argparse
 import sys
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types.google_ads_field import (
+    GoogleAdsField,
+)
+from google.ads.googleads.v19.services.services.google_ads_field_service import (
+    GoogleAdsFieldServiceClient,
+)
+from google.ads.googleads.v19.services.types.google_ads_field_service import (
+    SearchGoogleAdsFieldsRequest,
+    SearchGoogleAdsFieldsResponse,
+)
 
 
-def main(client, name_prefix):
+def main(client: GoogleAdsClient, name_prefix: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -35,10 +46,12 @@ def main(client, name_prefix):
         name_prefix: the name prefix to use when searching for Google Ads field
             names.
     """
-    gaf_service = client.get_service("GoogleAdsFieldService")
+    gaf_service: GoogleAdsFieldServiceClient = client.get_service(
+        "GoogleAdsFieldService"
+    )
 
     # Searches for all fields whose name begins with the specified name prefix.
-    query = f"""
+    query: str = f"""
         SELECT
           name,
           category,
@@ -50,10 +63,14 @@ def main(client, name_prefix):
           is_repeated
         WHERE name LIKE '{name_prefix}%'"""
 
-    request = client.get_type("SearchGoogleAdsFieldsRequest")
+    request: SearchGoogleAdsFieldsRequest = client.get_type(
+        "SearchGoogleAdsFieldsRequest"
+    )
     request.query = query
 
-    response = gaf_service.search_google_ads_fields(request=request)
+    response: SearchGoogleAdsFieldsResponse = (
+        gaf_service.search_google_ads_fields(request=request)
+    )
 
     # Checks if any results were returned and exits if not.
     if response.total_results_count == 0:
@@ -64,6 +81,7 @@ def main(client, name_prefix):
         sys.exit(0)
 
     # Retrieves each matching GoogleAdsField and prints its metadata.
+    googleads_field: GoogleAdsField
     for googleads_field in response:
         print(f"{googleads_field.name}:")
         # These statements format the printed string so that the left side is
@@ -81,6 +99,7 @@ def main(client, name_prefix):
             # Sorts the selectable_with list then prints each field name.
             googleads_field.selectable_with.sort()
             print("  selectable with:")
+            selectable_with_field: str
             for selectable_with_field in googleads_field.selectable_with:
                 print(f"    {selectable_with_field}")
 
@@ -100,11 +119,13 @@ if __name__ == "__main__":
         required=True,
         help="The name prefix to use when searching for Google Ads field names",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.name_prefix)

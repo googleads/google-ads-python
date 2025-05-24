@@ -20,44 +20,55 @@ To get responsive search ads, run get_responsive_search_ads.py.
 
 import argparse
 import sys
+from typing import MutableSequence
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v19.resources.types.ad import Ad
+from google.ads.googleads.v19.services.services.ad_service import (
+    AdServiceClient,
+)
+from google.ads.googleads.v19.services.types.ad_service import (
+    AdOperation,
+    MutateAdsResponse,
+)
 from google.api_core import protobuf_helpers
 
 
 # [START update_responsive_search_ad]
-def main(client, customer_id, ad_id):
-    ad_service = client.get_service("AdService")
-    ad_operation = client.get_type("AdOperation")
+def main(client: GoogleAdsClient, customer_id: str, ad_id: str) -> None:
+    ad_service: AdServiceClient = client.get_service("AdService")
+    ad_operation: AdOperation = client.get_type("AdOperation")
 
     # Update ad operation.
-    ad = ad_operation.update
+    ad: Ad = ad_operation.update
     ad.resource_name = ad_service.ad_path(customer_id, ad_id)
 
     # Update some properties of the responsive search ad.
-    headline_1 = client.get_type("AdTextAsset")
+    headline_1: AdTextAsset = client.get_type("AdTextAsset")
     headline_1.text = f"Cruise to Pluto #{uuid4().hex[:8]}"
     headline_1.pinned_field = client.enums.ServedAssetFieldTypeEnum.HEADLINE_1
 
-    headline_2 = client.get_type("AdTextAsset")
+    headline_2: AdTextAsset = client.get_type("AdTextAsset")
     headline_2.text = "Tickets on sale now"
 
-    headline_3 = client.get_type("AdTextAsset")
+    headline_3: AdTextAsset = client.get_type("AdTextAsset")
     headline_3.text = "Buy your tickets now"
 
     ad.responsive_search_ad.headlines.extend(
         [headline_1, headline_2, headline_3]
     )
 
-    description_1 = client.get_type("AdTextAsset")
+    description_1: AdTextAsset = client.get_type("AdTextAsset")
     description_1.text = "Best space cruise ever."
 
-    description_2 = client.get_type("AdTextAsset")
+    description_2: AdTextAsset = client.get_type("AdTextAsset")
     description_2.text = (
         "The most wonderful space experience you will ever have."
     )
+    ad.responsive_search_ad.descriptions.extend([description_1, description_2])
 
     ad.final_urls.append("https://www.example.com")
     ad.final_mobile_urls.append("https://www.example.com/mobile")
@@ -66,8 +77,8 @@ def main(client, customer_id, ad_id):
     )
 
     # Updates the ad.
-    ad_response = ad_service.mutate_ads(
-        customer_id=customer_id, operations=[ad_operation]
+    ad_response: MutateAdsResponse = ad_service.mutate_ads(
+        customer_id=customer_id, operations=[ad_operation]  # type: ignore
     )
     print(
         f'Ad with resource name "{ad_response.results[0].resource_name}" '
@@ -94,11 +105,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--ad_id", type=str, required=True, help="The ad ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_id)

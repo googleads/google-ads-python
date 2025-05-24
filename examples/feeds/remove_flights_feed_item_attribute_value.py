@@ -29,15 +29,33 @@ names in the _get_feeds method.
 
 import argparse
 import sys
+from typing import Dict, Mapping, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import flight_placeholder_field as flight_placeholder_field_enum
+from google.ads.googleads.v19.types import feed_item as feed_item_type
+from google.ads.googleads.v19.types import (
+    feed_item_operation as feed_item_operation_type,
+)
+from google.ads.googleads.v19.services.types import (
+    feed_item_service as feed_item_service_type,
+)
+from google.ads.googleads.v19.services.types import (
+    google_ads_service as google_ads_service_type,
+)
+from google.ads.googleads.v19.types import feed as feed_type
+
 from google.api_core import protobuf_helpers
 
 
 def main(
-    client, customer_id, feed_id, feed_item_id, flight_placeholder_field_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    feed_id: str,
+    feed_item_id: str,
+    flight_placeholder_field_name: str,
+) -> None:
     """Removes a feed item attribute value of a feed item in a flights feed.
 
     Args:
@@ -50,19 +68,26 @@ def main(
     """
     # [START remove_flights_feed_item_attribute_value]
     # Get the FeedItemService client.
-    feed_item_service = client.get_service("FeedItemService")
+    feed_item_service: feed_item_service_type.FeedItemServiceClient = client.get_service(
+        "FeedItemService"
+    )
 
     # Create the FeedItemOperation.
-    feed_item_operation = client.get_type("FeedItemOperation")
+    feed_item_operation: feed_item_operation_type.FeedItemOperation = client.get_type(
+        "FeedItemOperation"
+    )
 
     # Get a map of the FlightPlaceholderFields to FeedAttributes.
-    placeholders_to_feed_attributes_map = get_feed(client, customer_id, feed_id)
+    placeholders_to_feed_attributes_map: Mapping[
+        flight_placeholder_field_enum.FlightPlaceholderFieldEnum,
+        feed_type.FeedAttribute,
+    ] = get_feed(client, customer_id, feed_id)
 
     # Remove the attribute from the feed item.
-    flight_placeholder_field = client.enums.FlightPlaceholderFieldEnum[
+    flight_placeholder_field: flight_placeholder_field_enum.FlightPlaceholderFieldEnum = client.enums.FlightPlaceholderFieldEnum[
         flight_placeholder_field_name
     ].value
-    feed_item = remove_attribute_value_from_feed_item(
+    feed_item: feed_item_type.FeedItem = remove_attribute_value_from_feed_item(
         client,
         customer_id,
         feed_id,
@@ -78,7 +103,7 @@ def main(
     )
 
     # Update the feed item and print the results.
-    response = feed_item_service.mutate_feed_items(
+    response: feed_item_service_type.MutateFeedItemsResponse = feed_item_service.mutate_feed_items(
         customer_id=customer_id, operations=[feed_item_operation]
     )
     # [END remove_flights_feed_item_attribute_value]
@@ -90,7 +115,12 @@ def main(
         )
 
 
-def get_feed(client, customer_id, feed_id):
+def get_feed(
+    client: GoogleAdsClient, customer_id: str, feed_id: str
+) -> Mapping[
+    flight_placeholder_field_enum.FlightPlaceholderFieldEnum,
+    feed_type.FeedAttribute,
+]:
     """Retrieves details about a feed.
 
     Args:
@@ -102,29 +132,40 @@ def get_feed(client, customer_id, feed_id):
         requested Feed's FeedAttributes.
     """
     # Get the GoogleAdsService client.
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: google_ads_service_type.GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
-    feed_resource_name = client.get_service("FeedService").feed_path(
+    feed_resource_name: str = client.get_service("FeedService").feed_path(
         customer_id, feed_id
     )
 
     # Construct the query.
-    query = f"""
+    query: str = f"""
         SELECT feed.attributes
         FROM feed
         WHERE feed.resource_name = '{feed_resource_name}'"""
 
     # Issue the search request and get the first result, since we only need the
     # single feed item we created previously.
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: google_ads_service_type.SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
-    row = next(iter(googleads_service.search(request=search_request)))
+    row: google_ads_service_type.GoogleAdsRow = next(
+        iter(googleads_service.search(request=search_request))
+    )
 
     # Get the attributes list from the feed and create a map with keys of each
     # attribute and values of each corresponding ID.
-    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
-    feed_attributes = dict()
+    flight_placeholder_field_enum_type: Any = (
+        client.enums.FlightPlaceholderFieldEnum
+    )
+    feed_attributes: Dict[
+        flight_placeholder_field_enum.FlightPlaceholderFieldEnum,
+        feed_type.FeedAttribute,
+    ] = {}
 
     # Loop through the feed attributes to populate the map.
     # The full list of FlightPlaceholderFields can be found here:
@@ -132,23 +173,23 @@ def get_feed(client, customer_id, feed_id):
     for feed_attribute in row.feed.attributes:
         if feed_attribute.name == "Flight Description":
             feed_attributes[
-                flight_placeholder_field_enum.FLIGHT_DESCRIPTION
+                flight_placeholder_field_enum_type.FLIGHT_DESCRIPTION
             ] = feed_attribute
         elif feed_attribute.name == "Destination ID":
             feed_attributes[
-                flight_placeholder_field_enum.DESTINATION_ID
+                flight_placeholder_field_enum_type.DESTINATION_ID
             ] = feed_attribute
         elif feed_attribute.name == "Flight Price":
             feed_attributes[
-                flight_placeholder_field_enum.FLIGHT_PRICE
+                flight_placeholder_field_enum_type.FLIGHT_PRICE
             ] = feed_attribute
         elif feed_attribute.name == "Flight Sale Price":
             feed_attributes[
-                flight_placeholder_field_enum.FLIGHT_SALE_PRICE
+                flight_placeholder_field_enum_type.FLIGHT_SALE_PRICE
             ] = feed_attribute
         elif feed_attribute.name == "Final URLs":
             feed_attributes[
-                flight_placeholder_field_enum.FINAL_URLS
+                flight_placeholder_field_enum_type.FINAL_URLS
             ] = feed_attribute
         else:
             raise ValueError("Invalid attribute name.")
@@ -157,48 +198,57 @@ def get_feed(client, customer_id, feed_id):
 
 
 def remove_attribute_value_from_feed_item(
-    client,
-    customer_id,
-    feed_id,
-    feed_item_id,
-    placeholders_to_feed_attributes_map,
-    flight_placeholder_field_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    feed_id: str,
+    feed_item_id: str,
+    placeholders_to_feed_attributes_map: Mapping[
+        flight_placeholder_field_enum.FlightPlaceholderFieldEnum,
+        feed_type.FeedAttribute,
+    ],
+    flight_placeholder_field_name: flight_placeholder_field_enum.FlightPlaceholderFieldEnum,
+) -> feed_item_type.FeedItem:
     """Removes an attribute value from the specified feed item.
 
     Args:
-        client:
-        customer_id:
-        feed_id:
-        feed_item_id:
-        placeholders_to_feed_attributes_map:
-        flight_placeholder_field_name:
+        client: An initialized GoogleAdsClient instance.
+        customer_id: The Google Ads customer ID.
+        feed_id: The feed ID to which the feed item belongs.
+        feed_item_id: The ID of the feed item to be updated.
+        placeholders_to_feed_attributes_map: A map of placeholder fields to
+            feed attributes.
+        flight_placeholder_field_name: The flight placeholder field name for the
+            attribute to be removed.
     Returns:
         The modified FeedItem.
     """
     # [START remove_flights_feed_item_attribute_value_1]
     # Gets the ID of the FeedAttribute for the placeholder field.
-    attribute_id = placeholders_to_feed_attributes_map[
+    attribute_id: int = placeholders_to_feed_attributes_map[
         flight_placeholder_field_name
     ].id
 
     # Retrieve the feed item and its associated attributes based on its resource
     # name.
-    feed_item = get_feed_item(client, customer_id, feed_id, feed_item_id)
+    feed_item: feed_item_type.FeedItem = get_feed_item(
+        client, customer_id, feed_id, feed_item_id
+    )
 
     # Create the FeedItemAttributeValue that will be updated.
-    feed_item_attribute_value = client.get_type("FeedItemAttributeValue")
+    feed_item_attribute_value: feed_item_type.FeedItemAttributeValue = client.get_type(
+        "FeedItemAttributeValue"
+    )
     feed_item_attribute_value.feed_attribute_id = attribute_id
 
     # Loop through the attribute values to find the index of the
     # FeedItemAttributeValue to update.
-    attribute_index = -1
-    for attribute_value in feed_item.attribute_values:
-        attribute_index += 1
+    attribute_index: int = -1
+    for i, attribute_value in enumerate(feed_item.attribute_values):
         if (
             attribute_value.feed_attribute_id
             == feed_item_attribute_value.feed_attribute_id
         ):
+            attribute_index = i
             break
 
     if attribute_index == -1:
@@ -216,7 +266,12 @@ def remove_attribute_value_from_feed_item(
     # [END remove_flights_feed_item_attribute_value_1]
 
 
-def get_feed_item(client, customer_id, feed_id, feed_item_id):
+def get_feed_item(
+    client: GoogleAdsClient,
+    customer_id: str,
+    feed_id: str,
+    feed_item_id: str,
+) -> feed_item_type.FeedItem:
     """Retrieves a feed item and its attribute values given a resource name.
 
     Args:
@@ -228,22 +283,26 @@ def get_feed_item(client, customer_id, feed_id, feed_item_id):
         A FeedItem with the given resource name.
     """
     # Get the GoogleAdsService client.
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: google_ads_service_type.GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Construct the resource name for the feed item.
-    feed_item_resource_name = client.get_service(
+    feed_item_resource_name: str = client.get_service(
         "FeedItemService"
     ).feed_item_path(customer_id, feed_id, feed_item_id)
 
     # Construct the query.
-    query = f"""
+    query: str = f"""
         SELECT feed_item.attribute_values
         FROM feed_item
         WHERE feed_item.resource_name = '{feed_item_resource_name}'"""
 
     # Issue the search request and return the first result, since the query will
     # match only a single feed item.
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: google_ads_service_type.SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
@@ -253,7 +312,7 @@ def get_feed_item(client, customer_id, feed_id, feed_item_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Removes a feed item attribute value of a feed item in a "
         "flights feed."
     )
@@ -286,11 +345,13 @@ if __name__ == "__main__":
         required=True,
         help="The flight placeholder field name for the attribute to be removed.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

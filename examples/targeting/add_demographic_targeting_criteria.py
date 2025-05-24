@@ -18,32 +18,41 @@ create ad groups, run add_ad_groups.py."""
 
 
 import argparse
+from typing import Any, List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service("AdGroupService")
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: str
+) -> None:
+    ad_group_service: Any = client.get_service("AdGroupService")
+    ad_group_criterion_service: Any = client.get_service(
+        "AdGroupCriterionService"
+    )
 
-    ad_group_resource_name = ad_group_service.ad_group_path(
+    ad_group_resource_name: str = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     # Create a positive ad group criterion for the gender MALE.
-    gender_ad_group_criterion_operation = client.get_type(
+    gender_ad_group_criterion_operation: Any = client.get_type(
         "AdGroupCriterionOperation"
     )
-    gender_ad_group_criterion = gender_ad_group_criterion_operation.create
+    gender_ad_group_criterion: Any = (
+        gender_ad_group_criterion_operation.create
+    )
     gender_ad_group_criterion.ad_group = ad_group_resource_name
     gender_ad_group_criterion.gender.type_ = client.enums.GenderTypeEnum.MALE
 
     # Create a negative ad group criterion for age range of 18 to 24.
-    age_range_ad_group_criterion_operation = client.get_type(
+    age_range_ad_group_criterion_operation: Any = client.get_type(
         "AdGroupCriterionOperation"
     )
-    age_range_ad_group_criterion = age_range_ad_group_criterion_operation.create
+    age_range_ad_group_criterion: Any = (
+        age_range_ad_group_criterion_operation.create
+    )
     age_range_ad_group_criterion.ad_group = ad_group_resource_name
     age_range_ad_group_criterion.negative = True
     age_range_ad_group_criterion.age_range.type_ = (
@@ -51,7 +60,7 @@ def main(client, customer_id, ad_group_id):
     )
 
     # Add two ad group criteria
-    ad_group_criterion_response = (
+    ad_group_criterion_response: Any = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id,
             operations=[
@@ -83,11 +92,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

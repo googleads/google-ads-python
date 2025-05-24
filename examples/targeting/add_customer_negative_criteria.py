@@ -19,41 +19,44 @@ These criteria will be applied to all campaigns for the given customer.
 
 
 import argparse
+from typing import Any, List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    tragedy_criterion_op = client.get_type("CustomerNegativeCriterionOperation")
-    tragedy_criterion = tragedy_criterion_op.create
+    tragedy_criterion_op: Any = client.get_type(
+        "CustomerNegativeCriterionOperation"
+    )
+    tragedy_criterion: Any = tragedy_criterion_op.create
     # Creates a negative customer criterion excluding the content label type
     # of 'TRAGEDY'.
     tragedy_criterion.content_label.type_ = (
         client.enums.ContentLabelTypeEnum.TRAGEDY
     )
 
-    placement_criterion_op = client.get_type(
+    placement_criterion_op: Any = client.get_type(
         "CustomerNegativeCriterionOperation"
     )
-    placement_criterion = placement_criterion_op.create
+    placement_criterion: Any = placement_criterion_op.create
     # Creates a negative customer criterion excluding the placement with URL
     # 'http://www.example.com'.
     placement_criterion.placement.url = "http://www.example.com"
 
-    customer_negative_criterion_service = client.get_service(
+    customer_negative_criterion_service: Any = client.get_service(
         "CustomerNegativeCriterionService"
     )
 
     # Issues a mutate request to add the negative customer criteria.
-    response = (
+    response: Any = (
         customer_negative_criterion_service.mutate_customer_negative_criteria(
             customer_id=customer_id,
             operations=[tragedy_criterion_op, placement_criterion_op],
@@ -80,11 +83,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

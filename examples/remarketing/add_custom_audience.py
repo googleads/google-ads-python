@@ -23,25 +23,41 @@ https://support.google.com/google-ads/answer/9805516
 import argparse
 import sys
 from uuid import uuid4
+from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types.custom_audience_member_type import (
+    CustomAudienceMemberTypeEnum,
+)
+from google.ads.googleads.v19.resources.types.custom_audience import (
+    CustomAudience,
+    CustomAudienceMember,
+)
+from google.ads.googleads.v19.services.types.custom_audience_service import (
+    CustomAudienceOperation,
+    CustomAudienceServiceClient,
+)
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    custom_audience_service = client.get_service("CustomAudienceService")
+    custom_audience_service: CustomAudienceServiceClient = client.get_service(
+        "CustomAudienceService"
+    )
 
     # Create a custom audience operation.
-    custom_audience_operation = client.get_type("CustomAudienceOperation")
+    custom_audience_operation: CustomAudienceOperation = client.get_type(
+        "CustomAudienceOperation"
+    )
 
     # Create a custom audience
-    custom_audience = custom_audience_operation.create
+    custom_audience: CustomAudience = custom_audience_operation.create
     custom_audience.name = f"Example CustomAudience #{uuid4()}"
     custom_audience.description = (
         "Custom audiences who have searched specific terms on Google Search."
@@ -54,25 +70,27 @@ def main(client, customer_id):
     custom_audience.status = client.enums.CustomAudienceStatusEnum.ENABLED
     # List of members that this custom audience is composed of. Customers that
     # meet any of the membership conditions will be reached.
-    member_type_enum = client.enums.CustomAudienceMemberTypeEnum
+    member_type_enum: CustomAudienceMemberTypeEnum = (
+        client.enums.CustomAudienceMemberTypeEnum
+    )
 
-    member1 = create_custom_audience_member(
+    member1: CustomAudienceMember = create_custom_audience_member(
         client, member_type_enum.KEYWORD, "mars cruise"
     )
 
-    member2 = create_custom_audience_member(
+    member2: CustomAudienceMember = create_custom_audience_member(
         client, member_type_enum.KEYWORD, "jupiter cruise"
     )
 
-    member3 = create_custom_audience_member(
+    member3: CustomAudienceMember = create_custom_audience_member(
         client, member_type_enum.URL, "http://www.example.com/locations/mars"
     )
 
-    member4 = create_custom_audience_member(
+    member4: CustomAudienceMember = create_custom_audience_member(
         client, member_type_enum.URL, "http://www.example.com/locations/jupiter"
     )
 
-    member5 = create_custom_audience_member(
+    member5: CustomAudienceMember = create_custom_audience_member(
         client, member_type_enum.APP, "com.google.android.apps.adwords"
     )
 
@@ -81,8 +99,10 @@ def main(client, customer_id):
     )
 
     # Add the custom audience.
-    custom_audience_response = custom_audience_service.mutate_custom_audiences(
-        customer_id=customer_id, operations=[custom_audience_operation]
+    custom_audience_response: Any = (
+        custom_audience_service.mutate_custom_audiences(
+            customer_id=customer_id, operations=[custom_audience_operation]
+        )
     )
 
     print(
@@ -91,7 +111,11 @@ def main(client, customer_id):
     )
 
 
-def create_custom_audience_member(client, member_type, value):
+def create_custom_audience_member(
+    client: GoogleAdsClient,
+    member_type: CustomAudienceMemberTypeEnum,
+    value: str,
+) -> CustomAudienceMember:
     """Creates a custom audience member for a given member type and value.
 
     Args:
@@ -102,10 +126,12 @@ def create_custom_audience_member(client, member_type, value):
     Returns:
         A newly created CustomAudienceMember.
     """
-    member = client.get_type("CustomAudienceMember")
+    member: CustomAudienceMember = client.get_type("CustomAudienceMember")
     member.member_type = member_type
 
-    member_type_enum = client.enums.CustomAudienceMemberTypeEnum
+    member_type_enum: CustomAudienceMemberTypeEnum = (
+        client.enums.CustomAudienceMemberTypeEnum
+    )
 
     if member_type == member_type_enum.KEYWORD:
         member.keyword = value
@@ -122,7 +148,7 @@ def create_custom_audience_member(client, member_type, value):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Adds a custom audience for a specified customer."
     )
     # The following argument(s) should be provided to run the example.
@@ -133,11 +159,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

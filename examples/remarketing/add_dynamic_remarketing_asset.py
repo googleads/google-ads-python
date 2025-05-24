@@ -18,12 +18,43 @@
 import argparse
 from datetime import datetime
 import sys
+from uuid import uuid4
+from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types.asset import Asset
+from google.ads.googleads.v19.resources.types.asset_set import AssetSet
+from google.ads.googleads.v19.resources.types.asset_set_asset import (
+    AssetSetAsset,
+)
+from google.ads.googleads.v19.resources.types.campaign_asset_set import (
+    CampaignAssetSet,
+)
+from google.ads.googleads.v19.services.types.asset_service import (
+    AssetOperation,
+    AssetServiceClient,
+)
+from google.ads.googleads.v19.services.types.asset_set_service import (
+    AssetSetOperation,
+    AssetSetServiceClient,
+)
+from google.ads.googleads.v19.services.types.asset_set_asset_service import (
+    AssetSetAssetOperation,
+    AssetSetAssetServiceClient,
+)
+from google.ads.googleads.v19.services.types.campaign_asset_set_service import (
+    CampaignAssetSetOperation,
+    CampaignAssetSetServiceClient,
+)
+from google.ads.googleads.v19.services.types.google_ads_service import (
+    GoogleAdsServiceClient,
+)
 
 
-def main(client, customer_id, campaign_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -32,8 +63,8 @@ def main(client, customer_id, campaign_id):
         campaign_id: the ID for a campaign of a type that supports dynamic
             remarketing, such as Display.
     """
-    asset_resource_name = create_asset(client, customer_id)
-    asset_set_resource_name = create_asset_set(client, customer_id)
+    asset_resource_name: str = create_asset(client, customer_id)
+    asset_set_resource_name: str = create_asset_set(client, customer_id)
     add_assets_to_asset_set(
         client, asset_resource_name, asset_set_resource_name, customer_id
     )
@@ -43,7 +74,7 @@ def main(client, customer_id, campaign_id):
 
 
 # [START add_asset]
-def create_asset(client, customer_id):
+def create_asset(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a DynamicEducationAsset.
 
     See https://support.google.com/google-ads/answer/6053288?#zippy=%2Ceducation
@@ -57,11 +88,11 @@ def create_asset(client, customer_id):
         The resource name for an asset.
     """
     # Creates an operation to add the asset.
-    operation = client.get_type("AssetOperation")
-    asset = operation.create
+    operation: AssetOperation = client.get_type("AssetOperation")
+    asset: Asset = operation.create
     # The final_urls list must not be empty
     asset.final_urls.append("https://www.example.com")
-    education_asset = asset.dynamic_education_asset
+    education_asset: Any = asset.dynamic_education_asset
     # Defines meta-information about the school and program.
     education_asset.school_name = "The University of Unknown"
     education_asset.address = "Building 1, New York, 12345, USA"
@@ -81,11 +112,11 @@ def create_asset(client, customer_id):
     education_asset.ios_app_link = "exampleApp://content/page"
     education_asset.ios_app_store_id = 123
 
-    asset_service = client.get_service("AssetService")
-    response = asset_service.mutate_assets(
+    asset_service: AssetServiceClient = client.get_service("AssetService")
+    response: Any = asset_service.mutate_assets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Created a dynamic education asset with resource name '{resource_name}'"
     )
@@ -95,7 +126,7 @@ def create_asset(client, customer_id):
 
 
 # [START add_asset_set]
-def create_asset_set(client, customer_id):
+def create_asset_set(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates an AssetSet.
 
     The AssetSet will be used to link the dynamic remarketing assets to a
@@ -109,16 +140,18 @@ def create_asset_set(client, customer_id):
         The resource name for an asset set.
     """
     # Creates an operation to create the asset set.
-    operation = client.get_type("AssetSetOperation")
-    asset_set = operation.create
+    operation: AssetSetOperation = client.get_type("AssetSetOperation")
+    asset_set: AssetSet = operation.create
     asset_set.name = f"My dynamic remarketing assets {datetime.now()}"
     asset_set.type_ = client.enums.AssetSetTypeEnum.DYNAMIC_EDUCATION
 
-    asset_set_service = client.get_service("AssetSetService")
-    response = asset_set_service.mutate_asset_sets(
+    asset_set_service: AssetSetServiceClient = client.get_service(
+        "AssetSetService"
+    )
+    response: Any = asset_set_service.mutate_asset_sets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created asset set with resource name '{resource_name}'")
 
     return resource_name
@@ -127,8 +160,11 @@ def create_asset_set(client, customer_id):
 
 # [START add_asset_set_asset]
 def add_assets_to_asset_set(
-    client, asset_resource_name, asset_set_resource_name, customer_id
-):
+    client: GoogleAdsClient,
+    asset_resource_name: str,
+    asset_set_resource_name: str,
+    customer_id: str,
+) -> None:
     """Adds an Asset to an AssetSet by creating an AssetSetAsset link.
 
     Args:
@@ -138,28 +174,35 @@ def add_assets_to_asset_set(
         customer_id: a client customer ID.
     """
     # Creates an operation to add the asset set asset.
-    operation = client.get_type("AssetSetAssetOperation")
-    asset_set_asset = operation.create
+    operation: AssetSetAssetOperation = client.get_type(
+        "AssetSetAssetOperation"
+    )
+    asset_set_asset: AssetSetAsset = operation.create
     asset_set_asset.asset = asset_resource_name
     asset_set_asset.asset_set = asset_set_resource_name
 
-    asset_set_asset_service = client.get_service("AssetSetAssetService")
+    asset_set_asset_service: AssetSetAssetServiceClient = client.get_service(
+        "AssetSetAssetService"
+    )
     # Note this is the point that the API will enforce uniqueness of the
     # DynamicEducationAsset.program_id field. You can have any number of assets
     # with the same program ID, however, only one asset is allowed per asset set
     # with the same program ID.
-    response = asset_set_asset_service.mutate_asset_set_assets(
+    response: Any = asset_set_asset_service.mutate_asset_set_assets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created asset set asset link with resource name '{resource_name}'")
     # [END add_asset_set_asset]
 
 
 # [START add_campaign_asset_set]
 def link_asset_set_to_campaign(
-    client, asset_set_resource_name, customer_id, campaign_id
-):
+    client: GoogleAdsClient,
+    asset_set_resource_name: str,
+    customer_id: str,
+    campaign_id: str,
+) -> None:
     """Creates a CampaignAssetSet.
 
     The CampaignAssetSet represents the link between an AssetSet and a Campaign.
@@ -171,26 +214,32 @@ def link_asset_set_to_campaign(
         campaign_id: the ID for a campaign of a type that supports dynamic
             remarketing, such as Display.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # Creates an operation to add the campaign asset set.
-    operation = client.get_type("CampaignAssetSetOperation")
-    campaign_asset_set = operation.create
+    operation: CampaignAssetSetOperation = client.get_type(
+        "CampaignAssetSetOperation"
+    )
+    campaign_asset_set: CampaignAssetSet = operation.create
     campaign_asset_set.campaign = googleads_service.campaign_path(
         customer_id, campaign_id
     )
     campaign_asset_set.asset_set = asset_set_resource_name
 
-    campaign_asset_set_service = client.get_service("CampaignAssetSetService")
-    response = campaign_asset_set_service.mutate_campaign_asset_sets(
+    campaign_asset_set_service: CampaignAssetSetServiceClient = client.get_service(
+        "CampaignAssetSetService"
+    )
+    response: Any = campaign_asset_set_service.mutate_campaign_asset_sets(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created a campaign asset set with resource name '{resource_name}'")
     # [END add_campaign_asset_set]
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Adds an asset for use in dynamic remarketing."
     )
     # The following argument(s) should be provided to run the example.
@@ -210,11 +259,13 @@ if __name__ == "__main__":
         help="The campaign ID. Specify a campaign type which supports dynamic "
         "remarketing, such as Display.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

@@ -30,20 +30,43 @@ import argparse
 import hashlib
 import sys
 import uuid
+from typing import List, Dict, Any, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types.google_ads_service import (
+    GoogleAdsServiceClient,
+    SearchGoogleAdsStreamResponse,
+)
+from google.ads.googleads.v19.services.types.user_list_service import (
+    UserListOperation,
+    UserListServiceClient,
+)
+from google.ads.googleads.v19.resources.types.user_list import UserList
+from google.ads.googleads.v19.services.types.offline_user_data_job_service import (
+    OfflineUserDataJobOperation,
+    OfflineUserDataJobServiceClient,
+    AddOfflineUserDataJobOperationsResponse,
+)
+from google.ads.googleads.v19.resources.types.offline_user_data_job import (
+    OfflineUserDataJob,
+)
+from google.ads.googleads.v19.common.types.offline_user_data import (
+    UserData,
+    UserIdentifier,
+    AddressInfo,
+)
 
 
 def main(
-    client,
-    customer_id,
-    run_job,
-    user_list_id,
-    offline_user_data_job_id,
-    ad_user_data_consent,
-    ad_personalization_consent,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    run_job: bool,
+    user_list_id: Optional[str],
+    offline_user_data_job_id: Optional[str],
+    ad_user_data_consent: Optional[str],
+    ad_personalization_consent: Optional[str],
+) -> None:
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
@@ -60,7 +83,10 @@ def main(
         ad_personalization_consent: The personalization consent status for ad
             user data for all members in the job.
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    user_list_resource_name: str
 
     if not offline_user_data_job_id:
         if user_list_id:
@@ -86,7 +112,9 @@ def main(
 
 
 # [START add_customer_match_user_list_3]
-def create_customer_match_user_list(client, customer_id):
+def create_customer_match_user_list(
+    client: GoogleAdsClient, customer_id: str
+) -> str:
     """Creates a Customer Match user list.
 
     Args:
@@ -97,13 +125,17 @@ def create_customer_match_user_list(client, customer_id):
         The string resource name of the newly created user list.
     """
     # Creates the UserListService client.
-    user_list_service_client = client.get_service("UserListService")
+    user_list_service_client: UserListServiceClient = client.get_service(
+        "UserListService"
+    )
 
     # Creates the user list operation.
-    user_list_operation = client.get_type("UserListOperation")
+    user_list_operation: UserListOperation = client.get_type(
+        "UserListOperation"
+    )
 
     # Creates the new user list.
-    user_list = user_list_operation.create
+    user_list: UserList = user_list_operation.create
     user_list.name = f"Customer Match list #{uuid.uuid4()}"
     user_list.description = (
         "A list of customers that originated from email and physical addresses"
@@ -119,10 +151,10 @@ def create_customer_match_user_list(client, customer_id):
     # Sets the membership life span to 30 days.
     user_list.membership_life_span = 30
 
-    response = user_list_service_client.mutate_user_lists(
+    response: Any = user_list_service_client.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
-    user_list_resource_name = response.results[0].resource_name
+    user_list_resource_name: str = response.results[0].resource_name
     print(
         f"User list with resource name '{user_list_resource_name}' was created."
     )
@@ -133,14 +165,14 @@ def create_customer_match_user_list(client, customer_id):
 
 # [START add_customer_match_user_list]
 def add_users_to_customer_match_user_list(
-    client,
-    customer_id,
-    user_list_resource_name,
-    run_job,
-    offline_user_data_job_id,
-    ad_user_data_consent,
-    ad_personalization_consent,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    user_list_resource_name: str,
+    run_job: bool,
+    offline_user_data_job_id: Optional[str],
+    ad_user_data_consent: Optional[str],
+    ad_personalization_consent: Optional[str],
+) -> None:
     """Uses Customer Match to create and add users to a new user list.
 
     Args:
@@ -158,9 +190,10 @@ def add_users_to_customer_match_user_list(
             user data for all members in the job.
     """
     # Creates the OfflineUserDataJobService client.
-    offline_user_data_job_service_client = client.get_service(
-        "OfflineUserDataJobService"
+    offline_user_data_job_service_client: OfflineUserDataJobServiceClient = (
+        client.get_service("OfflineUserDataJobService")
     )
+    offline_user_data_job_resource_name: str
 
     if offline_user_data_job_id:
         # Reuses the specified offline user data job.
@@ -171,7 +204,9 @@ def add_users_to_customer_match_user_list(
         )
     else:
         # Creates a new offline user data job.
-        offline_user_data_job = client.get_type("OfflineUserDataJob")
+        offline_user_data_job: OfflineUserDataJob = client.get_type(
+            "OfflineUserDataJob"
+        )
         offline_user_data_job.type_ = (
             client.enums.OfflineUserDataJobTypeEnum.CUSTOMER_MATCH_USER_LIST
         )
@@ -192,7 +227,7 @@ def add_users_to_customer_match_user_list(
             ]
 
         # Issues a request to create an offline user data job.
-        create_offline_user_data_job_response = (
+        create_offline_user_data_job_response: Any = (
             offline_user_data_job_service_client.create_offline_user_data_job(
                 customer_id=customer_id, job=offline_user_data_job
             )
@@ -214,13 +249,13 @@ def add_users_to_customer_match_user_list(
     # https://developers.google.com/google-ads/api/docs/remarketing/audience-types/customer-match#customer_match_considerations
     # and https://developers.google.com/google-ads/api/docs/best-practices/quotas#user_data
     # for more information on the per-request limits.
-    request = client.get_type("AddOfflineUserDataJobOperationsRequest")
+    request: Any = client.get_type("AddOfflineUserDataJobOperationsRequest")
     request.resource_name = offline_user_data_job_resource_name
     request.operations = build_offline_user_data_job_operations(client)
     request.enable_partial_failure = True
 
     # Issues a request to add the operations to the offline user data job.
-    response = offline_user_data_job_service_client.add_offline_user_data_job_operations(
+    response: AddOfflineUserDataJobOperationsResponse = offline_user_data_job_service_client.add_offline_user_data_job_operations(
         request=request
     )
 
@@ -229,15 +264,15 @@ def add_users_to_customer_match_user_list(
     # Refer to the error_handling/handle_partial_failure.py example to learn
     # more.
     # Extracts the partial failure from the response status.
-    partial_failure = getattr(response, "partial_failure_error", None)
+    partial_failure: Any = getattr(response, "partial_failure_error", None)
     if getattr(partial_failure, "code", None) != 0:
-        error_details = getattr(partial_failure, "details", [])
+        error_details: Any = getattr(partial_failure, "details", [])
         for error_detail in error_details:
-            failure_message = client.get_type("GoogleAdsFailure")
+            failure_message: Any = client.get_type("GoogleAdsFailure")
             # Retrieve the class definition of the GoogleAdsFailure instance
             # in order to use the "deserialize" class method to parse the
             # error_detail string into a protobuf message object.
-            failure_object = type(failure_message).deserialize(
+            failure_object: Any = type(failure_message).deserialize(
                 error_detail.value
             )
 
@@ -270,7 +305,9 @@ def add_users_to_customer_match_user_list(
 
 
 # [START add_customer_match_user_list_2]
-def build_offline_user_data_job_operations(client):
+def build_offline_user_data_job_operations(
+    client: GoogleAdsClient,
+) -> List[OfflineUserDataJobOperation]:
     """Creates a raw input list of unhashed user information.
 
     Each element of the list represents a single user and is a dict containing a
@@ -285,7 +322,7 @@ def build_offline_user_data_job_operations(client):
         A list containing the operations.
     """
     # The first user data has an email address and a phone number.
-    raw_record_1 = {
+    raw_record_1: Dict[str, str] = {
         "email": "dana@example.com",
         # Phone number to be converted to E.164 format, with a leading '+' as
         # required. This includes whitespace that will be removed later.
@@ -294,7 +331,7 @@ def build_offline_user_data_job_operations(client):
 
     # The second user data has an email address, a mailing address, and a phone
     # number.
-    raw_record_2 = {
+    raw_record_2: Dict[str, str] = {
         # Email address that includes a period (.) before the email domain.
         "email": "alex.2@example.com",
         # Address that includes all four required elements: first name, last
@@ -309,17 +346,21 @@ def build_offline_user_data_job_operations(client):
     }
 
     # The third user data only has an email address.
-    raw_record_3 = {"email": "charlie@example.com"}
+    raw_record_3: Dict[str, str] = {"email": "charlie@example.com"}
 
     # Adds the raw records to a raw input list.
-    raw_records = [raw_record_1, raw_record_2, raw_record_3]
+    raw_records: List[Dict[str, str]] = [
+        raw_record_1,
+        raw_record_2,
+        raw_record_3,
+    ]
 
-    operations = []
+    operations: List[OfflineUserDataJobOperation] = []
     # Iterates over the raw input list and creates a UserData object for each
     # record.
     for record in raw_records:
         # Creates a UserData object that represents a member of the user list.
-        user_data = client.get_type("UserData")
+        user_data: UserData = client.get_type("UserData")
 
         # Checks if the record has email, phone, or address information, and
         # adds a SEPARATE UserIdentifier object for each one found. For example,
@@ -347,7 +388,7 @@ def build_offline_user_data_job_operations(client):
         # Checks if the record has an email address, and if so, adds a
         # UserIdentifier for it.
         if "email" in record:
-            user_identifier = client.get_type("UserIdentifier")
+            user_identifier: UserIdentifier = client.get_type("UserIdentifier")
             user_identifier.hashed_email = normalize_and_hash(
                 record["email"], True
             )
@@ -357,7 +398,7 @@ def build_offline_user_data_job_operations(client):
         # Checks if the record has a phone number, and if so, adds a
         # UserIdentifier for it.
         if "phone" in record:
-            user_identifier = client.get_type("UserIdentifier")
+            user_identifier: UserIdentifier = client.get_type("UserIdentifier")
             user_identifier.hashed_phone_number = normalize_and_hash(
                 record["phone"], True
             )
@@ -381,8 +422,10 @@ def build_offline_user_data_job_operations(client):
                     f"{missing_keys}"
                 )
             else:
-                user_identifier = client.get_type("UserIdentifier")
-                address_info = user_identifier.address_info
+                user_identifier: UserIdentifier = client.get_type(
+                    "UserIdentifier"
+                )
+                address_info: AddressInfo = user_identifier.address_info
                 address_info.hashed_first_name = normalize_and_hash(
                     record["first_name"], False
                 )
@@ -396,7 +439,9 @@ def build_offline_user_data_job_operations(client):
         # If the user_identifiers repeated field is not empty, create a new
         # OfflineUserDataJobOperation and add the UserData to it.
         if user_data.user_identifiers:
-            operation = client.get_type("OfflineUserDataJobOperation")
+            operation: OfflineUserDataJobOperation = client.get_type(
+                "OfflineUserDataJobOperation"
+            )
             operation.create = user_data
             operations.append(operation)
         # [END add_customer_match_user_list_2]
@@ -405,7 +450,11 @@ def build_offline_user_data_job_operations(client):
 
 
 # [START add_customer_match_user_list_4]
-def check_job_status(client, customer_id, offline_user_data_job_resource_name):
+def check_job_status(
+    client: GoogleAdsClient,
+    customer_id: str,
+    offline_user_data_job_resource_name: str,
+) -> None:
     """Retrieves, checks, and prints the status of the offline user data job.
 
     If the job is completed successfully, information about the user list is
@@ -421,7 +470,7 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
         offline_user_data_job_resource_name: The resource name of the offline
             user data job to get the status of.
     """
-    query = f"""
+    query: str = f"""
         SELECT
           offline_user_data_job.resource_name,
           offline_user_data_job.id,
@@ -435,17 +484,23 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
         LIMIT 1"""
 
     # Issues a search request using streaming.
-    google_ads_service = client.get_service("GoogleAdsService")
-    results = google_ads_service.search(customer_id=customer_id, query=query)
-    offline_user_data_job = next(iter(results)).offline_user_data_job
-    status_name = offline_user_data_job.status.name
-    user_list_resource_name = (
-        offline_user_data_job.customer_match_user_list_metadata.user_list
+    google_ads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    results: SearchGoogleAdsStreamResponse = google_ads_service.search(
+        customer_id=customer_id, query=query
+    )
+    offline_user_data_job_result: OfflineUserDataJob = next(
+        iter(results)
+    ).offline_user_data_job
+    status_name: str = offline_user_data_job_result.status.name
+    user_list_resource_name: str = (
+        offline_user_data_job_result.customer_match_user_list_metadata.user_list
     )
 
     print(
-        f"Offline user data job ID '{offline_user_data_job.id}' with type "
-        f"'{offline_user_data_job.type_.name}' has status: {status_name}"
+        f"Offline user data job ID '{offline_user_data_job_result.id}' with type "
+        f"'{offline_user_data_job_result.type_.name}' has status: {status_name}"
     )
 
     if status_name == "SUCCESS":
@@ -453,7 +508,9 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
             client, customer_id, user_list_resource_name
         )
     elif status_name == "FAILED":
-        print(f"\tFailure Reason: {offline_user_data_job.failure_reason}")
+        print(
+            f"\tFailure Reason: {offline_user_data_job_result.failure_reason}"
+        )
     elif status_name in ("PENDING", "RUNNING"):
         print(
             "To check the status of the job periodically, use the following "
@@ -463,8 +520,8 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
 
 
 def print_customer_match_user_list_info(
-    client, customer_id, user_list_resource_name
-):
+    client: GoogleAdsClient, customer_id: str, user_list_resource_name: str
+) -> None:
     """Prints information about the Customer Match user list.
 
     Args:
@@ -474,10 +531,12 @@ def print_customer_match_user_list_info(
             add users.
     """
     # [START add_customer_match_user_list_5]
-    googleads_service_client = client.get_service("GoogleAdsService")
+    googleads_service_client: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Creates a query that retrieves the user list.
-    query = f"""
+    query: str = f"""
         SELECT
           user_list.size_for_display,
           user_list.size_for_search
@@ -485,13 +544,13 @@ def print_customer_match_user_list_info(
         WHERE user_list.resource_name = '{user_list_resource_name}'"""
 
     # Issues a search request.
-    search_results = googleads_service_client.search(
-        customer_id=customer_id, query=query
+    search_results: SearchGoogleAdsStreamResponse = (
+        googleads_service_client.search(customer_id=customer_id, query=query)
     )
     # [END add_customer_match_user_list_5]
 
     # Prints out some information about the user list.
-    user_list = next(iter(search_results)).user_list
+    user_list: UserList = next(iter(search_results)).user_list
     print(
         "The estimated number of users that the user list "
         f"'{user_list.resource_name}' has is "
@@ -504,7 +563,7 @@ def print_customer_match_user_list_info(
     )
 
 
-def normalize_and_hash(s, remove_all_whitespace):
+def normalize_and_hash(s: str, remove_all_whitespace: bool) -> str:
     """Normalizes and hashes a string with SHA-256.
 
     Args:
@@ -530,7 +589,7 @@ def normalize_and_hash(s, remove_all_whitespace):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Adds a customer match user list for specified customer."
     )
     # The following argument(s) should be provided to run the example.
@@ -571,11 +630,19 @@ if __name__ == "__main__":
             "not specified, this example will create a new job."
         ),
     )
+    # Need to instantiate a GoogleAdsClient to access enums, but this is only
+    # used for help text, so it's fine if it fails.
+    try:
+        consent_status_enum_names = [
+            e.name for e in GoogleAdsClient.load_from_storage(version="v19").enums.ConsentStatusEnum
+        ]
+    except Exception:
+        consent_status_enum_names = ["UNSPECIFIED", "UNKNOWN", "GRANTED", "DENIED"]
     parser.add_argument(
         "-d",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=consent_status_enum_names,
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
@@ -585,18 +652,20 @@ if __name__ == "__main__":
         "-p",
         "--ad_personalization_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=consent_status_enum_names,
         help=(
             "The personalization consent status for ad user data for all "
             "members in the job."
         ),
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

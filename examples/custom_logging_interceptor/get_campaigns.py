@@ -19,20 +19,25 @@ Google Cloud Logging using a custom logging interceptor.
 
 import argparse
 import sys
+from typing import Any, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
+from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
+from google.ads.googleads.v19.types.google_ads_row import GoogleAdsRow
+
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Instantiate the GoogleAdsService object with a custom interceptor.
-    ga_service = client.get_service(
+    ga_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService",
         interceptors=[CloudLoggingInterceptor(api_version="v19")],
     )
 
-    query = """
+    query: str = """
         SELECT
           campaign.id,
           campaign.name
@@ -41,10 +46,10 @@ def main(client, customer_id):
         LIMIT 10"""
 
     # Issues a search request using streaming.
-    stream = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream: Iterable[SearchGoogleAdsStreamResponse] = ga_service.search_stream(customer_id=customer_id, query=query)
 
     for batch in stream:
-        for row in batch.results:
+        for row: GoogleAdsRow in batch.results:
             print(
                 f"Campaign with ID {row.campaign.id} and name "
                 f'"{row.campaign.name}" was found.'
@@ -52,7 +57,7 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Lists all campaigns for specified customer."
     )
     # The following argument(s) should be provided to run the example.
@@ -63,11 +68,11 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(googleads_client, args.customer_id)

@@ -23,6 +23,7 @@ import argparse
 from itertools import product
 import multiprocessing
 import time
+from typing import Any, Dict, Iterable, List, Tuple, Union
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -35,7 +36,9 @@ BACKOFF_FACTOR = 5
 MAX_RETRIES = 5
 
 
-def main(client, customer_ids):
+def main(
+    client: GoogleAdsClient, customer_ids: List[str]
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -53,17 +56,19 @@ def main(client, customer_ids):
         FROM ad_group
         WHERE segments.date DURING LAST_30_DAYS"""
 
-    inputs = generate_inputs(
+    inputs: Iterable[Tuple[GoogleAdsClient, str, str]] = generate_inputs(
         client, customer_ids, [campaign_query, ad_group_query]
     )
     with multiprocessing.Pool(MAX_PROCESSES) as pool:
         # Call issue_search_request on each input, parallelizing the work
         # across processes in the pool.
-        results = pool.starmap(issue_search_request, inputs)
+        results: List[Tuple[bool, Dict[str, Any]]] = pool.starmap(
+            issue_search_request, inputs
+        )
 
         # Partition our results into successful and failed results.
-        successes = []
-        failures = []
+        successes: List[Dict[str, Any]] = []
+        failures: List[Dict[str, Any]] = []
         for res in results:
             if res[0]:
                 successes.append(res[1])
@@ -101,7 +106,9 @@ def main(client, customer_ids):
                         print(f"\t\tOn field: {field_path_element.field_name}")
 
 
-def issue_search_request(client, customer_id, query):
+def issue_search_request(
+    client: GoogleAdsClient, customer_id: str, query: str
+) -> Tuple[bool, Dict[str, Any]]:
     """Issues a search request using streaming.
 
     Retries if a GoogleAdsException is caught, until MAX_RETRIES is reached.
@@ -111,27 +118,27 @@ def issue_search_request(client, customer_id, query):
         customer_id: a client customer ID str.
         query: a GAQL query str.
     """
-    ga_service = client.get_service("GoogleAdsService")
-    retry_count = 0
+    ga_service: Any = client.get_service("GoogleAdsService")
+    retry_count: int = 0
     # Retry until we've reached MAX_RETRIES or have successfully received a
     # response.
     while True:
         try:
-            stream = ga_service.search_stream(
+            stream: Any = ga_service.search_stream(
                 customer_id=customer_id, query=query
             )
             # Returning a list of GoogleAdsRows will result in a
             # PicklingError, so instead we put the GoogleAdsRow data
             # into a list of str results and return that.
-            result_strings = []
+            result_strings: List[str] = []
             for batch in stream:
                 for row in batch.results:
-                    ad_group_id = (
+                    ad_group_id: str = (
                         f"Ad Group ID {row.ad_group.id} in "
                         if "ad_group.id" in query
                         else ""
                     )
-                    result_string = (
+                    result_string: str = (
                         f"{ad_group_id}"
                         f"Campaign ID {row.campaign.id} "
                         f"had {row.metrics.impressions} impressions "
@@ -157,7 +164,11 @@ def issue_search_request(client, customer_id, query):
                 )
 
 
-def generate_inputs(client, customer_ids, queries):
+def generate_inputs(
+    client: GoogleAdsClient,
+    customer_ids: List[str],
+    queries: List[str],
+) -> Iterable[Tuple[GoogleAdsClient, str, str]]:
     """Generates all inputs to feed into search requests.
 
     A GoogleAdsService instance cannot be serialized with pickle for parallel
@@ -173,7 +184,7 @@ def generate_inputs(client, customer_ids, queries):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Download a set of reports in parallel from a list of "
         "accounts."
     )
@@ -192,11 +203,13 @@ if __name__ == "__main__":
         type=str,
         help="The login customer ID (optional).",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
     # Override the login_customer_id on the GoogleAdsClient, if specified.
     if args.login_customer_id is not None:
         googleads_client.login_customer_id = args.login_customer_id

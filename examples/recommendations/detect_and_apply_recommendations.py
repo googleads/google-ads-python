@@ -31,12 +31,18 @@ https://developers.google.com/google-ads/api/docs/recommendations#recommendation
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v19.services.types.recommendation_service import (
+    ApplyRecommendationOperation,
+    ApplyRecommendationResult,
+)
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -46,7 +52,9 @@ def main(client, customer_id):
     detect_and_apply_recommendations(client, customer_id)
 
 
-def detect_and_apply_recommendations(client, customer_id):
+def detect_and_apply_recommendations(
+    client: GoogleAdsClient, customer_id: str
+) -> None:
     """Detects recommendations and applies them.
 
     Args:
@@ -56,7 +64,7 @@ def detect_and_apply_recommendations(client, customer_id):
 
     # [START detect_keyword_recommendations]
     googleads_service = client.get_service("GoogleAdsService")
-    query = f"""
+    query: str = f"""
         SELECT
           recommendation.campaign,
           recommendation.keyword_recommendation
@@ -65,10 +73,12 @@ def detect_and_apply_recommendations(client, customer_id):
           recommendation.type = KEYWORD"""
 
     # Detects keyword recommendations that exist for the customer account.
-    response = googleads_service.search(customer_id=customer_id, query=query)
+    response: Iterable[GoogleAdsRow] = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
 
-    operations = []
-    for row in response.results:
+    operations: List[ApplyRecommendationOperation] = []
+    for row in response:
         recommendation = row.recommendation
         print(
             f"Keyword recommendation ('{recommendation.resource_name}') "
@@ -94,12 +104,13 @@ def detect_and_apply_recommendations(client, customer_id):
 
 
 # [START build_apply_recommendation_operation]
-def build_recommendation_operation(client, recommendation):
+def build_recommendation_operation(
+    client: GoogleAdsClient, recommendation: str
+) -> ApplyRecommendationOperation:
     """Creates a ApplyRecommendationOperation to apply the given recommendation.
 
     Args:
         client: an initialized GoogleAdsClient instance.
-        customer_id: a client customer ID.
         recommendation: a resource name for the recommendation to be applied.
     """
     # If you have a recommendation ID instead of a resource name, you can create
@@ -110,7 +121,9 @@ def build_recommendation_operation(client, recommendation):
     #   customer_id, recommendation.id
     # )
 
-    operation = client.get_type("ApplyRecommendationOperation")
+    operation: ApplyRecommendationOperation = client.get_type(
+        "ApplyRecommendationOperation"
+    )
 
     # Each recommendation type has optional parameters to override the
     # recommended values. Below is an example showing how to override a
@@ -127,7 +140,11 @@ def build_recommendation_operation(client, recommendation):
 
 
 # [START apply_recommendation]
-def apply_recommendations(client, customer_id, operations):
+def apply_recommendations(
+    client: GoogleAdsClient,
+    customer_id: str,
+    operations: List[ApplyRecommendationOperation],
+) -> None:
     """Applies a batch of recommendations.
 
     Args:
@@ -137,20 +154,22 @@ def apply_recommendations(client, customer_id, operations):
     """
     # Issues a mutate request to apply the recommendations.
     recommendation_service = client.get_service("RecommendationService")
-    response = recommendation_service.apply_recommendation(
-        customer_id=customer_id, operations=operations
+    response: ApplyRecommendationResult = (
+        recommendation_service.apply_recommendation(
+            customer_id=customer_id, operations=operations
+        )
     )
 
     for result in response.results:
         print(
             "Applied a recommendation with resource name: "
-            f"'{result[0].resource_name}'."
+            f"'{result.resource_name}'."
         )
         # [END apply_recommendation]
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
             "Retrieves keyword recommendations for specified customer and "
             "applies them."
@@ -164,11 +183,17 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
+<<<<<<< HEAD
     googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+=======
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
+>>>>>>> a90c77484 (I've added type hints to the examples/recommendations directory.)
 
     try:
         main(googleads_client, args.customer_id)

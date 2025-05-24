@@ -23,11 +23,24 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.recommendation_service import (
+    RecommendationServiceClient,
+)
+from google.ads.googleads.v19.services.types.recommendation_service import (
+    DismissRecommendationRequest,
+    DismissRecommendationResponse,
+)
 
 
-def main(client, customer_id, recommendation_id):
-    recommendation_service = client.get_service("RecommendationService")
-    request = client.get_type("DismissRecommendationRequest")
+def main(
+    client: GoogleAdsClient, customer_id: str, recommendation_id: str
+) -> None:
+    recommendation_service: RecommendationServiceClient = client.get_service(
+        "RecommendationService"
+    )
+    request: DismissRecommendationRequest = client.get_type(
+        "DismissRecommendationRequest"
+    )
     operation = request.DismissRecommendationOperation()
     operation.resource_name = recommendation_service.recommendation_path(
         customer_id, recommendation_id
@@ -35,7 +48,9 @@ def main(client, customer_id, recommendation_id):
     request.customer_id = customer_id
     request.operations.append(operation)
 
-    response = recommendation_service.dismiss_recommendation(request=request)
+    response: DismissRecommendationResponse = (
+        recommendation_service.dismiss_recommendation(request=request)
+    )
 
     print(
         "Dismissed recommendation with resource name: "
@@ -44,7 +59,7 @@ def main(client, customer_id, recommendation_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=("Dismisses a recommendation with the given ID.")
     )
     # The following argument(s) should be provided to run the example.
@@ -62,11 +77,13 @@ if __name__ == "__main__":
         required=True,
         help="The recommendation ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.recommendation_id)

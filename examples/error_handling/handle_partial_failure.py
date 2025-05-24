@@ -19,12 +19,30 @@
 import argparse
 import sys
 import uuid
+from typing import Any, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v19.services.types.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v19.services.types.ad_group_operation import (
+    AdGroupOperation,
+)
+from google.ads.googleads.v19.services.types.mutate_ad_groups_response import (
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v19.services.types.mutate_ad_groups_request import (
+    MutateAdGroupsRequest,
+)
 
 
-def main(client, customer_id, campaign_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> None:
     """Runs the example code, which demonstrates how to handle partial failures.
 
     The example creates three Ad Groups, two of which intentionally fail in
@@ -37,7 +55,9 @@ def main(client, customer_id, campaign_id):
         campaign_id: The ID for a campaign to create Ad Groups under.
     """
     try:
-        ad_group_response = create_ad_groups(client, customer_id, campaign_id)
+        ad_group_response: MutateAdGroupsResponse = create_ad_groups(
+            client, customer_id, campaign_id
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '
@@ -54,7 +74,9 @@ def main(client, customer_id, campaign_id):
 
 
 # [START handle_partial_failure]
-def create_ad_groups(client, customer_id, campaign_id):
+def create_ad_groups(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> MutateAdGroupsResponse:
     """Creates three Ad Groups, two of which intentionally generate errors.
 
     Args:
@@ -64,35 +86,41 @@ def create_ad_groups(client, customer_id, campaign_id):
 
     Returns: A MutateAdGroupsResponse message instance.
     """
-    ad_group_service = client.get_service("AdGroupService")
-    campaign_service = client.get_service("CampaignService")
-    resource_name = campaign_service.campaign_path(customer_id, campaign_id)
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
+    resource_name: str = campaign_service.campaign_path(
+        customer_id, campaign_id
+    )
 
-    invalid_resource_name = campaign_service.campaign_path(customer_id, 0)
-    ad_group_operations = []
+    invalid_resource_name: str = campaign_service.campaign_path(customer_id, 0)
+    ad_group_operations: List[AdGroupOperation] = []
 
     # This AdGroup should be created successfully - assuming the campaign in
     # the params exists.
-    ad_group_op1 = client.get_type("AdGroupOperation")
+    ad_group_op1: AdGroupOperation = client.get_type("AdGroupOperation")
     ad_group_op1.create.name = f"Valid AdGroup: {uuid.uuid4()}"
     ad_group_op1.create.campaign = resource_name
     ad_group_operations.append(ad_group_op1)
 
     # This AdGroup will always fail - campaign ID 0 in resource names is
     # never valid.
-    ad_group_op2 = client.get_type("AdGroupOperation")
+    ad_group_op2: AdGroupOperation = client.get_type("AdGroupOperation")
     ad_group_op2.create.name = f"Broken AdGroup: {uuid.uuid4()}"
     ad_group_op2.create.campaign = invalid_resource_name
     ad_group_operations.append(ad_group_op2)
 
     # This AdGroup will always fail - duplicate ad group names are not allowed.
-    ad_group_op3 = client.get_type("AdGroupOperation")
+    ad_group_op3: AdGroupOperation = client.get_type("AdGroupOperation")
     ad_group_op3.create.name = ad_group_op1.create.name
     ad_group_op3.create.campaign = resource_name
     ad_group_operations.append(ad_group_op3)
 
     # Issue a mutate request, setting partial_failure=True.
-    request = client.get_type("MutateAdGroupsRequest")
+    request: MutateAdGroupsRequest = client.get_type("MutateAdGroupsRequest")
     request.customer_id = customer_id
     request.operations = ad_group_operations
     request.partial_failure = True
@@ -101,7 +129,7 @@ def create_ad_groups(client, customer_id, campaign_id):
 
 
 # [START handle_partial_failure_1]
-def is_partial_failure_error_present(response):
+def is_partial_failure_error_present(response: MutateAdGroupsResponse) -> bool:
     """Checks whether a response message has a partial failure error.
 
     In Python the partial_failure_error attr is always present on a response
@@ -116,14 +144,16 @@ def is_partial_failure_error_present(response):
     Returns: A boolean, whether or not the response message has a partial
         failure error.
     """
-    partial_failure = getattr(response, "partial_failure_error", None)
-    code = getattr(partial_failure, "code", None)
+    partial_failure: Any = getattr(response, "partial_failure_error", None)
+    code: int = int(getattr(partial_failure, "code", 0))  # Default to 0 if None
     return code != 0
     # [END handle_partial_failure_1]
 
 
 # [START handle_partial_failure_2]
-def print_results(client, response):
+def print_results(
+    client: GoogleAdsClient, response: MutateAdGroupsResponse
+) -> None:
     """Prints partial failure errors and success messages from a response.
 
     This function shows how to retrieve partial_failure errors from a response
@@ -164,17 +194,19 @@ def print_results(client, response):
     if is_partial_failure_error_present(response):
         print("Partial failures occurred. Details will be shown below.\n")
         # Prints the details of the partial failure errors.
-        partial_failure = getattr(response, "partial_failure_error", None)
+        partial_failure: Any = getattr(response, "partial_failure_error", None)
         # partial_failure_error.details is a repeated field and iterable
-        error_details = getattr(partial_failure, "details", [])
+        error_details: List[Any] = getattr(partial_failure, "details", [])
 
         for error_detail in error_details:
             # Retrieve an instance of the GoogleAdsFailure class from the client
-            failure_message = client.get_type("GoogleAdsFailure")
+            failure_message: Any = client.get_type("GoogleAdsFailure")
             # Parse the string into a GoogleAdsFailure message instance.
             # To access class-only methods on the message we retrieve its type.
-            GoogleAdsFailure = type(failure_message)
-            failure_object = GoogleAdsFailure.deserialize(error_detail.value)
+            GoogleAdsFailure: Any = type(failure_message)
+            failure_object: Any = GoogleAdsFailure.deserialize(
+                error_detail.value
+            )
 
             for error in failure_object.errors:
                 # Construct and print a string that details which element in
@@ -223,6 +255,8 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     main(googleads_client, args.customer_id, args.campaign_id)

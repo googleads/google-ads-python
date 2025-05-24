@@ -17,12 +17,32 @@
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v17.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v17.services.services.ad_parameter_service import (
+    AdParameterServiceClient,
+)
+from google.ads.googleads.v17.services.types.ad_parameter_service import (
+    AdParameterOperation,
+    MutateAdParametersResponse,
+)
+from google.ads.googleads.v17.resources.types.ad_parameter import AdParameter
+from google.ads.googleads.v17.services.types.ad_parameter_service import (
+    MutateAdParameterResult,
+)
 
 
-def main(client, customer_id, ad_group_id, criterion_id):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    criterion_id: str,
+) -> None:
     """Demonstrates how to set ad parameters on an ad group criterion.
 
     Args:
@@ -31,23 +51,29 @@ def main(client, customer_id, ad_group_id, criterion_id):
         ad_group_id: An ad group ID str.
         criterion_id: A criterion ID str.
     """
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = client.get_service(
+        "AdGroupCriterionService"
+    )
     # Gets the resource name of the ad group criterion to be used.
-    resource_name = ad_group_criterion_service.ad_group_criterion_path(
+    resource_name: str = ad_group_criterion_service.ad_group_criterion_path(
         customer_id, ad_group_id, criterion_id
     )
 
-    operations = [
+    operations: List[AdParameterOperation] = [
         create_ad_parameter(client, resource_name, 1, "100"),
         create_ad_parameter(client, resource_name, 2, "$40"),
     ]
 
-    ad_parameter_service = client.get_service("AdParameterService")
+    ad_parameter_service: AdParameterServiceClient = client.get_service(
+        "AdParameterService"
+    )
 
     # Add the ad parameter.
     try:
-        response = ad_parameter_service.mutate_ad_parameters(
-            customer_id=customer_id, operations=operations
+        response: MutateAdParametersResponse = (
+            ad_parameter_service.mutate_ad_parameters(
+                customer_id=customer_id, operations=operations
+            )
         )
     except GoogleAdsException as ex:
         print(
@@ -63,14 +89,17 @@ def main(client, customer_id, ad_group_id, criterion_id):
     else:
         print(f"Set {len(response.results)} ad parameters:")
 
-        for result in response.results:
-            print(
-                "Set ad parameter with resource_name: "
-                f"{result.resource_name}"
-            )
+        for res in response.results:
+            # res: MutateAdParameterResult = res <- Removed type hint
+            print("Set ad parameter with resource_name: " f"{res.resource_name}")
 
 
-def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
+def create_ad_parameter(
+    client: GoogleAdsClient,
+    resource_name: str,
+    parameter_index: int,
+    insertion_text: str,
+) -> AdParameterOperation:
     """Creates a new ad parameter create operation and returns it.
 
     There can be a maximum of two ad parameters per ad group criterion, one
@@ -88,8 +117,8 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
     Returns: A new AdParameterOperation message class instance.
     """
-    ad_param_operation = client.get_type("AdParameterOperation")
-    ad_param = ad_param_operation.create
+    ad_param_operation: AdParameterOperation = client.get_type("AdParameterOperation")
+    ad_param: AdParameter = ad_param_operation.create
     ad_param.ad_group_criterion = resource_name
     ad_param.parameter_index = parameter_index
     ad_param.insertion_text = insertion_text
@@ -98,7 +127,7 @@ def create_ad_parameter(client, resource_name, parameter_index, insertion_text):
 
 if __name__ == "__main__":
     # Initializes a command line argument parser.
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Adds an ad group for specified customer and campaign id."
     )
 
@@ -120,12 +149,12 @@ if __name__ == "__main__":
         required=True,
         help="The criterion ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-
-    main(
-        googleads_client, args.customer_id, args.ad_group_id, args.criterion_id
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
     )
+
+    main(googleads_client, args.customer_id, args.ad_group_id, args.criterion_id)

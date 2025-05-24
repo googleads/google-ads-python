@@ -20,17 +20,37 @@ import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
+from google.ads.googleads.v17.services.services.campaign_criterion_service import (
+    CampaignCriterionServiceClient,
+)
+from google.ads.googleads.v17.services.types.campaign_criterion_service import (
+    CampaignCriterionOperation,
+    MutateCampaignCriteriaResponse,
+)
+from google.ads.googleads.v17.resources.types.campaign_criterion import (
+    CampaignCriterion,
+)
 
 
-def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    criterion_id: str,
+    bid_modifier_value: float,
+) -> None:
+    campaign_criterion_service: CampaignCriterionServiceClient = client.get_service(
+        "CampaignCriterionService"
+    )
 
-    criterion_rname = campaign_criterion_service.campaign_criterion_path(
+    criterion_rname: str = campaign_criterion_service.campaign_criterion_path(
         customer_id, campaign_id, criterion_id
     )
 
-    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
-    campaign_criterion = campaign_criterion_operation.update
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
+        "CampaignCriterionOperation"
+    )
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = criterion_rname
     campaign_criterion.bid_modifier = bid_modifier_value
     client.copy_from(
@@ -38,7 +58,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
         protobuf_helpers.field_mask(None, campaign_criterion._pb),
     )
 
-    campaign_criterion_response = (
+    campaign_criterion_response: MutateCampaignCriteriaResponse = (
         campaign_criterion_service.mutate_campaign_criteria(
             customer_id=customer_id,
             operations=[campaign_criterion_operation],
@@ -53,7 +73,7 @@ def main(client, customer_id, campaign_id, criterion_id, bid_modifier_value):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
             "Updates the bid modifier and device type for the given "
             "customer ID and campaign criterion ID."
@@ -84,11 +104,13 @@ if __name__ == "__main__":
         default=1.5,
         help="The desired campaign criterion bid modifier.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

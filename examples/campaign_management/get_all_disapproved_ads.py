@@ -19,12 +19,29 @@ import argparse
 import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v17.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v17.services.types.google_ads_service import (
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
+)
+from google.ads.googleads.v17.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v17.resources.types.ad import Ad
+from google.ads.googleads.v17.enums.types.policy_approval_status import (
+    PolicyApprovalStatusEnum,
+)
+from google.ads.googleads.v17.common.types.policy import (
+    PolicyTopicEntry,
+    PolicyTopicEvidence,
+)
+from google.ads.googleads.v17.services.types.google_ads_service import GoogleAdsRow
 
 
-def main(client, customer_id, campaign_id):
-    ga_service = client.get_service("GoogleAdsService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    query = f"""
+    query: str = f"""
         SELECT
           ad_group_ad.ad.id,
           ad_group_ad.ad.type,
@@ -35,21 +52,24 @@ def main(client, customer_id, campaign_id):
           campaign.id = {campaign_id}
           AND ad_group_ad.policy_summary.approval_status = DISAPPROVED"""
 
-    request = client.get_type("SearchGoogleAdsRequest")
+    request: SearchGoogleAdsRequest = client.get_type("SearchGoogleAdsRequest")
     request.customer_id = customer_id
     request.search_settings.return_total_results_count = True
     request.query = query
 
-    results = ga_service.search(request=request)
+    results: SearchGoogleAdsResponse = ga_service.search(request=request)
 
-    disapproved_enum = client.enums.PolicyApprovalStatusEnum.DISAPPROVED
+    disapproved_enum: PolicyApprovalStatusEnum.PolicyApprovalStatus = (
+        client.enums.PolicyApprovalStatusEnum.DISAPPROVED
+    )
 
     print("Disapproved ads:")
 
     # Iterate over all ads in all rows returned and count disapproved ads.
-    for row in results:
-        ad_group_ad = row.ad_group_ad
-        ad = ad_group_ad.ad
+    for result_row in results:
+        # result_row: GoogleAdsRow = result_row <- Removed type hint
+        ad_group_ad: AdGroupAd = result_row.ad_group_ad
+        ad: Ad = ad_group_ad.ad
         policy_summary = ad_group_ad.policy_summary
 
         if not policy_summary.approval_status == disapproved_enum:
@@ -61,23 +81,25 @@ def main(client, customer_id, campaign_id):
         )
 
         # Display the policy topic entries related to the ad disapproval.
-        for entry in policy_summary.policy_topic_entries:
-            print(f'\ttopic: "{entry.topic}", type "{entry.type_.name}"')
+        for pol_entry in policy_summary.policy_topic_entries:
+            # pol_entry: PolicyTopicEntry = pol_entry <- Removed type hint
+            print(f'\ttopic: "{pol_entry.topic}", type "{pol_entry.type_.name}"')
 
-        # Display the attributes and values that triggered the policy
-        # topic.
-        for evidence in entry.evidences:
-            for index, text in enumerate(evidence.text_list.texts):
-                print(f"\t\tevidence text[{index}]: {text}")
+            # Display the attributes and values that triggered the policy
+            # topic.
+            for pol_evidence in pol_entry.evidences:
+                # pol_evidence: PolicyTopicEvidence = pol_evidence <- Removed type hint
+                for index, ev_text in enumerate(pol_evidence.text_list.texts):
+                    # ev_text: str = ev_text <- Removed type hint
+                    print(f"\t\tevidence text[{index}]: {ev_text}")
 
     print(f"\nNumber of disapproved ads found: {results.total_results_count}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
-            "Lists disapproved ads for a given customer's specified "
-            "campaign."
+            "Lists disapproved ads for a given customer's specified " "campaign."
         )
     )
     # The following argument(s) should be provided to run the example.
@@ -91,11 +113,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

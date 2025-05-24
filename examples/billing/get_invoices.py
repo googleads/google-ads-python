@@ -18,12 +18,13 @@
 import argparse
 from datetime import date, timedelta
 import sys
+from typing import Any, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
-def main(client, customer_id, billing_setup_id):
+def main(client: GoogleAdsClient, customer_id: str, billing_setup_id: str):
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -100,7 +101,7 @@ def main(client, customer_id, billing_setup_id):
             # [END get_invoices_1]
 
 
-def micros_to_currency(micros):
+def micros_to_currency(micros: Optional[int]) -> Optional[float]:
     return micros / 1000000.0 if micros is not None else None
 
 

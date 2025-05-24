@@ -17,14 +17,15 @@
 import argparse
 import math
 import sys
+from typing import Any, Dict, List, Tuple
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-ONE_MILLION = 1.0e6
+ONE_MILLION: float = 1.0e6
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -34,23 +35,23 @@ def main(client, customer_id):
     # You can review a list of valid location IDs by visiting:
     # https://developers.google.com/google-ads/api/reference/data/geotargets
     # or by calling the ListPlannableLocations method on ReachPlanService.
-    location_id = "2840"  # US
-    currency_code = "USD"
-    budget = 500000
+    location_id: str = "2840"  # US
+    currency_code: str = "USD"
+    budget: int = 500000
 
     show_plannable_locations(client)
     show_plannable_products(client, location_id)
     forecast_manual_mix(client, customer_id, location_id, currency_code, budget)
 
 
-def show_plannable_locations(client):
+def show_plannable_locations(client: GoogleAdsClient) -> None:
     """Shows map of plannable locations to their IDs.
 
     Args:
         client: an initialized GoogleAdsClient instance.
     """
-    reach_plan_service = client.get_service("ReachPlanService")
-    response = reach_plan_service.list_plannable_locations()
+    reach_plan_service: Any = client.get_service("ReachPlanService")
+    response: Any = reach_plan_service.list_plannable_locations()
 
     print("Plannable Locations")
     print("Name,\tId,\tParentCountryId")
@@ -61,15 +62,15 @@ def show_plannable_locations(client):
 
 
 # [START forecast_reach_2]
-def show_plannable_products(client, location_id):
+def show_plannable_products(client: GoogleAdsClient, location_id: str) -> None:
     """Lists plannable products for a given location.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         location_id: The location ID to plan for.
     """
-    reach_plan_service = client.get_service("ReachPlanService")
-    response = reach_plan_service.list_plannable_products(
+    reach_plan_service: Any = client.get_service("ReachPlanService")
+    response: Any = reach_plan_service.list_plannable_products(
         plannable_location_id=location_id
     )
     print(f"Plannable Products for Location ID {location_id}")
@@ -96,8 +97,12 @@ def show_plannable_products(client, location_id):
 
 # [START forecast_reach]
 def request_reach_curve(
-    client, customer_id, product_mix, location_id, currency_code
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    product_mix: List[Any],
+    location_id: str,
+    currency_code: str,
+) -> None:
     """Creates a sample request for a given product mix.
 
     Args:
@@ -109,7 +114,7 @@ def request_reach_curve(
     """
     # See the docs for defaults and valid ranges:
     # https://developers.google.com/google-ads/api/reference/rpc/latest/GenerateReachForecastRequest
-    request = client.get_type("GenerateReachForecastRequest")
+    request: Any = client.get_type("GenerateReachForecastRequest")
     request.customer_id = customer_id
     # Valid durations are between 1 and 90 days.
     request.campaign_duration.duration_in_days = 28
@@ -128,7 +133,7 @@ def request_reach_curve(
         client.enums.GenderTypeEnum.FEMALE,
         client.enums.GenderTypeEnum.MALE,
     ]:
-        gender = client.get_type("GenderInfo")
+        gender: Any = client.get_type("GenderInfo")
         gender.type_ = gender_type
         request.targeting.genders.append(gender)
 
@@ -138,19 +143,19 @@ def request_reach_curve(
         client.enums.DeviceEnum.MOBILE,
         client.enums.DeviceEnum.TABLET,
     ]:
-        device = client.get_type("DeviceInfo")
+        device: Any = client.get_type("DeviceInfo")
         device.type_ = device_type
         request.targeting.devices.append(device)
 
-    reach_plan_service = client.get_service("ReachPlanService")
-    response = reach_plan_service.generate_reach_forecast(request=request)
+    reach_plan_service: Any = client.get_service("ReachPlanService")
+    response: Any = reach_plan_service.generate_reach_forecast(request=request)
 
     print(
         "Currency, Cost, On-Target Reach, On-Target Imprs, Total Reach,"
         " Total Imprs, Products"
     )
     for point in response.reach_curve.reach_forecasts:
-        product_splits = []
+        product_splits: List[Dict[str, float]] = []
         for p in point.planned_product_reach_forecasts:
             product_splits.append(
                 {p.plannable_product_code: p.cost_micros / ONE_MILLION}
@@ -171,27 +176,30 @@ def request_reach_curve(
 
 # [START forecast_reach_3]
 def forecast_manual_mix(
-    client, customer_id, location_id, currency_code, budget
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    location_id: str,
+    currency_code: str,
+    budget: int,
+) -> None:
     """Pulls a forecast for product mix created manually.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: The customer ID for the reach forecast.
-        product_mix: The product mix for the reach forecast.
         location_id: The location ID to plan for.
         currency_code: Three-character ISO 4217 currency code.
         budget: Budget to allocate to the plan.
     """
-    product_mix = []
-    trueview_allocation = 0.15
-    bumper_allocation = 1 - trueview_allocation
-    product_splits = [
+    product_mix: List[Any] = []
+    trueview_allocation: float = 0.15
+    bumper_allocation: float = 1 - trueview_allocation
+    product_splits: List[Tuple[str, float]] = [
         ("TRUEVIEW_IN_STREAM", trueview_allocation),
         ("BUMPER", bumper_allocation),
     ]
     for product, split in product_splits:
-        planned_product = client.get_type("PlannedProduct")
+        planned_product: Any = client.get_type("PlannedProduct")
         planned_product.plannable_product_code = product
         planned_product.budget_micros = math.trunc(budget * ONE_MILLION * split)
         product_mix.append(planned_product)
@@ -218,7 +226,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id)

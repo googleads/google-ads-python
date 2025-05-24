@@ -33,21 +33,41 @@ method for details.
 
 import argparse
 import sys
+from typing import Dict, Mapping, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.enums.types import (
+    flight_placeholder_field as flight_placeholder_field_enum_type,
+)
+from google.ads.googleads.v19.resources.types import (
+    feed as feed_type,
+    feed_item as feed_item_type,
+)
+from google.ads.googleads.v19.services.types import (
+    feed_service as feed_service_type,
+    feed_item_service as feed_item_service_type,
+    google_ads_service as google_ads_service_type,
+)
+from google.ads.googleads.v19.common.types import (
+    feed_item as feed_item_common_type,
+)
+from google.ads.googleads.v19.services.types import (
+    feed_item_operation as feed_item_operation_type,
+)
+
 from google.api_core import protobuf_helpers
 
 
 # [START update_flights_feed_item_string_attribute_value]
 def main(
-    client,
-    customer_id,
-    feed_id,
-    feed_item_id,
-    flight_placeholder_field_name,
-    attribute_value,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    feed_id: str,
+    feed_item_id: str,
+    flight_placeholder_field_name: str,
+    attribute_value: str,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -59,24 +79,29 @@ def main(
             the attribute to be updated
         attribute_value: the new value to set the feed attribute to
     """
-    feed_service = client.get_service("FeedService")
+    feed_service: feed_service_type.FeedServiceClient = client.get_service(
+        "FeedService"
+    )
     # Gets a map of the placeholder values to feed attributes.
-    placeholders_to_feed_attribute_map = flight_placeholder_fields_map(
+    placeholders_to_feed_attribute_map: Mapping[
+        flight_placeholder_field_enum_type.FlightPlaceholderFieldEnum,
+        feed_type.FeedAttribute,
+    ] = flight_placeholder_fields_map(
         client, customer_id, feed_service.feed_path(customer_id, feed_id)
     )
     # Gets the ID of the feed attribute for the placeholder field. This is
     # needed to specify which feed item attribute value will be updated in
     # the given feed item.
-    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
-    flight_placeholder_enum_value = getattr(
+    flight_placeholder_field_enum: Any = client.enums.FlightPlaceholderFieldEnum
+    flight_placeholder_enum_value: flight_placeholder_field_enum_type.FlightPlaceholderFieldEnum = getattr(
         flight_placeholder_field_enum, flight_placeholder_field_name
     )
-    attribute_id = placeholders_to_feed_attribute_map[
+    attribute_id: int = placeholders_to_feed_attribute_map[
         flight_placeholder_enum_value
     ].id
 
     # Creates the updated feed item attribute value.
-    updated_feed_item_attribute_value = client.get_type(
+    updated_feed_item_attribute_value: feed_item_common_type.FeedItemAttributeValue = client.get_type(
         "FeedItemAttributeValue"
     )
     updated_feed_item_attribute_value.feed_attribute_id = attribute_id
@@ -84,8 +109,10 @@ def main(
 
     # Retrieves the feed item and its associated attributes based on the
     # resource name.
-    feed_item_service = client.get_service("FeedItemService")
-    feed_item = get_feed_item(
+    feed_item_service: feed_item_service_type.FeedItemServiceClient = client.get_service(
+        "FeedItemService"
+    )
+    feed_item: feed_item_type.FeedItem = get_feed_item(
         client,
         customer_id,
         feed_item_service.feed_item_path(customer_id, feed_id, feed_item_id),
@@ -93,16 +120,18 @@ def main(
 
     # Gets the index of the attribute value that will be updated in the
     # feed item.
-    attribute_index = get_attribute_index(
+    attribute_index: int = get_attribute_index(
         updated_feed_item_attribute_value, feed_item
     )
     # Any feed item attribute values that are not included in the updated
     # feed item will be removed from the feed item, which is why you must
     # create the feed item from the existing feed item and its attribute
     # values. Then, update only the attribute that you want.
-    feed_item_operation = client.get_type("FeedItemOperation")
+    feed_item_operation: feed_item_operation_type.FeedItemOperation = client.get_type(
+        "FeedItemOperation"
+    )
     client.copy_from(feed_item_operation.update, feed_item)
-    updated_feed_item = feed_item_operation.update
+    updated_feed_item: feed_item_type.FeedItem = feed_item_operation.update
     client.copy_from(
         updated_feed_item.attribute_values[attribute_index],
         updated_feed_item_attribute_value,
@@ -114,7 +143,7 @@ def main(
         protobuf_helpers.field_mask(feed_item._pb, updated_feed_item._pb),
     )
 
-    response = feed_item_service.mutate_feed_items(
+    response: feed_item_service_type.MutateFeedItemsResponse = feed_item_service.mutate_feed_items(
         customer_id=customer_id, operations=[feed_item_operation]
     )
     print(
@@ -124,7 +153,12 @@ def main(
     # [END update_flights_feed_item_string_attribute_value]
 
 
-def flight_placeholder_fields_map(client, customer_id, feed_resource_name):
+def flight_placeholder_fields_map(
+    client: GoogleAdsClient, customer_id: str, feed_resource_name: str
+) -> Mapping[
+    flight_placeholder_field_enum_type.FlightPlaceholderFieldEnum,
+    feed_type.FeedAttribute,
+]:
     """Maps place holder fields and feed attributes for a flights feed.
 
     See FlightPlaceholderField.php for all available placeholder field values.
@@ -137,7 +171,7 @@ def flight_placeholder_fields_map(client, customer_id, feed_resource_name):
     Returns:
         a dict mapping placeholder fields to feed attributes
     """
-    flight_placeholder_field_enum = client.enums.FlightPlaceholderFieldEnum
+    flight_placeholder_field_enum: Any = client.enums.FlightPlaceholderFieldEnum
 
     return placeholder_field_maps(
         client,
@@ -154,8 +188,16 @@ def flight_placeholder_fields_map(client, customer_id, feed_resource_name):
 
 
 def placeholder_field_maps(
-    client, customer_id, feed_resource_name, feed_attribute_names_map
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    feed_resource_name: str,
+    feed_attribute_names_map: Mapping[
+        str, flight_placeholder_field_enum_type.FlightPlaceholderFieldEnum
+    ],
+) -> Mapping[
+    flight_placeholder_field_enum_type.FlightPlaceholderFieldEnum,
+    feed_type.FeedAttribute,
+]:
     """Retrieves the placeholder fields to feed attributes map for a feed.
 
     The initial query retrieves the feed attributes, or columns, of the feed.
@@ -176,23 +218,29 @@ def placeholder_field_maps(
     Returns:
         a dict mapping placeholder fields to feed attributes
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: google_ads_service_type.GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # Constructs the query to get the feed attributes for the specified feed
     # resource name.
-    query = f"""
+    query: str = f"""
         SELECT
           feed.attributes
         FROM feed
         WHERE feed.resource_name = '{feed_resource_name}'"""
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: google_ads_service_type.SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
-    response = googleads_service.search(request=search_request)
-    row = list(response)[0]
+    response: google_ads_service_type.SearchGoogleAdsResponse = googleads_service.search(
+        request=search_request
+    )
+    row: google_ads_service_type.GoogleAdsRow = list(response)[0]
     # Gets the attributes list from the feed and creates a map with keys of
     # placeholder fields and values of feed attributes.
-    feed_attributes = row.feed.attributes
+    feed_attributes: "list[feed_type.FeedAttribute]" = row.feed.attributes
     # Creates map with keys of placeholder fields and values of feed
     # attributes.
     return {
@@ -201,7 +249,9 @@ def placeholder_field_maps(
     }
 
 
-def get_feed_item(client, customer_id, feed_item_resource_name):
+def get_feed_item(
+    client: GoogleAdsClient, customer_id: str, feed_item_resource_name: str
+) -> feed_item_type.FeedItem:
     """Retrieves a feed item and its attribute values given a resource name.
 
     Args:
@@ -212,18 +262,24 @@ def get_feed_item(client, customer_id, feed_item_resource_name):
     Returns:
         a FeedItem instance
     """
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: google_ads_service_type.GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # Constructs the query to get the feed item with attribute values.
-    query = f"""
+    query: str = f"""
         SELECT
           feed_item.attribute_values
         FROM feed_item
         WHERE feed_item.resource_name = '{feed_item_resource_name}'"""
 
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: google_ads_service_type.SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
-    response = googleads_service.search(request=search_request)
+    response: google_ads_service_type.SearchGoogleAdsResponse = googleads_service.search(
+        request=search_request
+    )
 
     # Returns the feed item attribute values, which belongs to the first item.
     # We can ensure it belongs to the first one because we specified the feed
@@ -231,7 +287,10 @@ def get_feed_item(client, customer_id, feed_item_resource_name):
     return list(response)[0].feed_item
 
 
-def get_attribute_index(target_feed_item_attribute_value, feed_item):
+def get_attribute_index(
+    target_feed_item_attribute_value: feed_item_common_type.FeedItemAttributeValue,
+    feed_item: feed_item_type.FeedItem,
+) -> int:
     """Gets the index of the target feed item attribute value.
 
     This is needed to specify which feed item attribute value will be updated
@@ -246,31 +305,37 @@ def get_attribute_index(target_feed_item_attribute_value, feed_item):
     Returns:
         the index number of the attribute
     """
-    attribute_index = -1
+    attribute_index: int = -1
 
     # Loops through attribute values to find the index of the feed item
     # attribute value to update.
-    for feed_item_attribute_value in feed_item.attribute_values:
-        attribute_index += 1
+    for i, feed_item_attribute_value in enumerate(feed_item.attribute_values):
         # Checks if the current feedItemAttributeValue is the one we are
         # updating.
         if (
             feed_item_attribute_value.feed_attribute_id
             == target_feed_item_attribute_value.feed_attribute_id
         ):
+            attribute_index = i
             break
 
     if attribute_index == -1:
+        # This condition should not be met if the feed attribute ID is valid.
+        # If it's met, it means target_feed_item_attribute_value was not found
+        # in feed_item.attribute_values. In this case, we raise an error.
+        # The original code had a subtle bug here: if the loop completed without
+        # finding the attribute, feed_item_attribute_value would be the last
+        # element from the loop, not the one we were searching for.
         raise ValueError(
             "No matching feed attribute for feed item attribute "
-            f"ID: {feed_item_attribute_value.feed_attribute_id}"
+            f"ID: {target_feed_item_attribute_value.feed_attribute_id}"
         )
 
     return attribute_index
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Updates a feed item attribute value in a flights feed."
     )
     # The following argument(s) should be provided to run the example.
@@ -312,11 +377,13 @@ if __name__ == "__main__":
         required=True,
         help="The new value to set the feed attribute to.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

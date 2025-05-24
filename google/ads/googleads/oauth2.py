@@ -23,11 +23,17 @@ from google.auth.transport.requests import Request
 
 from google.ads.googleads import config
 
-_SERVICE_ACCOUNT_SCOPES = ["https://www.googleapis.com/auth/adwords"]
-_DEFAULT_TOKEN_URI = "https://accounts.google.com/o/oauth2/token"
+from typing import Any, Callable, TypeVar
+
+_SERVICE_ACCOUNT_SCOPES: list[str] = [
+    "https://www.googleapis.com/auth/adwords"
+]
+_DEFAULT_TOKEN_URI: str = "https://accounts.google.com/o/oauth2/token"
+
+F = TypeVar("F", bound=Callable[..., Any])
 
 
-def _initialize_credentials_decorator(func):
+def _initialize_credentials_decorator(func: F) -> F:
     """A decorator used to easily initialize credentials objects.
 
     Returns:
@@ -35,36 +41,38 @@ def _initialize_credentials_decorator(func):
     """
 
     @functools.wraps(func)
-    def initialize_credentials_wrapper(*args, **kwargs):
+    def initialize_credentials_wrapper(*args: Any, **kwargs: Any) -> Any:
         credentials = func(*args, **kwargs)
         # If the configs contain an http_proxy, refresh credentials through the
         # proxy URI
-        proxy = kwargs.get("http_proxy")
+        proxy: str | None = kwargs.get("http_proxy")
         if proxy:
             session = Session()
             session.proxies.update({"http": proxy, "https": proxy})
             credentials.refresh(Request(session=session))
         else:
-            credentials.refresh(Request())
+            credentials.refresh(Request())  # type: ignore[no-untyped-call]
         return credentials
 
-    return initialize_credentials_wrapper
+    return initialize_credentials_wrapper  # type: ignore[return-value]
 
 
 @_initialize_credentials_decorator
 def get_installed_app_credentials(
-    client_id,
-    client_secret,
-    refresh_token,
-    http_proxy=None,
-    token_uri=_DEFAULT_TOKEN_URI,
-):
+    client_id: str,
+    client_secret: str,
+    refresh_token: str,
+    http_proxy: str | None = None,
+    token_uri: str = _DEFAULT_TOKEN_URI,
+) -> InstalledAppCredentials:
     """Creates and returns an instance of oauth2.credentials.Credentials.
 
     Args:
         client_id: A str of the oauth2 client_id from configuration.
         client_secret: A str of the oauth2 client_secret from configuration.
         refresh_token: A str of the oauth2 refresh_token from configuration.
+        http_proxy: An optional str of the http proxy.
+        token_uri: An optional str of the token URI.
 
     Returns:
         An instance of oauth2.credentials.Credentials
@@ -80,13 +88,17 @@ def get_installed_app_credentials(
 
 @_initialize_credentials_decorator
 def get_service_account_credentials(
-    json_key_file_path, subject, http_proxy=None, scopes=_SERVICE_ACCOUNT_SCOPES
-):
+    json_key_file_path: str,
+    subject: str,
+    http_proxy: str | None = None,
+    scopes: list[str] = _SERVICE_ACCOUNT_SCOPES,
+) -> ServiceAccountCreds:
     """Creates and returns an instance of oauth2.service_account.Credentials.
 
     Args:
         json_key_file_path: A str of the path to the private key file location.
         subject: A str of the email address of the delegated account.
+        http_proxy: An optional str of the http proxy.
         scopes: A list of additional scopes.
 
     Returns:
@@ -97,7 +109,9 @@ def get_service_account_credentials(
     )
 
 
-def get_credentials(config_data):
+def get_credentials(
+    config_data: dict[str, Any]
+) -> InstalledAppCredentials | ServiceAccountCreds:
     """Decides which type of credentials to return based on the given config.
 
     Args:
@@ -106,25 +120,27 @@ def get_credentials(config_data):
     Returns:
         An initialized credentials instance.
     """
-    required_installed_app_keys = config.get_oauth2_installed_app_keys()
-    required_service_account_keys = (
-        config.get_oauth2_required_service_account_keys()
-    )
+    required_installed_app_keys: tuple[
+        str, ...
+    ] = config.get_oauth2_installed_app_keys()
+    required_service_account_keys: tuple[
+        str, ...
+    ] = config.get_oauth2_required_service_account_keys()
 
     if all(key in config_data for key in required_installed_app_keys):
         # Using the Installed App Flow
         return get_installed_app_credentials(
-            config_data.get("client_id"),
-            config_data.get("client_secret"),
-            config_data.get("refresh_token"),
-            http_proxy=config_data.get("http_proxy"),
+            config_data.get("client_id"),  # type: ignore[arg-type]
+            config_data.get("client_secret"),  # type: ignore[arg-type]
+            config_data.get("refresh_token"),  # type: ignore[arg-type]
+            http_proxy=config_data.get("http_proxy"),  # type: ignore[arg-type]
         )
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
-            config_data.get("json_key_file_path"),
-            config_data.get("impersonated_email"),
-            http_proxy=config_data.get("http_proxy"),
+            config_data.get("json_key_file_path"),  # type: ignore[arg-type]
+            config_data.get("impersonated_email"),  # type: ignore[arg-type]
+            http_proxy=config_data.get("http_proxy"),  # type: ignore[arg-type]
         )
     else:
         raise ValueError(

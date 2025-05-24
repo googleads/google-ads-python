@@ -60,19 +60,18 @@ class _EnumGetter:
     class instances when accessed.
     """
 
-    def __init__(self, client):
+    def __init__(self, client: "GoogleAdsClient"):
         """Initializer for the _EnumGetter class.
 
         Args:
-            version: a str indicating the version of the Google Ads API to be
-              used.
+            client: An instance of the GoogleAdsClient class.
         """
-        self._client = client
-        self._version = client.version or _DEFAULT_VERSION
-        self._enums = None
-        self._use_proto_plus = client.use_proto_plus
+        self._client: "GoogleAdsClient" = client
+        self._version: str = client.version or _DEFAULT_VERSION
+        self._enums: list[str] | None = None
+        self._use_proto_plus: bool = client.use_proto_plus
 
-    def __dir__(self):
+    def __dir__(self) -> list[str]:
         """Overrides behavior when dir() is called on instances of this class.
 
         It's useful to use dir() to see a list of available attributes. Since
@@ -86,7 +85,7 @@ class _EnumGetter:
 
         return self._enums
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str):
         """Dynamically loads the given enum class instance.
 
         Args:
@@ -95,7 +94,7 @@ class _EnumGetter:
         Returns:
             An instance of the enum proto message class.
         """
-        if not name in self.__dir__():
+        if name not in self.__dir__():
             raise AttributeError(
                 f"'{type(self).__name__}' object has no attribute '{name}'"
             )
@@ -143,7 +142,7 @@ class GoogleAdsClient:
     """Google Ads client used to configure settings and fetch services."""
 
     @classmethod
-    def copy_from(cls, destination, origin):
+    def copy_from(cls, destination, origin):  # type: ignore[no-untyped-def]
         """Copies protobuf and proto-plus messages into one-another.
 
         This method consolidates the CopyFrom logic of protobuf and proto-plus
@@ -157,7 +156,7 @@ class GoogleAdsClient:
         return util.proto_copy_from(destination, origin)
 
     @classmethod
-    def _get_client_kwargs(cls, config_data):
+    def _get_client_kwargs(cls, config_data: dict) -> dict:
         """Converts configuration dict into kwargs required by the client.
 
         Args:
@@ -171,7 +170,7 @@ class GoogleAdsClient:
             ValueError: If the configuration lacks a required field.
         """
         return {
-            "credentials": oauth2.get_credentials(config_data),
+            "credentials": oauth2.get_credentials(config_data),  # type: ignore[no-untyped-call]
             "developer_token": config_data.get("developer_token"),
             "endpoint": config_data.get("endpoint"),
             "login_customer_id": config_data.get("login_customer_id"),
@@ -185,7 +184,7 @@ class GoogleAdsClient:
         }
 
     @classmethod
-    def _get_api_services_by_version(cls, version):
+    def _get_api_services_by_version(cls, version: str):  # type: ignore[no-untyped-def]
         """Returns a module with all services and types for a given API version.
 
         Args:
@@ -207,7 +206,9 @@ class GoogleAdsClient:
         return version_module
 
     @classmethod
-    def load_from_env(cls, version=None):
+    def load_from_env(
+        cls, version: str | None = None
+    ) -> "GoogleAdsClient":
         """Creates a GoogleAdsClient with data stored in the env variables.
 
         Args:
@@ -220,12 +221,14 @@ class GoogleAdsClient:
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        config_data = config.load_from_env()
-        kwargs = cls._get_client_kwargs(config_data)
+        config_data: dict = config.load_from_env()  # type: ignore[no-untyped-call]
+        kwargs: dict = cls._get_client_kwargs(config_data)
         return cls(**dict(version=version, **kwargs))
 
     @classmethod
-    def load_from_string(cls, yaml_str, version=None):
+    def load_from_string(
+        cls, yaml_str: str, version: str | None = None
+    ) -> "GoogleAdsClient":
         """Creates a GoogleAdsClient with data stored in the YAML string.
 
         Args:
@@ -240,12 +243,14 @@ class GoogleAdsClient:
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        config_data = config.parse_yaml_document_to_dict(yaml_str)
-        kwargs = cls._get_client_kwargs(config_data)
+        config_data: dict = config.parse_yaml_document_to_dict(yaml_str)  # type: ignore[no-untyped-call]
+        kwargs: dict = cls._get_client_kwargs(config_data)
         return cls(**dict(version=version, **kwargs))
 
     @classmethod
-    def load_from_dict(cls, config_dict, version=None):
+    def load_from_dict(
+        cls, config_dict: dict, version: str | None = None
+    ) -> "GoogleAdsClient":
         """Creates a GoogleAdsClient with data stored in the config_dict.
 
         Args:
@@ -260,12 +265,14 @@ class GoogleAdsClient:
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        config_data = config.load_from_dict(config_dict)
-        kwargs = cls._get_client_kwargs(config_data)
+        config_data: dict = config.load_from_dict(config_dict)  # type: ignore[no-untyped-call]
+        kwargs: dict = cls._get_client_kwargs(config_data)
         return cls(**dict(version=version, **kwargs))
 
     @classmethod
-    def load_from_storage(cls, path=None, version=None):
+    def load_from_storage(
+        cls, path: str | None = None, version: str | None = None
+    ) -> "GoogleAdsClient":
         """Creates a GoogleAdsClient with data stored in the specified file.
 
         Args:
@@ -282,22 +289,22 @@ class GoogleAdsClient:
             IOError: If the configuration file can't be loaded.
             ValueError: If the configuration file lacks a required field.
         """
-        config_data = config.load_from_yaml_file(path)
-        kwargs = cls._get_client_kwargs(config_data)
+        config_data: dict = config.load_from_yaml_file(path)  # type: ignore[no-untyped-call]
+        kwargs: dict = cls._get_client_kwargs(config_data)
         return cls(**dict(version=version, **kwargs))
 
     def __init__(
         self,
-        credentials,
-        developer_token,
-        endpoint=None,
-        login_customer_id=None,
-        logging_config=None,
-        linked_customer_id=None,
-        version=None,
-        http_proxy=None,
-        use_proto_plus=False,
-        use_cloud_org_for_api_access=None,
+        credentials,  # type: ignore[no-untyped-def]
+        developer_token: str,
+        endpoint: str | None = None,
+        login_customer_id: str | None = None,
+        logging_config: dict | None = None,
+        linked_customer_id: str | None = None,
+        version: str | None = None,
+        http_proxy: str | None = None,
+        use_proto_plus: bool = False,
+        use_cloud_org_for_api_access: str | None = None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -322,21 +329,28 @@ class GoogleAdsClient:
             logging.config.dictConfig(logging_config)
 
         self.credentials = credentials
-        self.developer_token = developer_token
-        self.endpoint = endpoint
-        self.login_customer_id = login_customer_id
-        self.linked_customer_id = linked_customer_id
-        self.version = version
-        self.http_proxy = http_proxy
-        self.use_proto_plus = use_proto_plus
-        self.use_cloud_org_for_api_access = use_cloud_org_for_api_access
-        self.enums = _EnumGetter(self)
+        self.developer_token: str = developer_token
+        self.endpoint: str | None = endpoint
+        self.login_customer_id: str | None = login_customer_id
+        self.linked_customer_id: str | None = linked_customer_id
+        self.version: str | None = version
+        self.http_proxy: str | None = http_proxy
+        self.use_proto_plus: bool = use_proto_plus
+        self.use_cloud_org_for_api_access: str | None = (
+            use_cloud_org_for_api_access
+        )
+        self.enums: _EnumGetter = _EnumGetter(self)
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
             _GRPC_CHANNEL_OPTIONS.append(("grpc.http_proxy", http_proxy))
 
-    def get_service(self, name, version=_DEFAULT_VERSION, interceptors=None):
+    def get_service(  # type: ignore[no-untyped-def]
+        self,
+        name: str,
+        version: str = _DEFAULT_VERSION,
+        interceptors: list | None = None,
+    ):
         """Returns a service client instance for the specified service_name.
 
         Args:
@@ -359,13 +373,15 @@ class GoogleAdsClient:
         # override any version specified as an argument.
         version = self.version if self.version else version
         # api_module = self._get_api_services_by_version(version)
-        services_path = f"google.ads.googleads.{version}.services.services"
-        snaked = util.convert_upper_case_to_snake_case(name)
+        services_path: str = (
+            f"google.ads.googleads.{version}.services.services"
+        )
+        snaked: str = util.convert_upper_case_to_snake_case(name)  # type: ignore[no-untyped-call]
         interceptors = interceptors or []
 
         try:
             service_module = import_module(f"{services_path}.{snaked}")
-            service_client_class = util.get_nested_attr(
+            service_client_class = util.get_nested_attr(  # type: ignore[no-untyped-call]
                 service_module, _SERVICE_CLIENT_TEMPLATE.format(name)
             )
         except (AttributeError, ModuleNotFoundError):
@@ -389,17 +405,19 @@ class GoogleAdsClient:
         )
 
         interceptors = interceptors + [
-            MetadataInterceptor(
+            MetadataInterceptor(  # type: ignore[no-untyped-call]
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
                 self.use_cloud_org_for_api_access,
             ),
-            LoggingInterceptor(_logger, version, endpoint),
-            ExceptionInterceptor(version, use_proto_plus=self.use_proto_plus),
+            LoggingInterceptor(_logger, version, endpoint),  # type: ignore[no-untyped-call]
+            ExceptionInterceptor(  # type: ignore[no-untyped-call]
+                version, use_proto_plus=self.use_proto_plus
+            ),
         ]
 
-        channel = grpc.intercept_channel(channel, *interceptors)
+        channel = grpc.intercept_channel(channel, *interceptors)  # type: ignore[no-untyped-call]
 
         service_transport = service_transport_class(
             channel=channel, client_info=_CLIENT_INFO
@@ -407,7 +425,7 @@ class GoogleAdsClient:
 
         return service_client_class(transport=service_transport)
 
-    def get_type(self, name, version=_DEFAULT_VERSION):
+    def get_type(self, name: str, version: str = _DEFAULT_VERSION):  # type: ignore[no-untyped-def]
         """Returns the specified common, enum, error, or resource type.
 
         Args:
@@ -444,19 +462,19 @@ class GoogleAdsClient:
         version = self.version if self.version else version
         type_classes = self._get_api_services_by_version(version)
 
-        for type in _MESSAGE_TYPES:
-            if type == "services":
-                path = f"{type}.types.{name}"
+        for type_name in _MESSAGE_TYPES:
+            if type_name == "services":
+                path = f"{type_name}.types.{name}"
             else:
-                path = f"{type}.{name}"
+                path = f"{type_name}.{name}"
 
             try:
-                message_class = util.get_nested_attr(type_classes, path)
+                message_class = util.get_nested_attr(type_classes, path)  # type: ignore[no-untyped-call]
 
                 if self.use_proto_plus == True:
                     return message_class()
                 else:
-                    return util.convert_proto_plus_to_protobuf(message_class())
+                    return util.convert_proto_plus_to_protobuf(message_class())  # type: ignore[no-untyped-call]
             except AttributeError:
                 pass
 

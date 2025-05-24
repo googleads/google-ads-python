@@ -90,9 +90,19 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
+<<<<<<< HEAD
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
         version="v20"
     )
+=======
+<<<<<<< HEAD
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+=======
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
+>>>>>>> e9e91feee (I've added type hints and annotations to the Python files in your `examples/basic_operations` directory. This should make the code easier to read and also help with static analysis.)
+>>>>>>> 6b1491771 (I've added type hints and annotations to the Python files in your `examples/basic_operations` directory. This should make the code easier to read and also help with static analysis.)
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id, args.ad_id)

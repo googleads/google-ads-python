@@ -16,37 +16,49 @@
 
 import argparse
 import sys
+from typing import List # For operations list
 
 from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.customer_client_link_service.client import CustomerClientLinkServiceClient
+from google.ads.googleads.v19.services.types.customer_client_link_service import CustomerClientLinkOperation, MutateCustomerClientLinkResponse
+from google.ads.googleads.v19.resources.types.customer_client_link import CustomerClientLink
+from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
+from google.ads.googleads.v19.services.types.google_ads_service import SearchPagedResponse, GoogleAdsRow
+from google.ads.googleads.v19.services.services.customer_manager_link_service.client import CustomerManagerLinkServiceClient
+from google.ads.googleads.v19.services.types.customer_manager_link_service import CustomerManagerLinkOperation, MutateCustomerManagerLinkResponse
+from google.ads.googleads.v19.resources.types.customer_manager_link import CustomerManagerLink
+# ManagerLinkStatusEnum is used via client.enums
 
 
 # [START link_manager_to_client]
-def main(client, customer_id, manager_customer_id):
+def main(client: GoogleAdsClient, customer_id: str, manager_customer_id: str) -> None:
     # This example assumes that the same credentials will work for both
     # customers, but that may not be the case. If you need to use different
     # credentials for each customer, then you may either update the client
     # configuration or instantiate two clients, where at least one points to
     # a specific configuration file so that both clients don't read the same
     # file located in the $HOME dir.
-    customer_client_link_service = client.get_service(
+    customer_client_link_service: CustomerClientLinkServiceClient = client.get_service(
         "CustomerClientLinkService"
     )
 
     # Extend an invitation to the client while authenticating as the manager.
-    client_link_operation = client.get_type("CustomerClientLinkOperation")
-    client_link = client_link_operation.create
+    client_link_operation: CustomerClientLinkOperation = client.get_type("CustomerClientLinkOperation")
+    client_link: CustomerClientLink = client_link_operation.create
     client_link.client_customer = customer_client_link_service.customer_path(
         customer_id
     )
-    client_link.status = client.enums.ManagerLinkStatusEnum.PENDING
+    # client_link.status expects an enum value (int)
+    client_link.status = client.enums.ManagerLinkStatusEnum.PENDING.value
 
-    response = customer_client_link_service.mutate_customer_client_link(
+    response: MutateCustomerClientLinkResponse = customer_client_link_service.mutate_customer_client_link(
         customer_id=manager_customer_id, operation=client_link_operation
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(
         f'Extended an invitation from customer "{manager_customer_id}" to '
@@ -66,45 +78,52 @@ def main(client, customer_id, manager_customer_id):
         WHERE
             customer_client_link.resource_name = "{resource_name}"'''
 
-    ga_service = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    manager_link_id: int = -1 # Initialize with a default value
 
     try:
-        response = ga_service.search(
+        search_response: SearchPagedResponse = ga_service.search(
             customer_id=manager_customer_id, query=query
         )
         # Since the googleads_service.search method returns an iterator we need
         # to initialize an iteration in order to retrieve results, even though
         # we know the query will only return a single row.
-        for row in response.result:
+        for row: GoogleAdsRow in search_response: # Assuming direct iteration
             manager_link_id = row.customer_client_link.manager_link_id
     except GoogleAdsException as ex:
-        handle_googleads_exception(ex)
+        # handle_googleads_exception(ex) # This function is not defined here
+        print(f"GoogleAdsException: {ex}") # Basic error handling
+        sys.exit(1)
 
-    customer_manager_link_service = client.get_service(
+
+    customer_manager_link_service: CustomerManagerLinkServiceClient = client.get_service(
         "CustomerManagerLinkService"
     )
-    manager_link_operation = client.get_type("CustomerManagerLinkOperation")
-    manager_link = manager_link_operation.update
+    manager_link_operation: CustomerManagerLinkOperation = client.get_type("CustomerManagerLinkOperation")
+    manager_link: CustomerManagerLink = manager_link_operation.update
     manager_link.resource_name = (
         customer_manager_link_service.customer_manager_link_path(
             customer_id,
             manager_customer_id,
-            manager_link_id,
+            manager_link_id, # type: ignore
         )
     )
 
-    manager_link.status = client.enums.ManagerLinkStatusEnum.ACTIVE
+    # manager_link.status expects an enum value (int)
+    manager_link.status = client.enums.ManagerLinkStatusEnum.ACTIVE.value
+    # manager_link_operation.update_mask is a FieldMask
+    update_mask: FieldMask = protobuf_helpers.field_mask(None, manager_link._pb)
     client.copy_from(
         manager_link_operation.update_mask,
-        protobuf_helpers.field_mask(None, manager_link._pb),
+        update_mask,
     )
 
-    response = customer_manager_link_service.mutate_customer_manager_link(
+    mutate_manager_link_response: MutateCustomerManagerLinkResponse = customer_manager_link_service.mutate_customer_manager_link(
         customer_id=customer_id, operations=[manager_link_operation]
     )
     print(
         "Client accepted invitation with resource_name: "
-        f'"{response.results[0].resource_name}"'
+        f'"{mutate_manager_link_response.results[0].resource_name}"'
     )
     # [END link_manager_to_client]
 

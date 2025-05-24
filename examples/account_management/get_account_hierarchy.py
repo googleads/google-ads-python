@@ -24,12 +24,18 @@ for each accessible customer.
 
 import argparse
 import sys
+from typing import Optional, List, Dict
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
+from google.ads.googleads.v19.services.services.customer_service.client import CustomerServiceClient
+from google.ads.googleads.v19.resources.types.customer_client import CustomerClient
+from google.ads.googleads.v19.services.types.google_ads_service import SearchPagedResponse, GoogleAdsRow
+# ListAccessibleCustomersResponse is not directly used for a variable type,
+# but its attribute .resource_names is used, which is List[str].
 
-
-def main(client, login_customer_id=None):
+def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> None:
     """Gets the account hierarchy of the given MCC and login customer ID.
 
     Args:
@@ -40,11 +46,11 @@ def main(client, login_customer_id=None):
     """
 
     # Gets instances of the GoogleAdsService and CustomerService clients.
-    googleads_service = client.get_service("GoogleAdsService")
-    customer_service = client.get_service("CustomerService")
+    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    customer_service: CustomerServiceClient = client.get_service("CustomerService")
 
     # A collection of customer IDs to handle.
-    seed_customer_ids = []
+    seed_customer_ids: List[str] = []
 
     # Creates a query that retrieves all child accounts of the manager
     # specified in search calls below.
@@ -64,6 +70,7 @@ def main(client, login_customer_id=None):
     # the only ID in the list. Otherwise, we will issue a request for all
     # customers accessible by this authenticated Google account.
     if login_customer_id is not None:
+        # Ensure login_customer_id is treated as a string for this list.
         seed_customer_ids = [login_customer_id]
     else:
         print(
@@ -71,62 +78,66 @@ def main(client, login_customer_id=None):
             "hierarchies of all accessible customer IDs."
         )
 
-        customer_resource_names = (
+        customer_resource_names: List[str] = (
             customer_service.list_accessible_customers().resource_names
         )
 
         for customer_resource_name in customer_resource_names:
-            customer_id = googleads_service.parse_customer_path(
+            # customer_id here is a string as returned by parse_customer_path
+            customer_id_from_parse: str = googleads_service.parse_customer_path(
                 customer_resource_name
             )["customer_id"]
-            print(customer_id)
-            seed_customer_ids.append(customer_id)
+            print(customer_id_from_parse)
+            seed_customer_ids.append(customer_id_from_parse)
 
-    for seed_customer_id in seed_customer_ids:
+    for seed_customer_id_str in seed_customer_ids: # seed_customer_id_str is a string
         # Performs a breadth-first search to build a Dictionary that maps
         # managers to their child accounts (customerIdsToChildAccounts).
-        unprocessed_customer_ids = [seed_customer_id]
-        customer_ids_to_child_accounts = dict()
-        root_customer_client = None
+        # unprocessed_customer_ids should store integers.
+        unprocessed_customer_ids: List[int] = [int(seed_customer_id_str)]
+        customer_ids_to_child_accounts: Dict[int, List[CustomerClient]] = dict()
+        root_customer_client: CustomerClient | None = None
 
         while unprocessed_customer_ids:
-            customer_id = int(unprocessed_customer_ids.pop(0))
-            response = googleads_service.search(
-                customer_id=str(customer_id), query=query
+            customer_id_loop: int = unprocessed_customer_ids.pop(0) # customer_id_loop is an int
+            # The search method expects customer_id to be a string.
+            response: SearchPagedResponse = googleads_service.search(
+                customer_id=str(customer_id_loop), query=query
             )
 
             # Iterates over all rows in all pages to get all customer
             # clients under the specified customer's hierarchy.
-            for googleads_row in response:
-                customer_client = googleads_row.customer_client
+            for googleads_row: GoogleAdsRow in response:
+                customer_client_loop_var: CustomerClient = googleads_row.customer_client
 
                 # The customer client that with level 0 is the specified
                 # customer.
-                if customer_client.level == 0:
+                if customer_client_loop_var.level == 0:
                     if root_customer_client is None:
-                        root_customer_client = customer_client
+                        root_customer_client = customer_client_loop_var
                     continue
 
                 # For all level-1 (direct child) accounts that are a
                 # manager account, the above query will be run against them
                 # to create a Dictionary of managers mapped to their child
                 # accounts for printing the hierarchy afterwards.
-                if customer_id not in customer_ids_to_child_accounts:
-                    customer_ids_to_child_accounts[customer_id] = []
+                if customer_id_loop not in customer_ids_to_child_accounts:
+                    customer_ids_to_child_accounts[customer_id_loop] = []
 
-                customer_ids_to_child_accounts[customer_id].append(
-                    customer_client
+                customer_ids_to_child_accounts[customer_id_loop].append(
+                    customer_client_loop_var
                 )
 
-                if customer_client.manager:
+                if customer_client_loop_var.manager:
                     # A customer can be managed by multiple managers, so to
                     # prevent visiting the same customer many times, we
                     # need to check if it's already in the Dictionary.
+                    # Assuming customer_client_loop_var.id is an int
                     if (
-                        customer_client.id not in customer_ids_to_child_accounts
-                        and customer_client.level == 1
+                        customer_client_loop_var.id not in customer_ids_to_child_accounts
+                        and customer_client_loop_var.level == 1
                     ):
-                        unprocessed_customer_ids.append(customer_client.id)
+                        unprocessed_customer_ids.append(customer_client_loop_var.id)
 
         if root_customer_client is not None:
             print(
@@ -145,8 +156,8 @@ def main(client, login_customer_id=None):
 
 
 def print_account_hierarchy(
-    customer_client, customer_ids_to_child_accounts, depth
-):
+    customer_client: CustomerClient, customer_ids_to_child_accounts: Dict[int, List[CustomerClient]], depth: int
+) -> None:
     """Prints the specified account's hierarchy using recursion.
 
     Args:
@@ -160,17 +171,18 @@ def print_account_hierarchy(
     if depth == 0:
         print("Customer ID (Descriptive Name, Currency Code, Time Zone)")
 
-    customer_id = customer_client.id
+    # Assuming customer_client.id is an int based on previous analysis for keys in customer_ids_to_child_accounts
+    customer_id_print: int = customer_client.id
     print("-" * (depth * 2), end="")
     print(
-        f"{customer_id} ({customer_client.descriptive_name}, "
+        f"{customer_id_print} ({customer_client.descriptive_name}, "
         f"{customer_client.currency_code}, "
         f"{customer_client.time_zone})"
     )
 
     # Recursively call this function for all child accounts of customer_client.
-    if customer_id in customer_ids_to_child_accounts:
-        for child_account in customer_ids_to_child_accounts[customer_id]:
+    if customer_id_print in customer_ids_to_child_accounts:
+        for child_account: CustomerClient in customer_ids_to_child_accounts[customer_id_print]:
             print_account_hierarchy(
                 child_account, customer_ids_to_child_accounts, depth + 1
             )

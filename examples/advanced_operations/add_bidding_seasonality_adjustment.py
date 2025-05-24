@@ -28,15 +28,17 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types.bidding_seasonality_adjustment_service import BiddingSeasonalityAdjustmentOperation
+from google.ads.googleads.v19.resources.types.bidding_seasonality_adjustment import BiddingSeasonalityAdjustment
 
 
 def main(
-    client,
-    customer_id,
-    start_date_time,
-    end_date_time,
-    conversion_rate_modifier,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    start_date_time: str,
+    end_date_time: str,
+    conversion_rate_modifier: float,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -51,8 +53,8 @@ def main(
     bidding_seasonality_adjustment_service = client.get_service(
         "BiddingSeasonalityAdjustmentService"
     )
-    operation = client.get_type("BiddingSeasonalityAdjustmentOperation")
-    bidding_seasonality_adjustment = operation.create
+    operation: BiddingSeasonalityAdjustmentOperation = client.get_type("BiddingSeasonalityAdjustmentOperation")
+    bidding_seasonality_adjustment: BiddingSeasonalityAdjustment = operation.create
     # A unique name is required for every seasonality adjustment.
     bidding_seasonality_adjustment.name = f"Seasonality adjustment #{uuid4()}"
     # The CHANNEL scope applies the conversion_rate_modifier to all campaigns of
@@ -85,7 +87,7 @@ def main(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f"Added seasonality adjustment with resource name: '{resource_name}'")
     # [END add_bidding_seasonality_adjustment]
@@ -133,7 +135,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(

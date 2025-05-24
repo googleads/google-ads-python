@@ -36,13 +36,13 @@ def main(client, customer_id, ad_group_id):
         customer_id: a client customer ID.
         ad_group_id: an ad group ID.
     """
-    text_customizer_name = f"Planet_{uuid4().hex[:8]}"
-    price_customizer_name = f"Price_{uuid4().hex[:8]}"
+    text_customizer_name: str = f"Planet_{uuid4().hex[:8]}"
+    price_customizer_name: str = f"Price_{uuid4().hex[:8]}"
 
-    text_customizer_resource_name = create_text_customizer_attribute(
+    text_customizer_resource_name: str = create_text_customizer_attribute(
         client, customer_id, text_customizer_name
     )
-    price_customizer_resource_name = create_price_customizer_attribute(
+    price_customizer_resource_name: str = create_price_customizer_attribute(
         client, customer_id, price_customizer_name
     )
     link_customizer_attributes(
@@ -62,7 +62,7 @@ def main(client, customer_id, ad_group_id):
 
 
 # [START add_ad_customizer]
-def create_text_customizer_attribute(client, customer_id, customizer_name):
+def create_text_customizer_attribute(client: GoogleAdsClient, customer_id: str, customizer_name: str) -> str:
     """Creates a text customizer attribute and returns its resource name.
 
     Args:
@@ -88,7 +88,7 @@ def create_text_customizer_attribute(client, customer_id, customizer_name):
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Added text customizer attribute with resource name '{resource_name}'"
     )
@@ -97,7 +97,7 @@ def create_text_customizer_attribute(client, customer_id, customizer_name):
 
 
 # [START add_ad_customizer_1]
-def create_price_customizer_attribute(client, customer_id, customizer_name):
+def create_price_customizer_attribute(client: GoogleAdsClient, customer_id: str, customizer_name: str) -> str:
     """Creates a price customizer attribute and returns its resource name.
 
     Args:
@@ -123,7 +123,7 @@ def create_price_customizer_attribute(client, customer_id, customizer_name):
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Added price customizer attribute with resource name '{resource_name}'"
     )
@@ -133,12 +133,12 @@ def create_price_customizer_attribute(client, customer_id, customizer_name):
 
 # [START add_ad_customizer_2]
 def link_customizer_attributes(
-    client,
-    customer_id,
-    ad_group_id,
-    text_customizer_resource_name,
-    price_customizer_resource_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    text_customizer_resource_name: str,
+    price_customizer_resource_name: str,
+) -> None:
     """Restricts the ad customizer attributes to work with a specific ad group.
 
     This prevents the customizer attributes from being used elsewhere and makes
@@ -192,12 +192,12 @@ def link_customizer_attributes(
 
 # [START add_ad_customizer_3]
 def create_ad_with_customizations(
-    client,
-    customer_id,
-    ad_group_id,
-    text_customizer_name,
-    price_customizer_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    text_customizer_name: str,
+    price_customizer_name: str,
+) -> None:
     """Creates a responsive search ad (RSA).
 
     The RSA uses the ad customizer attributes to populate the placeholders.
@@ -255,7 +255,7 @@ def create_ad_with_customizations(
     response = ad_group_ad_service.mutate_ad_group_ads(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Added an ad with resource name '{resource_name}'")
     # [END add_ad_customizer_3]
 
@@ -287,7 +287,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

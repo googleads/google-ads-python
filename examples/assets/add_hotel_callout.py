@@ -16,14 +16,22 @@
 
 
 import argparse
+from typing import List, Sequence
 import sys
 
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types.asset_service import AssetOperation
+from google.ads.googleads.v19.resources.types.asset import Asset
+from google.ads.googleads.v19.services.types.customer_asset_service import CustomerAssetOperation
+from google.ads.googleads.v19.resources.types.customer_asset import CustomerAsset
+from google.ads.googleads.v19.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
-def main(client, customer_id, language_code):
+def main(
+    client: GoogleAdsClient, customer_id: str, language_code: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -32,7 +40,7 @@ def main(client, customer_id, language_code):
         language_code: the language of the hotel callout feed item text.
     """
     # Creates assets for the hotel callout assets.
-    asset_resource_names = add_hotel_callout_assets(
+    asset_resource_names: List[str] = add_hotel_callout_assets(
         client, customer_id, language_code
     )
 
@@ -41,7 +49,9 @@ def main(client, customer_id, language_code):
     link_asset_to_account(client, customer_id, asset_resource_names)
 
 
-def add_hotel_callout_assets(client, customer_id, language_code):
+def add_hotel_callout_assets(
+    client: GoogleAdsClient, customer_id: str, language_code: str
+) -> List[str]:
     """Creates new assets for the hotel callout.
 
     Args:
@@ -52,11 +62,11 @@ def add_hotel_callout_assets(client, customer_id, language_code):
     Returns:
         a list of asset resource names.
     """
-    operations = []
+    operations: List[AssetOperation] = []
     # Create a hotel callout asset operation for each of the below texts.
     for text in ["Activities", "Facilities"]:
-        operation = client.get_type("AssetOperation")
-        asset = operation.create
+        operation: AssetOperation = client.get_type("AssetOperation")
+        asset: Asset = operation.create
         asset.hotel_callout_asset.text = text
         asset.hotel_callout_asset.language_code = language_code
         operations.append(operation)
@@ -66,7 +76,9 @@ def add_hotel_callout_assets(client, customer_id, language_code):
     response = asset_service.mutate_assets(
         customer_id=customer_id, operations=operations
     )
-    resource_names = [result.resource_name for result in response.results]
+    resource_names: List[str] = [
+        result.resource_name for result in response.results
+    ]
 
     # Prints information about the result.
     for resource_name in resource_names:
@@ -78,7 +90,9 @@ def add_hotel_callout_assets(client, customer_id, language_code):
     return resource_names
 
 
-def link_asset_to_account(client, customer_id, resource_names):
+def link_asset_to_account(
+    client: GoogleAdsClient, customer_id: str, resource_names: List[str]
+) -> None:
     """Links Asset at the Customer level to serve in all eligible campaigns.
 
     Args:
@@ -87,10 +101,12 @@ def link_asset_to_account(client, customer_id, resource_names):
         resource_names: a list of asset resource names.
     """
     # Creates a CustomerAsset link for each Asset resource name provided.
-    operations = []
+    operations: List[CustomerAssetOperation] = []
     for resource_name in resource_names:
-        operation = client.get_type("CustomerAssetOperation")
-        asset = operation.create
+        operation: CustomerAssetOperation = client.get_type(
+            "CustomerAssetOperation"
+        )
+        asset: CustomerAsset = operation.create
         asset.asset = resource_name
         asset.field_type = client.enums.AssetFieldTypeEnum.HOTEL_CALLOUT
         operations.append(operation)
@@ -108,7 +124,7 @@ def link_asset_to_account(client, customer_id, resource_names):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
             "Adds a hotel callout asset and adds the asset to the given "
             "account."
@@ -133,11 +149,13 @@ if __name__ == "__main__":
             "https://developers.google.com/hotels/hotel-ads/api-reference/language-codes."
         ),
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.language_code)

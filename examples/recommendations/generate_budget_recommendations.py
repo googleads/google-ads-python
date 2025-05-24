@@ -27,56 +27,73 @@ To get impact metrics for a custom budget, run get_recommendation_impact_metrics
 
 import argparse
 import sys
+from typing import List, Dict, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v18.services.services.recommendation_service import (
+    RecommendationServiceClient,
+)
+from google.ads.googleads.v18.services.types.recommendation_service import (
+    GenerateRecommendationsRequest,
+    GenerateRecommendationsResponse,
+)
+from google.ads.googleads.v18.resources.types.recommendation import Recommendation
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    recommendation_service = client.get_service("RecommendationService")
-    request = client.get_type("GenerateRecommendationsRequest")
+    recommendation_service: RecommendationServiceClient = client.get_service(
+        "RecommendationService"
+    )
+    request: GenerateRecommendationsRequest = client.get_type(
+        "GenerateRecommendationsRequest"
+    )
 
     request.customer_id = customer_id
     request.recommendation_types = ["CAMPAIGN_BUDGET"]
-    request.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    request.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    )
     request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
     request.positive_locations_ids = [2840]  # 2840 is for United States
-    request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    request.asset_group_info = [{"final_url": "https://www.your-company.com/"}]
 
-    results = recommendation_service.generate_recommendations(request)
+    results: GenerateRecommendationsResponse = (
+        recommendation_service.generate_recommendations(request)
+    )
 
-    recommendations = results.recommendations
+    recommendations: List[Recommendation] = results.recommendations
 
     # Initialize a list to store all budget recommendations with impact metrics.
-    budget_recommendations_list = []
+    budget_recommendations_list: List[Dict[str, Any]] = []
     # Initialize a list to store budget recommendation amounts.
-    budget_amounts =  []
+    budget_amounts: List[float] = []
 
     # Get budget recommendations with their associated impact metrics.
     for rec in recommendations:
         campaign_budget_rec = rec.campaign_budget_recommendation
         # Loop through the budget options in the campaign budget recommendation
-        # to compile a list of budget amounts and their respective potential 
-        # impact metrics. If you have a campaign creation interface, 
-        # you could display this information for end users to decide which 
+        # to compile a list of budget amounts and their respective potential
+        # impact metrics. If you have a campaign creation interface,
+        # you could display this information for end users to decide which
         # budget amount best aligns with their goals.
         for budget_option in campaign_budget_rec.budget_options:
             impact = budget_option.impact
-            budget_amount = budget_option.budget_amount_micros
-            if budget_amount > 0:
-                budget_data = {
-                    "budget_amount": round((budget_amount/1000000), 2),
-                    "potential_metrics": impact.potential_metrics
+            budget_amount_micros = budget_option.budget_amount_micros
+            if budget_amount_micros > 0:
+                budget_data: Dict[str, Any] = {
+                    "budget_amount": round((budget_amount_micros / 1000000), 2),
+                    "potential_metrics": impact.potential_metrics,
                 }
                 budget_recommendations_list.append(budget_data)
-                budget_amounts.append(round((budget_amount/1000000), 2))
-    
+                budget_amounts.append(round((budget_amount_micros / 1000000), 2))
+
     print(f"budget_recommendations_list:\n{budget_recommendations_list}")
     """
     budget_recommendations_list:
@@ -94,7 +111,11 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=("Generate budget recommendations for a Performance Max campaign."))
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
+        description=(
+            "Generate budget recommendations for a Performance Max campaign."
+        )
+    )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
         "-c",
@@ -104,11 +125,13 @@ if __name__ == "__main__":
         help="The Google Ads customer ID.",
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v18"
+    )
 
     try:
         main(googleads_client, args.customer_id)

@@ -29,15 +29,43 @@ scopes before running this example.
 
 import argparse
 import sys
+from typing import Any, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v17.common.types.criteria import (
+    ListingDimensionInfo,
+)
+from google.ads.googleads.v17.enums.types.product_custom_attribute_index import (
+    ProductCustomAttributeIndexEnum,
+)
+from google.ads.googleads.v17.enums.types.product_type_level import (
+    ProductTypeLevelEnum,
+)
+from google.ads.googleads.v17.resources.types.campaign_criterion import (
+    CampaignCriterion,
+)
+from google.ads.googleads.v17.services.services.campaign_criterion_service import (
+    CampaignCriterionServiceClient,
+)
+from google.ads.googleads.v17.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v17.services.types.campaign_criterion_operation import (
+    CampaignCriterionOperation,
+)
 
 
-def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService")
-    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
-    campaign_criterion = campaign_criterion_operation.create
+def main(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> None:
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
+        "CampaignCriterionOperation"
+    )
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
@@ -47,16 +75,22 @@ def main(client, customer_id, campaign_id):
     # must be met for a product to be included in a campaign.
     # A typical listing scope might only have a few dimensions. This example
     # demonstrates a range of different dimensions you could use.
-    dimensions = campaign_criterion.listing_scope.dimensions
+    dimensions: List[ListingDimensionInfo] = (
+        campaign_criterion.listing_scope.dimensions
+    )
 
-    product_brand_dimension = client.get_type("ListingDimensionInfo")
+    product_brand_dimension: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
     product_brand_dimension.product_brand.value = "google"
     dimensions.append(product_brand_dimension)
 
-    product_custom_attribute_index_enum = (
+    product_custom_attribute_index_enum: ProductCustomAttributeIndexEnum = (
         client.enums.ProductCustomAttributeIndexEnum
     )
-    product_custom_attribute_dimension = client.get_type("ListingDimensionInfo")
+    product_custom_attribute_dimension: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
     product_custom_attribute = (
         product_custom_attribute_dimension.product_custom_attribute
     )
@@ -64,22 +98,30 @@ def main(client, customer_id, campaign_id):
     product_custom_attribute.value = "top_selling_products"
     dimensions.append(product_custom_attribute_dimension)
 
-    product_type_level_enum = client.enums.ProductTypeLevelEnum
-    product_type_dimension_1 = client.get_type("ListingDimensionInfo")
+    product_type_level_enum: ProductTypeLevelEnum = (
+        client.enums.ProductTypeLevelEnum
+    )
+    product_type_dimension_1: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
     product_type = product_type_dimension_1.product_type
     product_type.level = product_type_level_enum.LEVEL1
     product_type.value = "electronics"
     dimensions.append(product_type_dimension_1)
 
-    product_type_dimension_2 = client.get_type("ListingDimensionInfo")
+    product_type_dimension_2: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
     product_type = product_type_dimension_2.product_type
     product_type.level = product_type_level_enum.LEVEL2
     product_type.value = "smartphones"
     dimensions.append(product_type_dimension_2)
 
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
+    campaign_criterion_service: CampaignCriterionServiceClient = (
+        client.get_service("CampaignCriterionService")
+    )
 
-    campaign_criterion_response = (
+    campaign_criterion_response: Any = (
         campaign_criterion_service.mutate_campaign_criteria(
             customer_id=customer_id, operations=[campaign_criterion_operation]
         )
@@ -89,8 +131,8 @@ def main(client, customer_id, campaign_id):
         f"Added {len(campaign_criterion_response.results)} campaign "
         "criteria:"
     )
-    for campaign_criterion in campaign_criterion_response.results:
-        print(campaign_criterion.resource_name)
+    for criterion in campaign_criterion_response.results:
+        print(criterion.resource_name)
 
 
 if __name__ == "__main__":
@@ -108,11 +150,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

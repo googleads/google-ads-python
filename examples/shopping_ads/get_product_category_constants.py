@@ -18,11 +18,38 @@
 import argparse
 import collections
 import sys
+from typing import DefaultDict, List, Optional, Any
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v17.resources.types.product_category_constant import (
+    ProductCategoryConstant,
+)
+from google.ads.googleads.v17.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v17.services.types.google_ads_service import (
+    SearchGoogleAdsStreamRequest,
+    SearchGoogleAdsStreamResponse,
+)
 
 
-def display_categories(categories, prefix=""):
+class Category:
+    def __init__(
+        self,
+        localized_name: Optional[str] = None,
+        resource_name: Optional[str] = None,
+        children: Optional[List["Category"]] = None,
+    ) -> None:
+        self.localized_name: Optional[str] = localized_name
+        self.resource_name: Optional[str] = resource_name
+        if children is None:
+            self.children: List["Category"] = []
+        else:
+            self.children: List["Category"] = children
+
+
+def display_categories(categories: List[Category], prefix: str = "") -> None:
     """Recursively prints out each category and its children.
 
     Args:
@@ -39,67 +66,69 @@ def display_categories(categories, prefix=""):
             )
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """Fetches the set of valid ProductBiddingCategories."""
 
-    class Category:
-        def __init__(
-            self, localized_name=None, resource_name=None, children=None
-        ):
-            self.localized_name = localized_name
-            self.resource_name = resource_name
-            if children is None:
-                self.children = []
-            else:
-                self.children = children
-
-    ga_service = client.get_service("GoogleAdsService")
-    query = """
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    query: str = """
         SELECT
             product_category_constant.localizations,
             product_category_constant.product_category_constant_parent
         FROM product_category_constant"""
 
-    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request: SearchGoogleAdsStreamRequest = client.get_type(
+        "SearchGoogleAdsStreamRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
-    stream = ga_service.search_stream(search_request)
+    stream: SearchGoogleAdsStreamResponse = ga_service.search_stream(
+        search_request
+    )
 
-    all_categories = collections.defaultdict(lambda: Category())
+    all_categories: DefaultDict[str, Category] = collections.defaultdict(
+        lambda: Category()
+    )
 
     # Creates a map of top level categories.
-    root_categories = []
+    root_categories: List[Category] = []
 
     for batch in stream:
         for row in batch.results:
             # Gets the product category constant from the row.
-            product_category = row.product_category_constant
+            product_category: ProductCategoryConstant = (
+                row.product_category_constant
+            )
 
-            localized_name = ""
+            localized_name: str = ""
             for localization in product_category.localizations:
-                region = localization.region_code
-                lang = localization.language_code
+                region: str = localization.region_code
+                lang: str = localization.language_code
                 if region == "US" and lang == "en":
                     # Gets the name from the product category localization.
                     localized_name = localization.value
                     break
 
-            category = Category(
+            category: Category = Category(
                 localized_name=localized_name,
                 resource_name=product_category.resource_name,
             )
 
-            all_categories[category.resource_name] = category
-            parent_resource_name = (
-                product_category.product_category_constant_parent
-            )
+            # Ensure resource_name is not None before using as a dict key
+            if category.resource_name:
+                all_categories[category.resource_name] = category
+
+            parent_resource_name: Optional[str] = None
+            if product_category.product_category_constant_parent:
+                parent_resource_name = (
+                    product_category.product_category_constant_parent
+                )
 
             # Links the category to the parent category if any.
             if parent_resource_name:
                 # Adds the category as a child category of the parent
                 # category.
                 all_categories[parent_resource_name].children.append(category)
-            else:
+            elif category.resource_name: # Ensure it's not None before adding to root
                 # Otherwise adds the category as a root category.
                 root_categories.append(category)
 
@@ -118,11 +147,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id)

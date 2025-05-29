@@ -79,7 +79,7 @@ def test_main_runs_successfully(
         main(
             mock_google_ads_client,
             mock_customer_id, # customer_id
-            mock_customer_id, # manager_customer_id (assuming same for this test)
+            # mock_customer_id, # manager_customer_id (assuming same for this test) # This was the incorrect argument
             mock_video_id
         )
     except Exception as e:

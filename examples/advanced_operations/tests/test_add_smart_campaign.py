@@ -24,26 +24,57 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     # Suggest Keyword Themes
     mock_kw_theme_response = MagicMock()
     mock_kw_theme1 = MagicMock()
+    mock_kw_theme1.keyword_theme_constant = MagicMock() # Simulate protobuf message structure
     mock_kw_theme1.keyword_theme_constant.resource_name = "keywordThemeConstants/theme1"
-    mock_kw_theme1.keyword_theme_constant.name = "Theme 1"
+    # Ensure 'oneof' behavior; if keyword_theme_constant is set, free_form_keyword_theme is not.
+    # MagicMock by default would create these attributes if accessed.
+    # Explicitly deleting or ensuring they are None if not the active 'oneof' field.
+    # However, the script checks hasattr(theme, "keyword_theme_constant"), so direct assignment is enough.
+
     mock_kw_theme2 = MagicMock()
+    mock_kw_theme2.keyword_theme_constant = MagicMock()
     mock_kw_theme2.keyword_theme_constant.resource_name = "keywordThemeConstants/theme2"
-    mock_kw_theme2.keyword_theme_constant.name = "Theme 2"
+
     mock_kw_theme_response.keyword_themes = [mock_kw_theme1, mock_kw_theme2]
-    # Suggestion for free-form keyword
-    mock_free_form_suggestion = MagicMock()
-    mock_free_form_suggestion.keyword_theme_constant.resource_name = "keywordThemeConstants/freeform"
-    mock_free_form_suggestion.keyword_theme_constant.name = "FreeForm Theme"
     
+    # Suggestion for free-form keyword (this path is hit by the script)
+    # This mock should return a KeywordTheme message where free_form_keyword_theme is set.
+    mock_free_form_response = MagicMock()
+    mock_free_form_theme = MagicMock()
+    mock_free_form_theme.free_form_keyword_theme = "free form keyword theme text" # This is the actual text value
+    # Ensure 'oneof' behavior for this mock too
+    delattr(mock_free_form_theme, 'keyword_theme_constant') 
+    mock_free_form_response.keyword_themes = [mock_free_form_theme]
+
     # Side effect to handle different request types for suggest_keyword_themes
     def suggest_keyword_themes_side_effect(request):
         if request.suggestion_info.free_form_text:
-            response = MagicMock()
-            response.keyword_themes = [mock_free_form_suggestion]
-            return response
-        return mock_kw_theme_response
-    mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect
+            return mock_free_form_response
+        # This case is for request.suggestion_info.keyword_seed
+        # The script does not use this path for suggest_keyword_themes.
+        # It uses suggest_keyword_theme_constants for keyword_text.
+        # However, to be safe, if it were called with keyword_seed:
+        # return mock_kw_theme_response # This was the previous behavior
+        # For now, let's assume it's not called with keyword_seed for suggest_keyword_themes
+        # and the free_form_text path is the only one used by suggest_keyword_themes.
+        # If suggest_keyword_themes is called for the seed, it should also return KeywordThemes.
+        # The script calls:
+        # 1. suggest_keyword_theme_constants with keyword_text (mocked below)
+        # 2. suggest_keyword_themes with free_form_keyword_text (mocked by mock_free_form_response)
+        # So, the keyword_seed path for suggest_keyword_themes is actually NOT hit.
+        # Let's simplify the side_effect or remove it if only one path is hit.
+        # Re-checking script: _get_keyword_theme_infos calls suggest_keyword_themes for free_form_keyword_text
+        # and _get_keyword_theme_auto_suggestions calls suggest_keyword_theme_constants for keyword_text
+        # This means the side_effect for suggest_keyword_themes only needs to handle the free_form_text case.
+        if hasattr(request.suggestion_info, "free_form_text") and request.suggestion_info.free_form_text:
+             return mock_free_form_response
+        # Fallback if called unexpectedly (should not happen based on script logic)
+        empty_response = MagicMock()
+        empty_response.keyword_themes = []
+        return empty_response
 
+    mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect
+    
     # Suggest Budget Options
     mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
@@ -67,7 +98,17 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
 
     # KeywordThemeConstantService
     mock_ktc_service = mock_google_ads_client.get_service("KeywordThemeConstantService")
+    # Mock for suggest_keyword_theme_constants (called by _get_keyword_theme_auto_suggestions)
+    mock_ktc_suggest_response = MagicMock()
+    mock_ktc_constant1_from_suggest = MagicMock() # Simulates KeywordThemeConstant
+    mock_ktc_constant1_from_suggest.resource_name = "keywordThemeConstants/from_text_search1"
+    # mock_ktc_constant1_from_suggest.name = "From Text Search 1" # Name is not directly used by script
+    mock_ktc_suggest_response.keyword_theme_constants = [mock_ktc_constant1_from_suggest]
+    mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_suggest_response
+    # Mock for keyword_theme_constant_path (used by _get_keyword_theme_infos if keyword_theme_ids are present)
+    # This path is not hit with current main() args as keyword_theme_ids is not passed.
     mock_ktc_service.keyword_theme_constant_path.side_effect = lambda ktc_id: f"keywordThemeConstants/{ktc_id}"
+
 
     # GeoTargetConstantService
     mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
@@ -93,8 +134,11 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     responses.append(MagicMock(smart_campaign_setting_result=MagicMock(resource_name=f"customers/{mock_customer_id}/smartCampaignSettings/scs1")))
     responses.append(MagicMock(ad_group_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroups/adgroup1")))
     responses.append(MagicMock(ad_group_ad_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroupAds/ad1")))
-    # For keyword theme criteria (2 from suggestion + 1 free form) and 1 location criterion
-    for i in range(4): # 3 keyword themes + 1 location
+    # For keyword theme criteria:
+    # 1 from suggest_keyword_theme_constants (mock_ktc_constant1_from_suggest)
+    # 1 from suggest_keyword_themes (mock_free_form_theme)
+    # Total 2 keyword theme criteria + 1 location criterion
+    for i in range(3): 
         responses.append(MagicMock(campaign_criterion_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignCriteria/crit{i}")))
     
     mock_mutate_response.mutate_operation_responses = responses
@@ -137,16 +181,22 @@ def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock
     # Most mocks can be similar to the first test, just ensure business_profile_location_path is set up
     # SmartCampaignSuggestService
     mock_suggest_service = mock_google_ads_client.get_service("SmartCampaignSuggestService")
-    mock_kw_theme_response = MagicMock() # Define as in first test
-    mock_kw_theme1 = MagicMock()
-    mock_kw_theme1.keyword_theme_constant.resource_name = "keywordThemeConstants/theme_biz1"
-    mock_kw_theme1.keyword_theme_constant.name = "Theme Biz 1"
-    mock_kw_theme_response.keyword_themes = [mock_kw_theme1]
-    def suggest_keyword_themes_side_effect_biz(request): # Simplified for this test variation
-        return mock_kw_theme_response
-    mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect_biz
+    
+    # Mock for suggest_keyword_themes (called for free_form_keyword_text if provided)
+    # In this test, free_form_keyword_text is None, so suggest_keyword_themes might not be called,
+    # or if called, request.suggestion_info.free_form_text will be empty.
+    # The script's _get_keyword_theme_infos checks if free_form_keyword_text:
+    # if free_form_keyword_text:
+    #   response = smart_campaign_suggest_service.suggest_keyword_themes(request)
+    #   keyword_theme_infos.extend(map_keyword_themes_to_keyword_infos(response.keyword_themes))
+    # So, if free_form_keyword_text is None, suggest_keyword_themes is NOT called.
+    # Thus, we don't need to mock its response extensively for this specific test case path.
+    # However, if it were called, it should return an empty list or correctly structured mock.
+    mock_empty_kw_theme_response = MagicMock()
+    mock_empty_kw_theme_response.keyword_themes = []
+    mock_suggest_service.suggest_keyword_themes.return_value = mock_empty_kw_theme_response # Default for this test path
 
-    mock_budget_options_response = MagicMock() # Define as in first test
+    mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 55000000 
     mock_budget_options_response.recommended_daily_budget_options.high.daily_amount_micros = 65000000
@@ -166,6 +216,13 @@ def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock
     mock_suggest_service.suggest_smart_campaign_ad.return_value = mock_ad_suggestion_response
 
     mock_ktc_service = mock_google_ads_client.get_service("KeywordThemeConstantService")
+    # Mock for suggest_keyword_theme_constants (called by _get_keyword_theme_auto_suggestions for keyword_text)
+    mock_ktc_suggest_response_biz = MagicMock()
+    mock_ktc_constant1_biz = MagicMock() # Simulates KeywordThemeConstant
+    mock_ktc_constant1_biz.resource_name = "keywordThemeConstants/from_text_search_biz1"
+    mock_ktc_suggest_response_biz.keyword_theme_constants = [mock_ktc_constant1_biz]
+    mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_suggest_response_biz
+    # Mock for keyword_theme_constant_path (not hit with current args)
     mock_ktc_service.keyword_theme_constant_path.side_effect = lambda ktc_id: f"keywordThemeConstants/{ktc_id}"
     
     mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
@@ -184,7 +241,10 @@ def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock
     responses.append(MagicMock(smart_campaign_setting_result=MagicMock(resource_name=f"customers/{mock_customer_id}/smartCampaignSettings/scs_biz")))
     responses.append(MagicMock(ad_group_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroups/adgroup_biz")))
     responses.append(MagicMock(ad_group_ad_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroupAds/ad_biz")))
-    # Fewer keyword themes in this simplified version for biz profile path (1 suggested + 0 free-form) + 1 location
+    # Keyword themes for criteria:
+    # 1 from suggest_keyword_theme_constants (mock_ktc_constant1_biz)
+    # 0 from suggest_keyword_themes (because free_form_keyword_text is None)
+    # Total 1 keyword theme criterion + 1 location criterion
     for i in range(2): 
         responses.append(MagicMock(campaign_criterion_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignCriteria/crit_biz{i}")))
     mock_mutate_response.mutate_operation_responses = responses
@@ -207,9 +267,9 @@ def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock
             mock_google_ads_client,
             mock_customer_id,
             mock_keyword_text,
-            None, # No free_form_keyword_text when business profile is used, per script logic
+            None, # No free_form_keyword_text for this test case
             mock_business_profile_location,
-            mock_business_name # Should be None or ignored by script when biz profile is set
+            None # Business name is ignored by script when business profile location is set
         )
     except Exception as e:
         pytest.fail(f"main function raised an exception: {e}")

@@ -16,6 +16,7 @@
 """
 
 
+from typing import Any, List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -23,31 +24,33 @@ from google.ads.googleads.errors import GoogleAdsException
 
 # Locale is using ISO 639-1 format. If an invalid locale is given,
 # 'en' is used by default.
-LOCALE = "en"
+LOCALE: str = "en"
 
 # A list of country codes can be referenced here:
 # https://developers.google.com/google-ads/api/reference/data/geotargets
-COUNTRY_CODE = "FR"
+COUNTRY_CODE: str = "FR"
 
 
 # [START get_geo_target_constants_by_names]
-def main(client):
-    gtc_service = client.get_service("GeoTargetConstantService")
+def main(client: GoogleAdsClient) -> None:
+    gtc_service: Any = client.get_service("GeoTargetConstantService")
 
-    gtc_request = client.get_type("SuggestGeoTargetConstantsRequest")
+    gtc_request: Any = client.get_type("SuggestGeoTargetConstantsRequest")
 
     gtc_request.locale = LOCALE
     gtc_request.country_code = COUNTRY_CODE
 
     # The location names to get suggested geo target constants.
+    # Type hint for gtc_request.location_names.names is not straightforward
+    # as it's part of a complex protobuf object.
     gtc_request.location_names.names.extend(
         ["Paris", "Quebec", "Spain", "Deutschland"]
     )
 
-    results = gtc_service.suggest_geo_target_constants(gtc_request)
+    results: Any = gtc_service.suggest_geo_target_constants(gtc_request)
 
     for suggestion in results.geo_target_constant_suggestions:
-        geo_target_constant = suggestion.geo_target_constant
+        geo_target_constant: Any = suggestion.geo_target_constant
         print(
             f"{geo_target_constant.resource_name} "
             f"({geo_target_constant.name}, "
@@ -64,7 +67,9 @@ def main(client):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client)

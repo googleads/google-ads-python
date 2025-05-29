@@ -73,8 +73,42 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
         empty_response.keyword_themes = []
         return empty_response
 
-    mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect
+    mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect # Keep existing side effect logic for now
+
+    # --- Mocking client.get_type for KeywordTheme instantiation ---
+    # This is critical for how the script itself creates KeywordTheme objects.
+    # The KeywordTheme() call in the script should return a MagicMock that has
+    # 'keyword_theme_constant' and 'free_form_keyword_theme' attributes defined (initially as None).
     
+    def create_mock_keyword_theme_instance():
+        instance = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
+        instance.keyword_theme_constant = None
+        instance.free_form_keyword_theme = None
+        return instance
+
+    # This is the mock for the class/constructor itself
+    mock_keyword_theme_constructor = MagicMock(side_effect=create_mock_keyword_theme_instance)
+
+    # This is the mock for the object that *has* KeywordTheme as an attribute
+    # (e.g., what client.get_type("SuggestKeywordThemesResponse") returns)
+    mock_suggest_response_type_with_keyword_theme_attr = MagicMock()
+    mock_suggest_response_type_with_keyword_theme_attr.KeywordTheme = mock_keyword_theme_constructor
+    
+    # Store the original get_type mock from conftest
+    original_get_type_mock = mock_google_ads_client.get_type
+
+    def get_type_side_effect_for_keyword_theme(type_name):
+        if type_name == "SuggestKeywordThemesResponse":
+            return mock_suggest_response_type_with_keyword_theme_attr
+        # Fallback to the default behavior of the original get_type mock for other types
+        if hasattr(original_get_type_mock, 'side_effect') and original_get_type_mock.side_effect:
+            # If the original mock itself had a side_effect
+            return original_get_type_mock.side_effect(type_name)
+        return original_get_type_mock(type_name)
+
+    mock_google_ads_client.get_type.side_effect = get_type_side_effect_for_keyword_theme
+    # --- End of get_type mocking ---
+
     # Suggest Budget Options
     mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
@@ -189,16 +223,60 @@ def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock
     # if free_form_keyword_text:
     #   response = smart_campaign_suggest_service.suggest_keyword_themes(request)
     #   keyword_theme_infos.extend(map_keyword_themes_to_keyword_infos(response.keyword_themes))
-    # So, if free_form_keyword_text is None, suggest_keyword_themes is NOT called.
-    # Thus, we don't need to mock its response extensively for this specific test case path.
-    # However, if it were called, it should return an empty list or correctly structured mock.
+    # So, if free_form_keyword_text is None, suggest_keyword_themes is NOT called by _get_keyword_theme_infos.
+    # The script path for this test case:
+    # 1. _get_keyword_text_auto_completions IS called with keyword_text.
+    #    - It calls KeywordThemeConstantService.suggest_keyword_theme_constants.
+    #    - It then creates KeywordTheme objects using client.get_type("SuggestKeywordThemesResponse").KeywordTheme().
+    #      These instances will now be created by our mock_keyword_theme_constructor.
+    # 2. _get_keyword_theme_infos is called.
+    #    - If keyword_theme_ids are provided (not in this test), it uses them.
+    #    - If free_form_keyword_text is provided (None in this test), it calls suggest_keyword_themes.
+    #      Since free_form_keyword_text is None, suggest_keyword_themes is NOT called here.
+    # Therefore, the mock for suggest_keyword_themes for this test can return an empty list.
     mock_empty_kw_theme_response = MagicMock()
-    mock_empty_kw_theme_response.keyword_themes = []
-    mock_suggest_service.suggest_keyword_themes.return_value = mock_empty_kw_theme_response # Default for this test path
+    mock_empty_kw_theme_response.keyword_themes = [] # No themes from this service for this test path
+    mock_suggest_service.suggest_keyword_themes.return_value = mock_empty_kw_theme_response
+
+    # --- Mocking client.get_type for KeywordTheme instantiation (same as in the first test) ---
+    def create_mock_keyword_theme_instance_biz():
+        instance = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
+        instance.keyword_theme_constant = None
+        instance.free_form_keyword_theme = None
+        return instance
+    
+    mock_keyword_theme_constructor_biz = MagicMock(side_effect=create_mock_keyword_theme_instance_biz)
+    mock_suggest_response_type_with_keyword_theme_attr_biz = MagicMock()
+    mock_suggest_response_type_with_keyword_theme_attr_biz.KeywordTheme = mock_keyword_theme_constructor_biz
+    
+    original_get_type_mock_biz = mock_google_ads_client.get_type # already a side_effect from previous test
+                                                                # or the conftest default.
+                                                                # We need to be careful not to infinitely recurse if tests run in same session
+                                                                # But the test runner should give fresh client for each test.
+
+    # Re-assigning side_effect for this test case
+    # Note: If the mock_google_ads_client is shared and mutated across tests, this could be an issue.
+    # Pytest fixtures usually provide a fresh mock per test.
+    current_get_type_behavior = mock_google_ads_client.get_type 
+    # If current_get_type_behavior is already our complex side_effect from the *same* test pass (it shouldn't be),
+    # we'd need to access the 'original' it captured. But pytest should prevent this.
+
+    def get_type_side_effect_for_keyword_theme_biz(type_name):
+        if type_name == "SuggestKeywordThemesResponse":
+            return mock_suggest_response_type_with_keyword_theme_attr_biz
+        # Fallback for other types
+        if hasattr(current_get_type_behavior, "__call__") and not isinstance(current_get_type_behavior, MagicMock):
+             # If it's a function (like a previous side_effect)
+            return current_get_type_behavior(type_name)
+        return current_get_type_behavior # If it's a simple MagicMock
+        
+    mock_google_ads_client.get_type = MagicMock() # Reset to a simple mock first
+    mock_google_ads_client.get_type.side_effect = get_type_side_effect_for_keyword_theme_biz # Then apply new side_effect
+    # --- End of get_type mocking for biz test ---
 
     mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
-    mock_recommended_budget.daily_amount_micros = 55000000 
+    mock_recommended_budget.daily_amount_micros = 55000000
     mock_budget_options_response.recommended_daily_budget_options.high.daily_amount_micros = 65000000
     mock_budget_options_response.recommended_daily_budget_options.low.daily_amount_micros = 45000000
     mock_budget_options_response.recommended_daily_budget_options.recommended.daily_amount_micros = mock_recommended_budget.daily_amount_micros

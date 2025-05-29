@@ -17,6 +17,7 @@
 
 import argparse
 import sys
+from typing import Optional, Dict, List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -24,7 +25,7 @@ from google.ads.googleads.errors import GoogleAdsException
 _DEFAULT_LOG_SPACE_LENGTH = 4
 
 
-def account_hierarchy_module(google_ads_client, customer_id):
+def account_hierarchy_module(google_ads_client: GoogleAdsClient, customer_id: Optional[str]):
     """Print the account hierarchy for the given login customer ID.
 
     Args:
@@ -74,7 +75,7 @@ def account_hierarchy_module(google_ads_client, customer_id):
         # Performs a breadth-first search to build a Dictionary that maps
         # managers to their child accounts (customer_ids_to_child_accounts).
         unprocessed_customer_ids = [seed_customer_id]
-        customer_ids_to_child_accounts = dict()
+        customer_ids_to_child_accounts: Dict[str, List[Any]] = dict()
         root_customer_client = None
 
         while unprocessed_customer_ids:
@@ -129,7 +130,7 @@ def account_hierarchy_module(google_ads_client, customer_id):
 
 
 def print_account_hierarchy(
-    customer_client, customer_ids_to_child_accounts, depth
+    customer_client: Any, customer_ids_to_child_accounts: Dict[str, List[Any]], depth: int
 ):
     """Prints the specified account's hierarchy using recursion.
 
@@ -157,7 +158,7 @@ def print_account_hierarchy(
             )
 
 
-def get_users_module(google_ads_client, customer_id):
+def get_users_module(google_ads_client: GoogleAdsClient, customer_id: Optional[str]):
     """Prints the user access information for the given customer_id.
 
     Args:
@@ -221,3 +222,49 @@ if __name__ == "__main__":
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)
+
+
+def main(customer_id_override: Optional[str] = None):
+    """Main function to run the analyzer.
+
+    Args:
+        customer_id_override: Allows bypassing argparse for testing.
+    """
+    parser = argparse.ArgumentParser(
+        description="This analyzer will display the account info "
+        "according to the input."
+    )
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=False,
+        help="The Google Ads customer ID.",
+    )
+    args = parser.parse_args()
+
+    # Use customer_id_override if provided, else use parsed args
+    effective_customer_id = customer_id_override if customer_id_override is not None else args.customer_id
+
+    try:
+        # GoogleAdsClient will read the google-ads.yaml configuration file in
+        # the home directory if none is specified.
+        googleads_client = GoogleAdsClient.load_from_storage()
+        account_hierarchy_module(googleads_client, effective_customer_id)
+        get_users_module(googleads_client, effective_customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" '
+        )
+        print(f"And includes the following errors:")
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

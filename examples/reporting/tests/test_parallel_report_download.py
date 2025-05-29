@@ -19,7 +19,7 @@ from google.ads.googleads.v19.services.types.google_ads_service import SearchGoo
 # from google.ads.googleads.v19.common.types import Value # Not used in current example but good to have if needed
 from google.ads.googleads.v19.resources.types.ad_group import AdGroup
 from google.ads.googleads.v19.resources.types.campaign import Campaign
-from google.ads.googleads.v19.resources.types.metrics import Metrics
+from google.ads.googleads.v19.common.types.metrics import Metrics
 from google.ads.googleads.v19.resources.types.google_ads_row import GoogleAdsRow
 
 class TestParallelReportDownload(unittest.TestCase):

@@ -54,3 +54,32 @@ FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.py" | grep -v "googl
 echo "${FILES}" | xargs python -m black -l 80
 echo "${FILES}" | xargs git add
 ```
+
+## Running Tests
+
+This project uses [nox](https://nox.thea.codes/) for automated testing and linting across different Python environments. Nox is configured in the `noxfile.py` at the root of the repository.
+
+To run the test suite:
+
+1.  Ensure you have `nox` installed. If not, you can install it via pip:
+    ```bash
+    python -m pip install nox
+    ```
+
+2.  To list all available nox sessions (which might include different Python versions, linting, etc.), run:
+    ```bash
+    nox -l
+    ```
+
+3.  To run all default test sessions, execute the following command from the root of the repository:
+    ```bash
+    nox
+    ```
+
+4.  If you want to run a specific test session (e.g., tests for a particular Python version or a linting session), you can specify it using the `-s` flag. For example:
+    ```bash
+    nox -s tests-3.8
+    ```
+    (The exact session names can be found using `nox -l`.)
+
+The newly added tests for the `examples/assets` directory are part of the standard test sessions and will be executed automatically when you run `nox`.

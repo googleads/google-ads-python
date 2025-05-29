@@ -69,3 +69,8 @@ Repository = "https://github.com/googleads/google-ads-python"
 include=["google.ads.*"]
 exclude=["examples", "examples.*", "tests", "tests.*"]
 
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+

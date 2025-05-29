@@ -45,7 +45,7 @@ from urllib.parse import unquote
 # is not explicitly set in GCP.
 from google_auth_oauthlib.flow import Flow
 
-_SCOPE = "https://www.googleapis.com/auth/adwords"
+_SCOPE = "https://www.googleapis.com/auth/googleads"
 _SERVER = "127.0.0.1"
 _PORT = 8080
 _REDIRECT_URI = f"http://{_SERVER}:{_PORT}"
@@ -163,12 +163,30 @@ def parse_raw_query_params(data: bytes) -> Dict[str, str]:
     # Decode the request into a utf-8 encoded string
     decoded = data.decode("utf-8")
     # Use a regular expression to extract the URL query parameters string
-    match = re.search(r"GET\s\/\?(.*) ", decoded)
-    params = match.group(1)
+    # This regex looks for GET requests, captures the query string part,
+    # and requires HTTP at the end.
+    match = re.search(r"GET\s\/\?(.*)\sHTTP", decoded)
+
+    if not match:
+        return {}
+
+    params_str = match.group(1)
+    if not params_str: # Handle cases like "GET /? HTTP..."
+        return {}
+
     # Split the parameters to isolate the key/value pairs
-    pairs = [pair.split("=") for pair in params.split("&")]
-    # Convert pairs to a dict to make it easy to access the values
-    return {key: val for key, val in pairs}
+    pairs = params_str.split("&")
+    parsed_params = {}
+    for pair in pairs:
+        if not pair: # Skip empty strings that can result from "&&" or trailing "&"
+            continue
+        split_pair = pair.split("=", 1) # Split only on the first "="
+        if len(split_pair) == 2:
+            key, val = split_pair
+            parsed_params[key] = val
+        elif len(split_pair) == 1: # Key without a value
+            parsed_params[split_pair[0]] = ""
+    return parsed_params
 
 
 if __name__ == "__main__":

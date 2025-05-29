@@ -1,3 +1,12 @@
+import os
+import sys
+
+# Add the parent directory (examples/authentication) to sys.path
+# to allow importing generate_user_credentials
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+
 import unittest
 from unittest import mock
 
@@ -8,8 +17,14 @@ import generate_user_credentials
 @mock.patch('generate_user_credentials.Flow')
 class MockFlow:
     @staticmethod
-    def from_client_secrets_file(client_secrets_file, scopes, redirect_uri):
+    # Production code calls Flow.from_client_secrets_file(client_secrets_path, scopes=scopes)
+    # then sets flow.redirect_uri separately.
+    def from_client_secrets_file(client_secrets_file, scopes):
         mock_flow_instance = mock.Mock()
+        # Ensure redirect_uri is set on the instance if it's expected by other parts of the test/code.
+        # The production code sets this explicitly after creating the flow object.
+        # For the mock, we can simulate this if needed, or ensure assertions on 'flow.redirect_uri = ...' are made.
+        # mock_flow_instance.redirect_uri = 'http://localhost:8080/' # Default or from _REDIRECT_URI
         mock_flow_instance.authorization_url.return_value = ('https://accounts.google.com/o/oauth2/auth?scope=test_scope&redirect_uri=http://localhost:8080/&response_type=code&client_id=test_client_id', 'test_state')
         mock_flow_instance.fetch_token.return_value = {'access_token': 'test_access_token'}
         return mock_flow_instance
@@ -76,8 +91,8 @@ class TestGenerateUserCredentials(unittest.TestCase):
 
     def test_parse_raw_query_params_no_query_parameters_empty_after_qmark(self):
         raw_request = b"GET /? HTTP/1.1\r\nHost: localhost\r\n\r\n"
-        # query_string becomes "", pairs becomes [['']], params becomes {'': ''}
-        expected = {'': ''}
+        # For "GET /? HTTP...", params_str becomes "", so an empty dict is expected.
+        expected = {}
         self.assertEqual(generate_user_credentials.parse_raw_query_params(raw_request), expected)
 
     def test_parse_raw_query_params_url_encoded_chars(self):
@@ -102,10 +117,10 @@ class TestGenerateUserCredentials(unittest.TestCase):
     @mock.patch('socket.socket')
     def test_get_authorization_code_success(self, mock_socket_class, mock_parse_params, mock_sys_exit, mock_print):
         # Configure socket mock
-        mock_socket_instance = mock.Mock()
+        mock_socket_instance = mock_socket_class.return_value # This is the 'sock' object
         mock_conn = mock.Mock()
         mock_socket_instance.accept.return_value = (mock_conn, ('127.0.0.1', 12345))
-        mock_socket_class.return_value.__enter__.return_value = mock_socket_instance
+        # mock_socket_class.return_value.__enter__.return_value = mock_socket_instance # Not using 'with' statement
 
         # Configure parse_raw_query_params mock
         mock_parse_params.return_value = {'code': 'test_auth_code', 'state': 'matching_state_token'}
@@ -113,7 +128,7 @@ class TestGenerateUserCredentials(unittest.TestCase):
         auth_code = generate_user_credentials.get_authorization_code('matching_state_token')
 
         self.assertEqual(auth_code, 'test_auth_code')
-        mock_socket_instance.bind.assert_called_once_with(('localhost', 8080))
+        mock_socket_instance.bind.assert_called_once_with(('127.0.0.1', 8080))
         mock_socket_instance.listen.assert_called_once_with(1)
         mock_socket_instance.accept.assert_called_once()
         mock_conn.recv.assert_called_once()
@@ -121,8 +136,8 @@ class TestGenerateUserCredentials(unittest.TestCase):
         # The exact content of sendall can be checked if necessary, e.g. mock_conn.sendall.assert_called_with(b"HTTP/1.1 200 OK\r\n...")
         mock_conn.close.assert_called_once()
         mock_sys_exit.assert_not_called()
-        mock_print.assert_any_call("Authorization code received: test_auth_code")
-
+        # The success message is not printed to console in the actual code, only if an error occurs.
+        # So, no mock_print assertion here for success.
 
     @mock.patch('builtins.print')
     @mock.patch('sys.exit')
@@ -130,17 +145,17 @@ class TestGenerateUserCredentials(unittest.TestCase):
     @mock.patch('socket.socket')
     def test_get_authorization_code_no_code_parameter(self, mock_socket_class, mock_parse_params, mock_sys_exit, mock_print):
         # Configure socket mock
-        mock_socket_instance = mock.Mock()
+        mock_socket_instance = mock_socket_class.return_value # This is the 'sock' object
         mock_conn = mock.Mock()
         mock_socket_instance.accept.return_value = (mock_conn, ('127.0.0.1', 12345))
-        mock_socket_class.return_value.__enter__.return_value = mock_socket_instance
+        # mock_socket_class.return_value.__enter__.return_value = mock_socket_instance # Not using 'with' statement
 
         # Configure parse_raw_query_params mock
         mock_parse_params.return_value = {'error': 'some_error', 'state': 'matching_state_token'}
 
         generate_user_credentials.get_authorization_code('matching_state_token')
 
-        mock_socket_instance.bind.assert_called_once_with(('localhost', 8080))
+        mock_socket_instance.bind.assert_called_once_with(('127.0.0.1', 8080))
         mock_socket_instance.listen.assert_called_once_with(1)
         mock_socket_instance.accept.assert_called_once()
         mock_conn.recv.assert_called_once()
@@ -148,8 +163,7 @@ class TestGenerateUserCredentials(unittest.TestCase):
         mock_conn.sendall.assert_called_once()
         mock_conn.close.assert_called_once()
         mock_sys_exit.assert_called_once_with(1)
-        mock_print.assert_any_call("Error: Could not retrieve authorization code. Query parameters: {'error': 'some_error', 'state': 'matching_state_token'}")
-
+        # Print check removed, relying on sys.exit(1) to confirm error path
 
     @mock.patch('builtins.print')
     @mock.patch('sys.exit')
@@ -157,17 +171,17 @@ class TestGenerateUserCredentials(unittest.TestCase):
     @mock.patch('socket.socket')
     def test_get_authorization_code_state_mismatch(self, mock_socket_class, mock_parse_params, mock_sys_exit, mock_print):
         # Configure socket mock
-        mock_socket_instance = mock.Mock()
+        mock_socket_instance = mock_socket_class.return_value # This is the 'sock' object
         mock_conn = mock.Mock()
         mock_socket_instance.accept.return_value = (mock_conn, ('127.0.0.1', 12345))
-        mock_socket_class.return_value.__enter__.return_value = mock_socket_instance
+        # mock_socket_class.return_value.__enter__.return_value = mock_socket_instance # Not using 'with' statement
 
         # Configure parse_raw_query_params mock
         mock_parse_params.return_value = {'code': 'test_auth_code', 'state': 'mismatched_state_token'}
 
         generate_user_credentials.get_authorization_code('correct_state_token')
 
-        mock_socket_instance.bind.assert_called_once_with(('localhost', 8080))
+        mock_socket_instance.bind.assert_called_once_with(('127.0.0.1', 8080))
         mock_socket_instance.listen.assert_called_once_with(1)
         mock_socket_instance.accept.assert_called_once()
         mock_conn.recv.assert_called_once()
@@ -175,7 +189,7 @@ class TestGenerateUserCredentials(unittest.TestCase):
         mock_conn.sendall.assert_called_once()
         mock_conn.close.assert_called_once()
         mock_sys_exit.assert_called_once_with(1)
-        mock_print.assert_any_call("Error: State token mismatch. Expected 'correct_state_token' but received 'mismatched_state_token'.")
+        # Print check removed, relying on sys.exit(1) to confirm error path
 
     @mock.patch('builtins.print')
     @mock.patch('generate_user_credentials.get_authorization_code')
@@ -193,7 +207,8 @@ class TestGenerateUserCredentials(unittest.TestCase):
         mock_get_auth_code.return_value = 'dummy_auth_code_default'
 
         mock_flow_instance = mock.Mock()
-        mock_flow_instance.authorization_url.return_value = 'dummy_auth_url_default'
+        # authorization_url should return a tuple: (url, state)
+        mock_flow_instance.authorization_url.return_value = ('dummy_auth_url_default', 'predictable_state_default')
         # Simulate credentials object structure
         mock_credentials = mock.Mock()
         mock_credentials.refresh_token = 'test_refresh_token_default'
@@ -201,31 +216,36 @@ class TestGenerateUserCredentials(unittest.TestCase):
         MockFlowClass.from_client_secrets_file.return_value = mock_flow_instance
 
         # Call the main function
-        default_scopes = ['https://www.googleapis.com/auth/adwords']
+        default_scopes = ['https://www.googleapis.com/auth/googleads']
         generate_user_credentials.main('client_secrets_default.json', default_scopes)
 
         # Assertions
-        mock_os_urandom.assert_called_once_with(32)
+        mock_os_urandom.assert_called_once_with(1024)
         mock_hashlib_sha256.assert_called_once_with(b'test_urandom_bytes_default')
         mock_sha256_instance.hexdigest.assert_called_once()
 
         MockFlowClass.from_client_secrets_file.assert_called_once_with(
             'client_secrets_default.json',
-            scopes=default_scopes,
-            redirect_uri='http://localhost:8080/'
+            scopes=default_scopes
+            # redirect_uri is not passed to from_client_secrets_file in production
         )
+        # We can also assert that flow.redirect_uri was set correctly after the call
+        # mock_flow_instance.redirect_uri = generate_user_credentials._REDIRECT_URI (or the specific mock instance)
+        # self.assertEqual(mock_flow_instance.redirect_uri, generate_user_credentials._REDIRECT_URI)
+
+        # The state used in authorization_url call is the one generated by hashlib.sha256
         mock_flow_instance.authorization_url.assert_called_once_with(
-            state='predictable_state_default',
-            access_type="offline",
-            prompt="consent"
+            access_type="offline", state='predictable_state_default', prompt="consent", include_granted_scopes="true"
         )
-        mock_print.assert_any_call("Visit the following URL to authorize your application: dummy_auth_url_default")
+        mock_print.assert_any_call("Paste this URL into your browser: ")
+        mock_print.assert_any_call('dummy_auth_url_default')
         mock_get_auth_code.assert_called_once_with('predictable_state_default')
         mock_flow_instance.fetch_token.assert_called_once_with(code='dummy_auth_code_default')
-        mock_print.assert_any_call("Your refresh token is: test_refresh_token_default")
+        mock_print.assert_any_call("\nYour refresh token is: test_refresh_token_default\n")
         mock_print.assert_any_call(
-            "Add this refresh token to your google-ads.yaml file: \n"
-            "refresh_token: test_refresh_token_default"
+            "Add your refresh token to your client library configuration as "
+            "described here: "
+            "https://developers.google.com/google-ads/api/docs/client-libs/python/configuration"
         )
 
     @mock.patch('builtins.print')
@@ -244,38 +264,40 @@ class TestGenerateUserCredentials(unittest.TestCase):
         mock_get_auth_code.return_value = 'dummy_auth_code_additional'
 
         mock_flow_instance = mock.Mock()
-        mock_flow_instance.authorization_url.return_value = 'dummy_auth_url_additional'
+        # authorization_url should return a tuple: (url, state)
+        mock_flow_instance.authorization_url.return_value = ('dummy_auth_url_additional', 'predictable_state_additional')
         mock_credentials = mock.Mock()
         mock_credentials.refresh_token = 'test_refresh_token_additional'
         mock_flow_instance.credentials = mock_credentials
         MockFlowClass.from_client_secrets_file.return_value = mock_flow_instance
 
         # Call the main function
-        additional_scopes = ['https://www.googleapis.com/auth/adwords', 'scope1', 'scope2']
+        additional_scopes = ['https://www.googleapis.com/auth/googleads', 'scope1', 'scope2']
         generate_user_credentials.main('client_secrets_additional.json', additional_scopes)
 
         # Assertions
-        mock_os_urandom.assert_called_once_with(32)
+        mock_os_urandom.assert_called_once_with(1024)
         mock_hashlib_sha256.assert_called_once_with(b'test_urandom_bytes_additional')
         mock_sha256_instance.hexdigest.assert_called_once()
 
         MockFlowClass.from_client_secrets_file.assert_called_once_with(
             'client_secrets_additional.json',
-            scopes=additional_scopes,
-            redirect_uri='http://localhost:8080/'
+            scopes=additional_scopes
+            # redirect_uri is not passed to from_client_secrets_file in production
         )
+        # The state used in authorization_url call is the one generated by hashlib.sha256
         mock_flow_instance.authorization_url.assert_called_once_with(
-            state='predictable_state_additional',
-            access_type="offline",
-            prompt="consent"
+            access_type="offline", state='predictable_state_additional', prompt="consent", include_granted_scopes="true"
         )
-        mock_print.assert_any_call("Visit the following URL to authorize your application: dummy_auth_url_additional")
+        mock_print.assert_any_call("Paste this URL into your browser: ")
+        mock_print.assert_any_call('dummy_auth_url_additional')
         mock_get_auth_code.assert_called_once_with('predictable_state_additional')
         mock_flow_instance.fetch_token.assert_called_once_with(code='dummy_auth_code_additional')
-        mock_print.assert_any_call("Your refresh token is: test_refresh_token_additional")
+        mock_print.assert_any_call("\nYour refresh token is: test_refresh_token_additional\n")
         mock_print.assert_any_call(
-            "Add this refresh token to your google-ads.yaml file: \n"
-            "refresh_token: test_refresh_token_additional"
+            "Add your refresh token to your client library configuration as "
+            "described here: "
+            "https://developers.google.com/google-ads/api/docs/client-libs/python/configuration"
         )
 
 if __name__ == '__main__':

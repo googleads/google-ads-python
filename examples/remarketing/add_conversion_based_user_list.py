@@ -22,13 +22,27 @@ e.g. by visiting a site and making a purchase.
 import argparse
 import sys
 from uuid import uuid4
+from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.common.types.user_lists import UserListActionInfo
+from google.ads.googleads.v19.resources.types.user_list import UserList
+from google.ads.googleads.v19.services.types.conversion_action_service import (
+    ConversionActionServiceClient,
+)
+from google.ads.googleads.v19.services.types.user_list_service import (
+    UserListOperation,
+    UserListServiceClient,
+)
 
 
 # [START add_conversion_based_user_list]
-def main(client, customer_id, conversion_action_ids):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_ids: List[str],
+) -> None:
     """Creates a combination user list.
 
     Args:
@@ -38,15 +52,21 @@ def main(client, customer_id, conversion_action_ids):
             user list.
     """
     # Get the UserListService and ConversionActionService clients.
-    user_list_service = client.get_service("UserListService")
-    conversion_action_service = client.get_service("ConversionActionService")
+    user_list_service: UserListServiceClient = client.get_service(
+        "UserListService"
+    )
+    conversion_action_service: ConversionActionServiceClient = client.get_service(
+        "ConversionActionService"
+    )
 
     # Create a list of UserListActionInfo objects for the given conversion
     # actions. These specify the conversion actions that, when triggered, will
     # cause a user to be added to a UserList.
-    user_list_action_info_list = []
+    user_list_action_info_list: List[UserListActionInfo] = []
     for conversion_action_id in conversion_action_ids:
-        user_list_action_info = client.get_type("UserListActionInfo")
+        user_list_action_info: UserListActionInfo = client.get_type(
+            "UserListActionInfo"
+        )
         user_list_action_info.conversion_action = (
             conversion_action_service.conversion_action_path(
                 customer_id, conversion_action_id
@@ -55,8 +75,8 @@ def main(client, customer_id, conversion_action_ids):
         user_list_action_info_list.append(user_list_action_info)
 
     # Create a UserListOperation and populate the UserList.
-    user_list_operation = client.get_type("UserListOperation")
-    user_list = user_list_operation.create
+    user_list_operation: UserListOperation = client.get_type("UserListOperation")
+    user_list: UserList = user_list_operation.create
     user_list.name = f"Example BasicUserList #{uuid4()}"
     user_list.description = (
         "A list of people who have triggered one or more conversion actions"
@@ -67,7 +87,7 @@ def main(client, customer_id, conversion_action_ids):
     user_list.basic_user_list.actions.extend(user_list_action_info_list)
 
     # Issue a mutate request to add the user list, then print the results.
-    response = user_list_service.mutate_user_lists(
+    response: Any = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
     print(
@@ -78,7 +98,7 @@ def main(client, customer_id, conversion_action_ids):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Creates a basic user list based on conversion actions."
     )
     # The following argument(s) should be provided to run the example.
@@ -97,11 +117,13 @@ if __name__ == "__main__":
         required=True,
         help="The IDs of the conversion actions for the basic user list.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.conversion_action_ids)

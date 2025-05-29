@@ -23,23 +23,24 @@ To get ad group IDs, run basic_operations/get_ad_groups.py.
 
 import argparse
 import sys
+from typing import Any, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 # Country code is a two-letter ISO-3166 code, for a list of all codes see:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-17
-_DEFAULT_PHONE_COUNTRY = "US"
+_DEFAULT_PHONE_COUNTRY: str = "US"
 
 
 def main(
-    client,
-    customer_id,
-    ad_group_id,
-    phone_number,
-    phone_country,
-    conversion_action_id,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    phone_number: str,
+    phone_country: str,
+    conversion_action_id: Optional[str],
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -50,14 +51,14 @@ def main(
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = operation.create
+    googleads_service: Any = client.get_service("GoogleAdsService")
+    operation: Any = client.get_type("AdGroupAdOperation")
+    ad_group_ad: Any = operation.create
     ad_group_ad.ad_group = googleads_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
-    ad = ad_group_ad.ad
+    ad: Any = ad_group_ad.ad
     # The URL of the webpage to refer to.
     ad.final_urls.append("https://www.example.com")
     # Sets basic information.
@@ -90,11 +91,11 @@ def main(
         )
 
     # Issues a mutate request to add the ad group ad.
-    ad_group_ad_service = client.get_service("AdGroupAdService")
-    response = ad_group_ad_service.mutate_ad_group_ads(
+    ad_group_ad_service: Any = client.get_service("AdGroupAdService")
+    response: Any = ad_group_ad_service.mutate_ad_group_ads(
         customer_id=customer_id, operations=[operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created ad group ad with resource name: '{resource_name}'")
 
 
@@ -142,11 +143,13 @@ if __name__ == "__main__":
         help=("An optional conversion action ID to attribute conversions to."),
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

@@ -31,28 +31,94 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v17.common.types.bidding import ManualCpc
+from google.ads.googleads.v17.common.types.ads import ShoppingProductAdInfo
+from google.ads.googleads.v17.enums.types.ad_group_ad_status import (
+    AdGroupAdStatusEnum,
+)
+from google.ads.googleads.v17.enums.types.ad_group_criterion_status import (
+    AdGroupCriterionStatusEnum,
+)
+from google.ads.googleads.v17.enums.types.ad_group_status import (
+    AdGroupStatusEnum,
+)
+from google.ads.googleads.v17.enums.types.ad_group_type import AdGroupTypeEnum
+from google.ads.googleads.v17.enums.types.advertising_channel_type import (
+    AdvertisingChannelTypeEnum,
+)
+from google.ads.googleads.v17.enums.types.budget_delivery_method import (
+    BudgetDeliveryMethodEnum,
+)
+from google.ads.googleads.v17.enums.types.campaign_status import (
+    CampaignStatusEnum,
+)
+from google.ads.googleads.v17.enums.types.listing_group_type import (
+    ListingGroupTypeEnum,
+)
+from google.ads.googleads.v17.resources.types.ad_group import AdGroup
+from google.ads.googleads.v17.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v17.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v17.resources.types.campaign import Campaign
+from google.ads.googleads.v17.resources.types.campaign_budget import (
+    CampaignBudget,
+)
+from google.ads.googleads.v17.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v17.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v17.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v17.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
+from google.ads.googleads.v17.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v17.services.types.ad_group_ad_operation import (
+    AdGroupAdOperation,
+)
+from google.ads.googleads.v17.services.types.ad_group_criterion_operation import (
+    AdGroupCriterionOperation,
+)
+from google.ads.googleads.v17.services.types.ad_group_operation import (
+    AdGroupOperation,
+)
+from google.ads.googleads.v17.services.types.campaign_budget_operation import (
+    CampaignBudgetOperation,
+)
+from google.ads.googleads.v17.services.types.campaign_operation import (
+    CampaignOperation,
+)
 
 
 def main(
-    client,
-    customer_id,
-    merchant_center_account_id,
-    create_default_listing_group,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    merchant_center_account_id: int,
+    create_default_listing_group: bool,
+) -> None:
     # Creates a budget to be used by the campaign that will be created below.
-    budget_resource_name = add_campaign_budget(client, customer_id)
+    budget_resource_name: str = add_campaign_budget(client, customer_id)
 
     # Create a standard shopping campaign.
-    campaign_resource_name = add_standard_shopping_campaign(
+    campaign_resource_name: str = add_standard_shopping_campaign(
         client, customer_id, budget_resource_name, merchant_center_account_id
     )
 
     # Create a shopping product ad group.
-    ad_group_resource_name = add_shopping_product_ad_group(
+    ad_group_resource_name: str = add_shopping_product_ad_group(
         client, customer_id, campaign_resource_name
     )
 
     # Create a shopping product ad group ad.
+    # Note: The function add_shopping_product_ad_group_ad currently returns
+    # the ad_group_resource_name, not the ad_group_ad_resource_name.
+    # This is being kept as per the original code.
     add_shopping_product_ad_group_ad(
         client, customer_id, ad_group_resource_name
     )
@@ -66,13 +132,19 @@ def main(
         )
 
 
-def add_campaign_budget(client, customer_id):
+def add_campaign_budget(
+    client: GoogleAdsClient, customer_id: str
+) -> str:
     """Creates a new campaign budget in the specified client account."""
-    campaign_budget_service = client.get_service("CampaignBudgetService")
+    campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
+        "CampaignBudgetService"
+    )
 
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
-    campaign_budget = campaign_budget_operation.create
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
@@ -84,7 +156,9 @@ def add_campaign_budget(client, customer_id):
         customer_id=customer_id, operations=[campaign_budget_operation]
     )
 
-    budget_resource_name = campaign_budget_response.results[0].resource_name
+    budget_resource_name: str = campaign_budget_response.results[
+        0
+    ].resource_name
 
     print(f"Added a budget with resource name: '{budget_resource_name}'")
 
@@ -93,16 +167,24 @@ def add_campaign_budget(client, customer_id):
 
 # [START add_shopping_product_ad]
 def add_shopping_product_ad_group_ad(
-    client, customer_id, ad_group_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_resource_name: str,
+) -> str:
     """Creates a new shopping product ad group ad in the specified ad group."""
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
 
     # Creates a new ad group ad and sets the product ad to it.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
-    ad_group_ad = ad_group_ad_operation.create
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
+    # The Ad object itself is not directly manipulated for Shopping Product Ads.
+    # Instead, we copy ShoppingProductAdInfo into the ad's shopping_product_ad field.
     client.copy_from(
         ad_group_ad.ad.shopping_product_ad,
         client.get_type("ShoppingProductAdInfo"),
@@ -113,24 +195,35 @@ def add_shopping_product_ad_group_ad(
         customer_id=customer_id, operations=[ad_group_ad_operation]
     )
 
-    ad_group_ad_resource_name = ad_group_ad_response.results[0].resource_name
+    ad_group_ad_resource_name: str = ad_group_ad_response.results[
+        0
+    ].resource_name
 
     print(
         f"Created shopping product ad group ad '{ad_group_ad_resource_name}'."
     )
 
+    # Note: Original code returns ad_group_resource_name.
+    # Based on the print and function name, it seems like ad_group_ad_resource_name
+    # would be more appropriate. Sticking to original for now.
     return ad_group_resource_name
     # [END add_shopping_product_ad]
 
 
 # [START add_shopping_product_ad_1]
-def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
+def add_shopping_product_ad_group(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_resource_name: str,
+) -> str:
     """Creates a new shopping product ad group in the specified campaign."""
-    ad_group_service = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
 
     # Create ad group.
-    ad_group_operation = client.get_type("AdGroupOperation")
-    ad_group = ad_group_operation.create
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
@@ -144,7 +237,7 @@ def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
         customer_id=customer_id, operations=[ad_group_operation]
     )
 
-    ad_group_resource_name = ad_group_response.results[0].resource_name
+    ad_group_resource_name: str = ad_group_response.results[0].resource_name
 
     print(
         "Added a product shopping ad group with resource name "
@@ -157,14 +250,19 @@ def add_shopping_product_ad_group(client, customer_id, campaign_resource_name):
 
 # [START add_shopping_product_ad_2]
 def add_standard_shopping_campaign(
-    client, customer_id, budget_resource_name, merchant_center_account_id
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    budget_resource_name: str,
+    merchant_center_account_id: int,
+) -> str:
     """Creates a new standard shopping campaign in the specified client account."""
-    campaign_service = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # Create standard shopping campaign.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.create
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise Campaign {uuid.uuid4()}"
 
     # Configures settings related to shopping campaigns including advertising
@@ -201,7 +299,7 @@ def add_standard_shopping_campaign(
         customer_id=customer_id, operations=[campaign_operation]
     )
 
-    campaign_resource_name = campaign_response.results[0].resource_name
+    campaign_resource_name: str = campaign_response.results[0].resource_name
 
     print(
         "Added a standard shopping campaign with resource name "
@@ -213,8 +311,10 @@ def add_standard_shopping_campaign(
 
 
 def add_default_shopping_listing_group(
-    client, customer_id, ad_group_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_resource_name: str,
+) -> None:
     """Creates a new default shopping listing group for the specified ad group.
 
     A listing group is the Google Ads API representation of a "product group"
@@ -222,14 +322,22 @@ def add_default_shopping_listing_group(
     to the ad group using an "ad group criterion". The criterion will contain
     the bid for a given listing group.
     """
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
 
     # Creates a new ad group criterion. This will contain the "default" listing
     # group (All products).
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
-    ad_group_criterion = ad_group_criterion_operation.create
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    ad_group_criterion: AdGroupCriterion = (
+        ad_group_criterion_operation.create
+    )
     ad_group_criterion.ad_group = ad_group_resource_name
-    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
+    ad_group_criterion.status = (
+        client.enums.AdGroupCriterionStatusEnum.ENABLED
+    )
     ad_group_criterion.listing_group.type_ = (
         client.enums.ListingGroupTypeEnum.UNIT
     )
@@ -278,11 +386,13 @@ if __name__ == "__main__":
         default=False,
         help="Create a default listing group.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v19"
+    )
 
     try:
         main(

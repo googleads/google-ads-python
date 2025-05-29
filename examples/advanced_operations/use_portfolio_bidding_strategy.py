@@ -138,6 +138,12 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
+<<<<<<< HEAD
     googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+=======
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v21"
+    )
+>>>>>>> 26f705c77 (Add type hints to files in examples/advanced_operations)
 
     main(googleads_client, args.customer_id)

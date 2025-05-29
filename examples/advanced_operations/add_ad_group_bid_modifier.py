@@ -20,22 +20,28 @@ To get ad group bid modifiers, run get_ad_group_bid_modifiers.py
 
 import argparse
 import sys
+from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_ad_group_bid_modifier]
-def main(client, customer_id, ad_group_id, bid_modifier_value):
-    ad_group_service = client.get_service("AdGroupService")
-    ad_group_bm_service = client.get_service("AdGroupBidModifierService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    bid_modifier_value: float,
+) -> None:
+    ad_group_service: Any = client.get_service("AdGroupService")
+    ad_group_bm_service: Any = client.get_service("AdGroupBidModifierService")
 
     # Create ad group bid modifier for mobile devices with the specified ad
     # group ID and bid modifier value.
-    ad_group_bid_modifier_operation = client.get_type(
+    ad_group_bid_modifier_operation: Any = client.get_type(
         "AdGroupBidModifierOperation"
     )
-    ad_group_bid_modifier = ad_group_bid_modifier_operation.create
+    ad_group_bid_modifier: Any = ad_group_bid_modifier_operation.create
 
     # Set the ad group.
     ad_group_bid_modifier.ad_group = ad_group_service.ad_group_path(
@@ -46,13 +52,15 @@ def main(client, customer_id, ad_group_id, bid_modifier_value):
     ad_group_bid_modifier.bid_modifier = bid_modifier_value
 
     # Sets the device.
-    device_enum = client.enums.DeviceEnum
+    device_enum: Any = client.enums.DeviceEnum
     ad_group_bid_modifier.device.type_ = device_enum.MOBILE
 
     # Add the ad group bid modifier.
-    ad_group_bm_response = ad_group_bm_service.mutate_ad_group_bid_modifiers(
-        customer_id=customer_id,
-        operations=[ad_group_bid_modifier_operation],
+    ad_group_bm_response: Any = (
+        ad_group_bm_service.mutate_ad_group_bid_modifiers(
+            customer_id=customer_id,
+            operations=[ad_group_bid_modifier_operation],
+        )
     )
     # [END add_ad_group_bid_modifier]
 
@@ -88,11 +96,13 @@ if __name__ == "__main__":
         default=1.5,
         help="The bid modifier value.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v21"
+    )
 
     try:
         main(

@@ -145,7 +145,7 @@ class TestParallelReportDownload(unittest.TestCase):
         query = "SELECT campaign.id, metrics.impressions, metrics.clicks FROM campaign" 
 
         # Minimal exception for testing retries
-        exception = GoogleAdsException(None, None, None) 
+        exception = GoogleAdsException(None, None, None, request_id="test_request_id_retry") 
         
         mock_row_campaign = mock.Mock(spec=GoogleAdsRow)
         mock_row_campaign.campaign = mock.Mock(spec=Campaign)

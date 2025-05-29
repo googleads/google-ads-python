@@ -214,4 +214,6 @@ if __name__ == "__main__":
     if args.login_customer_id is not None:
         googleads_client.login_customer_id = args.login_customer_id
 
-    main(googleads_client, args.customer_ids)
+    # Import the module itself to ensure functions are pickled with the module name
+    import parallel_report_download as prd
+    prd.main(googleads_client, args.customer_ids)

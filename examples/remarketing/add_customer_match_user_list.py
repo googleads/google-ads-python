@@ -34,18 +34,30 @@ from typing import List, Dict, Any, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.google_ads_service import (
+# Corrected import path for GoogleAdsServiceClient
+from google.ads.googleads.v19.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
+)
+# SearchGoogleAdsStreamResponse is correctly located in .types
+from google.ads.googleads.v19.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
 )
-from google.ads.googleads.v19.services.types.user_list_service import (
-    UserListOperation,
+# Corrected import for UserListServiceClient
+from google.ads.googleads.v19.services.services.user_list_service.client import (
     UserListServiceClient,
 )
+# UserListOperation is correctly in .types
+from google.ads.googleads.v19.services.types.user_list_service import (
+    UserListOperation,
+)
 from google.ads.googleads.v19.resources.types.user_list import UserList
+# Corrected import for OfflineUserDataJobServiceClient
+from google.ads.googleads.v19.services.services.offline_user_data_job_service.client import (
+    OfflineUserDataJobServiceClient,
+)
+# OfflineUserDataJobOperation and AddOfflineUserDataJobOperationsResponse are correctly in .types
 from google.ads.googleads.v19.services.types.offline_user_data_job_service import (
     OfflineUserDataJobOperation,
-    OfflineUserDataJobServiceClient,
     AddOfflineUserDataJobOperationsResponse,
 )
 from google.ads.googleads.v19.resources.types.offline_user_data_job import (
@@ -54,8 +66,10 @@ from google.ads.googleads.v19.resources.types.offline_user_data_job import (
 from google.ads.googleads.v19.common.types.offline_user_data import (
     UserData,
     UserIdentifier,
-    AddressInfo,
+    # AddressInfo is not here
 )
+# Corrected import for AddressInfo
+from google.ads.googleads.v19.common.types.criteria import AddressInfo
 
 
 def main(
@@ -575,14 +589,15 @@ def normalize_and_hash(s: str, remove_all_whitespace: bool) -> str:
     Returns:
         A normalized (lowercase, remove whitespace) and SHA-256 hashed string.
     """
-    # Normalizes by first converting all characters to lowercase, then trimming
-    # spaces.
+    # Normalizes by first converting all characters to lowercase.
+    s = s.lower()
+    
     if remove_all_whitespace:
         # Removes leading, trailing, and intermediate whitespace.
         s = "".join(s.split())
     else:
         # Removes only leading and trailing spaces.
-        s = s.strip().lower()
+        s = s.strip() # Lowercasing is already done.
 
     # Hashes the normalized string using the hashing algorithm.
     return hashlib.sha256(s.encode()).hexdigest()

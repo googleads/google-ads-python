@@ -22,9 +22,13 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+# Corrected import path for ConversionActionServiceClient
+from google.ads.googleads.v19.services.services.conversion_action_service.client import (
+    ConversionActionServiceClient,
+)
+# ConversionActionOperation is correctly in the .types module
 from google.ads.googleads.v19.services.types.conversion_action_service import (
     ConversionActionOperation,
-    ConversionActionServiceClient,
 )
 from google.ads.googleads.v19.resources.types.conversion_action import (
     ConversionAction,

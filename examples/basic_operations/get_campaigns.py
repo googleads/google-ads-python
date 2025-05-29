@@ -49,7 +49,8 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     )
 
     for batch in stream:
-        for row: GoogleAdsRow in batch.results:
+        for row_data in batch.results:
+            row: GoogleAdsRow = row_data  # Type hint moved to separate line
             print(
                 f"Campaign with ID {row.campaign.id} and name "
                 f'"{row.campaign.name}" was found.'

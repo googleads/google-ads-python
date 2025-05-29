@@ -27,14 +27,20 @@ from typing import MutableSequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+# Corrected imports for service clients
+from google.ads.googleads.v19.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
+from google.ads.googleads.v19.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+# Imports for types remain the same
 from google.ads.googleads.v19.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
-    CampaignBudgetServiceClient,
     MutateCampaignBudgetsResponse,
 )
 from google.ads.googleads.v19.services.types.campaign_service import (
     CampaignOperation,
-    CampaignServiceClient,
     MutateCampaignsResponse,
 )
 from google.ads.googleads.v19.resources.types.campaign_budget import (

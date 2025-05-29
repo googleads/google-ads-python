@@ -25,13 +25,17 @@ from typing import Any, MutableSequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+# Corrected imports for service clients
+from google.ads.googleads.v19.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v19.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+# Imports for types remain the same
 from google.ads.googleads.v19.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
-    AdGroupServiceClient,
-)
-from google.ads.googleads.v19.services.types.campaign_service import (
-    CampaignServiceClient,
 )
 from google.ads.googleads.v19.resources.types.ad_group import AdGroup
 

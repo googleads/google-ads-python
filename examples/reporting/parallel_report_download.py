@@ -35,6 +35,16 @@ BACKOFF_FACTOR = 5
 # Maximum number of retries for errors.
 MAX_RETRIES = 5
 
+# Define the GAQL query strings to run for each customer ID.
+campaign_query = """
+        SELECT campaign.id, metrics.impressions, metrics.clicks
+        FROM campaign
+        WHERE segments.date DURING LAST_30_DAYS"""
+ad_group_query = """
+        SELECT campaign.id, ad_group.id, metrics.impressions, metrics.clicks
+        FROM ad_group
+        WHERE segments.date DURING LAST_30_DAYS"""
+
 
 def main(
     client: GoogleAdsClient, customer_ids: List[str]
@@ -45,16 +55,6 @@ def main(
         client: an initialized GoogleAdsClient instance.
         customer_ids: an array of client customer IDs.
     """
-
-    # Define the GAQL query strings to run for each customer ID.
-    campaign_query = """
-        SELECT campaign.id, metrics.impressions, metrics.clicks
-        FROM campaign
-        WHERE segments.date DURING LAST_30_DAYS"""
-    ad_group_query = """
-        SELECT campaign.id, ad_group.id, metrics.impressions, metrics.clicks
-        FROM ad_group
-        WHERE segments.date DURING LAST_30_DAYS"""
 
     inputs: Iterable[Tuple[GoogleAdsClient, str, str]] = generate_inputs(
         client, customer_ids, [campaign_query, ad_group_query]

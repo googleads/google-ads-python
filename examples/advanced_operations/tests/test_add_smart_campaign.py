@@ -120,13 +120,20 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
 
-    # Configure mock_suggest_service 
-    # This is called by _get_keyword_theme_infos for free_form_keyword_text
-    mock_suggest_themes_response_main = MagicMock()
-    free_form_theme_instance = create_mock_keyword_theme_instance_func()
-    free_form_theme_instance.free_form_keyword_theme = "mocked free form text" # From free_form_keyword_text
-    mock_suggest_themes_response_main.keyword_themes = [free_form_theme_instance]
-    mock_suggest_service.suggest_keyword_themes.return_value = mock_suggest_themes_response_main
+    # Configure mock_suggest_service for the call it receives in this test
+    # The script's get_keyword_theme_suggestions will call this with suggestion_info
+    # that includes the free_form_keyword_text.
+    mock_response_for_suggest_themes = MagicMock()
+    
+    # Use the already defined factory create_mock_keyword_theme_instance_func 
+    # (defined as part of the get_type mock setup)
+    # to ensure the KeywordTheme object is correctly spec'ed and initialized.
+    free_form_theme_for_test = create_mock_keyword_theme_instance_func() 
+    free_form_theme_for_test.free_form_keyword_theme = mock_free_form_keyword_text # Use the variable passed to main
+    free_form_theme_for_test.keyword_theme_constant = None # Explicitly ensure other oneof field is None
+    
+    mock_response_for_suggest_themes.keyword_themes = [free_form_theme_for_test]
+    mock_suggest_service.suggest_keyword_themes.return_value = mock_response_for_suggest_themes
 
     # Configure mock_ktc_service
     # This is called by _get_keyword_theme_auto_suggestions for keyword_text
@@ -370,7 +377,8 @@ def test_main_with_business_location_runs_successfully(mock_google_ads_client: M
     mock_mutate_response_biz.mutate_operation_responses = responses_biz
     mock_googleads_service.mutate.return_value = mock_mutate_response_biz
 
-    # Suggest Budget Options (remains largely the same after service inits)
+    # Suggest Budget Options
+    mock_budget_options_response = MagicMock() # Initialize here
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 55000000
     mock_budget_options_response.recommended_daily_budget_options.high.daily_amount_micros = 65000000

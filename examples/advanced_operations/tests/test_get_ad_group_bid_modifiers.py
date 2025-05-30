@@ -100,7 +100,7 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     modifier_hotel_day.hotel_check_in_day.day_of_week = mock_google_ads_client.enums.DayOfWeekEnum.MONDAY
     row2.ad_group_bid_modifier = modifier_hotel_day
 
-    mock_search_response_page = MagicMock()
+    mock_search_response_page = MagicMock(spec=['results']) # Add spec
     mock_search_response_page.results = [row1, row2]
     mock_googleads_service.search.return_value = iter([mock_search_response_page])
 
@@ -137,7 +137,7 @@ def test_main_runs_without_ad_group_id(mock_google_ads_client: MagicMock) -> Non
     modifier1.device.type_ = mock_google_ads_client.enums.DeviceEnum.TABLET
     row1.ad_group_bid_modifier = modifier1
 
-    mock_search_response_page = MagicMock()
+    mock_search_response_page = MagicMock(spec=['results']) # Add spec
     mock_search_response_page.results = [row1]
     mock_googleads_service.search.return_value = iter([mock_search_response_page])
 

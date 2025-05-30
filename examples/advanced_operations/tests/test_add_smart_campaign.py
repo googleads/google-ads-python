@@ -74,56 +74,68 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
 
     mock_suggest_service.suggest_keyword_themes.side_effect = suggest_keyword_themes_side_effect # Keep existing side effect logic for now
 
-    # --- Mocking client.get_type for various types used in the script ---
-    mock_google_ads_client.get_type = MagicMock() # Reset to a simple mock first
+    # --- Start of client.get_type mocking ---
+    mock_google_ads_client.get_type = MagicMock() # Reset get_type
 
-    # Mock for KeywordTheme objects produced by KeywordTheme()
-    # This instance will be returned when KeywordTheme() is called in the script.
-    mock_keyword_theme_instance = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
-    mock_keyword_theme_instance.keyword_theme_constant = None
-    mock_keyword_theme_instance.free_form_keyword_theme = None
-    # This is the mock for the KeywordTheme "class" or "constructor"
-    mock_keyword_theme_constructor = MagicMock(return_value=mock_keyword_theme_instance)
-    
-    # This is the mock for the type that *contains* KeywordTheme 
-    # (i.e., what client.get_type("SuggestKeywordThemesResponse") returns)
-    mock_suggest_keyword_themes_response_type = MagicMock()
-    mock_suggest_keyword_themes_response_type.KeywordTheme = mock_keyword_theme_constructor
+    def create_mock_keyword_theme_instance_func(): # Renamed to avoid clash if tests run in same scope
+        instance = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
+        instance.keyword_theme_constant = None
+        instance.free_form_keyword_theme = None
+        return instance
 
-    # Mock for SmartCampaignSuggestionInfo
-    mock_smart_campaign_suggestion_info_instance = MagicMock()
-    mock_smart_campaign_suggestion_info_instance.location_list = MagicMock()
-    mock_smart_campaign_suggestion_info_instance.location_list.locations = [] # Must be a list for .append()
-    mock_smart_campaign_suggestion_info_instance.ad_schedules = [] # Must be a list for .append()
+    mock_keyword_theme_constructor_main = MagicMock(side_effect=create_mock_keyword_theme_instance_func)
+    mock_suggest_response_type_main = MagicMock()
+    mock_suggest_response_type_main.KeywordTheme = mock_keyword_theme_constructor_main
 
-    # Mock for LocationInfo and AdScheduleInfo (simple mocks are fine)
-    mock_location_info_instance = MagicMock()
-    mock_ad_schedule_info_instance = MagicMock()
+    mock_si_instance_main = MagicMock() # SmartCampaignSuggestionInfo instance
+    mock_si_instance_main.location_list = MagicMock()
+    mock_si_instance_main.location_list.locations = []
+    mock_si_instance_main.ad_schedules = []
 
-    def new_get_type_side_effect(type_name):
+    def new_get_type_side_effect_main(type_name):
         if type_name == "SuggestKeywordThemesResponse":
-            return mock_suggest_keyword_themes_response_type
+            return mock_suggest_response_type_main
         elif type_name == "SmartCampaignSuggestionInfo":
-            # Important: return the instance directly if the script does client.get_type("SmartCampaignSuggestionInfo")
-            # and expects to set attributes on it. If it calls it like a constructor, then this should return a mock constructor.
-            # The script does: suggestion_info = client.get_type("SmartCampaignSuggestionInfo")
-            # then suggestion_info.location_list = ...
-            # So, returning the instance directly is correct.
-            return mock_smart_campaign_suggestion_info_instance
+            return mock_si_instance_main
         elif type_name == "LocationInfo":
-            # Script does: location = client.get_type("LocationInfo")
-            return mock_location_info_instance
+            return MagicMock() 
         elif type_name == "AdScheduleInfo":
-            # Script does: ad_schedule = client.get_type("AdScheduleInfo")
-            return mock_ad_schedule_info_instance
-        else:
-            # Fallback for any other type
             return MagicMock()
+        elif type_name == "CampaignBudgetOperation": return MagicMock()
+        elif type_name == "CampaignOperation": return MagicMock()
+        elif type_name == "SmartCampaignSettingOperation":
+            op_mock = MagicMock(); op_mock.update = MagicMock(); return op_mock
+        elif type_name == "CampaignCriterionOperation": return MagicMock()
+        elif type_name == "AdGroupOperation": return MagicMock()
+        elif type_name == "AdGroupAdOperation": return MagicMock()
+        elif type_name == "AdTextAsset": return MagicMock()
+        else: return MagicMock()
 
-    mock_google_ads_client.get_type.side_effect = new_get_type_side_effect
-    # --- End of get_type mocking ---
+    mock_google_ads_client.get_type.side_effect = new_get_type_side_effect_main
+    # --- End of client.get_type mocking ---
 
-    # Suggest Budget Options
+    # Refined SmartCampaignSuggestService.suggest_keyword_themes mock
+    # This is called by _get_keyword_theme_infos for free_form_keyword_text
+    mock_suggest_themes_response_main = MagicMock()
+    free_form_theme_instance = create_mock_keyword_theme_instance_func()
+    free_form_theme_instance.free_form_keyword_theme = "mocked free form text" # From free_form_keyword_text
+    mock_suggest_themes_response_main.keyword_themes = [free_form_theme_instance]
+    # The side_effect for suggest_keyword_themes needs to handle different request types if script calls it multiple ways.
+    # For free_form_text path:
+    mock_suggest_service.suggest_keyword_themes.return_value = mock_suggest_themes_response_main
+    # If suggest_keyword_themes was also called for keyword_seed (it's not, suggest_keyword_theme_constants is),
+    # the side_effect would need to distinguish. Since it's only for free_form_text:
+    # Simplified: if called, it's for free_form_text.
+
+    # Refined KeywordThemeConstantService.suggest_keyword_theme_constants mock
+    # This is called by _get_keyword_theme_auto_suggestions for keyword_text
+    mock_ktc_response_main = MagicMock()
+    ktc_proto_mock_main = MagicMock() # Simulates KeywordThemeConstant proto
+    ktc_proto_mock_main.resource_name = "keywordThemeConstants/from_text_search_auto1"
+    mock_ktc_response_main.keyword_theme_constants = [ktc_proto_mock_main]
+    mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_response_main
+    
+    # Suggest Budget Options (remains largely the same)
     mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 50000000 # 50 units of currency
@@ -251,41 +263,60 @@ def test_main_with_business_location_runs_successfully(mock_google_ads_client: M
     mock_empty_kw_theme_response.keyword_themes = [] # No themes from this service for this test path
     mock_suggest_service.suggest_keyword_themes.return_value = mock_empty_kw_theme_response
 
-    # --- Mocking client.get_type for various types (similar to the first test) ---
-    mock_google_ads_client.get_type = MagicMock() # Reset to a simple mock
+    # --- Start of client.get_type mocking for biz test ---
+    mock_google_ads_client.get_type = MagicMock() # Reset get_type
 
-    mock_keyword_theme_instance_biz = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
-    mock_keyword_theme_instance_biz.keyword_theme_constant = None
-    mock_keyword_theme_instance_biz.free_form_keyword_theme = None
-    mock_keyword_theme_constructor_biz = MagicMock(return_value=mock_keyword_theme_instance_biz)
+    def create_mock_keyword_theme_instance_func_biz(): # Unique name
+        instance = MagicMock(spec=['keyword_theme_constant', 'free_form_keyword_theme'])
+        instance.keyword_theme_constant = None
+        instance.free_form_keyword_theme = None
+        return instance
 
-    mock_suggest_keyword_themes_response_type_biz = MagicMock()
-    mock_suggest_keyword_themes_response_type_biz.KeywordTheme = mock_keyword_theme_constructor_biz
+    mock_keyword_theme_constructor_biz = MagicMock(side_effect=create_mock_keyword_theme_instance_func_biz)
+    mock_suggest_response_type_biz = MagicMock()
+    mock_suggest_response_type_biz.KeywordTheme = mock_keyword_theme_constructor_biz
 
-    mock_smart_campaign_suggestion_info_instance_biz = MagicMock()
-    mock_smart_campaign_suggestion_info_instance_biz.location_list = MagicMock()
-    mock_smart_campaign_suggestion_info_instance_biz.location_list.locations = []
-    mock_smart_campaign_suggestion_info_instance_biz.ad_schedules = []
-    
-    mock_location_info_instance_biz = MagicMock()
-    mock_ad_schedule_info_instance_biz = MagicMock()
+    mock_si_instance_biz = MagicMock() # SmartCampaignSuggestionInfo instance
+    mock_si_instance_biz.location_list = MagicMock()
+    mock_si_instance_biz.location_list.locations = []
+    mock_si_instance_biz.ad_schedules = []
 
-    def new_get_type_side_effect_biz(type_name):
+    def new_get_type_side_effect_biz_func(type_name): # Unique name
         if type_name == "SuggestKeywordThemesResponse":
-            return mock_suggest_keyword_themes_response_type_biz
+            return mock_suggest_response_type_biz
         elif type_name == "SmartCampaignSuggestionInfo":
-            return mock_smart_campaign_suggestion_info_instance_biz
+            return mock_si_instance_biz
         elif type_name == "LocationInfo":
-            return mock_location_info_instance_biz
-        elif type_name == "AdScheduleInfo":
-            return mock_ad_schedule_info_instance_biz
-        else:
             return MagicMock()
+        elif type_name == "AdScheduleInfo":
+            return MagicMock()
+        elif type_name == "CampaignBudgetOperation": return MagicMock()
+        elif type_name == "CampaignOperation": return MagicMock()
+        elif type_name == "SmartCampaignSettingOperation":
+            op_mock = MagicMock(); op_mock.update = MagicMock(); return op_mock
+        elif type_name == "CampaignCriterionOperation": return MagicMock()
+        elif type_name == "AdGroupOperation": return MagicMock()
+        elif type_name == "AdGroupAdOperation": return MagicMock()
+        elif type_name == "AdTextAsset": return MagicMock()
+        else: return MagicMock()
 
-    mock_google_ads_client.get_type.side_effect = new_get_type_side_effect_biz
-    # --- End of get_type mocking for biz test ---
+    mock_google_ads_client.get_type.side_effect = new_get_type_side_effect_biz_func
+    # --- End of client.get_type mocking for biz test ---
 
-    mock_budget_options_response = MagicMock()
+    # Refined SmartCampaignSuggestService.suggest_keyword_themes mock for biz test
+    # free_form_keyword_text is None, so _get_keyword_theme_infos won't call suggest_keyword_themes for it.
+    mock_suggest_themes_response_biz = MagicMock()
+    mock_suggest_themes_response_biz.keyword_themes = [] # No themes from this call path
+    mock_suggest_service.suggest_keyword_themes.return_value = mock_suggest_themes_response_biz
+    
+    # Refined KeywordThemeConstantService.suggest_keyword_theme_constants mock for biz test
+    mock_ktc_response_biz = MagicMock()
+    ktc_proto_mock_biz = MagicMock()
+    ktc_proto_mock_biz.resource_name = "keywordThemeConstants/from_text_search_auto_biz"
+    mock_ktc_response_biz.keyword_theme_constants = [ktc_proto_mock_biz]
+    mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_response_biz
+
+    # Suggest Budget Options (remains largely the same)
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 55000000
     mock_budget_options_response.recommended_daily_budget_options.high.daily_amount_micros = 65000000

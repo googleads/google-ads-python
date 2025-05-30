@@ -87,9 +87,11 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
 
     # Row 1: Device Modifier
-    row1 = MagicMock()
+    row1 = MagicMock(spec=['ad_group_bid_modifier', 'ad_group', 'campaign'])
+    row1.campaign = MagicMock(spec=['id'])
     row1.campaign.id = "campaign1"
-    row1.ad_group.id = int(mock_ad_group_id) # Match ad_group_id if provided
+    row1.ad_group = MagicMock(spec=['id'])
+    row1.ad_group.id = int(mock_ad_group_id)
 
     modifier_device = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
     modifier_device.criterion_id = "100"
@@ -99,8 +101,10 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     row1.ad_group_bid_modifier = modifier_device
 
     # Row 2: Hotel Check-in Day Modifier
-    row2 = MagicMock()
+    row2 = MagicMock(spec=['ad_group_bid_modifier', 'ad_group', 'campaign'])
+    row2.campaign = MagicMock(spec=['id'])
     row2.campaign.id = "campaign2"
+    row2.ad_group = MagicMock(spec=['id'])
     row2.ad_group.id = int(mock_ad_group_id)
 
     modifier_hotel_day = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
@@ -136,12 +140,14 @@ def test_main_runs_without_ad_group_id(mock_google_ads_client: MagicMock) -> Non
     # --- Mock GoogleAdsService for search ---
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
 
-    row1 = MagicMock()
+    row1 = MagicMock(spec=['ad_group_bid_modifier', 'ad_group', 'campaign'])
+    row1.campaign = MagicMock(spec=['id'])
     row1.campaign.id = "campaign3"
-    row1.ad_group.id = "987" # Script expects ad_group.id to be populated
+    row1.ad_group = MagicMock(spec=['id'])
+    row1.ad_group.id = "987"
 
     modifier1 = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
-    modifier1.criterion_id = "3003"
+    modifier1.criterion_id = "test_crit_id_3" # Using a more descriptive string for criterion ID
     modifier1.bid_modifier = 1.2
     modifier1.set_active_criterion_field("device")
     modifier1.device.type_ = mock_google_ads_client.enums.DeviceEnum.TABLET

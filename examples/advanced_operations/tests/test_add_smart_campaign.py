@@ -114,28 +114,53 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_google_ads_client.get_type.side_effect = new_get_type_side_effect_main
     # --- End of client.get_type mocking ---
 
-    # Refined SmartCampaignSuggestService.suggest_keyword_themes mock
+    # --- Mock services ---
+    mock_suggest_service = mock_google_ads_client.get_service("SmartCampaignSuggestService")
+    mock_ktc_service = mock_google_ads_client.get_service("KeywordThemeConstantService") # Define mock_ktc_service
+    mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
+    mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
+
+    # Configure mock_suggest_service 
     # This is called by _get_keyword_theme_infos for free_form_keyword_text
     mock_suggest_themes_response_main = MagicMock()
     free_form_theme_instance = create_mock_keyword_theme_instance_func()
     free_form_theme_instance.free_form_keyword_theme = "mocked free form text" # From free_form_keyword_text
     mock_suggest_themes_response_main.keyword_themes = [free_form_theme_instance]
-    # The side_effect for suggest_keyword_themes needs to handle different request types if script calls it multiple ways.
-    # For free_form_text path:
     mock_suggest_service.suggest_keyword_themes.return_value = mock_suggest_themes_response_main
-    # If suggest_keyword_themes was also called for keyword_seed (it's not, suggest_keyword_theme_constants is),
-    # the side_effect would need to distinguish. Since it's only for free_form_text:
-    # Simplified: if called, it's for free_form_text.
 
-    # Refined KeywordThemeConstantService.suggest_keyword_theme_constants mock
+    # Configure mock_ktc_service
     # This is called by _get_keyword_theme_auto_suggestions for keyword_text
     mock_ktc_response_main = MagicMock()
     ktc_proto_mock_main = MagicMock() # Simulates KeywordThemeConstant proto
     ktc_proto_mock_main.resource_name = "keywordThemeConstants/from_text_search_auto1"
     mock_ktc_response_main.keyword_theme_constants = [ktc_proto_mock_main]
     mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_response_main
+    mock_ktc_service.keyword_theme_constant_path.side_effect = lambda ktc_id: f"keywordThemeConstants/{ktc_id}" # Path mock
+
+    # Configure mock_geo_service
+    mock_geo_service.geo_target_constant_path.return_value = "geoTargetConstants/2840" # USA
+
+    # Configure mock_googleads_service (paths and mutate)
+    mock_googleads_service.campaign_budget_path.return_value = f"customers/{mock_customer_id}/campaignBudgets/{_BUDGET_TEMPORARY_ID}"
+    mock_googleads_service.campaign_path.return_value = f"customers/{mock_customer_id}/campaigns/{_SMART_CAMPAIGN_TEMPORARY_ID}"
+    mock_googleads_service.ad_group_path.return_value = f"customers/{mock_customer_id}/adGroups/{_AD_GROUP_TEMPORARY_ID}"
+    # business_profile_location_path mock (not used in this test path as mock_business_profile_location is None)
+    if mock_business_profile_location: # Should be None for this test
+         mock_googleads_service.business_profile_location_path.return_value = f"businessProfileLocations/{mock_business_profile_location.split('/')[-1]}"
+    # Mutate call mock
+    mock_mutate_response = MagicMock()
+    responses = []
+    responses.append(MagicMock(campaign_budget_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignBudgets/budget1")))
+    responses.append(MagicMock(campaign_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaigns/campaign1")))
+    responses.append(MagicMock(smart_campaign_setting_result=MagicMock(resource_name=f"customers/{mock_customer_id}/smartCampaignSettings/scs1")))
+    responses.append(MagicMock(ad_group_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroups/adgroup1")))
+    responses.append(MagicMock(ad_group_ad_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroupAds/ad1")))
+    for i in range(3): 
+        responses.append(MagicMock(campaign_criterion_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignCriteria/crit{i}")))
+    mock_mutate_response.mutate_operation_responses = responses
+    mock_googleads_service.mutate.return_value = mock_mutate_response
     
-    # Suggest Budget Options (remains largely the same)
+    # Suggest Budget Options (remains largely the same after service inits)
     mock_budget_options_response = MagicMock()
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 50000000 # 50 units of currency
@@ -303,20 +328,49 @@ def test_main_with_business_location_runs_successfully(mock_google_ads_client: M
     mock_google_ads_client.get_type.side_effect = new_get_type_side_effect_biz_func
     # --- End of client.get_type mocking for biz test ---
 
-    # Refined SmartCampaignSuggestService.suggest_keyword_themes mock for biz test
+    # --- Mock services for biz test ---
+    mock_suggest_service = mock_google_ads_client.get_service("SmartCampaignSuggestService")
+    mock_ktc_service = mock_google_ads_client.get_service("KeywordThemeConstantService") # Define mock_ktc_service
+    mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
+    mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
+
+    # Configure mock_suggest_service for biz test
     # free_form_keyword_text is None, so _get_keyword_theme_infos won't call suggest_keyword_themes for it.
     mock_suggest_themes_response_biz = MagicMock()
     mock_suggest_themes_response_biz.keyword_themes = [] # No themes from this call path
     mock_suggest_service.suggest_keyword_themes.return_value = mock_suggest_themes_response_biz
     
-    # Refined KeywordThemeConstantService.suggest_keyword_theme_constants mock for biz test
+    # Configure mock_ktc_service for biz test
     mock_ktc_response_biz = MagicMock()
     ktc_proto_mock_biz = MagicMock()
     ktc_proto_mock_biz.resource_name = "keywordThemeConstants/from_text_search_auto_biz"
     mock_ktc_response_biz.keyword_theme_constants = [ktc_proto_mock_biz]
     mock_ktc_service.suggest_keyword_theme_constants.return_value = mock_ktc_response_biz
+    mock_ktc_service.keyword_theme_constant_path.side_effect = lambda ktc_id: f"keywordThemeConstants/{ktc_id}" # Path mock
 
-    # Suggest Budget Options (remains largely the same)
+    # Configure mock_geo_service
+    mock_geo_service.geo_target_constant_path.return_value = "geoTargetConstants/2840" # USA
+
+    # Configure mock_googleads_service (paths and mutate)
+    mock_googleads_service.campaign_budget_path.return_value = f"customers/{mock_customer_id}/campaignBudgets/{_BUDGET_TEMPORARY_ID}"
+    mock_googleads_service.campaign_path.return_value = f"customers/{mock_customer_id}/campaigns/{_SMART_CAMPAIGN_TEMPORARY_ID}"
+    mock_googleads_service.ad_group_path.return_value = f"customers/{mock_customer_id}/adGroups/{_AD_GROUP_TEMPORARY_ID}"
+    if mock_business_profile_location: # Should be set for this test
+         mock_googleads_service.business_profile_location_path.return_value = mock_business_profile_location
+    # Mutate call mock
+    mock_mutate_response_biz = MagicMock() # Distinct name for clarity
+    responses_biz = []
+    responses_biz.append(MagicMock(campaign_budget_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignBudgets/budget_biz")))
+    responses_biz.append(MagicMock(campaign_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaigns/campaign_biz")))
+    responses_biz.append(MagicMock(smart_campaign_setting_result=MagicMock(resource_name=f"customers/{mock_customer_id}/smartCampaignSettings/scs_biz")))
+    responses_biz.append(MagicMock(ad_group_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroups/adgroup_biz")))
+    responses_biz.append(MagicMock(ad_group_ad_result=MagicMock(resource_name=f"customers/{mock_customer_id}/adGroupAds/ad_biz")))
+    for i in range(2): 
+        responses_biz.append(MagicMock(campaign_criterion_result=MagicMock(resource_name=f"customers/{mock_customer_id}/campaignCriteria/crit_biz{i}")))
+    mock_mutate_response_biz.mutate_operation_responses = responses_biz
+    mock_googleads_service.mutate.return_value = mock_mutate_response_biz
+
+    # Suggest Budget Options (remains largely the same after service inits)
     mock_recommended_budget = MagicMock()
     mock_recommended_budget.daily_amount_micros = 55000000
     mock_budget_options_response.recommended_daily_budget_options.high.daily_amount_micros = 65000000

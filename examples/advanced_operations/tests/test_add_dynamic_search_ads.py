@@ -47,7 +47,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_criterion_result.resource_name = f"customers/{mock_customer_id}/adGroupCriteria/criterion_testuuid"
     mock_criterion_response.results = [mock_criterion_result]
     mock_ad_group_criterion_service.mutate_ad_group_criteria.return_value = mock_criterion_response
-    
+
     # Mock GoogleAdsService for campaign_path (used in _create_campaign_level_targeting)
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
     mock_googleads_service.campaign_path.return_value = f"customers/{mock_customer_id}/campaigns/campaign_testuuid"

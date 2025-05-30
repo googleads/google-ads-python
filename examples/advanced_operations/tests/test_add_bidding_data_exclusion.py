@@ -23,7 +23,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_enums.SeasonalityEventScopeEnum.CHANNEL = "CHANNEL"
     mock_enums.AdvertisingChannelTypeEnum.SEARCH = "SEARCH"
     # The script also uses DeviceEnum, but it's commented out, so not strictly needed for this test pass
-    # mock_enums.DeviceEnum.MOBILE = "MOBILE" 
+    # mock_enums.DeviceEnum.MOBILE = "MOBILE"
 
     try:
         main(

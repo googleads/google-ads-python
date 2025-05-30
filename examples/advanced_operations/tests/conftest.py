@@ -20,12 +20,12 @@ def mock_google_ads_client():
     # For now, we'll make it a MagicMock. If specific enums are needed,
     # they can be added as properties to this mock_enums object.
     mock_enums = MagicMock()
-    
+
     # Example of mocking a specific enum if needed for a test:
     # mock_campaign_status_enum = MagicMock()
     # mock_campaign_status_enum.PAUSED = "PAUSED_ENUM_VALUE" # Or an int if that's what the API uses
     # type(mock_enums).CampaignStatusEnum = PropertyMock(return_value=mock_campaign_status_enum)
-    
+
     mock_client.enums = mock_enums
 
     return mock_client

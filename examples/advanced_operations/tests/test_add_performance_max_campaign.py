@@ -36,7 +36,7 @@ def test_main_runs_successfully(
 
     # Mock CampaignService (similar to budget service, paths are via GoogleAdsService)
     # mock_campaign_service = mock_google_ads_client.get_service("CampaignService")
-    
+
     # Mock AssetGroupService (paths via GoogleAdsService)
     # mock_asset_group_service = mock_google_ads_client.get_service("AssetGroupService")
 

@@ -30,7 +30,7 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_ad_group_customizer_result.resource_name = "mock_resource_name_ad_group_customizer"
     mock_mutate_ad_group_customizers_response.results = [mock_ad_group_customizer_result]
     mock_ad_group_customizer_service.mutate_ad_group_customizers.return_value = mock_mutate_ad_group_customizers_response
-    
+
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
     mock_googleads_service.ad_group_path.return_value = "mock/ad_group/path"
 
@@ -40,7 +40,7 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_ad_group_ad_result.resource_name = "mock_resource_name_ad_group_ad"
     mock_mutate_ad_group_ads_response.results = [mock_ad_group_ad_result]
     mock_ad_group_ad_service.mutate_ad_group_ads.return_value = mock_mutate_ad_group_ads_response
-    
+
     # Mock enums used by the script
     mock_enums = mock_google_ads_client.enums
     mock_enums.CustomizerAttributeTypeEnum.TEXT = "TEXT"

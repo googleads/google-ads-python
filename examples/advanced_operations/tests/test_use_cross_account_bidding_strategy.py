@@ -40,14 +40,14 @@ def test_main_runs_successfully(mock_field_mask_constructor: MagicMock, mock_uui
     mock_row_manager_bs.bidding_strategy.currency_code = "USD"
     mock_search_stream_response_manager_page.results = [mock_row_manager_bs]
     # search_stream returns an iterator of pages
-    
+
     # --- Mocking for client account operations ---
     # GoogleAdsService (for client - search_stream to find accessible strategies)
     # This will be a different call to googleads_service.search_stream
     mock_search_stream_response_client_page = MagicMock()
     mock_row_client_accessible_bs = MagicMock()
     # This ID should match what was "created" in the manager account for the script to find it.
-    mock_row_client_accessible_bs.accessible_bidding_strategy.id = "bs_manager_id_123" 
+    mock_row_client_accessible_bs.accessible_bidding_strategy.id = "bs_manager_id_123"
     mock_row_client_accessible_bs.accessible_bidding_strategy.name = f"Manager Maximize Clicks {mock_uuid4().hex}"
     mock_row_client_accessible_bs.accessible_bidding_strategy.type_ = mock_google_ads_client.enums.BiddingStrategyTypeEnum.MAXIMIZE_CLICKS
     mock_row_client_accessible_bs.accessible_bidding_strategy.owner_customer_id = int(mock_manager_customer_id)
@@ -85,7 +85,7 @@ def test_main_runs_successfully(mock_field_mask_constructor: MagicMock, mock_uui
     # Mock FieldMask
     mock_field_mask_instance = MagicMock()
     mock_field_mask_constructor.return_value = mock_field_mask_instance
-    
+
     # Mock enums
     mock_enums = mock_google_ads_client.enums
     mock_enums.BiddingStrategyTypeEnum.MAXIMIZE_CLICKS = "MAXIMIZE_CLICKS"

@@ -1,61 +1,62 @@
 import pytest
 from unittest.mock import MagicMock
+import pytest # Ensure pytest is imported if not already
 
 from examples.advanced_operations.get_ad_group_bid_modifiers import main
 
-# --- Helper Mock Class ---
 class MockAdGroupBidModifierModel:
-    def __init__(self, client_enums):
-        # Attributes accessed directly by the script's print statement
-        self.criterion_id = MagicMock(name="criterion_id")
-        self.bid_modifier = MagicMock(name="bid_modifier")
-        
-        self.device = MagicMock(name="device_criterion")
-        # Ensure type_ itself can have .name called on it
-        self.device.type_ = MagicMock(name="device_type_enum_value")
-        self.device.type_.name = "UNKNOWN_DEVICE" # Default .name for the enum value
+    def __init__(self, client_enums_mock): # Renamed to avoid conflict with client fixture
+        # --- Begin: Attributes accessed directly by the script's print statement or logic ---
+        self.criterion_id = MagicMock(name="criterion_id_attr")
+        self.bid_modifier = MagicMock(name="bid_modifier_attr")
 
-        # Hotel criteria attributes
-        self.hotel_date_selection_type = MagicMock(name="hotel_date_selection_type_criterion")
-        self.hotel_date_selection_type.type_ = MagicMock(name="hotel_date_selection_type_enum_value")
-        self.hotel_date_selection_type.type_.name = "UNKNOWN_HOTEL_DATE_SELECTION"
+        self.device = MagicMock(name="device_attr")
+        # Ensure type_ itself is a mock that has a .name attribute
+        self.device.type_ = MagicMock(name="device_type_attr")
+        self.device.type_.name = "DEFAULT_DEVICE_NAME" # Default .name
 
-        self.hotel_advance_booking_window = MagicMock(name="hotel_advance_booking_window_criterion")
+        # Hotel criteria attributes (initialize them as MagicMocks)
+        self.hotel_date_selection_type = MagicMock(name="hotel_date_selection_type_attr")
+        self.hotel_date_selection_type.type_ = MagicMock(name="hotel_date_selection_type_type_attr")
+        self.hotel_date_selection_type.type_.name = "DEFAULT_HOTEL_DATE_NAME"
+
+
+        self.hotel_advance_booking_window = MagicMock(name="hotel_advance_booking_window_attr")
         self.hotel_advance_booking_window.min_days = None
         self.hotel_advance_booking_window.max_days = None
 
-        self.hotel_length_of_stay = MagicMock(name="hotel_length_of_stay_criterion")
+        self.hotel_length_of_stay = MagicMock(name="hotel_length_of_stay_attr")
         self.hotel_length_of_stay.min_nights = None
         self.hotel_length_of_stay.max_nights = None
 
-        self.hotel_check_in_day = MagicMock(name="hotel_check_in_day_criterion")
-        self.hotel_check_in_day.day_of_week = MagicMock(name="day_of_week_enum_value")
-        self.hotel_check_in_day.day_of_week.name = "UNSPECIFIED_DAY"
-        
-        self.hotel_check_in_date_range = MagicMock(name="hotel_check_in_date_range_criterion")
+        self.hotel_check_in_day = MagicMock(name="hotel_check_in_day_attr")
+        self.hotel_check_in_day.day_of_week = MagicMock(name="hotel_check_in_day_day_of_week_attr")
+        self.hotel_check_in_day.day_of_week.name = "DEFAULT_DAY_OF_WEEK_NAME"
+
+        self.hotel_check_in_date_range = MagicMock(name="hotel_check_in_date_range_attr")
         self.hotel_check_in_date_range.start_date = None
         self.hotel_check_in_date_range.end_date = None
-        
-        # This will store the name of the 'oneof' criterion field (e.g., "device")
-        self._active_criterion_field = None # Default to None, must be set by test
 
+        # This will store the name of the 'oneof' criterion field (e.g., "device")
+        self._active_criterion_field = "device" # Default active field
+
+    # This class method mimics the real .pb() class method on Google Ads model classes.
     @classmethod
     def pb(cls, instance_self):
-        mock_pb_message = MagicMock(name="pb_message")
+        # instance_self here is an instance of MockAdGroupBidModifierModel
+        mock_pb_message = MagicMock(name="pb_message_obj_from_class")
+        # WhichOneof should return the active criterion field name for this instance
         mock_pb_message.WhichOneof.return_value = instance_self._active_criterion_field
         return mock_pb_message
 
-    def set_active_criterion_field(self, field_name):
-        self._active_criterion_field = field_name
-        # Basic way to somewhat mimic oneof: clear other fields if one is set.
-        # More robust would be to ensure only the active field has a non-default/non-None value.
-        # For this mock, primarily WhichOneof matters for the script's logic.
-        all_criteria_fields = [
-            "device", "hotel_date_selection_type", "hotel_advance_booking_window",
-            "hotel_length_of_stay", "hotel_check_in_day", "hotel_check_in_date_range"
-        ]
-        if field_name not in all_criteria_fields and field_name is not None:
-            raise ValueError(f"Unknown criterion field: {field_name}")
+    # Helper to set the active criterion field for testing different types
+    def set_active_criterion_field(self, field_name_str):
+        self._active_criterion_field = field_name_str
+        # Example: If setting device, ensure device attributes are primary
+        if field_name_str == "device":
+            # self.device.type_ is already a mock, its .name can be set in test
+            pass
+        # Add similar logic if other criterion types need specific default setup when activated
         return self
 
 # --- Test Functions ---
@@ -65,45 +66,52 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_ad_group_id = "456"
 
     # --- Mock Enums (ensure they have .name attribute) ---
-    mock_google_ads_client.enums.DeviceEnum.MOBILE.name = "MOBILE_DEVICE"
-    mock_google_ads_client.enums.DeviceEnum.TABLET.name = "TABLET_DEVICE" # Just in case
-    mock_google_ads_client.enums.DeviceEnum.DESKTOP.name = "DESKTOP_DEVICE" # Just in case
-    mock_google_ads_client.enums.DeviceEnum.UNKNOWN.name = "UNKNOWN_DEVICE" # Default
+    mock_enums = mock_google_ads_client.enums
 
-    mock_google_ads_client.enums.DayOfWeekEnum.MONDAY.name = "MONDAY"
-    mock_google_ads_client.enums.DayOfWeekEnum.UNSPECIFIED.name = "UNSPECIFIED_DOW" # Default
-    
-    # Add other hotel enums if specific paths are tested, e.g., HotelDateSelectionTypeEnum
-    mock_google_ads_client.enums.HotelDateSelectionTypeEnum.DEFAULT_SELECTION.name = "DEFAULT_SELECTION"
-    mock_google_ads_client.enums.HotelDateSelectionTypeEnum.UNKNOWN.name = "UNKNOWN_HDST" # Default
+    # DeviceEnum setup
+    mock_enums.DeviceEnum.MOBILE = MagicMock(name="DeviceEnum.MOBILE"); mock_enums.DeviceEnum.MOBILE.name = "MOBILE"
+    mock_enums.DeviceEnum.TABLET = MagicMock(name="DeviceEnum.TABLET"); mock_enums.DeviceEnum.TABLET.name = "TABLET"
+    mock_enums.DeviceEnum.DESKTOP = MagicMock(name="DeviceEnum.DESKTOP"); mock_enums.DeviceEnum.DESKTOP.name = "DESKTOP"
+    mock_enums.DeviceEnum.UNKNOWN = MagicMock(name="DeviceEnum.UNKNOWN"); mock_enums.DeviceEnum.UNKNOWN.name = "UNKNOWN_DEVICE_FOR_PRINT" # Default in class constructor matched
+
+    # HotelDateSelectionTypeEnum setup
+    mock_enums.HotelDateSelectionTypeEnum.DEFAULT_SELECTION = MagicMock(name="HotelDateSelectionTypeEnum.DEFAULT_SELECTION"); mock_enums.HotelDateSelectionTypeEnum.DEFAULT_SELECTION.name = "DEFAULT_SELECTION"
+    mock_enums.HotelDateSelectionTypeEnum.USER_SELECTED = MagicMock(name="HotelDateSelectionTypeEnum.USER_SELECTED"); mock_enums.HotelDateSelectionTypeEnum.USER_SELECTED.name = "USER_SELECTED"
+    mock_enums.HotelDateSelectionTypeEnum.UNKNOWN = MagicMock(name="HotelDateSelectionTypeEnum.UNKNOWN"); mock_enums.HotelDateSelectionTypeEnum.UNKNOWN.name = "UNKNOWN_HOTEL_DATE_FOR_PRINT"
+
+    # DayOfWeekEnum setup
+    mock_enums.DayOfWeekEnum.MONDAY = MagicMock(name="DayOfWeekEnum.MONDAY"); mock_enums.DayOfWeekEnum.MONDAY.name = "MONDAY"
+    mock_enums.DayOfWeekEnum.UNSPECIFIED = MagicMock(name="DayOfWeekEnum.UNSPECIFIED"); mock_enums.DayOfWeekEnum.UNSPECIFIED.name = "UNSPECIFIED_DAY_FOR_PRINT"
 
     # --- Mock GoogleAdsService for search ---
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
-    
+
     # Row 1: Device Modifier
-    mock_row1 = MagicMock()
-    modifier1 = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
-    modifier1.criterion_id = "1001"
-    modifier1.bid_modifier = 1.5
-    modifier1.set_active_criterion_field("device")
-    modifier1.device.type_ = mock_google_ads_client.enums.DeviceEnum.MOBILE
-    mock_row1.ad_group_bid_modifier = modifier1
-    mock_row1.ad_group.id = int(mock_ad_group_id)
-    mock_row1.campaign.id = "789"
+    row1 = MagicMock()
+    row1.campaign.id = "campaign1"
+    row1.ad_group.id = int(mock_ad_group_id) # Match ad_group_id if provided
+
+    modifier_device = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
+    modifier_device.criterion_id = "100"
+    modifier_device.bid_modifier = 1.5
+    modifier_device.set_active_criterion_field("device")
+    modifier_device.device.type_ = mock_google_ads_client.enums.DeviceEnum.MOBILE
+    row1.ad_group_bid_modifier = modifier_device
 
     # Row 2: Hotel Check-in Day Modifier
-    mock_row2 = MagicMock()
-    modifier2 = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
-    modifier2.criterion_id = "2002"
-    modifier2.bid_modifier = 0.8
-    modifier2.set_active_criterion_field("hotel_check_in_day")
-    modifier2.hotel_check_in_day.day_of_week = mock_google_ads_client.enums.DayOfWeekEnum.MONDAY
-    mock_row2.ad_group_bid_modifier = modifier2
-    mock_row2.ad_group.id = int(mock_ad_group_id)
-    mock_row2.campaign.id = "790"
-    
+    row2 = MagicMock()
+    row2.campaign.id = "campaign2"
+    row2.ad_group.id = int(mock_ad_group_id)
+
+    modifier_hotel_day = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
+    modifier_hotel_day.criterion_id = "200"
+    modifier_hotel_day.bid_modifier = 0.8
+    modifier_hotel_day.set_active_criterion_field("hotel_check_in_day")
+    modifier_hotel_day.hotel_check_in_day.day_of_week = mock_google_ads_client.enums.DayOfWeekEnum.MONDAY
+    row2.ad_group_bid_modifier = modifier_hotel_day
+
     mock_search_response_page = MagicMock()
-    mock_search_response_page.results = [mock_row1, mock_row2]
+    mock_search_response_page.results = [row1, row2]
     mock_googleads_service.search.return_value = iter([mock_search_response_page])
 
     try:
@@ -121,26 +129,26 @@ def test_main_runs_without_ad_group_id(mock_google_ads_client: MagicMock) -> Non
     mock_ad_group_id = None # Key difference for this test
 
     # --- Mock Enums (ensure they have .name attribute) ---
-    # Ensure these are available on the mock_google_ads_client.enums object
-    # The conftest should provide the base enums, we just need to ensure .name is on values.
-    mock_google_ads_client.enums.DeviceEnum.TABLET.name = "TABLET_DEVICE"
-    mock_google_ads_client.enums.DeviceEnum.UNKNOWN.name = "UNKNOWN_DEVICE"
+    mock_enums = mock_google_ads_client.enums
+    mock_enums.DeviceEnum.TABLET = MagicMock(name="DeviceEnum.TABLET"); mock_enums.DeviceEnum.TABLET.name = "TABLET"
+    mock_enums.DeviceEnum.UNKNOWN = MagicMock(name="DeviceEnum.UNKNOWN"); mock_enums.DeviceEnum.UNKNOWN.name = "UNKNOWN_DEVICE_FOR_PRINT" # Default in class constructor matched
 
     # --- Mock GoogleAdsService for search ---
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
-    
-    mock_row1 = MagicMock()
+
+    row1 = MagicMock()
+    row1.campaign.id = "campaign3"
+    row1.ad_group.id = "987" # Script expects ad_group.id to be populated
+
     modifier1 = MockAdGroupBidModifierModel(mock_google_ads_client.enums)
     modifier1.criterion_id = "3003"
     modifier1.bid_modifier = 1.2
     modifier1.set_active_criterion_field("device")
     modifier1.device.type_ = mock_google_ads_client.enums.DeviceEnum.TABLET
-    mock_row1.ad_group_bid_modifier = modifier1
-    mock_row1.ad_group.id = "987" # Different ad group ID
-    mock_row1.campaign.id = "654"
-    
+    row1.ad_group_bid_modifier = modifier1
+
     mock_search_response_page = MagicMock()
-    mock_search_response_page.results = [mock_row1]
+    mock_search_response_page.results = [row1]
     mock_googleads_service.search.return_value = iter([mock_search_response_page])
 
     try:

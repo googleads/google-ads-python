@@ -39,7 +39,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_campaign_create_result = MagicMock()
     mock_campaign_create_result.resource_name = f"customers/{mock_customer_id}/campaigns/{mock_campaign_id_1}"
     mock_campaign_create_response.results = [mock_campaign_create_result]
-    
+
     # Update campaign response
     mock_campaign_update_response = MagicMock()
     mock_campaign_update_result = MagicMock()

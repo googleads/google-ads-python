@@ -49,7 +49,7 @@ def test_main_runs_successfully(mock_get_printable_datetime: MagicMock, mock_goo
     mock_campaign_asset_set_result.resource_name = "customers/123/campaignAssetSets/campaign_asset_set123"
     mock_campaign_asset_set_response.results = [mock_campaign_asset_set_result]
     mock_campaign_asset_set_service.mutate_campaign_asset_sets.return_value = mock_campaign_asset_set_response
-    
+
     # Mock AdGroupCriterionService
     mock_ad_group_criterion_service = mock_google_ads_client.get_service("AdGroupCriterionService")
     mock_ad_group_criterion_response = MagicMock()

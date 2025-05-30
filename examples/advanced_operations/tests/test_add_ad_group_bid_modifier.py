@@ -24,7 +24,7 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_device_enum = MagicMock()
     mock_device_enum.MOBILE = "MOBILE_DEVICE" # Or actual enum value if known/needed
     mock_google_ads_client.enums.DeviceEnum = mock_device_enum
-    
+
     # Mock types
     # The get_type method in conftest returns a MagicMock by default.
     # We can configure its "create" attribute if necessary, but often not needed

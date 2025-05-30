@@ -46,7 +46,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_criterion_result_lang2 = MagicMock()
     mock_criterion_result_lang2.resource_name = "criterion_lang2"
     mock_criterion_response.results = [
-        mock_criterion_result_loc1, 
+        mock_criterion_result_loc1,
         mock_criterion_result_loc2,
         mock_criterion_result_lang1,
         mock_criterion_result_lang2
@@ -79,7 +79,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_enums.AppCampaignBiddingStrategyGoalTypeEnum.OPTIMIZE_INSTALLS_TARGET_INSTALL_COST = "OPTIMIZE_INSTALLS_TARGET_INSTALL_COST"
     mock_enums.AdGroupStatusEnum.ENABLED = "ENABLED"
     mock_enums.AdGroupAdStatusEnum.ENABLED = "ENABLED"
-    
+
     # --- Mock types ---
     # Most types are simple containers, MagicMock default behavior is often sufficient.
     # For AdTextAsset, it's created and then its `text` attribute is set.

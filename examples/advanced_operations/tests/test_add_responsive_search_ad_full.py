@@ -45,7 +45,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
     mock_ad_result.resource_name = f"customers/{mock_customer_id}/adGroupAds/ad_testuuid"
     mock_ad_response.results = [mock_ad_result]
     mock_ad_group_ad_service.mutate_ad_group_ads.return_value = mock_ad_response
-    
+
     # AdGroupCriterionService (for keywords)
     mock_criterion_service = mock_google_ads_client.get_service("AdGroupCriterionService")
     mock_criterion_response = MagicMock()
@@ -116,7 +116,7 @@ def test_main_with_customizer_runs_successfully(mock_uuid4_custom: MagicMock, mo
     mock_cust_cust_result.resource_name = f"customers/{mock_customer_id}/customerCustomizers/cust_cust_testuuid_custom"
     mock_cust_cust_response.results = [mock_cust_cust_result]
     mock_customer_customizer_service.mutate_customer_customizers.return_value = mock_cust_cust_response
-    
+
     # AdCustomizerService (new service for this path)
     mock_ad_customizer_service = mock_google_ads_client.get_service("AdCustomizerService")
     mock_ad_customizer_response = MagicMock()
@@ -155,7 +155,7 @@ def test_main_with_customizer_runs_successfully(mock_uuid4_custom: MagicMock, mo
     mock_ad_result.resource_name = f"customers/{mock_customer_id}/adGroupAds/ad_testuuid_custom"
     mock_ad_response.results = [mock_ad_result] # The ad customizer part references this resource name
     mock_ad_group_ad_service.mutate_ad_group_ads.return_value = mock_ad_response
-    
+
     mock_criterion_service = mock_google_ads_client.get_service("AdGroupCriterionService")
     mock_criterion_response = MagicMock()
     mock_criterion_result1 = MagicMock()
@@ -166,7 +166,7 @@ def test_main_with_customizer_runs_successfully(mock_uuid4_custom: MagicMock, mo
     mock_criterion_service.mutate_ad_group_criteria.return_value = mock_criterion_response
 
     mock_geo_service = mock_google_ads_client.get_service("GeoTargetConstantService")
-    mock_geo_service.geo_target_constant_path.return_value = "geoTargetConstants/2840" 
+    mock_geo_service.geo_target_constant_path.return_value = "geoTargetConstants/2840"
 
     mock_googleads_service = mock_google_ads_client.get_service("GoogleAdsService")
     mock_googleads_service.campaign_path.return_value = f"customers/{mock_customer_id}/campaigns/campaign_testuuid_custom"
@@ -188,9 +188,9 @@ def test_main_with_customizer_runs_successfully(mock_uuid4_custom: MagicMock, mo
     mock_enums.KeywordMatchTypeEnum.BROAD = "BROAD"
     mock_enums.ServedAssetFieldTypeEnum.HEADLINE_1 = "HEADLINE_1"
     mock_enums.CriterionTypeEnum.LOCATION = "LOCATION"
-    mock_enums.PositiveGeoTargetTypeEnum = MagicMock() 
+    mock_enums.PositiveGeoTargetTypeEnum = MagicMock()
     mock_enums.PositiveGeoTargetTypeEnum.DONT_CARE = "DONT_CARE"
-    mock_enums.LocationSourceTypeEnum = MagicMock() 
+    mock_enums.LocationSourceTypeEnum = MagicMock()
     mock_enums.LocationSourceTypeEnum.DOMAIN_LOCATION = "DOMAIN_LOCATION"
 
 

@@ -48,7 +48,7 @@ def test_main_runs_successfully(
     mock_mutate_response.mutate_operation_responses.append(MagicMock(campaign_criterion_result=MagicMock(resource_name="campaign_criterion_1"))) # Campaign Criterion
 
     mock_googleads_service.mutate.return_value = mock_mutate_response
-    
+
     # Mock SearchStream for finding existing assets (assumed not found for simplicity of this test)
     mock_search_response = MagicMock()
     mock_search_response.results = [] # No existing assets found

@@ -25,7 +25,7 @@ def test_main_runs_successfully(mock_requests_get: MagicMock, mock_google_ads_cl
     # Mock AdGroupService for ad_group_path
     mock_ad_group_service_path_helper = mock_google_ads_client.get_service("AdGroupService")
     mock_ad_group_service_path_helper.ad_group_path.return_value = f"customers/{mock_customer_id}/adGroups/{mock_ad_group_id}"
-    
+
     # Mock AdGroupAdService
     mock_ad_group_ad_service = mock_google_ads_client.get_service("AdGroupAdService")
     mock_ad_mutate_response = MagicMock()
@@ -39,7 +39,7 @@ def test_main_runs_successfully(mock_requests_get: MagicMock, mock_google_ads_cl
     mock_enums.AssetTypeEnum.MEDIA_BUNDLE = "MEDIA_BUNDLE"
     mock_enums.AdGroupAdStatusEnum.PAUSED = "PAUSED"
     mock_enums.DisplayUploadProductTypeEnum.HTML5_UPLOAD_AD = "HTML5_UPLOAD_AD"
-    
+
     # Mock types
     # mock_asset_operation = mock_google_ads_client.get_type("AssetOperation")
     # mock_ad_group_ad_operation = mock_google_ads_client.get_type("AdGroupAdOperation")

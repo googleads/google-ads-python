@@ -26,13 +26,13 @@ def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     mock_row_criterion_to_remove.shared_criterion.type_ = mock_google_ads_client.enums.CriterionTypeEnum.KEYWORD
     mock_row_criterion_to_remove.shared_criterion.keyword.text = "keyword to remove"
     mock_row_criterion_to_remove.shared_criterion.keyword.match_type = mock_google_ads_client.enums.KeywordMatchTypeEnum.EXACT
-    
+
     mock_row_criterion_to_keep = MagicMock()
     mock_row_criterion_to_keep.shared_criterion.resource_name = f"customers/{mock_customer_id}/sharedCriteria/789012~222"
     mock_row_criterion_to_keep.shared_criterion.type_ = mock_google_ads_client.enums.CriterionTypeEnum.KEYWORD
     mock_row_criterion_to_keep.shared_criterion.keyword.text = "keyword to keep" # Script removes based on "remove" in text
     mock_row_criterion_to_keep.shared_criterion.keyword.match_type = mock_google_ads_client.enums.KeywordMatchTypeEnum.BROAD
-    
+
     mock_search_response_criteria.results = [mock_row_criterion_to_remove, mock_row_criterion_to_keep]
 
     # Configure side_effect for multiple search calls

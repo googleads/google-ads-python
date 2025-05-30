@@ -31,7 +31,7 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
 from google.ads.googleads.v19.services.services.customer_service.client import CustomerServiceClient
 from google.ads.googleads.v19.resources.types.customer_client import CustomerClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchPagedResponse, GoogleAdsRow
+from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsResponse, GoogleAdsRow
 # ListAccessibleCustomersResponse is not directly used for a variable type,
 # but its attribute .resource_names is used, which is List[str].
 
@@ -101,13 +101,13 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
         while unprocessed_customer_ids:
             customer_id_loop: int = unprocessed_customer_ids.pop(0) # customer_id_loop is an int
             # The search method expects customer_id to be a string.
-            response: SearchPagedResponse = googleads_service.search(
+            response: SearchGoogleAdsResponse = googleads_service.search(
                 customer_id=str(customer_id_loop), query=query
             )
 
             # Iterates over all rows in all pages to get all customer
             # clients under the specified customer's hierarchy.
-            for googleads_row: GoogleAdsRow in response:
+            for googleads_row in response.results:
                 customer_client_loop_var: CustomerClient = googleads_row.customer_client
 
                 # The customer client that with level 0 is the specified
@@ -182,7 +182,7 @@ def print_account_hierarchy(
 
     # Recursively call this function for all child accounts of customer_client.
     if customer_id_print in customer_ids_to_child_accounts:
-        for child_account: CustomerClient in customer_ids_to_child_accounts[customer_id_print]:
+        for child_account in customer_ids_to_child_accounts[customer_id_print]:
             print_account_hierarchy(
                 child_account, customer_ids_to_child_accounts, depth + 1
             )

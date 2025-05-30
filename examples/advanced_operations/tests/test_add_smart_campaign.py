@@ -8,8 +8,7 @@ _BUDGET_TEMPORARY_ID = "-1"
 _SMART_CAMPAIGN_TEMPORARY_ID = "-2"
 _AD_GROUP_TEMPORARY_ID = "-3"
 
-@patch("examples.advanced_operations.add_smart_campaign.uuid4", return_value=MagicMock(hex="testuuid"))
-def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: MagicMock) -> None:
+def test_main_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     """Tests that the main function runs without raising an exception."""
     mock_customer_id = "123"
     mock_keyword_text = "some keywords"
@@ -218,8 +217,7 @@ def test_main_runs_successfully(mock_uuid4: MagicMock, mock_google_ads_client: M
         pytest.fail(f"main function raised an exception: {e}")
 
 # Consider a separate test if business_profile_location path is significantly different
-@patch("examples.advanced_operations.add_smart_campaign.uuid4", return_value=MagicMock(hex="testuuid_biz"))
-def test_main_with_business_location_runs_successfully(mock_uuid4_biz: MagicMock, mock_google_ads_client: MagicMock) -> None:
+def test_main_with_business_location_runs_successfully(mock_google_ads_client: MagicMock) -> None:
     """Tests main with a business profile location."""
     mock_customer_id = "123"
     mock_keyword_text = "other keywords"

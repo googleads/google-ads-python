@@ -1,0 +1,2 @@
+google-ads>=23.0.0,<24.0.0
+unittest.mock>=5.0.0,<6.0.0

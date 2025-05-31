@@ -2,8 +2,10 @@ import pytest
 import time
 from unittest.mock import MagicMock, patch
 
-from google.ads.googleads.interceptors import LoggingInterceptor
+# Local application imports (these trigger the problematic import if not mocked above)
 from examples.custom_logging_interceptor.cloud_logging_interceptor import CloudLoggingInterceptor
+from google.ads.googleads.interceptors import LoggingInterceptor # This is fine
+
 
 # Mock a GRPC Call/Future object.
 class MockFuture:

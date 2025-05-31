@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 import sys
 
-sys.path.insert(0, '/app') # For subtask environment
+# sys.path.insert(0, '/app') # For subtask environment - REMOVED
 
 from examples.advanced_operations import add_smart_campaign
 
@@ -87,9 +87,17 @@ class TestAddSmartCampaign(unittest.TestCase):
 
                 if base_name == "SmartCampaignSetting":
                     op_mock.update = create_mock
-                    # Mock update_mask.paths directly on the op_mock for SmartCampaignSettingOperation
                     op_mock.update_mask = mock.Mock(name="FieldMask")
-                    op_mock.update_mask.paths = [] # Ensure paths is a list to append to
+                    op_mock.update_mask.paths = []
+
+                    # Setup _pb.DESCRIPTOR.fields_by_name for field_mask helper for SmartCampaignSetting payload
+                    mock_pb = mock.Mock(name="_pb_for_SCS_Payload")
+                    mock_descriptor = mock.Mock(name="DESCRIPTOR_for_SCS_pb")
+                    # Set fields_by_name to an empty dictionary (which is iterable)
+                    mock_descriptor.fields_by_name = {}
+                    mock_pb.DESCRIPTOR = mock_descriptor
+                    create_mock._pb = mock_pb
+                    create_mock.phone_number = mock.Mock(name="PhoneNumber_on_SCS")
                 else:
                     op_mock.create = create_mock
 
@@ -104,8 +112,7 @@ class TestAddSmartCampaign(unittest.TestCase):
                     ad_mock.smart_campaign_ad.headlines = []
                     ad_mock.smart_campaign_ad.descriptions = []
                     create_mock.ad = ad_mock
-                elif base_name == "SmartCampaignSetting": # This is the .update mock (payload)
-                    create_mock.phone_number = mock.Mock(name="PhoneNumber_on_SCS")
+                # No need for specific SmartCampaignSetting pre-creation here as it's handled above for .update
                 return op_mock
             elif type_name == "SmartCampaignSuggestionInfo":
                 suggestion_info_mock = mock.Mock(name="SmartCampaignSuggestionInfo")

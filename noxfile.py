@@ -28,15 +28,29 @@ TEST_COMMAND = [
     "unittest",
     "discover",
     "--buffer",
-    "-s=.",
+    "-s=tests",  # Reverted to original -s=tests
     "-p",
     "*_test.py",
 ]
+
+EXAMPLES_TEST_COMMAND = [
+    "coverage",
+    "run",
+    "--append",
+    "-m",
+    "unittest",
+    "discover",
+    "--buffer",
+    "-s=examples/advanced_operations/tests", # New path for advanced examples tests
+    "-p",
+    "*_test.py",
+]
+
 COVERAGE_COMMAND = [
     "coverage",
     "report",
     "-m",
-    "--omit=.nox/*,examples/*,*/__init__.py",
+    "--omit=.nox/*,examples/*,*/__init__.py", # Note: examples/* will omit coverage for example tests too
 ]
 FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
 TEST_DEPENDENCIES = [
@@ -56,6 +70,12 @@ def tests(session, protobuf_implementation):
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
+    )
+    session.run(
+        *EXAMPLES_TEST_COMMAND, # Added call for example tests
         env={
             "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
         },
@@ -84,6 +104,12 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
+        env={
+            "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
+        },
+    )
+    session.run(
+        *EXAMPLES_TEST_COMMAND, # Added call for example tests
         env={
             "PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION": protobuf_implementation,
         },

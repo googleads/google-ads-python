@@ -2,7 +2,7 @@ import unittest
 from unittest import mock
 import sys
 
-sys.path.insert(0, '/app') # For subtask environment
+# sys.path.insert(0, '/app') # For subtask environment - REMOVED
 
 from examples.advanced_operations import add_dynamic_page_feed_asset
 

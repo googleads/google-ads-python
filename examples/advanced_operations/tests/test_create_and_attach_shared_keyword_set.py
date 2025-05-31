@@ -3,7 +3,7 @@ from unittest import mock
 import sys
 import uuid # Script uses uuid, so import it for safety if we mock it
 
-sys.path.insert(0, '/app') # For subtask environment
+# sys.path.insert(0, '/app') # For subtask environment - REMOVED
 
 from examples.advanced_operations import create_and_attach_shared_keyword_set
 

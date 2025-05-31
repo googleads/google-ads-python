@@ -3,7 +3,7 @@ from unittest import mock
 import sys
 import uuid # Script uses uuid
 
-sys.path.insert(0, '/app') # For subtask environment
+# sys.path.insert(0, '/app') # For subtask environment - REMOVED
 
 from examples.advanced_operations import use_cross_account_bidding_strategy
 from google.protobuf import field_mask_pb2 # For creating FieldMask

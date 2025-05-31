@@ -74,26 +74,46 @@ class MockFuture:
 
 
 @pytest.fixture
-def mock_cloud_logging_client():
+def mock_cloud_logging_components(): # Renamed for clarity
     with patch("google.cloud.logging.Client") as mock_client_constructor:
-        mock_logger = MagicMock()
-        mock_client_instance = MagicMock()
-        mock_client_instance.logger = MagicMock(return_value=mock_logger)
-        mock_client_constructor.return_value = mock_client_instance
-        yield mock_logger # Yield the mock_logger for assertions
+        # This is the mock for the google.cloud.logging.Client() instance
+        mock_logging_client_instance = MagicMock(name="mock_logging_client_instance")
+        mock_client_constructor.return_value = mock_logging_client_instance
+
+        # This is the mock for the logger object that interceptor.logger will hold
+        mock_interceptor_logger = MagicMock(name="mock_interceptor_logger")
+
+        # This is the mock for the .logger() method on the client instance
+        # When mock_logging_client_instance.logger("cloud_logging") is called,
+        # it will return mock_interceptor_logger.
+        mock_logger_method_on_client = MagicMock(name="mock_logger_method_on_client", return_value=mock_interceptor_logger)
+        mock_logging_client_instance.logger = mock_logger_method_on_client
+
+        yield {
+            "mock_client_constructor": mock_client_constructor, # The class mock
+            "mock_logging_client_instance": mock_logging_client_instance, # The instance of logging.Client()
+            "mock_logger_method_on_client": mock_logger_method_on_client, # The method called on the instance
+            "mock_interceptor_logger": mock_interceptor_logger # The logger returned and used by the interceptor
+        }
 
 @pytest.fixture
-def interceptor(mock_cloud_logging_client): # mock_cloud_logging_client is injected here
+def interceptor(mock_cloud_logging_components): # Use the new fixture
+    # CloudLoggingInterceptor will call google.cloud.logging.Client(),
+    # which is mock_client_constructor. It returns mock_logging_client_instance.
+    # Then it calls .logger("cloud_logging") on that, which is mock_logger_method_on_client.
+    # This returns mock_interceptor_logger, which is assigned to self.logger.
     return CloudLoggingInterceptor(api_version="v19")
 
-def test_interceptor_init(interceptor, mock_cloud_logging_client):
+def test_interceptor_init(interceptor, mock_cloud_logging_components):
     assert interceptor._api_version == "v19"
-    # mock_cloud_logging_client is the mock_logger we yielded
-    assert interceptor.logger == mock_cloud_logging_client
-    mock_cloud_logging_client.parent.logger.assert_called_once_with("cloud_logging")
+    # interceptor.logger should be the mock_interceptor_logger
+    assert interceptor.logger == mock_cloud_logging_components["mock_interceptor_logger"]
+    # The method mock_logging_client_instance.logger() should have been called
+    mock_cloud_logging_components["mock_logger_method_on_client"].assert_called_once_with("cloud_logging")
 
 
-def test_log_successful_request(interceptor, mock_cloud_logging_client):
+def test_log_successful_request(interceptor, mock_cloud_logging_components):
+    mock_interceptor_logger = mock_cloud_logging_components["mock_interceptor_logger"]
     method = "/google.ads.googleads.v19.services.GoogleAdsService/SearchStream"
     customer_id = "1234567890"
     metadata_json = (('host', 'googleads.googleapis.com'),) # simplified metadata
@@ -126,10 +146,10 @@ def test_log_successful_request(interceptor, mock_cloud_logging_client):
         response_future,
     )
 
-    assert mock_cloud_logging_client.log_struct.call_count == 2
+    assert mock_interceptor_logger.log_struct.call_count == 2
 
-    debug_log_call = mock_cloud_logging_client.log_struct.call_args_list[0]
-    info_log_call = mock_cloud_logging_client.log_struct.call_args_list[1]
+    debug_log_call = mock_interceptor_logger.log_struct.call_args_list[0]
+    info_log_call = mock_interceptor_logger.log_struct.call_args_list[1]
 
     expected_debug_log = {
         "method": method,
@@ -156,7 +176,8 @@ def test_log_successful_request(interceptor, mock_cloud_logging_client):
     interceptor.retrieve_and_mask_result.assert_called_once_with(response_future)
 
 
-def test_log_failed_request(interceptor, mock_cloud_logging_client):
+def test_log_failed_request(interceptor, mock_cloud_logging_components):
+    mock_interceptor_logger = mock_cloud_logging_components["mock_interceptor_logger"]
     method = "/google.ads.googleads.v19.services.GoogleAdsService/Mutate"
     customer_id = "1234567890"
     metadata_json = (('host', 'googleads.googleapis.com'),)
@@ -186,9 +207,9 @@ def test_log_failed_request(interceptor, mock_cloud_logging_client):
         response_future, # The response_future itself is passed
     )
 
-    assert mock_cloud_logging_client.log_struct.call_count == 2
-    info_log_call = mock_cloud_logging_client.log_struct.call_args_list[0]
-    error_log_call = mock_cloud_logging_client.log_struct.call_args_list[1]
+    assert mock_interceptor_logger.log_struct.call_count == 2
+    info_log_call = mock_interceptor_logger.log_struct.call_args_list[0]
+    error_log_call = mock_interceptor_logger.log_struct.call_args_list[1]
 
     expected_info_log = {
         "method": method,

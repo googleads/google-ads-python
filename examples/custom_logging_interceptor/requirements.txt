@@ -1,3 +1,5 @@
 google-cloud-logging
 pytest
 pytest-mock
+PyYAML
+google-ads

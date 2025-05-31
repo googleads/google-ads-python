@@ -63,8 +63,8 @@ class TestGetChangeDetails(unittest.TestCase):
         # Mock old and new resources (nested under event.old_resource.ad_group etc.)
         # Make event.old_resource and event.new_resource themselves MagicMocks
         # so that their sub-attributes like .ad_group can be easily assigned.
-        event.old_resource = MagicMock(spec=event.old_resource) # spec helps with isinstance if needed
-        event.new_resource = MagicMock(spec=event.new_resource)
+        event.old_resource = MagicMock()
+        event.new_resource = MagicMock()
 
         mock_old_ad_group_details = MagicMock()
         mock_new_ad_group_details = MagicMock()

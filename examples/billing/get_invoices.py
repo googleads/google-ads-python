@@ -63,18 +63,18 @@ def main(client, customer_id, billing_setup_id):
     Currency code: {invoice.currency_code}
     Service date range (inclusive): from {invoice.service_date_range.start_date} to {invoice.service_date_range.end_date}
     Adjustments:
-        subtotal {_micros_to_currency(invoice.adjustments_subtotal_amount_micros)}
-        tax {_micros_to_currency(invoice.adjustments_tax_amount_micros)}
-        total {_micros_to_currency(invoice.adjustments_total_amount_micros)}
+        subtotal {micros_to_currency(invoice.adjustments_subtotal_amount_micros)}
+        tax {micros_to_currency(invoice.adjustments_tax_amount_micros)}
+        total {micros_to_currency(invoice.adjustments_total_amount_micros)}
     Regulatory costs:
-        subtotal {_micros_to_currency(invoice.regulatory_costs_subtotal_amount_micros)}
-        tax {_micros_to_currency(invoice.regulatory_costs_tax_amount_micros)}
-        total {_micros_to_currency(invoice.regulatory_costs_total_amount_micros)}
+        subtotal {micros_to_currency(invoice.regulatory_costs_subtotal_amount_micros)}
+        tax {micros_to_currency(invoice.regulatory_costs_tax_amount_micros)}
+        total {micros_to_currency(invoice.regulatory_costs_total_amount_micros)}
     Replaced invoices: {invoice.replaced_invoices.join(", ") if invoice.replaced_invoices else "none"}
     Amounts:
-        subtotal {_micros_to_currency(invoice.subtotal_amount_micros)}
-        tax {_micros_to_currency(invoice.tax_amount_micros)}
-        total {_micros_to_currency(invoice.total_amount_micros)}
+        subtotal {micros_to_currency(invoice.subtotal_amount_micros)}
+        tax {micros_to_currency(invoice.tax_amount_micros)}
+        total {micros_to_currency(invoice.total_amount_micros)}
     Corrected invoice: {invoice.corrected_invoice or "none"}
     PDF URL: {invoice.pdf_url}
     Account budgets:
@@ -92,9 +92,9 @@ def main(client, customer_id, billing_setup_id):
                         from #{account_budget_summary.billable_activity_date_range.start_date}
                         to #{account_budget_summary.billable_activity_date_range.end_date}
                       Amounts:
-                        subtotal '{_micros_to_currency(account_budget_summary.subtotal_amount_micros)}'
-                        tax '{_micros_to_currency(account_budget_summary.tax_amount_micros)}'
-                        total '{_micros_to_currency(account_budget_summary.total_amount_micros)}'
+                        subtotal '{micros_to_currency(account_budget_summary.subtotal_amount_micros)}'
+                        tax '{micros_to_currency(account_budget_summary.tax_amount_micros)}'
+                        total '{micros_to_currency(account_budget_summary.total_amount_micros)}'
                 """
             )
             # [END get_invoices_1]

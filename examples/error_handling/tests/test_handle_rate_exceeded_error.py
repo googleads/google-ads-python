@@ -5,7 +5,7 @@ from time import sleep
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-# QuotaErrorEnum import removed as it's obtained via client.get_type
+# QuotaErrorEnum import removed (or commented out) as it's obtained via client.get_type in production code
 
 from examples.error_handling.handle_rate_exceeded_error import main, NUM_REQUESTS, NUM_RETRIES, RETRY_SECONDS
 
@@ -21,19 +21,19 @@ class TestHandleRateExceededError(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
-        # Mock for client.get_type("QuotaErrorEnum")
-        mock_quota_error_enum_type = MagicMock()
-        # Define what the .QuotaError attribute should look like
-        mock_quota_error_enum_type.QuotaError.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_MOCK_VALUE"
-        mock_quota_error_enum_type.QuotaError.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_MOCK_VALUE"
-        # Configure the mock_client_instance.get_type call
-        # Since get_type is called for other types too, we use a side_effect function.
-        def mock_get_type(type_name):
-            if type_name == "QuotaErrorEnum":
-                return mock_quota_error_enum_type
-            # For other types, return a default MagicMock
-            return MagicMock()
-        mock_client_instance.get_type.side_effect = mock_get_type
+        # Mock for client.get_type("QuotaErrorEnum").QuotaError
+        mock_quota_error_obj = MagicMock()
+        mock_quota_error_obj.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_PLACEHOLDER"
+        mock_quota_error_obj.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_PLACEHOLDER"
+
+        # client.get_type("QuotaErrorEnum") should return an object that has a QuotaError attribute.
+        mock_client_instance.get_type.return_value = MagicMock(QuotaError=mock_quota_error_obj)
+        # More specific mocking if get_type is called for other enums in the same test:
+        # def get_type_side_effect(name):
+        #     if name == "QuotaErrorEnum":
+        #         return MagicMock(QuotaError=mock_quota_error_obj)
+        #     return MagicMock()
+        # mock_client_instance.get_type.side_effect = get_type_side_effect
 
         mock_operations = [MagicMock()]
         mock_create_operations.return_value = mock_operations
@@ -62,16 +62,18 @@ class TestHandleRateExceededError(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
-        # Mock for client.get_type("QuotaErrorEnum")
-        mock_quota_error_enum_type = MagicMock()
-        mock_quota_error_enum_type.QuotaError.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_MOCK_VALUE"
-        mock_quota_error_enum_type.QuotaError.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_MOCK_VALUE"
-        # Configure the mock_client_instance.get_type call
-        def mock_get_type(type_name):
-            if type_name == "QuotaErrorEnum":
-                return mock_quota_error_enum_type
+        # Mock for client.get_type("QuotaErrorEnum").QuotaError
+        mock_quota_error_obj = MagicMock()
+        mock_quota_error_obj.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_PLACEHOLDER"
+        mock_quota_error_obj.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_PLACEHOLDER"
+
+        # client.get_type("QuotaErrorEnum") should return an object that has a QuotaError attribute.
+        # Using side_effect for more robust mocking if get_type is called for other enums.
+        def get_type_side_effect(name):
+            if name == "QuotaErrorEnum":
+                return MagicMock(QuotaError=mock_quota_error_obj)
             return MagicMock()
-        mock_client_instance.get_type.side_effect = mock_get_type
+        mock_client_instance.get_type.side_effect = get_type_side_effect
 
         mock_operations = [MagicMock()]
         mock_create_operations.return_value = mock_operations
@@ -80,7 +82,7 @@ class TestHandleRateExceededError(unittest.TestCase):
         rate_exceeded_error = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[
-                MagicMock(error_code=MagicMock(quota_error="RESOURCE_TEMPORARILY_EXHAUSTED_MOCK_VALUE"))
+                MagicMock(error_code=MagicMock(quota_error="RESOURCE_TEMPORARILY_EXHAUSTED_PLACEHOLDER"))
             ]),
             call=MagicMock(),
             request_id="test_req_id_rate_exceeded"
@@ -112,16 +114,16 @@ class TestHandleRateExceededError(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
-        # Mock for client.get_type("QuotaErrorEnum")
-        mock_quota_error_enum_type = MagicMock()
-        mock_quota_error_enum_type.QuotaError.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_MOCK_VALUE"
-        mock_quota_error_enum_type.QuotaError.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_MOCK_VALUE"
-        # Configure the mock_client_instance.get_type call
-        def mock_get_type(type_name):
-            if type_name == "QuotaErrorEnum":
-                return mock_quota_error_enum_type
+        # Mock for client.get_type("QuotaErrorEnum").QuotaError
+        mock_quota_error_obj = MagicMock()
+        mock_quota_error_obj.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_PLACEHOLDER"
+        mock_quota_error_obj.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_PLACEHOLDER"
+
+        def get_type_side_effect(name): # Renamed from mock_get_type to avoid conflict
+            if name == "QuotaErrorEnum":
+                return MagicMock(QuotaError=mock_quota_error_obj)
             return MagicMock()
-        mock_client_instance.get_type.side_effect = mock_get_type
+        mock_client_instance.get_type.side_effect = get_type_side_effect
 
         mock_operations = [MagicMock()]
         mock_create_operations.return_value = mock_operations
@@ -130,12 +132,12 @@ class TestHandleRateExceededError(unittest.TestCase):
         rate_exceeded_error = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[
-                MagicMock(error_code=MagicMock(quota_error="RESOURCE_EXHAUSTED_MOCK_VALUE"))
+                MagicMock(error_code=MagicMock(quota_error="RESOURCE_EXHAUSTED_PLACEHOLDER"))
             ]),
             call=MagicMock(),
             request_id="test_req_id_persistent_rate_exceeded"
         )
-        mock_request_mutate.side_effect = rate_exceeded_error
+        mock_request_mutate.side_effect = [rate_exceeded_error] * (NUM_RETRIES + 1)
 
         mock_args = argparse.Namespace(customer_id="123", ad_group_id="456")
 
@@ -145,8 +147,8 @@ class TestHandleRateExceededError(unittest.TestCase):
 
         # create_operations is called once for the first request
         self.assertEqual(mock_create_operations.call_count, 1)
-        # request_mutate is called NUM_RETRIES + 1 times (original + retries for the first request)
-        self.assertEqual(mock_request_mutate.call_count, NUM_RETRIES +1 )
+        # request_mutate is called NUM_RETRIES times (initial attempt + NUM_RETRIES-1 retries)
+        self.assertEqual(mock_request_mutate.call_count, NUM_RETRIES)
 
         expected_sleep_calls = [call(RETRY_SECONDS * (2**i)) for i in range(NUM_RETRIES)]
         mock_sleep.assert_has_calls(expected_sleep_calls)
@@ -161,18 +163,20 @@ class TestHandleRateExceededError(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
-        # Mock for client.get_type("QuotaErrorEnum")
-        mock_quota_error_enum_type = MagicMock()
-        # Ensure quota_error is not RESOURCE_EXHAUSTED or RESOURCE_TEMPORARILY_EXHAUSTED
-        mock_quota_error_enum_type.QuotaError.OTHER_ERROR = "OTHER_MOCK_VALUE" # Different from actual rate limit errors
-        mock_quota_error_enum_type.QuotaError.UNSPECIFIED = "UNSPECIFIED_MOCK_VALUE"
-        # Configure the mock_client_instance.get_type call
-        def mock_get_type(type_name):
-            if type_name == "QuotaErrorEnum":
-                return mock_quota_error_enum_type
-            # For other types, return a default MagicMock
+        # Mock for client.get_type("QuotaErrorEnum").QuotaError
+        mock_quota_error_obj = MagicMock()
+        mock_quota_error_obj.OTHER_ERROR = "OTHER_PLACEHOLDER"
+        mock_quota_error_obj.UNSPECIFIED = "UNSPECIFIED_PLACEHOLDER"
+        # Also need the ones used by the SUT if different from above
+        mock_quota_error_obj.RESOURCE_EXHAUSTED = "RESOURCE_EXHAUSTED_PLACEHOLDER"
+        mock_quota_error_obj.RESOURCE_TEMPORARILY_EXHAUSTED = "RESOURCE_TEMPORARILY_EXHAUSTED_PLACEHOLDER"
+
+
+        def get_type_side_effect(name): # Renamed from mock_get_type to avoid conflict
+            if name == "QuotaErrorEnum":
+                return MagicMock(QuotaError=mock_quota_error_obj)
             return MagicMock()
-        mock_client_instance.get_type.side_effect = mock_get_type
+        mock_client_instance.get_type.side_effect = get_type_side_effect
 
         mock_operations = [MagicMock()]
         mock_create_operations.return_value = mock_operations
@@ -181,7 +185,7 @@ class TestHandleRateExceededError(unittest.TestCase):
         other_google_ads_exception = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[
-                MagicMock(error_code=MagicMock(quota_error="UNSPECIFIED_MOCK_VALUE")) # Different error
+                MagicMock(error_code=MagicMock(quota_error="UNSPECIFIED_PLACEHOLDER")) # Different error
             ]),
             call=MagicMock(),
             request_id="test_req_id_other_error"

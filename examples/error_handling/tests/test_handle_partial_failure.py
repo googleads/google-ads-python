@@ -88,21 +88,41 @@ class TestHandlePartialFailure(unittest.TestCase):
         mock_client = MagicMock(spec=GoogleAdsClient)
         mock_response = MagicMock()
 
-        # Simulate a partial failure error
         mock_response.partial_failure_error = MagicMock(code=1)
 
-        # Mock GoogleAdsFailure deserialization
-        mock_failure_message_type = MagicMock()
-        mock_client.get_type.return_value = mock_failure_message_type
+        # Mock GoogleAdsFailure deserialization based on SUT:
+        # failure_message = client.get_type("GoogleAdsFailure") # Returns an instance
+        # GoogleAdsFailure = type(failure_message) # The class of that instance
+        # failure_object = GoogleAdsFailure.deserialize(error_detail.value) # Class.deserialize()
 
-        mock_deserialized_failure = MagicMock()
-        mock_failure_message_type.deserialize.return_value = mock_deserialized_failure
+        # 1. Define the mock for the GoogleAdsFailure CLASS
+        mock_google_ads_failure_class = MagicMock(name="GoogleAdsFailureClass_Mock")
 
+        # 2. Define the mock for the INSTANCE that client.get_type("GoogleAdsFailure") returns
+        #    Its type (__class__) will be our mock_google_ads_failure_class
+        mock_failure_message_instance = MagicMock(name="FailureMessageInstance_Mock")
+        # Setting __class__ directly is more explicit for type() behavior
+        mock_failure_message_instance.__class__ = mock_google_ads_failure_class
+
+        # 3. Define the mock for the FINAL object that GoogleAdsFailure.deserialize() returns
+        mock_final_failure_object = MagicMock(name="FinalFailureObject_Mock")
+
+        # 4. Setup the deserialize method on the CLASS mock
+        mock_google_ads_failure_class.deserialize = MagicMock(return_value=mock_final_failure_object)
+
+        # 5. Configure mock_client.get_type to return the INSTANCE mock when called with "GoogleAdsFailure"
+        def get_type_side_effect(type_name):
+            if type_name == "GoogleAdsFailure":
+                return mock_failure_message_instance
+            return MagicMock()
+        mock_client.get_type.side_effect = get_type_side_effect
+
+        # 6. Assign errors to the FINAL deserialized object
         mock_error = MagicMock()
         mock_error.location.field_path_elements = [MagicMock(index=0)]
         mock_error.message = "Partial failure message"
         mock_error.error_code = "PARTIAL_ERROR_CODE"
-        mock_deserialized_failure.errors = [mock_error]
+        mock_final_failure_object.errors = [mock_error]
 
         # Simulate error_details attribute
         mock_error_detail = MagicMock()

@@ -14,6 +14,12 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums used in create_keyword_criterion
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupCriterionStatusEnum.ENABLED = "ENABLED_MOCK_STATUS"
+        mock_enums_container.KeywordMatchTypeEnum.EXACT = "EXACT_MOCK_MATCH_TYPE"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_criterion_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_criterion_service
 
@@ -30,7 +36,7 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=mock_args):
             main(mock_client_instance, mock_args.customer_id, mock_args.ad_group_id, mock_args.keyword_text)
 
-        mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19")
+        # mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19") # Removed: main is called with an instance
         mock_client_instance.get_service.assert_any_call("AdGroupCriterionService")
         mock_ad_group_criterion_service.mutate_ad_group_criteria.assert_called()
 
@@ -43,6 +49,12 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums used in create_keyword_criterion
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupCriterionStatusEnum.ENABLED = "ENABLED_MOCK_STATUS"
+        mock_enums_container.KeywordMatchTypeEnum.EXACT = "EXACT_MOCK_MATCH_TYPE"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_criterion_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_criterion_service
 
@@ -50,6 +62,7 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         mock_google_ads_exception = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(),
+            call=MagicMock(),
             request_id="test_request_id"
         )
         mock_ad_group_criterion_service.mutate_ad_group_criteria.side_effect = [
@@ -70,7 +83,7 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=mock_args):
             main(mock_client_instance, mock_args.customer_id, mock_args.ad_group_id, mock_args.keyword_text)
 
-        mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19")
+        # mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19") # Removed: main is called with an instance
         mock_fetch_exempt_policy_violation_keys.assert_called_once_with(mock_google_ads_exception)
         mock_request_exemption.assert_called_once()
 
@@ -83,6 +96,12 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums used in create_keyword_criterion
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupCriterionStatusEnum.ENABLED = "ENABLED_MOCK_STATUS"
+        mock_enums_container.KeywordMatchTypeEnum.EXACT = "EXACT_MOCK_MATCH_TYPE"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_criterion_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_criterion_service
 
@@ -90,12 +109,14 @@ class TestHandleKeywordPolicyViolations(unittest.TestCase):
         mock_google_ads_exception_initial = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(),
+            call=MagicMock(),
             request_id="test_request_id_initial"
         )
         # Simulate GoogleAdsException during the exemption request
         mock_google_ads_exception_exemption = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[MagicMock(message=MagicMock())]), # Add errors attribute
+            call=MagicMock(),
             request_id="test_request_id_exemption"
         )
 

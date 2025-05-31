@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types.policy_finding_error import PolicyFindingErrorEnum
+# PolicyFindingErrorEnum import removed as it's obtained via client.get_type
 
 from examples.error_handling.handle_responsive_search_ad_policy_violations import main
 
@@ -14,6 +14,11 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
     def test_main_success_first_try(self, mock_google_ads_client):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
+
+        # Setup mock for client.enums
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupAdStatusEnum.PAUSED = "PAUSED_MOCK_STATUS"
+        mock_client_instance.enums = mock_enums_container
 
         mock_ad_group_ad_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_ad_service
@@ -26,7 +31,7 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=mock_args):
             main(mock_client_instance, mock_args.customer_id, mock_args.ad_group_id)
 
-        mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19")
+        # mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19") # Removed: main is called with an instance
         mock_client_instance.get_service.assert_any_call("AdGroupAdService")
         # Mutate should be called once if successful on first try
         mock_ad_group_ad_service.mutate_ad_group_ads.assert_called_once()
@@ -40,15 +45,32 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupAdStatusEnum.PAUSED = "PAUSED_MOCK_STATUS"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_ad_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_ad_service
+
+        # Mock for client.get_type("PolicyFindingErrorEnum")
+        mock_policy_finding_enum_type = MagicMock()
+        mock_policy_finding_enum_type.PolicyFindingError.POLICY_FINDING = "POLICY_FINDING_MOCK_VALUE"
+        mock_policy_finding_enum_type.PolicyFindingError.UNSPECIFIED = "UNSPECIFIED_MOCK_VALUE"
+        # Configure the mock_client_instance.get_type call
+        def mock_get_type(type_name):
+            if type_name == "PolicyFindingErrorEnum":
+                return mock_policy_finding_enum_type
+            return MagicMock()
+        mock_client_instance.get_type.side_effect = mock_get_type
 
         # Simulate GoogleAdsException with policy finding error on first mutate
         policy_violation_exception = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[
-                MagicMock(error_code=MagicMock(policy_finding_error=PolicyFindingErrorEnum.PolicyFindingError.POLICY_FINDING))
+                MagicMock(error_code=MagicMock(policy_finding_error="POLICY_FINDING_MOCK_VALUE"))
             ]),
+            call=MagicMock(),
             request_id="policy_error_req_id"
         )
 
@@ -81,15 +103,31 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupAdStatusEnum.PAUSED = "PAUSED_MOCK_STATUS"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_ad_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_ad_service
+
+        # Mock for client.get_type("PolicyFindingErrorEnum")
+        mock_policy_finding_enum_type = MagicMock()
+        mock_policy_finding_enum_type.PolicyFindingError.POLICY_FINDING = "POLICY_FINDING_MOCK_VALUE"
+        # Configure the mock_client_instance.get_type call
+        def mock_get_type(type_name):
+            if type_name == "PolicyFindingErrorEnum":
+                return mock_policy_finding_enum_type
+            return MagicMock()
+        mock_client_instance.get_type.side_effect = mock_get_type
 
         # Simulate GoogleAdsException with policy finding error on first mutate
         policy_violation_exception = GoogleAdsException(
             error=MagicMock(),
             failure=MagicMock(errors=[
-                MagicMock(error_code=MagicMock(policy_finding_error=PolicyFindingErrorEnum.PolicyFindingError.POLICY_FINDING))
+                MagicMock(error_code=MagicMock(policy_finding_error="POLICY_FINDING_MOCK_VALUE"))
             ]),
+            call=MagicMock(),
             request_id="policy_error_req_id"
         )
 
@@ -97,6 +135,7 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
         exemption_failure_exception = GoogleAdsException(
             error=MagicMock(code=MagicMock(name="ExemptionError")), # Add code.name for printing
             failure=MagicMock(errors=[MagicMock(message="Exemption failed", location=MagicMock(field_path_elements=[MagicMock(field_name="ex_field")]))]),
+            call=MagicMock(),
             request_id="exemption_fail_req_id"
         )
 
@@ -131,18 +170,35 @@ class TestHandleResponsiveSearchAdPolicyViolations(unittest.TestCase):
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
         mock_google_ads_client.load_from_storage.return_value = mock_client_instance
 
+        # Setup mock for client.enums
+        mock_enums_container = MagicMock()
+        mock_enums_container.AdGroupAdStatusEnum.PAUSED = "PAUSED_MOCK_STATUS"
+        mock_client_instance.enums = mock_enums_container
+
         mock_ad_group_ad_service = MagicMock()
         mock_client_instance.get_service.return_value = mock_ad_group_ad_service
+
+        # Mock for client.get_type("PolicyFindingErrorEnum")
+        mock_policy_finding_enum_type = MagicMock()
+        mock_policy_finding_enum_type.PolicyFindingError.POLICY_FINDING = "POLICY_FINDING_MOCK_VALUE"
+        mock_policy_finding_enum_type.PolicyFindingError.UNSPECIFIED = "UNSPECIFIED_MOCK_VALUE"
+         # Configure the mock_client_instance.get_type call
+        def mock_get_type(type_name):
+            if type_name == "PolicyFindingErrorEnum":
+                return mock_policy_finding_enum_type
+            return MagicMock()
+        mock_client_instance.get_type.side_effect = mock_get_type
 
         # Simulate GoogleAdsException that is NOT a policy finding error
         non_policy_exception = GoogleAdsException(
             error=MagicMock(code=MagicMock(name="OtherError")), # Add code.name
             failure=MagicMock(errors=[
                 # Ensure not a policy_finding_error
-                MagicMock(error_code=MagicMock(policy_finding_error=PolicyFindingErrorEnum.PolicyFindingError.UNSPECIFIED),
+                MagicMock(error_code=MagicMock(policy_finding_error="UNSPECIFIED_MOCK_VALUE"),
                           message="Some other error",
                           location=MagicMock(field_path_elements=[MagicMock(field_name="other_field")]))
             ]),
+            call=MagicMock(),
             request_id="other_error_req_id"
         )
 

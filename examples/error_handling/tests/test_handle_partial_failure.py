@@ -28,7 +28,7 @@ class TestHandlePartialFailure(unittest.TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=mock_args):
             main(mock_client_instance, mock_args.customer_id, mock_args.campaign_id)
 
-        mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19")
+        # mock_google_ads_client.load_from_storage.assert_called_once_with(version="v19") # Removed: main is called with an instance
         mock_create_ad_groups.assert_called_once_with(
             mock_client_instance, mock_args.customer_id, mock_args.campaign_id
         )
@@ -47,6 +47,7 @@ class TestHandlePartialFailure(unittest.TestCase):
         mock_google_ads_exception = GoogleAdsException(
             error=MagicMock(code=MagicMock(name="TestError")),
             failure=MagicMock(errors=[MagicMock(message="Test message", location=MagicMock(field_path_elements=[MagicMock(field_name="test_field")]))]),
+            call=MagicMock(),
             request_id="test_request_id",
         )
         mock_create_ad_groups.side_effect = mock_google_ads_exception

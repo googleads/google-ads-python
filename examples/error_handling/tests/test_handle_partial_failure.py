@@ -84,45 +84,32 @@ class TestHandlePartialFailure(unittest.TestCase):
         self.assertFalse(is_partial_failure_error_present(mock_response_no_error))
 
     @patch("builtins.print")
-    def test_print_results_with_partial_failure(self, mock_print):
+    @patch('google.ads.googleads.errors.GoogleAdsFailure.deserialize') # Direct patch
+    def test_print_results_with_partial_failure(self, mock_gdsflr_deserialize, mock_print): # Added mock_gdsflr_deserialize
         mock_client = MagicMock(spec=GoogleAdsClient)
         mock_response = MagicMock()
 
         mock_response.partial_failure_error = MagicMock(code=1)
 
-        # Mock GoogleAdsFailure deserialization based on SUT:
-        # failure_message = client.get_type("GoogleAdsFailure") # Returns an instance
-        # GoogleAdsFailure = type(failure_message) # The class of that instance
-        # failure_object = GoogleAdsFailure.deserialize(error_detail.value) # Class.deserialize()
-
-        # 1. Define the mock for the GoogleAdsFailure CLASS
-        mock_google_ads_failure_class = MagicMock(name="GoogleAdsFailureClass_Mock")
-
-        # 2. Define the mock for the INSTANCE that client.get_type("GoogleAdsFailure") returns
-        #    Its type (__class__) will be our mock_google_ads_failure_class
-        mock_failure_message_instance = MagicMock(name="FailureMessageInstance_Mock")
-        # Setting __class__ directly is more explicit for type() behavior
-        mock_failure_message_instance.__class__ = mock_google_ads_failure_class
-
-        # 3. Define the mock for the FINAL object that GoogleAdsFailure.deserialize() returns
         mock_final_failure_object = MagicMock(name="FinalFailureObject_Mock")
-
-        # 4. Setup the deserialize method on the CLASS mock
-        mock_google_ads_failure_class.deserialize = MagicMock(return_value=mock_final_failure_object)
-
-        # 5. Configure mock_client.get_type to return the INSTANCE mock when called with "GoogleAdsFailure"
-        def get_type_side_effect(type_name):
-            if type_name == "GoogleAdsFailure":
-                return mock_failure_message_instance
-            return MagicMock()
-        mock_client.get_type.side_effect = get_type_side_effect
-
-        # 6. Assign errors to the FINAL deserialized object
         mock_error = MagicMock()
         mock_error.location.field_path_elements = [MagicMock(index=0)]
         mock_error.message = "Partial failure message"
         mock_error.error_code = "PARTIAL_ERROR_CODE"
         mock_final_failure_object.errors = [mock_error]
+
+        # Configure the patched static method
+        mock_gdsflr_deserialize.return_value = mock_final_failure_object
+
+        # Configure client.get_type to return a dummy instance
+        # because type() is called on its return value in the SUT.
+        def get_type_side_effect(type_name):
+            if type_name == "GoogleAdsFailure":
+                # This instance's type will be used, but its deserialize won't be called
+                # because GoogleAdsFailure.deserialize is patched directly.
+                return MagicMock(name="DummyFailureMessageInstance_For_Type_Call")
+            return MagicMock() # For any other types
+        mock_client.get_type.side_effect = get_type_side_effect
 
         # Simulate error_details attribute
         mock_error_detail = MagicMock()

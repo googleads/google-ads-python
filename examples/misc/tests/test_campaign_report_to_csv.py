@@ -108,7 +108,6 @@ class TestCampaignReportToCsv(unittest.TestCase):
     # If it were to be kept, it would need to use the new helper classes or be for a different purpose.
     # For now, removing it to avoid confusion with the new MockCSVRow.
     # def _create_mock_row(...):
-        return row
 
     @mock.patch("builtins.open", new_callable=mock.mock_open)
     def test_main_success_with_headers(self, mock_open_file):

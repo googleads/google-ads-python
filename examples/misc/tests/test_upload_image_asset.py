@@ -48,12 +48,12 @@ class TestUploadImageAsset(unittest.TestCase):
         """Tests a successful run of the main function."""
         customer_id = "1234567890"
 
-        # Configure the mock for get_image_bytes_from_url specifically for this test
-        mock_get_image_bytes_in_success.return_value = self.mock_image_bytes # Using self.mock_image_bytes from setUp
+        # Configure the mock for get_image_bytes_from_url (which is mock_print_in_success per traceback)
+        mock_print_in_success.return_value = self.mock_image_bytes # Using self.mock_image_bytes from setUp
 
         upload_image_asset.main(self.mock_client, customer_id)
 
-        mock_get_image_bytes_in_success.assert_called_once_with( # Use the local mock from argument
+        mock_print_in_success.assert_called_once_with( # Use mock_print_in_success for get_image_bytes_from_url mock
             "https://gaagl.page.link/Eit5"
         )
         self.mock_asset_service.mutate_assets.assert_called_once()
@@ -78,7 +78,8 @@ class TestUploadImageAsset(unittest.TestCase):
             mock.call("Uploaded file(s):"),
             mock.call(f"\tResource name: {self.mock_mutate_response.results[0].resource_name}")
         ]
-        mock_print_in_success.assert_has_calls(expected_print_calls, any_order=False)
+        # Use mock_get_image_bytes_in_success for print assertions
+        mock_get_image_bytes_in_success.assert_has_calls(expected_print_calls, any_order=False)
 
     @mock.patch("sys.exit")
     @mock.patch("builtins.print")

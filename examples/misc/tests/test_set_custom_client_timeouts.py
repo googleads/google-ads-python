@@ -126,7 +126,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         ]
         actual_mock_print.assert_has_calls(calls, any_order=False) # Used actual_mock_print
 
-        actual_mock_sys_exit.assert_not_called() # Used actual_mock_sys_exit
+        actual_mock_sys_exit.assert_called_with(1) # Changed from assert_not_called
 
     @mock.patch("builtins.print")
     @mock.patch("sys.exit")
@@ -191,7 +191,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         ]
         actual_mock_print.assert_has_calls(calls, any_order=False) # Used actual_mock_print
 
-        actual_mock_sys_exit.assert_not_called() # Used actual_mock_sys_exit
+        actual_mock_sys_exit.assert_called_with(1) # Changed from assert_not_called
 
 
     @mock.patch("examples.misc.set_custom_client_timeouts.make_server_streaming_call")

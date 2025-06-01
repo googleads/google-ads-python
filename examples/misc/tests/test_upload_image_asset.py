@@ -73,9 +73,12 @@ class TestUploadImageAsset(unittest.TestCase):
         self.assertEqual(actual_operation.create.name, "Marketing Image")
         self.assertEqual(actual_operation.create.image_asset.full_size.url, "https://gaagl.page.link/Eit5")
 
-        mock_print_in_success.assert_any_call( # Use the local mock from argument
-            f"Uploaded image asset with resource name: '{self.mock_mutate_response.results[0].resource_name}'"
-        )
+        # Corrected print assertions
+        expected_print_calls = [
+            mock.call("Uploaded file(s):"),
+            mock.call(f"\tResource name: {self.mock_mutate_response.results[0].resource_name}")
+        ]
+        mock_print_in_success.assert_has_calls(expected_print_calls, any_order=False)
 
     @mock.patch("sys.exit")
     @mock.patch("builtins.print")

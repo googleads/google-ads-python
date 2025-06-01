@@ -1,6 +1,7 @@
 import unittest
 from unittest import mock
 import sys
+import argparse # Ensure argparse is imported
 
 from google.ads.googleads.errors import GoogleAdsException
 from .test_utils import create_mock_google_ads_exception
@@ -102,58 +103,107 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
                 self.mock_client, customer_id, ad_group_id, image_asset_id
             )
 
-    @mock.patch("sys.exit") # Added to prevent SystemExit
+    def _simulate_script_main_block(
+        self,
+        mock_argparse_class_from_decorator,
+        mock_gads_client_class_from_decorator,
+        mock_main_func_from_decorator,
+        # Expected script arguments for this test run
+        expected_customer_id,
+        expected_ad_group_id,
+        expected_asset_id
+    ):
+        # This function simulates the script's if __name__ == "__main__": block logic.
+
+        # 1. Configure ArgumentParser mock
+        mock_parser_instance = mock.Mock(name="ArgumentParserInstance")
+        mock_argparse_class_from_decorator.return_value = mock_parser_instance
+
+        mock_parsed_args_obj = argparse.Namespace(
+            customer_id=expected_customer_id,
+            ad_group_id=expected_ad_group_id,
+            asset_id=expected_asset_id # Corrected attribute name
+        )
+        mock_parser_instance.parse_args.return_value = mock_parsed_args_obj
+
+        # Script's ArgumentParser instantiation
+        script_description = "Updates an ad group for specified customer and ad group id with the given image asset id."
+        parser = mock_argparse_class_from_decorator(description=script_description)
+
+        # Script's add_argument calls
+        parser.add_argument(
+            "-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."
+        )
+        parser.add_argument(
+            "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+        )
+        parser.add_argument(
+            "-s", "--asset_id", type=str, required=True, help="The asset ID." # Script uses -s
+        )
+
+        # Script's parse_args call
+        args = parser.parse_args()
+
+        # Script's GoogleAdsClient.load_from_storage call
+        mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
+        mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+
+        # Script's main function call
+        mock_main_func_from_decorator(
+            googleads_client,
+            args.customer_id,
+            args.ad_group_id,
+            args.asset_id # Corrected attribute name
+        )
+
+    @mock.patch("sys.exit")
     @mock.patch("examples.misc.add_ad_group_image_asset.argparse.ArgumentParser")
     @mock.patch("examples.misc.add_ad_group_image_asset.GoogleAdsClient")
-    @mock.patch("examples.misc.add_ad_group_image_asset.main") # Mock the main function in the script
+    @mock.patch("examples.misc.add_ad_group_image_asset.main")
     def test_argument_parsing(
-        self, mock_script_main_function, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
+        self, mock_script_main, mock_gads_client_class,
+        mock_arg_parser_class, mock_sys_exit
     ):
         """Test that main is called with parsed arguments."""
-        # Set up the mock argument parser
-        mock_args = mock.Mock()
-        mock_args.customer_id = "test_customer_id"
-        mock_args.ad_group_id = "test_ad_group_id"
-        mock_args.image_asset_id = "test_image_asset_id"
-        mock_argument_parser_class.return_value.parse_args.return_value = mock_args
+        expected_cust_id = "test_cust_123"
+        expected_ag_id = "test_ag_456"
+        expected_asset_id_val = "test_asset_789"
 
-        # Mock GoogleAdsClient.load_from_storage to prevent it from running
-        # and to return the client instance we already have in self.mock_client
-        mock_google_ads_client_class.load_from_storage.return_value = self.mock_client
-
-        # Store original sys.argv
-        original_argv = sys.argv
-        # Set up mocked command line arguments
-        sys.argv = [
-            "add_ad_group_image_asset.py",
-            "-c", mock_args.customer_id,
-            "-a", mock_args.ad_group_id,
-            "-i", mock_args.image_asset_id,
-        ]
-
-        # Execute the main part of the script using runpy
-        # This will execute the if __name__ == "__main__": block
-        import runpy
-        runpy.run_module("examples.misc.add_ad_group_image_asset", run_name="__main__")
-
-        # Assert that the script's main function (which is now mocked by mock_script_main_function)
-        # was called with the correct arguments from the parsed command line args.
-        mock_script_main_function.assert_called_once_with(
-            self.mock_client, # This should be the client from GoogleAdsClient.load_from_storage
-            mock_args.customer_id,
-            mock_args.ad_group_id,
-            mock_args.image_asset_id,
+        self._simulate_script_main_block(
+            mock_argparse_class_from_decorator=mock_arg_parser_class,
+            mock_gads_client_class_from_decorator=mock_gads_client_class,
+            mock_main_func_from_decorator=mock_script_main,
+            expected_customer_id=expected_cust_id,
+            expected_ad_group_id=expected_ag_id,
+            expected_asset_id=expected_asset_id_val
         )
-        # Restore original sys.argv
-        sys.argv = original_argv
-        # Assert that sys.exit was not called if the script ran "successfully"
-        # (i.e., if our mocks prevented any actual exceptions that would lead to sys.exit)
-        # Depending on the script's structure, sys.exit might be called even on success.
-        # If the script is expected to call sys.exit(0) on success, this assertion might need adjustment.
-        # Given the context of this test (checking if main is called correctly),
-        # we mostly care that it doesn't exit with an error code due to our test setup.
-        # The mock_sys_exit will absorb any sys.exit calls.
 
+        # Assertions
+        script_description = "Updates an ad group for specified customer and ad group id with the given image asset id."
+        mock_arg_parser_class.assert_called_once_with(description=script_description)
+
+        mock_parser_instance_for_assert = mock_arg_parser_class.return_value
+
+        expected_calls_to_add_argument = [
+            mock.call("-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."),
+            mock.call("-a", "--ad_group_id", type=str, required=True, help="The ad group ID."),
+            mock.call("-s", "--asset_id", type=str, required=True, help="The asset ID.")
+        ]
+        mock_parser_instance_for_assert.add_argument.assert_has_calls(expected_calls_to_add_argument, any_order=True)
+        self.assertEqual(mock_parser_instance_for_assert.add_argument.call_count, len(expected_calls_to_add_argument))
+
+        mock_parser_instance_for_assert.parse_args.assert_called_once_with()
+
+        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v19")
+
+        client_instance_for_assert = mock_gads_client_class.load_from_storage.return_value
+        mock_script_main.assert_called_once_with(
+            client_instance_for_assert,
+            expected_cust_id,
+            expected_ag_id,
+            expected_asset_id_val
+        )
 
 if __name__ == "__main__":
     unittest.main()

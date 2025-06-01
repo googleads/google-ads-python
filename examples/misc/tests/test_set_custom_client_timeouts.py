@@ -46,7 +46,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
         self.mock_ga_service.search_stream.assert_called_once_with(
             request=mock_request_instance,
-            timeout=set_custom_client_timeouts.CLIENT_TIMEOUT_SECONDS,
+            timeout=set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS, # Changed to _CLIENT_TIMEOUT_SECONDS
         )
         self.mock_search_stream_request.assert_called_once_with()
         self.assertEqual(mock_request_instance.customer_id, customer_id)

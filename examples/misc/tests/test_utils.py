@@ -19,12 +19,12 @@ def create_mock_google_ads_exception(mock_client, request_id="test_request_id", 
 
     mock_grpc_call = mock.Mock() # Represents the gRPC call object
 
-    mock_failure = mock_client.get_type("GoogleAdsFailure")() # Instantiate
+    mock_failure = mock.Mock() # Simple mock for GoogleAdsFailure
+    mock_failure.errors = [] # Ensure errors attribute exists
 
-    error_info = mock_client.get_type("ErrorInfo")() # Instantiate
+    error_info = mock.Mock() # Simple mock for ErrorInfo
     error_info.message = message
-
-    # If location details are needed by any error handler:
+    # If location details were being mocked and ARE USED by an error handler:
     # error_location = mock_client.get_type("ErrorLocation")()
     # field_path_element = error_location.field_path_elements.add()
     # field_path_element.field_name = "mock_field"

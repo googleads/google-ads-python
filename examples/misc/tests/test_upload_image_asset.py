@@ -85,10 +85,18 @@ class TestUploadImageAsset(unittest.TestCase):
         mock_ex = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_upload", message="Error uploading image")
         self.mock_asset_service.mutate_assets.side_effect = mock_ex
 
-        upload_image_asset.main(self.mock_client, customer_id)
+        with self.assertRaises(GoogleAdsException) as cm:
+            upload_image_asset.main(self.mock_client, customer_id)
+
+        # self.assertEqual(cm.exception.request_id, "ga_ex_upload")
+        # self.assertIn("Error uploading image", str(cm.exception))
 
         # Assert that sys.exit was called, indicating the exception was caught
-        mock_sys_exit.assert_called_with(1)
+        # This mock_sys_exit is for the @mock.patch("sys.exit") at the method level.
+        # The script's main() function itself doesn't call sys.exit, but the
+        # if __name__ == "__main__" block does. This test is for main().
+        # So, sys.exit should not be called by main().
+        mock_sys_exit.assert_not_called()
         # Optionally, check if specific error messages were printed
         # This depends on the exact error printing logic in the script
         # For example: mock_print.assert_any_call(...)

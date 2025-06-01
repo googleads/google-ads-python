@@ -11,6 +11,18 @@ from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry # Added import for Retry
 from .test_utils import create_mock_google_ads_exception
 
+# Helper classes for mocking Google Ads API response structures
+class MockCampaign:
+    def __init__(self, campaign_id):
+        self.id = campaign_id
+
+class MockRow:
+    def __init__(self, campaign_id):
+        self.campaign = MockCampaign(campaign_id)
+
+class MockBatch:
+    def __init__(self, rows): # rows is a list of MockRow instances
+        self.results = rows
 
 class TestSetCustomClientTimeouts(unittest.TestCase):
     """Tests for the set_custom_client_timeouts script."""
@@ -66,18 +78,11 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # mock_request_instance related lines are removed as we use self.mock_search_stream_request_obj
 
         # Test successful call
-        # Create a mock for the row object with campaign.id attribute
-        mock_row_for_streaming = mock.Mock()
-        mock_row_for_streaming.campaign.id = "streaming_c_id_1"
+        mock_row_streaming = MockRow(campaign_id="streaming_cid_1")
+        mock_batch_streaming = MockBatch(rows=[mock_row_streaming])
 
-        # Create a mock for the batch object with a results list containing the mock_row_streaming
-        mock_batch_for_streaming = mock.Mock()
-        mock_batch_for_streaming.results = [mock_row_for_streaming]
-
-        # Set the return_value for search_stream to be a list containing the mock_batch_streaming
-        self.mock_ga_service.search_stream.return_value = [mock_batch_for_streaming]
-        # Explicitly clear any prior side_effect that might have been set for other test conditions within this method
-        self.mock_ga_service.search_stream.side_effect = None
+        self.mock_ga_service.search_stream.return_value = [mock_batch_streaming] # List of MockBatch
+        self.mock_ga_service.search_stream.side_effect = None # Ensure no interfering side effect
 
         set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
 
@@ -115,14 +120,10 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # mock_request_instance related lines are removed
 
         # Test successful call
-        # Create a mock for the row object with campaign.id attribute
-        mock_row_for_unary = mock.Mock()
-        mock_row_for_unary.campaign.id = "unary_c_id_1"
+        mock_row_unary = MockRow(campaign_id="unary_cid_1")
 
-        # Set the return_value for search to be a list containing the mock_row_unary
-        self.mock_ga_service.search.return_value = [mock_row_for_unary]
-        # Explicitly clear any prior side_effect
-        self.mock_ga_service.search.side_effect = None
+        self.mock_ga_service.search.return_value = [mock_row_unary] # List of MockRow
+        self.mock_ga_service.search.side_effect = None # Ensure no interfering side effect
 
         set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
 
@@ -171,76 +172,44 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_make_server_streaming_call.assert_called_once_with(self.mock_client, customer_id)
         mock_make_unary_call.assert_called_once_with(self.mock_client, customer_id)
 
-    def _simulate_script_main_execution(
-        self,
-        mock_argparser_class,
-        mock_googleadsclient_class,
-        mock_main_function,
-        # cli_args parameter is not strictly needed here if parse_args is fully mocked
-        # but kept for conceptual completeness if we were to use actual sys.argv
-        cli_args
-    ):
-        # This simulates the script's if __name__ == "__main__": block
-
-        # 1. parser = argparse.ArgumentParser(...)
-        #    In our sim, this is:
-        #    The mock_argparser_class is already configured by the test method's decorator.
-        #    When it's called, it returns mock_argparser_class.return_value (which is mock_parser_instance from the test)
-        parser_sim = mock_argparser_class(description="Demonstrates custom client timeouts in the context of server streaming and unary calls.") # Changed description
-
-        # 2. args = parser.parse_args()
-        #    In our sim, this is:
-        #    The mock_parser_instance.parse_args.return_value is set by the calling test.
-        args_sim = parser_sim.parse_args()
-
-        # 3. googleads_client = GoogleAdsClient.load_from_storage(version="v19")
-        #    In our sim, this is:
-        #    The mock_googleadsclient_class.load_from_storage.return_value is set by the calling test.
-        client_sim = mock_googleadsclient_class.load_from_storage(version="v19")
-
-        # 4. main(googleads_client, args.customer_id)
-        #    In our sim, call the mocked main function:
-        mock_main_function(client_sim, args_sim.customer_id)
-
     @mock.patch("sys.exit")
     @mock.patch("examples.misc.set_custom_client_timeouts.argparse.ArgumentParser")
     @mock.patch("examples.misc.set_custom_client_timeouts.GoogleAdsClient")
-    @mock.patch("examples.misc.set_custom_client_timeouts.main") # Patches main in the already imported module
+    @mock.patch("examples.misc.set_custom_client_timeouts.main")
     def test_argument_parsing_and_script_execution(
         self, mock_script_main_function, mock_google_ads_client_class_in_script,
         mock_argument_parser_class, mock_sys_exit
     ):
         """Tests argument parsing and the script's main execution block."""
-        # 1. Setup ArgumentParser mock
-        # The mock_argument_parser_class is the class mock from the decorator.
-        # We need to configure its return_value (the instance mock)
-        mock_parser_instance = mock_argument_parser_class.return_value
+
+        # 1. Configure the mock for ArgumentParser CLASS to return a specific INSTANCE mock
+        mock_parser_instance = mock.Mock(name="ArgumentParserInstance")
+        mock_argument_parser_class.return_value = mock_parser_instance
+
+        # 2. Configure the INSTANCE mock's parse_args method
         mock_args_obj = argparse.Namespace(customer_id="test_customer_id_arg")
         mock_parser_instance.parse_args.return_value = mock_args_obj
-        # mock_argument_parser_class is already configured by @mock.patch to return mock_parser_instance
 
-        # 2. Setup GoogleAdsClient mock
-        # mock_google_ads_client_class_in_script is the class mock from the decorator.
-        mock_script_client_instance = mock.Mock() # This will be the instance returned by load_from_storage
+        # 3. Configure the mock for GoogleAdsClient CLASS's load_from_storage method
+        mock_script_client_instance = mock.Mock(name="GoogleAdsClientInstance")
         mock_google_ads_client_class_in_script.load_from_storage.return_value = mock_script_client_instance
 
-        # 3. Call the helper to simulate the script's __main__ execution
-        self._simulate_script_main_execution(
-            mock_argparser_class=mock_argument_parser_class,
-            mock_googleadsclient_class=mock_google_ads_client_class_in_script,
-            mock_main_function=mock_script_main_function,
-            cli_args=["set_custom_client_timeouts.py", "-c", mock_args_obj.customer_id]
-        )
+        # Re-insert sys.argv manipulation for runpy
+        original_argv = sys.argv
+        sys.argv = ["set_custom_client_timeouts.py", "-c", "test_customer_id_arg"]
 
-        # 4. Assertions
-        # 1. Assert that ArgumentParser class was called (instantiated) correctly
+        import runpy
+        runpy.run_module("examples.misc.set_custom_client_timeouts", run_name="__main__")
+
+        sys.argv = original_argv # Restore
+
+        # --- Assertions ---
+        # 1. Assert ArgumentParser class was called
         mock_argument_parser_class.assert_called_once_with(
             description="Demonstrates custom client timeouts in the context of server streaming and unary calls."
         )
 
-        # 2. mock_parser_instance is already mock_argument_parser_class.return_value from the test setup
-
-        # 3. Assert that add_argument was called on this instance
+        # 2. mock_parser_instance is the object returned by mock_argument_parser_class()
         mock_parser_instance.add_argument.assert_called_once_with(
             "-c",
             "--customer_id",
@@ -248,19 +217,16 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
             required=True,
             help="The Google Ads customer ID.",
         )
-
-        # 4. Assert that parse_args was called on this instance
         mock_parser_instance.parse_args.assert_called_once_with()
 
-        # The existing assertions for GoogleAdsClient.load_from_storage and mock_script_main_function should remain:
+        # 3. Assert GoogleAdsClient.load_from_storage was called
         mock_google_ads_client_class_in_script.load_from_storage.assert_called_once_with(version="v19")
-        mock_script_main_function.assert_called_once_with(
-            mock_script_client_instance, # This is mock_google_ads_client_class_in_script.load_from_storage.return_value
-            mock_args_obj.customer_id  # This is from mock_parser_instance.parse_args.return_value.customer_id
-        )
 
-        # original_argv and sys.argv restoration are no longer needed here
-        # as sys.argv is not modified by this test method directly.
+        # 4. Assert the script's main (which is mock_script_main_function) was called
+        mock_script_main_function.assert_called_once_with(
+            mock_script_client_instance, # This is the return_value of load_from_storage
+            "test_customer_id_arg"     # This is from mock_args_obj.customer_id
+        )
 
 if __name__ == "__main__":
     unittest.main()

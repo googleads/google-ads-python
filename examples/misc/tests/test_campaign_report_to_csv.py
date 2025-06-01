@@ -7,13 +7,13 @@ import io # Use io.StringIO for mocking file operations in memory
 # Adjust the import path as necessary.
 from examples.misc import campaign_report_to_csv
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v17.services.types.google_ads_service import SearchGoogleAdsStreamResponse
-from google.ads.googleads.v17.resources.types.campaign import Campaign
-from google.ads.googleads.v17.resources.types.ad_group import AdGroup
-from google.ads.googleads.v17.resources.types.metrics import Metrics
-from google.ads.googleads.v17.resources.types.customer import Customer
-from google.ads.googleads.v17.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
+from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
+from google.ads.googleads.v19.resources.types.campaign import Campaign
+from google.ads.googleads.v19.resources.types.ad_group import AdGroup
+from google.ads.googleads.v19.resources.types.metrics import Metrics
+from google.ads.googleads.v19.resources.types.customer import Customer
+from google.ads.googleads.v19.services.types.google_ads_service import GoogleAdsRow
 
 
 class TestCampaignReportToCsv(unittest.TestCase):

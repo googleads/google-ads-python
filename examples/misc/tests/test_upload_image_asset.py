@@ -7,8 +7,8 @@ import sys
 # Adjust the import path as necessary.
 from examples.misc import upload_image_asset
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.enums.types.asset_type import AssetTypeEnum
-from google.ads.googleads.v17.enums.types.mime_type import MimeTypeEnum
+from google.ads.googleads.v19.enums.types.asset_type import AssetTypeEnum
+from google.ads.googleads.v19.enums.types.mime_type import MimeTypeEnum
 
 
 class TestUploadImageAsset(unittest.TestCase):

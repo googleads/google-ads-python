@@ -1,5 +1,6 @@
 import unittest
 from unittest import mock
+import sys
 
 from google.ads.googleads.errors import GoogleAdsException
 from .test_utils import create_mock_google_ads_exception
@@ -18,6 +19,13 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
         self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_ad_group_asset_service = self.mock_client.get_service(
             "AdGroupAssetService"
+        )
+        # Mock the path helper methods on the service
+        self.mock_ad_group_asset_service.ad_group_path = mock.Mock(
+            side_effect=lambda cust_id, ag_id: f"customers/{cust_id}/adGroups/{ag_id}"
+        )
+        self.mock_ad_group_asset_service.asset_path = mock.Mock(
+            side_effect=lambda cust_id, asset_id_val: f"customers/{cust_id}/assets/{asset_id_val}"
         )
         self.mock_ad_group_asset_operation = self.mock_client.get_type(
             "AdGroupAssetOperation"

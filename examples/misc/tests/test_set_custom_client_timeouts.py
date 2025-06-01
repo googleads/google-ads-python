@@ -37,7 +37,12 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_request_instance.query = set_custom_client_timeouts._QUERY # Changed QUERY to _QUERY
 
         # Test successful call
-        self.mock_ga_service.search_stream.return_value = [mock.Mock()] # Simulate some response
+        mock_row_stream = mock.Mock()
+        mock_row_stream.campaign.id = "test_campaign_id_stream"
+        mock_batch_stream = mock.Mock()
+        mock_batch_stream.results = [mock_row_stream]
+        self.mock_ga_service.search_stream.return_value = [mock_batch_stream]
+
         set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
         self.mock_ga_service.search_stream.assert_called_once_with(
             request=mock_request_instance,
@@ -73,7 +78,10 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
 
 
         # Test successful call
-        self.mock_ga_service.search.return_value = mock.Mock() # Simulate some response
+        mock_row_unary = mock.Mock()
+        mock_row_unary.campaign.id = "test_campaign_id_unary"
+        self.mock_ga_service.search.return_value = [mock_row_unary] # search returns an iterable of rows
+
         set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
         self.mock_ga_service.search.assert_called_once()
         call_args = self.mock_ga_service.search.call_args

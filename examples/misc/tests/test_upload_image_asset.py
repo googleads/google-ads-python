@@ -70,6 +70,7 @@ class TestUploadImageAsset(unittest.TestCase):
         self.assertEqual(actual_operation.create.image_asset.file_size, len(self.mock_image_bytes))
         self.assertEqual(actual_operation.create.image_asset.mime_type, MimeTypeEnum.IMAGE_JPEG) # Uses imported MimeTypeEnum
         self.assertEqual(actual_operation.create.name, "Marketing Image")
+        self.assertEqual(actual_operation.create.image_asset.full_size.url, "https://gaagl.page.link/Eit5")
 
         mock_print.assert_any_call(
             f"Uploaded image asset with resource name: '{self.mock_mutate_response.results[0].resource_name}'"

@@ -33,8 +33,8 @@ def create_mock_google_ads_exception(mock_client, request_id="test_request_id", 
     mock_failure.errors = [error_info]
 
     return GoogleAdsException(
-        error_pb=mock_error_proto,
+        error=mock_error_proto,
         call=mock_grpc_call,
         request_id=request_id,
-        failure_pb=mock_failure
+        failure=mock_failure
     )

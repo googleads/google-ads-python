@@ -20,10 +20,38 @@ class TestCampaignReportToCsv(unittest.TestCase):
     """Tests for the campaign_report_to_csv script."""
 
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
-    def setUp(self, mock_google_ads_client):
+    def setUp(self, mock_google_ads_client_class): # Renamed for consistency
         """Set up mock objects for testing."""
-        self.mock_client = mock_google_ads_client.load_from_storage.return_value
+        self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_google_ads_service = self.mock_client.get_service("GoogleAdsService")
+
+        # This will be the object returned by client.get_type("SearchGoogleAdsStreamRequest")
+        self.mock_search_request_obj = mock.Mock()
+
+        # Configure client.get_type side_effect to handle different type requests
+        # Store the original get_type method to call for other types if needed,
+        # or handle them explicitly.
+        self._original_get_type = self.mock_client.get_type
+        def mock_get_type_side_effect(type_name):
+            if type_name == "SearchGoogleAdsStreamRequest":
+                return self.mock_search_request_obj
+            # For other types, you might want to return a new mock or call the original
+            return self._original_get_type(type_name)
+            # If _original_get_type is already a mock, this might become complex.
+            # A simpler way if ONLY "SearchGoogleAdsStreamRequest" is special:
+            # if type_name == "SearchGoogleAdsStreamRequest":
+            #     return self.mock_search_request_obj
+            # else: # For any other type_name, return a new default mock or a specific one
+            #     return mock.Mock() # Or specific mocks for "GoogleAdsFailure", "ErrorInfo" etc.
+
+        # If get_type is already a simple mock (not a real method), just set return_value for this specific case.
+        # Assuming get_type is a MagicMock that can be configured per call or with a side_effect.
+        # For this specific task, we only care about "SearchGoogleAdsStreamRequest".
+        # If other calls to get_type are made by the SUT for other types (e.g. GoogleAdsFailure),
+        # those would also return self.mock_search_request_obj if we just set return_value.
+        # So, using a side_effect is safer.
+        self.mock_client.get_type.side_effect = mock_get_type_side_effect
+
 
     def _create_mock_row(self, campaign_id, campaign_name, ad_group_id, ad_group_name, impressions, clicks, cost_micros):
         """Helper method to create a mock GoogleAdsRow."""
@@ -60,9 +88,11 @@ class TestCampaignReportToCsv(unittest.TestCase):
             self.mock_client, customer_id, output_filepath, write_headers
         )
 
-        self.mock_google_ads_service.search_stream.assert_called_once_with(
-            customer_id=customer_id, query=campaign_report_to_csv._QUERY
-        )
+        # Assertions based on the new mocking strategy for get_type
+        self.mock_client.get_type.assert_any_call("SearchGoogleAdsStreamRequest") # Check it was called for this type
+        self.assertEqual(self.mock_search_request_obj.customer_id, customer_id)
+        self.assertEqual(self.mock_search_request_obj.query, campaign_report_to_csv._QUERY)
+        self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_request_obj)
 
         # Check what was written to the file
         mock_open_file.assert_called_once_with(output_filepath, "w", newline="", encoding="utf-8")
@@ -103,9 +133,12 @@ class TestCampaignReportToCsv(unittest.TestCase):
             self.mock_client, customer_id, output_filepath, write_headers
         )
 
-        self.mock_google_ads_service.search_stream.assert_called_once_with(
-            customer_id=customer_id, query=campaign_report_to_csv._QUERY
-        )
+        # Assertions based on the new mocking strategy for get_type
+        self.mock_client.get_type.assert_any_call("SearchGoogleAdsStreamRequest")
+        self.assertEqual(self.mock_search_request_obj.customer_id, customer_id)
+        self.assertEqual(self.mock_search_request_obj.query, campaign_report_to_csv._QUERY)
+        self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_request_obj)
+
         mock_open_file.assert_called_once_with(output_filepath, "w", newline="", encoding="utf-8")
         written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
 
@@ -134,11 +167,13 @@ class TestCampaignReportToCsv(unittest.TestCase):
                 self.mock_client, customer_id, output_filepath, write_headers
             )
 
-    @mock.patch("sys.exit") # Added mock_sys_exit
+    @mock.patch("sys.exit")
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
-    @mock.patch("examples.misc.campaign_report_to_csv.main") # Patched main
-    def test_argument_parsing(self, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit):
+    @mock.patch("examples.misc.campaign_report_to_csv.main")
+    @mock.patch("os.path.abspath", return_value="/fake/path/to/campaign_report_to_csv.py") # Added
+    @mock.patch("os.path.dirname", return_value="/fake/path/to") # Added
+    def test_argument_parsing(self, mock_os_dirname, mock_os_abspath, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit): # Added new mock args
         """Test that main is called with parsed arguments."""
         mock_args = mock.Mock()
         mock_args.customer_id = "test_customer_id_arg"
@@ -172,11 +207,13 @@ class TestCampaignReportToCsv(unittest.TestCase):
         )
         sys.argv = original_argv
 
-    @mock.patch("sys.exit") # Added mock_sys_exit
+    @mock.patch("sys.exit")
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
-    @mock.patch("examples.misc.campaign_report_to_csv.main") # Patched main
-    def test_argument_parsing_no_headers_flag(self, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit):
+    @mock.patch("examples.misc.campaign_report_to_csv.main")
+    @mock.patch("os.path.abspath", return_value="/fake/path/to/campaign_report_to_csv.py") # Added
+    @mock.patch("os.path.dirname", return_value="/fake/path/to") # Added
+    def test_argument_parsing_no_headers_flag(self, mock_os_dirname, mock_os_abspath, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit): # Added new mock args
         """Test argument parsing when --no-headers is specified."""
         mock_args = mock.Mock()
         mock_args.customer_id = "test_customer_id_no_header_arg"

@@ -71,8 +71,9 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         self.mock_ga_service.search_stream = mock.Mock()
         self.mock_ga_service.search = mock.Mock()
 
-    @mock.patch("sys.exit") # To check if sys.exit is called
-    def test_make_server_streaming_call(self, mock_sys_exit):
+    @mock.patch("builtins.print") # Added for print assertions
+    @mock.patch("sys.exit")
+    def test_make_server_streaming_call(self, mock_print, mock_sys_exit): # Added mock_print
         """Tests the make_server_streaming_call function."""
         customer_id = "1234567890"
         # mock_request_instance related lines are removed as we use self.mock_search_stream_request_obj
@@ -104,17 +105,32 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_sys_exit.assert_called_with(1)
 
         # Test GoogleAdsException
-        self.mock_ga_service.search_stream.reset_mock()
-        mock_sys_exit.reset_mock()
+        self.mock_ga_service.search_stream.reset_mock() # Reset for the exception scenario
+        mock_sys_exit.reset_mock() # Reset sys.exit mock for this specific path
+
         mock_ex_stream = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_timeout_stream", message="Stream error")
         self.mock_ga_service.search_stream.side_effect = mock_ex_stream
-        # This function is expected to raise GoogleAdsException if not DeadlineExceeded
-        with self.assertRaises(GoogleAdsException):
-            set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
+
+        # Call the function that is expected to print and NOT raise unhandled GoogleAdsException
+        set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
+
+        # Construct expected messages based on how mock_ex_stream was created
+        # Assuming mock_ex_stream.error.code().name is "MOCK_API_ERROR" from test_utils.py
+        expected_status_line = f"Request with ID '{mock_ex_stream.request_id}' failed with status 'MOCK_API_ERROR' and includes the following errors:"
+        expected_error_line = f"\tError with message '{mock_ex_stream.failure.errors[0].message}'."
+        # Since field_path_elements is [] in the mock, the field path line won't be printed by the script.
+
+        calls = [
+            mock.call(expected_status_line),
+            mock.call(expected_error_line),
+        ]
+        mock_print.assert_has_calls(calls, any_order=False)
+
         mock_sys_exit.assert_not_called() # Should not exit for general GoogleAdsException
 
+    @mock.patch("builtins.print") # Added for print assertions
     @mock.patch("sys.exit")
-    def test_make_unary_call(self, mock_sys_exit):
+    def test_make_unary_call(self, mock_print, mock_sys_exit): # Added mock_print
         """Tests the make_unary_call function."""
         customer_id = "1234567890"
         # mock_request_instance related lines are removed
@@ -156,10 +172,25 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # Test GoogleAdsException
         self.mock_ga_service.search.reset_mock()
         mock_sys_exit.reset_mock()
+        # Reset mock_print if it could have been called by the success path of this method
+        # (though make_unary_call in the SUT doesn't print on success)
+        mock_print.reset_mock()
+
         mock_ex_unary = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_timeout_unary", message="Unary error")
         self.mock_ga_service.search.side_effect = mock_ex_unary
-        with self.assertRaises(GoogleAdsException):
-            set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
+
+        # Call the function that is expected to print and NOT raise unhandled GoogleAdsException
+        set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
+
+        expected_status_line = f"Request with ID '{mock_ex_unary.request_id}' failed with status 'MOCK_API_ERROR' and includes the following errors:"
+        expected_error_line = f"\tError with message '{mock_ex_unary.failure.errors[0].message}'."
+
+        calls = [
+            mock.call(expected_status_line),
+            mock.call(expected_error_line),
+        ]
+        mock_print.assert_has_calls(calls, any_order=False)
+
         mock_sys_exit.assert_not_called()
 
 

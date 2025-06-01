@@ -15,7 +15,7 @@ def create_mock_google_ads_exception(mock_client, request_id="test_request_id", 
     """
     mock_error_proto = mock.Mock() # Represents the main error structure in the gRPC sense
     # If the code being tested accesses error_proto.code().name, mock it:
-    # mock_error_proto.code.return_value.name = "MOCK_GRPC_ERROR"
+    mock_error_proto.code.return_value.name = "MOCK_API_ERROR" # Set a concrete string
 
     mock_grpc_call = mock.Mock() # Represents the gRPC call object
 

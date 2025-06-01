@@ -23,13 +23,16 @@ class TestUploadImageAsset(unittest.TestCase):
         self.mock_asset_operation = self.mock_client.get_type("AssetOperation")
 
         # Mock enums properly
-        # Instead of replacing the whole enum type on mock_client.enums,
-        # we let the script access the real enums (AssetTypeEnum, MimeTypeEnum are imported directly)
-        # The test will then assert that the correct real enum values are used.
-        # This also means the direct imports of AssetTypeEnum and MimeTypeEnum at the top are important.
+        self.mock_asset_type_enum_instance = mock.Mock(name="AssetTypeEnumInstance")
+        self.mock_asset_type_enum_instance.IMAGE = "mocked_asset_type_image_enum"
+        self.mock_client.enums.AssetTypeEnum = self.mock_asset_type_enum_instance
+
+        self.mock_mime_type_enum_instance = mock.Mock(name="MimeTypeEnumInstance")
+        self.mock_mime_type_enum_instance.IMAGE_JPEG = "mocked_mime_type_image_jpeg_enum"
+        self.mock_client.enums.MimeTypeEnum = self.mock_mime_type_enum_instance
 
         # self.mock_get_image_bytes_from_url removed
-        self.mock_image_bytes = b"test_image_data" # This might be needed if other tests use it, or move to test_main_success
+        self.mock_image_bytes = b"test_image_data"
         # For now, keeping self.mock_image_bytes here, can be localized if only test_main_success uses it.
 
         # Mock the mutate_assets response
@@ -66,10 +69,10 @@ class TestUploadImageAsset(unittest.TestCase):
         actual_operation = call_args[1]["operations"][0]
 
         # Assertions on the asset operation
-        self.assertEqual(actual_operation.create.type_, AssetTypeEnum.IMAGE) # Uses imported AssetTypeEnum
+        self.assertEqual(actual_operation.create.type_, self.mock_client.enums.AssetTypeEnum.IMAGE)
         self.assertEqual(actual_operation.create.image_asset.data, self.mock_image_bytes)
         self.assertEqual(actual_operation.create.image_asset.file_size, len(self.mock_image_bytes))
-        self.assertEqual(actual_operation.create.image_asset.mime_type, MimeTypeEnum.IMAGE_JPEG) # Uses imported MimeTypeEnum
+        self.assertEqual(actual_operation.create.image_asset.mime_type, self.mock_client.enums.MimeTypeEnum.IMAGE_JPEG)
         self.assertEqual(actual_operation.create.name, "Marketing Image")
         self.assertEqual(actual_operation.create.image_asset.full_size.url, "https://gaagl.page.link/Eit5")
 

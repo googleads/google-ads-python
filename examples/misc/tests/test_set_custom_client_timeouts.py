@@ -8,6 +8,7 @@ import sys
 from examples.misc import set_custom_client_timeouts
 from google.ads.googleads.errors import GoogleAdsException
 from google.api_core.exceptions import DeadlineExceeded
+from google.api_core.retry import Retry # Added import for Retry
 from .test_utils import create_mock_google_ads_exception
 
 
@@ -20,9 +21,39 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_ga_service = self.mock_client.get_service("GoogleAdsService")
 
-        # Mock types
-        self.mock_search_stream_request = self.mock_client.get_type("SearchGoogleAdsStreamRequest")
-        self.mock_search_request = self.mock_client.get_type("SearchGoogleAdsRequest")
+        # Mock types returned by get_type
+        self.mock_search_stream_request_obj = mock.Mock(name="SearchGoogleAdsStreamRequestInstance")
+        self.mock_search_request_obj = mock.Mock(name="SearchGoogleAdsRequestInstance")
+
+        # Store the original get_type if it's already a mock with other behavior,
+        # though usually it's a new MagicMock per test instance of the client.
+        self._original_get_type = self.mock_client.get_type
+
+        def get_type_side_effect(type_name):
+            if type_name == "SearchGoogleAdsStreamRequest":
+                return self.mock_search_stream_request_obj
+            elif type_name == "SearchGoogleAdsRequest":
+                return self.mock_search_request_obj
+            # Fallback for other types like "GoogleAdsFailure", "ErrorInfo"
+            # which are used by create_mock_google_ads_exception
+            if isinstance(self._original_get_type, mock.Mock) and \
+               self._original_get_type.side_effect is not get_type_side_effect:
+                return self._original_get_type(type_name)
+            # If the original get_type was not a complex mock, or to ensure other types are still mockable:
+            # For "GoogleAdsFailure" and "ErrorInfo", the create_mock_google_ads_exception
+            # expects get_type to return a type that can be instantiated (e.g. by calling () on it)
+            # and that instance should have an 'errors' attribute if it's a GoogleAdsFailure.
+            # A simple mock.Mock() would work for these if they are then assigned attributes.
+            # However, the create_mock_google_ads_exception calls .get_type(...)()
+            # so get_type should return a mock that, when called, returns another mock.
+            temp_mock_type = mock.Mock(name=f"{type_name}_Type")
+            temp_mock_instance = mock.Mock(name=f"{type_name}_Instance")
+            if type_name == "GoogleAdsFailure":
+                temp_mock_instance.errors = []
+            temp_mock_type.return_value = temp_mock_instance
+            return temp_mock_type
+
+        self.mock_client.get_type.side_effect = get_type_side_effect
 
         # Ensure the mock service methods are also mocks
         self.mock_ga_service.search_stream = mock.Mock()
@@ -32,9 +63,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
     def test_make_server_streaming_call(self, mock_sys_exit):
         """Tests the make_server_streaming_call function."""
         customer_id = "1234567890"
-        mock_request_instance = self.mock_search_stream_request.return_value
-        mock_request_instance.customer_id = customer_id
-        mock_request_instance.query = set_custom_client_timeouts._QUERY # Changed QUERY to _QUERY
+        # mock_request_instance related lines are removed as we use self.mock_search_stream_request_obj
 
         # Test successful call
         mock_row_stream = mock.Mock()
@@ -44,13 +73,17 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         self.mock_ga_service.search_stream.return_value = [mock_batch_stream]
 
         set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
+
+        # Verify attributes were set on the shared mock object by the script
+        self.assertEqual(self.mock_search_stream_request_obj.customer_id, customer_id)
+        self.assertEqual(self.mock_search_stream_request_obj.query, set_custom_client_timeouts._QUERY)
+
+        # Verify the service call
         self.mock_ga_service.search_stream.assert_called_once_with(
-            request=mock_request_instance,
-            timeout=set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS, # Changed to _CLIENT_TIMEOUT_SECONDS
+            request=self.mock_search_stream_request_obj, # Use the shared mock from setUp
+            timeout=set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS,
         )
-        self.mock_search_stream_request.assert_called_once_with()
-        self.assertEqual(mock_request_instance.customer_id, customer_id)
-        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts._QUERY) # Changed QUERY to _QUERY
+        # self.mock_search_stream_request.assert_called_once_with() # This assertion is no longer valid with the new setUp
 
         # Test DeadlineExceeded
         self.mock_ga_service.search_stream.reset_mock()
@@ -72,10 +105,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
     def test_make_unary_call(self, mock_sys_exit):
         """Tests the make_unary_call function."""
         customer_id = "1234567890"
-        mock_request_instance = self.mock_search_request.return_value
-        mock_request_instance.customer_id = customer_id
-        mock_request_instance.query = set_custom_client_timeouts._QUERY # Changed QUERY to _QUERY
-
+        # mock_request_instance related lines are removed
 
         # Test successful call
         mock_row_unary = mock.Mock()
@@ -83,14 +113,26 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         self.mock_ga_service.search.return_value = [mock_row_unary] # search returns an iterable of rows
 
         set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
-        self.mock_ga_service.search.assert_called_once()
-        call_args = self.mock_ga_service.search.call_args
-        self.assertEqual(call_args[1]["request"], mock_request_instance)
-        self.assertIsNotNone(call_args[1]["retry"]) # Check that retry is passed
-        self.mock_search_request.assert_called_once_with()
-        self.assertEqual(mock_request_instance.customer_id, customer_id)
-        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts._QUERY) # Changed QUERY to _QUERY
 
+        # Verify attributes were set on the shared mock object by the script
+        self.assertEqual(self.mock_search_request_obj.customer_id, customer_id)
+        self.assertEqual(self.mock_search_request_obj.query, set_custom_client_timeouts._QUERY)
+
+        # Verify the service call
+        self.mock_ga_service.search.assert_called_once_with(
+            request=self.mock_search_request_obj,
+            retry=mock.ANY
+        )
+
+        # Capture the actual retry object passed to the mock
+        actual_call_args = self.mock_ga_service.search.call_args
+        passed_retry_object = actual_call_args[1]['retry'] # Get the 'retry' kwarg
+
+        # Assert the attributes of the passed_retry_object
+        self.assertIsInstance(passed_retry_object, Retry)
+        self.assertEqual(passed_retry_object._deadline, set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS)
+        self.assertEqual(passed_retry_object._initial, set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS / 10)
+        self.assertEqual(passed_retry_object._maximum, set_custom_client_timeouts._CLIENT_TIMEOUT_SECONDS / 5)
 
         # Test DeadlineExceeded
         self.mock_ga_service.search.reset_mock()
@@ -117,11 +159,13 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_make_server_streaming_call.assert_called_once_with(self.mock_client, customer_id)
         mock_make_unary_call.assert_called_once_with(self.mock_client, customer_id)
 
-    @mock.patch("sys.exit") # Added mock_sys_exit
+    @mock.patch("sys.exit")
     @mock.patch("examples.misc.set_custom_client_timeouts.argparse.ArgumentParser")
     @mock.patch("examples.misc.set_custom_client_timeouts.GoogleAdsClient")
+    @mock.patch("examples.misc.set_custom_client_timeouts.main") # Patches main in the already imported module
     def test_argument_parsing_and_script_execution(
-        self, mock_google_ads_client_class_in_script, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
+        self, mock_script_main_function, mock_google_ads_client_class_in_script,
+        mock_argument_parser_class, mock_sys_exit
     ):
         """Tests argument parsing and the script's main execution block."""
         # Prepare mock for ArgumentParser instance
@@ -142,8 +186,9 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # Patch the 'main' function within the script to prevent it from actually running
         # its logic, but to check if it's called correctly by the __main__ block.
         import runpy
-        with mock.patch.object(set_custom_client_timeouts, "main") as mock_script_main_function:
-            runpy.run_module("examples.misc.set_custom_client_timeouts", run_name="__main__")
+        # When runpy executes the module, it should use the already patched main (mock_script_main_function),
+        # the mocked ArgumentParser, and the mocked GoogleAdsClient.
+        runpy.run_module("examples.misc.set_custom_client_timeouts", run_name="__main__")
 
         # Assertions
         mock_argument_parser_class.assert_called_once_with(

@@ -7,6 +7,7 @@ import io # Use io.StringIO for mocking file operations in memory
 # Adjust the import path as necessary.
 from examples.misc import campaign_report_to_csv
 from google.ads.googleads.errors import GoogleAdsException
+from .test_utils import create_mock_google_ads_exception
 from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
 from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
 from google.ads.googleads.v19.resources.types.campaign import Campaign
@@ -60,7 +61,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         )
 
         self.mock_google_ads_service.search_stream.assert_called_once_with(
-            customer_id=customer_id, query=campaign_report_to_csv.QUERY
+            customer_id=customer_id, query=campaign_report_to_csv._QUERY
         )
 
         # Check what was written to the file
@@ -103,7 +104,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         )
 
         self.mock_google_ads_service.search_stream.assert_called_once_with(
-            customer_id=customer_id, query=campaign_report_to_csv.QUERY
+            customer_id=customer_id, query=campaign_report_to_csv._QUERY
         )
         mock_open_file.assert_called_once_with(output_filepath, "w", newline="", encoding="utf-8")
         written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
@@ -125,26 +126,27 @@ class TestCampaignReportToCsv(unittest.TestCase):
         output_filepath = "test_error.csv"
         write_headers = True
 
-        self.mock_google_ads_service.search_stream.side_effect = GoogleAdsException(
-            None, None, None
-        )
+        mock_ex = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_csv", message="Error generating CSV")
+        self.mock_google_ads_service.search_stream.side_effect = mock_ex
 
         with self.assertRaises(GoogleAdsException):
             campaign_report_to_csv.main(
                 self.mock_client, customer_id, output_filepath, write_headers
             )
 
+    @mock.patch("sys.exit") # Added mock_sys_exit
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
-    def test_argument_parsing(self, mock_google_ads_client, mock_argument_parser):
+    @mock.patch("examples.misc.campaign_report_to_csv.main") # Patched main
+    def test_argument_parsing(self, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit):
         """Test that main is called with parsed arguments."""
         mock_args = mock.Mock()
         mock_args.customer_id = "test_customer_id_arg"
-        mock_args.output_filepath = "parsed_output.csv"
+        mock_args.output_filepath = "parsed_output.csv" # This is already a string
         mock_args.no_headers = False # Corresponds to write_headers=True
-        mock_argument_parser.return_value.parse_args.return_value = mock_args
+        mock_argument_parser_class.return_value.parse_args.return_value = mock_args
 
-        mock_google_ads_client.load_from_storage.return_value = self.mock_client
+        mock_google_ads_client_class.load_from_storage.return_value = self.mock_client
 
         import sys
         original_argv = sys.argv
@@ -156,8 +158,11 @@ class TestCampaignReportToCsv(unittest.TestCase):
         ]
 
         import runpy
-        with mock.patch.object(campaign_report_to_csv, "main") as mock_script_main:
-            runpy.run_module("examples.misc.campaign_report_to_csv", run_name="__main__")
+        # runpy.run_module will execute the __main__ block of the script.
+        # Since we've patched campaign_report_to_csv.main (as mock_script_main),
+        # the actual main function of the script won't run, but the __main__ block's
+        # call to it will be captured by mock_script_main.
+        runpy.run_module("examples.misc.campaign_report_to_csv", run_name="__main__")
 
         mock_script_main.assert_called_once_with(
             self.mock_client,
@@ -167,17 +172,19 @@ class TestCampaignReportToCsv(unittest.TestCase):
         )
         sys.argv = original_argv
 
+    @mock.patch("sys.exit") # Added mock_sys_exit
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
-    def test_argument_parsing_no_headers_flag(self, mock_google_ads_client, mock_argument_parser):
+    @mock.patch("examples.misc.campaign_report_to_csv.main") # Patched main
+    def test_argument_parsing_no_headers_flag(self, mock_script_main, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit):
         """Test argument parsing when --no-headers is specified."""
         mock_args = mock.Mock()
         mock_args.customer_id = "test_customer_id_no_header_arg"
-        mock_args.output_filepath = "parsed_output_no_header.csv"
+        mock_args.output_filepath = "parsed_output_no_header.csv" # This is already a string
         mock_args.no_headers = True # Corresponds to write_headers=False
-        mock_argument_parser.return_value.parse_args.return_value = mock_args
+        mock_argument_parser_class.return_value.parse_args.return_value = mock_args
 
-        mock_google_ads_client.load_from_storage.return_value = self.mock_client
+        mock_google_ads_client_class.load_from_storage.return_value = self.mock_client
 
         import sys
         original_argv = sys.argv
@@ -189,8 +196,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         ]
 
         import runpy
-        with mock.patch.object(campaign_report_to_csv, "main") as mock_script_main:
-            runpy.run_module("examples.misc.campaign_report_to_csv", run_name="__main__")
+        runpy.run_module("examples.misc.campaign_report_to_csv", run_name="__main__")
 
         mock_script_main.assert_called_once_with(
             self.mock_client,

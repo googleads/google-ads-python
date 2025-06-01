@@ -8,6 +8,7 @@ import sys
 from examples.misc import set_custom_client_timeouts
 from google.ads.googleads.errors import GoogleAdsException
 from google.api_core.exceptions import DeadlineExceeded
+from .test_utils import create_mock_google_ads_exception
 
 
 class TestSetCustomClientTimeouts(unittest.TestCase):
@@ -33,7 +34,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         customer_id = "1234567890"
         mock_request_instance = self.mock_search_stream_request.return_value
         mock_request_instance.customer_id = customer_id
-        mock_request_instance.query = set_custom_client_timeouts.QUERY
+        mock_request_instance.query = set_custom_client_timeouts._QUERY # Changed QUERY to _QUERY
 
         # Test successful call
         self.mock_ga_service.search_stream.return_value = [mock.Mock()] # Simulate some response
@@ -44,7 +45,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         )
         self.mock_search_stream_request.assert_called_once_with()
         self.assertEqual(mock_request_instance.customer_id, customer_id)
-        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts.QUERY)
+        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts._QUERY) # Changed QUERY to _QUERY
 
         # Test DeadlineExceeded
         self.mock_ga_service.search_stream.reset_mock()
@@ -55,7 +56,8 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # Test GoogleAdsException
         self.mock_ga_service.search_stream.reset_mock()
         mock_sys_exit.reset_mock()
-        self.mock_ga_service.search_stream.side_effect = GoogleAdsException(None, None, None)
+        mock_ex_stream = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_timeout_stream", message="Stream error")
+        self.mock_ga_service.search_stream.side_effect = mock_ex_stream
         # This function is expected to raise GoogleAdsException if not DeadlineExceeded
         with self.assertRaises(GoogleAdsException):
             set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
@@ -67,7 +69,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         customer_id = "1234567890"
         mock_request_instance = self.mock_search_request.return_value
         mock_request_instance.customer_id = customer_id
-        mock_request_instance.query = set_custom_client_timeouts.QUERY
+        mock_request_instance.query = set_custom_client_timeouts._QUERY # Changed QUERY to _QUERY
 
 
         # Test successful call
@@ -79,7 +81,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         self.assertIsNotNone(call_args[1]["retry"]) # Check that retry is passed
         self.mock_search_request.assert_called_once_with()
         self.assertEqual(mock_request_instance.customer_id, customer_id)
-        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts.QUERY)
+        self.assertEqual(mock_request_instance.query, set_custom_client_timeouts._QUERY) # Changed QUERY to _QUERY
 
 
         # Test DeadlineExceeded
@@ -91,7 +93,8 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # Test GoogleAdsException
         self.mock_ga_service.search.reset_mock()
         mock_sys_exit.reset_mock()
-        self.mock_ga_service.search.side_effect = GoogleAdsException(None, None, None)
+        mock_ex_unary = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_timeout_unary", message="Unary error")
+        self.mock_ga_service.search.side_effect = mock_ex_unary
         with self.assertRaises(GoogleAdsException):
             set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
         mock_sys_exit.assert_not_called()
@@ -106,10 +109,11 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_make_server_streaming_call.assert_called_once_with(self.mock_client, customer_id)
         mock_make_unary_call.assert_called_once_with(self.mock_client, customer_id)
 
+    @mock.patch("sys.exit") # Added mock_sys_exit
     @mock.patch("examples.misc.set_custom_client_timeouts.argparse.ArgumentParser")
     @mock.patch("examples.misc.set_custom_client_timeouts.GoogleAdsClient")
     def test_argument_parsing_and_script_execution(
-        self, mock_google_ads_client_class_in_script, mock_argument_parser_class
+        self, mock_google_ads_client_class_in_script, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
     ):
         """Tests argument parsing and the script's main execution block."""
         # Prepare mock for ArgumentParser instance

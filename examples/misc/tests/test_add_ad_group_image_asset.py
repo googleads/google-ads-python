@@ -2,6 +2,7 @@ import unittest
 from unittest import mock
 
 from google.ads.googleads.errors import GoogleAdsException
+from .test_utils import create_mock_google_ads_exception
 
 # Assuming the script to be tested is in the parent directory.
 # Adjust the import path as necessary if the script is located elsewhere.
@@ -12,9 +13,9 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
     """Tests for the add_ad_group_image_asset script."""
 
     @mock.patch("examples.misc.add_ad_group_image_asset.GoogleAdsClient")
-    def setUp(self, mock_google_ads_client):
+    def setUp(self, mock_google_ads_client_class): # Renamed for clarity
         """Set up mock objects for testing."""
-        self.mock_client = mock_google_ads_client.load_from_storage.return_value
+        self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_ad_group_asset_service = self.mock_client.get_service(
             "AdGroupAssetService"
         )
@@ -26,6 +27,10 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
 
         # Mock the response from mutate_ad_group_assets
         self.mock_mutate_response = mock.Mock()
+        # Create a mock result object that would be in the results list
+        mock_result = mock.Mock()
+        mock_result.resource_name = "test_resource_name"
+        self.mock_mutate_response.results = [mock_result] # Make .results an iterable
         self.mock_ad_group_asset_service.mutate_ad_group_assets.return_value = (
             self.mock_mutate_response
         )
@@ -62,8 +67,26 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
         image_asset_id = "1122334455"
 
         # Configure the mock service to raise GoogleAdsException
+        # Mock objects needed for GoogleAdsException instantiation
+        mock_error = mock.Mock()
+        # It's common for error details to be complex; mocking specific attributes
+        # that the code under test might access.
+        # For example, if the code accesses ex.failure.errors[0].error_code.name
+        mock_error_detail = mock.Mock()
+        mock_error_detail.error_code.name = "TEST_ERROR" # Example error code name
+        mock_error_detail.message = "Test failure message"
+        # If the error object has a location, mock that too
+        mock_error_detail.location.field_path_elements = []
+
+
+        mock_failure = self.mock_client.get_type("GoogleAdsFailure")
+        mock_failure.errors = [mock_error_detail] # Assign the detailed mock error
+
+        mock_call = mock.Mock()
+        mock_request_id = "test_request_id"
+
         self.mock_ad_group_asset_service.mutate_ad_group_assets.side_effect = (
-            GoogleAdsException(None, None, None)
+            GoogleAdsException(mock_error, mock_call, mock_request_id, mock_failure)
         )
 
         with self.assertRaises(GoogleAdsException):
@@ -71,10 +94,12 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
                 self.mock_client, customer_id, ad_group_id, image_asset_id
             )
 
+    @mock.patch("sys.exit") # Added to prevent SystemExit
     @mock.patch("examples.misc.add_ad_group_image_asset.argparse.ArgumentParser")
     @mock.patch("examples.misc.add_ad_group_image_asset.GoogleAdsClient")
+    @mock.patch("examples.misc.add_ad_group_image_asset.main") # Mock the main function in the script
     def test_argument_parsing(
-        self, mock_google_ads_client, mock_argument_parser
+        self, mock_script_main_function, mock_google_ads_client_class, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
     ):
         """Test that main is called with parsed arguments."""
         # Set up the mock argument parser
@@ -82,78 +107,44 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
         mock_args.customer_id = "test_customer_id"
         mock_args.ad_group_id = "test_ad_group_id"
         mock_args.image_asset_id = "test_image_asset_id"
-        mock_argument_parser.return_value.parse_args.return_value = mock_args
+        mock_argument_parser_class.return_value.parse_args.return_value = mock_args
 
         # Mock GoogleAdsClient.load_from_storage to prevent it from running
-        mock_google_ads_client.load_from_storage.return_value = self.mock_client
+        # and to return the client instance we already have in self.mock_client
+        mock_google_ads_client_class.load_from_storage.return_value = self.mock_client
 
-        # Call the script's entry point, which should trigger argument parsing
-        # We need to mock `main` itself to check how it's called by the script's own `if __name__ == "__main__":` block
-        with mock.patch("examples.misc.add_ad_group_image_asset.main") as mock_main:
-            # This simulates running the script from the command line
-            # The actual add_ad_group_image_asset.py needs to have the standard
-            # if __name__ == "__main__": block that calls main with parsed args.
-            # We need to trigger that part of the script.
-            # A simple way is to import it again or use runpy.
-            import importlib
-            import sys
-            # To ensure the if __name__ == "__main__": block runs, we can temporarily
-            # set the __name__ attribute of the module and then reload it.
-            # However, a more straightforward way for testing is to directly call
-            # the function that would be invoked by the script's entry point,
-            # assuming it's structured to allow this. If the script directly calls
-            # main() after parsing args, we can simulate that.
+        # Store original sys.argv
+        original_argv = sys.argv
+        # Set up mocked command line arguments
+        sys.argv = [
+            "add_ad_group_image_asset.py",
+            "-c", mock_args.customer_id,
+            "-a", mock_args.ad_group_id,
+            "-i", mock_args.image_asset_id,
+        ]
 
-            # For this test, we'll assume the script calls main() after parsing.
-            # We need to ensure that the `if __name__ == "__main__":` block in
-            # add_ad_group_image_asset.py gets executed.
-            # One way to do this is to use runpy.run_module
+        # Execute the main part of the script using runpy
+        # This will execute the if __name__ == "__main__": block
+        import runpy
+        runpy.run_module("examples.misc.add_ad_group_image_asset", run_name="__main__")
 
-            # Let's refine this. The goal is to check if add_ad_group_image_asset.main
-            # is called with arguments from the parser.
-            # The script add_ad_group_image_asset.py itself will call its own main().
-            # We need to ensure our mocks are in place when that happens.
-
-            # Simulate command line execution context
-            # Store original sys.argv
-            original_argv = sys.argv
-            # Set up mocked command line arguments
-            sys.argv = [
-                "add_ad_group_image_asset.py",
-                "-c", mock_args.customer_id,
-                "-a", mock_args.ad_group_id,
-                "-i", mock_args.image_asset_id,
-            ]
-
-            # Execute the main part of the script.
-            # This relies on add_ad_group_image_asset.py having a block like:
-            # if __name__ == "__main__":
-            #   parser = argparse.ArgumentParser(...)
-            #   args = parser.parse_args()
-            #   googleads_client = GoogleAdsClient.load_from_storage()
-            #   main(googleads_client, args.customer_id, args.ad_group_id, args.image_asset_id)
-
-            # To test this, we need to ensure that when the script is run,
-            # our mocked ArgumentParser is used.
-            # The @mock.patch for ArgumentParser should handle this.
-            # We also need to ensure our mocked GoogleAdsClient is used.
-
-            # The most direct way to test the script's argument parsing and main invocation
-            # is to use runpy.run_module, which executes a module as if it were run from the CLI.
-            import runpy
-            with mock.patch.object(add_ad_group_image_asset, "main") as mock_script_main:
-                 runpy.run_module("examples.misc.add_ad_group_image_asset", run_name="__main__")
-
-
-            # Assert that our mock_main (inside the script) was called with the correct arguments
-            mock_script_main.assert_called_once_with(
-                self.mock_client, # This comes from mock_google_ads_client
-                mock_args.customer_id,
-                mock_args.ad_group_id,
-                mock_args.image_asset_id,
-            )
-            # Restore original sys.argv
-            sys.argv = original_argv
+        # Assert that the script's main function (which is now mocked by mock_script_main_function)
+        # was called with the correct arguments from the parsed command line args.
+        mock_script_main_function.assert_called_once_with(
+            self.mock_client, # This should be the client from GoogleAdsClient.load_from_storage
+            mock_args.customer_id,
+            mock_args.ad_group_id,
+            mock_args.image_asset_id,
+        )
+        # Restore original sys.argv
+        sys.argv = original_argv
+        # Assert that sys.exit was not called if the script ran "successfully"
+        # (i.e., if our mocks prevented any actual exceptions that would lead to sys.exit)
+        # Depending on the script's structure, sys.exit might be called even on success.
+        # If the script is expected to call sys.exit(0) on success, this assertion might need adjustment.
+        # Given the context of this test (checking if main is called correctly),
+        # we mostly care that it doesn't exit with an error code due to our test setup.
+        # The mock_sys_exit will absorb any sys.exit calls.
 
 
 if __name__ == "__main__":

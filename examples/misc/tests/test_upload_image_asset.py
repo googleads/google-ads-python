@@ -7,6 +7,7 @@ import sys
 # Adjust the import path as necessary.
 from examples.misc import upload_image_asset
 from google.ads.googleads.errors import GoogleAdsException
+from .test_utils import create_mock_google_ads_exception
 from google.ads.googleads.v19.enums.types.asset_type import AssetTypeEnum
 from google.ads.googleads.v19.enums.types.mime_type import MimeTypeEnum
 
@@ -14,21 +15,23 @@ from google.ads.googleads.v19.enums.types.mime_type import MimeTypeEnum
 class TestUploadImageAsset(unittest.TestCase):
     """Tests for the upload_image_asset script."""
 
-    @mock.patch("examples.misc.upload_image_asset.GoogleAdsClient")
     @mock.patch("examples.misc.upload_image_asset.get_image_bytes_from_url")
-    def setUp(self, mock_get_image_bytes, mock_google_ads_client_class):
+    @mock.patch("examples.misc.upload_image_asset.GoogleAdsClient")
+    def setUp(self, mock_google_ads_client_class, mock_get_image_bytes_func): # Corrected order and name
         # Mock GoogleAdsClient and its methods
         self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_asset_service = self.mock_client.get_service("AssetService")
         self.mock_asset_operation = self.mock_client.get_type("AssetOperation")
 
-        # Mock enums
-        self.mock_client.enums.AssetTypeEnum = AssetTypeEnum
-        self.mock_client.enums.MimeTypeEnum = MimeTypeEnum
+        # Mock enums properly
+        # Instead of replacing the whole enum type on mock_client.enums,
+        # we let the script access the real enums (AssetTypeEnum, MimeTypeEnum are imported directly)
+        # The test will then assert that the correct real enum values are used.
+        # This also means the direct imports of AssetTypeEnum and MimeTypeEnum at the top are important.
 
         # Mock get_image_bytes_from_url
-        self.mock_get_image_bytes_from_url = mock_get_image_bytes
-        self.mock_image_bytes = b"mock_image_data"
+        self.mock_get_image_bytes_from_url = mock_get_image_bytes_func # Corrected name
+        self.mock_image_bytes = b"test_image_data" # Changed from mock_image_data for clarity
         self.mock_get_image_bytes_from_url.return_value = self.mock_image_bytes
 
         # Mock the mutate_assets response
@@ -62,10 +65,10 @@ class TestUploadImageAsset(unittest.TestCase):
         actual_operation = call_args[1]["operations"][0]
 
         # Assertions on the asset operation
-        self.assertEqual(actual_operation.create.type_, AssetTypeEnum.IMAGE)
+        self.assertEqual(actual_operation.create.type_, AssetTypeEnum.IMAGE) # Uses imported AssetTypeEnum
         self.assertEqual(actual_operation.create.image_asset.data, self.mock_image_bytes)
         self.assertEqual(actual_operation.create.image_asset.file_size, len(self.mock_image_bytes))
-        self.assertEqual(actual_operation.create.image_asset.mime_type, MimeTypeEnum.IMAGE_JPEG)
+        self.assertEqual(actual_operation.create.image_asset.mime_type, MimeTypeEnum.IMAGE_JPEG) # Uses imported MimeTypeEnum
         self.assertEqual(actual_operation.create.name, "Marketing Image")
 
         mock_print.assert_any_call(
@@ -77,9 +80,9 @@ class TestUploadImageAsset(unittest.TestCase):
     def test_main_google_ads_exception(self, mock_print, mock_sys_exit):
         """Tests handling of GoogleAdsException."""
         customer_id = "1234567890"
-        mock_google_ads_exception = GoogleAdsException(None, None, mock.Mock()) # Mock error details
 
-        self.mock_asset_service.mutate_assets.side_effect = mock_google_ads_exception
+        mock_ex = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_upload", message="Error uploading image")
+        self.mock_asset_service.mutate_assets.side_effect = mock_ex
 
         upload_image_asset.main(self.mock_client, customer_id)
 
@@ -90,10 +93,11 @@ class TestUploadImageAsset(unittest.TestCase):
         # For example: mock_print.assert_any_call(...)
 
 
+    @mock.patch("sys.exit") # Added mock_sys_exit
     @mock.patch("examples.misc.upload_image_asset.argparse.ArgumentParser")
     @mock.patch("examples.misc.upload_image_asset.GoogleAdsClient")
     def test_argument_parsing_and_script_execution(
-        self, mock_google_ads_client_class_in_script, mock_argument_parser_class
+        self, mock_google_ads_client_class_in_script, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
     ):
         """Tests argument parsing and the script's main execution block."""
         mock_parser_instance = mock.Mock()

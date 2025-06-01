@@ -66,13 +66,18 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # mock_request_instance related lines are removed as we use self.mock_search_stream_request_obj
 
         # Test successful call
-        mock_row_instance_streaming = mock.Mock()
-        mock_row_instance_streaming.campaign.id = "streaming_campaign_id_example"
+        # Create a mock for the row object with campaign.id attribute
+        mock_row_for_streaming = mock.Mock()
+        mock_row_for_streaming.campaign.id = "streaming_c_id_1"
 
-        mock_batch_instance = mock.Mock()
-        mock_batch_instance.results = [mock_row_instance_streaming]
+        # Create a mock for the batch object with a results list containing the mock_row_streaming
+        mock_batch_for_streaming = mock.Mock()
+        mock_batch_for_streaming.results = [mock_row_for_streaming]
 
-        self.mock_ga_service.search_stream.return_value = [mock_batch_instance]
+        # Set the return_value for search_stream to be a list containing the mock_batch_streaming
+        self.mock_ga_service.search_stream.return_value = [mock_batch_for_streaming]
+        # Explicitly clear any prior side_effect that might have been set for other test conditions within this method
+        self.mock_ga_service.search_stream.side_effect = None
 
         set_custom_client_timeouts.make_server_streaming_call(self.mock_client, customer_id)
 
@@ -110,10 +115,14 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         # mock_request_instance related lines are removed
 
         # Test successful call
-        mock_row_instance_unary = mock.Mock()
-        mock_row_instance_unary.campaign.id = "unary_campaign_id_example"
+        # Create a mock for the row object with campaign.id attribute
+        mock_row_for_unary = mock.Mock()
+        mock_row_for_unary.campaign.id = "unary_c_id_1"
 
-        self.mock_ga_service.search.return_value = [mock_row_instance_unary]
+        # Set the return_value for search to be a list containing the mock_row_unary
+        self.mock_ga_service.search.return_value = [mock_row_for_unary]
+        # Explicitly clear any prior side_effect
+        self.mock_ga_service.search.side_effect = None
 
         set_custom_client_timeouts.make_unary_call(self.mock_client, customer_id)
 

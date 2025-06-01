@@ -53,7 +53,7 @@ class TestUploadImageAsset(unittest.TestCase):
         upload_image_asset.main(self.mock_client, customer_id)
 
         self.mock_get_image_bytes_from_url.assert_called_once_with(
-            upload_image_asset.IMAGE_URL
+            "https://gaagl.page.link/Eit5"
         )
         self.mock_asset_service.mutate_assets.assert_called_once()
 

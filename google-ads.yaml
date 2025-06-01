@@ -81,3 +81,11 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 # don't have username and password, just specify host and port.                          #
 # ########################################################################################
 # http_proxy: http://user:password@localhost:8000
+
+# Google Ads API client configuration
+##########################################################################################
+# This section configures the Google Ads API client library.                             #
+##########################################################################################
+google_ads_client:
+  # The version of the Google Ads API to use.
+  version: v19

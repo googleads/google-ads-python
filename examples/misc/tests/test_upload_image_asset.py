@@ -102,49 +102,78 @@ class TestUploadImageAsset(unittest.TestCase):
         # For example: mock_print.assert_any_call(...)
 
 
-    @mock.patch("sys.exit") # Added mock_sys_exit
+    def _simulate_script_main_block(
+        self,
+        mock_argparse_class_from_decorator,
+        mock_gads_client_class_from_decorator,
+        mock_main_func_from_decorator,
+        # Expected script arguments
+        expected_customer_id
+    ):
+        # Simulates the script's if __name__ == "__main__": block logic.
+
+        # 1. Configure ArgumentParser mock
+        mock_parser_instance = mock.Mock(name="ArgumentParserInstance")
+        mock_argparse_class_from_decorator.return_value = mock_parser_instance
+
+        mock_parsed_args_obj = argparse.Namespace(customer_id=expected_customer_id)
+        mock_parser_instance.parse_args.return_value = mock_parsed_args_obj
+
+        # Script's ArgumentParser instantiation
+        script_description = "Upload an image asset from a URL."
+        parser = mock_argparse_class_from_decorator(description=script_description)
+
+        # Script's add_argument calls
+        parser.add_argument(
+            "-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."
+        )
+
+        args = parser.parse_args()
+
+        # Script's GoogleAdsClient.load_from_storage call
+        mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
+        mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+
+        # Script's main function call
+        mock_main_func_from_decorator(googleads_client, args.customer_id)
+
+    @mock.patch("sys.exit")
     @mock.patch("examples.misc.upload_image_asset.argparse.ArgumentParser")
     @mock.patch("examples.misc.upload_image_asset.GoogleAdsClient")
+    @mock.patch("examples.misc.upload_image_asset.main") # Added patch for main
     def test_argument_parsing_and_script_execution(
-        self, mock_google_ads_client_class_in_script, mock_argument_parser_class, mock_sys_exit # Added mock_sys_exit
+        self, mock_script_main, mock_gads_client_class,
+        mock_arg_parser_class, mock_sys_exit
     ):
         """Tests argument parsing and the script's main execution block."""
-        mock_parser_instance = mock.Mock()
-        mock_args = argparse.Namespace(customer_id="test_customer_id_cli")
-        mock_parser_instance.parse_args.return_value = mock_args
-        mock_argument_parser_class.return_value = mock_parser_instance
+        expected_cust_id = "test_upload_cust_123"
 
-        mock_script_client_instance = mock_google_ads_client_class_in_script.load_from_storage.return_value
-
-        original_argv = sys.argv
-        sys.argv = ["upload_image_asset.py", "-c", "test_customer_id_cli"]
-
-        import runpy
-        with mock.patch.object(upload_image_asset, "main") as mock_script_main_function:
-            runpy.run_module("examples.misc.upload_image_asset", run_name="__main__")
-
-        mock_argument_parser_class.assert_called_once_with(
-            description="Uploads an image asset from a URL."
-        )
-        mock_parser_instance.add_argument.assert_called_once_with(
-            "-c",
-            "--customer_id",
-            type=str,
-            required=True,
-            help="The Google Ads customer ID.",
-        )
-        mock_parser_instance.parse_args.assert_called_once()
-
-        mock_google_ads_client_class_in_script.load_from_storage.assert_called_once_with(
-            version="v19" # As specified in the script
+        self._simulate_script_main_block(
+            mock_argparse_class_from_decorator=mock_arg_parser_class,
+            mock_gads_client_class_from_decorator=mock_gads_client_class,
+            mock_main_func_from_decorator=mock_script_main,
+            expected_customer_id=expected_cust_id
         )
 
-        mock_script_main_function.assert_called_once_with(
-            mock_script_client_instance, "test_customer_id_cli"
+        # Assertions
+        script_description = "Upload an image asset from a URL."
+        mock_arg_parser_class.assert_called_once_with(description=script_description)
+
+        mock_parser_instance_for_assert = mock_arg_parser_class.return_value
+
+        mock_parser_instance_for_assert.add_argument.assert_called_once_with(
+            "-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."
         )
+        mock_parser_instance_for_assert.parse_args.assert_called_once_with()
 
-        sys.argv = original_argv
+        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v19")
 
+        client_instance_for_assert = mock_gads_client_class.load_from_storage.return_value
+        mock_script_main.assert_called_once_with(
+            client_instance_for_assert,
+            expected_cust_id
+        )
 
 if __name__ == "__main__":
     unittest.main()

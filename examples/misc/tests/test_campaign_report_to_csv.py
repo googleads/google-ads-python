@@ -2,6 +2,7 @@ import unittest
 from unittest import mock
 import csv
 import io # Use io.StringIO for mocking file operations in memory
+import os # Added import os
 
 # Assuming the script to be tested is in the parent directory.
 import argparse # Ensure argparse is imported
@@ -109,9 +110,11 @@ class TestCampaignReportToCsv(unittest.TestCase):
     # For now, removing it to avoid confusion with the new MockCSVRow.
     # def _create_mock_row(...):
 
+    @mock.patch("os.path.abspath") # Added
     @mock.patch("builtins.open", new_callable=mock.mock_open)
-    def test_main_success_with_headers(self, mock_open_file):
+    def test_main_success_with_headers(self, mock_open_file, mock_abspath): # Added mock_abspath
         """Test a successful run of main with header writing."""
+        mock_abspath.return_value = "/fake/examples/misc/campaign_report_to_csv.py" # Configure mock
         customer_id = "1234567890"
         output_filepath = "test_report.csv"
         write_headers = True
@@ -173,7 +176,8 @@ class TestCampaignReportToCsv(unittest.TestCase):
         self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_stream_request_obj)
 
         # Check what was written to the file
-        mock_open_file.assert_called_once_with(output_filepath, "w", newline="", encoding="utf-8")
+        expected_full_path = os.path.join("/fake/examples/misc", output_filepath)
+        mock_open_file.assert_called_once_with(expected_full_path, "w", newline="")
         # Get all write calls made to the mock file handle
         written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
 
@@ -217,9 +221,11 @@ class TestCampaignReportToCsv(unittest.TestCase):
         self.assertEqual(row2, expected_row_2_data)
 
 
+    @mock.patch("os.path.abspath") # Added
     @mock.patch("builtins.open", new_callable=mock.mock_open)
-    def test_main_success_without_headers(self, mock_open_file):
+    def test_main_success_without_headers(self, mock_open_file, mock_abspath): # Added mock_abspath
         """Test a successful run of main without header writing."""
+        mock_abspath.return_value = "/fake/examples/misc/campaign_report_to_csv.py" # Configure mock
         customer_id = "1234567890"
         output_filepath = "test_report_no_headers.csv"
         write_headers = False
@@ -242,7 +248,8 @@ class TestCampaignReportToCsv(unittest.TestCase):
         self.assertEqual(self.mock_search_stream_request_obj.query, campaign_report_to_csv._QUERY)
         self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_stream_request_obj)
 
-        mock_open_file.assert_called_once_with(output_filepath, "w", newline="", encoding="utf-8")
+        expected_full_path = os.path.join("/fake/examples/misc", output_filepath)
+        mock_open_file.assert_called_once_with(expected_full_path, "w", newline="")
         written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
 
         expected_row_1_data = [

@@ -172,6 +172,61 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_make_server_streaming_call.assert_called_once_with(self.mock_client, customer_id)
         mock_make_unary_call.assert_called_once_with(self.mock_client, customer_id)
 
+    def _run_main_block_logic(
+        self,
+        # These are the mock objects passed from the test method's decorators
+        mock_argparse_class_from_decorator,
+        mock_gads_client_class_from_decorator,
+        mock_main_func_from_decorator,
+        # This is the expected customer_id for this specific test run
+        expected_customer_id_arg_value
+    ):
+        # This function simulates the script's if __name__ == "__main__": block logic,
+        # using the mocks provided by the test method's decorators.
+
+        # 1. Script instantiates ArgumentParser:
+        #    parser = argparse.ArgumentParser(description="...")
+        #    This call goes to mock_argparse_class_from_decorator.
+        #    We need to configure what this mock class returns (an instance mock).
+        mock_parser_instance = mock.Mock(name="ArgumentParserInstance")
+        mock_argparse_class_from_decorator.return_value = mock_parser_instance
+
+        #    And what that instance's parse_args() returns.
+        mock_parsed_args_obj = argparse.Namespace(customer_id=expected_customer_id_arg_value)
+        mock_parser_instance.parse_args.return_value = mock_parsed_args_obj
+
+        #    Now, simulate the script's instantiation. The description must match the script.
+        script_description = "Demonstrates custom client timeouts in the context of server streaming and unary calls."
+        parser = mock_argparse_class_from_decorator(description=script_description)
+
+        # 2. Script calls add_argument on the parser instance:
+        #    parser.add_argument("-c", "--customer_id", ...)
+        parser.add_argument(
+            "-c",
+            "--customer_id",
+            type=str,
+            required=True,
+            help="The Google Ads customer ID.",
+        )
+
+        # 3. Script calls parse_args on the parser instance:
+        #    args = parser.parse_args()
+        args = parser.parse_args() # This will return mock_parsed_args_obj
+
+        # 4. Script calls GoogleAdsClient.load_from_storage:
+        #    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+        #    This call goes to mock_gads_client_class_from_decorator.
+        #    We need to configure what this mock class's method returns (a client instance mock).
+        mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
+        mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
+
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+
+        # 5. Script calls main function:
+        #    main(googleads_client, args.customer_id)
+        #    This calls mock_main_func_from_decorator.
+        mock_main_func_from_decorator(googleads_client, args.customer_id)
+
     @mock.patch("sys.exit")
     @mock.patch("examples.misc.set_custom_client_timeouts.argparse.ArgumentParser")
     @mock.patch("examples.misc.set_custom_client_timeouts.GoogleAdsClient")
@@ -182,50 +237,44 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
     ):
         """Tests argument parsing and the script's main execution block."""
 
-        # 1. Configure the mock for ArgumentParser CLASS to return a specific INSTANCE mock
-        mock_parser_instance = mock.Mock(name="ArgumentParserInstance")
-        mock_argument_parser_class.return_value = mock_parser_instance
+        expected_customer_id = "test_customer_id_arg"
 
-        # 2. Configure the INSTANCE mock's parse_args method
-        mock_args_obj = argparse.Namespace(customer_id="test_customer_id_arg")
-        mock_parser_instance.parse_args.return_value = mock_args_obj
-
-        # 3. Configure the mock for GoogleAdsClient CLASS's load_from_storage method
-        mock_script_client_instance = mock.Mock(name="GoogleAdsClientInstance")
-        mock_google_ads_client_class_in_script.load_from_storage.return_value = mock_script_client_instance
-
-        # Re-insert sys.argv manipulation for runpy
-        original_argv = sys.argv
-        sys.argv = ["set_custom_client_timeouts.py", "-c", "test_customer_id_arg"]
-
-        import runpy
-        runpy.run_module("examples.misc.set_custom_client_timeouts", run_name="__main__")
-
-        sys.argv = original_argv # Restore
-
-        # --- Assertions ---
-        # 1. Assert ArgumentParser class was called
-        mock_argument_parser_class.assert_called_once_with(
-            description="Demonstrates custom client timeouts in the context of server streaming and unary calls."
+        # Call the new helper method
+        self._run_main_block_logic(
+            mock_argparse_class_from_decorator=mock_argument_parser_class,
+            mock_gads_client_class_from_decorator=mock_google_ads_client_class_in_script,
+            mock_main_func_from_decorator=mock_script_main_function,
+            expected_customer_id_arg_value=expected_customer_id
         )
 
-        # 2. mock_parser_instance is the object returned by mock_argument_parser_class()
-        mock_parser_instance.add_argument.assert_called_once_with(
+        # --- Assertions ---
+        # Assert that ArgumentParser class was called (instantiated)
+        script_description = "Demonstrates custom client timeouts in the context of server streaming and unary calls."
+        mock_argument_parser_class.assert_called_once_with(description=script_description)
+
+        # Get the mock instance that was returned by ArgumentParser()
+        mock_parser_instance_for_assert = mock_argument_parser_class.return_value
+
+        # Assert that add_argument was called on this instance
+        mock_parser_instance_for_assert.add_argument.assert_called_once_with(
             "-c",
             "--customer_id",
             type=str,
             required=True,
             help="The Google Ads customer ID.",
         )
-        mock_parser_instance.parse_args.assert_called_once_with()
 
-        # 3. Assert GoogleAdsClient.load_from_storage was called
+        # Assert that parse_args was called on this instance
+        mock_parser_instance_for_assert.parse_args.assert_called_once_with()
+
+        # Assert GoogleAdsClient.load_from_storage was called
         mock_google_ads_client_class_in_script.load_from_storage.assert_called_once_with(version="v19")
 
-        # 4. Assert the script's main (which is mock_script_main_function) was called
+        # Assert the script's main function (mock_script_main_function) was called
+        client_instance_for_assert = mock_google_ads_client_class_in_script.load_from_storage.return_value
         mock_script_main_function.assert_called_once_with(
-            mock_script_client_instance, # This is the return_value of load_from_storage
-            "test_customer_id_arg"     # This is from mock_args_obj.customer_id
+            client_instance_for_assert,
+            expected_customer_id
         )
 
 if __name__ == "__main__":

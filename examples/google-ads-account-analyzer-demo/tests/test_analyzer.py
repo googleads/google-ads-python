@@ -1,8 +1,40 @@
+import os
+import sys
 import unittest
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import MagicMock, patch, call # Ensure 'call' is imported if not already
 
-# Assuming analyzer.py is in the parent directory
-from .. import analyzer
+# Dynamically add the parent directory to sys.path to resolve analyzer module
+# This makes the test runnable whether discovered or run directly
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.join(current_dir, '..')
+
+# Check if the parent directory is already in sys.path to avoid duplicates
+# and to ensure the original sys.path is respected if possible.
+original_sys_path = list(sys.path) # Take a copy
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+    path_inserted = True
+else:
+    path_inserted = False
+
+try:
+    import analyzer
+except ImportError as e:
+    # If it still fails, raise an error that's informative.
+    raise ImportError(
+        f"Failed to import 'analyzer' module. "
+        f"Attempted to add '{parent_dir}' to sys.path. "
+        f"Original error: {e}"
+    )
+finally:
+    # Clean up sys.path if we modified it.
+    # This prevents side effects if tests are run in a persistent session.
+    if path_inserted:
+        if sys.path[0] == parent_dir:
+            sys.path.pop(0)
+        elif parent_dir in sys.path: # Fallback removal if it wasn't at index 0
+             sys.path.remove(parent_dir)
+
 
 class TestAnalyzer(unittest.TestCase):
 

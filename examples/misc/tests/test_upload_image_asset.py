@@ -15,9 +15,8 @@ from google.ads.googleads.v19.enums.types.mime_type import MimeTypeEnum
 class TestUploadImageAsset(unittest.TestCase):
     """Tests for the upload_image_asset script."""
 
-    @mock.patch("examples.misc.upload_image_asset.get_image_bytes_from_url")
     @mock.patch("examples.misc.upload_image_asset.GoogleAdsClient")
-    def setUp(self, mock_google_ads_client_class, mock_get_image_bytes_func): # Corrected order and name
+    def setUp(self, mock_google_ads_client_class): # mock_get_image_bytes_func removed
         # Mock GoogleAdsClient and its methods
         self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
         self.mock_asset_service = self.mock_client.get_service("AssetService")
@@ -29,10 +28,9 @@ class TestUploadImageAsset(unittest.TestCase):
         # The test will then assert that the correct real enum values are used.
         # This also means the direct imports of AssetTypeEnum and MimeTypeEnum at the top are important.
 
-        # Mock get_image_bytes_from_url
-        self.mock_get_image_bytes_from_url = mock_get_image_bytes_func # Corrected name
-        self.mock_image_bytes = b"test_image_data" # Changed from mock_image_data for clarity
-        self.mock_get_image_bytes_from_url.return_value = self.mock_image_bytes
+        # self.mock_get_image_bytes_from_url removed
+        self.mock_image_bytes = b"test_image_data" # This might be needed if other tests use it, or move to test_main_success
+        # For now, keeping self.mock_image_bytes here, can be localized if only test_main_success uses it.
 
         # Mock the mutate_assets response
         self.mock_mutate_response = mock.Mock()
@@ -44,15 +42,18 @@ class TestUploadImageAsset(unittest.TestCase):
         self.mock_asset_create = self.mock_asset_operation.return_value.create
         self.mock_asset_create.image_asset = mock.Mock()
 
-
+    @mock.patch("examples.misc.upload_image_asset.get_image_bytes_from_url")
     @mock.patch("builtins.print")
-    def test_main_success(self, mock_print):
+    def test_main_success(self, mock_get_image_bytes_in_success, mock_print_in_success): # Signature updated
         """Tests a successful run of the main function."""
         customer_id = "1234567890"
 
+        # Configure the mock for get_image_bytes_from_url specifically for this test
+        mock_get_image_bytes_in_success.return_value = self.mock_image_bytes # Using self.mock_image_bytes from setUp
+
         upload_image_asset.main(self.mock_client, customer_id)
 
-        self.mock_get_image_bytes_from_url.assert_called_once_with(
+        mock_get_image_bytes_in_success.assert_called_once_with( # Use the local mock from argument
             "https://gaagl.page.link/Eit5"
         )
         self.mock_asset_service.mutate_assets.assert_called_once()
@@ -72,13 +73,13 @@ class TestUploadImageAsset(unittest.TestCase):
         self.assertEqual(actual_operation.create.name, "Marketing Image")
         self.assertEqual(actual_operation.create.image_asset.full_size.url, "https://gaagl.page.link/Eit5")
 
-        mock_print.assert_any_call(
+        mock_print_in_success.assert_any_call( # Use the local mock from argument
             f"Uploaded image asset with resource name: '{self.mock_mutate_response.results[0].resource_name}'"
         )
 
     @mock.patch("sys.exit")
-    @mock.patch("builtins.print") # To check error messages if needed
-    def test_main_google_ads_exception(self, mock_print, mock_sys_exit):
+    @mock.patch("builtins.print")
+    def test_main_google_ads_exception(self, mock_print_for_exception, mock_sys_exit_for_exception): # Renamed for clarity
         """Tests handling of GoogleAdsException."""
         customer_id = "1234567890"
 
@@ -96,10 +97,10 @@ class TestUploadImageAsset(unittest.TestCase):
         # The script's main() function itself doesn't call sys.exit, but the
         # if __name__ == "__main__" block does. This test is for main().
         # So, sys.exit should not be called by main().
-        mock_sys_exit.assert_not_called()
+        mock_sys_exit_for_exception.assert_not_called() # Use renamed mock
         # Optionally, check if specific error messages were printed
         # This depends on the exact error printing logic in the script
-        # For example: mock_print.assert_any_call(...)
+        # For example: mock_print_for_exception.assert_any_call(...)
 
 
     def _simulate_script_main_block(

@@ -4,13 +4,23 @@ import io
 import sys
 from types import SimpleNamespace
 
+# Add the project root to sys.path to allow for relative imports
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
+
+
 # SUT (System Under Test)
 from examples.remarketing import upload_conversion_adjustment
 
-# To store the original builtins.type for restoration in specific test
-BUILTIN_TYPE_ORIGINAL = type
-
 class TestUploadConversionAdjustmentMain(unittest.TestCase):
+
+    # Inner class to serve as the mock type for GoogleAdsFailure
+    class MockGoogleAdsFailureForTest(object):
+        deserialize = None # Will be replaced by a Mock instance
+
+    # Simple placeholder class for the instance returned by get_type("GoogleAdsFailure")
+    class PlainFailureMessagePlaceholder(object):
+        pass
 
     def setUp(self):
         self.mock_client = Mock(name="GoogleAdsClient")
@@ -64,7 +74,18 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
         self.mock_conversion_adjustment_obj.restatement_value = self.mock_restatement_value_obj
 
         self.mock_upload_request_obj = Mock(name="UploadConversionAdjustmentsRequestInstance")
-        self.mock_google_ads_failure_message_instance = Mock(name="GoogleAdsFailureMessageInstance")
+
+        # --- Setup for GoogleAdsFailure mocking using __class__ ---
+        self.parsed_failure_object_mock = Mock(name="ParsedFailureObject_Global")
+        TestUploadConversionAdjustmentMain.MockGoogleAdsFailureForTest.deserialize = Mock(
+            return_value=self.parsed_failure_object_mock
+        )
+
+        # Use an instance of the plain placeholder class
+        self.plain_failure_message_instance = TestUploadConversionAdjustmentMain.PlainFailureMessagePlaceholder()
+        # Assign its __class__ to our mock type
+        self.plain_failure_message_instance.__class__ = TestUploadConversionAdjustmentMain.MockGoogleAdsFailureForTest
+        # --- End setup ---
 
         def get_type_side_effect(type_name):
             if type_name == "ConversionAdjustment":
@@ -80,12 +101,14 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
                 self.mock_upload_request_obj.partial_failure = None
                 return self.mock_upload_request_obj
             elif type_name == "GoogleAdsFailure":
-                return self.mock_google_ads_failure_message_instance
+                # Return the instance of PlainFailureMessagePlaceholder
+                return self.plain_failure_message_instance
             return Mock(name=f"DefaultMock_{type_name}")
         self.mock_client.get_type.side_effect = get_type_side_effect
 
-    def _configure_successful_response(self, adjustment_type_enum_member): # Renamed
+    def _configure_successful_response(self, adjustment_type_enum_member):
         self.mock_upload_response.partial_failure_error = Mock(details=None, name="NoErrorPartialFailureMock")
+        self.mock_upload_response.partial_failure_error.error_details = []
         self.mock_adjustment_result.conversion_action = self.mock_conversion_action_service.conversion_action_path.return_value
         self.mock_adjustment_result.adjustment_type = adjustment_type_enum_member
         self.mock_adjustment_result.adjustment_date_time = self.test_adjustment_date_time
@@ -139,7 +162,6 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
         self.assertEqual(self.mock_restatement_value_obj.adjusted_value, float(test_restatement_value_str))
         self.assertIsNone(self.mock_restatement_value_obj.currency_code)
 
-        # Corrected: SUT success message does not include adjustment type name
         expected_stdout_fragment = (
             f"Uploaded conversion adjustment for conversion action "
             f"'{self.mock_adjustment_result.conversion_action}' and order "
@@ -162,7 +184,6 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
         self.assertIsNone(self.mock_restatement_value_obj.adjusted_value)
         self.assertIsNone(self.mock_restatement_value_obj.currency_code)
 
-        # Corrected: SUT success message does not include adjustment type name
         expected_stdout_fragment = (
             f"Uploaded conversion adjustment for conversion action "
             f"'{self.mock_adjustment_result.conversion_action}' and order "
@@ -185,7 +206,6 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
         self.assertIsNone(self.mock_restatement_value_obj.adjusted_value)
         self.assertIsNone(self.mock_restatement_value_obj.currency_code)
 
-        # Corrected: SUT success message does not include adjustment type name
         expected_stdout_fragment = (
             f"Uploaded conversion adjustment for conversion action "
             f"'{self.mock_adjustment_result.conversion_action}' and order "
@@ -195,59 +215,47 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_partial_failure_error(self, mock_stdout):
-        # This mock will be the class returned by type(failure_message_instance)
-        mock_controlled_failure_class = Mock(name="ControlledGoogleAdsFailureClass")
-
-        # This is the instance that deserialize will return
-        parsed_failure_object_mock = Mock(name="ParsedFailureObject_InstanceLevel")
         mock_single_error = Mock(name="SingleError")
-        mock_single_error.location.field_path_elements = [Mock(index=0, field_name="test_field")]
+        mock_field_path_element = Mock(index=0, field_name="test_field")
+        mock_single_error.location.field_path_elements = [mock_field_path_element]
         mock_single_error.message = "Specific error for index 0."
         mock_error_code_obj = Mock(name="ErrorCodeObject_for_str_in_partial_failure")
-        mock_error_code_obj.__str__ = Mock(return_value="TEST_ERROR_CODE_NAME") # For f-string printing
+        mock_error_code_obj.__str__ = Mock(return_value="TEST_ERROR_CODE_NAME")
         mock_single_error.error_code = mock_error_code_obj
-        parsed_failure_object_mock.errors = [mock_single_error]
+        self.parsed_failure_object_mock.errors = [mock_single_error] # Configure return of deserialize
 
-        mock_controlled_failure_class.deserialize = Mock(return_value=parsed_failure_object_mock)
+        TestUploadConversionAdjustmentMain.MockGoogleAdsFailureForTest.deserialize.reset_mock()
 
-        # Configure response for partial failure
         mock_error_detail_val = Mock(name="ErrorDetailValue")
         mock_error_detail_val.value = b"serialized_error_bytes_content"
-        # Ensure partial_failure_error and its details list are correctly structured
         self.mock_upload_response.partial_failure_error = Mock(
-            details=[mock_error_detail_val], message="Mock partial failure message."
+            details=[mock_error_detail_val], message="Mock partial failure message." # SUT uses this message
         )
-        # Ensure results list matches length of details, or SUT logic for error_details[i] might fail
-        self.mock_adjustment_result.conversion_action = "ca_path_for_partial_fail" # Dummy value
+        # SUT iterates over partial_failure_error.error_details in the print loop
+        self.mock_upload_response.partial_failure_error.error_details = [mock_error_detail_val]
+
+
+        self.mock_adjustment_result.conversion_action = "ca_path_for_partial_fail"
         self.mock_adjustment_result.adjustment_type = self.mock_client.enums.ConversionAdjustmentTypeEnum.RETRACTION
         self.mock_adjustment_result.order_id = self.test_order_id
         self.mock_upload_response.results = [self.mock_adjustment_result]
         self.mock_adjustment_upload_service.upload_conversion_adjustments.return_value = self.mock_upload_response
 
-        original_type_func = type
-        def type_side_effect(obj_being_typed):
-            if obj_being_typed is self.mock_google_ads_failure_message_instance:
-                return mock_controlled_failure_class
-            return original_type_func(obj_being_typed)
-
-        with patch('builtins.type', side_effect=type_side_effect) as mock_type_patch_for_scope:
-            upload_conversion_adjustment.main(
-                client=self.mock_client, customer_id=self.test_customer_id,
-                conversion_action_id=self.test_conversion_action_id, adjustment_type="RETRACTION",
-                order_id=self.test_order_id, adjustment_date_time=self.test_adjustment_date_time,
-                restatement_value=None
-            )
+        upload_conversion_adjustment.main(
+            client=self.mock_client, customer_id=self.test_customer_id,
+            conversion_action_id=self.test_conversion_action_id, adjustment_type="RETRACTION",
+            order_id=self.test_order_id, adjustment_date_time=self.test_adjustment_date_time,
+            restatement_value=None
+        )
 
         self._common_asserts_basic_adjustment(self.mock_client.enums.ConversionAdjustmentTypeEnum.RETRACTION)
         self.mock_client.get_type.assert_any_call("GoogleAdsFailure")
-        mock_type_patch_for_scope.assert_called_with(self.mock_google_ads_failure_message_instance)
-        mock_controlled_failure_class.deserialize.assert_called_once_with(b"serialized_error_bytes_content")
+        TestUploadConversionAdjustmentMain.MockGoogleAdsFailureForTest.deserialize.assert_called_once_with(b"serialized_error_bytes_content")
 
         captured_output = mock_stdout.getvalue()
-        self.assertIn("A partial failure at index 0 occurred", captured_output) # Removed trailing \n from SUT print
+        self.assertIn("A partial failure at index 0 occurred", captured_output)
         self.assertIn("Error message: Specific error for index 0.", captured_output)
         self.assertIn("Error code: TEST_ERROR_CODE_NAME", captured_output)
-        # The SUT does NOT print the success message if error_details[i] is present for that result.
         unexpected_success_fragment = (
              f"Uploaded conversion adjustment for conversion action "
             f"'{self.mock_adjustment_result.conversion_action}' and order "
@@ -258,10 +266,9 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_result_indicates_failure_via_no_order_id(self, mock_stdout):
-        # Simulate a result that's "problematic" by SUT's print logic (e.g. missing order_id)
         retraction_enum_member = self.mock_client.enums.ConversionAdjustmentTypeEnum.RETRACTION
         self._configure_successful_response(adjustment_type_enum_member=retraction_enum_member)
-        self.mock_adjustment_result.order_id = None # Make order_id None in the result
+        self.mock_adjustment_result.order_id = None
 
         upload_conversion_adjustment.main(
             self.mock_client, self.test_customer_id, self.test_conversion_action_id,
@@ -269,11 +276,10 @@ class TestUploadConversionAdjustmentMain(unittest.TestCase):
         )
         self._common_asserts_basic_adjustment(retraction_enum_member)
 
-        # Check that the print includes "None" for the order_id
         expected_stdout_fragment = (
             f"Uploaded conversion adjustment for conversion action "
-            f"'{self.mock_adjustment_result.conversion_action}' and order " # SUT uses result.conversion_action
-            f"ID 'None'." # SUT uses result.order_id
+            f"'{self.mock_adjustment_result.conversion_action}' and order "
+            f"ID 'None'."
         )
         self.assertIn(expected_stdout_fragment, mock_stdout.getvalue())
 

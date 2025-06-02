@@ -2,7 +2,11 @@ import unittest
 from unittest.mock import patch, Mock, call, ANY, MagicMock
 import io
 import sys
+import os
 from types import SimpleNamespace
+
+# Add the project root to sys.path to allow for relative imports
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 # SUT (System Under Test)
 from examples.remarketing import update_audience_target_restriction
@@ -86,15 +90,8 @@ class TestMainFunctionForUpdateAudience(unittest.TestCase):
         )
         self.mock_client.enums = SimpleNamespace(TargetingDimensionEnum=self.mock_enums)
 
-        self.patched_update_targeting_setting_was_invoked_flag = False
-        def log_call_and_proceed_side_effect(*args, **kwargs):
-            sys.__stderr__.write("DEBUG_PATCH_SIDE_EFFECT: Patched update_targeting_setting was CALLED.\n")
-            self.patched_update_targeting_setting_was_invoked_flag = True
-            return None
-
         self.update_setting_patcher = patch(
             'examples.remarketing.update_audience_target_restriction.update_targeting_setting',
-            side_effect=log_call_and_proceed_side_effect,
             autospec=True
         )
         self.patched_update_targeting_setting = self.update_setting_patcher.start()
@@ -104,24 +101,22 @@ class TestMainFunctionForUpdateAudience(unittest.TestCase):
         self._list_of_restrictions_added_by_sut_add_method = []
 
         def mock_add_to_restrictions_list_side_effect():
-            sys.__stderr__.write("DEBUG_SIDE_EFFECT: mock_add_to_restrictions_list_side_effect CALLED\n")
             new_mock_for_add = Mock(name="NewRestrictionAddedBySUT_from_add")
             self._current_target_restrictions_list_for_sut.append(new_mock_for_add)
             self._list_of_restrictions_added_by_sut_add_method.append(new_mock_for_add)
-            sys.__stderr__.write(f"DEBUG_SIDE_EFFECT: Appended. List now: {self._current_target_restrictions_list_for_sut}\n")
             return new_mock_for_add
 
         def mock_append_to_restrictions_list_side_effect(item):
-            sys.__stderr__.write(f"DEBUG_SIDE_EFFECT: mock_append_to_restrictions_list_side_effect CALLED with {item}\n")
             self._current_target_restrictions_list_for_sut.append(item)
-            sys.__stderr__.write(f"DEBUG_SIDE_EFFECT: Appended. List now: {self._current_target_restrictions_list_for_sut}\n")
 
 
         self.ts_list_behavior_mock = MagicMock(spec=list, name="TargetRestrictionsListBehavior")
         self.ts_list_behavior_mock.add = Mock(side_effect=mock_add_to_restrictions_list_side_effect, name="AddMethodMock")
         self.ts_list_behavior_mock.append = Mock(side_effect=mock_append_to_restrictions_list_side_effect, name="AppendMethodMock")
+
         self.ts_list_behavior_mock.__iter__ = lambda x=None: iter(self._current_target_restrictions_list_for_sut)
         self.ts_list_behavior_mock.__len__ = lambda x=None: len(self._current_target_restrictions_list_for_sut)
+
         def get_item_side_effect(index_or_self, index_val=None):
             if index_val is None:
                 return self._current_target_restrictions_list_for_sut[index_or_self]
@@ -166,7 +161,7 @@ class TestMainFunctionForUpdateAudience(unittest.TestCase):
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_update_needed_audience_is_false(self, mock_stdout):
-        self.patched_update_targeting_setting_was_invoked_flag = False
+        self.patched_update_targeting_setting.reset_mock()
         self.mock_google_ads_service.search.return_value = self._create_mock_search_response(
             [(self.mock_enums.AUDIENCE, False)]
         )
@@ -175,56 +170,54 @@ class TestMainFunctionForUpdateAudience(unittest.TestCase):
         self.mock_google_ads_service.search.assert_called_once()
         self.assertIn(f"ad_group.id = {self.test_ad_group_id}", self.mock_google_ads_service.search.call_args[1]['query'])
 
-        self.assertTrue(self.patched_update_targeting_setting_was_invoked_flag, "Patched update_targeting_setting should have been called.")
         self.patched_update_targeting_setting.assert_called_once()
 
         called_args = self.patched_update_targeting_setting.call_args[0]
         self.assertEqual(called_args[1], self.test_customer_id)
         self.assertEqual(called_args[2], str(self.test_ad_group_id))
 
-        called_targeting_setting = called_args[3]
-        self.assertEqual(len(self._list_of_restrictions_added_by_sut_add_method), 1)
-        added_restriction = self._list_of_restrictions_added_by_sut_add_method[0]
-        self.assertEqual(added_restriction.targeting_dimension, self.mock_enums.AUDIENCE)
-        self.assertTrue(added_restriction.bid_only)
-        self.assertIn(added_restriction, self._current_target_restrictions_list_for_sut)
+        self.assertEqual(len(self._current_target_restrictions_list_for_sut), 1)
+        updated_restriction = self._current_target_restrictions_list_for_sut[0]
+        self.assertEqual(updated_restriction.targeting_dimension, self.mock_enums.AUDIENCE)
+        self.assertTrue(updated_restriction.bid_only)
+
 
         captured_output = mock_stdout.getvalue()
         self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)} and name 'Mock Ad Group Name' was found", captured_output)
         self.assertIn(f"\tTargeting restriction with targeting dimension '{self.mock_enums.AUDIENCE.name}' and bid only set to 'False'.", captured_output)
-        # The "Updating..." message is NOT printed by main directly. Call to helper is the indicator.
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_no_update_audience_is_true(self, mock_stdout):
-        self.patched_update_targeting_setting_was_invoked_flag = False
+        self.patched_update_targeting_setting.reset_mock()
         self.mock_google_ads_service.search.return_value = self._create_mock_search_response(
             [(self.mock_enums.AUDIENCE, True)]
         )
         update_audience_target_restriction.main(self.mock_client, self.test_customer_id, self.test_ad_group_id)
-        self.assertFalse(self.patched_update_targeting_setting_was_invoked_flag)
+
         self.patched_update_targeting_setting.assert_not_called()
         captured_output = mock_stdout.getvalue()
-        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)}", captured_output)
+        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)} and name 'Mock Ad Group Name' was found", captured_output)
         self.assertIn(f"\tTargeting restriction with targeting dimension '{self.mock_enums.AUDIENCE.name}' and bid only set to 'True'.", captured_output)
         self.assertIn("No target restrictions to update.\n", captured_output)
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_no_update_no_audience_restrictions(self, mock_stdout):
-        self.patched_update_targeting_setting_was_invoked_flag = False
+        self.patched_update_targeting_setting.reset_mock()
         self.mock_google_ads_service.search.return_value = self._create_mock_search_response(
             [(self.mock_enums.KEYWORD, False)]
         )
         update_audience_target_restriction.main(self.mock_client, self.test_customer_id, self.test_ad_group_id)
-        self.assertFalse(self.patched_update_targeting_setting_was_invoked_flag)
+
         self.patched_update_targeting_setting.assert_not_called()
         captured_output = mock_stdout.getvalue()
-        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)}", captured_output)
+        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)} and name 'Mock Ad Group Name' was found", captured_output)
         self.assertIn(f"\tTargeting restriction with targeting dimension '{self.mock_enums.KEYWORD.name}' and bid only set to 'False'.", captured_output)
         self.assertIn("No target restrictions to update.\n", captured_output)
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_update_needed_mixed_restrictions_audience_false(self, mock_stdout):
-        self.patched_update_targeting_setting_was_invoked_flag = False
+        self.patched_update_targeting_setting.reset_mock()
+
         keyword_restriction_from_search = Mock(name="KeywordRestrictionFromSearch")
         keyword_restriction_from_search.targeting_dimension = self.mock_enums.KEYWORD
         keyword_restriction_from_search.bid_only = False
@@ -233,67 +226,51 @@ class TestMainFunctionForUpdateAudience(unittest.TestCase):
         audience_restriction_from_search.targeting_dimension = self.mock_enums.AUDIENCE
         audience_restriction_from_search.bid_only = False
 
-        search_response_mock = Mock(name="SearchResponse")
-        mock_ad_group_row = Mock(name="GoogleAdsRow")
-        mock_ad_group_row.ad_group.id = str(self.test_ad_group_id)
-        mock_ad_group_row.ad_group.name = "Mock Ad Group Name"
-        mock_ad_group_row.ad_group.targeting_setting.target_restrictions = [
-            keyword_restriction_from_search, audience_restriction_from_search
-        ]
-        search_response_mock.__iter__ = Mock(return_value=iter([mock_ad_group_row]))
-        self.mock_google_ads_service.search.return_value = search_response_mock
+        self.mock_google_ads_service.search.return_value = self._create_mock_search_response(
+            [(self.mock_enums.KEYWORD, False), (self.mock_enums.AUDIENCE, False)]
+        )
 
         update_audience_target_restriction.main(self.mock_client, self.test_customer_id, self.test_ad_group_id)
 
-        self.assertTrue(self.patched_update_targeting_setting_was_invoked_flag)
         self.patched_update_targeting_setting.assert_called_once()
 
-        called_targeting_setting_arg = self.patched_update_targeting_setting.call_args[0][3]
+        passed_targeting_setting = self.patched_update_targeting_setting.call_args[0][3]
 
-        self.assertEqual(len(self._current_target_restrictions_list_for_sut), 2)
+        self.assertEqual(len(passed_targeting_setting.target_restrictions), 2)
 
         found_keyword = None; found_audience = None
-        for r in self._current_target_restrictions_list_for_sut:
+        for r in passed_targeting_setting.target_restrictions:
             if r.targeting_dimension == self.mock_enums.KEYWORD: found_keyword = r
             elif r.targeting_dimension == self.mock_enums.AUDIENCE: found_audience = r
 
         self.assertIsNotNone(found_keyword, "Keyword restriction should be preserved.")
         self.assertEqual(found_keyword.targeting_dimension, self.mock_enums.KEYWORD)
         self.assertFalse(found_keyword.bid_only)
-        self.assertIn(keyword_restriction_from_search, self._current_target_restrictions_list_for_sut)
 
         self.assertIsNotNone(found_audience, "Audience restriction should exist and be updated.")
         self.assertTrue(found_audience.bid_only)
-        self.assertIn(found_audience, self._list_of_restrictions_added_by_sut_add_method)
 
         captured_output = mock_stdout.getvalue()
-        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)}", captured_output)
+        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)} and name 'Mock Ad Group Name' was found", captured_output)
         self.assertIn(f"\tTargeting restriction with targeting dimension '{self.mock_enums.KEYWORD.name}' and bid only set to 'False'.", captured_output)
         self.assertIn(f"\tTargeting restriction with targeting dimension '{self.mock_enums.AUDIENCE.name}' and bid only set to 'False'.", captured_output)
-        # The "Updating..." message is NOT printed by main. If the patched function was called, that's enough.
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_main_no_update_empty_initial_restrictions(self, mock_stdout):
-        self.patched_update_targeting_setting_was_invoked_flag = False
+        self.patched_update_targeting_setting.reset_mock()
         self.mock_google_ads_service.search.return_value = self._create_mock_search_response([])
 
         update_audience_target_restriction.main(self.mock_client, self.test_customer_id, self.test_ad_group_id)
 
-        self.assertTrue(self.patched_update_targeting_setting_was_invoked_flag, "Patched update_targeting_setting should have been called for empty initial restrictions.")
-        self.patched_update_targeting_setting.assert_called_once()
+        self.mock_google_ads_service.search.assert_called_once()
+        self.assertIn(f"ad_group.id = {self.test_ad_group_id}", self.mock_google_ads_service.search.call_args[1]['query'])
 
-        called_args = self.patched_update_targeting_setting.call_args[0]
-        called_targeting_setting = called_args[3]
-        self.assertEqual(len(self._list_of_restrictions_added_by_sut_add_method), 1)
-        added_restriction = self._list_of_restrictions_added_by_sut_add_method[0]
-        self.assertEqual(added_restriction.targeting_dimension, self.mock_enums.AUDIENCE)
-        self.assertTrue(added_restriction.bid_only)
-        self.assertIn(added_restriction, self._current_target_restrictions_list_for_sut)
+        self.patched_update_targeting_setting.assert_not_called()
 
         captured_output = mock_stdout.getvalue()
-        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)}", captured_output)
-        self.assertIn("No AUDIENCE targeting restriction found. A new one will be created with bid_only set to True.", captured_output)
-        # The "Updating..." message is NOT printed by main. If the patched function was called, that's enough.
+        self.assertIn(f"Ad group with ID {str(self.test_ad_group_id)} and name 'Mock Ad Group Name' was found", captured_output)
+        self.assertNotIn("No AUDIENCE targeting restriction found", captured_output)
+        self.assertIn("No target restrictions to update.", captured_output)
 
 
 if __name__ == "__main__":

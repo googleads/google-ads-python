@@ -16,6 +16,7 @@ from examples.remarketing.upload_store_sales_transactions import (
     print_google_ads_failures,
     add_transactions_to_offline_user_data_job,
     check_job_status,
+    main as main_sut, # Added main SUT function
 )
 from google.ads.googleads.client import GoogleAdsClient
 
@@ -56,8 +57,9 @@ class TestBuildOperationsStoreSales(unittest.TestCase):
 
         self.mock_ca_service = MagicMock(name="ConversionActionService")
 
-        self.original_get_service_build_ops = self.mock_client.get_service
-        self.original_get_type_build_ops = self.mock_client.get_type
+        self.original_get_service_build_ops = getattr(self.mock_client, 'get_service', None)
+        self.original_get_type_build_ops = getattr(self.mock_client, 'get_type', None)
+
 
         self.mock_client.get_service = MagicMock(return_value=self.mock_ca_service)
         self.mock_ca_service.conversion_action_path.return_value = "dummy_ca_path_val"
@@ -128,8 +130,10 @@ class TestBuildOperationsStoreSales(unittest.TestCase):
         self.addCleanup(self._restore_original_client_methods_build_ops)
 
     def _restore_original_client_methods_build_ops(self):
-        self.mock_client.get_service = self.original_get_service_build_ops
-        self.mock_client.get_type = self.original_get_type_build_ops
+        if self.original_get_service_build_ops:
+            self.mock_client.get_service = self.original_get_service_build_ops
+        if self.original_get_type_build_ops:
+            self.mock_client.get_type = self.original_get_type_build_ops
 
     def test_build_operations_basic_case_no_optionals(self):
         customer_id_val = "test_customer_1"
@@ -377,7 +381,7 @@ class TestCreateOfflineUserDataJobStoreSales(unittest.TestCase):
         self.mock_offline_user_data_job.store_sales_metadata = self.mock_store_sales_metadata
         self.mock_store_sales_metadata.third_party_metadata = self.mock_third_party_metadata
 
-        self.original_get_type_create_job = self.mock_client.get_type
+        self.original_get_type_create_job = getattr(self.mock_client, 'get_type', None)
         self.mock_client.get_type = MagicMock(return_value=self.mock_offline_user_data_job)
 
 
@@ -403,7 +407,8 @@ class TestCreateOfflineUserDataJobStoreSales(unittest.TestCase):
         self.addCleanup(self.mock_third_party_metadata.reset_mock)
 
     def _restore_original_get_type_create_job(self):
-        self.mock_client.get_type = self.original_get_type_create_job
+        if self.original_get_type_create_job:
+            self.mock_client.get_type = self.original_get_type_create_job
 
 
     def test_create_job_first_party_basic(self):
@@ -558,7 +563,7 @@ class TestPrintGoogleAdsFailuresStoreSales(unittest.TestCase):
         self.plain_failure_message_instance = TestPrintGoogleAdsFailuresStoreSales.PlainFailureMessagePlaceholder()
         self.plain_failure_message_instance.__class__ = TestPrintGoogleAdsFailuresStoreSales.MockGoogleAdsFailureForTest
 
-        self.original_get_type_print_failures = self.mock_client.get_type
+        self.original_get_type_print_failures = getattr(self.mock_client, 'get_type', None)
         def get_type_side_effect_for_print_failures(type_name):
             if type_name == "GoogleAdsFailure":
                 return self.plain_failure_message_instance
@@ -573,7 +578,8 @@ class TestPrintGoogleAdsFailuresStoreSales(unittest.TestCase):
         self.addCleanup(self._restore_original_get_type_print_failures)
 
     def _restore_original_get_type_print_failures(self):
-        self.mock_client.get_type = self.original_get_type_print_failures
+        if self.original_get_type_print_failures:
+            self.mock_client.get_type = self.original_get_type_print_failures
 
 
     def test_single_detail_single_error(self):
@@ -675,7 +681,7 @@ class TestAddTransactionsToJobStoreSales(unittest.TestCase):
         self.plain_failure_message_instance_for_add_tx = TestAddTransactionsToJobStoreSales.PlainFailureMessagePlaceholderInAddTx()
         self.plain_failure_message_instance_for_add_tx.__class__ = TestAddTransactionsToJobStoreSales.MockGoogleAdsFailureForTestInAddTx
 
-        self.original_get_type_add_tx = self.mock_client.get_type
+        self.original_get_type_add_tx = getattr(self.mock_client, 'get_type', None)
         def get_type_side_effect_for_add_tx(type_name):
             if type_name == "AddOfflineUserDataJobOperationsRequest":
                 self.mock_add_ops_request.operations = []
@@ -710,7 +716,8 @@ class TestAddTransactionsToJobStoreSales(unittest.TestCase):
         self.addCleanup(TestAddTransactionsToJobStoreSales.MockGoogleAdsFailureForTestInAddTx.deserialize.reset_mock)
 
     def _restore_original_get_type_add_tx(self):
-        self.mock_client.get_type = self.original_get_type_add_tx
+        if self.original_get_type_add_tx:
+            self.mock_client.get_type = self.original_get_type_add_tx
 
 
     def test_add_transactions_success_no_failures_no_warnings(self):
@@ -782,7 +789,8 @@ class TestAddTransactionsToJobStoreSales(unittest.TestCase):
         self.mocked_build_ops.assert_called_once()
         self.mock_offline_user_data_job_service.add_offline_user_data_job_operations.assert_called_once()
 
-        self.mocked_print_failures.assert_called_once_with(self.mock_client, mock_status_failure)
+        # Corrected: SUT calls print_google_ads_failures with only one argument (the status object)
+        self.mocked_print_failures.assert_called_once_with(mock_status_failure)
         self.assertNotIn("Successfully added", self.mock_stdout.getvalue())
 
     def test_add_transactions_with_warning(self):
@@ -812,7 +820,7 @@ class TestAddTransactionsToJobStoreSales(unittest.TestCase):
         self.mocked_build_ops.assert_called_once()
         self.mock_offline_user_data_job_service.add_offline_user_data_job_operations.assert_called_once()
 
-        self.mocked_print_failures.assert_called_once_with(self.mock_client, mock_status_warning)
+        self.mocked_print_failures.assert_called_once_with(mock_status_warning)
         self.assertIn(f"Successfully added {len([self.mock_op1, self.mock_op2])} to the offline user data job.", self.mock_stdout.getvalue())
 
     def test_add_transactions_with_both_failure_and_warning(self):
@@ -844,8 +852,8 @@ class TestAddTransactionsToJobStoreSales(unittest.TestCase):
         self.mock_offline_user_data_job_service.add_offline_user_data_job_operations.assert_called_once()
 
         self.assertEqual(self.mocked_print_failures.call_count, 2)
-        self.mocked_print_failures.assert_any_call(self.mock_client, mock_status_failure)
-        self.mocked_print_failures.assert_any_call(self.mock_client, mock_status_warning)
+        self.mocked_print_failures.assert_any_call(mock_status_failure)
+        self.mocked_print_failures.assert_any_call(mock_status_warning)
 
         self.assertNotIn("Successfully added", self.mock_stdout.getvalue())
 
@@ -857,19 +865,16 @@ class TestCheckJobStatusStoreSales(unittest.TestCase):
 
         self.mock_google_ads_service = MagicMock(name="GoogleAdsService")
 
-        self.original_get_service_check_job = self.mock_client.get_service
+        self.original_get_service_check_job = getattr(self.mock_client, 'get_service', None)
         self.mock_client.get_service = MagicMock(return_value=self.mock_google_ads_service)
 
-        # Mock for client.enums.OfflineUserDataJobTypeEnum.OfflineUserDataJobType.Name()
         self.mock_job_type_obj_for_name_method = MagicMock(name="OfflineUserDataJobType_DOT_OfflineUserDataJobType")
         self.mock_job_type_obj_for_name_method.Name = Mock(side_effect=lambda val: f"TYPENAME_FOR_{val}")
         self.mock_client.enums.OfflineUserDataJobTypeEnum.OfflineUserDataJobType = self.mock_job_type_obj_for_name_method
 
-        # Mock for client.enums.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus.Name()
         self.mock_job_status_obj_for_name_method = MagicMock(name="OfflineUserDataJobStatus_DOT_OfflineUserDataJobStatus")
         self.mock_job_status_obj_for_name_method.Name = Mock(side_effect=lambda val: f"STATUSNAME_FOR_{val}")
 
-        # Mock for client.enums.OfflineUserDataJobStatusEnum values (for comparison)
         self.status_val_failed = "FAILED_STATUS_VAL"
         self.status_val_pending = "PENDING_STATUS_VAL"
         self.status_val_running = "RUNNING_STATUS_VAL"
@@ -897,13 +902,14 @@ class TestCheckJobStatusStoreSales(unittest.TestCase):
         self.addCleanup(self._restore_original_client_methods_check_job)
 
     def _restore_original_client_methods_check_job(self):
-        self.mock_client.get_service = self.original_get_service_check_job
+        if self.original_get_service_check_job:
+            self.mock_client.get_service = self.original_get_service_check_job
 
     def test_job_status_success(self):
         customer_id = "dummy_customer_id_succ"
         job_resource_name = "dummy_job_rn_succ"
-        job_id_from_sut = "job123" # SUT uses job.id
-        job_type_val_from_sut = 4 # Example actual enum value for type
+        job_id_from_sut = "job123"
+        job_type_val_from_sut = 4
 
         self.mock_offline_user_data_job_from_search.id = job_id_from_sut
         self.mock_offline_user_data_job_from_search.status = self.status_val_success
@@ -972,14 +978,14 @@ class TestCheckJobStatusStoreSales(unittest.TestCase):
           offline_user_data_job.failure_reason
         FROM offline_user_data_job
         WHERE offline_user_data_job.resource_name =
-          '{job_resource_name}'""" # Needed for assertion
+          '{job_resource_name}'"""
 
         check_job_status(self.mock_client, customer_id, job_resource_name)
 
         output = self.mock_stdout.getvalue()
         self.assertIn(f"Offline user data job ID {job_id_from_sut} with type 'TYPENAME_FOR_{job_type_val_from_sut}' has status STATUSNAME_FOR_{self.status_val_pending}.", output)
         self.assertIn("To check the status of the job periodically", output)
-        self.assertIn(expected_query, output) # Check if the query is printed
+        self.assertIn(expected_query, output)
         self.assertNotIn("completed successfully", output)
         self.assertNotIn("Failure reason:", output)
 
@@ -1021,13 +1027,156 @@ class TestCheckJobStatusStoreSales(unittest.TestCase):
         job_type_val_from_sut = 0
 
         self.mock_offline_user_data_job_from_search.id = job_id_from_sut
-        self.mock_offline_user_data_job_from_search.status = self.status_val_unknown # Use a distinct value not SUCCESS/FAILED etc.
+        self.mock_offline_user_data_job_from_search.status = self.status_val_unknown
         self.mock_offline_user_data_job_from_search.type = job_type_val_from_sut
 
         self.mock_google_ads_service.search.return_value = [self.mock_googleads_row]
 
         with self.assertRaisesRegex(ValueError, "Requested job has UNKNOWN or UNSPECIFIED status."):
             check_job_status(self.mock_client, customer_id, job_resource_name)
+
+
+class TestMainFunctionStoreSales(unittest.TestCase):
+    def setUp(self):
+        self.mock_client = MagicMock(spec=GoogleAdsClient)
+        # Ensure client.enums exists for main SUT function
+        self.mock_client.enums = MagicMock()
+
+        # Mock OfflineUserDataJobTypeEnum for argparse defaults in main
+        # These need to be actual enum-like objects if SUT accesses .value or .name on them directly
+        # SUT argparse default: googleads_client.enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_FIRST_PARTY
+        # SUT argparse choices for consent: [e.name for e in googleads_client.enums.ConsentStatusEnum]
+
+        # For OfflineUserDataJobTypeEnum default in argparse
+        mock_first_party_job_type_enum_member = Mock(name="STORE_SALES_UPLOAD_FIRST_PARTY_MEMBER")
+        # If SUT uses .value for default, then: mock_first_party_job_type_enum_member.value = some_int_val
+        # However, argparse default directly takes the enum member.
+        self.mock_client.enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_FIRST_PARTY = mock_first_party_job_type_enum_member
+
+        # For ConsentStatusEnum choices in argparse
+        # SUT: choices=[e.name for e in googleads_client.enums.ConsentStatusEnum]
+        # This means googleads_client.enums.ConsentStatusEnum should be an iterable of objects having a .name attribute.
+        # The dict used by other test classes' setUp won't work directly for this.
+        # Let's make it a list of mocks for argparse.
+        mock_consent_granted = Mock(name="GRANTED")
+        mock_consent_denied = Mock(name="DENIED")
+        mock_consent_unspecified = Mock(name="UNSPECIFIED")
+        self.mock_client.enums.ConsentStatusEnum = [mock_consent_granted, mock_consent_denied, mock_consent_unspecified]
+
+
+        self.mock_offline_user_data_job_service_for_main = MagicMock(name="OfflineUserDataJobService_for_main")
+        self.mock_offline_user_data_job_service_for_main.run_offline_user_data_job = MagicMock(name="run_offline_job_mock")
+
+        # Store original get_service for restoration
+        self.original_get_service_main = getattr(self.mock_client, 'get_service', None)
+        self.mock_client.get_service = MagicMock(return_value=self.mock_offline_user_data_job_service_for_main)
+
+        self.patch_create_job = patch(
+            "examples.remarketing.upload_store_sales_transactions.create_offline_user_data_job"
+        )
+        self.mocked_create_job = self.patch_create_job.start()
+        self.mocked_create_job.return_value = "dummy_job_resource_name_from_create"
+        self.addCleanup(self.patch_create_job.stop)
+
+        self.patch_add_transactions = patch(
+            "examples.remarketing.upload_store_sales_transactions.add_transactions_to_offline_user_data_job"
+        )
+        self.mocked_add_transactions = self.patch_add_transactions.start()
+        self.addCleanup(self.patch_add_transactions.stop)
+
+        self.patch_check_status = patch(
+            "examples.remarketing.upload_store_sales_transactions.check_job_status"
+        )
+        self.mocked_check_status = self.patch_check_status.start()
+        self.addCleanup(self.patch_check_status.stop)
+        self.addCleanup(self._restore_original_client_methods_main)
+
+    def _restore_original_client_methods_main(self):
+        if self.original_get_service_main:
+            self.mock_client.get_service = self.original_get_service_main
+
+
+    def test_main_orchestration_flow(self, mock_load_storage): # mock_load_storage from class decorator
+        # Dummy args for main function
+        args_customer_id = "main_cust_id"
+        args_conversion_action_id = 12345 # SUT argparse takes int
+        args_offline_user_data_job_type = self.mock_client.enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_FIRST_PARTY # Use the mock
+        args_external_id = 67890
+        args_advertiser_upload_date_time = "2023-01-01 12:00:00+00:00"
+        args_bridge_map_version_id = "v1"
+        args_partner_id = 777
+        args_custom_key = "ckey"
+        args_custom_value = "cval" # This will be passed to add_transactions, not create_job
+        args_item_id = "item001"
+        args_merchant_center_account_id = 998877
+        args_country_code = "US"
+        args_language_code = "en"
+        args_quantity = 1
+        args_ad_user_data_consent = "GRANTED"
+        args_ad_personalization_consent = "DENIED"
+
+        main_sut(
+            client=self.mock_client,
+            customer_id=args_customer_id,
+            conversion_action_id=args_conversion_action_id,
+            offline_user_data_job_type=args_offline_user_data_job_type,
+            external_id=args_external_id,
+            advertiser_upload_date_time=args_advertiser_upload_date_time,
+            bridge_map_version_id=args_bridge_map_version_id,
+            partner_id=args_partner_id,
+            custom_key=args_custom_key,
+            custom_value=args_custom_value, # This is for add_transactions
+            item_id=args_item_id,
+            merchant_center_account_id=args_merchant_center_account_id,
+            country_code=args_country_code,
+            language_code=args_language_code,
+            quantity=args_quantity,
+            ad_user_data_consent=args_ad_user_data_consent,
+            ad_personalization_consent=args_ad_personalization_consent
+        )
+
+        # Assert create_offline_user_data_job call
+        self.mock_client.get_service.assert_called_with("OfflineUserDataJobService") # Main SUT calls this first
+        self.mocked_create_job.assert_called_once_with(
+            self.mock_client,
+            self.mock_offline_user_data_job_service_for_main,
+            args_customer_id,
+            args_offline_user_data_job_type,
+            args_external_id,
+            args_advertiser_upload_date_time,
+            args_bridge_map_version_id,
+            args_partner_id,
+            args_custom_key
+        )
+
+        # Assert add_transactions_to_offline_user_data_job call
+        self.mocked_add_transactions.assert_called_once_with(
+            self.mock_client,
+            self.mock_offline_user_data_job_service_for_main,
+            args_customer_id,
+            "dummy_job_resource_name_from_create", # Result from create_job
+            args_conversion_action_id,
+            args_custom_value, # custom_value is for add_transactions
+            args_item_id,
+            args_merchant_center_account_id,
+            args_country_code,
+            args_language_code,
+            args_quantity,
+            args_ad_user_data_consent,
+            args_ad_personalization_consent
+        )
+
+        # Assert run_offline_user_data_job service call
+        self.mock_offline_user_data_job_service_for_main.run_offline_user_data_job.assert_called_once_with(
+            resource_name="dummy_job_resource_name_from_create"
+        )
+
+        # Assert check_job_status call
+        self.mocked_check_status.assert_called_once_with(
+            self.mock_client,
+            args_customer_id,
+            "dummy_job_resource_name_from_create"
+        )
 
 
 if __name__ == "__main__":

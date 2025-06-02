@@ -25,7 +25,7 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v19.common.types.ad_asset import AdTextAsset # Corrected import
 from google.ads.googleads.v19.resources.types.ad import Ad
 from google.ads.googleads.v19.services.services.ad_service import (
     AdServiceClient,

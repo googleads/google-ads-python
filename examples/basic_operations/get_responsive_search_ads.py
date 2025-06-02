@@ -24,7 +24,7 @@ from typing import List, Optional, Sequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v19.common.types.ad_asset import AdTextAsset # Corrected import
 from google.ads.googleads.v19.resources.types.ad import Ad
 from google.ads.googleads.v19.services.services.google_ads_service import (
     GoogleAdsServiceClient,
@@ -67,7 +67,7 @@ def main(
 
     one_found: bool = False
 
-    for row in results:
+    for row in results.results: # Iterate over results.results
         one_found = True
         ad: Ad = row.ad_group_ad.ad
         print(

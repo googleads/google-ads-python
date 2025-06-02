@@ -1,0 +1,7 @@
+google-ads
+google-api-core
+google-auth
+googleapis-common-protos
+grpcio
+protobuf
+PyYAML

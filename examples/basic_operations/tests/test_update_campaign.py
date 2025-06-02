@@ -3,7 +3,7 @@ import unittest
 from io import StringIO
 from unittest.mock import MagicMock, patch
 
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -21,7 +21,7 @@ from google.ads.googleads.v19.enums.types.campaign_status import (
 )
 from google.protobuf import field_mask_pb2
 
-from basic_operations.update_campaign import main
+from examples.basic_operations.update_campaign import main # Absolute import
 
 
 class TestUpdateCampaign(unittest.TestCase):
@@ -42,7 +42,7 @@ class TestUpdateCampaign(unittest.TestCase):
             call=MagicMock(),
         )
 
-    @patch("basic_operations.update_campaign.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.update_campaign.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_update_campaign_success(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client
@@ -114,7 +114,7 @@ class TestUpdateCampaign(unittest.TestCase):
             captured_output.getvalue(),
         )
 
-    @patch("basic_operations.update_campaign.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.update_campaign.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_update_campaign_failure_api_error(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client

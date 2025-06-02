@@ -3,7 +3,7 @@ import unittest
 from io import StringIO
 from unittest.mock import MagicMock, patch
 
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -16,7 +16,7 @@ from google.ads.googleads.v19.services.types.campaign_service import (
     MutateCampaignResult,
 )
 
-from basic_operations.remove_campaign import main
+from examples.basic_operations.remove_campaign import main # Absolute import
 
 
 class TestRemoveCampaign(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestRemoveCampaign(unittest.TestCase):
             call=MagicMock(), # Mocking the gRPC call object
         )
 
-    @patch("basic_operations.remove_campaign.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.remove_campaign.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_remove_campaign_success(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client
@@ -93,7 +93,7 @@ class TestRemoveCampaign(unittest.TestCase):
             captured_output.getvalue(),
         )
 
-    @patch("basic_operations.remove_campaign.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.remove_campaign.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_remove_campaign_failure_api_error(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client

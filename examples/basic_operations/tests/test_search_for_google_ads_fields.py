@@ -3,7 +3,7 @@ import unittest
 from io import StringIO
 from unittest.mock import MagicMock, patch
 
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -25,7 +25,7 @@ from google.ads.googleads.v19.enums.types.google_ads_field_data_type import (
     GoogleAdsFieldDataTypeEnum,
 )
 
-from basic_operations.search_for_google_ads_fields import main
+from examples.basic_operations.search_for_google_ads_fields import main # Absolute import
 
 
 class TestSearchGoogleAdsFields(unittest.TestCase):
@@ -46,8 +46,8 @@ class TestSearchGoogleAdsFields(unittest.TestCase):
             call=MagicMock(),
         )
 
-    @patch("basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage")
-    @patch("basic_operations.search_for_google_ads_fields.sys.exit")
+    @patch("examples.basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage") # Updated patch path
+    @patch("examples.basic_operations.search_for_google_ads_fields.sys.exit") # Updated patch path
     def test_main_no_fields_found(self, mock_sys_exit, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client
@@ -77,7 +77,7 @@ class TestSearchGoogleAdsFields(unittest.TestCase):
         )
         mock_sys_exit.assert_called_once_with(0)
 
-    @patch("basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_fields_found(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client
@@ -142,7 +142,7 @@ class TestSearchGoogleAdsFields(unittest.TestCase):
         self.assertIn(f"{'  category:':<16} METRIC", output)
         # ... (add more assertions for field2 if needed, similar to field1)
 
-    @patch("basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.search_for_google_ads_fields.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_api_error(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client

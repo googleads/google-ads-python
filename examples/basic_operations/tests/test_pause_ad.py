@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch, call # ensure call is imported
 # Add the parent directory to the Python path to allow importing from sibling directories
 # This assumes the tests are run from the 'examples/basic_operations/tests/' directory
 # or that the PYTHONPATH is set up appropriately.
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -24,7 +24,7 @@ from google.ads.googleads.v19.enums.types.ad_group_ad_status import (
 from google.protobuf import field_mask_pb2
 
 # Import the function to be tested
-from basic_operations.pause_ad import main
+from examples.basic_operations.pause_ad import main # Absolute import
 
 
 class TestPauseAd(unittest.TestCase):
@@ -44,7 +44,7 @@ class TestPauseAd(unittest.TestCase):
             call=MagicMock(),
         )
 
-    @patch("basic_operations.pause_ad.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.pause_ad.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_pause_ad_success(self, mock_load_from_storage):
         # --- Mock client and services ---
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
@@ -147,7 +147,7 @@ class TestPauseAd(unittest.TestCase):
             captured_output.getvalue(),
         )
 
-    @patch("basic_operations.pause_ad.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.pause_ad.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_pause_ad_failure_api_error(self, mock_load_from_storage):
         # --- Mock client and services ---
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)

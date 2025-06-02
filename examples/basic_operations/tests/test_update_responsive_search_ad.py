@@ -3,7 +3,7 @@ import unittest
 from io import StringIO
 from unittest.mock import MagicMock, patch, ANY
 
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -21,7 +21,7 @@ from google.ads.googleads.v19.enums.types.served_asset_field_type import (
 from google.protobuf import field_mask_pb2
 
 # Import the function to be tested
-from basic_operations.update_responsive_search_ad import main
+from examples.basic_operations.update_responsive_search_ad import main # Absolute import
 
 
 class TestUpdateResponsiveSearchAd(unittest.TestCase):
@@ -42,8 +42,8 @@ class TestUpdateResponsiveSearchAd(unittest.TestCase):
             call=MagicMock(),
         )
 
-    @patch("basic_operations.update_responsive_search_ad.uuid4") # Mock uuid4 to control its output
-    @patch("basic_operations.update_responsive_search_ad.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.update_responsive_search_ad.uuid4") # Updated patch path
+    @patch("examples.basic_operations.update_responsive_search_ad.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_update_rsa_success(self, mock_load_from_storage, mock_uuid4):
         # Configure mock_uuid4 to return a fixed hex value
         mock_uuid_hex = "12345678"
@@ -145,7 +145,7 @@ class TestUpdateResponsiveSearchAd(unittest.TestCase):
             captured_output.getvalue(),
         )
 
-    @patch("basic_operations.update_responsive_search_ad.GoogleAdsClient.load_from_storage")
+    @patch("examples.basic_operations.update_responsive_search_ad.GoogleAdsClient.load_from_storage") # Updated patch path
     def test_main_update_rsa_failure_api_error(self, mock_load_from_storage):
         mock_google_ads_client = MagicMock(spec=GoogleAdsClient)
         mock_load_from_storage.return_value = mock_google_ads_client

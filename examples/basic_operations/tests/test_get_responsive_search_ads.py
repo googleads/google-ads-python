@@ -19,9 +19,9 @@ from google.ads.googleads.v19.services.types.google_ads_service import (
 )
 
 # Add the parent directory to the Python path to allow importing from sibling directories
-sys.path.append("../..")
+# sys.path.append("../..") # No longer needed with relative import
 
-from basic_operations.get_responsive_search_ads import (
+from examples.basic_operations.get_responsive_search_ads import ( # Absolute import
     main,
     ad_text_assets_to_strs,
 )
@@ -46,7 +46,7 @@ class TestGetResponsiveSearchAds(unittest.TestCase):
         ]
         self.assertEqual(ad_text_assets_to_strs(assets), expected_output)
 
-    @patch("basic_operations.get_responsive_search_ads.GoogleAdsClient")
+    @patch("examples.basic_operations.get_responsive_search_ads.GoogleAdsClient") # Updated patch path
     def test_main_no_ads_found(self, mock_google_ads_client_constructor):
         mock_ads_client = MagicMock()
         mock_google_ads_service = MagicMock(spec=GoogleAdsServiceClient)
@@ -71,7 +71,7 @@ class TestGetResponsiveSearchAds(unittest.TestCase):
         )
         mock_google_ads_service.search.assert_called_once()
 
-    @patch("basic_operations.get_responsive_search_ads.GoogleAdsClient")
+    @patch("examples.basic_operations.get_responsive_search_ads.GoogleAdsClient") # Updated patch path
     def test_main_ads_found(self, mock_google_ads_client_constructor):
         mock_ads_client = MagicMock()
         mock_google_ads_service = MagicMock(spec=GoogleAdsServiceClient)
@@ -134,7 +134,7 @@ class TestGetResponsiveSearchAds(unittest.TestCase):
             in mock_google_ads_service.search.call_args[1]["request"].query
         )
 
-    @patch("basic_operations.get_responsive_search_ads.GoogleAdsClient")
+    @patch("examples.basic_operations.get_responsive_search_ads.GoogleAdsClient") # Updated patch path
     # Removed mock_sys_exit as main() itself doesn't call sys.exit()
     def test_main_google_ads_exception(self, mock_google_ads_client_constructor):
         mock_ads_client = MagicMock()

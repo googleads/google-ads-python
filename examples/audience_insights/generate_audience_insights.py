@@ -44,7 +44,7 @@ def main(client, customer_id, custom_name):
         customer_id,
         location_id,
         user_interest_category,
-        custom_name
+        custom_name,
     )
     generate_suggested_targeting_insights(
         client,
@@ -52,14 +52,14 @@ def main(client, customer_id, custom_name):
         googleads_service,
         customer_id,
         location_id,
-        custom_name
+        custom_name,
     )
     list_audience_insights_attributes(
         client,
         audience_insights_service,
         customer_id,
         product_name,
-        custom_name
+        custom_name,
     )
 
 
@@ -71,7 +71,7 @@ def audience_composition_insights(
     customer_id,
     location_id,
     user_interest,
-    custom_name
+    custom_name,
 ):
     """Returns a collection of attributes represented in an audience of interest.
 
@@ -93,8 +93,8 @@ def audience_composition_insights(
 
     insights_info = client.get_type("InsightsAudienceAttributeGroup")
     attributes = client.get_type("AudienceInsightsAttribute")
-    attributes.user_interest.user_interest_category = googleads_service.user_interest_path(
-        customer_id, user_interest
+    attributes.user_interest.user_interest_category = (
+        googleads_service.user_interest_path(customer_id, user_interest)
     )
 
     insights_info.attributes.append(attributes)
@@ -126,7 +126,7 @@ def generate_suggested_targeting_insights(
     googleads_service,
     customer_id,
     location_id,
-    custom_name
+    custom_name,
 ):
     """Returns a collection of targeting insights (e.g.targetable audiences)
         that are relevant to the requested audience.
@@ -215,7 +215,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(googleads_client, args.customer_id, args.custom_name)

@@ -34,24 +34,24 @@ from typing import List, Dict, Any, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     GoogleAdsServiceClient,
     SearchGoogleAdsStreamResponse,
 )
-from google.ads.googleads.v19.services.types.user_list_service import (
+from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
     UserListServiceClient,
 )
-from google.ads.googleads.v19.resources.types.user_list import UserList
-from google.ads.googleads.v19.services.types.offline_user_data_job_service import (
+from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.types.offline_user_data_job_service import (
     OfflineUserDataJobOperation,
     OfflineUserDataJobServiceClient,
     AddOfflineUserDataJobOperationsResponse,
 )
-from google.ads.googleads.v19.resources.types.offline_user_data_job import (
+from google.ads.googleads.v20.resources.types.offline_user_data_job import (
     OfflineUserDataJob,
 )
-from google.ads.googleads.v19.common.types.offline_user_data import (
+from google.ads.googleads.v20.common.types.offline_user_data import (
     UserData,
     UserIdentifier,
     AddressInfo,
@@ -634,7 +634,7 @@ if __name__ == "__main__":
     # used for help text, so it's fine if it fails.
     try:
         consent_status_enum_names = [
-            e.name for e in GoogleAdsClient.load_from_storage(version="v19").enums.ConsentStatusEnum
+            e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum
         ]
     except Exception:
         consent_status_enum_names = ["UNSPECIFIED", "UNKNOWN", "GRANTED", "DENIED"]
@@ -664,7 +664,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

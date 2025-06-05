@@ -26,12 +26,12 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.common.types.user_lists import UserListActionInfo
-from google.ads.googleads.v19.resources.types.user_list import UserList
-from google.ads.googleads.v19.services.types.conversion_action_service import (
+from google.ads.googleads.v20.common.types.user_lists import UserListActionInfo
+from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.types.conversion_action_service import (
     ConversionActionServiceClient,
 )
-from google.ads.googleads.v19.services.types.user_list_service import (
+from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
     UserListServiceClient,
 )
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

@@ -23,31 +23,31 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.resources.types.asset import Asset
-from google.ads.googleads.v19.resources.types.asset_set import AssetSet
-from google.ads.googleads.v19.resources.types.asset_set_asset import (
+from google.ads.googleads.v20.resources.types.asset import Asset
+from google.ads.googleads.v20.resources.types.asset_set import AssetSet
+from google.ads.googleads.v20.resources.types.asset_set_asset import (
     AssetSetAsset,
 )
-from google.ads.googleads.v19.resources.types.campaign_asset_set import (
+from google.ads.googleads.v20.resources.types.campaign_asset_set import (
     CampaignAssetSet,
 )
-from google.ads.googleads.v19.services.types.asset_service import (
+from google.ads.googleads.v20.services.types.asset_service import (
     AssetOperation,
     AssetServiceClient,
 )
-from google.ads.googleads.v19.services.types.asset_set_service import (
+from google.ads.googleads.v20.services.types.asset_set_service import (
     AssetSetOperation,
     AssetSetServiceClient,
 )
-from google.ads.googleads.v19.services.types.asset_set_asset_service import (
+from google.ads.googleads.v20.services.types.asset_set_asset_service import (
     AssetSetAssetOperation,
     AssetSetAssetServiceClient,
 )
-from google.ads.googleads.v19.services.types.campaign_asset_set_service import (
+from google.ads.googleads.v20.services.types.campaign_asset_set_service import (
     CampaignAssetSetOperation,
     CampaignAssetSetServiceClient,
 )
-from google.ads.googleads.v19.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     GoogleAdsServiceClient,
 )
 
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

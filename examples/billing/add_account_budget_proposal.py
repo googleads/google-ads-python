@@ -27,7 +27,9 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 # [START add_account_budget_proposal]
-def main(client, customer_id, billing_setup_id):
+def main(
+    client: GoogleAdsClient, customer_id: str, billing_setup_id: str
+):
     account_budget_proposal_service = client.get_service(
         "AccountBudgetProposalService"
     )

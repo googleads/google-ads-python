@@ -18,6 +18,7 @@ import argparse
 import unittest
 from unittest import mock
 import runpy
+import warnings
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -163,7 +164,13 @@ class AddPerformanceMaxCampaignTest(unittest.TestCase):
             "examples.advanced_operations.add_performance_max_campaign.argparse.ArgumentParser"
         ) as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_performance_max_campaign' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_performance_max_campaign'",
+                    category=RuntimeWarning,
+                )
+                runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
 
         self.assertEqual(mock_googleads_service.mutate.call_count, 3)
         mock_load_from_storage.assert_called_once_with(version="v20")
@@ -227,7 +234,13 @@ class AddPerformanceMaxCampaignTest(unittest.TestCase):
             "examples.advanced_operations.add_performance_max_campaign.argparse.ArgumentParser"
         ) as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_performance_max_campaign' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_performance_max_campaign'",
+                    category=RuntimeWarning,
+                )
+                runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
 
         self.assertEqual(mock_googleads_service.mutate.call_count, 3)
         main_mutate_call_args = mock_googleads_service.mutate.call_args_list[2]
@@ -279,9 +292,15 @@ class AddPerformanceMaxCampaignTest(unittest.TestCase):
         with mock.patch("sys.argv", ["add_performance_max_campaign.py", "-c", mock_args.customer_id]), \
              mock.patch("examples.advanced_operations.add_performance_max_campaign.argparse.ArgumentParser") as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            with self.assertRaises(SystemExit) as cm:
-                runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
-            self.assertEqual(cm.exception.code, 1)
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_performance_max_campaign' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_performance_max_campaign'",
+                    category=RuntimeWarning,
+                )
+                with self.assertRaises(SystemExit) as cm:
+                    runpy.run_module("examples.advanced_operations.add_performance_max_campaign", run_name="__main__")
+                self.assertEqual(cm.exception.code, 1)
 
         mock_googleads_service.mutate.assert_called_once() # Should fail on the first call
 

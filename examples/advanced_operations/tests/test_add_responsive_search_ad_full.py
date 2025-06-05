@@ -18,6 +18,7 @@ import argparse
 import unittest
 from unittest import mock
 import runpy
+import warnings
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -119,7 +120,13 @@ class AddResponsiveSearchAdFullTest(unittest.TestCase):
         with mock.patch("sys.argv", ["add_responsive_search_ad_full.py", "-c", mock_args.customer_id]), \
              mock.patch("examples.advanced_operations.add_responsive_search_ad_full.argparse.ArgumentParser") as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_responsive_search_ad_full' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_responsive_search_ad_full'",
+                    category=RuntimeWarning,
+                )
+                runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
 
         mock_load_from_storage.assert_called_once_with(version="v20")
         self.mock_services["CustomizerAttributeService"].mutate_customizer_attributes.assert_not_called()
@@ -174,7 +181,13 @@ class AddResponsiveSearchAdFullTest(unittest.TestCase):
         with mock.patch("sys.argv", ["add_responsive_search_ad_full.py", "-c", mock_args.customer_id, "-n", _CUSTOMIZER_NAME]), \
              mock.patch("examples.advanced_operations.add_responsive_search_ad_full.argparse.ArgumentParser") as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_responsive_search_ad_full' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_responsive_search_ad_full'",
+                    category=RuntimeWarning,
+                )
+                runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
 
         self.mock_services["CustomizerAttributeService"].mutate_customizer_attributes.assert_called_once()
         customizer_attr_op_create = self.mock_services["CustomizerAttributeService"].mutate_customizer_attributes.call_args[1]['operations'][0].create
@@ -218,9 +231,15 @@ class AddResponsiveSearchAdFullTest(unittest.TestCase):
         with mock.patch("sys.argv", ["add_responsive_search_ad_full.py", "-c", mock_args.customer_id]), \
              mock.patch("examples.advanced_operations.add_responsive_search_ad_full.argparse.ArgumentParser") as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            with self.assertRaises(SystemExit) as cm:
-                runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
-            self.assertEqual(cm.exception.code, 1)
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_responsive_search_ad_full' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_responsive_search_ad_full'",
+                    category=RuntimeWarning,
+                )
+                with self.assertRaises(SystemExit) as cm:
+                    runpy.run_module("examples.advanced_operations.add_responsive_search_ad_full", run_name="__main__")
+                self.assertEqual(cm.exception.code, 1)
 
         self.mock_services["CampaignBudgetService"].mutate_campaign_budgets.assert_called_once()
 

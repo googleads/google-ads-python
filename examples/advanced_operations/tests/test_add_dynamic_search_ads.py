@@ -18,6 +18,7 @@ import argparse
 import unittest
 from unittest import mock
 import runpy
+import warnings
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -123,7 +124,13 @@ class AddDynamicSearchAdsTest(unittest.TestCase):
             "examples.advanced_operations.add_dynamic_search_ads.argparse.ArgumentParser"
         ) as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            runpy.run_module("examples.advanced_operations.add_dynamic_search_ads", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_dynamic_search_ads' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_dynamic_search_ads'",
+                    category=RuntimeWarning,
+                )
+                runpy.run_module("examples.advanced_operations.add_dynamic_search_ads", run_name="__main__")
 
         mock_load_from_storage.assert_called_once_with(version="v20")
         mock_campaign_budget_service.mutate_campaign_budgets.assert_called_once()
@@ -180,10 +187,16 @@ class AddDynamicSearchAdsTest(unittest.TestCase):
             "examples.advanced_operations.add_dynamic_search_ads.argparse.ArgumentParser"
         ) as mock_argparse:
             mock_argparse.return_value.parse_args.return_value = mock_args
-            with self.assertRaises(SystemExit) as cm:
-                runpy.run_module("examples.advanced_operations.add_dynamic_search_ads", run_name="__main__")
+            with warnings.catch_warnings():
+                warnings.filterwarnings(
+                    "ignore",
+                    message="'.*add_dynamic_search_ads' found in sys.modules after import of package 'examples.advanced_operations', but prior to execution of 'examples.advanced_operations.add_dynamic_search_ads'",
+                    category=RuntimeWarning,
+                )
+                with self.assertRaises(SystemExit) as cm:
+                    runpy.run_module("examples.advanced_operations.add_dynamic_search_ads", run_name="__main__")
 
-            self.assertEqual(cm.exception.code, 1)
+                self.assertEqual(cm.exception.code, 1)
 
         mock_load_from_storage.assert_called_once_with(version="v20")
         mock_campaign_budget_service.mutate_campaign_budgets.assert_called_once()

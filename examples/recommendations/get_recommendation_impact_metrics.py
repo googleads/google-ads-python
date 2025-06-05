@@ -12,13 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example is to get impact metrics for a custom budget. 
+"""This example is to get impact metrics for a custom budget.
 
 Use this example to get impact metrics for a given budget amount.
 
-This example uses the following: 
+This example uses the following:
 1) Performance Max for the campaign type
-2) United States for the geo targeting 
+2) United States for the geo targeting
 3) Maximize Conversions Value for the bidding strategy
 
 To get budget recommendations, run generate_budget_recommendations.py.
@@ -45,12 +45,16 @@ def main(client, customer_id, user_provided_budget_amount):
 
     request.customer_id = customer_id
     request.recommendation_types = ["CAMPAIGN_BUDGET"]
-    request.advertising_channel_type = client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    request.advertising_channel_type = (
+        client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    )
     request.bidding_info.bidding_strategy_type = "MAXIMIZE_CONVERSION_VALUE"
     request.positive_locations_ids = [2840]  # 2840 is for United States
-    request.asset_group_info = [{ "final_url": "https://www.your-company.com/" }]
+    request.asset_group_info = [{"final_url": "https://www.your-company.com/"}]
     # Multiply the user-provided budget by 1,000,000 to convert to micros, as required for current_budget
-    request.budget_info.current_budget = round((user_provided_budget_amount*1000000), 2)
+    request.budget_info.current_budget = round(
+        (user_provided_budget_amount * 1000000), 2
+    )
 
     results = recommendation_service.generate_recommendations(request)
 
@@ -63,18 +67,18 @@ def main(client, customer_id, user_provided_budget_amount):
     for rec in recommendations:
         campaign_budget_rec = rec.campaign_budget_recommendation
         # Loop through the budget options in the campaign budget recommendation
-        # to compile a list of budget amounts and their respective potential 
-        # impact metrics. If you have a campaign creation interface, 
-        # you could display this information for end users to decide which 
+        # to compile a list of budget amounts and their respective potential
+        # impact metrics. If you have a campaign creation interface,
+        # you could display this information for end users to decide which
         # budget amount best aligns with their goals.
         for budget_option in campaign_budget_rec.budget_options:
-            if hasattr(budget_option, 'impact'):
+            if hasattr(budget_option, "impact"):
                 impact = budget_option.impact
                 budget_amount = budget_option.budget_amount_micros
-                if budget_amount/1000000 == user_provided_budget_amount:
+                if budget_amount / 1000000 == user_provided_budget_amount:
                     budget_data = {
-                        "budget_amount": round((budget_amount/1000000), 2),
-                        "potential_metrics": impact.potential_metrics
+                        "budget_amount": round((budget_amount / 1000000), 2),
+                        "potential_metrics": impact.potential_metrics,
                     }
                     budget_impact_metrics.append(budget_data)
             else:
@@ -91,7 +95,9 @@ def main(client, customer_id, user_provided_budget_amount):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=("Get impact metrics for Performance Max budget."))
+    parser = argparse.ArgumentParser(
+        description=("Get impact metrics for Performance Max budget.")
+    )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
         "-c",
@@ -105,16 +111,14 @@ if __name__ == "__main__":
         "--user_provided_budget_amount",
         type=int,
         required=True,
-        help=(
-            "A budget amount (not in micros) advertiser wants to use."
-        ),
+        help=("A budget amount (not in micros) advertiser wants to use."),
     )
 
     args = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v18")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(

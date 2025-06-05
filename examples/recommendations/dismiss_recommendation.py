@@ -23,10 +23,10 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.recommendation_service import (
+from google.ads.googleads.v20.services.services.recommendation_service import (
     RecommendationServiceClient,
 )
-from google.ads.googleads.v19.services.types.recommendation_service import (
+from google.ads.googleads.v20.services.types.recommendation_service import (
     DismissRecommendationRequest,
     DismissRecommendationResponse,
 )

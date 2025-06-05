@@ -1,3 +1,12 @@
+import sys
+import os
+# Calculate the path to the project root directory
+# __file__ is examples/advanced_operations/tests/test_name.py
+# project_root is three levels up from the test file's directory
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 import unittest
 from unittest import mock
 import sys

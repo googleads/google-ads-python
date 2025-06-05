@@ -23,9 +23,9 @@ from typing import Any, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
-from google.ads.googleads.v19.types.google_ads_row import GoogleAdsRow
+from google.ads.googleads.v20.services.services.google_ads_service import GoogleAdsServiceClient
+from google.ads.googleads.v20.services.types.google_ads_service import SearchGoogleAdsStreamResponse
+from google.ads.googleads.v20.types.google_ads_row import GoogleAdsRow
 
 from cloud_logging_interceptor import CloudLoggingInterceptor
 

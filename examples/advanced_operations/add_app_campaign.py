@@ -284,6 +284,7 @@ def create_app_ad(client, customer_id, ad_group_resource_name):
         "Ad Group App Ad created with resource name:"
         f'"{ad_group_ad_resource_name}".'
     )
+    return ad_group_ad_resource_name
 
 
 def create_ad_text_asset(client, text):

@@ -20,16 +20,16 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types import (
+from google.ads.googleads.v20.enums.types import (
     AudienceInsightsDimensionEnum,
 )
-from google.ads.googleads.v19.services.services.audience_insights_service import (
+from google.ads.googleads.v20.services.services.audience_insights_service import (
     AudienceInsightsServiceClient,
 )
-from google.ads.googleads.v19.services.services.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v19.types.audience_insights_service import (
+from google.ads.googleads.v20.types.audience_insights_service import (
     AudienceInsightsAttribute,
     GenerateAudienceCompositionInsightsRequest,
     GenerateAudienceCompositionInsightsResponse,
@@ -39,7 +39,7 @@ from google.ads.googleads.v19.types.audience_insights_service import (
     ListAudienceInsightsAttributesRequest,
     ListAudienceInsightsAttributesResponse,
 )
-from google.ads.googleads.v19.types.common import LocationInfo
+from google.ads.googleads.v20.types.common import LocationInfo
 
 
 def main(
@@ -271,7 +271,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

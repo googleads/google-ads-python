@@ -314,7 +314,7 @@ if __name__ == "__main__":
         "-n",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."

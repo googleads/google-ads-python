@@ -645,7 +645,7 @@ if __name__ == "__main__":
         "--offline_user_data_job_type",
         type=int,
         required=False,
-        default=googleads_client.enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_FIRST_PARTY,
+        default=GoogleAdsClient.load_from_storage(version="v20").enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_FIRST_PARTY,
         help="Optional type of offline user data in the job (first party or "
         "third party). If you have an official store sales partnership with "
         "Google, use STORE_SALES_UPLOAD_THIRD_PARTY. Otherwise, defaults to "
@@ -740,7 +740,7 @@ if __name__ == "__main__":
         "-d",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
@@ -750,7 +750,7 @@ if __name__ == "__main__":
         "-p",
         "--ad_personalization_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum],
         help=(
             "The personalization consent status for ad user data for all "
             "members in the job."

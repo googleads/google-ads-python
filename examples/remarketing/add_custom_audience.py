@@ -27,14 +27,14 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types.custom_audience_member_type import (
+from google.ads.googleads.v20.enums.types.custom_audience_member_type import (
     CustomAudienceMemberTypeEnum,
 )
-from google.ads.googleads.v19.resources.types.custom_audience import (
+from google.ads.googleads.v20.resources.types.custom_audience import (
     CustomAudience,
     CustomAudienceMember,
 )
-from google.ads.googleads.v19.services.types.custom_audience_service import (
+from google.ads.googleads.v20.services.types.custom_audience_service import (
     CustomAudienceOperation,
     CustomAudienceServiceClient,
 )

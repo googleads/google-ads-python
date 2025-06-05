@@ -224,7 +224,7 @@ if __name__ == "__main__":
         "-s",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum],
         help=("The ad user data consent for the click."),
     )
     args = parser.parse_args()

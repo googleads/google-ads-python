@@ -122,7 +122,7 @@ def add_hotel_ad_group(client, customer_id, campaign_resource_name):
     ad_group_resource_name = ad_group_response.results[0].resource_name
 
     print(
-        "Added a hotel ad group with resource name '{ad_group_resource_name}'."
+        f"Added a hotel ad group with resource name '{ad_group_resource_name}'."
     )
 
     return ad_group_resource_name
@@ -177,7 +177,7 @@ def add_hotel_campaign(
     campaign_resource_name = campaign_response.results[0].resource_name
 
     print(
-        "Added a hotel campaign with resource name '{campaign_resource_name}'."
+        f"Added a hotel campaign with resource name '{campaign_resource_name}'."
     )
 
     return campaign_resource_name

@@ -25,17 +25,17 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.asset_service import AssetOperation
-from google.ads.googleads.v19.resources.types.asset import Asset
-from google.ads.googleads.v19.common.types.asset_types import LeadFormAsset
-from google.ads.googleads.v19.enums.types.lead_form_call_to_action_type import LeadFormCallToActionTypeEnum
-from google.ads.googleads.v19.enums.types.lead_form_field_user_input_type import LeadFormFieldUserInputTypeEnum
-from google.ads.googleads.v19.common.types.asset_types import LeadFormField
-from google.ads.googleads.v19.enums.types.lead_form_post_submit_call_to_action_type import LeadFormPostSubmitCallToActionTypeEnum
-from google.ads.googleads.v19.common.types.asset_types import LeadFormDeliveryMethod
-from google.ads.googleads.v19.services.types.campaign_asset_service import CampaignAssetOperation
-from google.ads.googleads.v19.resources.types.campaign_asset import CampaignAsset
-from google.ads.googleads.v19.enums.types.asset_field_type import AssetFieldTypeEnum
+from google.ads.googleads.v20.services.types.asset_service import AssetOperation
+from google.ads.googleads.v20.resources.types.asset import Asset
+from google.ads.googleads.v20.common.types.asset_types import LeadFormAsset
+from google.ads.googleads.v20.enums.types.lead_form_call_to_action_type import LeadFormCallToActionTypeEnum
+from google.ads.googleads.v20.enums.types.lead_form_field_user_input_type import LeadFormFieldUserInputTypeEnum
+from google.ads.googleads.v20.common.types.asset_types import LeadFormField
+from google.ads.googleads.v20.enums.types.lead_form_post_submit_call_to_action_type import LeadFormPostSubmitCallToActionTypeEnum
+from google.ads.googleads.v20.common.types.asset_types import LeadFormDeliveryMethod
+from google.ads.googleads.v20.services.types.campaign_asset_service import CampaignAssetOperation
+from google.ads.googleads.v20.resources.types.campaign_asset import CampaignAsset
+from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
 def main(
@@ -220,7 +220,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

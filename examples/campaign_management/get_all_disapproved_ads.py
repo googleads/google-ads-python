@@ -19,23 +19,23 @@ import argparse
 import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.services.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v17.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v17.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v17.resources.types.ad import Ad
-from google.ads.googleads.v17.enums.types.policy_approval_status import (
+from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v20.resources.types.ad import Ad
+from google.ads.googleads.v20.enums.types.policy_approval_status import (
     PolicyApprovalStatusEnum,
 )
-from google.ads.googleads.v17.common.types.policy import (
+from google.ads.googleads.v20.common.types.policy import (
     PolicyTopicEntry,
     PolicyTopicEvidence,
 )
-from google.ads.googleads.v17.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v20.services.types.google_ads_service import GoogleAdsRow
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

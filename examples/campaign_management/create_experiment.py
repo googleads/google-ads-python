@@ -27,28 +27,28 @@ from typing import List, Any
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
-from google.ads.googleads.v17.services.types.experiment_service import (
+from google.ads.googleads.v20.services.types.experiment_service import (
     ExperimentOperation,
     MutateExperimentsResponse,
 )
-from google.ads.googleads.v17.services.types.experiment_arm_service import (
+from google.ads.googleads.v20.services.types.experiment_arm_service import (
     ExperimentArmOperation,
     MutateExperimentArmsRequest,
     MutateExperimentArmsResponse,
 )
-from google.ads.googleads.v17.resources.types.experiment import Experiment
-from google.ads.googleads.v17.resources.types.experiment_arm import ExperimentArm
-from google.ads.googleads.v17.services.services.experiment_service import (
+from google.ads.googleads.v20.resources.types.experiment import Experiment
+from google.ads.googleads.v20.resources.types.experiment_arm import ExperimentArm
+from google.ads.googleads.v20.services.services.experiment_service import (
     ExperimentServiceClient,
 )
-from google.ads.googleads.v17.services.services.experiment_arm_service import (
+from google.ads.googleads.v20.services.services.experiment_arm_service import (
     ExperimentArmServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_service import (
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v17.services.types.campaign_service import CampaignOperation
-from google.ads.googleads.v17.resources.types.campaign import Campaign
+from google.ads.googleads.v20.services.types.campaign_service import CampaignOperation
+from google.ads.googleads.v20.resources.types.campaign import Campaign
 
 
 def main(client: GoogleAdsClient, customer_id: str, base_campaign_id: str) -> None:

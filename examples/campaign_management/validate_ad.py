@@ -26,23 +26,23 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.types.ad_group_ad_service import (
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsRequest,
 )
-from google.ads.googleads.v17.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v17.services.services.ad_group_service import (
+from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v20.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v17.common.types.ad_type_infos import AdTextAsset
-from google.ads.googleads.v17.services.services.ad_group_ad_service import (
+from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v20.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v17.enums.types.policy_finding_error import (
+from google.ads.googleads.v20.enums.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
-from google.ads.googleads.v17.common.types.policy import PolicyTopicEntry
-from google.ads.googleads.v17.errors.types.google_ads_failure import GoogleAdsError
+from google.ads.googleads.v20.common.types.policy import PolicyTopicEntry
+from google.ads.googleads.v20.errors.types.google_ads_failure import GoogleAdsError
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

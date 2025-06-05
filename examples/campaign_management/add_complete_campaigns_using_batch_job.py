@@ -26,32 +26,32 @@ from typing import Any, List, Coroutine
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.services.batch_job_service import (
+from google.ads.googleads.v20.services.services.batch_job_service import (
     BatchJobServiceClient,
 )
-from google.ads.googleads.v17.services.types.batch_job_service import (
+from google.ads.googleads.v20.services.types.batch_job_service import (
     MutateBatchJobResponse,
     AddBatchJobOperationsResponse,
     ListBatchJobResultsRequest,
     ListBatchJobResultsResponse,
 )
-from google.ads.googleads.v17.services.types.common import MutateOperation
-from google.ads.googleads.v17.resources.types.batch_job import BatchJob
-from google.ads.googleads.v17.services.types.campaign_budget_service import (
+from google.ads.googleads.v20.services.types.common import MutateOperation
+from google.ads.googleads.v20.resources.types.batch_job import BatchJob
+from google.ads.googleads.v20.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v17.services.types.campaign_service import CampaignOperation
-from google.ads.googleads.v17.services.types.campaign_criterion_service import (
+from google.ads.googleads.v20.services.types.campaign_service import CampaignOperation
+from google.ads.googleads.v20.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
 )
-from google.ads.googleads.v17.services.types.ad_group_service import AdGroupOperation
-from google.ads.googleads.v17.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v20.services.types.ad_group_service import AdGroupOperation
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
-from google.ads.googleads.v17.services.types.ad_group_ad_service import (
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
 )
-from google.ads.googleads.v17.services.types.batch_job_service import BatchJobOperation
+from google.ads.googleads.v20.services.types.batch_job_service import BatchJobOperation
 from google.api_core.operation import Operation
 
 NUMBER_OF_CAMPAIGNS_TO_ADD: int = 2

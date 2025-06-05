@@ -33,18 +33,18 @@ from typing import Dict, Mapping, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types import flight_placeholder_field as flight_placeholder_field_enum
-from google.ads.googleads.v19.types import feed_item as feed_item_type
-from google.ads.googleads.v19.types import (
+from google.ads.googleads.v20.enums.types import flight_placeholder_field as flight_placeholder_field_enum
+from google.ads.googleads.v20.types import feed_item as feed_item_type
+from google.ads.googleads.v20.types import (
     feed_item_operation as feed_item_operation_type,
 )
-from google.ads.googleads.v19.services.types import (
+from google.ads.googleads.v20.services.types import (
     feed_item_service as feed_item_service_type,
 )
-from google.ads.googleads.v19.services.types import (
+from google.ads.googleads.v20.services.types import (
     google_ads_service as google_ads_service_type,
 )
-from google.ads.googleads.v19.types import feed as feed_type
+from google.ads.googleads.v20.types import feed as feed_type
 
 from google.api_core import protobuf_helpers
 

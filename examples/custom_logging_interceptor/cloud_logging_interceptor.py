@@ -21,9 +21,16 @@ within the class (in this case, a Cloud Logging client).
 
 import logging
 import time
+from typing import Any, Callable, Dict, Optional, Tuple
 
-from google.cloud import logging
-from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+from google.cloud import logging as google_cloud_logging
+from grpc import (
+    Call,
+    Future,
+    UnaryUnaryClientInterceptor,
+    UnaryStreamClientInterceptor,
+)
+from grpc._interceptor import _ClientCallDetails
 
 from google.ads.googleads.interceptors import LoggingInterceptor, mask_message
 
@@ -40,7 +47,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
     this is to inherit from the Interceptor class instead, and selectively copy whatever
     logic is needed from the LoggingInterceptor class."""
 
-    def __init__(self, api_version):
+    def __init__(self, api_version: str):
         """Initializer for the CloudLoggingInterceptor.
 
         Args:
@@ -48,19 +55,21 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         """
         super().__init__(logger=None, api_version=api_version)
         # Instantiate the Cloud Logging client.
-        logging_client = logging.Client()
-        self.logger = logging_client.logger("cloud_logging")
+        logging_client: google_cloud_logging.Client = google_cloud_logging.Client()
+        self.logger: google_cloud_logging.Logger = logging_client.logger("cloud_logging")
+        self.rpc_start: float
+        self.rpc_end: float
 
     def log_successful_request(
         self,
-        method,
-        customer_id,
-        metadata_json,
-        request_id,
-        request,
-        trailing_metadata_json,
-        response,
-    ):
+        method: str,
+        customer_id: Optional[str],
+        metadata_json: str,
+        request_id: str,
+        request: Any,  # google.ads.googleads.vX.services.types.SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+        trailing_metadata_json: str,
+        response: Any,  # grpc.Call or grpc.Future
+    ) -> None:
         """Handles logging of a successful request.
 
         Args:
@@ -78,15 +87,15 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         # The response result could contain up to 10,000 rows of data,
         # so consider truncating this value before logging it, to save
         # on data storage costs and maintain readability.
-        result = self.retrieve_and_mask_result(response)
+        result: Any = self.retrieve_and_mask_result(response)
 
         # elapsed_ms is the approximate elapsed time of the RPC, in milliseconds.
         # There are different ways to define and measure elapsed time, so use
         # whatever approach makes sense for your monitoring purposes.
         # rpc_start and rpc_end are set in the intercept_unary_* methods below.
-        elapsed_ms = (self.rpc_end - self.rpc_start) * 1000
+        elapsed_ms: float = (self.rpc_end - self.rpc_start) * 1000
 
-        debug_log = {
+        debug_log: Dict[str, Any] = {
             "method": method,
             "host": metadata_json,
             "request_id": request_id,
@@ -98,7 +107,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(debug_log, severity="DEBUG")
 
-        info_log = {
+        info_log: Dict[str, Any] = {
             "customer_id": customer_id,
             "method": method,
             "request_id": request_id,
@@ -110,14 +119,14 @@ class CloudLoggingInterceptor(LoggingInterceptor):
 
     def log_failed_request(
         self,
-        method,
-        customer_id,
-        metadata_json,
-        request_id,
-        request,
-        trailing_metadata_json,
-        response,
-    ):
+        method: str,
+        customer_id: Optional[str],
+        metadata_json: str,
+        request_id: str,
+        request: Any,  # google.ads.googleads.vX.services.types.SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+        trailing_metadata_json: str,
+        response: Any,  # grpc.Call or grpc.Future
+    ) -> None:
         """Handles logging of a failed request.
 
         Args:
@@ -129,11 +138,11 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             trailing_metadata_json: A JSON str of trailing_metadata.
             response: A JSON str of the response message.
         """
-        exception = self._get_error_from_response(response)
-        exception_str = self._parse_exception_to_str(exception)
-        fault_message = self._get_fault_message(exception)
+        exception: Any = self._get_error_from_response(response)
+        exception_str: str = self._parse_exception_to_str(exception)
+        fault_message: str = self._get_fault_message(exception)
 
-        info_log = {
+        info_log: Dict[str, Any] = {
             "method": method,
             "endpoint": self.endpoint,
             "host": metadata_json,
@@ -145,7 +154,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(info_log, severity="INFO")
 
-        error_log = {
+        error_log: Dict[str, Any] = {
             "method": method,
             "endpoint": self.endpoint,
             "request_id": request_id,
@@ -155,7 +164,12 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         }
         self.logger.log_struct(error_log, severity="ERROR")
 
-    def intercept_unary_unary(self, continuation, client_call_details, request):
+    def intercept_unary_unary(
+        self,
+        continuation: Callable[[_ClientCallDetails, Any], Any], # Any is request type
+        client_call_details: _ClientCallDetails,
+        request: Any,  # google.ads.googleads.vX.services.types.SearchGoogleAdsRequest
+    ) -> Any:  # grpc.Call or grpc.Future
         """Intercepts and logs API interactions.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
@@ -171,7 +185,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
         # Set the rpc_end value to current time when RPC completes.
-        def update_rpc_end(response_future):
+        def update_rpc_end(response_future: Any) -> None: # response_future is grpc.Future
             self.rpc_end = time.perf_counter()
 
         # Capture precise clock time to later calculate approximate elapsed
@@ -179,7 +193,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         self.rpc_start = time.perf_counter()
 
         # The below call is REQUIRED.
-        response = continuation(client_call_details, request)
+        response: Any = continuation(client_call_details, request) # response is grpc.Call or grpc.Future
 
         response.add_done_callback(update_rpc_end)
 
@@ -189,8 +203,11 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         return response
 
     def intercept_unary_stream(
-        self, continuation, client_call_details, request
-    ):
+        self,
+        continuation: Callable[[_ClientCallDetails, Any], Any], # Any is request type
+        client_call_details: _ClientCallDetails,
+        request: Any,  # google.ads.googleads.vX.services.types.SearchGoogleAdsStreamRequest
+    ) -> Any:  # grpc.Call or grpc.Future
         """Intercepts and logs API interactions for Unary-Stream requests.
 
         Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
@@ -206,7 +223,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
             A grpc.Call/grpc.Future instance representing a service response.
         """
 
-        def on_rpc_complete(response_future):
+        def on_rpc_complete(response_future: Any) -> None: # response_future is grpc.Future
             self.rpc_end = time.perf_counter()
             self.log_request(client_call_details, request, response_future)
 
@@ -215,7 +232,7 @@ class CloudLoggingInterceptor(LoggingInterceptor):
         self.rpc_start = time.perf_counter()
 
         # The below call is REQUIRED.
-        response = continuation(client_call_details, request)
+        response: Any = continuation(client_call_details, request) # response is grpc.Call or grpc.Future
 
         # Set self._cache to the cache on the response wrapper in order to
         # access the streaming logs. This is REQUIRED in order to log streaming

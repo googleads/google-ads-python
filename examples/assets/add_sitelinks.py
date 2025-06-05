@@ -18,23 +18,14 @@ Run basic_operations/add_campaigns.py to create a campaign.
 """
 
 import argparse
-from typing import List, Sequence
 import sys
 import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.asset_service import AssetOperation
-from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.common.types.asset_types import SitelinkAsset
-from google.ads.googleads.v20.services.types.campaign_asset_service import CampaignAssetOperation
-from google.ads.googleads.v20.resources.types.campaign_asset import CampaignAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> None:
+def main(client, customer_id, campaign_id):
     """Adds sitelinks to a campaign using assets.
 
     Args:
@@ -43,14 +34,12 @@ def main(
         campaign_id: The campaign to which sitelinks will be added.
     """
     # Creates sitelink assets.
-    resource_names: List[str] = create_sitelink_assets(client, customer_id)
+    resource_names = create_sitelink_assets(client, customer_id, campaign_id)
     # Associates the sitelinks at the campaign level.
     link_sitelinks_to_campaign(client, customer_id, campaign_id, resource_names)
 
 
-def create_sitelink_assets(
-    client: GoogleAdsClient, customer_id: str
-) -> List[str]:
+def create_sitelink_assets(client, customer_id):
     """Creates sitelink assets, which can be added to campaigns.
 
     Args:
@@ -60,8 +49,8 @@ def create_sitelink_assets(
     Returns:
         a list of sitelink asset resource names.
     """
-    store_locator_operation: AssetOperation = client.get_type("AssetOperation")
-    store_locator_asset: Asset = store_locator_operation.create
+    store_locator_operation = client.get_type("AssetOperation")
+    store_locator_asset = store_locator_operation.create
     store_locator_asset.final_urls.append(
         "http://example.com/contact/store-finder"
     )
@@ -72,18 +61,16 @@ def create_sitelink_assets(
     store_locator_asset.sitelink_asset.description2 = "Find your local store"
     store_locator_asset.sitelink_asset.link_text = "Store locator"
 
-    store_asset_operation: AssetOperation = client.get_type("AssetOperation")
-    store_asset: Asset = store_asset_operation.create
+    store_asset_operation = client.get_type("AssetOperation")
+    store_asset = store_asset_operation.create
     store_asset.final_urls.append("http://example.com/store")
     store_asset.final_mobile_urls.append("http://example.com/mobile/store")
     store_asset.sitelink_asset.description1 = "Buy some stuff"
     store_asset.sitelink_asset.description2 = "It's really good"
     store_asset.sitelink_asset.link_text = "Store"
 
-    store_addnl_asset_operation: AssetOperation = client.get_type(
-        "AssetOperation"
-    )
-    store_addnl_asset: Asset = store_addnl_asset_operation.create
+    store_addnl_asset_operation = client.get_type("AssetOperation")
+    store_addnl_asset = store_addnl_asset_operation.create
     store_addnl_asset.final_urls.append("http://example.com/store/more")
     store_addnl_asset.final_mobile_urls.append(
         "http://example.com/mobile/store/more"
@@ -102,9 +89,7 @@ def create_sitelink_assets(
         ],
     )
 
-    resource_names: List[str] = [
-        result.resource_name for result in response.results
-    ]
+    resource_names = [result.resource_name for result in response.results]
 
     for resource_name in resource_names:
         print(f"Created sitelink asset with resource name '{resource_name}'.")
@@ -113,11 +98,8 @@ def create_sitelink_assets(
 
 
 def link_sitelinks_to_campaign(
-    client: GoogleAdsClient,
-    customer_id: str,
-    campaign_id: str,
-    resource_names: List[str],
-) -> None:
+    client, customer_id, campaign_id, resource_names
+):
     """Creates sitelink assets, which can be added to campaigns.
 
     Args:
@@ -127,12 +109,10 @@ def link_sitelinks_to_campaign(
         resource_names: a list of sitelink asset resource names.
     """
     campaign_service = client.get_service("CampaignService")
-    operations: List[CampaignAssetOperation] = []
+    operations = []
     for resource_name in resource_names:
-        operation: CampaignAssetOperation = client.get_type(
-            "CampaignAssetOperation"
-        )
-        campaign_asset: CampaignAsset = operation.create
+        operation = client.get_type("CampaignAssetOperation")
+        campaign_asset = operation.create
         campaign_asset.asset = resource_name
         campaign_asset.campaign = campaign_service.campaign_path(
             customer_id, campaign_id
@@ -152,7 +132,7 @@ def link_sitelinks_to_campaign(
 
 
 if __name__ == "__main__":
-    parser: argparse.ArgumentParser = argparse.ArgumentParser(
+    parser = argparse.ArgumentParser(
         description="Adds sitelinks to a campaign using feed services."
     )
     # The following argument(s) should be provided to run the example.
@@ -171,13 +151,11 @@ if __name__ == "__main__":
         default=None,
         help="ID of the campaign to which sitelinks will be added.",
     )
-    args: argparse.Namespace = parser.parse_args()
+    args = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
-    )
+    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

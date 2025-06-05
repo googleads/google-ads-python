@@ -32,6 +32,7 @@ from google.ads.googleads.v19.services.types.google_ads_service import (
     GoogleAdsRow,
 )
 
+
 # [START get_campaigns]
 def main(client: GoogleAdsClient, customer_id: str) -> None:
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
@@ -75,7 +76,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

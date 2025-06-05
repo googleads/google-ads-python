@@ -21,18 +21,18 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v17.services.services.ad_parameter_service import (
+from google.ads.googleads.v20.services.services.ad_parameter_service import (
     AdParameterServiceClient,
 )
-from google.ads.googleads.v17.services.types.ad_parameter_service import (
+from google.ads.googleads.v20.services.types.ad_parameter_service import (
     AdParameterOperation,
     MutateAdParametersResponse,
 )
-from google.ads.googleads.v17.resources.types.ad_parameter import AdParameter
-from google.ads.googleads.v17.services.types.ad_parameter_service import (
+from google.ads.googleads.v20.resources.types.ad_parameter import AdParameter
+from google.ads.googleads.v20.services.types.ad_parameter_service import (
     MutateAdParameterResult,
 )
 
@@ -153,6 +153,6 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v20")
 
     main(googleads_client, args.customer_id, args.ad_group_id, args.criterion_id)

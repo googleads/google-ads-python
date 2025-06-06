@@ -29,30 +29,30 @@ from typing import Any, Dict, List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v17.common.types.listing_group_filter_dimension import (
+from google.ads.googleads.v20.common.types.listing_group_filter_dimension import (
     ListingGroupFilterDimension,
 )
-from google.ads.googleads.v17.enums.types.listing_group_filter_product_condition import (
+from google.ads.googleads.v20.enums.types.listing_group_filter_product_condition import (
     ListingGroupFilterProductConditionEnum,
 )
-from google.ads.googleads.v17.enums.types.listing_group_filter_type import (
+from google.ads.googleads.v20.enums.types.listing_group_filter_type import (
     ListingGroupFilterTypeEnum,
 )
-from google.ads.googleads.v17.enums.types.listing_group_filter_listing_source import (
+from google.ads.googleads.v20.enums.types.listing_group_filter_listing_source import (
     ListingGroupFilterListingSourceEnum,
 )
-from google.ads.googleads.v17.resources.types.asset_group_listing_group_filter import (
+from google.ads.googleads.v20.resources.types.asset_group_listing_group_filter import (
     AssetGroupListingGroupFilter,
 )
-from google.ads.googleads.v17.services.services.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v17.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v17.services.types.mutate_operation import (
+from google.ads.googleads.v20.services.types.mutate_operation import (
     MutateOperation,
 )
 
@@ -670,7 +670,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

@@ -46,91 +46,91 @@ from google.api_core import protobuf_helpers
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-from google.ads.googleads.v17.common.types.criteria import LanguageInfo
-from google.ads.googleads.v17.common.types.asset_types import (
+from google.ads.googleads.v20.common.types.criteria import LanguageInfo
+from google.ads.googleads.v20.common.types.asset_types import (
     ImageAsset,
     TextAsset,
 )
-from google.ads.googleads.v17.enums.types.advertising_channel_type import (
+from google.ads.googleads.v20.enums.types.advertising_channel_type import (
     AdvertisingChannelTypeEnum,
 )
-from google.ads.googleads.v17.enums.types.asset_field_type import (
+from google.ads.googleads.v20.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v17.enums.types.asset_group_status import (
+from google.ads.googleads.v20.enums.types.asset_group_status import (
     AssetGroupStatusEnum,
 )
-from google.ads.googleads.v17.enums.types.asset_type import AssetTypeEnum
-from google.ads.googleads.v17.enums.types.budget_delivery_method import (
+from google.ads.googleads.v20.enums.types.asset_type import AssetTypeEnum
+from google.ads.googleads.v20.enums.types.budget_delivery_method import (
     BudgetDeliveryMethodEnum,
 )
-from google.ads.googleads.v17.enums.types.campaign_status import (
+from google.ads.googleads.v20.enums.types.campaign_status import (
     CampaignStatusEnum,
 )
-from google.ads.googleads.v17.enums.types.conversion_action_category import (
+from google.ads.googleads.v20.enums.types.conversion_action_category import (
     ConversionActionCategoryEnum,
 )
-from google.ads.googleads.v17.enums.types.conversion_origin import (
+from google.ads.googleads.v20.enums.types.conversion_origin import (
     ConversionOriginEnum,
 )
-from google.ads.googleads.v17.enums.types.listing_group_filter_listing_source import (
+from google.ads.googleads.v20.enums.types.listing_group_filter_listing_source import (
     ListingGroupFilterListingSourceEnum,
 )
-from google.ads.googleads.v17.enums.types.listing_group_filter_type import (
+from google.ads.googleads.v20.enums.types.listing_group_filter_type import (
     ListingGroupFilterTypeEnum,
 )
-from google.ads.googleads.v17.resources.types.asset import Asset
-from google.ads.googleads.v17.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v17.resources.types.asset_group_asset import (
+from google.ads.googleads.v20.resources.types.asset import Asset
+from google.ads.googleads.v20.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v20.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v17.resources.types.asset_group_listing_group_filter import (
+from google.ads.googleads.v20.resources.types.asset_group_listing_group_filter import (
     AssetGroupListingGroupFilter,
 )
-from google.ads.googleads.v17.resources.types.campaign import Campaign
-from google.ads.googleads.v17.resources.types.campaign_asset import (
+from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.resources.types.campaign_asset import (
     CampaignAsset,
 )
-from google.ads.googleads.v17.resources.types.campaign_budget import (
+from google.ads.googleads.v20.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v17.resources.types.campaign_conversion_goal import (
+from google.ads.googleads.v20.resources.types.campaign_conversion_goal import (
     CampaignConversionGoal,
 )
-from google.ads.googleads.v17.resources.types.campaign_criterion import (
+from google.ads.googleads.v20.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v17.services.services.asset_group_service import (
+from google.ads.googleads.v20.services.services.asset_group_service import (
     AssetGroupServiceClient,
 )
-from google.ads.googleads.v17.services.services.asset_service import (
+from google.ads.googleads.v20.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_budget_service import (
+from google.ads.googleads.v20.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_conversion_goal_service import (
+from google.ads.googleads.v20.services.services.campaign_conversion_goal_service import (
     CampaignConversionGoalServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_criterion_service import (
+from google.ads.googleads.v20.services.services.campaign_criterion_service import (
     CampaignCriterionServiceClient,
 )
-from google.ads.googleads.v17.services.services.campaign_service import (
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v17.services.services.geo_target_constant_service import (
+from google.ads.googleads.v20.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v17.services.services.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v17.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperationResponse,
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v17.services.types.mutate_operation import (
+from google.ads.googleads.v20.services.types.mutate_operation import (
     MutateOperation,
 )
 
@@ -1241,7 +1241,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v19"
+        version="v20"
     )
 
     try:

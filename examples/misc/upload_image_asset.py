@@ -23,20 +23,25 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.services.types import (
+    AssetOperation,
+    MutateAssetsResponse,
+)
+from google.ads.googleads.v19.resources.types import Asset
 from examples.utils.example_helpers import get_image_bytes_from_url
 
 
 # [START upload_image_asset]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    url = "https://gaagl.page.link/Eit5"
-    image_content = get_image_bytes_from_url(url)
+    url: str = "https://gaagl.page.link/Eit5"
+    image_content: bytes = get_image_bytes_from_url(url)
 
     asset_service = client.get_service("AssetService")
-    asset_operation = client.get_type("AssetOperation")
-    asset = asset_operation.create
+    asset_operation: AssetOperation = client.get_type("AssetOperation")
+    asset: Asset = asset_operation.create
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_content
     asset.image_asset.file_size = len(image_content)
@@ -49,9 +54,10 @@ def main(client, customer_id):
     # When there is an existing image asset with the same content but a different
     # name, the new name will be dropped silently.
     asset.name = "Marketing Image"
-
-    mutate_asset_response = asset_service.mutate_assets(
-        customer_id=customer_id, operations=[asset_operation]
+    mutate_asset_response: MutateAssetsResponse = (
+        asset_service.mutate_assets(
+            customer_id=customer_id, operations=[asset_operation]
+        )
     )
     print("Uploaded file(s):")
     for row in mutate_asset_response.results:

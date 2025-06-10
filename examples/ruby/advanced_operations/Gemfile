@@ -1,0 +1,4 @@
+source 'https://rubygems.org'
+gem 'google-ads-googleads'
+gem 'optimist'
+gem 'securerandom'

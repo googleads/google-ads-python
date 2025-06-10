@@ -38,7 +38,12 @@ from google.ads.googleads.errors import GoogleAdsException
 _DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
 
 
-def main(client, customer_id, output_file, write_headers):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    output_file: str,
+    write_headers: bool,
+) -> None:
     """Writes rows returned from a search_stream request to a CSV file.
     Args:
         client: An initialized GoogleAdsClient instance.
@@ -46,11 +51,11 @@ def main(client, customer_id, output_file, write_headers):
         output_file (str): Filename of the file to write the report data to.
         write_headers (bool): From argparse, True if arg is provided.
     """
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(file_dir, output_file)
+    file_dir: str = os.path.dirname(os.path.abspath(__file__))
+    file_path: str = os.path.join(file_dir, output_file)
     ga_service = client.get_service("GoogleAdsService")
 
-    query = """
+    query: str = """
         SELECT
           customer.descriptive_name,
           segments.date,
@@ -74,7 +79,7 @@ def main(client, customer_id, output_file, write_headers):
         writer = csv.writer(f)
 
         # Define a list of headers for the first row.
-        headers = [
+        headers: list[str] = [
             "Account",
             "Date",
             "Campaign",

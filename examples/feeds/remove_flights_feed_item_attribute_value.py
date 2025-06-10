@@ -135,21 +135,21 @@ def get_feed(client, customer_id, feed_id):
                 flight_placeholder_field_enum.FLIGHT_DESCRIPTION
             ] = feed_attribute
         elif feed_attribute.name == "Destination ID":
-            feed_attributes[
-                flight_placeholder_field_enum.DESTINATION_ID
-            ] = feed_attribute
+            feed_attributes[flight_placeholder_field_enum.DESTINATION_ID] = (
+                feed_attribute
+            )
         elif feed_attribute.name == "Flight Price":
-            feed_attributes[
-                flight_placeholder_field_enum.FLIGHT_PRICE
-            ] = feed_attribute
+            feed_attributes[flight_placeholder_field_enum.FLIGHT_PRICE] = (
+                feed_attribute
+            )
         elif feed_attribute.name == "Flight Sale Price":
-            feed_attributes[
-                flight_placeholder_field_enum.FLIGHT_SALE_PRICE
-            ] = feed_attribute
+            feed_attributes[flight_placeholder_field_enum.FLIGHT_SALE_PRICE] = (
+                feed_attribute
+            )
         elif feed_attribute.name == "Final URLs":
-            feed_attributes[
-                flight_placeholder_field_enum.FINAL_URLS
-            ] = feed_attribute
+            feed_attributes[flight_placeholder_field_enum.FINAL_URLS] = (
+                feed_attribute
+            )
         else:
             raise ValueError("Invalid attribute name.")
 
@@ -290,7 +290,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(

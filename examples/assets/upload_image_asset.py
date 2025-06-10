@@ -19,24 +19,29 @@ To get image assets, run get_all_image_assets.py.
 
 
 import argparse
+from typing import Sequence
 import sys
 
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.types.asset_service import AssetOperation
+from google.ads.googleads.v20.resources.types.asset import Asset
+from google.ads.googleads.v20.enums.types.asset_type import AssetTypeEnum
+from google.ads.googleads.v20.enums.types.mime_type import MimeTypeEnum
 
 
 # [START upload_image_asset]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """Main method, to run this code example as a standalone application."""
 
     # Download image from URL
-    url = "https://gaagl.page.link/Eit5"
-    image_content = get_image_bytes_from_url(url)
+    url: str = "https://gaagl.page.link/Eit5"
+    image_content: bytes = get_image_bytes_from_url(url)
 
     asset_service = client.get_service("AssetService")
-    asset_operation = client.get_type("AssetOperation")
-    asset = asset_operation.create
+    asset_operation: AssetOperation = client.get_type("AssetOperation")
+    asset: Asset = asset_operation.create
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_content
     asset.image_asset.file_size = len(image_content)
@@ -61,7 +66,7 @@ def main(client, customer_id):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Upload an image asset from a URL."
     )
     # The following argument(s) should be provided to run the example.
@@ -72,11 +77,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id)

@@ -20,17 +20,28 @@ To get campaigns, run get_campaigns.py.
 
 import argparse
 import sys
+from typing import MutableSequence
 
-from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v19.resources.types.campaign import Campaign
+from google.ads.googleads.v19.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v19.services.types.campaign_service import (
+    CampaignOperation,
+    MutateCampaignsResponse,
+)
 from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, campaign_id):
-    campaign_service = client.get_service("CampaignService")
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
     # Create campaign operation.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.update
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.update
 
     campaign.resource_name = campaign_service.campaign_path(
         customer_id, campaign_id
@@ -45,8 +56,11 @@ def main(client, customer_id, campaign_id):
         protobuf_helpers.field_mask(None, campaign._pb),
     )
 
-    campaign_response = campaign_service.mutate_campaigns(
-        customer_id=customer_id, operations=[campaign_operation]
+    campaign_response: MutateCampaignsResponse = (
+        campaign_service.mutate_campaigns(
+            customer_id=customer_id,
+            operations=[campaign_operation],  # type: ignore
+        )
     )
 
     print(f"Updated campaign {campaign_response.results[0].resource_name}.")
@@ -67,11 +81,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--campaign_id", type=str, required=True, help="The campaign ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

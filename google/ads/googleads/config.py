@@ -45,7 +45,9 @@ _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = (
     "path_to_private_key_file",
     "delegated_account",
 )
-_KEYS_ENV_VARIABLES_MAP = {
+from typing import Any, Callable, TypeVar
+
+_KEYS_ENV_VARIABLES_MAP: dict[str, str] = {
     key: _ENV_PREFIX + key.upper()
     for key in _REQUIRED_KEYS
     + _OPTIONAL_KEYS
@@ -56,8 +58,10 @@ _KEYS_ENV_VARIABLES_MAP = {
     + _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS
 }
 
+F = TypeVar("F", bound=Callable[..., Any])
 
-def _config_validation_decorator(func):
+
+def _config_validation_decorator(func: F) -> F:
     """A decorator used to easily run validations on configs loaded into dicts.
 
     Add this decorator to any method that returns the config as a dict.
@@ -67,15 +71,15 @@ def _config_validation_decorator(func):
     """
 
     @functools.wraps(func)
-    def validation_wrapper(*args, **kwargs):
-        config_dict = func(*args, **kwargs)
+    def validation_wrapper(*args: Any, **kwargs: Any) -> Any:
+        config_dict: dict[str, Any] = func(*args, **kwargs)
         validate_dict(config_dict)
         return config_dict
 
-    return validation_wrapper
+    return validation_wrapper  # type: ignore[return-value]
 
 
-def _config_parser_decorator(func):
+def _config_parser_decorator(func: F) -> F:
     """A decorator used to easily parse config values.
 
     Since configs can be loaded from different locations such as env vars or
@@ -85,9 +89,11 @@ def _config_parser_decorator(func):
     """
 
     @functools.wraps(func)
-    def parser_wrapper(*args, **kwargs):
-        config_dict = func(*args, **kwargs)
-        parsed_config = convert_login_customer_id_to_str(config_dict)
+    def parser_wrapper(*args: Any, **kwargs: Any) -> Any:
+        config_dict: dict[str, Any] = func(*args, **kwargs)
+        parsed_config: dict[str, Any] = convert_login_customer_id_to_str(
+            config_dict
+        )
         parsed_config = convert_linked_customer_id_to_str(parsed_config)
 
         config_keys = parsed_config.keys()
@@ -155,10 +161,10 @@ def _config_parser_decorator(func):
 
         return parsed_config
 
-    return parser_wrapper
+    return parser_wrapper  # type: ignore[return-value]
 
 
-def validate_dict(config_data):
+def validate_dict(config_data: dict[str, Any]) -> None:
     """Validates the given configuration dict.
 
     Validations that are performed include:
@@ -188,13 +194,13 @@ def validate_dict(config_data):
         )
 
     if "login_customer_id" in config_data:
-        validate_login_customer_id(config_data["login_customer_id"])
+        validate_login_customer_id(str(config_data["login_customer_id"]))
 
     if "linked_customer_id" in config_data:
-        validate_linked_customer_id(config_data["linked_customer_id"])
+        validate_linked_customer_id(str(config_data["linked_customer_id"]))
 
 
-def _validate_customer_id(customer_id, id_type):
+def _validate_customer_id(customer_id: str | None, id_type: str) -> None:
     """Validates a customer ID.
 
     Args:
@@ -216,7 +222,7 @@ def _validate_customer_id(customer_id, id_type):
             )
 
 
-def validate_login_customer_id(login_customer_id):
+def validate_login_customer_id(login_customer_id: str | None) -> None:
     """Validates a login customer ID.
     Args:
         login_customer_id: a str from config indicating a login customer ID.
@@ -227,7 +233,7 @@ def validate_login_customer_id(login_customer_id):
     _validate_customer_id(login_customer_id, "login")
 
 
-def validate_linked_customer_id(linked_customer_id):
+def validate_linked_customer_id(linked_customer_id: str | None) -> None:
     """Validates a linked customer ID.
     Args:
         linked_customer_id: a str from config indicating a linked customer ID.
@@ -240,7 +246,7 @@ def validate_linked_customer_id(linked_customer_id):
 
 @_config_validation_decorator
 @_config_parser_decorator
-def load_from_yaml_file(path=None):
+def load_from_yaml_file(path: str | None = None) -> dict[str, Any]:
     """Loads configuration data from a YAML file and returns it as a dict.
 
     Args:
@@ -278,7 +284,7 @@ def load_from_yaml_file(path=None):
 
 @_config_validation_decorator
 @_config_parser_decorator
-def load_from_dict(config_dict):
+def load_from_dict(config_dict: dict[str, Any]) -> dict[str, Any]:
     """Check if the argument is dictionary or not. If successful it calls the parsing decorator,
     followed by validation decorator. This validates the keys used in the config_dict, before
     returning to its caller.
@@ -302,7 +308,7 @@ def load_from_dict(config_dict):
 
 @_config_validation_decorator
 @_config_parser_decorator
-def parse_yaml_document_to_dict(yaml_doc):
+def parse_yaml_document_to_dict(yaml_doc: str | bytes) -> dict[str, Any]:
     """Parses a YAML document to a dict.
 
     Args:
@@ -320,7 +326,7 @@ def parse_yaml_document_to_dict(yaml_doc):
 
 @_config_validation_decorator
 @_config_parser_decorator
-def load_from_env():
+def load_from_env() -> dict[str, Any]:
     """Loads configuration data from the environment and returns it as a dict.
 
     Returns:
@@ -329,7 +335,7 @@ def load_from_env():
     Raises:
         ValueError: If the configuration
     """
-    config_data = {
+    config_data: dict[str, Any] = {
         key: os.environ.get(env_variable)
         for key, env_variable in _KEYS_ENV_VARIABLES_MAP.items()
         if env_variable in os.environ
@@ -343,7 +349,7 @@ def load_from_env():
     return config_data
 
 
-def get_oauth2_installed_app_keys():
+def get_oauth2_installed_app_keys() -> tuple[str, ...]:
     """A getter that returns the required OAuth2 installed application keys.
 
     Returns:
@@ -352,7 +358,7 @@ def get_oauth2_installed_app_keys():
     return _OAUTH2_INSTALLED_APP_KEYS
 
 
-def get_oauth2_required_service_account_keys():
+def get_oauth2_required_service_account_keys() -> tuple[str, ...]:
     """A getter that returns the required OAuth2 service account keys.
 
     Returns:
@@ -361,7 +367,9 @@ def get_oauth2_required_service_account_keys():
     return _OAUTH2_REQUIRED_SERVICE_ACCOUNT_KEYS
 
 
-def convert_login_customer_id_to_str(config_data):
+def convert_login_customer_id_to_str(
+    config_data: dict[str, Any]
+) -> dict[str, Any]:
     """Parses a config dict's login_customer_id attr value to a str.
 
     Like many values from YAML it's possible for login_customer_id to
@@ -374,7 +382,7 @@ def convert_login_customer_id_to_str(config_data):
     Returns:
         The same config dict object with a mutated login_customer_id attr.
     """
-    login_customer_id = config_data.get("login_customer_id")
+    login_customer_id: Any = config_data.get("login_customer_id")
 
     if login_customer_id:
         config_data["login_customer_id"] = str(login_customer_id)
@@ -382,7 +390,9 @@ def convert_login_customer_id_to_str(config_data):
     return config_data
 
 
-def convert_linked_customer_id_to_str(config_data):
+def convert_linked_customer_id_to_str(
+    config_data: dict[str, Any]
+) -> dict[str, Any]:
     """Parses a config dict's linked_customer_id attr value to a str.
 
     Like many values from YAML it's possible for linked_customer_id to
@@ -395,7 +405,7 @@ def convert_linked_customer_id_to_str(config_data):
     Returns:
         The same config dict object with a mutated linked_customer_id attr.
     """
-    linked_customer_id = config_data.get("linked_customer_id")
+    linked_customer_id: Any = config_data.get("linked_customer_id")
 
     if linked_customer_id:
         config_data["linked_customer_id"] = str(linked_customer_id)
@@ -403,7 +413,7 @@ def convert_linked_customer_id_to_str(config_data):
     return config_data
 
 
-def disambiguate_string_bool(value):
+def disambiguate_string_bool(value: str | bool) -> bool:
     """Converts a stringified boolean to its bool representation.
 
     Args:

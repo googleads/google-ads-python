@@ -50,19 +50,20 @@ def main(client, customer_id):
                 f'"{row.campaign.name}" was found.'
             )
 
+# Define parser at module level so it can be imported by tests
+parser = argparse.ArgumentParser(
+    description="Lists all campaigns for specified customer."
+)
+# The following argument(s) should be provided to run the example.
+parser.add_argument(
+    "-c",
+    "--customer_id",
+    type=str,
+    required=True,
+    help="The Google Ads customer ID.",
+)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Lists all campaigns for specified customer."
-    )
-    # The following argument(s) should be provided to run the example.
-    parser.add_argument(
-        "-c",
-        "--customer_id",
-        type=str,
-        required=True,
-        help="The Google Ads customer ID.",
-    )
     args = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the

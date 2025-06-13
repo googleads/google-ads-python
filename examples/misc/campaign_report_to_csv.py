@@ -37,20 +37,7 @@ from google.ads.googleads.errors import GoogleAdsException
 
 _DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
 
-
-def main(client, customer_id, output_file, write_headers):
-    """Writes rows returned from a search_stream request to a CSV file.
-    Args:
-        client: An initialized GoogleAdsClient instance.
-        customer_id (str): The client customer ID string.
-        output_file (str): Filename of the file to write the report data to.
-        write_headers (bool): From argparse, True if arg is provided.
-    """
-    file_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(file_dir, output_file)
-    ga_service = client.get_service("GoogleAdsService")
-
-    query = """
+_QUERY = """
         SELECT
           customer.descriptive_name,
           segments.date,
@@ -64,10 +51,23 @@ def main(client, customer_id, output_file, write_headers):
         ORDER BY metrics.impressions DESC
         LIMIT 25"""
 
+
+def main(client, customer_id, output_file, write_headers):
+    """Writes rows returned from a search_stream request to a CSV file.
+    Args:
+        client: An initialized GoogleAdsClient instance.
+        customer_id (str): The client customer ID string.
+        output_file (str): Filename of the file to write the report data to.
+        write_headers (bool): From argparse, True if arg is provided.
+    """
+    file_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(file_dir, output_file)
+    ga_service = client.get_service("GoogleAdsService")
+
     # Issues a search request using streaming.
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
-    search_request.query = query
+    search_request.query = _QUERY
     stream = ga_service.search_stream(search_request)
 
     with open(file_path, "w", newline="") as f:

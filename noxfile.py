@@ -29,6 +29,7 @@ TEST_COMMAND = [
     "discover",
     "--buffer",
     "-s=tests",
+    "-s=examples/assets/tests/",
     "-p",
     "*_test.py",
 ]

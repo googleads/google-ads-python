@@ -22,7 +22,7 @@ version = "27.0.0"
 description = "Client library for the Google Ads API"
 readme = "./README.rst"
 requires-python = ">=3.9, <3.14"
-license = {text = "Apache 2.0"}
+license = "Apache-2.0"
 authors = [
     {name = "Google LLC", email = "googleapis-packages@google.com"}
 ]
@@ -30,7 +30,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
@@ -66,6 +65,5 @@ tests = ["nox >= 2020.12.31, < 2022.6"]
 Repository = "https://github.com/googleads/google-ads-python"
 
 [tool.setuptools.packages.find]
-include=["google.ads.*"]
-exclude=["examples", "examples.*", "tests", "tests.*"]
-
+include=["google.ads.*", "examples.*"]
+exclude=["tests", "tests.*"]

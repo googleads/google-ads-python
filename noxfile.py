@@ -50,7 +50,7 @@ CONSTRAINTS_DIR = os.path.join(CURRENT_DIR, "tests", "constraints")
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
 def tests(session, protobuf_implementation):
-    session.install(".")
+    session.install("-e", ".")
     # modules for testing
     session.install(*TEST_DEPENDENCIES)
     session.run(*FREEZE_COMMAND)
@@ -79,7 +79,7 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
 
     constraints_file = os.path.join(CONSTRAINTS_DIR, "minimums", filename)
 
-    session.install(".")
+    session.install("-e", ".")
     session.install(*TEST_DEPENDENCIES, "-c", constraints_file)
     session.run(*FREEZE_COMMAND)
     session.run(

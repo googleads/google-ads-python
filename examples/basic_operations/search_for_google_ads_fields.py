@@ -26,13 +26,13 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.resources.types.google_ads_field import (
+from google.ads.googleads.v20.resources.types.google_ads_field import (
     GoogleAdsField,
 )
-from google.ads.googleads.v19.services.services.google_ads_field_service import (
+from google.ads.googleads.v20.services.services.google_ads_field_service import (
     GoogleAdsFieldServiceClient,
 )
-from google.ads.googleads.v19.services.types.google_ads_field_service import (
+from google.ads.googleads.v20.services.types.google_ads_field_service import (
     SearchGoogleAdsFieldsRequest,
     SearchGoogleAdsFieldsResponse,
 )

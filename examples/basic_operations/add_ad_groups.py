@@ -20,20 +20,20 @@ To get ad groups, run get_ad_groups.py.
 
 import argparse
 import sys
+from typing import List
 import uuid
-from typing import Any, MutableSequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.ad_group_service import (
+from google.ads.googleads.v20.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
     AdGroupServiceClient,
 )
-from google.ads.googleads.v19.services.types.campaign_service import (
+from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v19.resources.types.ad_group import AdGroup
+from google.ads.googleads.v20.resources.types.ad_group import AdGroup
 
 
 def main(
@@ -55,11 +55,13 @@ def main(
     ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_STANDARD
     ad_group.cpc_bid_micros = 10000000
 
+    operations: List[AdGroupOperation] = [ad_group_operation]
+
     # Add the ad group.
     ad_group_response: MutateAdGroupsResponse = (
         ad_group_service.mutate_ad_groups(
             customer_id=customer_id,
-            operations=[ad_group_operation],  # type: ignore
+            operations=operations,
         )
     )
     print(f"Created ad group {ad_group_response.results[0].resource_name}.")

@@ -20,14 +20,14 @@ To add campaigns, run add_campaigns.py.
 
 import argparse
 import sys
-from typing import Iterator
+from typing import Iterator, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v19.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
     GoogleAdsRow,
 )
@@ -50,8 +50,8 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     )
 
     for batch in stream:
-        row: GoogleAdsRow
-        for row in batch.results:
+        rows: List[GoogleAdsRow] = batch.results
+        for row in rows:
             print(
                 f"Campaign with ID {row.campaign.id} and name "
                 f'"{row.campaign.name}" was found.'

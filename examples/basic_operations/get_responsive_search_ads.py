@@ -24,13 +24,12 @@ from typing import List, Optional, Sequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.common.types.ad_type_infos import AdTextAsset
-from google.ads.googleads.v19.resources.types.ad import Ad
-from google.ads.googleads.v19.services.services.google_ads_service import (
+from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v20.resources.types.ad import Ad
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v19.services.types.google_ads_service import (
-    GoogleAdsRow,
+from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
@@ -44,12 +43,15 @@ def main(
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
     query: str = """
-        SELECT ad_group.id, ad_group_ad.ad.id,
-        ad_group_ad.ad.responsive_search_ad.headlines,
-        ad_group_ad.ad.responsive_search_ad.descriptions,
-        ad_group_ad.status FROM ad_group_ad
-        WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
-        AND ad_group_ad.status != "REMOVED" """
+        SELECT
+          ad_group.id,
+          ad_group_ad.ad.id,
+          ad_group_ad.ad.responsive_search_ad.headlines,
+          ad_group_ad.ad.responsive_search_ad.descriptions,
+          ad_group_ad.status
+        FROM ad_group_ad
+          WHERE ad_group_ad.ad.type = RESPONSIVE_SEARCH_AD
+          AND ad_group_ad.status != REMOVED"""
 
     # Optional: Specify an ad group ID to restrict search to only a given
     # ad group.

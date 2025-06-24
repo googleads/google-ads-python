@@ -19,29 +19,28 @@ To get campaigns, run get_campaigns.py.
 
 
 import argparse
-import argparse
 import datetime
 import sys
+from typing import List
 import uuid
-from typing import MutableSequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.campaign_budget_service import (
+from google.ads.googleads.v20.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     CampaignBudgetServiceClient,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v19.services.types.campaign_service import (
+from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
     CampaignServiceClient,
     MutateCampaignsResponse,
 )
-from google.ads.googleads.v19.resources.types.campaign_budget import (
+from google.ads.googleads.v20.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v19.resources.types.campaign import Campaign
-from google.ads.googleads.v19.common.types.bidding import ManualCpc
+from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.common.types.bidding import ManualCpc
 
 
 _DATE_FORMAT: str = "%Y%m%d"
@@ -70,10 +69,11 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Add budget.
     campaign_budget_response: MutateCampaignBudgetsResponse
     try:
+        budget_operations: List[CampaignBudgetOperation] = [campaign_budget_operation]
         campaign_budget_response = (
             campaign_budget_service.mutate_campaign_budgets(
                 customer_id=customer_id,
-                operations=[campaign_budget_operation],  # type: ignore
+                operations=budget_operations,
             )
         )
     except GoogleAdsException as ex:
@@ -98,7 +98,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     campaign.status = client.enums.CampaignStatusEnum.PAUSED
 
     # Set the bidding strategy and budget.
-    campaign.manual_cpc = ManualCpc()
+    campaign.manual_cpc = client.get_type("ManualCpc")
     campaign.campaign_budget = campaign_budget_response.results[0].resource_name
 
     # Set the campaign network options.
@@ -123,8 +123,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Add the campaign.
     campaign_response: MutateCampaignsResponse
     try:
+        campaign_operations: List[CampaignOperation] = [campaign_operation]
         campaign_response = campaign_service.mutate_campaigns(
-            customer_id=customer_id, operations=[campaign_operation]  # type: ignore
+            customer_id=customer_id, operations=campaign_operations
         )
         print(f"Created campaign {campaign_response.results[0].resource_name}.")
     except GoogleAdsException as ex:

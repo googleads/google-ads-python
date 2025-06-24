@@ -20,15 +20,15 @@ To get campaigns, run get_campaigns.py.
 
 import argparse
 import sys
-from typing import MutableSequence
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.resources.types.campaign import Campaign
-from google.ads.googleads.v19.services.services.campaign_service import (
+from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v19.services.types.campaign_service import (
+from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -56,10 +56,12 @@ def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
         protobuf_helpers.field_mask(None, campaign._pb),
     )
 
+    operations: List[CampaignOperation] = [campaign_operation]
+
     campaign_response: MutateCampaignsResponse = (
         campaign_service.mutate_campaigns(
             customer_id=customer_id,
-            operations=[campaign_operation],  # type: ignore
+            operations=operations,
         )
     )
 

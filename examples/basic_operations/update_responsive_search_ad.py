@@ -25,12 +25,12 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.common.types.ad_type_infos import AdTextAsset
-from google.ads.googleads.v19.resources.types.ad import Ad
-from google.ads.googleads.v19.services.services.ad_service import (
+from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v20.resources.types.ad import Ad
+from google.ads.googleads.v20.services.services.ad_service import (
     AdServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_service import (
+from google.ads.googleads.v20.services.types.ad_service import (
     AdOperation,
     MutateAdsResponse,
 )
@@ -77,8 +77,9 @@ def main(client: GoogleAdsClient, customer_id: str, ad_id: str) -> None:
     )
 
     # Updates the ad.
+    operations: List[AdOperation] = [ad_operation]
     ad_response: MutateAdsResponse = ad_service.mutate_ads(
-        customer_id=customer_id, operations=[ad_operation]  # type: ignore
+        customer_id=customer_id, operations=operations
     )
     print(
         f'Ad with resource name "{ad_response.results[0].resource_name}" '

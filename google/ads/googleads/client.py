@@ -31,7 +31,8 @@ _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 
-_VALID_API_VERSIONS = ["v17", "v16"]
+_VALID_API_VERSIONS = ["v20", "v19", "v18"]
+_MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
@@ -360,14 +361,17 @@ class GoogleAdsClient:
         # If version is specified when the instance is created,
         # override any version specified as an argument.
         version = self.version if self.version else version
-        api_module = self._get_api_services_by_version(version)
+        # api_module = self._get_api_services_by_version(version)
+        services_path = f"google.ads.googleads.{version}.services.services"
+        snaked = util.convert_upper_case_to_snake_case(name)
         interceptors = interceptors or []
 
         try:
-            service_client_class = getattr(
-                api_module, _SERVICE_CLIENT_TEMPLATE.format(name)
+            service_module = import_module(f"{services_path}.{snaked}")
+            service_client_class = util.get_nested_attr(
+                service_module, _SERVICE_CLIENT_TEMPLATE.format(name)
             )
-        except AttributeError:
+        except (AttributeError, ModuleNotFoundError):
             raise ValueError(
                 'Specified service {}" does not exist in Google '
                 "Ads API {}.".format(name, version)
@@ -441,17 +445,25 @@ class GoogleAdsClient:
         # If version is specified when the instance is created,
         # override any version specified as an argument.
         version = self.version if self.version else version
+        type_classes = self._get_api_services_by_version(version)
 
-        try:
-            type_classes = self._get_api_services_by_version(version)
-            message_class = getattr(type_classes, name)
-        except AttributeError:
-            raise ValueError(
-                f"Specified type '{name}' does not exist in "
-                f"Google Ads API {version}"
-            )
+        for type in _MESSAGE_TYPES:
+            if type == "services":
+                path = f"{type}.types.{name}"
+            else:
+                path = f"{type}.{name}"
 
-        if self.use_proto_plus == True:
-            return message_class()
-        else:
-            return util.convert_proto_plus_to_protobuf(message_class())
+            try:
+                message_class = util.get_nested_attr(type_classes, path)
+
+                if self.use_proto_plus == True:
+                    return message_class()
+                else:
+                    return util.convert_proto_plus_to_protobuf(message_class())
+            except AttributeError:
+                pass
+
+        raise ValueError(
+            f"Specified type '{name}' does not exist in "
+            f"Google Ads API {version}"
+        )

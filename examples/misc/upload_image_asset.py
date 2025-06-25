@@ -20,10 +20,10 @@ To get image assets, run get_all_image_assets.py.
 
 import argparse
 import sys
-import requests
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from examples.utils.example_helpers import get_image_bytes_from_url
 
 
 # [START upload_image_asset]
@@ -32,7 +32,7 @@ def main(client, customer_id):
 
     # Download image from URL
     url = "https://gaagl.page.link/Eit5"
-    image_content = requests.get(url).content
+    image_content = get_image_bytes_from_url(url)
 
     asset_service = client.get_service("AssetService")
     asset_operation = client.get_type("AssetOperation")
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(googleads_client, args.customer_id)

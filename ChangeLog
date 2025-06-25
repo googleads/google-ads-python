@@ -1,3 +1,33 @@
+* 27.0.0
+- Google Ads API v20_0 release.
+- Remove Google Ads API v17.
+- Add example for generating audience insights.
+- Add example for creating demand gen campaign.
+
+* 26.1.0
+- Google Ads API v19_1 release.
+- Add two new examples for budget recommendations.
+- Fix bug in normalize_and_hash function in enhanced conversions examples.
+- Update enhanced conversions for leads example to include session attributes.
+
+* 26.0.1
+- Rename constraints file to resolve install issues on Windows
+- Update add_customer_match_user_list.py to remove mention of unlimited list expiry (#921)
+- Fix issue importing types defined in service protos
+
+* 26.0.0
+- Migrate to default GAPIC templates
+- Migrate from setup.py to pyproject.toml
+- Remove Google Ads API v16
+- Add support for Python 3.13
+- Remove support for Python 3.8
+
+* 25.2.0
+- Google Ads API v19 release.
+
+* 25.1.0
+- Google Ads API v18 release.
+
 * 25.0.0
 - Google Ads API v17_1 release.
 - Remove support for Google Ads API v15.

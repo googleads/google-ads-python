@@ -43,7 +43,7 @@ You can manually run the formatter on all non-generated code with the following
 command:
 
 ```
-python -m black -l 80 -t py37 --exclude "/(v[0-9]+|\.eggs|\.git|_cache|\.nox|\.tox|\.venv|\.svn|_build|buck-out|build|dist)/" .
+python -m black -l 80 --exclude "/(v[0-9]+|\.eggs|\.git|_cache|\.nox|\.tox|\.venv|\.svn|_build|buck-out|build|dist)/" .
 ```
 
 Alternatively, if you intend to contribute regularly, it might be easier to
@@ -51,6 +51,6 @@ append this script to the `.git/hooks/pre-commit` file:
 
 ```
 FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.py" | grep -v "google/ads/google_ads/v.*")
-echo "${FILES}" | xargs python -m black -l 80 -t py37
+echo "${FILES}" | xargs python -m black -l 80
 echo "${FILES}" | xargs git add
 ```

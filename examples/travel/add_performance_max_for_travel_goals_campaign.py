@@ -38,13 +38,15 @@ Notes:
 
 import argparse
 import sys
-from timeit import default_timer
 
-from examples.utils.example_helpers import get_printable_datetime
+
+from examples.utils.example_helpers import (
+    get_printable_datetime,
+    get_image_bytes_from_url,
+)
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
-import requests
 
 MIN_REQUIRED_TEXT_ASSET_COUNTS = {
     "HEADLINE": 3,
@@ -867,7 +869,7 @@ def create_image_asset_and_image_asset_group_asset_operations(
     # existing image asset with the same content but a different name, the new
     # name will be dropped silently.
     asset.name = asset_name
-    asset.image_asset.data = requests.get(url).content
+    asset.image_asset.data = get_image_bytes_from_url(url)
     operations.append(asset_mutate_operation)
 
     # Creates an asset group asset operation to link the asset to the asset
@@ -957,7 +959,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v17")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(googleads_client, args.customer_id, args.place_id)

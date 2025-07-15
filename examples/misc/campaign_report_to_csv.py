@@ -36,6 +36,19 @@ from google.ads.googleads.errors import GoogleAdsException
 
 
 _DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
+_QUERY: str = """
+  SELECT
+      customer.descriptive_name,
+      segments.date,
+      campaign.name,
+      metrics.impressions,
+      metrics.clicks,
+      metrics.cost_micros
+  FROM campaign
+  WHERE
+      segments.date DURING LAST_7_DAYS
+  ORDER BY metrics.impressions DESC
+  LIMIT 25"""
 
 
 def main(
@@ -55,24 +68,10 @@ def main(
     file_path: str = os.path.join(file_dir, output_file)
     ga_service = client.get_service("GoogleAdsService")
 
-    query: str = """
-        SELECT
-          customer.descriptive_name,
-          segments.date,
-          campaign.name,
-          metrics.impressions,
-          metrics.clicks,
-          metrics.cost_micros
-        FROM campaign
-        WHERE
-          segments.date DURING LAST_7_DAYS
-        ORDER BY metrics.impressions DESC
-        LIMIT 25"""
-
     # Issues a search request using streaming.
     search_request = client.get_type("SearchGoogleAdsStreamRequest")
     search_request.customer_id = customer_id
-    search_request.query = query
+    search_request.query = _QUERY
     stream = ga_service.search_stream(search_request)
 
     with open(file_path, "w", newline="") as f:

@@ -1,3 +1,16 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import unittest
 from unittest import mock
 import csv
@@ -11,14 +24,6 @@ import argparse # Ensure argparse is imported
 from examples.misc import campaign_report_to_csv
 from google.ads.googleads.errors import GoogleAdsException
 from .test_utils import create_mock_google_ads_exception
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsStreamResponse
-# Campaign, AdGroup, Customer, GoogleAdsRow types are not strictly needed for these tests
-# if we use the custom mock row/batch classes, but keeping them doesn't hurt.
-from google.ads.googleads.v19.resources.types.campaign import Campaign
-from google.ads.googleads.v19.resources.types.ad_group import AdGroup
-from google.ads.googleads.v19.resources.types.customer import Customer
-from google.ads.googleads.v19.services.types.google_ads_service import GoogleAdsRow
 
 
 # Helper classes for mocking Google Ads API CSV Row/Batch structures
@@ -332,7 +337,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         # Script's GoogleAdsClient.load_from_storage call
         mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
         mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
-        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v20")
 
         # Script's main function call
         mock_main_func_from_decorator(
@@ -384,7 +389,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
 
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
-        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v19")
+        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v20")
 
         client_inst_for_assert = mock_gads_client_class.load_from_storage.return_value
         mock_script_main.assert_called_once_with(
@@ -425,7 +430,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         # For brevity, only checking parse_args and main call here, assuming add_argument calls are covered.
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
-        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v19")
+        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v20")
 
         client_inst_for_assert = mock_gads_client_class.load_from_storage.return_value
         mock_script_main.assert_called_once_with(
@@ -434,6 +439,3 @@ class TestCampaignReportToCsv(unittest.TestCase):
             expected_filepath,
             expected_headers_bool
         )
-
-if __name__ == "__main__":
-    unittest.main()

@@ -27,15 +27,26 @@ from datetime import datetime
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.resources.types.customer import Customer
-from google.ads.googleads.v19.services.services.customer_service.client import CustomerServiceClient
-from google.ads.googleads.v19.services.types.customer_service import CreateCustomerClientResponse
-
+from google.ads.googleads.v20.resources.types.customer import Customer
+from google.ads.googleads.v20.services.services.customer_service.client import (
+    CustomerServiceClient,
+)
+from google.ads.googleads.v20.services.types.customer_service import (
+    CreateCustomerClientResponse,
+)
 
 
 # [START create_customer]
 def main(client: GoogleAdsClient, manager_customer_id: str) -> None:
-    customer_service: CustomerServiceClient = client.get_service("CustomerService")
+    """The main method that creates all necessary entities for the example.
+
+    Args:
+        client: an initialized GoogleAdsClient instance.
+        manager_customer_id: a manager client customer ID.
+    """
+    customer_service: CustomerServiceClient = client.get_service(
+        "CustomerService"
+    )
     customer: Customer = client.get_type("Customer")
     now: str = datetime.today().strftime("%Y%m%d %H:%M:%S")
     customer.descriptive_name = f"Account created with CustomerService on {now}"
@@ -47,11 +58,13 @@ def main(client: GoogleAdsClient, manager_customer_id: str) -> None:
     # options see: https://support.google.com/google-ads/answer/6305348
     customer.tracking_url_template = "{lpurl}?device={device}"
     customer.final_url_suffix = (
-        "keyword={keyword}&matchtype={matchtype}" "&adgroupid={adgroupid}"
+        "keyword={keyword}&matchtype={matchtype}&adgroupid={adgroupid}"
     )
 
-    response: CreateCustomerClientResponse = customer_service.create_customer_client(
-        customer_id=manager_customer_id, customer_client=customer
+    response: CreateCustomerClientResponse = (
+        customer_service.create_customer_client(
+            customer_id=manager_customer_id, customer_client=customer
+        )
     )
     print(
         f'Customer created with resource name "{response.resource_name}" '

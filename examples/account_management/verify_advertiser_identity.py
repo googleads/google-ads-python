@@ -24,11 +24,17 @@ from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.resources.types.identity_verification import IdentityVerification, IdentityVerificationProgress
-from google.ads.googleads.v19.enums.types.identity_verification_program_status import IdentityVerificationProgramStatusEnum
-from google.ads.googleads.v19.enums.types.identity_verification_program import IdentityVerificationProgramEnum
-from google.ads.googleads.v19.services.services.identity_verification_service.client import IdentityVerificationServiceClient
-from google.ads.googleads.v19.services.types.identity_verification_service import GetIdentityVerificationResponse
+from google.ads.googleads.v19.enums.types.identity_verification_program_status import (
+    IdentityVerificationProgramStatusEnum,
+)
+from google.ads.googleads.v19.services.services.identity_verification_service.client import (
+    IdentityVerificationServiceClient,
+)
+from google.ads.googleads.v19.services.types.identity_verification_service import (
+    GetIdentityVerificationResponse,
+    IdentityVerification,
+    IdentityVerificationProgress,
+)
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
@@ -39,12 +45,18 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         customer_id: The client customer ID str.
     """
     # Retrieve the current advertiser identity verification status.
-    identity_verification: Optional[IdentityVerification] = get_identity_verification(client, customer_id)
+    identity_verification: Optional[IdentityVerification] = (
+        get_identity_verification(client, customer_id)
+    )
 
     if identity_verification:
         # Type for status is the enum itself, not int, as it's used for direct comparison.
-        status: IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus = identity_verification.verification_progress.program_status
-        status_enum = client.enums.IdentityVerificationProgramStatusEnum # This is an EnumTypeWrapper
+        status: (
+            IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
+        ) = identity_verification.verification_progress.program_status
+        status_enum = (
+            client.enums.IdentityVerificationProgramStatusEnum
+        )  # This is an EnumTypeWrapper
 
         if status == status_enum.UNSPECIFIED:
             # Starts an identity verification session.
@@ -57,7 +69,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
             # If there is an identity verification session in progress, there
             # is no need to start another one by calling
             # StartIdentityVerification.
-            verification_progress: IdentityVerificationProgress = identity_verification.verification_progress
+            verification_progress: IdentityVerificationProgress = (
+                identity_verification.verification_progress
+            )
             print(
                 "There is an advertiser identity verification session in "
                 "progress. The URL for the verification process is: "
@@ -83,7 +97,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
 
 
 # [START verify_advertiser_identity_1]
-def get_identity_verification(client: GoogleAdsClient, customer_id: str) -> Optional[IdentityVerification]:
+def get_identity_verification(
+    client: GoogleAdsClient, customer_id: str
+) -> Optional[IdentityVerification]:
     """Retrieves the status of the advertiser identity verification process.
 
     Args:
@@ -93,39 +109,51 @@ def get_identity_verification(client: GoogleAdsClient, customer_id: str) -> Opti
     Returns:
         either an IdentityVerification instance, or None
     """
-    service: IdentityVerificationServiceClient = client.get_service("IdentityVerificationService")
-    response: GetIdentityVerificationResponse = service.get_identity_verification(customer_id=customer_id)
+    service: IdentityVerificationServiceClient = client.get_service(
+        "IdentityVerificationService"
+    )
+    response: GetIdentityVerificationResponse = (
+        service.get_identity_verification(customer_id=customer_id)
+    )
 
     # Check if the response contains any indentity verifications. If not, then
     # None will be returned.
     if response.identity_verification:
-        identity_verification_data: IdentityVerification = response.identity_verification[0]
+        identity_verification_data: IdentityVerification = (
+            response.identity_verification[0]
+        )
         deadline: str = (
             identity_verification_data.identity_verification_requirement.verification_completion_deadline_time
         )
         # progress is an enum member
-        progress: IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus = identity_verification_data.verification_progress.program_status
+        progress: (
+            IdentityVerificationProgramStatusEnum.IdentityVerificationProgramStatus
+        ) = identity_verification_data.verification_progress.program_status
 
         print(
             f"Account {customer_id} has a verification completion deadline "
-            "of {deadline} and status {progress.name} for advertiser identity " # Use .name for string representation of enum
+            "of {deadline} and status {progress.name} for advertiser identity "  # Use .name for string representation of enum
             "verification."
         )
 
         return identity_verification_data
         # [END verify_advertiser_identity_1]
-    return None # Explicitly return None if no identity_verification found
+    return None  # Explicitly return None if no identity_verification found
 
 
 # [START verify_advertiser_identity_2]
-def start_identity_verification(client: GoogleAdsClient, customer_id: str) -> None:
+def start_identity_verification(
+    client: GoogleAdsClient, customer_id: str
+) -> None:
     """Starts the identity verification process.
 
     Args:
         client: An initialized GoogleAdsClient instance.
         customer_id: The client customer ID str.
     """
-    service: IdentityVerificationServiceClient = client.get_service("IdentityVerificationService")
+    service: IdentityVerificationServiceClient = client.get_service(
+        "IdentityVerificationService"
+    )
     # Sends a request to start the identity verification process.
     # The verification_program argument expects an IdentityVerificationProgramEnum value (int).
     service.start_identity_verification(

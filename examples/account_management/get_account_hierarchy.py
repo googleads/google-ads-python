@@ -28,14 +28,27 @@ from typing import Optional, List, Dict
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.services.customer_service.client import CustomerServiceClient
-from google.ads.googleads.v19.resources.types.customer_client import CustomerClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchPagedResponse, GoogleAdsRow
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.services.customer_service.client import (
+    CustomerServiceClient,
+)
+from google.ads.googleads.v20.resources.types.customer_client import (
+    CustomerClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    SearchPagedResponse,
+    GoogleAdsRow,
+)
+
 # ListAccessibleCustomersResponse is not directly used for a variable type,
 # but its attribute .resource_names is used, which is List[str].
 
-def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> None:
+
+def main(
+    client: GoogleAdsClient, login_customer_id: Optional[str] = None
+) -> None:
     """Gets the account hierarchy of the given MCC and login customer ID.
 
     Args:
@@ -44,10 +57,13 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
       method will instead list the accounts accessible from the
       authenticated Google Ads account.
     """
-
     # Gets instances of the GoogleAdsService and CustomerService clients.
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
-    customer_service: CustomerServiceClient = client.get_service("CustomerService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    customer_service: CustomerServiceClient = client.get_service(
+        "CustomerService"
+    )
 
     # A collection of customer IDs to handle.
     seed_customer_ids: List[str] = []
@@ -90,7 +106,9 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
             print(customer_id_from_parse)
             seed_customer_ids.append(customer_id_from_parse)
 
-    for seed_customer_id_str in seed_customer_ids: # seed_customer_id_str is a string
+    for (
+        seed_customer_id_str
+    ) in seed_customer_ids:  # seed_customer_id_str is a string
         # Performs a breadth-first search to build a Dictionary that maps
         # managers to their child accounts (customerIdsToChildAccounts).
         # unprocessed_customer_ids should store integers.
@@ -99,7 +117,9 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
         root_customer_client: CustomerClient | None = None
 
         while unprocessed_customer_ids:
-            customer_id_loop: int = unprocessed_customer_ids.pop(0) # customer_id_loop is an int
+            customer_id_loop: int = unprocessed_customer_ids.pop(
+                0
+            )  # customer_id_loop is an int
             # The search method expects customer_id to be a string.
             response: SearchPagedResponse = googleads_service.search(
                 customer_id=str(customer_id_loop), query=query
@@ -107,8 +127,11 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
 
             # Iterates over all rows in all pages to get all customer
             # clients under the specified customer's hierarchy.
-            for googleads_row: GoogleAdsRow in response:
-                customer_client_loop_var: CustomerClient = googleads_row.customer_client
+            googleads_row: GoogleAdsRow
+            for googleads_row in response:
+                customer_client_loop_var: CustomerClient = (
+                    googleads_row.customer_client
+                )
 
                 # The customer client that with level 0 is the specified
                 # customer.
@@ -134,10 +157,13 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
                     # need to check if it's already in the Dictionary.
                     # Assuming customer_client_loop_var.id is an int
                     if (
-                        customer_client_loop_var.id not in customer_ids_to_child_accounts
+                        customer_client_loop_var.id
+                        not in customer_ids_to_child_accounts
                         and customer_client_loop_var.level == 1
                     ):
-                        unprocessed_customer_ids.append(customer_client_loop_var.id)
+                        unprocessed_customer_ids.append(
+                            customer_client_loop_var.id
+                        )
 
         if root_customer_client is not None:
             print(
@@ -156,7 +182,9 @@ def main(client: GoogleAdsClient, login_customer_id: Optional[str] = None) -> No
 
 
 def print_account_hierarchy(
-    customer_client: CustomerClient, customer_ids_to_child_accounts: Dict[int, List[CustomerClient]], depth: int
+    customer_client: CustomerClient,
+    customer_ids_to_child_accounts: Dict[int, List[CustomerClient]],
+    depth: int,
 ) -> None:
     """Prints the specified account's hierarchy using recursion.
 
@@ -182,7 +210,8 @@ def print_account_hierarchy(
 
     # Recursively call this function for all child accounts of customer_client.
     if customer_id_print in customer_ids_to_child_accounts:
-        for child_account: CustomerClient in customer_ids_to_child_accounts[customer_id_print]:
+        child_account: CustomerClient
+        for child_account in customer_ids_to_child_accounts[customer_id_print]:
             print_account_hierarchy(
                 child_account, customer_ids_to_child_accounts, depth + 1
             )

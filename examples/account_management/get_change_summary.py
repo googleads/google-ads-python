@@ -22,9 +22,15 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsRequest, SearchPagedResponse, GoogleAdsRow
-from google.ads.googleads.v19.resources.types.change_status import ChangeStatus
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    SearchGoogleAdsRequest,
+    SearchPagedResponse,
+    GoogleAdsRow,
+)
+from google.ads.googleads.v20.resources.types.change_status import ChangeStatus
 
 
 # [START get_change_summary]
@@ -49,13 +55,16 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         ORDER BY change_status.last_change_date_time
         LIMIT 10000"""
 
-    search_request: SearchGoogleAdsRequest = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
     response: SearchPagedResponse = ads_service.search(request=search_request)
 
-    for row: GoogleAdsRow in response:
+    row: GoogleAdsRow
+    for row in response:
         cs: ChangeStatus = row.change_status
         resource_type: str = cs.resource_type.name
         resource_name: str

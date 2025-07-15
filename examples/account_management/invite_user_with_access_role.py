@@ -23,14 +23,28 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.services.customer_user_access_invitation_service.client import CustomerUserAccessInvitationServiceClient
-from google.ads.googleads.v19.services.types.customer_user_access_invitation_service import CustomerUserAccessInvitationOperation, MutateCustomerUserAccessInvitationResponse
-from google.ads.googleads.v19.resources.types.customer_user_access_invitation import CustomerUserAccessInvitation
+from google.ads.googleads.v20.services.services.customer_user_access_invitation_service.client import (
+    CustomerUserAccessInvitationServiceClient,
+)
+from google.ads.googleads.v20.services.types.customer_user_access_invitation_service import (
+    CustomerUserAccessInvitationOperation,
+    MutateCustomerUserAccessInvitationResponse,
+)
+from google.ads.googleads.v20.resources.types.customer_user_access_invitation import (
+    CustomerUserAccessInvitation,
+)
+
 # AccessRoleEnum is part of google.ads.googleads.v19.enums.types.access_role
 # but it's accessed via client.enums.AccessRoleEnum, so direct import for type hint might not be strictly needed for the parameter.
 # The field invitation.access_role expects an int (the enum value).
 
-def main(client: GoogleAdsClient, customer_id: str, email_address: str, access_role: str) -> None:
+
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    email_address: str,
+    access_role: str,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -39,10 +53,12 @@ def main(client: GoogleAdsClient, customer_id: str, email_address: str, access_r
         email_address: The email address for the user receiving the invitation.
         access_role: The desired access role for the invitee (e.g., "ADMIN", "STANDARD").
     """
-    service: CustomerUserAccessInvitationServiceClient = client.get_service("CustomerUserAccessInvitationService")
+    service: CustomerUserAccessInvitationServiceClient = client.get_service(
+        "CustomerUserAccessInvitationService"
+    )
     # [START invite_user_with_access_role]
-    invitation_operation: CustomerUserAccessInvitationOperation = client.get_type(
-        "CustomerUserAccessInvitationOperation"
+    invitation_operation: CustomerUserAccessInvitationOperation = (
+        client.get_type("CustomerUserAccessInvitationOperation")
     )
     invitation: CustomerUserAccessInvitation = invitation_operation.create
     invitation.email_address = email_address
@@ -50,8 +66,10 @@ def main(client: GoogleAdsClient, customer_id: str, email_address: str, access_r
     # an AccessRoleEnum value (which is an int).
     invitation.access_role = client.enums.AccessRoleEnum[access_role].value
 
-    response: MutateCustomerUserAccessInvitationResponse = service.mutate_customer_user_access_invitation(
-        customer_id=customer_id, operation=invitation_operation
+    response: MutateCustomerUserAccessInvitationResponse = (
+        service.mutate_customer_user_access_invitation(
+            customer_id=customer_id, operation=invitation_operation
+        )
     )
     print(
         "Customer user access invitation was sent for "

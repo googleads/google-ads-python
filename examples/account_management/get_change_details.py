@@ -28,9 +28,15 @@ from proto.enums import ProtoEnumMeta
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import get_nested_attr
-from google.ads.googleads.v19.services.services.google_ads_service.client import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types.google_ads_service import SearchGoogleAdsRequest, SearchPagedResponse, GoogleAdsRow
-from google.ads.googleads.v19.resources.types.change_event import ChangeEvent
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    SearchGoogleAdsRequest,
+    SearchPagedResponse,
+    GoogleAdsRow,
+)
+from google.ads.googleads.v20.resources.types.change_event import ChangeEvent
 
 
 # [START get_change_details]
@@ -41,7 +47,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
       client: The Google Ads client.
       customer_id: The Google Ads customer ID.
     """
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Construct a query to find details for recent changes in your account.
     # The LIMIT clause is required for the change_event resource.
@@ -70,13 +78,18 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         ORDER BY change_event.change_date_time DESC
         LIMIT 5"""
 
-    search_request: SearchGoogleAdsRequest = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
-    results: SearchPagedResponse = googleads_service.search(request=search_request)
+    results: SearchPagedResponse = googleads_service.search(
+        request=search_request
+    )
 
-    for row: GoogleAdsRow in results:
+    row: GoogleAdsRow
+    for row in results:
         event: ChangeEvent = row.change_event
         resource_type: str = event.change_resource_type.name
         old_resource: Any
@@ -174,7 +187,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
                 if operation_type == "CREATE":
                     print(f"\t{changed_field} set to {new_value}")
                 else:
-                    old_value: Any = get_nested_attr(old_resource, changed_field)
+                    old_value: Any = get_nested_attr(
+                        old_resource, changed_field
+                    )
                     # If the field value is an Enum get the human readable name
                     # so that it is printed instead of the field ID integer.
                     if isinstance(type(old_value), ProtoEnumMeta):

@@ -25,6 +25,7 @@ https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 
 import argparse
 import sys
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -33,17 +34,19 @@ from google.api_core.retry import Retry
 
 
 _CLIENT_TIMEOUT_SECONDS = 5 * 60  # 5 minutes.
-_QUERY = "SELECT campaign.id FROM campaign"
+_QUERY: str = "SELECT campaign.id FROM campaign"
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """Main method, to run this code example as a standalone application."""
     make_server_streaming_call(client, customer_id)
     make_unary_call(client, customer_id)
 
 
 # [START set_custom_client_timeouts]
-def make_server_streaming_call(client, customer_id):
+def make_server_streaming_call(
+    client: GoogleAdsClient, customer_id: str
+) -> None:
     """Makes a server streaming call using a custom client timeout.
 
     Args:
@@ -51,7 +54,7 @@ def make_server_streaming_call(client, customer_id):
         customer_id: The str Google Ads customer ID.
     """
     ga_service = client.get_service("GoogleAdsService")
-    campaign_ids = []
+    campaign_ids: List[str] = []
 
     try:
         search_request = client.get_type("SearchGoogleAdsStreamRequest")
@@ -92,7 +95,7 @@ def make_server_streaming_call(client, customer_id):
 
 
 # [START set_custom_client_timeouts_1]
-def make_unary_call(client, customer_id):
+def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
     """Makes a unary call using a custom client timeout.
 
     Args:
@@ -100,7 +103,7 @@ def make_unary_call(client, customer_id):
         customer_id: The Google Ads customer ID.
     """
     ga_service = client.get_service("GoogleAdsService")
-    campaign_ids = []
+    campaign_ids: List[str] = []
 
     try:
         search_request = client.get_type("SearchGoogleAdsRequest")

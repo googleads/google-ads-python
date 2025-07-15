@@ -26,9 +26,14 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, ad_group_id, asset_id):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    asset_id: str,
+) -> None:
     ad_group_asset_service = client.get_service("AdGroupAssetService")
-    ad_group_asset_resource_name = ad_group_asset_service.asset_path(
+    ad_group_asset_resource_name: str = ad_group_asset_service.asset_path(
         customer_id, asset_id
     )
 

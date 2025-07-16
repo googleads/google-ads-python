@@ -31,7 +31,6 @@ from google.ads.googleads.v20.services.services.google_ads_service.client import
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
 )
 from google.ads.googleads.v20.resources.types.customer_user_access import (
     CustomerUserAccess,

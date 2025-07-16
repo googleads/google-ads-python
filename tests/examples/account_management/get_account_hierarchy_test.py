@@ -1,12 +1,32 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import unittest
 from unittest.mock import patch, MagicMock
 import io
 import sys
 
-from examples.account_management import get_account_hierarchy
+from examples.account_management.get_account_hierarchy import (
+    main as example_main,
+)
 from google.ads.googleads.client import GoogleAdsClient
-from google.ads.googleads.v19.services.services.customer_service import CustomerServiceClient
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
+from google.ads.googleads.v19.services.services.customer_service import (
+    CustomerServiceClient,
+)
+from google.ads.googleads.v19.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+
 # Re-attempting import from v19 based on `ls` output.
 # Previous error was "No module named 'google.ads.googleads.v19.types'".
 # Trying "google.ads.googleads.v19.services.types" instead.
@@ -15,17 +35,23 @@ from google.ads.googleads.v19.services.types import GoogleAdsRow
 
 class TestGetAccountHierarchy(unittest.TestCase):
 
-    @patch('examples.account_management.get_account_hierarchy.GoogleAdsClient')
-    def test_main_prints_hierarchy_correctly_with_manager_id(self, mock_google_ads_client_class):
+    # @patch('examples.account_management.get_account_hierarchy.GoogleAdsClient')
+    def test_main_prints_hierarchy_correctly_with_manager_id(
+        self, mock_google_ads_client_class
+    ):
         # 1. Setup Mocks
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
-        mock_google_ads_client_class.load_from_storage.return_value = mock_client_instance
+        mock_google_ads_client_class.load_from_storage.return_value = (
+            mock_client_instance
+        )
 
         mock_google_ads_service = MagicMock(spec=GoogleAdsServiceClient)
         # This mock is only used if login_customer_id is None in main()
         mock_customer_service = MagicMock(spec=CustomerServiceClient)
 
-        def get_service_side_effect(service_name, version=None): # Script doesn't pass version
+        def get_service_side_effect(
+            service_name, version=None
+        ):  # Script doesn't pass version
             if service_name == "GoogleAdsService":
                 return mock_google_ads_service
             elif service_name == "CustomerService":
@@ -40,7 +66,9 @@ class TestGetAccountHierarchy(unittest.TestCase):
         # 3. Mock responses for GoogleAdsService.search()
         # This function is called in a loop by the script's BFS logic.
         # The query is fixed in the script; behavior changes based on the 'customer_id' argument to search().
-        def mock_search_logic(*, customer_id, query): # Use keyword args to match GoogleAdsService.search
+        def mock_search_logic(
+            *, customer_id, query
+        ):  # Use keyword args to match GoogleAdsService.search
             response_rows = []
 
             # Simulate response for initial call with login_manager_id_str (e.g., "1000")
@@ -52,7 +80,7 @@ class TestGetAccountHierarchy(unittest.TestCase):
                 row_m.customer_client.currency_code = "USD"
                 row_m.customer_client.time_zone = "America/New_York"
                 row_m.customer_client.level = 0
-                row_m.customer_client.manager = True # Manager M is a manager
+                row_m.customer_client.manager = True  # Manager M is a manager
                 response_rows.append(row_m)
 
                 # Child C1 (ID 2000) of Manager M - level 1 relative to M
@@ -62,7 +90,7 @@ class TestGetAccountHierarchy(unittest.TestCase):
                 row_c1.customer_client.currency_code = "USD"
                 row_c1.customer_client.time_zone = "America/Los_Angeles"
                 row_c1.customer_client.level = 1
-                row_c1.customer_client.manager = True # C1 is also a manager
+                row_c1.customer_client.manager = True  # C1 is also a manager
                 response_rows.append(row_c1)
 
                 # Child C2 (ID 3000) of Manager M - level 1 relative to M
@@ -72,7 +100,7 @@ class TestGetAccountHierarchy(unittest.TestCase):
                 row_c2.customer_client.currency_code = "EUR"
                 row_c2.customer_client.time_zone = "Europe/London"
                 row_c2.customer_client.level = 1
-                row_c2.customer_client.manager = False # C2 is NOT a manager
+                row_c2.customer_client.manager = False  # C2 is NOT a manager
                 response_rows.append(row_c2)
 
             # Simulate response when script calls search for customer_id "2000" (Child C1)
@@ -80,7 +108,9 @@ class TestGetAccountHierarchy(unittest.TestCase):
                 # Child C1 (ID 2000) itself - now as level 0 in this context
                 row_c1_self = GoogleAdsRow()
                 row_c1_self.customer_client.id = 2000
-                row_c1_self.customer_client.descriptive_name = "Child Account C1"
+                row_c1_self.customer_client.descriptive_name = (
+                    "Child Account C1"
+                )
                 row_c1_self.customer_client.currency_code = "USD"
                 row_c1_self.customer_client.time_zone = "America/Los_Angeles"
                 row_c1_self.customer_client.level = 0
@@ -90,11 +120,13 @@ class TestGetAccountHierarchy(unittest.TestCase):
                 # Grandchild GC1 (ID 4000) of M, child of C1 - level 1 relative to C1
                 row_gc1 = GoogleAdsRow()
                 row_gc1.customer_client.id = 4000
-                row_gc1.customer_client.descriptive_name = "Grandchild Account GC1"
+                row_gc1.customer_client.descriptive_name = (
+                    "Grandchild Account GC1"
+                )
                 row_gc1.customer_client.currency_code = "CAD"
                 row_gc1.customer_client.time_zone = "America/Toronto"
                 row_gc1.customer_client.level = 1
-                row_gc1.customer_client.manager = False # GC1 is NOT a manager
+                row_gc1.customer_client.manager = False  # GC1 is NOT a manager
                 response_rows.append(row_gc1)
 
             # Simulate response for customer_id "3000" (Child C2)
@@ -103,14 +135,18 @@ class TestGetAccountHierarchy(unittest.TestCase):
             elif customer_id == "3000":
                 row_c2_self = GoogleAdsRow()
                 row_c2_self.customer_client.id = 3000
-                row_c2_self.customer_client.descriptive_name = "Child Account C2"
+                row_c2_self.customer_client.descriptive_name = (
+                    "Child Account C2"
+                )
                 row_c2_self.customer_client.currency_code = "EUR"
                 row_c2_self.customer_client.time_zone = "Europe/London"
                 row_c2_self.customer_client.level = 0
                 row_c2_self.customer_client.manager = False
                 response_rows.append(row_c2_self)
 
-            return iter(response_rows) # googleads_service.search returns an iterator
+            return iter(
+                response_rows
+            )  # googleads_service.search returns an iterator
 
         mock_google_ads_service.search.side_effect = mock_search_logic
 
@@ -119,7 +155,7 @@ class TestGetAccountHierarchy(unittest.TestCase):
         sys.stdout = captured_output
 
         # 5. Call the main function from the script
-        get_account_hierarchy.main(mock_client_instance, login_manager_id_str)
+        example_main(mock_client_instance, login_manager_id_str)
 
         # 6. Restore stdout
         sys.stdout = sys.__stdout__
@@ -146,8 +182,12 @@ class TestGetAccountHierarchy(unittest.TestCase):
         FROM customer_client
         WHERE customer_client.level <= 1"""
 
-        mock_google_ads_service.search.assert_any_call(customer_id=login_manager_id_str, query=expected_query)
-        mock_google_ads_service.search.assert_any_call(customer_id="2000", query=expected_query)
+        mock_google_ads_service.search.assert_any_call(
+            customer_id=login_manager_id_str, query=expected_query
+        )
+        mock_google_ads_service.search.assert_any_call(
+            customer_id="2000", query=expected_query
+        )
         # The following call does not happen because customer "3000" is not a manager
         # mock_google_ads_service.search.assert_any_call(customer_id="3000", query=expected_query)
 
@@ -161,11 +201,8 @@ class TestGetAccountHierarchy(unittest.TestCase):
             "--2000 (Child Account C1, USD, America/Los_Angeles)",
             "----4000 (Grandchild Account GC1, CAD, America/Toronto)",
             "--3000 (Child Account C2, EUR, Europe/London)",
-            "" # Ensure trailing newline
+            "",  # Ensure trailing newline
         ]
         expected_output = "\n".join(expected_output_lines)
 
         self.assertEqual(output, expected_output)
-
-if __name__ == "__main__":
-    unittest.main()

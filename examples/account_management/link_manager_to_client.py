@@ -37,7 +37,7 @@ from google.ads.googleads.v20.services.services.google_ads_service.client import
     GoogleAdsServiceClient,
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
-    SearchPagedResponse,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v20.services.services.customer_manager_link_service.client import (
@@ -108,7 +108,7 @@ def main(
     manager_link_id: int = -1  # Initialize with a default value
 
     try:
-        search_response: SearchPagedResponse = ga_service.search(
+        search_response: SearchGoogleAdsResponse = ga_service.search(
             customer_id=manager_customer_id, query=query
         )
         # Since the googleads_service.search method returns an iterator we need
@@ -116,6 +116,7 @@ def main(
         # we know the query will only return a single row.
         row: GoogleAdsRow
         for row in search_response:  # Assuming direct iteration
+            breakpoint()
             manager_link_id = row.customer_client_link.manager_link_id
     except GoogleAdsException as ex:
         # handle_googleads_exception(ex) # This function is not defined here

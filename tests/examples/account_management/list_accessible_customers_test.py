@@ -1,3 +1,16 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import unittest
 from unittest.mock import patch, MagicMock
 import io
@@ -5,16 +18,26 @@ import sys
 
 from examples.account_management import list_accessible_customers
 from google.ads.googleads.client import GoogleAdsClient
-from google.ads.googleads.v19.services.services.customer_service import CustomerServiceClient
+from google.ads.googleads.v19.services.services.customer_service import (
+    CustomerServiceClient,
+)
+
 # The script uses ListAccessibleCustomersResponse, but we only need to mock its relevant attribute.
+
 
 class TestListAccessibleCustomers(unittest.TestCase):
 
-    @patch('examples.account_management.list_accessible_customers.GoogleAdsClient')
-    def test_main_prints_accessible_customers(self, mock_google_ads_client_class):
+    @patch(
+        "examples.account_management.list_accessible_customers.GoogleAdsClient"
+    )
+    def test_main_prints_accessible_customers(
+        self, mock_google_ads_client_class
+    ):
         # 1. Setup Mocks
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
-        mock_google_ads_client_class.load_from_storage.return_value = mock_client_instance
+        mock_google_ads_client_class.load_from_storage.return_value = (
+            mock_client_instance
+        )
 
         mock_customer_service = MagicMock(spec=CustomerServiceClient)
         mock_client_instance.get_service.return_value = mock_customer_service
@@ -25,10 +48,12 @@ class TestListAccessibleCustomers(unittest.TestCase):
         mock_customer_resource_names = [
             "customers/1234567890",
             "customers/0987654321",
-            "customers/1122334455"
+            "customers/1122334455",
         ]
         mock_list_response.resource_names = mock_customer_resource_names
-        mock_customer_service.list_accessible_customers.return_value = mock_list_response
+        mock_customer_service.list_accessible_customers.return_value = (
+            mock_list_response
+        )
 
         # 2. Capture stdout
         captured_output = io.StringIO()
@@ -42,20 +67,23 @@ class TestListAccessibleCustomers(unittest.TestCase):
 
         # 5. Assertions
         # Assert get_service was called
-        mock_client_instance.get_service.assert_called_once_with("CustomerService")
+        mock_client_instance.get_service.assert_called_once_with(
+            "CustomerService"
+        )
 
         # Assert list_accessible_customers was called
-        mock_customer_service.list_accessible_customers.assert_called_once_with() # No arguments
+        mock_customer_service.list_accessible_customers.assert_called_once_with()  # No arguments
 
         # Verify printed output
         output = captured_output.getvalue()
 
-        expected_lines = [f"Total results: {len(mock_customer_resource_names)}\n"]
+        expected_lines = [
+            f"Total results: {len(mock_customer_resource_names)}\n"
+        ]
         for resource_name in mock_customer_resource_names:
-            expected_lines.append(f'Customer resource name: "{resource_name}"\n')
+            expected_lines.append(
+                f'Customer resource name: "{resource_name}"\n'
+            )
 
         expected_output = "".join(expected_lines)
         self.assertEqual(output, expected_output)
-
-if __name__ == "__main__":
-    unittest.main()

@@ -1,21 +1,45 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import unittest
 from unittest.mock import patch, MagicMock
 import io
 import sys
 
-from examples.account_management import get_change_summary # Assuming this is the script name
+from examples.account_management import (
+    get_change_summary,
+)  # Assuming this is the script name
 from google.ads.googleads.client import GoogleAdsClient
-from google.ads.googleads.v19.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v19.services.types import GoogleAdsRow # Using consistent import path
-from google.ads.googleads.v19.services.types import SearchGoogleAdsRequest # Corrected path
+from google.ads.googleads.v19.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v19.services.types import (
+    GoogleAdsRow,
+)  # Using consistent import path
+from google.ads.googleads.v19.services.types import (
+    SearchGoogleAdsRequest,
+)  # Corrected path
+
 
 class TestGetChangeSummary(unittest.TestCase):
 
-    @patch('examples.account_management.get_change_summary.GoogleAdsClient')
+    @patch("examples.account_management.get_change_summary.GoogleAdsClient")
     def test_main_prints_change_summary(self, mock_google_ads_client_class):
         # 1. Setup Mocks
         mock_client_instance = MagicMock(spec=GoogleAdsClient)
-        mock_google_ads_client_class.load_from_storage.return_value = mock_client_instance
+        mock_google_ads_client_class.load_from_storage.return_value = (
+            mock_client_instance
+        )
 
         mock_google_ads_service = MagicMock(spec=GoogleAdsServiceClient)
         mock_client_instance.get_service.return_value = mock_google_ads_service
@@ -30,37 +54,37 @@ class TestGetChangeSummary(unittest.TestCase):
                 "resource_type_name": "CAMPAIGN",
                 "specific_resource_name": "customers/123/campaigns/1",
                 "last_change_date_time": "2023-03-10 09:00:00",
-                "resource_status_name": "ENABLED"
+                "resource_status_name": "ENABLED",
             },
             {
                 "change_status_resource_name": "customers/123/changeStatus/B",
                 "resource_type_name": "AD_GROUP",
                 "specific_resource_name": "customers/123/adGroups/1",
                 "last_change_date_time": "2023-03-10 10:00:00",
-                "resource_status_name": "PAUSED"
+                "resource_status_name": "PAUSED",
             },
             {
                 "change_status_resource_name": "customers/123/changeStatus/C",
                 "resource_type_name": "AD_GROUP_AD",
                 "specific_resource_name": "customers/123/adGroupAds/1",
                 "last_change_date_time": "2023-03-10 11:00:00",
-                "resource_status_name": "ENABLED"
+                "resource_status_name": "ENABLED",
             },
         ]
 
         mock_google_ads_rows = []
         for data in mock_rows_data:
             row = MagicMock(spec=GoogleAdsRow)
-            row.change_status = MagicMock() # Explicitly define change_status
-            cs = row.change_status # cs is also a MagicMock now
+            row.change_status = MagicMock()  # Explicitly define change_status
+            cs = row.change_status  # cs is also a MagicMock now
 
             cs.resource_name = data["change_status_resource_name"]
             cs.last_change_date_time = data["last_change_date_time"]
 
-            cs.resource_type = MagicMock() # Mock for enum
+            cs.resource_type = MagicMock()  # Mock for enum
             cs.resource_type.name = data["resource_type_name"]
 
-            cs.resource_status = MagicMock() # Mock for enum
+            cs.resource_status = MagicMock()  # Mock for enum
             cs.resource_status.name = data["resource_status_name"]
 
             # Set specific resource name fields based on resource_type_name
@@ -93,18 +117,27 @@ class TestGetChangeSummary(unittest.TestCase):
 
         # 7. Assertions
         # Assert get_type was called for SearchGoogleAdsRequest
-        mock_client_instance.get_type.assert_called_once_with("SearchGoogleAdsRequest")
+        mock_client_instance.get_type.assert_called_once_with(
+            "SearchGoogleAdsRequest"
+        )
 
         # Assert search was called with the request object
-        mock_google_ads_service.search.assert_called_once_with(request=mock_search_request)
+        mock_google_ads_service.search.assert_called_once_with(
+            request=mock_search_request
+        )
 
         # Verify attributes of the search_request object
         self.assertEqual(mock_search_request.customer_id, customer_id)
         actual_query_arg = mock_search_request.query
 
         # Verify query content
-        self.assertIn("change_status.last_change_date_time DURING LAST_14_DAYS", actual_query_arg) # Corrected date range
-        self.assertIn("ORDER BY change_status.last_change_date_time", actual_query_arg)
+        self.assertIn(
+            "change_status.last_change_date_time DURING LAST_14_DAYS",
+            actual_query_arg,
+        )  # Corrected date range
+        self.assertIn(
+            "ORDER BY change_status.last_change_date_time", actual_query_arg
+        )
         self.assertIn("LIMIT 10000", actual_query_arg)
         self.assertIn("change_status.resource_name", actual_query_arg)
         self.assertIn("change_status.resource_type", actual_query_arg)
@@ -133,6 +166,3 @@ class TestGetChangeSummary(unittest.TestCase):
 
         expected_output = "".join(expected_lines)
         self.assertEqual(output, expected_output)
-
-if __name__ == "__main__":
-    unittest.main()

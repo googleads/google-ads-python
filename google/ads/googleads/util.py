@@ -19,11 +19,25 @@ import re
 from google.protobuf.message import Message as ProtobufMessageType
 import proto
 
+from typing import Any, TypeVar, overload, Union
+
 # This regex matches characters preceded by start of line or an underscore.
 _RE_FIND_CHARS_TO_UPPERCASE = re.compile(r"(?:_|^)([a-z])")
 
+M = TypeVar("M", bound=ProtobufMessageType)
 
-def get_nested_attr(obj, attr, *args):
+
+@overload
+def get_nested_attr(obj: Any, attr: str) -> Any:
+    ...
+
+
+@overload
+def get_nested_attr(obj: Any, attr: str, default: Any) -> Any:
+    ...
+
+
+def get_nested_attr(obj: Any, attr: str, *args: Any) -> Any:
     """Gets the value of a nested attribute from an object.
 
     Args:
@@ -34,13 +48,15 @@ def get_nested_attr(obj, attr, *args):
       The object attribute value or the given *args if the attr isn't present.
     """
 
-    def _getattr(obj, attr):
+    def _getattr(obj: Any, attr: str) -> Any:
         return getattr(obj, attr, *args)
 
     return functools.reduce(_getattr, [obj] + attr.split("."))
 
 
-def set_nested_message_field(message, field_path, value):
+def set_nested_message_field(
+    message: M, field_path: Union[str, list[str]], value: Any
+) -> None:
     """Sets the value of a nested attribute on a protobuf message instance.
 
     This method uses "setattr" to update a given field on a protobuf message
@@ -71,18 +87,20 @@ def set_nested_message_field(message, field_path, value):
             names or a list of strings.
         value: The value that the nested attribute should be set to.
     """
-    if type(field_path) == str:
-        field_path = field_path.split(".")
+    if isinstance(field_path, str):
+        field_path_list = field_path.split(".")
+    else:
+        field_path_list = field_path
 
-    if len(field_path) == 1:
-        setattr(message, field_path[0], value)
+    if len(field_path_list) == 1:
+        setattr(message, field_path_list[0], value)
     else:
         set_nested_message_field(
-            getattr(message, field_path[0]), field_path[1:], value
+            getattr(message, field_path_list[0]), field_path_list[1:], value
         )
 
 
-def convert_upper_case_to_snake_case(string):
+def convert_upper_case_to_snake_case(string: str) -> str:
     """Converts a string from UpperCase to snake_case.
 
     Primarily used to translate module names when retrieving them from version
@@ -94,8 +112,8 @@ def convert_upper_case_to_snake_case(string):
     Returns:
         A new snake_case representation of the given string.
     """
-    new_string = ""
-    index = 0
+    new_string: str = ""
+    index: int = 0
 
     for char in string:
         if index == 0:
@@ -110,7 +128,7 @@ def convert_upper_case_to_snake_case(string):
     return new_string
 
 
-def convert_snake_case_to_upper_case(string):
+def convert_snake_case_to_upper_case(string: str) -> str:
     """Converts a string from snake_case to UpperCase.
 
     Primarily used to translate module names when retrieving them from version
@@ -120,14 +138,18 @@ def convert_snake_case_to_upper_case(string):
         string: an arbitrary string to convert.
     """
 
-    def converter(match):
+    def converter(match: re.Match) -> str:
         """Convert a string to strip underscores then uppercase it."""
         return match.group().replace("_", "").upper()
 
     return _RE_FIND_CHARS_TO_UPPERCASE.sub(converter, string)
 
 
-def convert_proto_plus_to_protobuf(message):
+PPM = TypeVar("PPM", bound=proto.Message)
+PBPM = TypeVar("PBPM", bound=ProtobufMessageType)
+
+
+def convert_proto_plus_to_protobuf(message: PPM | PBPM) -> PBPM:
     """Converts a proto-plus  message to its protobuf counterpart.
 
     Args:
@@ -137,16 +159,16 @@ def convert_proto_plus_to_protobuf(message):
         The protobuf version of the proto_plus proto.
     """
     if isinstance(message, proto.Message):
-        return type(message).pb(message)
+        return type(message).pb(message)  # type: ignore
     elif isinstance(message, ProtobufMessageType):
-        return message
+        return message  # type: ignore
     else:
         raise TypeError(
             f"Cannot convert type {type(message)} to protobuf protobuf."
         )
 
 
-def convert_protobuf_to_proto_plus(message):
+def convert_protobuf_to_proto_plus(message: PBPM | PPM) -> PPM:
     """Converts a protobuf message to a proto-plus message.
 
     Args:
@@ -156,16 +178,16 @@ def convert_protobuf_to_proto_plus(message):
         A proto_plus version of the protobuf proto.
     """
     if isinstance(message, ProtobufMessageType):
-        return proto.Message.wrap(message)
+        return proto.Message.wrap(message)  # type: ignore
     elif isinstance(message, proto.Message):
-        return message
+        return message  # type: ignore
     else:
         raise TypeError(
             f"Cannot convert type {type(message)} to a proto_plus protobuf."
         )
 
 
-def proto_copy_from(destination, origin):
+def proto_copy_from(destination: PPM | PBPM, origin: PPM | PBPM) -> None:
     """Copies protobuf and proto-plus messages into one-another.
 
     This method consolidates the CopyFrom logic of protobuf and proto-plus

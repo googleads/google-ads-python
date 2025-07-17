@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # Copyright 2018 Google LLC
+
+from typing import List, Dict
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +51,7 @@ _PORT = 8080
 _REDIRECT_URI = f"http://{_SERVER}:{_PORT}"
 
 
-def main(client_secrets_path, scopes):
+def main(client_secrets_path: str, scopes: List[str]) -> None:
     """The main method, starts a basic server and initializes an auth request.
 
     Args:
@@ -96,7 +98,7 @@ def main(client_secrets_path, scopes):
     )
 
 
-def get_authorization_code(passthrough_val):
+def get_authorization_code(passthrough_val: str) -> str:
     """Opens a socket to handle a single HTTP request containing auth tokens.
 
     Args:
@@ -145,7 +147,7 @@ def get_authorization_code(passthrough_val):
     return params.get("code")
 
 
-def parse_raw_query_params(data):
+def parse_raw_query_params(data: bytes) -> Dict[str, str]:
     """Parses a raw HTTP request to extract its query params as a dict.
 
     Note that this logic is likely irrelevant if you're building OAuth logic

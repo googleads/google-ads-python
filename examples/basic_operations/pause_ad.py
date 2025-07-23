@@ -20,6 +20,7 @@ import sys
 from typing import List
 
 from google.api_core import protobuf_helpers
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
@@ -56,7 +57,7 @@ def main(
         protobuf_helpers.field_mask(None, ad_group_ad._pb),
     )
 
-    operations List[AdGroupAdOperation] = [ad_group_ad_operation]
+    operations: List[AdGroupAdOperation] = [ad_group_ad_operation]
 
     ad_group_ad_response: MutateAdGroupAdsResponse = (
         ad_group_ad_service.mutate_ad_group_ads(
@@ -92,19 +93,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-<<<<<<< HEAD
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
         version="v20"
     )
-=======
-<<<<<<< HEAD
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-=======
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
-    )
->>>>>>> e9e91feee (I've added type hints and annotations to the Python files in your `examples/basic_operations` directory. This should make the code easier to read and also help with static analysis.)
->>>>>>> 6b1491771 (I've added type hints and annotations to the Python files in your `examples/basic_operations` directory. This should make the code easier to read and also help with static analysis.)
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id, args.ad_id)

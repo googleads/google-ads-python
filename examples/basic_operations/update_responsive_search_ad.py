@@ -20,12 +20,14 @@ To get responsive search ads, run get_responsive_search_ads.py.
 
 import argparse
 import sys
-from typing import MutableSequence
+from typing import List
 from uuid import uuid4
+
+from google.api_core import protobuf_helpers
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v20.common.types.ad_asset import AdTextAsset
 from google.ads.googleads.v20.resources.types.ad import Ad
 from google.ads.googleads.v20.services.services.ad_service import (
     AdServiceClient,
@@ -34,7 +36,6 @@ from google.ads.googleads.v20.services.types.ad_service import (
     AdOperation,
     MutateAdsResponse,
 )
-from google.api_core import protobuf_helpers
 
 
 # [START update_responsive_search_ad]

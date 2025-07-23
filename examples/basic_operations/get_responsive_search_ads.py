@@ -24,7 +24,7 @@ from typing import List, Optional, Sequence
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v20.common.types.ad_asset import AdTextAsset
 from google.ads.googleads.v20.resources.types.ad import Ad
 from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,

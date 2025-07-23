@@ -25,20 +25,20 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
 from google.ads.googleads.v20.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
-    AdGroupServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
 from google.ads.googleads.v20.resources.types.ad_group import AdGroup
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
     ad_group_service: AdGroupServiceClient = client.get_service(
         "AdGroupService"
     )
@@ -86,7 +86,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.campaign_id)

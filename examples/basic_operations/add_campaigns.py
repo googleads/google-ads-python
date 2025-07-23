@@ -26,21 +26,24 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
 from google.ads.googleads.v20.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
-    CampaignBudgetServiceClient,
     MutateCampaignBudgetsResponse,
+)
+from google.ads.googleads.v20.services.services.campaign_service import (
+    CampaignServiceClient,
 )
 from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
-    CampaignServiceClient,
     MutateCampaignsResponse,
 )
 from google.ads.googleads.v20.resources.types.campaign_budget import (
     CampaignBudget,
 )
 from google.ads.googleads.v20.resources.types.campaign import Campaign
-from google.ads.googleads.v20.common.types.bidding import ManualCpc
 
 
 _DATE_FORMAT: str = "%Y%m%d"
@@ -69,7 +72,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Add budget.
     campaign_budget_response: MutateCampaignBudgetsResponse
     try:
-        budget_operations: List[CampaignBudgetOperation] = [campaign_budget_operation]
+        budget_operations: List[CampaignBudgetOperation] = [
+            campaign_budget_operation
+        ]
         campaign_budget_response = (
             campaign_budget_service.mutate_campaign_budgets(
                 customer_id=customer_id,

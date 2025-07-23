@@ -22,6 +22,8 @@ import argparse
 import sys
 from typing import List
 
+from google.api_core import protobuf_helpers
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.resources.types.campaign import Campaign
@@ -32,7 +34,6 @@ from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
-from google.api_core import protobuf_helpers
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

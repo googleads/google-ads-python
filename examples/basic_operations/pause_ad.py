@@ -17,29 +17,53 @@
 
 import argparse
 import sys
+from typing import List
 
 from google.api_core import protobuf_helpers
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
 
 
-def main(client, customer_id, ad_group_id, ad_id):
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    ad_id: str,
+) -> None:
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
 
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
 
-    ad_group_ad = ad_group_ad_operation.update
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.update
     ad_group_ad.resource_name = ad_group_ad_service.ad_group_ad_path(
         customer_id, ad_group_id, ad_id
     )
-    ad_group_ad.status = client.enums.AdGroupStatusEnum.PAUSED
+    ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     client.copy_from(
         ad_group_ad_operation.update_mask,
         protobuf_helpers.field_mask(None, ad_group_ad._pb),
     )
 
-    ad_group_ad_response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id=customer_id, operations=[ad_group_ad_operation]
+    operations: List[AdGroupAdOperation] = [ad_group_ad_operation]
+
+    ad_group_ad_response: MutateAdGroupAdsResponse = (
+        ad_group_ad_service.mutate_ad_group_ads(
+            customer_id=customer_id,
+            operations=operations,
+        )
     )
 
     print(
@@ -65,11 +89,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "-i", "--ad_id", type=str, required=True, help="The ad ID."
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id, args.ad_id)

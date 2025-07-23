@@ -20,19 +20,39 @@ To get ad groups, run get_ad_groups.py.
 
 import argparse
 import sys
+from typing import List
+
+from google.api_core import protobuf_helpers
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.api_core import protobuf_helpers
+from google.ads.googleads.v20.resources.types.ad_group import AdGroup
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+)
+from google.ads.googleads.v20.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
 
 
 # [START update_ad_group]
-def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
-    ad_group_service = client.get_service("AdGroupService")
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    cpc_bid_micro_amount: int,
+) -> None:
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
 
     # Create ad group operation.
-    ad_group_operation = client.get_type("AdGroupOperation")
-    ad_group = ad_group_operation.update
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.update
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
@@ -43,9 +63,14 @@ def main(client, customer_id, ad_group_id, cpc_bid_micro_amount):
         protobuf_helpers.field_mask(None, ad_group._pb),
     )
 
+    operations: List[AdGroupAdOperation] = [ad_group_operation]
+
     # Update the ad group.
-    ad_group_response = ad_group_service.mutate_ad_groups(
-        customer_id=customer_id, operations=[ad_group_operation]
+    ad_group_response: MutateAdGroupsResponse = (
+        ad_group_service.mutate_ad_groups(
+            customer_id=customer_id,
+            operations=operations,
+        )
     )
 
     print(f"Updated ad group {ad_group_response.results[0].resource_name}.")
@@ -77,11 +102,13 @@ if __name__ == "__main__":
         required=True,
         help="The cpc bid micro amount.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

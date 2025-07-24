@@ -32,9 +32,6 @@ from google.ads.googleads.v20.services.types.ad_parameter_service import (
     MutateAdParametersResponse,
 )
 from google.ads.googleads.v20.resources.types.ad_parameter import AdParameter
-from google.ads.googleads.v20.services.types.ad_parameter_service import (
-    MutateAdParameterResult,
-)
 
 
 def main(
@@ -51,8 +48,8 @@ def main(
         ad_group_id: An ad group ID str.
         criterion_id: A criterion ID str.
     """
-    ad_group_criterion_service: AdGroupCriterionServiceClient = client.get_service(
-        "AdGroupCriterionService"
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
     )
     # Gets the resource name of the ad group criterion to be used.
     resource_name: str = ad_group_criterion_service.ad_group_criterion_path(
@@ -91,7 +88,9 @@ def main(
 
         for res in response.results:
             # res: MutateAdParameterResult = res <- Removed type hint
-            print("Set ad parameter with resource_name: " f"{res.resource_name}")
+            print(
+                "Set ad parameter with resource_name: " f"{res.resource_name}"
+            )
 
 
 def create_ad_parameter(
@@ -117,7 +116,9 @@ def create_ad_parameter(
 
     Returns: A new AdParameterOperation message class instance.
     """
-    ad_param_operation: AdParameterOperation = client.get_type("AdParameterOperation")
+    ad_param_operation: AdParameterOperation = client.get_type(
+        "AdParameterOperation"
+    )
     ad_param: AdParameter = ad_param_operation.create
     ad_param.ad_group_criterion = resource_name
     ad_param.parameter_index = parameter_index
@@ -157,4 +158,6 @@ if __name__ == "__main__":
         version="v20"
     )
 
-    main(googleads_client, args.customer_id, args.ad_group_id, args.criterion_id)
+    main(
+        googleads_client, args.customer_id, args.ad_group_id, args.criterion_id
+    )

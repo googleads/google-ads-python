@@ -17,6 +17,7 @@
 
 import argparse
 import sys
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.services.google_ads_service import (
@@ -31,11 +32,6 @@ from google.ads.googleads.v20.resources.types.ad import Ad
 from google.ads.googleads.v20.enums.types.policy_approval_status import (
     PolicyApprovalStatusEnum,
 )
-from google.ads.googleads.v20.common.types.policy import (
-    PolicyTopicEntry,
-    PolicyTopicEvidence,
-)
-from google.ads.googleads.v20.services.types.google_ads_service import GoogleAdsRow
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
@@ -83,7 +79,9 @@ def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
         # Display the policy topic entries related to the ad disapproval.
         for pol_entry in policy_summary.policy_topic_entries:
             # pol_entry: PolicyTopicEntry = pol_entry <- Removed type hint
-            print(f'\ttopic: "{pol_entry.topic}", type "{pol_entry.type_.name}"')
+            print(
+                f'\ttopic: "{pol_entry.topic}", type "{pol_entry.type_.name}"'
+            )
 
             # Display the attributes and values that triggered the policy
             # topic.
@@ -99,7 +97,8 @@ def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
 if __name__ == "__main__":
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
-            "Lists disapproved ads for a given customer's specified " "campaign."
+            "Lists disapproved ads for a given customer's specified "
+            "campaign."
         )
     )
     # The following argument(s) should be provided to run the example.

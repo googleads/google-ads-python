@@ -29,12 +29,15 @@ from google.ads.googleads.v20.services.services.campaign_label_service import (
 from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.services.label_service import LabelServiceClient
+from google.ads.googleads.v20.services.services.label_service import (
+    LabelServiceClient,
+)
 from google.ads.googleads.v20.services.types.campaign_label_service import (
     MutateCampaignLabelsResponse,
 )
-from google.ads.googleads.v20.resources.types.campaign_label import CampaignLabel
-from google.ads.googleads.v20.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v20.resources.types.campaign_label import (
+    CampaignLabel,
+)
 
 
 # [START add_campaign_labels]
@@ -57,7 +60,9 @@ def main(
     campaign_label_service: CampaignLabelServiceClient = client.get_service(
         "CampaignLabelService"
     )
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
     label_service: LabelServiceClient = client.get_service("LabelService")
 
     # Build the resource name of the label to be added across the campaigns.
@@ -69,7 +74,9 @@ def main(
         campaign_resource_name: str = campaign_service.campaign_path(
             customer_id, campaign_id
         )
-        campaign_label_operation: Any = client.get_type("CampaignLabelOperation")
+        campaign_label_operation: Any = client.get_type(
+            "CampaignLabelOperation"
+        )
 
         campaign_label: CampaignLabel = campaign_label_operation.create
         campaign_label.campaign = campaign_resource_name
@@ -89,7 +96,8 @@ def main(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="This code example adds a campaign label to a list of " "campaigns."
+        description="This code example adds a campaign label to a list of "
+        "campaigns."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -122,7 +130,9 @@ if __name__ == "__main__":
         version="v20"
     )
     try:
-        main(googleads_client, args.customer_id, args.label_id, args.campaign_ids)
+        main(
+            googleads_client, args.customer_id, args.label_id, args.campaign_ids
+        )
     except GoogleAdsException as ex:
         print(
             f'Request with ID "{ex.request_id}" failed with status '

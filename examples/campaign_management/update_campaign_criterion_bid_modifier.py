@@ -17,9 +17,10 @@
 import argparse
 import sys
 
+from google.api_core import protobuf_helpers
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.api_core import protobuf_helpers
 from google.ads.googleads.v20.services.services.campaign_criterion_service import (
     CampaignCriterionServiceClient,
 )
@@ -39,8 +40,8 @@ def main(
     criterion_id: str,
     bid_modifier_value: float,
 ) -> None:
-    campaign_criterion_service: CampaignCriterionServiceClient = client.get_service(
-        "CampaignCriterionService"
+    campaign_criterion_service: CampaignCriterionServiceClient = (
+        client.get_service("CampaignCriterionService")
     )
 
     criterion_rname: str = campaign_criterion_service.campaign_criterion_path(

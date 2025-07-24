@@ -22,7 +22,7 @@ will still be thrown.
 
 import argparse
 import sys
-from typing import List, Any
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -38,18 +38,23 @@ from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
 from google.ads.googleads.v20.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v20.enums.types.policy_finding_error import (
+from google.ads.googleads.v20.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
 from google.ads.googleads.v20.common.types.policy import PolicyTopicEntry
-from google.ads.googleads.v20.errors.types.google_ads_failure import GoogleAdsError
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
-    ad_group_ad_operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
     ad_group_ad: AdGroupAd = ad_group_ad_operation.create
-    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
-    ad_group_ad.ad_group = ad_group_service.ad_group_path(customer_id, ad_group_id)
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
+    ad_group_ad.ad_group = ad_group_service.ad_group_path(
+        customer_id, ad_group_id
+    )
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad_group_ad.ad.final_urls.append("http://www.example.com/")
 
@@ -77,10 +82,14 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     description_2.text = "Book your ticket now"
     ad_group_ad.ad.responsive_search_ad.descriptions.append(description_2)
 
-    ad_group_ad_service: AdGroupAdServiceClient = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
     # Attempt the mutate with validate_only=True.
     try:
-        request: MutateAdGroupAdsRequest = client.get_type("MutateAdGroupAdsRequest")
+        request: MutateAdGroupAdsRequest = client.get_type(
+            "MutateAdGroupAdsRequest"
+        )
         request.customer_id = customer_id
         request.operations.append(ad_group_ad_operation)
         request.partial_failure = False
@@ -97,9 +106,11 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
             "There may have been validation error(s) while adding responsive "
             "search ad."
         )
-        policy_error_enum: PolicyFindingErrorEnum.PolicyFindingError = client.get_type(
-            "PolicyFindingErrorEnum"
-        ).PolicyFindingError.POLICY_FINDING
+        policy_error_enum: PolicyFindingErrorEnum.PolicyFindingError = (
+            client.get_type(
+                "PolicyFindingErrorEnum"
+            ).PolicyFindingError.POLICY_FINDING
+        )
 
         count: int = 1
         for err in ex.failure.errors:
@@ -117,7 +128,10 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
                         print(f"{count}) Policy topic entry: \n{pol_entry}\n")
                 count += 1
             else:
-                print(f"\tNon-policy finding error with message " f'"{err.message}".')
+                print(
+                    f"\tNon-policy finding error with message "
+                    f'"{err.message}".'
+                )
                 if err.location:
                     for field_path_element in err.location.field_path_elements:
                         print(f"\t\tOn field: {field_path_element.field_name}")

@@ -24,9 +24,10 @@ import sys
 import uuid
 from typing import List, Any
 
+from google.api_core import protobuf_helpers
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.api_core import protobuf_helpers
 from google.ads.googleads.v20.services.types.experiment_service import (
     ExperimentOperation,
     MutateExperimentsResponse,
@@ -37,7 +38,9 @@ from google.ads.googleads.v20.services.types.experiment_arm_service import (
     MutateExperimentArmsResponse,
 )
 from google.ads.googleads.v20.resources.types.experiment import Experiment
-from google.ads.googleads.v20.resources.types.experiment_arm import ExperimentArm
+from google.ads.googleads.v20.resources.types.experiment_arm import (
+    ExperimentArm,
+)
 from google.ads.googleads.v20.services.services.experiment_service import (
     ExperimentServiceClient,
 )
@@ -47,11 +50,15 @@ from google.ads.googleads.v20.services.services.experiment_arm_service import (
 from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_service import CampaignOperation
+from google.ads.googleads.v20.services.types.campaign_service import (
+    CampaignOperation,
+)
 from google.ads.googleads.v20.resources.types.campaign import Campaign
 
 
-def main(client: GoogleAdsClient, customer_id: str, base_campaign_id: str) -> None:
+def main(
+    client: GoogleAdsClient, customer_id: str, base_campaign_id: str
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -76,7 +83,9 @@ def main(client: GoogleAdsClient, customer_id: str, base_campaign_id: str) -> No
 
 
 # [START create_experiment_1]
-def create_experiment_resource(client: GoogleAdsClient, customer_id: str) -> str:
+def create_experiment_resource(
+    client: GoogleAdsClient, customer_id: str
+) -> str:
     """Creates a new experiment resource.
 
     Args:
@@ -86,7 +95,9 @@ def create_experiment_resource(client: GoogleAdsClient, customer_id: str) -> str
     Returns:
         the resource name for the new experiment.
     """
-    experiment_operation: ExperimentOperation = client.get_type("ExperimentOperation")
+    experiment_operation: ExperimentOperation = client.get_type(
+        "ExperimentOperation"
+    )
     experiment: Experiment = experiment_operation.create
 
     experiment.name = f"Example Experiment #{uuid.uuid4()}"
@@ -129,10 +140,14 @@ def create_experiment_arms(
     """
     operations: List[ExperimentArmOperation] = []
 
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # The "control" arm references an already-existing campaign.
-    operation_1: ExperimentArmOperation = client.get_type("ExperimentArmOperation")
+    operation_1: ExperimentArmOperation = client.get_type(
+        "ExperimentArmOperation"
+    )
     exa_1: ExperimentArm = operation_1.create
     exa_1.control = True
     exa_1.campaigns.append(
@@ -146,7 +161,9 @@ def create_experiment_arms(
     # The non-"control" arm, also called a "treatment" arm, will automatically
     # generate draft campaigns that you can modify before starting the
     # experiment.
-    operation_2: ExperimentArmOperation = client.get_type("ExperimentArmOperation")
+    operation_2: ExperimentArmOperation = client.get_type(
+        "ExperimentArmOperation"
+    )
     exa_2: ExperimentArm = operation_2.create
     exa_2.control = False
     exa_2.experiment = experiment
@@ -177,7 +194,9 @@ def create_experiment_arms(
     control_arm_result: Any = response.results[0]
     treatment_arm_result: Any = response.results[1]
 
-    print(f"Created control arm with resource name {control_arm_result.resource_name}")
+    print(
+        f"Created control arm with resource name {control_arm_result.resource_name}"
+    )
     print(
         f"Created treatment arm with resource name {treatment_arm_result.resource_name}"
     )
@@ -196,7 +215,9 @@ def modify_draft_campaign(
         customer_id: a client customer ID.
         draft_campaign: the resource name for an in-design campaign.
     """
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
     campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
     campaign: Campaign = campaign_operation.update
     campaign.resource_name = draft_campaign

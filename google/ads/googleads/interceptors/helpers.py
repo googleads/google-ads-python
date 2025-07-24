@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any, Dict, List, TypeVar
 from copy import deepcopy
+from google.protobuf.message import Message
+
 from google.ads.googleads.util import (
     set_nested_message_field,
     get_nested_attr,
@@ -29,7 +32,7 @@ from google.ads.googleads.util import (
 #     1. They are returned as part of a Search or SearchStream request.
 #     2. They are returned individually in a Get request.
 #     3. They are sent to the API as part of a Mutate request.
-_MESSAGES_WITH_SENSITIVE_FIELDS = {
+_MESSAGES_WITH_SENSITIVE_FIELDS: Dict[str, List[str]] = {
     "CustomerUserAccess": ["email_address", "inviter_user_email_address"],
     "CustomerUserAccessInvitation": ["email_address"],
     "MutateCustomerUserAccessRequest": [
@@ -50,18 +53,20 @@ _MESSAGES_WITH_SENSITIVE_FIELDS = {
 # This is a list of the names of messages that return search results from the
 # API. These messages contain other messages that may contain sensitive
 # information that needs to be masked before being logged.
-_SEARCH_RESPONSE_MESSAGE_NAMES = [
+_SEARCH_RESPONSE_MESSAGE_NAMES: List[str] = [
     "SearchGoogleAdsResponse",
     "SearchGoogleAdsStreamResponse",
 ]
 
+ProtoMessageT = TypeVar("ProtoMessageT", bound=Message)
 
-def _copy_message(message):
+
+def _copy_message(message: ProtoMessageT) -> ProtoMessageT:
     """Returns a copy of the given message.
 
     Args:
         message: An object containing information from an API request
-            or response.
+            or response, expected to be a protobuf Message.
 
     Returns:
         A copy of the given message.
@@ -69,7 +74,9 @@ def _copy_message(message):
     return deepcopy(message)
 
 
-def _mask_message_fields(field_list, message, mask):
+def _mask_message_fields(
+    field_list: List[str], message: ProtoMessageT, mask: str
+) -> ProtoMessageT:
     """Copies the given message and masks sensitive fields.
 
     Sensitive fields are given as a list of strings and are overridden
@@ -79,7 +86,7 @@ def _mask_message_fields(field_list, message, mask):
         field_list: A list of strings specifying the fields on the message
             that should be masked.
         message: An object containing information from an API request
-            or response.
+            or response, expected to be a protobuf Message.
         mask: A str that should replace the sensitive information in the
             message.
 
@@ -87,7 +94,13 @@ def _mask_message_fields(field_list, message, mask):
         A new instance of the message object with fields copied and masked
             where necessary.
     """
-    copy = _copy_message(message)
+    # Ensure that the message is not None and is of a type that can be copied.
+    # The ProtoMessageT TypeVar already implies it's a protobuf message.
+    if message is None:
+        # Or handle this case as appropriate, e.g., raise ValueError
+        return message  # Or an empty message of the same type, if possible
+
+    copy: ProtoMessageT = _copy_message(message)
 
     for field_path in field_list:
         try:
@@ -98,16 +111,21 @@ def _mask_message_fields(field_list, message, mask):
             # AttributeError is raised when the field is not defined on the
             # message. In this case there's nothing to mask and the field
             # should be skipped.
-            break
+            # Original code had "break", which would exit the loop entirely
+            # after the first AttributeError. "continue" seems more appropriate
+            # to skip only the problematic field_path.
+            continue
 
     return copy
 
 
-def _mask_google_ads_search_response(message, mask):
+def _mask_google_ads_search_response(message: Any, mask: str) -> Any:
     """Copies and masks sensitive data in a Search response
 
     Response messages include instances of GoogleAdsSearchResponse and
-    GoogleAdsSearchStreamResponse.
+    GoogleAdsSearchStreamResponse. For typing, these are kept as Any
+    due to the dynamic nature of protobuf messages and to avoid circular
+    dependencies if specific types were imported.
 
     Args:
         message: A SearchGoogleAdsResponse or SearchGoogleAdsStreamResponse
@@ -118,7 +136,13 @@ def _mask_google_ads_search_response(message, mask):
     Returns:
         A copy of the message with sensitive fields masked.
     """
-    copy = _copy_message(message)
+    # Given message is Any, the copy will also be Any.
+    # Specific handling for protobuf-like objects is assumed.
+    copy: Any = _copy_message(message)
+
+    # Assuming 'copy' has a 'results' attribute, which is iterable.
+    if not hasattr(copy, "results"):
+        return copy # Or raise an error if 'results' is expected
 
     for row in copy.results:
         # Each row is an instance of GoogleAdsRow. The ListFields method
@@ -148,29 +172,48 @@ def _mask_google_ads_search_response(message, mask):
                 )
                 # Overwrites the nested message with an exact copy of itself,
                 # where sensitive fields have been masked.
-                proto_copy_from(getattr(row, field_name), masked_message)
+                # for proto_plus messages, _pb holds the protobuf message
+                # for protobuf messages, it's the message itself
+                target_nested_message = getattr(row, field_name)
+                proto_copy_from(target_nested_message, masked_message)
 
     return copy
 
 
-def mask_message(message, mask):
+def mask_message(message: Any, mask: str) -> Any:
     """Copies and returns a message with sensitive fields masked.
 
     Args:
         message: An object containing information from an API request
-            or response.
+            or response. This is typed as Any due to the variety of
+            protobuf message types it can handle.
         mask: A str that should replace the sensitive information in the
             message.
 
     Returns:
-        A copy of the message instance with sensitive fields masked.
+        A copy of the message instance with sensitive fields masked, or the
+        original message if no masking rules apply. The return type is Any,
+        mirroring the input message type.
     """
-    class_name = message.__class__.__name__
+    if not hasattr(message, "__class__") or not hasattr(message.__class__, "__name__"):
+        # Not an object we can get a class name from, return as is.
+        return message
+
+    class_name: str = message.__class__.__name__
 
     if class_name in _SEARCH_RESPONSE_MESSAGE_NAMES:
+        # _mask_google_ads_search_response expects Any and returns Any
         return _mask_google_ads_search_response(message, mask)
-    elif class_name in _MESSAGES_WITH_SENSITIVE_FIELDS.keys():
-        sensitive_fields = _MESSAGES_WITH_SENSITIVE_FIELDS[class_name]
+    elif class_name in _MESSAGES_WITH_SENSITIVE_FIELDS:
+        sensitive_fields: List[str] = _MESSAGES_WITH_SENSITIVE_FIELDS[class_name]
+        # _mask_message_fields is generic over ProtoMessageT.
+        # Since 'message' is Any here, we're passing Any.
+        # This might lose some type safety if 'message' isn't actually a Message.
+        # However, the function's logic implies it expects a message-like object.
+        # If 'message' here is guaranteed to be a protobuf message,
+        # we could potentially cast or check, but 'Any' is safer for now.
         return _mask_message_fields(sensitive_fields, message, mask)
     else:
+        # If not a special type, return the message as is (or a copy if preferred)
+        # The original code returns the original message.
         return message

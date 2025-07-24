@@ -57,114 +57,116 @@ def main(
     output_file: str,
     write_headers: bool,
 ) -> None:
-  """Writes rows returned from a search_stream request to a CSV file.
-  Args:
-      client: An initialized GoogleAdsClient instance.
-      customer_id (str): The client customer ID string.
-      output_file (str): Filename of the file to write the report data to.
-      write_headers (bool): From argparse, True if arg is provided.
-  """
-  file_dir: str = os.path.dirname(os.path.abspath(__file__))
-  file_path: str = os.path.join(file_dir, output_file)
-  ga_service = client.get_service("GoogleAdsService")
+    """Writes rows returned from a search_stream request to a CSV file.
+    Args:
+        client: An initialized GoogleAdsClient instance.
+        customer_id (str): The client customer ID string.
+        output_file (str): Filename of the file to write the report data to.
+        write_headers (bool): From argparse, True if arg is provided.
+    """
+    file_dir: str = os.path.dirname(os.path.abspath(__file__))
+    file_path: str = os.path.join(file_dir, output_file)
+    ga_service = client.get_service("GoogleAdsService")
 
-  # Issues a search request using streaming.
-  search_request = client.get_type("SearchGoogleAdsStreamRequest")
-  search_request.customer_id = customer_id
-  search_request.query = _QUERY
-  stream = ga_service.search_stream(search_request)
+    # Issues a search request using streaming.
+    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request.customer_id = customer_id
+    search_request.query = _QUERY
+    stream = ga_service.search_stream(search_request)
 
-  with open(file_path, "w", newline="") as f:
-    writer = csv.writer(f)
+    with open(file_path, "w", newline="") as f:
+        writer = csv.writer(f)
 
-    # Define a list of headers for the first row.
-    headers: list[str] = [
-        "Account",
-        "Date",
-        "Campaign",
-        "Impressions",
-        "Clicks",
-        "Cost",
-    ]
+        # Define a list of headers for the first row.
+        headers: list[str] = [
+            "Account",
+            "Date",
+            "Campaign",
+            "Impressions",
+            "Clicks",
+            "Cost",
+        ]
 
-    # If the write_headers flag was passed, write header row to the CSV
-    if write_headers:
-      writer.writerow(headers)
+        # If the write_headers flag was passed, write header row to the CSV
+        if write_headers:
+            writer.writerow(headers)
 
-    for batch in stream:
-      for row in batch.results:
-        # Use the CSV writer to write the individual GoogleAdsRow
-        # fields returned in the SearchGoogleAdsStreamResponse.
-        writer.writerow([
-            row.customer.descriptive_name,
-            row.segments.date,
-            row.campaign.name,
-            row.metrics.impressions,
-            row.metrics.clicks,
-            row.metrics.cost_micros,
-        ])
+        for batch in stream:
+            for row in batch.results:
+                # Use the CSV writer to write the individual GoogleAdsRow
+                # fields returned in the SearchGoogleAdsStreamResponse.
+                writer.writerow(
+                    [
+                        row.customer.descriptive_name,
+                        row.segments.date,
+                        row.campaign.name,
+                        row.metrics.impressions,
+                        row.metrics.clicks,
+                        row.metrics.cost_micros,
+                    ]
+                )
 
-    print(f"Customer {customer_id} report written to {output_file}")
+        print(f"Customer {customer_id} report written to {output_file}")
 
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(
-      description="Retrieves a campaign stats and writes to CSV file."
-  )
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument(
-      "-c",
-      "--customer_id",
-      type=str,
-      required=True,
-      help=(
-          "The Google Ads customer ID of the account you would like to get "
-          "the report for to write to CSV."
-      ),
-  )
-  parser.add_argument(
-      "-o",
-      "--output_file",
-      type=str,
-      required=False,
-      default=_DEFAULT_FILE_NAME,
-      help=(
-          "Name of the local CSV file to save the report to. File will be "
-          "saved in the same directory as the script."
-      ),
-  )
-  # Optional boolean argument for writing headers.
-  parser.add_argument(
-      "-w",
-      "--write_headers",
-      action="store_true",
-      help=(
-          "Writes headers to the CSV file if argument is supplied. Simply "
-          "add -w if you want the headers defined in the script to be "
-          "added as the first row in the CSV file."
-      ),
-  )
-  args = parser.parse_args()
-
-  # GoogleAdsClient will read the google-ads.yaml configuration file in the
-  # home directory if none is specified.
-  googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-
-  try:
-    main(
-        googleads_client,
-        args.customer_id,
-        args.output_file,
-        args.write_headers,
+    parser = argparse.ArgumentParser(
+        description="Retrieves a campaign stats and writes to CSV file."
     )
-  except GoogleAdsException as ex:
-    print(
-        f'Request with ID "{ex.request_id}" failed with status '
-        f'"{ex.error.code().name}" and includes the following errors:'
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help=(
+            "The Google Ads customer ID of the account you would like to get "
+            "the report for to write to CSV."
+        ),
     )
-    for error in ex.failure.errors:
-      print(f'\tError with message "{error.message}".')
-      if error.location:
-        for field_path_element in error.location.field_path_elements:
-          print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
+    parser.add_argument(
+        "-o",
+        "--output_file",
+        type=str,
+        required=False,
+        default=_DEFAULT_FILE_NAME,
+        help=(
+            "Name of the local CSV file to save the report to. File will be "
+            "saved in the same directory as the script."
+        ),
+    )
+    # Optional boolean argument for writing headers.
+    parser.add_argument(
+        "-w",
+        "--write_headers",
+        action="store_true",
+        help=(
+            "Writes headers to the CSV file if argument is supplied. Simply "
+            "add -w if you want the headers defined in the script to be "
+            "added as the first row in the CSV file."
+        ),
+    )
+    args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+
+    try:
+        main(
+            googleads_client,
+            args.customer_id,
+            args.output_file,
+            args.write_headers,
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

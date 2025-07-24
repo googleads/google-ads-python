@@ -34,67 +34,65 @@ from examples.utils.example_helpers import get_image_bytes_from_url
 
 # [START upload_image_asset]
 def main(client: GoogleAdsClient, customer_id: str) -> None:
-  """Main method, to run this code example as a standalone application."""
+    """Main method, to run this code example as a standalone application."""
 
-  # Download image from URL
-  url: str = "https://gaagl.page.link/Eit5"
-  image_content: bytes = get_image_bytes_from_url(url)
+    # Download image from URL
+    url: str = "https://gaagl.page.link/Eit5"
+    image_content: bytes = get_image_bytes_from_url(url)
 
-  asset_service = client.get_service("AssetService")
-  asset_operation: AssetOperation = client.get_type("AssetOperation")
-  asset: Asset = asset_operation.create
-  asset.type_ = client.enums.AssetTypeEnum.IMAGE
-  asset.image_asset.data = image_content
-  asset.image_asset.file_size = len(image_content)
-  asset.image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
-  # Use your favorite image library to determine dimensions
-  asset.image_asset.full_size.height_pixels = 315
-  asset.image_asset.full_size.width_pixels = 600
-  asset.image_asset.full_size.url = url
-  # Provide a unique friendly name to identify your asset.
-  # When there is an existing image asset with the same content but a different
-  # name, the new name will be dropped silently.
-  asset.name = "Marketing Image"
-  mutate_asset_response: MutateAssetsResponse = (
-      asset_service.mutate_assets(
-          customer_id=customer_id, operations=[asset_operation]
-      )
-  )
-  print("Uploaded file(s):")
-  for row in mutate_asset_response.results:
-      print(f"\tResource name: {row.resource_name}")
+    asset_service = client.get_service("AssetService")
+    asset_operation: AssetOperation = client.get_type("AssetOperation")
+    asset: Asset = asset_operation.create
+    asset.type_ = client.enums.AssetTypeEnum.IMAGE
+    asset.image_asset.data = image_content
+    asset.image_asset.file_size = len(image_content)
+    asset.image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
+    # Use your favorite image library to determine dimensions
+    asset.image_asset.full_size.height_pixels = 315
+    asset.image_asset.full_size.width_pixels = 600
+    asset.image_asset.full_size.url = url
+    # Provide a unique friendly name to identify your asset.
+    # When there is an existing image asset with the same content but a different
+    # name, the new name will be dropped silently.
+    asset.name = "Marketing Image"
+    mutate_asset_response: MutateAssetsResponse = asset_service.mutate_assets(
+        customer_id=customer_id, operations=[asset_operation]
+    )
+    print("Uploaded file(s):")
+    for row in mutate_asset_response.results:
+        print(f"\tResource name: {row.resource_name}")
 
-  # [END upload_image_asset]
+    # [END upload_image_asset]
 
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(
-      description="Upload an image asset from a URL."
-  )
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument(
-      "-c",
-      "--customer_id",
-      type=str,
-      required=True,
-      help="The Google Ads customer ID.",
-  )
-  args = parser.parse_args()
-
-  # GoogleAdsClient will read the google-ads.yaml configuration file in the
-  # home directory if none is specified.
-  googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-
-  try:
-    main(googleads_client, args.customer_id)
-  except GoogleAdsException as ex:
-    print(
-        f'Request with ID "{ex.request_id}" failed with status '
-        f'"{ex.error.code().name}" and includes the following errors:'
+    parser = argparse.ArgumentParser(
+        description="Upload an image asset from a URL."
     )
-    for error in ex.failure.errors:
-      print(f'\tError with message "{error.message}".')
-      if error.location:
-        for field_path_element in error.location.field_path_elements:
-          print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+
+    try:
+        main(googleads_client, args.customer_id)
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

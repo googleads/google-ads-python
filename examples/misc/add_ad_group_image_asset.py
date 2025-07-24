@@ -32,69 +32,71 @@ def main(
     ad_group_id: str,
     asset_id: str,
 ) -> None:
-  ad_group_asset_service = client.get_service("AdGroupAssetService")
-  ad_group_asset_resource_name: str = ad_group_asset_service.asset_path(
-      customer_id, asset_id
-  )
-
-  ad_group_asset_operation = client.get_type("AdGroupAssetOperation")
-  ad_group_asset_set = ad_group_asset_operation.create
-  ad_group_asset_set.asset = ad_group_asset_resource_name
-  ad_group_asset_set.field_type = client.enums.AssetFieldTypeEnum.AD_IMAGE
-  ad_group_asset_set.ad_group = ad_group_asset_service.ad_group_path(
-      customer_id, ad_group_id
-  )
-  response = ad_group_asset_service.mutate_ad_group_assets(
-      customer_id=customer_id, operations=[ad_group_asset_operation]
-  )
-
-  for result in response.results:
-    print(
-        f"Created ad group asset with resource name: '{result.resource_name}'"
+    ad_group_asset_service = client.get_service("AdGroupAssetService")
+    ad_group_asset_resource_name: str = ad_group_asset_service.asset_path(
+        customer_id, asset_id
     )
+
+    ad_group_asset_operation = client.get_type("AdGroupAssetOperation")
+    ad_group_asset_set = ad_group_asset_operation.create
+    ad_group_asset_set.asset = ad_group_asset_resource_name
+    ad_group_asset_set.field_type = client.enums.AssetFieldTypeEnum.AD_IMAGE
+    ad_group_asset_set.ad_group = ad_group_asset_service.ad_group_path(
+        customer_id, ad_group_id
+    )
+    response = ad_group_asset_service.mutate_ad_group_assets(
+        customer_id=customer_id, operations=[ad_group_asset_operation]
+    )
+
+    for result in response.results:
+        print(
+            f"Created ad group asset with resource name: '{result.resource_name}'"
+        )
 
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(
-      description=(
-          "Updates an ad group for specified customer and ad group "
-          "id with the given image asset id."
-      )
-  )
-  # The following argument(s) should be provided to run the example.
-  parser.add_argument(
-      "-c",
-      "--customer_id",
-      type=str,
-      required=True,
-      help="The Google Ads customer ID.",
-  )
-  parser.add_argument(
-      "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
-  )
-  parser.add_argument(
-      "-s",
-      "--asset_id",
-      type=str,
-      required=True,
-      help="The asset ID.",
-  )
-  args = parser.parse_args()
-
-  # GoogleAdsClient will read the google-ads.yaml configuration file in the
-  # home directory if none is specified.
-  googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-
-  try:
-    main(googleads_client, args.customer_id, args.ad_group_id, args.asset_id)
-  except GoogleAdsException as ex:
-    print(
-        f'Request with ID "{ex.request_id}" failed with status '
-        f'"{ex.error.code().name}" and includes the following errors:'
+    parser = argparse.ArgumentParser(
+        description=(
+            "Updates an ad group for specified customer and ad group "
+            "id with the given image asset id."
+        )
     )
-    for error in ex.failure.errors:
-      print(f'\tError with message "{error.message}".')
-      if error.location:
-        for field_path_element in error.location.field_path_elements:
-          print(f"\t\tOn field: {field_path_element.field_name}")
-    sys.exit(1)
+    # The following argument(s) should be provided to run the example.
+    parser.add_argument(
+        "-c",
+        "--customer_id",
+        type=str,
+        required=True,
+        help="The Google Ads customer ID.",
+    )
+    parser.add_argument(
+        "-a", "--ad_group_id", type=str, required=True, help="The ad group ID."
+    )
+    parser.add_argument(
+        "-s",
+        "--asset_id",
+        type=str,
+        required=True,
+        help="The asset ID.",
+    )
+    args = parser.parse_args()
+
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+
+    try:
+        main(
+            googleads_client, args.customer_id, args.ad_group_id, args.asset_id
+        )
+    except GoogleAdsException as ex:
+        print(
+            f'Request with ID "{ex.request_id}" failed with status '
+            f'"{ex.error.code().name}" and includes the following errors:'
+        )
+        for error in ex.failure.errors:
+            print(f'\tError with message "{error.message}".')
+            if error.location:
+                for field_path_element in error.location.field_path_elements:
+                    print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)

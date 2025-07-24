@@ -132,7 +132,7 @@ def get_identity_verification(
 
         print(
             f"Account {customer_id} has a verification completion deadline "
-            "of {deadline} and status {progress.name} for advertiser identity "  # Use .name for string representation of enum
+            f"of {deadline} and status {progress.name} for advertiser identity "  # Use .name for string representation of enum
             "verification."
         )
 
@@ -158,7 +158,7 @@ def start_identity_verification(
     # The verification_program argument expects an IdentityVerificationProgramEnum value (int).
     service.start_identity_verification(
         customer_id=customer_id,
-        verification_program=client.enums.IdentityVerificationProgramEnum.ADVERTISER_IDENTITY_VERIFICATION.value,
+        verification_program=client.enums.IdentityVerificationProgramEnum.ADVERTISER_IDENTITY_VERIFICATION,
     )
     # [END verify_advertiser_identity_2]
 

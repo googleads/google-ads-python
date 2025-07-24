@@ -27,7 +27,7 @@ from google.ads.googleads.v20.services.services.google_ads_service.client import
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v20.resources.types.change_status import ChangeStatus
@@ -61,7 +61,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     search_request.customer_id = customer_id
     search_request.query = query
 
-    response: SearchPagedResponse = ads_service.search(request=search_request)
+    response: SearchGoogleAdsResponse = ads_service.search(
+        request=search_request
+    )
 
     row: GoogleAdsRow
     for row in response:

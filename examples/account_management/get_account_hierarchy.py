@@ -38,7 +38,7 @@ from google.ads.googleads.v20.resources.types.customer_client import (
     CustomerClient,
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
-    SearchPagedResponse,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 
@@ -121,7 +121,7 @@ def main(
                 0
             )  # customer_id_loop is an int
             # The search method expects customer_id to be a string.
-            response: SearchPagedResponse = googleads_service.search(
+            response: SearchGoogleAdsResponse = googleads_service.search(
                 customer_id=str(customer_id_loop), query=query
             )
 

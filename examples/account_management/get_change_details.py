@@ -33,7 +33,7 @@ from google.ads.googleads.v20.services.services.google_ads_service.client import
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v20.resources.types.change_event import ChangeEvent
@@ -84,7 +84,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     search_request.customer_id = customer_id
     search_request.query = query
 
-    results: SearchPagedResponse = googleads_service.search(
+    results: SearchGoogleAdsResponse = googleads_service.search(
         request=search_request
     )
 

@@ -24,11 +24,15 @@ import sys
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types import (
+from google.ads.googleads.v20.resources.types.asset import Asset
+from google.ads.googleads.v20.services.services.asset_service.client import (
+    AssetServiceClient,
+)
+from google.ads.googleads.v20.services.types.asset_service import (
     AssetOperation,
+    MutateAssetResult,
     MutateAssetsResponse,
 )
-from google.ads.googleads.v19.resources.types import Asset
 from examples.utils.example_helpers import get_image_bytes_from_url
 
 
@@ -40,7 +44,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     url: str = "https://gaagl.page.link/Eit5"
     image_content: bytes = get_image_bytes_from_url(url)
 
-    asset_service = client.get_service("AssetService")
+    asset_service: AssetServiceClient = client.get_service("AssetService")
     asset_operation: AssetOperation = client.get_type("AssetOperation")
     asset: Asset = asset_operation.create
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
@@ -59,6 +63,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         customer_id=customer_id, operations=[asset_operation]
     )
     print("Uploaded file(s):")
+    row: MutateAssetResult
     for row in mutate_asset_response.results:
         print(f"\tResource name: {row.resource_name}")
 

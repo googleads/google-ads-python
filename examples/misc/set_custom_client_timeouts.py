@@ -24,11 +24,21 @@ https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 
 
 import argparse
+from collections.abc import Iterator
 import sys
 from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    GoogleAdsRow,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsStreamRequest,
+    SearchGoogleAdsStreamResponse,
+)
 from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry
 
@@ -53,14 +63,18 @@ def make_server_streaming_call(
         client: An initialized GoogleAds client.
         customer_id: The str Google Ads customer ID.
     """
-    ga_service = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
     campaign_ids: List[str] = []
 
     try:
-        search_request = client.get_type("SearchGoogleAdsStreamRequest")
+        search_request: SearchGoogleAdsStreamRequest = client.get_type(
+            "SearchGoogleAdsStreamRequest"
+        )
         search_request.customer_id = customer_id
         search_request.query = _QUERY
-        stream = ga_service.search_stream(
+        stream: Iterator[
+            SearchGoogleAdsStreamResponse
+        ] = ga_service.search_stream(
             request=search_request,
             # When making any request, an optional "timeout" parameter can be
             # provided to specify a client-side response deadline in seconds.
@@ -70,7 +84,9 @@ def make_server_streaming_call(
             timeout=_CLIENT_TIMEOUT_SECONDS,
         )
 
+        batch: SearchGoogleAdsStreamResponse
         for batch in stream:
+            row: GoogleAdsRow
             for row in batch.results:
                 campaign_ids.append(row.campaign.id)
 
@@ -102,14 +118,16 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
         client: An initialized GoogleAds client.
         customer_id: The Google Ads customer ID.
     """
-    ga_service = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
     campaign_ids: List[str] = []
 
     try:
-        search_request = client.get_type("SearchGoogleAdsRequest")
+        search_request: SearchGoogleAdsRequest = client.get_type(
+            "SearchGoogleAdsRequest"
+        )
         search_request.customer_id = customer_id
         search_request.query = _QUERY
-        results = ga_service.search(
+        results: Iterator[GoogleAdsRow] = ga_service.search(
             request=search_request,
             # When making any request, an optional "retry" parameter can be
             # provided to specify its retry behavior. Complete information about
@@ -133,6 +151,7 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
             ),
         )
 
+        row: GoogleAdsRow
         for row in results:
             campaign_ids.append(row.campaign.id)
 

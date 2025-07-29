@@ -28,11 +28,20 @@ Examples:
 """
 import argparse
 import csv
+from collections.abc import Iterator
 import os
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    GoogleAdsRow,
+    SearchGoogleAdsStreamRequest,
+    SearchGoogleAdsStreamResponse,
+)
 
 
 _DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
@@ -66,13 +75,17 @@ def main(
     """
     file_dir: str = os.path.dirname(os.path.abspath(__file__))
     file_path: str = os.path.join(file_dir, output_file)
-    ga_service = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
     # Issues a search request using streaming.
-    search_request = client.get_type("SearchGoogleAdsStreamRequest")
+    search_request: SearchGoogleAdsStreamRequest = client.get_type(
+        "SearchGoogleAdsStreamRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = _QUERY
-    stream = ga_service.search_stream(search_request)
+    stream: Iterator[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
+        search_request
+    )
 
     with open(file_path, "w", newline="") as f:
         writer = csv.writer(f)
@@ -91,7 +104,9 @@ def main(
         if write_headers:
             writer.writerow(headers)
 
+        batch: SearchGoogleAdsStreamResponse
         for batch in stream:
+            row: GoogleAdsRow
             for row in batch.results:
                 # Use the CSV writer to write the individual GoogleAdsRow
                 # fields returned in the SearchGoogleAdsStreamResponse.

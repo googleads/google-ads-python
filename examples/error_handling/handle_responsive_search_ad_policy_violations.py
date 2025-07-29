@@ -25,32 +25,30 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.ad_group_ad_service import (
+from google.ads.googleads.v19.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_group_service import (
+from google.ads.googleads.v19.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_group_ad_operation import (
+from google.ads.googleads.v19.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
 )
 from google.ads.googleads.v19.resources.types.ad_group_ad import AdGroupAd
 from google.ads.googleads.v19.common.types.ad_type_infos import (
     ResponsiveSearchAdInfo,
+)
+from google.ads.googleads.v19.common.types.ad_asset import (
     AdTextAsset,
 )
-from google.ads.googleads.v19.enums.types.policy_finding_error import (
+from google.ads.googleads.v19.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
-from google.ads.googleads.v19.services.types.mutate_ad_group_ads_response import (
-    MutateAdGroupAdsResponse,
-)
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, ad_group_id: str
-) -> None:
-    """Uses Customer Match to create and add users to a new user list.
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
+    """Handles responsive search ad policy violations.
 
     Args:
         client: The Google Ads client.
@@ -168,9 +166,7 @@ def fetch_ignorable_policy_topics(
     for error in googleads_exception.failure.errors:
         if (
             error.error_code.policy_finding_error
-            != client.get_type(
-                "PolicyFindingErrorEnum"
-            ).PolicyFindingError.POLICY_FINDING
+            != client.enums.PolicyFindingErrorEnum.POLICY_FINDING
         ):
             print(
                 "This example supports sending exemption request for the "

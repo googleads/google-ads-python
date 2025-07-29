@@ -29,20 +29,16 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types.quota_error import QuotaErrorEnum
-from google.ads.googleads.v19.services.types.ad_group_service import (
+from google.ads.googleads.v20.errors.types.quota_error import QuotaErrorEnum
+from google.ads.googleads.v20.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_group_criterion_operation import (
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
-)
-from google.ads.googleads.v19.services.types.mutate_ad_group_criteria_request import (
     MutateAdGroupCriteriaRequest,
-)
-from google.ads.googleads.v19.services.types.mutate_ad_group_criteria_response import (
     MutateAdGroupCriteriaResponse,
 )
 
@@ -56,9 +52,7 @@ NUM_RETRIES: int = 3
 RETRY_SECONDS: int = 10
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, ad_group_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     """Runs the example code, which shows how to handle rate exceeded errors.
 
     Args:
@@ -75,10 +69,10 @@ def main(
     )
 
     for i in range(NUM_REQUESTS):
-        operations: List[
-            AdGroupCriterionOperation
-        ] = create_ad_group_criterion_operations(
-            client, customer_id, ad_group_id, i
+        operations: List[AdGroupCriterionOperation] = (
+            create_ad_group_criterion_operations(
+                client, customer_id, ad_group_id, i
+            )
         )
 
         try:
@@ -165,7 +159,7 @@ def create_ad_group_criterion_operations(
         ad_group_criterion_operation: AdGroupCriterionOperation = (
             client.get_type("AdGroupCriterionOperation")
         )
-        ad_group_criterion: AdGroupCriterionOperation.create = (
+        ad_group_criterion: AdGroupCriterion = (
             ad_group_criterion_operation.create
         )
         ad_group_criterion.ad_group = ad_group_service.ad_group_path(

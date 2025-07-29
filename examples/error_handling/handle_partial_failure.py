@@ -22,26 +22,20 @@ from typing import Any, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.services.types.ad_group_service import (
+from google.ads.googleads.v20.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v19.services.types.campaign_service import (
+from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v19.services.types.ad_group_operation import (
+from google.ads.googleads.v20.services.types.ad_group_service import (
     AdGroupOperation,
-)
-from google.ads.googleads.v19.services.types.mutate_ad_groups_response import (
     MutateAdGroupsResponse,
-)
-from google.ads.googleads.v19.services.types.mutate_ad_groups_request import (
     MutateAdGroupsRequest,
 )
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
     """Runs the example code, which demonstrates how to handle partial failures.
 
     The example creates three Ad Groups, two of which intentionally fail in

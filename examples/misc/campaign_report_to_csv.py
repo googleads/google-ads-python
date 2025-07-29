@@ -28,8 +28,8 @@ Examples:
 """
 import argparse
 import csv
-import sys
 import os
+import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -119,8 +119,10 @@ if __name__ == "__main__":
         "--customer_id",
         type=str,
         required=True,
-        help="The Google Ads customer ID of the account you would like to get "
-        "the report for to write to CSV.",
+        help=(
+            "The Google Ads customer ID of the account you would like to get "
+            "the report for to write to CSV."
+        ),
     )
     parser.add_argument(
         "-o",
@@ -128,17 +130,21 @@ if __name__ == "__main__":
         type=str,
         required=False,
         default=_DEFAULT_FILE_NAME,
-        help="Name of the local CSV file to save the report to. File will be "
-        "saved in the same directory as the script.",
+        help=(
+            "Name of the local CSV file to save the report to. File will be "
+            "saved in the same directory as the script."
+        ),
     )
     # Optional boolean argument for writing headers.
     parser.add_argument(
         "-w",
         "--write_headers",
         action="store_true",
-        help="Writes headers to the CSV file if argument is supplied. Simply "
-        "add -w if you want the headers defined in the script to be "
-        "added as the first row in the CSV file.",
+        help=(
+            "Writes headers to the CSV file if argument is supplied. Simply "
+            "add -w if you want the headers defined in the script to be "
+            "added as the first row in the CSV file."
+        ),
     )
     args = parser.parse_args()
 

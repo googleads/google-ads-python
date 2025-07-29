@@ -50,8 +50,7 @@ def main(
 
     for result in response.results:
         print(
-            "Created ad group asset with resource name: "
-            f"'{result.resource_name}'"
+            f"Created ad group asset with resource name: '{result.resource_name}'"
         )
 
 

@@ -158,8 +158,10 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Demonstrates custom client timeouts in the context of "
-        "server streaming and unary calls."
+        description=(
+            "Demonstrates custom client timeouts in the context of "
+            "server streaming and unary calls."
+        )
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

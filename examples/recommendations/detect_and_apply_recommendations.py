@@ -31,11 +31,13 @@ https://developers.google.com/google-ads/api/docs/recommendations#recommendation
 
 import argparse
 import sys
-from typing import List
+from typing import List, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.google_ads_service import GoogleAdsRow
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    GoogleAdsRow,
+)
 from google.ads.googleads.v20.services.types.recommendation_service import (
     ApplyRecommendationOperation,
     ApplyRecommendationResult,
@@ -187,13 +189,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-<<<<<<< HEAD
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
-=======
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
         version="v20"
     )
->>>>>>> a90c77484 (I've added type hints to the examples/recommendations directory.)
 
     try:
         main(googleads_client, args.customer_id)

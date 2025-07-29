@@ -31,14 +31,16 @@ from typing import List, Dict, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v18.services.services.recommendation_service import (
+from google.ads.googleads.v20.services.services.recommendation_service import (
     RecommendationServiceClient,
 )
-from google.ads.googleads.v18.services.types.recommendation_service import (
+from google.ads.googleads.v20.services.types.recommendation_service import (
     GenerateRecommendationsRequest,
     GenerateRecommendationsResponse,
 )
-from google.ads.googleads.v18.resources.types.recommendation import Recommendation
+from google.ads.googleads.v20.resources.types.recommendation import (
+    Recommendation,
+)
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
@@ -92,7 +94,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
                     "potential_metrics": impact.potential_metrics,
                 }
                 budget_recommendations_list.append(budget_data)
-                budget_amounts.append(round((budget_amount_micros / 1000000), 2))
+                budget_amounts.append(
+                    round((budget_amount_micros / 1000000), 2)
+                )
 
     print(f"budget_recommendations_list:\n{budget_recommendations_list}")
     """

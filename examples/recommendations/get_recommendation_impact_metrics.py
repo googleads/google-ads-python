@@ -31,14 +31,16 @@ from typing import List, Dict, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v18.services.services.recommendation_service import (
+from google.ads.googleads.v20.services.services.recommendation_service import (
     RecommendationServiceClient,
 )
-from google.ads.googleads.v18.services.types.recommendation_service import (
+from google.ads.googleads.v20.services.types.recommendation_service import (
     GenerateRecommendationsRequest,
     GenerateRecommendationsResponse,
 )
-from google.ads.googleads.v18.resources.types.recommendation import Recommendation
+from google.ads.googleads.v20.resources.types.recommendation import (
+    Recommendation,
+)
 
 
 def main(
@@ -92,7 +94,10 @@ def main(
             if hasattr(budget_option, "impact"):
                 impact = budget_option.impact
                 budget_amount_micros = budget_option.budget_amount_micros
-                if budget_amount_micros / 1000000 == user_provided_budget_amount:
+                if (
+                    budget_amount_micros / 1000000
+                    == user_provided_budget_amount
+                ):
                     budget_data: Dict[str, Any] = {
                         "budget_amount": round(
                             (budget_amount_micros / 1000000), 2

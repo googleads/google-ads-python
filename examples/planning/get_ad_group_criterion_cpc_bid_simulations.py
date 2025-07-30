@@ -17,11 +17,10 @@
 To get ad groups, run get_ad_groups.py.
 """
 
-
+from typing import Iterable
 import argparse
 import sys
 
-from collections.abc import Iterator
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.resources.types.ad_group_criterion_simulation import (
@@ -58,9 +57,9 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str):
           AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
     # Issues a search request using streaming.
-    stream: Iterator[
-        SearchGoogleAdsStreamResponse
-    ] = googleads_service.search_stream(customer_id=customer_id, query=query)
+    stream: Iterable[SearchGoogleAdsStreamResponse] = (
+        googleads_service.search_stream(customer_id=customer_id, query=query)
+    )
 
     # Iterates over all rows in all messages and prints the requested field
     # values for the ad group criterion CPC bid simulation in each row.

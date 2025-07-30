@@ -18,13 +18,15 @@ For more details see this guide:
 https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics
 """
 
+from typing import Iterable
 import argparse
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.keyword_plan_network import (
-    KeywordPlanNetworkEnum,
+from google.ads.googleads.v20.common.types.keyword_plan_common import (
+    KeywordPlanHistoricalMetrics,
+    MonthlySearchVolume,
 )
 from google.ads.googleads.v20.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
@@ -35,8 +37,7 @@ from google.ads.googleads.v20.services.services.keyword_plan_idea_service.client
 from google.ads.googleads.v20.services.types.keyword_plan_idea_service import (
     GenerateKeywordHistoricalMetricsRequest,
     GenerateKeywordHistoricalMetricsResponse,
-    KeywordMetrics,
-    MonthlySearchVolume,
+    GenerateKeywordHistoricalMetricsResult,
 )
 
 
@@ -61,8 +62,8 @@ def generate_historical_metrics(client: GoogleAdsClient, customer_id: str):
     googleads_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService"
     )
-    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = client.get_service(
-        "KeywordPlanIdeaService"
+    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = (
+        client.get_service("KeywordPlanIdeaService")
     )
     request: GenerateKeywordHistoricalMetricsRequest = client.get_type(
         "GenerateKeywordHistoricalMetricsRequest"
@@ -87,9 +88,9 @@ def generate_historical_metrics(client: GoogleAdsClient, customer_id: str):
         )
     )
 
-    result: KeywordMetrics
-    for result in response.results:
-        metrics: KeywordMetrics = result.keyword_metrics
+    results: Iterable[GenerateKeywordHistoricalMetricsResult] = response.results
+    for result in results:
+        metrics: KeywordPlanHistoricalMetrics = result.keyword_metrics
         # These metrics include those for both the search query and any variants
         # included in the response.
         print(
@@ -126,8 +127,8 @@ def generate_historical_metrics(client: GoogleAdsClient, customer_id: str):
 
         # Approximate number of searches on this query for the past twelve
         # months.
-        month: MonthlySearchVolume
-        for month in metrics.monthly_search_volumes:
+        months: Iterable[MonthlySearchVolume] = metrics.monthly_search_volumes
+        for month in months:
             print(
                 f"\tApproximately {month.monthly_searches} searches in "
                 f"{month.month.name}, {month.year}"

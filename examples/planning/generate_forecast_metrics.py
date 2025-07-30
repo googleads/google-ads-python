@@ -24,11 +24,8 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.keyword_plan_network import (
-    KeywordPlanNetworkEnum,
-)
-from google.ads.googleads.v20.enums.types.keyword_match_type import (
-    KeywordMatchTypeEnum,
+from google.ads.googleads.v20.common.types.criteria import (
+    KeywordInfo,
 )
 from google.ads.googleads.v20.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
@@ -41,7 +38,6 @@ from google.ads.googleads.v20.services.types.keyword_plan_idea_service import (
     CriterionBidModifier,
     ForecastAdGroup,
     BiddableKeyword,
-    KeywordInfo,
     GenerateKeywordForecastMetricsRequest,
     GenerateKeywordForecastMetricsResponse,
 )
@@ -165,8 +161,8 @@ def generate_forecast_metrics(
         customer_id: a client customer ID.
         campaign_to_forecast: a CampaignToForecast to generate metrics for.
     """
-    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = client.get_service(
-        "KeywordPlanIdeaService"
+    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = (
+        client.get_service("KeywordPlanIdeaService")
     )
     request: GenerateKeywordForecastMetricsRequest = client.get_type(
         "GenerateKeywordForecastMetricsRequest"

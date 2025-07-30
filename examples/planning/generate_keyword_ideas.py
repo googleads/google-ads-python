@@ -37,9 +37,6 @@ from google.ads.googleads.v20.services.services.keyword_plan_idea_service.client
 from google.ads.googleads.v20.services.types.keyword_plan_idea_service import (
     GenerateKeywordIdeasRequest,
     GenerateKeywordIdeaResult,
-    UrlSeed,
-    KeywordSeed,
-    KeywordAndUrlSeed,
 )
 
 # Location IDs are listed here:
@@ -62,8 +59,8 @@ def main(
     keyword_texts: list[str],
     page_url: str,
 ):
-    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = client.get_service(
-        "KeywordPlanIdeaService"
+    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = (
+        client.get_service("KeywordPlanIdeaService")
     )
     keyword_competition_level_enum: KeywordPlanCompetitionLevelEnum = (
         client.enums.KeywordPlanCompetitionLevelEnum

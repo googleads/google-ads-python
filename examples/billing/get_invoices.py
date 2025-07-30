@@ -18,7 +18,7 @@
 import argparse
 from datetime import date, timedelta
 import sys
-from typing import Any, Optional
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException

@@ -18,7 +18,6 @@
 import argparse
 from datetime import datetime
 import sys
-from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException

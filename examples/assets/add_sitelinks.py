@@ -18,18 +18,15 @@ Run basic_operations/add_campaigns.py to create a campaign.
 """
 
 import argparse
-from typing import List, Sequence
+from typing import List
 import sys
-import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.common.types.asset_types import SitelinkAsset
 from google.ads.googleads.v20.services.types.campaign_asset_service import CampaignAssetOperation
 from google.ads.googleads.v20.resources.types.campaign_asset import CampaignAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
 def main(

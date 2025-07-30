@@ -15,7 +15,6 @@
 """Adds a page feed with URLs for a Dynamic Search Ads campaign."""
 
 import argparse
-import resource
 import sys
 
 from examples.utils.example_helpers import get_printable_datetime

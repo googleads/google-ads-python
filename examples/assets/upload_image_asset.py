@@ -19,7 +19,6 @@ To get image assets, run get_all_image_assets.py.
 
 
 import argparse
-from typing import Sequence
 import sys
 
 from examples.utils.example_helpers import get_image_bytes_from_url
@@ -27,8 +26,6 @@ from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.enums.types.asset_type import AssetTypeEnum
-from google.ads.googleads.v20.enums.types.mime_type import MimeTypeEnum
 
 
 # [START upload_image_asset]

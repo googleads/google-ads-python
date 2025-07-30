@@ -168,7 +168,7 @@ def get_users_module(google_ads_client: GoogleAdsClient, customer_id: Optional[s
     """
     googleads_service = google_ads_client.get_service("GoogleAdsService")
     customer_service = google_ads_client.get_service("CustomerService")
-    query = f"""
+    query = """
     SELECT
       customer_user_access.user_id,
       customer_user_access.email_address,
@@ -215,7 +215,7 @@ if __name__ == "__main__":
             f'Request with ID "{ex.request_id}" failed with status '
             f'"{ex.error.code().name}" '
         )
-        print(f"And includes the following errors:")
+        print("And includes the following errors:")
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if error.location:

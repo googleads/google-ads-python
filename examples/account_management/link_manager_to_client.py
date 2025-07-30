@@ -16,7 +16,6 @@
 
 import argparse
 import sys
-from typing import List  # For operations list
 
 from google.api_core import protobuf_helpers
 from google.protobuf.field_mask_pb2 import FieldMask

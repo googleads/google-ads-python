@@ -33,7 +33,6 @@ from google.ads.googleads.v20.services.types.asset_service import (
     MutateAssetResult,
     MutateAssetsResponse,
 )
-from examples.utils.example_helpers import get_image_bytes_from_url
 
 
 # [START upload_image_asset]

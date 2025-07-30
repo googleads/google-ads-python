@@ -19,7 +19,6 @@ Run add_campaigns.py to create a campaign.
 
 
 import argparse
-from typing import List, Sequence
 import sys
 from uuid import uuid4
 
@@ -28,14 +27,10 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.common.types.asset_types import LeadFormAsset
-from google.ads.googleads.v20.enums.types.lead_form_call_to_action_type import LeadFormCallToActionTypeEnum
-from google.ads.googleads.v20.enums.types.lead_form_field_user_input_type import LeadFormFieldUserInputTypeEnum
 from google.ads.googleads.v20.common.types.asset_types import LeadFormField
-from google.ads.googleads.v20.enums.types.lead_form_post_submit_call_to_action_type import LeadFormPostSubmitCallToActionTypeEnum
 from google.ads.googleads.v20.common.types.asset_types import LeadFormDeliveryMethod
 from google.ads.googleads.v20.services.types.campaign_asset_service import CampaignAssetOperation
 from google.ads.googleads.v20.resources.types.campaign_asset import CampaignAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
 def main(

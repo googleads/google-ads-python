@@ -17,17 +17,32 @@
 To get ad groups, run get_ad_groups.py.
 """
 
-
+from typing import Iterable
 import argparse
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.resources.types.ad_group_criterion_simulation import (
+    AdGroupCriterionSimulation,
+)
+from google.ads.googleads.v20.common.types.simulation import (
+    CpcBidSimulationPoint,
+)
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    SearchGoogleAdsStreamResponse,
+    GoogleAdsRow,
+)
 
 
 # [START get_ad_group_criterion_cpc_bid_simulations]
-def main(client, customer_id, ad_group_id):
-    googleads_service = client.get_service("GoogleAdsService")
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str):
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     query = f"""
         SELECT
@@ -42,15 +57,19 @@ def main(client, customer_id, ad_group_id):
           AND ad_group_criterion_simulation.ad_group_id = {ad_group_id}"""
 
     # Issues a search request using streaming.
-    stream = googleads_service.search_stream(
-        customer_id=customer_id, query=query
+    stream: Iterable[SearchGoogleAdsStreamResponse] = (
+        googleads_service.search_stream(customer_id=customer_id, query=query)
     )
 
     # Iterates over all rows in all messages and prints the requested field
     # values for the ad group criterion CPC bid simulation in each row.
+    batch: SearchGoogleAdsStreamResponse
     for batch in stream:
+        row: GoogleAdsRow
         for row in batch.results:
-            simulation = row.ad_group_criterion_simulation
+            simulation: AdGroupCriterionSimulation = (
+                row.ad_group_criterion_simulation
+            )
 
             print(
                 "found ad group criterion CPC bid simulation for "
@@ -60,6 +79,7 @@ def main(client, customer_id, ad_group_id):
                 f"end date {simulation.end_date}"
             )
 
+            point: CpcBidSimulationPoint
             for point in simulation.cpc_bid_point_list.points:
                 print(
                     f"\tbid: {point.cpc_bid_micros} => "

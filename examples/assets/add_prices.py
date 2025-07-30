@@ -16,7 +16,7 @@
 
 
 import argparse
-from typing import List, Optional, Sequence
+from typing import Optional
 import sys
 from uuid import uuid4
 
@@ -25,13 +25,10 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.common.types.asset_types import PriceAsset
-from google.ads.googleads.v20.enums.types.price_extension_type import PriceExtensionTypeEnum
-from google.ads.googleads.v20.enums.types.price_extension_price_qualifier import PriceExtensionPriceQualifierEnum
 from google.ads.googleads.v20.common.types.asset_types import PriceOffering
 from google.ads.googleads.v20.enums.types.price_extension_price_unit import PriceExtensionPriceUnitEnum
 from google.ads.googleads.v20.services.types.customer_asset_service import CustomerAssetOperation
 from google.ads.googleads.v20.resources.types.customer_asset import CustomerAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

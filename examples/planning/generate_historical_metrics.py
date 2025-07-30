@@ -18,15 +18,31 @@ For more details see this guide:
 https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics
 """
 
+from typing import Iterable
 import argparse
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.keyword_plan_common import (
+    KeywordPlanHistoricalMetrics,
+    MonthlySearchVolume,
+)
+from google.ads.googleads.v20.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.services.keyword_plan_idea_service.client import (
+    KeywordPlanIdeaServiceClient,
+)
+from google.ads.googleads.v20.services.types.keyword_plan_idea_service import (
+    GenerateKeywordHistoricalMetricsRequest,
+    GenerateKeywordHistoricalMetricsResponse,
+    GenerateKeywordHistoricalMetricsResult,
+)
 
 
 # [START generate_historical_metrics]
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str):
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -36,16 +52,22 @@ def main(client, customer_id):
     generate_historical_metrics(client, customer_id)
 
 
-def generate_historical_metrics(client, customer_id):
+def generate_historical_metrics(client: GoogleAdsClient, customer_id: str):
     """Generates historical metrics and prints the results.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    googleads_service = client.get_service("GoogleAdsService")
-    keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
-    request = client.get_type("GenerateKeywordHistoricalMetricsRequest")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    keyword_plan_idea_service: KeywordPlanIdeaServiceClient = (
+        client.get_service("KeywordPlanIdeaService")
+    )
+    request: GenerateKeywordHistoricalMetricsRequest = client.get_type(
+        "GenerateKeywordHistoricalMetricsRequest"
+    )
     request.customer_id = customer_id
     request.keywords = ["mars cruise", "cheap cruise", "jupiter cruise"]
     # Geo target constant 2840 is for USA.
@@ -60,12 +82,15 @@ def generate_historical_metrics(client, customer_id):
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#languages
     request.language = googleads_service.language_constant_path("1000")
 
-    response = keyword_plan_idea_service.generate_keyword_historical_metrics(
-        request=request
+    response: GenerateKeywordHistoricalMetricsResponse = (
+        keyword_plan_idea_service.generate_keyword_historical_metrics(
+            request=request
+        )
     )
 
-    for result in response.results:
-        metrics = result.keyword_metrics
+    results: Iterable[GenerateKeywordHistoricalMetricsResult] = response.results
+    for result in results:
+        metrics: KeywordPlanHistoricalMetrics = result.keyword_metrics
         # These metrics include those for both the search query and any variants
         # included in the response.
         print(
@@ -102,7 +127,8 @@ def generate_historical_metrics(client, customer_id):
 
         # Approximate number of searches on this query for the past twelve
         # months.
-        for month in metrics.monthly_search_volumes:
+        months: Iterable[MonthlySearchVolume] = metrics.monthly_search_volumes
+        for month in months:
             print(
                 f"\tApproximately {month.monthly_searches} searches in "
                 f"{month.month.name}, {month.year}"

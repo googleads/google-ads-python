@@ -23,22 +23,31 @@ import argparse
 from itertools import product
 import multiprocessing
 import time
-from typing import Any, Dict, Iterable, List, Tuple, Union
+from typing import Any, Dict, Iterable, List, Tuple
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.errors.types import (
+    ErrorLocation,
+    GoogleAdsError,
+)
+from google.ads.googleads.v20.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types import (
+    GoogleAdsRow,
+    SearchGoogleAdsStreamResponse,
+)
 
 # Maximum number of processes to spawn.
-MAX_PROCESSES = multiprocessing.cpu_count()
+MAX_PROCESSES: int = multiprocessing.cpu_count()
 # Timeout between retries in seconds.
-BACKOFF_FACTOR = 5
+BACKOFF_FACTOR: int = 5
 # Maximum number of retries for errors.
-MAX_RETRIES = 5
+MAX_RETRIES: int = 5
 
 
-def main(
-    client: GoogleAdsClient, customer_ids: List[str]
-) -> None:
+def main(client: GoogleAdsClient, customer_ids: List[str]) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -47,11 +56,11 @@ def main(
     """
 
     # Define the GAQL query strings to run for each customer ID.
-    campaign_query = """
+    campaign_query: str = """
         SELECT campaign.id, metrics.impressions, metrics.clicks
         FROM campaign
         WHERE segments.date DURING LAST_30_DAYS"""
-    ad_group_query = """
+    ad_group_query: str = """
         SELECT campaign.id, ad_group.id, metrics.impressions, metrics.clicks
         FROM ad_group
         WHERE segments.date DURING LAST_30_DAYS"""
@@ -69,6 +78,7 @@ def main(
         # Partition our results into successful and failed results.
         successes: List[Dict[str, Any]] = []
         failures: List[Dict[str, Any]] = []
+        res: Tuple[bool, Dict[str, Any]]
         for res in results:
             if res[0]:
                 successes.append(res[1])
@@ -82,24 +92,28 @@ def main(
         )
 
         print("Successes:") if len(successes) else None
+        success: Dict[str, Any]
         for success in successes:
             # success["results"] represents an array of result strings for one
             # customer ID / query combination.
-            result_str = "\n".join(success["results"])
+            result_str: str = "\n".join(success["results"])
             print(result_str)
 
         print("Failures:") if len(failures) else None
+        failure: Dict[str, Any]
         for failure in failures:
-            ex = failure["exception"]
+            ex: GoogleAdsException = failure["exception"]
             print(
                 f'Request with ID "{ex.request_id}" failed with status '
                 f'"{ex.error.code().name}" for customer_id '
                 f'{failure["customer_id"]} and query "{failure["query"]}" and '
                 "includes the following errors:"
             )
+            error: GoogleAdsError
             for error in ex.failure.errors:
                 print(f'\tError with message "{error.message}".')
                 if error.location:
+                    field_path_element: ErrorLocation.FieldPathElement
                     for (
                         field_path_element
                     ) in error.location.field_path_elements:
@@ -118,20 +132,22 @@ def issue_search_request(
         customer_id: a client customer ID str.
         query: a GAQL query str.
     """
-    ga_service: Any = client.get_service("GoogleAdsService")
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
     retry_count: int = 0
     # Retry until we've reached MAX_RETRIES or have successfully received a
     # response.
     while True:
         try:
-            stream: Any = ga_service.search_stream(
-                customer_id=customer_id, query=query
+            stream: Iterable[SearchGoogleAdsStreamResponse] = (
+                ga_service.search_stream(customer_id=customer_id, query=query)
             )
             # Returning a list of GoogleAdsRows will result in a
             # PicklingError, so instead we put the GoogleAdsRow data
             # into a list of str results and return that.
             result_strings: List[str] = []
+            batch: SearchGoogleAdsStreamResponse
             for batch in stream:
+                row: GoogleAdsRow
                 for row in batch.results:
                     ad_group_id: str = (
                         f"Ad Group ID {row.ad_group.id} in "

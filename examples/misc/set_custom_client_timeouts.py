@@ -91,7 +91,7 @@ def make_server_streaming_call(
                 campaign_ids.append(row.campaign.id)
 
         print("The server streaming call completed before the timeout.")
-    except DeadlineExceeded as ex:
+    except DeadlineExceeded:
         print("The server streaming call did not complete before the timeout.")
         sys.exit(1)
     except GoogleAdsException as ex:
@@ -156,7 +156,7 @@ def make_unary_call(client: GoogleAdsClient, customer_id: str) -> None:
             campaign_ids.append(row.campaign.id)
 
         print("The unary call completed before the timeout.")
-    except DeadlineExceeded as ex:
+    except DeadlineExceeded:
         print("The unary call did not complete before the timeout.")
         sys.exit(1)
     except GoogleAdsException as ex:

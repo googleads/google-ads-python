@@ -66,7 +66,7 @@ def detect_and_apply_recommendations(
 
     # [START detect_keyword_recommendations]
     googleads_service = client.get_service("GoogleAdsService")
-    query: str = f"""
+    query: str = """
         SELECT
           recommendation.campaign,
           recommendation.keyword_recommendation

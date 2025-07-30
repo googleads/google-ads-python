@@ -16,7 +16,7 @@
 
 
 import argparse
-from typing import List, Sequence
+from typing import List
 import sys
 
 
@@ -26,7 +26,6 @@ from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.services.types.customer_asset_service import CustomerAssetOperation
 from google.ads.googleads.v20.resources.types.customer_asset import CustomerAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 
 def main(

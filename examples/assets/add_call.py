@@ -16,7 +16,7 @@
 
 
 import argparse
-from typing import Optional, Sequence
+from typing import Optional
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -24,12 +24,8 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.services.types.asset_service import AssetOperation
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.common.types.criteria import AdScheduleInfo
-from google.ads.googleads.v20.enums.types.day_of_week import DayOfWeekEnum
-from google.ads.googleads.v20.enums.types.minute_of_hour import MinuteOfHourEnum
-from google.ads.googleads.v20.enums.types.call_conversion_reporting_state import CallConversionReportingStateEnum
 from google.ads.googleads.v20.services.types.customer_asset_service import CustomerAssetOperation
 from google.ads.googleads.v20.resources.types.customer_asset import CustomerAsset
-from google.ads.googleads.v20.enums.types.asset_field_type import AssetFieldTypeEnum
 
 # Country code is a two-letter ISO-3166 code, for a list of all codes see:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-17

@@ -20,7 +20,6 @@ customizer attributes to populate dynamic data.
 
 
 import argparse
-from datetime import datetime
 import sys
 from uuid import uuid4
 

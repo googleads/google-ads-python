@@ -43,9 +43,6 @@ from google.ads.googleads.v20.services.types.customer_user_access_service import
     CustomerUserAccessOperation,
     MutateCustomerUserAccessResponse,
 )
-from google.ads.googleads.v20.enums.types.access_role import (
-    AccessRoleEnum,
-)  # For type of customer_user_access.access_role
 
 from google.api_core import protobuf_helpers
 from google.protobuf.field_mask_pb2 import FieldMask

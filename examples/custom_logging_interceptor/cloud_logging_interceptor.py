@@ -19,20 +19,13 @@ human readable structure and logs them using the logging service instantiated
 within the class (in this case, a Cloud Logging client).
 """
 
-import logging
 import time
-from typing import Any, Callable, Dict, Optional, Tuple
+from typing import Any, Callable, Dict, Optional
 
 from google.cloud import logging as google_cloud_logging
-from grpc import (
-    Call,
-    Future,
-    UnaryUnaryClientInterceptor,
-    UnaryStreamClientInterceptor,
-)
 from grpc._interceptor import _ClientCallDetails
 
-from google.ads.googleads.interceptors import LoggingInterceptor, mask_message
+from google.ads.googleads.interceptors import LoggingInterceptor
 
 
 class CloudLoggingInterceptor(LoggingInterceptor):

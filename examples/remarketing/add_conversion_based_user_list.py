@@ -22,18 +22,21 @@ e.g. by visiting a site and making a purchase.
 import argparse
 import sys
 from uuid import uuid4
-from typing import List, Any
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.common.types.user_lists import UserListActionInfo
 from google.ads.googleads.v20.resources.types.user_list import UserList
-from google.ads.googleads.v20.services.types.conversion_action_service import (
+from google.ads.googleads.v20.services.services.conversion_action_service import (
     ConversionActionServiceClient,
+)
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
 )
 from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
-    UserListServiceClient,
+    MutateUserListsResponse,
 )
 
 
@@ -55,8 +58,8 @@ def main(
     user_list_service: UserListServiceClient = client.get_service(
         "UserListService"
     )
-    conversion_action_service: ConversionActionServiceClient = client.get_service(
-        "ConversionActionService"
+    conversion_action_service: ConversionActionServiceClient = (
+        client.get_service("ConversionActionService")
     )
 
     # Create a list of UserListActionInfo objects for the given conversion
@@ -75,7 +78,9 @@ def main(
         user_list_action_info_list.append(user_list_action_info)
 
     # Create a UserListOperation and populate the UserList.
-    user_list_operation: UserListOperation = client.get_type("UserListOperation")
+    user_list_operation: UserListOperation = client.get_type(
+        "UserListOperation"
+    )
     user_list: UserList = user_list_operation.create
     user_list.name = f"Example BasicUserList #{uuid4()}"
     user_list.description = (
@@ -87,7 +92,7 @@ def main(
     user_list.basic_user_list.actions.extend(user_list_action_info_list)
 
     # Issue a mutate request to add the user list, then print the results.
-    response: Any = user_list_service.mutate_user_lists(
+    response: MutateUserListsResponse = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
     print(

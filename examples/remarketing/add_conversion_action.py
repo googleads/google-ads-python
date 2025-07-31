@@ -18,23 +18,25 @@
 import argparse
 import sys
 import uuid
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.conversion_action_service import (
-    ConversionActionOperation,
-    ConversionActionServiceClient,
-)
 from google.ads.googleads.v20.resources.types.conversion_action import (
     ConversionAction,
+)
+from google.ads.googleads.v20.services.services.conversion_action_service import (
+    ConversionActionServiceClient,
+)
+from google.ads.googleads.v20.services.types.conversion_action_service import (
+    ConversionActionOperation,
+    MutateConversionActionsResponse,
 )
 
 
 # [START add_conversion_action]
 def main(client: GoogleAdsClient, customer_id: str) -> None:
-    conversion_action_service: ConversionActionServiceClient = client.get_service(
-        "ConversionActionService"
+    conversion_action_service: ConversionActionServiceClient = (
+        client.get_service("ConversionActionService")
     )
 
     # Create the operation.
@@ -49,18 +51,24 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # already exists with the specified conversion_action_name, the create
     # operation will fail with a ConversionActionError.DUPLICATE_NAME error.
     conversion_action.name = f"Earth to Mars Cruises Conversion {uuid.uuid4()}"
-    conversion_action.type_ = client.enums.ConversionActionTypeEnum.UPLOAD_CLICKS
-    conversion_action.category = client.enums.ConversionActionCategoryEnum.DEFAULT
+    conversion_action.type_ = (
+        client.enums.ConversionActionTypeEnum.UPLOAD_CLICKS
+    )
+    conversion_action.category = (
+        client.enums.ConversionActionCategoryEnum.DEFAULT
+    )
     conversion_action.status = client.enums.ConversionActionStatusEnum.ENABLED
     conversion_action.view_through_lookback_window_days = 15
 
     # Create a value settings object.
-    value_settings: Any = conversion_action.value_settings
+    value_settings: ConversionAction.ValueSettings = (
+        conversion_action.value_settings
+    )
     value_settings.default_value = 15.0
     value_settings.always_use_default_value = True
 
     # Add the conversion action.
-    conversion_action_response: Any = (
+    conversion_action_response: MutateConversionActionsResponse = (
         conversion_action_service.mutate_conversion_actions(
             customer_id=customer_id,
             operations=[conversion_action_operation],

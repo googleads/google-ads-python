@@ -21,7 +21,6 @@ two different pages of a website.
 import argparse
 import sys
 from uuid import uuid4
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -34,9 +33,12 @@ from google.ads.googleads.v20.common.types.user_lists import (
     UserListRuleItemInfo,
 )
 from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
+)
 from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
-    UserListServiceClient,
+    MutateUserListsResponse,
 )
 
 
@@ -142,7 +144,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     user_list_service: UserListServiceClient = client.get_service(
         "UserListService"
     )
-    response: Any = user_list_service.mutate_user_lists(
+    response: MutateUserListsResponse = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
     print(

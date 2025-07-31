@@ -25,23 +25,39 @@ import argparse
 import hashlib
 import re
 import sys
+from typing import Dict, Optional, Union
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.offline_user_data import (
+    UserIdentifier,
+)
+from google.ads.googleads.v20.services.services.conversion_action_service import (
+    ConversionActionServiceClient,
+)
+from google.ads.googleads.v20.services.services.conversion_upload_service import (
+    ConversionUploadServiceClient,
+)
+from google.ads.googleads.v20.services.types.conversion_upload_service import (
+    ClickConversion,
+    ClickConversionResult,
+    SessionAttributeKeyValuePair,
+    UploadClickConversionsResponse,
+)
 
 
 def main(
-    client,
-    customer_id,
-    conversion_action_id,
-    conversion_date_time,
-    conversion_value,
-    order_id,
-    gclid,
-    ad_user_data_consent,
-    session_attributes_encoded=None,
-    session_attributes_dict=None,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_id: str,
+    conversion_date_time: str,
+    conversion_value: float,
+    order_id: Optional[str],
+    gclid: Optional[str],
+    ad_user_data_consent: Optional[str],
+    session_attributes_encoded: Optional[str] = None,
+    session_attributes_dict: Optional[Dict[str, str]] = None,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -87,7 +103,7 @@ def main(
     # incorrectly_populated_user_identifier.hashed_email = "...""
     # incorrectly_populated_user_identifier.hashed_phone_number = "...""
 
-    raw_record = {
+    raw_record: Dict[str, Union[str, float]] = {
         # Email address that includes a period (.) before the Gmail domain.
         "email": "alex.2@example.com",
         # Phone number to be converted to E.164 format, with a leading '+' as
@@ -106,10 +122,10 @@ def main(
     }
 
     # Constructs the click conversion.
-    click_conversion = client.get_type("ClickConversion")
+    click_conversion: ClickConversion = client.get_type("ClickConversion")
     # Creates a user identifier using the hashed email address, using the
     # normalize and hash method specifically for email addresses.
-    email_identifier = client.get_type("UserIdentifier")
+    email_identifier: UserIdentifier = client.get_type("UserIdentifier")
     # Optional: Specifies the user identifier source.
     email_identifier.user_identifier_source = (
         client.enums.UserIdentifierSourceEnum.FIRST_PARTY
@@ -124,7 +140,7 @@ def main(
     # Checks if the record has a phone number, and if so, adds a UserIdentifier
     # for it.
     if raw_record.get("phone") is not None:
-        phone_identifier = client.get_type("UserIdentifier")
+        phone_identifier: UserIdentifier = client.get_type("UserIdentifier")
         phone_identifier.hashed_phone_number = normalize_and_hash(
             raw_record["phone"]
         )
@@ -135,7 +151,9 @@ def main(
     # [START add_conversion_details]
     # Add details of the conversion.
     # Gets the conversion action resource name.
-    conversion_action_service = client.get_service("ConversionActionService")
+    conversion_action_service: ConversionActionServiceClient = (
+        client.get_service("ConversionActionService")
+    )
     click_conversion.conversion_action = (
         conversion_action_service.conversion_action_path(
             customer_id, raw_record["conversion_action_id"]
@@ -168,7 +186,9 @@ def main(
         click_conversion.session_attributes_encoded = session_attributes_encoded
     elif session_attributes_dict:
         for key, value in session_attributes_dict.items():
-            pair = client.get_type("SessionAttributeKeyValuePair")
+            pair: SessionAttributeKeyValuePair = client.get_type(
+                "SessionAttributeKeyValuePair"
+            )
             pair.session_attribute_key = key
             pair.session_attribute_value = value
             click_conversion.session_attributes_key_value_pairs.key_value_pairs.append(
@@ -179,18 +199,22 @@ def main(
 
     # [START upload_conversion]
     # Creates the conversion upload service client.
-    conversion_upload_service = client.get_service("ConversionUploadService")
+    conversion_upload_service: ConversionUploadServiceClient = (
+        client.get_service("ConversionUploadService")
+    )
     # Uploads the click conversion. Partial failure should always be set to
     # True.
     # NOTE: This request only uploads a single conversion, but if you have
     # multiple conversions to upload, it's most efficient to upload them in a
     # single request. See the following for per-request limits for reference:
     # https://developers.google.com/google-ads/api/docs/best-practices/quotas#conversion_upload_service
-    response = conversion_upload_service.upload_click_conversions(
-        customer_id=customer_id,
-        conversions=[click_conversion],
-        # Enables partial failure (must be true).
-        partial_failure=True,
+    response: UploadClickConversionsResponse = (
+        conversion_upload_service.upload_click_conversions(
+            customer_id=customer_id,
+            conversions=[click_conversion],
+            # Enables partial failure (must be true).
+            partial_failure=True,
+        )
     )
     # [END upload_conversion]
 
@@ -204,16 +228,16 @@ def main(
         )
     else:
         # Prints the result.
-        result = response.results[0]
+        result: ClickConversionResult = response.results[0]
         print(
             "Uploaded conversion that occurred at "
-            f"{result.conversion_data_time} "
+            f"{result.conversion_date_time} "
             f"to {result.conversion_action}."
         )
 
 
 # [START normalize_and_hash]
-def normalize_and_hash_email_address(email_address):
+def normalize_and_hash_email_address(email_address: str) -> str:
     """Returns the result of normalizing and hashing an email address.
 
     For this use case, Google Ads requires removal of any '.' characters
@@ -225,8 +249,8 @@ def normalize_and_hash_email_address(email_address):
     Returns:
         A normalized (lowercase, removed whitespace) and SHA-265 hashed string.
     """
-    normalized_email = email_address.strip().lower()
-    email_parts = normalized_email.split("@")
+    normalized_email: str = email_address.strip().lower()
+    email_parts: list[str] = normalized_email.split("@")
 
     # Check that there are at least two segments
     if len(email_parts) > 1:
@@ -242,7 +266,7 @@ def normalize_and_hash_email_address(email_address):
     return normalize_and_hash(normalized_email)
 
 
-def normalize_and_hash(s):
+def normalize_and_hash(s: str) -> str:
     """Normalizes and hashes a string with SHA-256.
 
     Private customer data must be hashed during upload, as described at:
@@ -261,9 +285,11 @@ def normalize_and_hash(s):
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
         "to your ads."
     )
@@ -314,7 +340,7 @@ if __name__ == "__main__":
         "-n",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum],
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
@@ -342,8 +368,9 @@ if __name__ == "__main__":
             "'-k gad_campaignid=12345 gad_source=1'"
         ),
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
+    session_attributes_dict: Optional[Dict[str, str]] = None
     if args.session_attributes_key_value_pairs:
         # Convert the string-based input to a dict
         session_attributes_dict = dict(

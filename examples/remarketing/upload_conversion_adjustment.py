@@ -20,21 +20,43 @@ To set up a conversion action, run the add_conversion_action.py example.
 
 import argparse
 import sys
+from typing import Optional, Iterable
+
+from google.protobuf.any_pb2 import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.enums.types.conversion_adjustment_type import (
+    ConversionAdjustmentTypeEnum,
+)
+from google.ads.googleads.v20.errors.types.errors import (
+    GoogleAdsError,
+    GoogleAdsFailure,
+)
+from google.ads.googleads.v20.services.services.conversion_action_service import (
+    ConversionActionServiceClient,
+)
+from google.ads.googleads.v20.services.services.conversion_adjustment_upload_service import (
+    ConversionAdjustmentUploadServiceClient,
+)
+from google.ads.googleads.v20.services.types.conversion_adjustment_upload_service import (
+    ConversionAdjustment,
+    ConversionAdjustmentResult,
+    UploadConversionAdjustmentsRequest,
+    UploadConversionAdjustmentsResponse,
+)
 
 
 # [START upload_conversion_adjustment]
 def main(
-    client,
-    customer_id,
-    conversion_action_id,
-    adjustment_type,
-    order_id,
-    adjustment_date_time,
-    restatement_value=None,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_id: str,
+    adjustment_type: str,
+    order_id: str,
+    adjustment_date_time: str,
+    restatement_value: Optional[str] = None,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -48,15 +70,21 @@ def main(
         adjustment_date_time: the date and time of the adjustment.
         restatement_value: the adjusted value for adjustment type RESTATEMENT.
     """
-    conversion_adjustment_type_enum = client.enums.ConversionAdjustmentTypeEnum
+    conversion_adjustment_type_enum: ConversionAdjustmentTypeEnum = (
+        client.enums.ConversionAdjustmentTypeEnum
+    )
     # Determine the adjustment type.
-    conversion_adjustment_type = conversion_adjustment_type_enum[
+    conversion_adjustment_type: int = conversion_adjustment_type_enum[
         adjustment_type
     ].value
 
     # Applies the conversion adjustment to the existing conversion.
-    conversion_adjustment = client.get_type("ConversionAdjustment")
-    conversion_action_service = client.get_service("ConversionActionService")
+    conversion_adjustment: ConversionAdjustment = client.get_type(
+        "ConversionAdjustment"
+    )
+    conversion_action_service: ConversionActionServiceClient = (
+        client.get_service("ConversionActionService")
+    )
     conversion_adjustment.conversion_action = (
         conversion_action_service.conversion_action_path(
             customer_id, conversion_action_id
@@ -87,30 +115,44 @@ def main(
 
     # Uploads the click conversion. Partial failure should always be set to
     # true.
-    service = client.get_service("ConversionAdjustmentUploadService")
-    request = client.get_type("UploadConversionAdjustmentsRequest")
+    service: ConversionAdjustmentUploadServiceClient = client.get_service(
+        "ConversionAdjustmentUploadService"
+    )
+    request: UploadConversionAdjustmentsRequest = client.get_type(
+        "UploadConversionAdjustmentsRequest"
+    )
     request.customer_id = customer_id
     request.conversion_adjustments.append(conversion_adjustment)
     # Enables partial failure (must be true)
     request.partial_failure = True
 
-    response = service.upload_conversion_adjustments(request=request)
+    response: UploadConversionAdjustmentsResponse = (
+        service.upload_conversion_adjustments(request=request)
+    )
 
     # Extracts the partial failure error if present on the response.
+    error_details = None
     if response.partial_failure_error:
-        error_details = response.partial_failure_error.details
+        error_details: Iterable[Any] = response.partial_failure_error.details
 
+    i: int
+    conversion_adjustment_result: ConversionAdjustmentResult
     for i, conversion_adjustment_result in enumerate(response.results):
         # If there's a GoogleAdsFailure in error_details at this position then
         # the uploaded operation failed and we print the error message.
         if error_details and error_details[i]:
-            error_detail = error_details[i]
-            failure_message = client.get_type("GoogleAdsFailure")
+            error_detail: Any = error_details[i]
+            failure_message: GoogleAdsFailure = client.get_type(
+                "GoogleAdsFailure"
+            )
             # Parse the string into a GoogleAdsFailure message instance.
             # To access class-only methods on the message we retrieve its type.
-            GoogleAdsFailure = type(failure_message)
-            failure_object = GoogleAdsFailure.deserialize(error_detail.value)
+            google_ads_failure_class: GoogleAdsFailure = type(failure_message)
+            failure_object: GoogleAdsFailure = (
+                google_ads_failure_class.deserialize(error_detail.value)
+            )
 
+            error: GoogleAdsError
             for error in failure_object.errors:
                 # Construct and print a string that details which element in
                 # the operation list failed (by index number) as well as the
@@ -131,7 +173,7 @@ def main(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Uploads a conversion adjustment."
     )
     # The following argument(s) should be provided to run the example.
@@ -155,7 +197,10 @@ if __name__ == "__main__":
         type=str,
         required=True,
         choices=[
-            e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConversionAdjustmentTypeEnum
+            e.name
+            for e in GoogleAdsClient.load_from_storage(
+                version="v20"
+            ).enums.ConversionAdjustmentTypeEnum
         ],
         help="The adjustment type, e.g. " "RETRACTION, RESTATEMENT",
     )
@@ -189,11 +234,13 @@ if __name__ == "__main__":
         required=False,
         help="The adjusted value for adjustment type RESTATEMENT.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

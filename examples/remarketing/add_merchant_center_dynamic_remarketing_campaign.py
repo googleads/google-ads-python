@@ -23,7 +23,6 @@ import argparse
 import requests
 import sys
 from uuid import uuid4
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -34,29 +33,46 @@ from google.ads.googleads.v20.resources.types.ad_group_criterion import (
 )
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.services.asset_service import (
+    AssetServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_service import (
+    CampaignServiceClient,
+)
 from google.ads.googleads.v20.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
-    AdGroupAdServiceClient,
+    MutateAdGroupAdsResponse,
 )
 from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
-    AdGroupCriterionServiceClient,
+    MutateAdGroupCriteriaResponse,
 )
 from google.ads.googleads.v20.services.types.ad_group_service import (
     AdGroupOperation,
-    AdGroupServiceClient,
+    MutateAdGroupsResponse,
 )
 from google.ads.googleads.v20.services.types.asset_service import (
     AssetOperation,
-    AssetServiceClient,
+    MutateAssetsResponse,
 )
 from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
-    CampaignServiceClient,
+    MutateCampaignsResponse,
 )
-from google.ads.googleads.v20.common.types.ad_type_infos import (
+from google.ads.googleads.v20.common.types.ad_asset import (
     AdImageAsset,
     AdTextAsset,
+)
+from google.ads.googleads.v20.common.types.ad_type_infos import (
     ResponsiveDisplayAdInfo,
 )
 
@@ -138,8 +154,10 @@ def create_campaign(
     client.copy_from(campaign.manual_cpc, client.get_type("ManualCpc"))
 
     # Issues a mutate request to add the campaign.
-    campaign_response: Any = campaign_service.mutate_campaigns(
-        customer_id=customer_id, operations=[campaign_operation]
+    campaign_response: MutateCampaignsResponse = (
+        campaign_service.mutate_campaigns(
+            customer_id=customer_id, operations=[campaign_operation]
+        )
     )
     campaign_resource_name: str = campaign_response.results[0].resource_name
     print(f"Created campaign with resource name '{campaign_resource_name}'.")
@@ -174,8 +192,10 @@ def create_ad_group(
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Issues a mutate request to add the ad group.
-    ad_group_response: Any = ad_group_service.mutate_ad_groups(
-        customer_id=customer_id, operations=[ad_group_operation]
+    ad_group_response: MutateAdGroupsResponse = (
+        ad_group_service.mutate_ad_groups(
+            customer_id=customer_id, operations=[ad_group_operation]
+        )
     )
     ad_group_resource_name: str = ad_group_response.results[0].resource_name
 
@@ -262,8 +282,10 @@ def create_ad(
     # responsive_display_ad_info.square_logo_images.append(square_logo_image)
 
     # Issue a mutate request to add the ad group ad.
-    ad_group_ad_response: Any = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id=customer_id, operations=[ad_group_ad_operation]
+    ad_group_ad_response: MutateAdGroupAdsResponse = (
+        ad_group_ad_service.mutate_ad_group_ads(
+            customer_id=customer_id, operations=[ad_group_ad_operation]
+        )
     )
     print(
         "Created ad group ad with resource name "
@@ -298,7 +320,7 @@ def upload_image_asset(
     asset.image_asset.data = image_data
     asset.name = asset_name
 
-    mutate_asset_response: Any = asset_service.mutate_assets(
+    mutate_asset_response: MutateAssetsResponse = asset_service.mutate_assets(
         customer_id=customer_id, operations=[asset_operation]
     )
     image_asset_resource_name: str = mutate_asset_response.results[
@@ -344,7 +366,7 @@ def attach_user_list(
     ).user_list_path(customer_id, str(user_list_id))
 
     # Issue a mutate request to add the ad group criterion.
-    ad_group_criterion_response: Any = (
+    ad_group_criterion_response: MutateAdGroupCriteriaResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id, operations=[ad_group_criterion_operation]
         )

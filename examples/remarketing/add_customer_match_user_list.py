@@ -30,31 +30,49 @@ import argparse
 import hashlib
 import sys
 import uuid
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Optional, Union, Iterable
+
+from google.protobuf.any_pb2 import Any
+from google.rpc import status_pb2
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
+)
+from google.ads.googleads.v20.services.services.offline_user_data_job_service import (
+    OfflineUserDataJobServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
 )
 from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
-    UserListServiceClient,
+    MutateUserListsResponse,
 )
 from google.ads.googleads.v20.resources.types.user_list import UserList
 from google.ads.googleads.v20.services.types.offline_user_data_job_service import (
+    AddOfflineUserDataJobOperationsRequest,
     OfflineUserDataJobOperation,
-    OfflineUserDataJobServiceClient,
     AddOfflineUserDataJobOperationsResponse,
+    CreateOfflineUserDataJobResponse,
 )
 from google.ads.googleads.v20.resources.types.offline_user_data_job import (
     OfflineUserDataJob,
 )
+from google.ads.googleads.v20.common.types.criteria import (
+    AddressInfo,
+)
 from google.ads.googleads.v20.common.types.offline_user_data import (
     UserData,
     UserIdentifier,
-    AddressInfo,
+)
+from google.ads.googleads.v20.errors.types.errors import (
+    GoogleAdsFailure,
+    GoogleAdsError,
 )
 
 
@@ -151,8 +169,10 @@ def create_customer_match_user_list(
     # Sets the membership life span to 30 days.
     user_list.membership_life_span = 30
 
-    response: Any = user_list_service_client.mutate_user_lists(
-        customer_id=customer_id, operations=[user_list_operation]
+    response: MutateUserListsResponse = (
+        user_list_service_client.mutate_user_lists(
+            customer_id=customer_id, operations=[user_list_operation]
+        )
     )
     user_list_resource_name: str = response.results[0].resource_name
     print(
@@ -227,10 +247,10 @@ def add_users_to_customer_match_user_list(
             ]
 
         # Issues a request to create an offline user data job.
-        create_offline_user_data_job_response: Any = (
-            offline_user_data_job_service_client.create_offline_user_data_job(
-                customer_id=customer_id, job=offline_user_data_job
-            )
+        create_offline_user_data_job_response: (
+            CreateOfflineUserDataJobResponse
+        ) = offline_user_data_job_service_client.create_offline_user_data_job(
+            customer_id=customer_id, job=offline_user_data_job
         )
         offline_user_data_job_resource_name = (
             create_offline_user_data_job_response.resource_name
@@ -249,14 +269,18 @@ def add_users_to_customer_match_user_list(
     # https://developers.google.com/google-ads/api/docs/remarketing/audience-types/customer-match#customer_match_considerations
     # and https://developers.google.com/google-ads/api/docs/best-practices/quotas#user_data
     # for more information on the per-request limits.
-    request: Any = client.get_type("AddOfflineUserDataJobOperationsRequest")
+    request: AddOfflineUserDataJobOperationsRequest = client.get_type(
+        "AddOfflineUserDataJobOperationsRequest"
+    )
     request.resource_name = offline_user_data_job_resource_name
     request.operations = build_offline_user_data_job_operations(client)
     request.enable_partial_failure = True
 
     # Issues a request to add the operations to the offline user data job.
-    response: AddOfflineUserDataJobOperationsResponse = offline_user_data_job_service_client.add_offline_user_data_job_operations(
-        request=request
+    response: AddOfflineUserDataJobOperationsResponse = (
+        offline_user_data_job_service_client.add_offline_user_data_job_operations(
+            request=request
+        )
     )
 
     # Prints the status message if any partial failure error is returned.
@@ -264,19 +288,26 @@ def add_users_to_customer_match_user_list(
     # Refer to the error_handling/handle_partial_failure.py example to learn
     # more.
     # Extracts the partial failure from the response status.
-    partial_failure: Any = getattr(response, "partial_failure_error", None)
+    partial_failure: Union[status_pb2.Status, None] = getattr(
+        response, "partial_failure_error", None
+    )
     if getattr(partial_failure, "code", None) != 0:
-        error_details: Any = getattr(partial_failure, "details", [])
+        error_details: Iterable[Any, None] = getattr(
+            partial_failure, "details", []
+        )
         for error_detail in error_details:
-            failure_message: Any = client.get_type("GoogleAdsFailure")
+            failure_message: GoogleAdsFailure = client.get_type(
+                "GoogleAdsFailure"
+            )
             # Retrieve the class definition of the GoogleAdsFailure instance
             # in order to use the "deserialize" class method to parse the
             # error_detail string into a protobuf message object.
-            failure_object: Any = type(failure_message).deserialize(
-                error_detail.value
-            )
+            failure_object: GoogleAdsFailure = type(
+                failure_message
+            ).deserialize(error_detail.value)
+            errors: Iterable[GoogleAdsError] = failure_object.errors
 
-            for error in failure_object.errors:
+            for error in errors:
                 print(
                     "A partial failure at index "
                     f"{error.location.field_path_elements[0].index} occurred.\n"
@@ -634,10 +665,18 @@ if __name__ == "__main__":
     # used for help text, so it's fine if it fails.
     try:
         consent_status_enum_names = [
-            e.name for e in GoogleAdsClient.load_from_storage(version="v20").enums.ConsentStatusEnum
+            e.name
+            for e in GoogleAdsClient.load_from_storage(
+                version="v20"
+            ).enums.ConsentStatusEnum
         ]
     except Exception:
-        consent_status_enum_names = ["UNSPECIFIED", "UNKNOWN", "GRANTED", "DENIED"]
+        consent_status_enum_names = [
+            "UNSPECIFIED",
+            "UNKNOWN",
+            "GRANTED",
+            "DENIED",
+        ]
     parser.add_argument(
         "-d",
         "--ad_user_data_consent",

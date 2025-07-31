@@ -27,15 +27,64 @@ purposes.
 
 import argparse
 import sys
+from typing import List
 from uuid import uuid4
 
 from google.api_core import protobuf_helpers
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.user_lists import (
+    FlexibleRuleOperandInfo,
+    FlexibleRuleUserListInfo,
+    UserListRuleItemGroupInfo,
+    UserListRuleItemInfo,
+)
+from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v20.resources.types.campaign_criterion import (
+    CampaignCriterion,
+)
+from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_criterion_service import (
+    CampaignCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+    AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
+)
+from google.ads.googleads.v20.services.types.campaign_criterion_service import (
+    CampaignCriterionOperation,
+    MutateCampaignCriteriaResponse,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    GoogleAdsRow,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
+)
+from google.ads.googleads.v20.services.types.user_list_service import (
+    MutateUserListsResponse,
+    UserListOperation,
+)
 
 
-def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    ad_group_id: str,
+    bid_modifier_value: float,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -49,8 +98,8 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
         bid_modifier_value: a float that specifies a modifier on the bid amount
             for newly created ad group criterion.
     """
-    user_list_resource_name = create_user_list(client, customer_id)
-    ad_group_criterion_resource_name = target_ads_in_ad_group_to_user_list(
+    user_list_resource_name: str = create_user_list(client, customer_id)
+    ad_group_criterion_resource_name: str = target_ads_in_ad_group_to_user_list(
         client, customer_id, ad_group_id, user_list_resource_name
     )
     modify_ad_group_bids(
@@ -60,7 +109,7 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
         bid_modifier_value,
     )
     remove_existing_criteria_from_ad_group(client, customer_id, campaign_id)
-    campaign_criterion_resource_name = target_ads_in_campaign_to_user_list(
+    campaign_criterion_resource_name: str = target_ads_in_campaign_to_user_list(
         client, customer_id, campaign_id, user_list_resource_name
     )
     modify_campaign_bids(
@@ -72,7 +121,7 @@ def main(client, customer_id, campaign_id, ad_group_id, bid_modifier_value):
 
 
 # [START setup_remarketing]
-def create_user_list(client, customer_id):
+def create_user_list(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a user list targeting users that have visited a given URL.
 
     Args:
@@ -83,9 +132,11 @@ def create_user_list(client, customer_id):
         a str resource name for the newly created user list.
     """
     # Creates a UserListOperation.
-    user_list_operation = client.get_type("UserListOperation")
+    user_list_operation: UserListOperation = client.get_type(
+        "UserListOperation"
+    )
     # Creates a UserList.
-    user_list = user_list_operation.create
+    user_list: UserList = user_list_operation.create
     user_list.name = f"All visitors to example.com #{uuid4()}"
     user_list.description = "Any visitor to any page of example.com"
     user_list.membership_status = client.enums.UserListMembershipStatusEnum.OPEN
@@ -97,10 +148,12 @@ def create_user_list(client, customer_id):
     )
     # Specifies that the user list targets visitors of a page with a URL that
     # contains 'example.com'.
-    user_list_rule_item_group_info = client.get_type(
+    user_list_rule_item_group_info: UserListRuleItemGroupInfo = client.get_type(
         "UserListRuleItemGroupInfo"
     )
-    user_list_rule_item_info = client.get_type("UserListRuleItemInfo")
+    user_list_rule_item_info: UserListRuleItemInfo = client.get_type(
+        "UserListRuleItemInfo"
+    )
     # Uses a built-in parameter to create a domain URL rule.
     user_list_rule_item_info.name = "url__"
     user_list_rule_item_info.string_rule_item.operator = (
@@ -111,7 +164,7 @@ def create_user_list(client, customer_id):
 
     # Specify that the user list targets visitors of a page based on the
     # provided rule.
-    flexible_rule_user_list_info = (
+    flexible_rule_user_list_info: FlexibleRuleUserListInfo = (
         user_list.rule_based_user_list.flexible_rule_user_list
     )
     flexible_rule_user_list_info.inclusive_rule_operator = (
@@ -119,16 +172,20 @@ def create_user_list(client, customer_id):
     )
     # Inclusive operands are joined together with the specified
     # inclusive rule operator.
-    rule_operand = client.get_type("FlexibleRuleOperandInfo")
+    rule_operand: FlexibleRuleOperandInfo = client.get_type(
+        "FlexibleRuleOperandInfo"
+    )
     rule_operand.rule.rule_item_groups.extend([user_list_rule_item_group_info])
     rule_operand.lookback_window_days = 7
     flexible_rule_user_list_info.inclusive_operands.append(rule_operand)
 
-    user_list_service = client.get_service("UserListService")
-    response = user_list_service.mutate_user_lists(
+    user_list_service: UserListServiceClient = client.get_service(
+        "UserListService"
+    )
+    response: MutateUserListsResponse = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Created user list with resource name: '{resource_name}'")
     return resource_name
     # [END setup_remarketing]
@@ -136,8 +193,11 @@ def create_user_list(client, customer_id):
 
 # [START setup_remarketing_1]
 def target_ads_in_ad_group_to_user_list(
-    client, customer_id, ad_group_id, user_list_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    user_list_resource_name: str,
+) -> str:
     """Creates an ad group criterion that targets a user list with an ad group.
 
     Args:
@@ -151,19 +211,25 @@ def target_ads_in_ad_group_to_user_list(
     Returns:
         a str resource name for an ad group criterion.
     """
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
     # Creates the ad group criterion targeting members of the user list.
-    ad_group_criterion = ad_group_criterion_operation.create
+    ad_group_criterion: AdGroupCriterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = client.get_service(
         "AdGroupService"
     ).ad_group_path(customer_id, ad_group_id)
     ad_group_criterion.user_list.user_list = user_list_resource_name
 
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
-    response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
     )
-    resource_name = response.results[0].resource_name
+    response: MutateAdGroupCriteriaResponse = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
+    )
+    resource_name: str = response.results[0].resource_name
     print(
         "Successfully created ad group criterion with resource name: "
         f"'{resource_name}' targeting user list with resource name: "
@@ -175,8 +241,11 @@ def target_ads_in_ad_group_to_user_list(
 
 
 def modify_ad_group_bids(
-    client, customer_id, ad_group_criterion_resource_name, bid_modifier_value
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_criterion_resource_name: str,
+    bid_modifier_value: float,
+) -> None:
     """Updates the bid modifier on an ad group criterion.
 
     Args:
@@ -189,8 +258,10 @@ def modify_ad_group_bids(
     """
     # Constructs an operation that will update the ad group criterion with the
     # specified resource name.
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
-    ad_group_criterion = ad_group_criterion_operation.update
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    ad_group_criterion: AdGroupCriterion = ad_group_criterion_operation.update
     # Creates the ad group criterion with a bid modifier. You may alternatively
     # set the bid for the ad group criterion directly.
     ad_group_criterion.resource_name = ad_group_criterion_resource_name
@@ -201,9 +272,13 @@ def modify_ad_group_bids(
         ad_group_criterion_operation.update_mask,
         protobuf_helpers.field_mask(None, ad_group_criterion._pb),
     )
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
-    response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
+    response: MutateAdGroupCriteriaResponse = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
     print(
         "Updated bid for ad group criterion with resource name: "
@@ -212,7 +287,9 @@ def modify_ad_group_bids(
 
 
 # [START setup_remarketing_3]
-def remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
+def remove_existing_criteria_from_ad_group(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> None:
     """Removes all ad group criteria targeting a user list under a campaign.
 
     This is a necessary step before targeting a user list at the campaign level.
@@ -224,20 +301,26 @@ def remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
             criteria that targets user lists removed.
     """
     # Retrieves all of the ad group criteria under a campaign.
-    all_ad_group_criteria = get_user_list_ad_group_criteria(
+    all_ad_group_criteria: List[str] = get_user_list_ad_group_criteria(
         client, customer_id, campaign_id
     )
 
     # Creates a list of remove operations.
-    remove_operations = []
+    remove_operations: List[AdGroupCriterionOperation] = []
     for ad_group_criterion_resource_name in all_ad_group_criteria:
-        remove_operation = client.get_type("AdGroupCriterionOperation")
+        remove_operation: AdGroupCriterionOperation = client.get_type(
+            "AdGroupCriterionOperation"
+        )
         remove_operation.remove = ad_group_criterion_resource_name
         remove_operations.append(remove_operation)
 
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
-    response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=remove_operations
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
+    response: MutateAdGroupCriteriaResponse = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=remove_operations
+        )
     )
     print(
         "Successfully removed ad group criterion with resource name: "
@@ -247,7 +330,9 @@ def remove_existing_criteria_from_ad_group(client, customer_id, campaign_id):
 
 
 # [START setup_remarketing_2]
-def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
+def get_user_list_ad_group_criteria(
+    client: GoogleAdsClient, customer_id: str, campaign_id: str
+) -> List[str]:
     """Finds all of user list ad group criteria under a campaign.
 
     Args:
@@ -260,24 +345,31 @@ def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
     """
     # Creates a query that retrieves all of the ad group criteria under a
     # campaign.
-    query = f"""
+    query: str = f"""
         SELECT
           ad_group_criterion.criterion_id
         FROM ad_group_criterion
         WHERE campaign.id = {campaign_id}
         AND ad_group_criterion.type = USER_LIST"""
 
-    googleads_service = client.get_service("GoogleAdsService")
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
-    response = googleads_service.search(request=search_request)
+    response: SearchGoogleAdsResponse = googleads_service.search(
+        request=search_request
+    )
 
     # Iterates over all rows in all pages. Prints the user list criteria and
     # adds the ad group criteria resource names to the list.
-    user_list_criteria = []
+    user_list_criteria: List[str] = []
+    row: GoogleAdsRow
     for row in response:
-        resource_name = row.ad_group_criterion.resource_name
+        resource_name: str = row.ad_group_criterion.resource_name
         print(
             "Ad group criterion with resource name '{resource_name}' was "
             "found."
@@ -290,8 +382,11 @@ def get_user_list_ad_group_criteria(client, customer_id, campaign_id):
 
 # [START setup_remarketing_4]
 def target_ads_in_campaign_to_user_list(
-    client, customer_id, campaign_id, user_list_resource_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    user_list_resource_name: str,
+) -> str:
     """Creates a campaign criterion that targets a user list with a campaign.
 
     Args:
@@ -305,18 +400,24 @@ def target_ads_in_campaign_to_user_list(
     Returns:
         a str resource name for a campaign criterion.
     """
-    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
-    campaign_criterion = campaign_criterion_operation.create
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
+        "CampaignCriterionOperation"
+    )
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.create
     campaign_criterion.campaign = client.get_service(
         "CampaignService"
     ).campaign_path(customer_id, campaign_id)
     campaign_criterion.user_list.user_list = user_list_resource_name
 
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
-    response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[campaign_criterion_operation]
+    campaign_criterion_service: CampaignCriterionServiceClient = (
+        client.get_service("CampaignCriterionService")
     )
-    resource_name = response.results[0].resource_name
+    response: MutateCampaignCriteriaResponse = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[campaign_criterion_operation]
+        )
+    )
+    resource_name: str = response.results[0].resource_name
     print(
         "Successfully created campaign criterion with resource name "
         f"'{resource_name}' targeting user list with resource name "
@@ -327,8 +428,11 @@ def target_ads_in_campaign_to_user_list(
 
 
 def modify_campaign_bids(
-    client, customer_id, campaign_criterion_resource_name, bid_modifier_value
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_criterion_resource_name: str,
+    bid_modifier_value: float,
+) -> None:
     """Updates the bid modifier on a campaign criterion.
 
     Args:
@@ -341,8 +445,10 @@ def modify_campaign_bids(
     """
     # Constructs an operation that will update the campaign criterion with the
     # specified resource name.
-    campaign_criterion_operation = client.get_type("CampaignCriterionOperation")
-    campaign_criterion = campaign_criterion_operation.update
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
+        "CampaignCriterionOperation"
+    )
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.update
     campaign_criterion.resource_name = campaign_criterion_resource_name
     campaign_criterion.bid_modifier = bid_modifier_value
 
@@ -353,9 +459,13 @@ def modify_campaign_bids(
         protobuf_helpers.field_mask(None, campaign_criterion._pb),
     )
 
-    campaign_criterion_service = client.get_service("CampaignCriterionService")
-    response = campaign_criterion_service.mutate_campaign_criteria(
-        customer_id=customer_id, operations=[campaign_criterion_operation]
+    campaign_criterion_service: CampaignCriterionServiceClient = (
+        client.get_service("CampaignCriterionService")
+    )
+    response: MutateCampaignCriteriaResponse = (
+        campaign_criterion_service.mutate_campaign_criteria(
+            customer_id=customer_id, operations=[campaign_criterion_operation]
+        )
     )
     print(
         "Successfully updated the bid for campaign criterion with resource "
@@ -364,7 +474,7 @@ def modify_campaign_bids(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Demonstrates various operations involved in remarketing."
     )
     # The following arguments are required to run the example.
@@ -409,11 +519,13 @@ if __name__ == "__main__":
             "for newly created ad group criterion."
         ),
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

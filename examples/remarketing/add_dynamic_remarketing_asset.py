@@ -18,11 +18,12 @@
 import argparse
 from datetime import datetime
 import sys
-from uuid import uuid4
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.asset_types import (
+    DynamicEducationAsset,
+)
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.resources.types.asset_set import AssetSet
 from google.ads.googleads.v20.resources.types.asset_set_asset import (
@@ -31,30 +32,40 @@ from google.ads.googleads.v20.resources.types.asset_set_asset import (
 from google.ads.googleads.v20.resources.types.campaign_asset_set import (
     CampaignAssetSet,
 )
+from google.ads.googleads.v20.services.services.asset_service import (
+    AssetServiceClient,
+)
 from google.ads.googleads.v20.services.types.asset_service import (
     AssetOperation,
-    AssetServiceClient,
+    MutateAssetsResponse,
+)
+from google.ads.googleads.v20.services.services.asset_set_service import (
+    AssetSetServiceClient,
 )
 from google.ads.googleads.v20.services.types.asset_set_service import (
     AssetSetOperation,
-    AssetSetServiceClient,
+    MutateAssetSetsResponse,
+)
+from google.ads.googleads.v20.services.services.asset_set_asset_service import (
+    AssetSetAssetServiceClient,
 )
 from google.ads.googleads.v20.services.types.asset_set_asset_service import (
     AssetSetAssetOperation,
-    AssetSetAssetServiceClient,
+    MutateAssetSetAssetsResponse,
+)
+from google.ads.googleads.v20.services.services.campaign_asset_set_service import (
+    CampaignAssetSetServiceClient,
 )
 from google.ads.googleads.v20.services.types.campaign_asset_set_service import (
     CampaignAssetSetOperation,
-    CampaignAssetSetServiceClient,
+    MutateCampaignAssetSetsResponse,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -92,7 +103,7 @@ def create_asset(client: GoogleAdsClient, customer_id: str) -> str:
     asset: Asset = operation.create
     # The final_urls list must not be empty
     asset.final_urls.append("https://www.example.com")
-    education_asset: Any = asset.dynamic_education_asset
+    education_asset: DynamicEducationAsset = asset.dynamic_education_asset
     # Defines meta-information about the school and program.
     education_asset.school_name = "The University of Unknown"
     education_asset.address = "Building 1, New York, 12345, USA"
@@ -113,7 +124,7 @@ def create_asset(client: GoogleAdsClient, customer_id: str) -> str:
     education_asset.ios_app_store_id = 123
 
     asset_service: AssetServiceClient = client.get_service("AssetService")
-    response: Any = asset_service.mutate_assets(
+    response: MutateAssetsResponse = asset_service.mutate_assets(
         customer_id=customer_id, operations=[operation]
     )
     resource_name: str = response.results[0].resource_name
@@ -148,7 +159,7 @@ def create_asset_set(client: GoogleAdsClient, customer_id: str) -> str:
     asset_set_service: AssetSetServiceClient = client.get_service(
         "AssetSetService"
     )
-    response: Any = asset_set_service.mutate_asset_sets(
+    response: MutateAssetSetsResponse = asset_set_service.mutate_asset_sets(
         customer_id=customer_id, operations=[operation]
     )
     resource_name: str = response.results[0].resource_name
@@ -188,8 +199,10 @@ def add_assets_to_asset_set(
     # DynamicEducationAsset.program_id field. You can have any number of assets
     # with the same program ID, however, only one asset is allowed per asset set
     # with the same program ID.
-    response: Any = asset_set_asset_service.mutate_asset_set_assets(
-        customer_id=customer_id, operations=[operation]
+    response: MutateAssetSetAssetsResponse = (
+        asset_set_asset_service.mutate_asset_set_assets(
+            customer_id=customer_id, operations=[operation]
+        )
     )
     resource_name: str = response.results[0].resource_name
     print(f"Created asset set asset link with resource name '{resource_name}'")
@@ -227,11 +240,13 @@ def link_asset_set_to_campaign(
     )
     campaign_asset_set.asset_set = asset_set_resource_name
 
-    campaign_asset_set_service: CampaignAssetSetServiceClient = client.get_service(
-        "CampaignAssetSetService"
+    campaign_asset_set_service: CampaignAssetSetServiceClient = (
+        client.get_service("CampaignAssetSetService")
     )
-    response: Any = campaign_asset_set_service.mutate_campaign_asset_sets(
-        customer_id=customer_id, operations=[operation]
+    response: MutateCampaignAssetSetsResponse = (
+        campaign_asset_set_service.mutate_campaign_asset_sets(
+            customer_id=customer_id, operations=[operation]
+        )
     )
     resource_name: str = response.results[0].resource_name
     print(f"Created a campaign asset set with resource name '{resource_name}'")

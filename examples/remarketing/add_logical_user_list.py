@@ -21,7 +21,7 @@ lists.
 import argparse
 import sys
 from uuid import uuid4
-from typing import List, Any
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -30,9 +30,12 @@ from google.ads.googleads.v20.common.types.user_lists import (
     UserListLogicalRuleInfo,
 )
 from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
+)
 from google.ads.googleads.v20.services.types.user_list_service import (
     UserListOperation,
-    UserListServiceClient,
+    MutateUserListsResponse,
 )
 
 
@@ -54,9 +57,7 @@ def main(
 
     # Add each of the provided list IDs to a list of rule operands specifying
     # which lists the operator should target.
-    logical_user_list_operand_info_list: List[
-        LogicalUserListOperandInfo
-    ] = []
+    logical_user_list_operand_info_list: List[LogicalUserListOperandInfo] = []
     for user_list_id in user_list_ids:
         logical_user_list_operand_info: LogicalUserListOperandInfo = (
             client.get_type("LogicalUserListOperandInfo")
@@ -93,7 +94,7 @@ def main(
     user_list.logical_user_list.rules.append(user_list_logical_rule_info)
 
     # Issue a mutate request to add the user list, then print the results.
-    response: Any = user_list_service.mutate_user_lists(
+    response: MutateUserListsResponse = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
     print(

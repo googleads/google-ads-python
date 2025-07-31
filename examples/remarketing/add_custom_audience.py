@@ -23,7 +23,6 @@ https://support.google.com/google-ads/answer/9805516
 import argparse
 import sys
 from uuid import uuid4
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -36,6 +35,9 @@ from google.ads.googleads.v20.resources.types.custom_audience import (
 )
 from google.ads.googleads.v20.services.types.custom_audience_service import (
     CustomAudienceOperation,
+    MutateCustomAudiencesResponse,
+)
+from google.ads.googleads.v20.services.services.custom_audience_service import (
     CustomAudienceServiceClient,
 )
 
@@ -99,7 +101,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     )
 
     # Add the custom audience.
-    custom_audience_response: Any = (
+    custom_audience_response: MutateCustomAudiencesResponse = (
         custom_audience_service.mutate_custom_audiences(
             customer_id=customer_id, operations=[custom_audience_operation]
         )

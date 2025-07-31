@@ -20,10 +20,31 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.targeting_setting import (
+    TargetingSetting,
+    TargetRestriction,
+)
+from google.ads.googleads.v20.enums.types.targeting_dimension import (
+    TargetingDimensionEnum,
+)
+from google.ads.googleads.v20.resources.types.ad_group import AdGroup
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v20.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    SearchGoogleAdsResponse,
+)
 from google.api_core import protobuf_helpers
 
 
-def main(client, customer_id, ad_group_id):
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     """Updates the audience target restriction of a given ad group to bid only.
 
     Args:
@@ -33,12 +54,14 @@ def main(client, customer_id, ad_group_id):
             restriction.
     """
     # Get the GoogleAdsService client.
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Create a search request that retrieves the targeting settings from a given
     # ad group.
     # [START update_audience_target_restriction]
-    query = f"""
+    query: str = f"""
         SELECT
           ad_group.id,
           ad_group.name,
@@ -48,28 +71,32 @@ def main(client, customer_id, ad_group_id):
     # [END update_audience_target_restriction]
 
     # Issue the search request.
-    search_response = googleads_service.search(
+    search_response: SearchGoogleAdsResponse = googleads_service.search(
         customer_id=customer_id, query=query
     )
 
-    targeting_dimension_enum = client.enums.TargetingDimensionEnum
+    targeting_dimension_enum: TargetingDimensionEnum = (
+        client.enums.TargetingDimensionEnum
+    )
 
     # Create an empty TargetingSetting instance.
-    targeting_setting = client.get_type("TargetingSetting")
+    targeting_setting: TargetingSetting = client.get_type("TargetingSetting")
 
     # Create a flag that specifies whether or not we should update the
     # targeting setting. We should only do this if we find an audience
     # target restriction with bid_only set to false.
-    should_update_targeting_setting = False
+    should_update_targeting_setting: bool = False
 
-    ad_group = next(iter(search_response)).ad_group
+    ad_group: AdGroup = next(iter(search_response)).ad_group
 
     print(
         f"Ad group with ID {ad_group.id} and name '{ad_group.name}' "
         "was found with the following targeting restrictions:"
     )
 
-    target_restrictions = ad_group.targeting_setting.target_restrictions
+    target_restrictions: "list[TargetRestriction]" = (
+        ad_group.targeting_setting.target_restrictions
+    )
 
     # Loop through and print each of the target restrictions.
     # Reconstruct the TargetingSetting object with the updated audience
@@ -77,9 +104,12 @@ def main(client, customer_id, ad_group_id):
     # targeting_setting field of the ad group when the field mask
     # includes targeting_setting in an update operation.
     # [START update_audience_target_restriction_1]
+    target_restriction: TargetRestriction
     for target_restriction in target_restrictions:
-        targeting_dimension = target_restriction.targeting_dimension
-        bid_only = target_restriction.bid_only
+        targeting_dimension: TargetingDimensionEnum.TargetingDimension = (
+            target_restriction.targeting_dimension
+        )
+        bid_only: bool = target_restriction.bid_only
 
         print(
             "\tTargeting restriction with targeting dimension "
@@ -93,7 +123,7 @@ def main(client, customer_id, ad_group_id):
         if targeting_dimension != targeting_dimension_enum.AUDIENCE:
             targeting_setting.target_restrictions.append(target_restriction)
         elif not bid_only:
-            should_update_targeting_setting = True
+            should_update_targeting_setting: bool = True
 
             # Add an audience target restriction with bid_only set to
             # true to the targeting setting object. This has the effect
@@ -101,7 +131,9 @@ def main(client, customer_id, ad_group_id):
             # "Observation". For more details about the targeting
             # setting, visit
             # https://support.google.com/google-ads/answer/7365594.
-            new_target_restriction = targeting_setting.target_restrictions.add()
+            new_target_restriction: TargetRestriction = (
+                targeting_setting.target_restrictions.add()
+            )
             new_target_restriction.targeting_dimension = (
                 targeting_dimension_enum.AUDIENCE
             )
@@ -120,8 +152,11 @@ def main(client, customer_id, ad_group_id):
 
 # [START update_audience_target_restriction_2]
 def update_targeting_setting(
-    client, customer_id, ad_group_id, targeting_setting
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    targeting_setting: TargetingSetting,
+) -> None:
     """Updates the given TargetingSetting of an ad group.
 
     Args:
@@ -132,13 +167,15 @@ def update_targeting_setting(
         targeting_setting: The updated targeting setting.
     """
     # Get the AdGroupService client.
-    ad_group_service = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
 
     # Construct an operation that will update the ad group.
-    ad_group_operation = client.get_type("AdGroupOperation")
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
 
     # Populate the ad group object with the updated targeting setting.
-    ad_group = ad_group_operation.update
+    ad_group: AdGroup = ad_group_operation.update
     ad_group.resource_name = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
@@ -154,8 +191,10 @@ def update_targeting_setting(
 
     # Send the operation in a mutate request and print the resource name of the
     # updated object.
-    mutate_ad_groups_response = ad_group_service.mutate_ad_groups(
-        customer_id=customer_id, operations=[ad_group_operation]
+    mutate_ad_groups_response: MutateAdGroupsResponse = (
+        ad_group_service.mutate_ad_groups(
+            customer_id=customer_id, operations=[ad_group_operation]
+        )
     )
     print(
         "Updated targeting setting of ad group with resource name "
@@ -166,7 +205,7 @@ def update_targeting_setting(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Updates the audience target restriction of a given ad "
         "group to bid only."
     )
@@ -186,11 +225,13 @@ if __name__ == "__main__":
         help="The ad group ID for which to update the audience targeting "
         "restriction.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

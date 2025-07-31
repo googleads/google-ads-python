@@ -620,6 +620,12 @@ def normalize_and_hash(s: str, remove_all_whitespace: bool) -> str:
 
 
 if __name__ == "__main__":
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
+
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Adds a customer match user list for specified customer."
     )
@@ -661,27 +667,11 @@ if __name__ == "__main__":
             "not specified, this example will create a new job."
         ),
     )
-    # Need to instantiate a GoogleAdsClient to access enums, but this is only
-    # used for help text, so it's fine if it fails.
-    try:
-        consent_status_enum_names = [
-            e.name
-            for e in GoogleAdsClient.load_from_storage(
-                version="v20"
-            ).enums.ConsentStatusEnum
-        ]
-    except Exception:
-        consent_status_enum_names = [
-            "UNSPECIFIED",
-            "UNKNOWN",
-            "GRANTED",
-            "DENIED",
-        ]
     parser.add_argument(
         "-d",
         "--ad_user_data_consent",
         type=str,
-        choices=consent_status_enum_names,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
@@ -691,7 +681,7 @@ if __name__ == "__main__":
         "-p",
         "--ad_personalization_consent",
         type=str,
-        choices=consent_status_enum_names,
+        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
         help=(
             "The personalization consent status for ad user data for all "
             "members in the job."
@@ -699,12 +689,6 @@ if __name__ == "__main__":
     )
 
     args: argparse.Namespace = parser.parse_args()
-
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
-    )
 
     try:
         main(

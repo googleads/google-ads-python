@@ -21,13 +21,28 @@ lists.
 import argparse
 import sys
 from uuid import uuid4
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.user_lists import (
+    LogicalUserListOperandInfo,
+    UserListLogicalRuleInfo,
+)
+from google.ads.googleads.v20.resources.types.user_list import UserList
+from google.ads.googleads.v20.services.services.user_list_service import (
+    UserListServiceClient,
+)
+from google.ads.googleads.v20.services.types.user_list_service import (
+    UserListOperation,
+    MutateUserListsResponse,
+)
 
 
 # [START add_logical_user_list]
-def main(client, customer_id, user_list_ids):
+def main(
+    client: GoogleAdsClient, customer_id: str, user_list_ids: List[str]
+) -> None:
     """Creates a combination user list.
 
     Args:
@@ -36,14 +51,16 @@ def main(client, customer_id, user_list_ids):
         user_list_ids: A list of user list IDs to logically combine.
     """
     # Get the UserListService client.
-    user_list_service = client.get_service("UserListService")
+    user_list_service: UserListServiceClient = client.get_service(
+        "UserListService"
+    )
 
     # Add each of the provided list IDs to a list of rule operands specifying
     # which lists the operator should target.
-    logical_user_list_operand_info_list = []
+    logical_user_list_operand_info_list: List[LogicalUserListOperandInfo] = []
     for user_list_id in user_list_ids:
-        logical_user_list_operand_info = client.get_type(
-            "LogicalUserListOperandInfo"
+        logical_user_list_operand_info: LogicalUserListOperandInfo = (
+            client.get_type("LogicalUserListOperandInfo")
         )
         logical_user_list_operand_info.user_list = (
             user_list_service.user_list_path(customer_id, user_list_id)
@@ -53,12 +70,16 @@ def main(client, customer_id, user_list_ids):
         )
 
     # Create a UserListOperation and populate the UserList.
-    user_list_operation = client.get_type("UserListOperation")
-    user_list = user_list_operation.create
+    user_list_operation: UserListOperation = client.get_type(
+        "UserListOperation"
+    )
+    user_list: UserList = user_list_operation.create
     user_list.name = f"My combination list of other user lists #{uuid4()}"
     # Create a UserListLogicalRuleInfo specifying that a user should be added to
     # the new list if they are present in any of the provided lists.
-    user_list_logical_rule_info = client.get_type("UserListLogicalRuleInfo")
+    user_list_logical_rule_info: UserListLogicalRuleInfo = client.get_type(
+        "UserListLogicalRuleInfo"
+    )
     # Using ANY means that a user should be added to the combined list if they
     # are present on any of the lists targeted in the
     # LogicalUserListOperandInfo. Use ALL to add users present on all of the
@@ -73,7 +94,7 @@ def main(client, customer_id, user_list_ids):
     user_list.logical_user_list.rules.append(user_list_logical_rule_info)
 
     # Issue a mutate request to add the user list, then print the results.
-    response = user_list_service.mutate_user_lists(
+    response: MutateUserListsResponse = user_list_service.mutate_user_lists(
         customer_id=customer_id, operations=[user_list_operation]
     )
     print(
@@ -84,7 +105,7 @@ def main(client, customer_id, user_list_ids):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Creates a combination user list containing users that are "
         "present on any one of the provided user lists."
     )
@@ -104,11 +125,13 @@ if __name__ == "__main__":
         required=True,
         help="The user list IDs logically combine.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.user_list_ids)

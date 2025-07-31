@@ -22,30 +22,69 @@ import argparse
 from datetime import datetime
 import hashlib
 import sys
+from typing import List, Optional, Tuple
+
+from google.protobuf.any_pb2 import Any
+from google.rpc import status_pb2
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.offline_user_data import (
+    ItemAttribute,
+    StoreSalesMetadata,
+    StoreSalesThirdPartyMetadata,
+    UserData,
+    UserIdentifier,
+)
+from google.ads.googleads.v20.enums.types.offline_user_data_job_status import (
+    OfflineUserDataJobStatusEnum,
+)
+from google.ads.googleads.v20.enums.types.offline_user_data_job_type import (
+    OfflineUserDataJobTypeEnum,
+)
+from google.ads.googleads.v20.errors.types.errors import (
+    GoogleAdsError,
+    GoogleAdsFailure,
+)
+from google.ads.googleads.v20.resources.types.offline_user_data_job import (
+    OfflineUserDataJob,
+)
+from google.ads.googleads.v20.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.services.offline_user_data_job_service import (
+    OfflineUserDataJobServiceClient,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    GoogleAdsRow,
+)
+from google.ads.googleads.v20.services.types.offline_user_data_job_service import (
+    AddOfflineUserDataJobOperationsRequest,
+    AddOfflineUserDataJobOperationsResponse,
+    CreateOfflineUserDataJobResponse,
+    OfflineUserDataJobOperation,
+)
 
 
 def main(
-    client,
-    customer_id,
-    conversion_action_id,
-    offline_user_data_job_type,
-    external_id,
-    advertiser_upload_date_time,
-    bridge_map_version_id,
-    partner_id,
-    custom_key,
-    custom_value,
-    item_id,
-    merchant_center_account_id,
-    country_code,
-    language_code,
-    quantity,
-    ad_user_data_consent,
-    ad_personalization_consent,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_id: int,
+    offline_user_data_job_type: int,
+    external_id: Optional[int],
+    advertiser_upload_date_time: Optional[str],
+    bridge_map_version_id: Optional[str],
+    partner_id: Optional[int],
+    custom_key: Optional[str],
+    custom_value: Optional[str],
+    item_id: Optional[str],
+    merchant_center_account_id: Optional[int],
+    country_code: Optional[str],
+    language_code: Optional[str],
+    quantity: int,
+    ad_user_data_consent: Optional[str],
+    ad_personalization_consent: Optional[str],
+) -> None:
     """Uploads offline conversion data for store sales transactions.
 
     Args:
@@ -90,13 +129,13 @@ def main(
         ad_personalization_consent: The personalization consent status for ad
             user data for all members in the job.
     """
-    # Get the OfflineUserDataJobService and OperationService clients.
-    offline_user_data_job_service = client.get_service(
-        "OfflineUserDataJobService"
+    # Get the OfflineUserDataJobService client.
+    offline_user_data_job_service: OfflineUserDataJobServiceClient = (
+        client.get_service("OfflineUserDataJobService")
     )
 
     # Create an offline user data job for uploading transactions.
-    offline_user_data_job_resource_name = create_offline_user_data_job(
+    offline_user_data_job_resource_name: str = create_offline_user_data_job(
         client,
         offline_user_data_job_service,
         customer_id,
@@ -138,16 +177,16 @@ def main(
 
 
 def create_offline_user_data_job(
-    client,
-    offline_user_data_job_service,
-    customer_id,
-    offline_user_data_job_type,
-    external_id,
-    advertiser_upload_date_time,
-    bridge_map_version_id,
-    partner_id,
-    custom_key,
-):
+    client: GoogleAdsClient,
+    offline_user_data_job_service: OfflineUserDataJobServiceClient,
+    customer_id: str,
+    offline_user_data_job_type: int,
+    external_id: Optional[int],
+    advertiser_upload_date_time: Optional[str],
+    bridge_map_version_id: Optional[str],
+    partner_id: Optional[int],
+    custom_key: Optional[str],
+) -> str:
     """Creates an offline user data job for uploading store sales transactions.
 
     Args:
@@ -176,14 +215,18 @@ def create_offline_user_data_job(
     # Ads API.
 
     # Create a new offline user data job.
-    offline_user_data_job = client.get_type("OfflineUserDataJob")
+    offline_user_data_job: OfflineUserDataJob = client.get_type(
+        "OfflineUserDataJob"
+    )
     offline_user_data_job.type_ = offline_user_data_job_type
     if external_id is not None:
         offline_user_data_job.external_id = external_id
 
     # Please refer to https://support.google.com/google-ads/answer/7506124 for
     # additional details.
-    store_sales_metadata = offline_user_data_job.store_sales_metadata
+    store_sales_metadata: StoreSalesMetadata = (
+        offline_user_data_job.store_sales_metadata
+    )
     # Set the fraction of your overall sales that you (or the advertiser,
     # in the third party case) can associate with a customer (email, phone
     # number, address, etc.) in your database or loyalty program.
@@ -207,7 +250,7 @@ def create_offline_user_data_job(
         == client.enums.OfflineUserDataJobTypeEnum.STORE_SALES_UPLOAD_THIRD_PARTY
     ):
         # Create additional metadata required for uploading third party data.
-        store_sales_third_party_metadata = (
+        store_sales_third_party_metadata: StoreSalesThirdPartyMetadata = (
             store_sales_metadata.third_party_metadata
         )
         # The date/time must be in the format "yyyy-MM-dd hh:mm:ss".
@@ -243,12 +286,12 @@ def create_offline_user_data_job(
         # Set the third party partner ID uploading the transactions.
         store_sales_third_party_metadata.partner_id = partner_id
 
-    create_offline_user_data_job_response = (
+    create_offline_user_data_job_response: CreateOfflineUserDataJobResponse = (
         offline_user_data_job_service.create_offline_user_data_job(
             customer_id=customer_id, job=offline_user_data_job
         )
     )
-    offline_user_data_job_resource_name = (
+    offline_user_data_job_resource_name: str = (
         create_offline_user_data_job_response.resource_name
     )
     print(
@@ -259,20 +302,20 @@ def create_offline_user_data_job(
 
 
 def add_transactions_to_offline_user_data_job(
-    client,
-    offline_user_data_job_service,
-    customer_id,
-    offline_user_data_job_resource_name,
-    conversion_action_id,
-    custom_value,
-    item_id,
-    merchant_center_account_id,
-    country_code,
-    language_code,
-    quantity,
-    ad_user_data_consent,
-    ad_personalization_consent,
-):
+    client: GoogleAdsClient,
+    offline_user_data_job_service: OfflineUserDataJobServiceClient,
+    customer_id: str,
+    offline_user_data_job_resource_name: str,
+    conversion_action_id: int,
+    custom_value: Optional[str],
+    item_id: Optional[str],
+    merchant_center_account_id: Optional[int],
+    country_code: Optional[str],
+    language_code: Optional[str],
+    quantity: int,
+    ad_user_data_consent: Optional[str],
+    ad_personalization_consent: Optional[str],
+) -> None:
     """Add operations to the job for a set of sample transactions.
 
     Args:
@@ -304,31 +347,35 @@ def add_transactions_to_offline_user_data_job(
             user data for all members in the job.
     """
     # Construct some sample transactions.
-    operations = build_offline_user_data_job_operations(
-        client,
-        customer_id,
-        conversion_action_id,
-        custom_value,
-        item_id,
-        merchant_center_account_id,
-        country_code,
-        language_code,
-        quantity,
-        ad_user_data_consent,
-        ad_personalization_consent,
+    operations: List[OfflineUserDataJobOperation] = (
+        build_offline_user_data_job_operations(
+            client,
+            customer_id,
+            conversion_action_id,
+            custom_value,
+            item_id,
+            merchant_center_account_id,
+            country_code,
+            language_code,
+            quantity,
+            ad_user_data_consent,
+            ad_personalization_consent,
+        )
     )
 
     # [START enable_warnings_1]
     # Constructs a request with partial failure enabled to add the operations
     # to the offline user data job, and enable_warnings set to true to retrieve
     # warnings.
-    request = client.get_type("AddOfflineUserDataJobOperationsRequest")
+    request: AddOfflineUserDataJobOperationsRequest = client.get_type(
+        "AddOfflineUserDataJobOperationsRequest"
+    )
     request.resource_name = offline_user_data_job_resource_name
     request.enable_partial_failure = True
     request.enable_warnings = True
     request.operations = operations
 
-    response = (
+    response: AddOfflineUserDataJobOperationsResponse = (
         offline_user_data_job_service.add_offline_user_data_job_operations(
             request=request,
         )
@@ -337,7 +384,7 @@ def add_transactions_to_offline_user_data_job(
 
     # Print the error message for any partial failure error that is returned.
     if response.partial_failure_error:
-        print_google_ads_failures(response.partial_failure_error)
+        print_google_ads_failures(client, response.partial_failure_error)
     else:
         print(
             f"Successfully added {len(operations)} to the offline user data "
@@ -346,11 +393,13 @@ def add_transactions_to_offline_user_data_job(
 
     # Print the message for any warnings that are returned.
     if response.warning:
-        print_google_ads_failures(response.warning)
+        print_google_ads_failures(client, response.warning)
 
 
 # [START enable_warnings_2]
-def print_google_ads_failures(client, status):
+def print_google_ads_failures(
+    client: GoogleAdsClient, status: status_pb2.Status
+) -> None:
     """Prints the details for partial failure errors and warnings.
 
     Both partial failure errors and warnings are returned as Status instances,
@@ -361,12 +410,18 @@ def print_google_ads_failures(client, status):
         client: An initialized Google Ads API client.
         status: a google.rpc.Status instance.
     """
+    detail: Any
     for detail in status.details:
-        google_ads_failure = client.get_type("GoogleAdsFailure")
+        google_ads_failure: GoogleAdsFailure = client.get_type(
+            "GoogleAdsFailure"
+        )
         # Retrieve the class definition of the GoogleAdsFailure instance
         # with type() in order to use the "deserialize" class method to parse
         # the detail string into a protobuf message instance.
-        failure_instance = type(google_ads_failure).deserialize(detail.value)
+        failure_instance: GoogleAdsFailure = type(
+            google_ads_failure
+        ).deserialize(detail.value)
+        error: GoogleAdsError
         for error in failure_instance.errors:
             print(
                 "A partial failure or warning at index "
@@ -378,18 +433,18 @@ def print_google_ads_failures(client, status):
 
 
 def build_offline_user_data_job_operations(
-    client,
-    customer_id,
-    conversion_action_id,
-    custom_value,
-    item_id,
-    merchant_center_account_id,
-    country_code,
-    language_code,
-    quantity,
-    ad_user_data_consent,
-    ad_personalization_consent,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_id: int,
+    custom_value: Optional[str],
+    item_id: Optional[str],
+    merchant_center_account_id: Optional[int],
+    country_code: Optional[str],
+    language_code: Optional[str],
+    quantity: int,
+    ad_user_data_consent: Optional[str],
+    ad_personalization_consent: Optional[str],
+) -> List[OfflineUserDataJobOperation]:
     """Create offline user data job operations for sample transactions.
 
     Args:
@@ -421,14 +476,16 @@ def build_offline_user_data_job_operations(
         A list of OfflineUserDataJobOperations.
     """
     # Create the first transaction for upload with an email address and state.
-    user_data_with_email_address_operation = client.get_type(
-        "OfflineUserDataJobOperation"
+    user_data_with_email_address_operation: OfflineUserDataJobOperation = (
+        client.get_type("OfflineUserDataJobOperation")
     )
-    user_data_with_email_address = user_data_with_email_address_operation.create
-    email_identifier = client.get_type("UserIdentifier")
+    user_data_with_email_address: UserData = (
+        user_data_with_email_address_operation.create
+    )
+    email_identifier: UserIdentifier = client.get_type("UserIdentifier")
     # Hash normalized email addresses based on SHA-256 hashing algorithm.
     email_identifier.hashed_email = normalize_and_hash("dana@example.com")
-    state_identifier = client.get_type("UserIdentifier")
+    state_identifier: UserIdentifier = client.get_type("UserIdentifier")
     state_identifier.address_info.state = "NY"
     user_data_with_email_address.user_identifiers.extend(
         [email_identifier, state_identifier]
@@ -470,13 +527,13 @@ def build_offline_user_data_job_operations(
         )
 
     # Create the second transaction for upload based on a physical address.
-    user_data_with_physical_address_operation = client.get_type(
-        "OfflineUserDataJobOperation"
+    user_data_with_physical_address_operation: OfflineUserDataJobOperation = (
+        client.get_type("OfflineUserDataJobOperation")
     )
-    user_data_with_physical_address = (
+    user_data_with_physical_address: UserData = (
         user_data_with_physical_address_operation.create
     )
-    address_identifier = client.get_type("UserIdentifier")
+    address_identifier: UserIdentifier = client.get_type("UserIdentifier")
     # First and last name must be normalized and hashed.
     address_identifier.address_info.hashed_first_name = normalize_and_hash(
         "Dana"
@@ -511,7 +568,7 @@ def build_offline_user_data_job_operations(
     # Optional: If uploading data with item attributes, also assign these
     # values in the transaction attribute
     if item_id:
-        item_attribute = (
+        item_attribute: ItemAttribute = (
             user_data_with_physical_address.transaction_attribute.item_attribute
         )
         item_attribute.item_id = item_id
@@ -526,7 +583,7 @@ def build_offline_user_data_job_operations(
     ]
 
 
-def normalize_and_hash(s):
+def normalize_and_hash(s: str) -> str:
     """Normalizes and hashes a string with SHA-256.
 
     Args:
@@ -538,7 +595,11 @@ def normalize_and_hash(s):
     return hashlib.sha256(s.strip().lower().encode()).hexdigest()
 
 
-def check_job_status(client, customer_id, offline_user_data_job_resource_name):
+def check_job_status(
+    client: GoogleAdsClient,
+    customer_id: str,
+    offline_user_data_job_resource_name: str,
+) -> None:
     """Retrieves, checks, and prints the status of the offline user data job.
 
     Args:
@@ -548,10 +609,12 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
             status you wish to check.
     """
     # Get the GoogleAdsService client.
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Construct a query to fetch the job status.
-    query = f"""
+    query: str = f"""
         SELECT
           offline_user_data_job.resource_name,
           offline_user_data_job.id,
@@ -563,46 +626,54 @@ def check_job_status(client, customer_id, offline_user_data_job_resource_name):
           '{offline_user_data_job_resource_name}'"""
 
     # Issue the query and get the GoogleAdsRow containing the job.
-    googleads_row = next(
+    googleads_row: GoogleAdsRow = next(
         iter(googleads_service.search(customer_id=customer_id, query=query))
     )
-    offline_user_data_job = googleads_row.offline_user_data_job
-
-    offline_user_data_job_type_enum = (
-        client.enums.OfflineUserDataJobTypeEnum.OfflineUserDataJobType
-    )
-    offline_user_data_job_status_enum = (
-        client.enums.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+    offline_user_data_job: OfflineUserDataJob = (
+        googleads_row.offline_user_data_job
     )
 
-    job_status = offline_user_data_job.status
+    offline_user_data_job_type_enum: (
+        OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+    ) = client.enums.OfflineUserDataJobTypeEnum.OfflineUserDataJobType
+    offline_user_data_job_status_enum: (
+        OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+    ) = client.enums.OfflineUserDataJobStatusEnum.OfflineUserDataJobStatus
+
+    job_status: int = offline_user_data_job.status
     print(
         f"Offline user data job ID {offline_user_data_job.id} with type "
         f"'{offline_user_data_job_type_enum.Name(offline_user_data_job.type)}' "
         f"has status {offline_user_data_job_status_enum.Name(job_status)}."
     )
 
-    offline_user_data_job_status_enum = (
+    offline_user_data_job_status_enum_wrapper: OfflineUserDataJobStatusEnum = (
         client.enums.OfflineUserDataJobStatusEnum
     )
-    if job_status == offline_user_data_job_status_enum.FAILED:
+    if job_status == offline_user_data_job_status_enum_wrapper.FAILED:
         print(f"\tFailure reason: {offline_user_data_job.failure_reason}")
     elif (
-        job_status == offline_user_data_job_status_enum.PENDING
-        or job_status == offline_user_data_job_status_enum.RUNNING
+        job_status == offline_user_data_job_status_enum_wrapper.PENDING
+        or job_status == offline_user_data_job_status_enum_wrapper.RUNNING
     ):
         print(
             "\nTo check the status of the job periodically, use the "
             f"following GAQL query with GoogleAdsService.Search:\n{query}\n"
         )
-    elif job_status == offline_user_data_job_status_enum.SUCCESS:
+    elif job_status == offline_user_data_job_status_enum_wrapper.SUCCESS:
         print("\nThe requested job has completed successfully.")
     else:
         raise ValueError("Requested job has UNKNOWN or UNSPECIFIED status.")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
+
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="This example uploads offline data for store sales "
         "transactions."
     )
@@ -621,7 +692,9 @@ if __name__ == "__main__":
         required=True,
         help="The ID of a store sales conversion action.",
     )
-    group = parser.add_mutually_exclusive_group(required=False)
+    group: argparse._MutuallyExclusiveGroup = (
+        parser.add_mutually_exclusive_group(required=False)
+    )
     group.add_argument(
         "-k",
         "--custom_key",
@@ -737,35 +810,37 @@ if __name__ == "__main__":
         "item attributes.",
     )
     parser.add_argument(
-        "-d",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[
+            e.name
+            for e in googleads_client.enums.ConsentStatusEnum
+            if e.name not in ("UNSPECIFIED", "UNKNOWN")
+        ],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
         ),
     )
     parser.add_argument(
-        "-p",
         "--ad_personalization_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[
+            e.name
+            for e in googleads_client.enums.ConsentStatusEnum
+            if e.name not in ("UNSPECIFIED", "UNKNOWN")
+        ],
         help=(
             "The personalization consent status for ad user data for all "
             "members in the job."
         ),
     )
-    args = parser.parse_args()
-
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    args: argparse.Namespace = parser.parse_args()
 
     # Additional check to make sure that custom_key and custom_value are either
     # not provided or both provided together.
-    required_together = ("custom_key", "custom_value")
-    required_custom_vals = [
+    required_together: Tuple[str, str] = ("custom_key", "custom_value")
+    required_custom_vals: List[Optional[str]] = [
         getattr(args, field, None) for field in required_together
     ]
     if any(required_custom_vals) and not all(required_custom_vals):

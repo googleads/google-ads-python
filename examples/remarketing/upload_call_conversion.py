@@ -20,6 +20,20 @@ To set up a conversion action, run the add_conversion_action.py example.
 
 import argparse
 import sys
+from typing import Optional
+
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.services.services.conversion_upload_service import (
+    ConversionUploadServiceClient,
+)
+from google.ads.googleads.v20.services.types.conversion_upload_service import (
+    CallConversion,
+    CustomVariable,
+    UploadCallConversionsResponse,
+    UploadCallConversionsRequest,
+    CallConversionResult,
+)
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -27,16 +41,16 @@ from google.ads.googleads.errors import GoogleAdsException
 
 # [START upload_call_conversion]
 def main(
-    client,
-    customer_id,
-    conversion_action_id,
-    caller_id,
-    call_start_date_time,
-    conversion_date_time,
-    conversion_value,
-    conversion_custom_variable_id,
-    conversion_custom_variable_value,
-    ad_user_data_consent,
+    client: GoogleAdsClient,
+    customer_id: str,
+    conversion_action_id: str,
+    caller_id: str,
+    call_start_date_time: str,
+    conversion_date_time: str,
+    conversion_value: float,
+    conversion_custom_variable_id: Optional[str],
+    conversion_custom_variable_value: Optional[str],
+    ad_user_data_consent: Optional[str],
 ):
     """Imports offline call conversion values for calls related to your ads.
 
@@ -62,10 +76,12 @@ def main(
             members in the job.
     """
     # Get the ConversionUploadService client.
-    conversion_upload_service = client.get_service("ConversionUploadService")
+    conversion_upload_service: ConversionUploadServiceClient = (
+        client.get_service("ConversionUploadService")
+    )
 
     # Create a call conversion in USD currency.
-    call_conversion = client.get_type("CallConversion")
+    call_conversion: CallConversion = client.get_type("CallConversion")
     call_conversion.conversion_action = client.get_service(
         "ConversionActionService"
     ).conversion_action_path(customer_id, conversion_action_id)
@@ -76,7 +92,9 @@ def main(
     call_conversion.currency_code = "USD"
 
     if conversion_custom_variable_id and conversion_custom_variable_value:
-        conversion_custom_variable = client.get_type("CustomVariable")
+        conversion_custom_variable: CustomVariable = client.get_type(
+            "CustomVariable"
+        )
         conversion_custom_variable.conversion_custom_variable = (
             conversion_custom_variable_id
         )
@@ -93,7 +111,9 @@ def main(
 
     # Issue a request to upload the call conversion.
     # Partial failure MUST be enabled for this request.
-    request = client.get_type("UploadCallConversionsRequest")
+    request: UploadCallConversionsRequest = client.get_type(
+        "UploadCallConversionsRequest"
+    )
     request.customer_id = customer_id
     request.conversions = [call_conversion]
     request.partial_failure = True
@@ -101,7 +121,7 @@ def main(
     # multiple conversions to upload, it's most efficient to upload them in a
     # single request. See the following for per-request limits for reference:
     # https://developers.google.com/google-ads/api/docs/best-practices/quotas#conversion_upload_service
-    upload_call_conversions_response = (
+    upload_call_conversions_response: UploadCallConversionsResponse = (
         conversion_upload_service.upload_call_conversions(request=request)
     )
 
@@ -113,7 +133,9 @@ def main(
         )
 
     # Print the result if valid.
-    uploaded_call_conversion = upload_call_conversions_response.results[0]
+    uploaded_call_conversion: CallConversionResult = (
+        upload_call_conversions_response.results[0]
+    )
     if uploaded_call_conversion.call_start_date_time:
         print(
             "Uploaded call conversion that occurred at "
@@ -126,6 +148,12 @@ def main(
 
 
 if __name__ == "__main__":
+    # GoogleAdsClient will read the google-ads.yaml configuration file in the
+    # home directory if none is specified.
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
+
     parser = argparse.ArgumentParser(
         description="Imports offline call conversion values for calls related "
         "to your ads."
@@ -194,17 +222,17 @@ if __name__ == "__main__":
         "-d",
         "--ad_user_data_consent",
         type=str,
-        choices=[e.name for e in googleads_client.enums.ConsentStatusEnum],
+        choices=[
+            e.name
+            for e in googleads_client.enums.ConsentStatusEnum
+            if e.name not in ("UNSPECIFIED", "UNKNOWN")
+        ],
         help=(
             "The data consent status for ad user data for all members in "
             "the job."
         ),
     )
     args = parser.parse_args()
-
-    # GoogleAdsClient will read the google-ads.yaml configuration file in the
-    # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
 
     try:
         main(

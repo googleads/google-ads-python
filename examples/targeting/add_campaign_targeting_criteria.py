@@ -16,11 +16,30 @@
 
 
 import argparse
-from typing import Any, List
+from typing import List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.criteria import (
+    KeywordInfo,
+)
+from google.ads.googleads.v20.resources.types.campaign_criterion import (
+    CampaignCriterion,
+)
+from google.ads.googleads.v20.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_criterion_service import (
+    CampaignCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.geo_target_constant_service import (
+    GeoTargetConstantServiceClient,
+)
+from google.ads.googleads.v20.services.types.campaign_criterion_service import (
+    CampaignCriterionOperation,
+    MutateCampaignCriteriaResponse
+)
 
 
 def main(
@@ -30,11 +49,11 @@ def main(
     keyword_text: str,
     location_id: str,
 ) -> None:
-    campaign_criterion_service: Any = client.get_service(
+    campaign_criterion_service: CampaignCriterionServiceClient = client.get_service(
         "CampaignCriterionService"
     )
 
-    operations: List[Any] = [
+    operations: List[CampaignCriterionOperation] = [
         create_location_op(client, customer_id, campaign_id, location_id),
         create_negative_keyword_op(
             client, customer_id, campaign_id, keyword_text
@@ -42,7 +61,7 @@ def main(
         create_proximity_op(client, customer_id, campaign_id),
     ]
 
-    campaign_criterion_response: Any = (
+    campaign_criterion_response: MutateCampaignCriteriaResponse = (
         campaign_criterion_service.mutate_campaign_criteria(
             customer_id=customer_id, operations=operations
         )
@@ -55,17 +74,17 @@ def main(
 # [START add_campaign_targeting_criteria]
 def create_location_op(
     client: GoogleAdsClient, customer_id: str, campaign_id: str, location_id: str
-) -> Any:
-    campaign_service: Any = client.get_service("CampaignService")
-    geo_target_constant_service: Any = client.get_service(
+) -> CampaignCriterionOperation:
+    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    geo_target_constant_service: GeoTargetConstantServiceClient = client.get_service(
         "GeoTargetConstantService"
     )
 
     # Create the campaign criterion.
-    campaign_criterion_operation: Any = client.get_type(
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
         "CampaignCriterionOperation"
     )
-    campaign_criterion: Any = campaign_criterion_operation.create
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
@@ -84,19 +103,19 @@ def create_location_op(
 
 def create_negative_keyword_op(
     client: GoogleAdsClient, customer_id: str, campaign_id: str, keyword_text: str
-) -> Any:
-    campaign_service: Any = client.get_service("CampaignService")
+) -> CampaignCriterionOperation:
+    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
 
     # Create the campaign criterion.
-    campaign_criterion_operation: Any = client.get_type(
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
         "CampaignCriterionOperation"
     )
-    campaign_criterion: Any = campaign_criterion_operation.create
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )
     campaign_criterion.negative = True
-    criterion_keyword = campaign_criterion.keyword
+    criterion_keyword: KeywordInfo = campaign_criterion.keyword
     criterion_keyword.text = keyword_text
     criterion_keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
 
@@ -106,14 +125,14 @@ def create_negative_keyword_op(
 # [START add_campaign_targeting_criteria_1]
 def create_proximity_op(
     client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> Any:
-    campaign_service: Any = client.get_service("CampaignService")
+) -> CampaignCriterionOperation:
+    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
 
     # Create the campaign criterion.
-    campaign_criterion_operation: Any = client.get_type(
+    campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
         "CampaignCriterionOperation"
     )
-    campaign_criterion: Any = campaign_criterion_operation.create
+    campaign_criterion: CampaignCriterion = campaign_criterion_operation.create
     campaign_criterion.campaign = campaign_service.campaign_path(
         customer_id, campaign_id
     )

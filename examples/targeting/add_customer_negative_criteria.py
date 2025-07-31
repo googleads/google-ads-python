@@ -19,12 +19,20 @@ These criteria will be applied to all campaigns for the given customer.
 
 
 import argparse
-from typing import Any, List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
+from google.ads.googleads.v20.resources.types.customer_negative_criterion import (
+    CustomerNegativeCriterion,
+)
+from google.ads.googleads.v20.services.services.customer_negative_criterion_service import (
+    CustomerNegativeCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.types.customer_negative_criterion_service import (
+    CustomerNegativeCriterionOperation,
+    MutateCustomerNegativeCriteriaResponse
+)
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
@@ -33,35 +41,36 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
     """
-    tragedy_criterion_op: Any = client.get_type(
+    tragedy_criterion_op: CustomerNegativeCriterionOperation = client.get_type(
         "CustomerNegativeCriterionOperation"
     )
-    tragedy_criterion: Any = tragedy_criterion_op.create
+    tragedy_criterion: CustomerNegativeCriterion = tragedy_criterion_op.create
     # Creates a negative customer criterion excluding the content label type
     # of 'TRAGEDY'.
     tragedy_criterion.content_label.type_ = (
         client.enums.ContentLabelTypeEnum.TRAGEDY
     )
 
-    placement_criterion_op: Any = client.get_type(
+    placement_criterion_op: CustomerNegativeCriterionOperation = client.get_type(
         "CustomerNegativeCriterionOperation"
     )
-    placement_criterion: Any = placement_criterion_op.create
+    placement_criterion: CustomerNegativeCriterion = placement_criterion_op.create
     # Creates a negative customer criterion excluding the placement with URL
     # 'http://www.example.com'.
     placement_criterion.placement.url = "http://www.example.com"
 
-    customer_negative_criterion_service: Any = client.get_service(
+    customer_negative_criterion_service: CustomerNegativeCriterionServiceClient = client.get_service(
         "CustomerNegativeCriterionService"
     )
 
     # Issues a mutate request to add the negative customer criteria.
-    response: Any = (
+    response: MutateCustomerNegativeCriteriaResponse = (
         customer_negative_criterion_service.mutate_customer_negative_criteria(
             customer_id=customer_id,
             operations=[tragedy_criterion_op, placement_criterion_op],
         )
     )
+
     print(f"Added {len(response.results)} negative customer criteria:")
     for negative_criterion in response.results:
         print(f"Resource name: '{negative_criterion.resource_name}'")

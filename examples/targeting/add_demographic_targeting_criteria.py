@@ -18,18 +18,30 @@ create ad groups, run add_ad_groups.py."""
 
 
 import argparse
-from typing import Any, List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+    AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
+)
 
 
 def main(
     client: GoogleAdsClient, customer_id: str, ad_group_id: str
 ) -> None:
-    ad_group_service: Any = client.get_service("AdGroupService")
-    ad_group_criterion_service: Any = client.get_service(
+    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = client.get_service(
         "AdGroupCriterionService"
     )
 
@@ -37,20 +49,20 @@ def main(
         customer_id, ad_group_id
     )
     # Create a positive ad group criterion for the gender MALE.
-    gender_ad_group_criterion_operation: Any = client.get_type(
+    gender_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
-    gender_ad_group_criterion: Any = (
+    gender_ad_group_criterion: AdGroupCriterion = (
         gender_ad_group_criterion_operation.create
     )
     gender_ad_group_criterion.ad_group = ad_group_resource_name
     gender_ad_group_criterion.gender.type_ = client.enums.GenderTypeEnum.MALE
 
     # Create a negative ad group criterion for age range of 18 to 24.
-    age_range_ad_group_criterion_operation: Any = client.get_type(
+    age_range_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
-    age_range_ad_group_criterion: Any = (
+    age_range_ad_group_criterion: AdGroupCriterion = (
         age_range_ad_group_criterion_operation.create
     )
     age_range_ad_group_criterion.ad_group = ad_group_resource_name
@@ -60,7 +72,7 @@ def main(
     )
 
     # Add two ad group criteria
-    ad_group_criterion_response: Any = (
+    ad_group_criterion_response: MutateAdGroupCriteriaResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id,
             operations=[
@@ -71,7 +83,7 @@ def main(
     )
 
     for result in ad_group_criterion_response.results:
-        print("Created keyword {}.".format(result.resource_name))
+        print(f"Created ad group criterion '{result.resource_name}'.")
 
 
 if __name__ == "__main__":

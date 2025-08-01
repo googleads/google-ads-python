@@ -24,10 +24,43 @@ https://support.google.com/hotelprices/answer/6101897.
 import argparse
 import sys
 import uuid
-from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.resources.types.ad_group import AdGroup
+from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.resources.types.campaign_budget import (
+    CampaignBudget,
+)
+from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
+from google.ads.googleads.v20.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v20.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+    MutateCampaignBudgetsResponse,
+)
+from google.ads.googleads.v20.services.types.campaign_service import (
+    CampaignOperation,
+    MutateCampaignsResponse,
+)
 
 
 def main(
@@ -54,11 +87,15 @@ def main(
 
 
 def add_budget(client: GoogleAdsClient, customer_id: str) -> str:
-    campaign_budget_service: Any = client.get_service("CampaignBudgetService")
+    campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
+        "CampaignBudgetService"
+    )
 
     # Create a budget, which can be shared by multiple campaigns.
-    campaign_budget_operation: Any = client.get_type("CampaignBudgetOperation")
-    campaign_budget: Any = campaign_budget_operation.create
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
@@ -66,7 +103,7 @@ def add_budget(client: GoogleAdsClient, customer_id: str) -> str:
     campaign_budget.amount_micros = 500000
 
     # Add budget.
-    campaign_budget_response: Any = (
+    campaign_budget_response: MutateCampaignBudgetsResponse = (
         campaign_budget_service.mutate_campaign_budgets(
             customer_id=customer_id, operations=[campaign_budget_operation]
         )
@@ -85,11 +122,13 @@ def add_budget(client: GoogleAdsClient, customer_id: str) -> str:
 def add_hotel_ad(
     client: GoogleAdsClient, customer_id: str, ad_group_resource_name: str
 ) -> str:
-    ad_group_ad_service: Any = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
 
     # Creates a new ad group ad and sets the hotel ad to it.
-    ad_group_ad_operation: Any = client.get_type("AdGroupAdOperation")
-    ad_group_ad: Any = ad_group_ad_operation.create
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to enabled.  Setting this to paused will cause an error
     # for hotel campaigns.  For hotels pausing should happen at either the ad group or
@@ -98,7 +137,7 @@ def add_hotel_ad(
     client.copy_from(ad_group_ad.ad.hotel_ad, client.get_type("HotelAdInfo"))
 
     # Add the ad group ad.
-    ad_group_ad_response: Any = ad_group_ad_service.mutate_ad_group_ads(
+    ad_group_ad_response: MutateAdGroupAdsResponse = ad_group_ad_service.mutate_ad_group_ads(
         customer_id=customer_id, operations=[ad_group_ad_operation]
     )
 
@@ -116,11 +155,11 @@ def add_hotel_ad(
 def add_hotel_ad_group(
     client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
 ) -> str:
-    ad_group_service: Any = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
 
     # Create ad group.
-    ad_group_operation: Any = client.get_type("AdGroupOperation")
-    ad_group: Any = ad_group_operation.create
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
+    ad_group: AdGroup = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruise {uuid.uuid4()}"
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
     ad_group.campaign = campaign_resource_name
@@ -129,7 +168,7 @@ def add_hotel_ad_group(
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
-    ad_group_response: Any = ad_group_service.mutate_ad_groups(
+    ad_group_response: MutateAdGroupsResponse = ad_group_service.mutate_ad_groups(
         customer_id=customer_id, operations=[ad_group_operation]
     )
 
@@ -151,12 +190,12 @@ def add_hotel_campaign(
     hotel_center_account_id: int,
     cpc_bid_ceiling_micro_amount: int,
 ) -> str:
-    campaign_service: Any = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
 
     # [START add_hotel_ad_1]
     # Create campaign.
-    campaign_operation: Any = client.get_type("CampaignOperation")
-    campaign: Any = campaign_operation.create
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise Campaign {uuid.uuid4()}"
 
     # Configures settings related to hotel campaigns including advertising
@@ -184,7 +223,7 @@ def add_hotel_campaign(
     # [END add_hotel_ad_1]
 
     # Add the campaign.
-    campaign_response: Any = campaign_service.mutate_campaigns(
+    campaign_response: MutateCampaignsResponse = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
     )
 

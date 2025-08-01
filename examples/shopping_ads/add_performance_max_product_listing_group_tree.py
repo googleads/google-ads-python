@@ -25,21 +25,12 @@ shopping_ads/add_performance_max_retail_campaign.py example.
 
 import argparse
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.listing_group_filter_dimension import (
+from google.ads.googleads.v20.resources.types.asset_group_listing_group_filter import (
     ListingGroupFilterDimension,
-)
-from google.ads.googleads.v20.enums.types.listing_group_filter_product_condition import (
-    ListingGroupFilterProductConditionEnum,
-)
-from google.ads.googleads.v20.enums.types.listing_group_filter_type import (
-    ListingGroupFilterTypeEnum,
-)
-from google.ads.googleads.v20.enums.types.listing_group_filter_listing_source import (
-    ListingGroupFilterListingSourceEnum,
 )
 from google.ads.googleads.v20.resources.types.asset_group_listing_group_filter import (
     AssetGroupListingGroupFilter,
@@ -52,7 +43,7 @@ from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v20.services.types.mutate_operation import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     MutateOperation,
 )
 
@@ -95,9 +86,9 @@ class AssetGroupListingGroupFilterRemoveOperationFactory:
         # node and any parent to child edges in the tree.
         for listing_group_filter_node in listing_group_filters:
             resource_name: str = listing_group_filter_node.resource_name
-            parent_resource_name: Optional[
-                str
-            ] = listing_group_filter_node.parent_listing_group_filter
+            parent_resource_name: Optional[str] = (
+                listing_group_filter_node.parent_listing_group_filter
+            )
 
             # When the node has no parent, it means it's the root node.
             if not parent_resource_name:
@@ -423,10 +414,10 @@ def main(
 
     if replace_existing_tree:
         # Retrieve a list of existing AssetGroupListingGroupFilters
-        existing_listing_group_filters: List[
-            AssetGroupListingGroupFilter
-        ] = get_all_existing_listing_group_filter_assets_in_asset_group(
-            client, customer_id, asset_group_resource_name
+        existing_listing_group_filters: List[AssetGroupListingGroupFilter] = (
+            get_all_existing_listing_group_filter_assets_in_asset_group(
+                client, customer_id, asset_group_resource_name
+            )
         )
 
         # If present, create MutateOperations to remove each
@@ -578,7 +569,9 @@ def get_all_existing_listing_group_filter_assets_in_asset_group(
     googleads_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService"
     )
-    response: SearchGoogleAdsResponse = googleads_service.search(request=request)
+    response: SearchGoogleAdsResponse = googleads_service.search(
+        request=request
+    )
 
     return [
         result.asset_group_listing_group_filter

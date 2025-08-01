@@ -18,7 +18,7 @@
 import argparse
 import collections
 import sys
-from typing import DefaultDict, List, Optional, Any
+from typing import DefaultDict, List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -128,7 +128,9 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
                 # Adds the category as a child category of the parent
                 # category.
                 all_categories[parent_resource_name].children.append(category)
-            elif category.resource_name: # Ensure it's not None before adding to root
+            elif (
+                category.resource_name
+            ):  # Ensure it's not None before adding to root
                 # Otherwise adds the category as a root category.
                 root_categories.append(category)
 

@@ -34,14 +34,6 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v20.common.types.criteria import (
     ListingDimensionInfo,
     ListingGroupInfo,
-    ProductBrandInfo,
-    ProductConditionInfo,
-)
-from google.ads.googleads.v20.enums.types.ad_group_criterion_status import (
-    AdGroupCriterionStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.listing_group_type import (
-    ListingGroupTypeEnum,
 )
 from google.ads.googleads.v20.enums.types.product_condition import (
     ProductConditionEnum,
@@ -58,7 +50,7 @@ from google.ads.googleads.v20.services.services.ad_group_service import (
 from google.ads.googleads.v20.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_criterion_operation import (
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
 from google.ads.googleads.v20.services.types.google_ads_service import (
@@ -368,9 +360,7 @@ def create_listing_group_subdivision(
             customer_id, ad_group_id, next_id()
         )
     )
-    ad_group_criterion.status = (
-        client.enums.AdGroupCriterionStatusEnum.ENABLED
-    )
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
 
     listing_group_info: ListingGroupInfo = ad_group_criterion.listing_group
     # Set the type as a SUBDIVISION, which will allow the node to be the

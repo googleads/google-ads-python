@@ -38,46 +38,23 @@ Prerequisites:
 import argparse
 from datetime import datetime, timedelta
 import sys
-from typing import Any, Dict, List, Tuple
+from typing import Dict, List, Union
 from uuid import uuid4
 
-from examples.utils.example_helpers import get_image_bytes_from_url
 from google.api_core import protobuf_helpers
+
+from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-from google.ads.googleads.v20.common.types.criteria import LanguageInfo
-from google.ads.googleads.v20.common.types.asset_types import (
-    ImageAsset,
-    TextAsset,
-)
-from google.ads.googleads.v20.enums.types.advertising_channel_type import (
-    AdvertisingChannelTypeEnum,
-)
-from google.ads.googleads.v20.enums.types.asset_field_type import (
-    AssetFieldTypeEnum,
-)
-from google.ads.googleads.v20.enums.types.asset_group_status import (
-    AssetGroupStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.asset_type import AssetTypeEnum
-from google.ads.googleads.v20.enums.types.budget_delivery_method import (
-    BudgetDeliveryMethodEnum,
-)
-from google.ads.googleads.v20.enums.types.campaign_status import (
-    CampaignStatusEnum,
-)
 from google.ads.googleads.v20.enums.types.conversion_action_category import (
     ConversionActionCategoryEnum,
 )
 from google.ads.googleads.v20.enums.types.conversion_origin import (
     ConversionOriginEnum,
 )
-from google.ads.googleads.v20.enums.types.listing_group_filter_listing_source import (
-    ListingGroupFilterListingSourceEnum,
-)
-from google.ads.googleads.v20.enums.types.listing_group_filter_type import (
-    ListingGroupFilterTypeEnum,
+from google.ads.googleads.v20.enums.types.asset_field_type import (
+    AssetFieldTypeEnum,
 )
 from google.ads.googleads.v20.resources.types.asset import Asset
 from google.ads.googleads.v20.resources.types.asset_group import AssetGroup
@@ -112,9 +89,6 @@ from google.ads.googleads.v20.services.services.campaign_budget_service import (
 from google.ads.googleads.v20.services.services.campaign_conversion_goal_service import (
     CampaignConversionGoalServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_criterion_service import (
-    CampaignCriterionServiceClient,
-)
 from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
@@ -130,7 +104,7 @@ from google.ads.googleads.v20.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v20.services.types.mutate_operation import (
+from google.ads.googleads.v20.services.types.google_ads_service import (
     MutateOperation,
 )
 
@@ -176,7 +150,13 @@ def main(
     # This campaign will override the customer conversion goals.
     # Retrieve the current list of customer conversion goals.
     customer_conversion_goals: List[
-        Dict[str, Any]
+        Dict[
+            str,
+            Union[
+                ConversionActionCategoryEnum.ConversionActionCategory,
+                ConversionOriginEnum.ConversionOrigin,
+            ],
+        ]
     ] = get_customer_conversion_goals(client, customer_id)
 
     # Performance Max campaigns require that repeated assets such as headlines
@@ -185,9 +165,7 @@ def main(
     # https://developers.google.com/google-ads/api/docs/performance-max/assets
     #
     # Create the headlines.
-    headline_asset_resource_names: List[
-        str
-    ] = create_multiple_text_assets(
+    headline_asset_resource_names: List[str] = create_multiple_text_assets(
         client,
         customer_id,
         [
@@ -197,9 +175,7 @@ def main(
         ],
     )
     # Create the descriptions.
-    description_asset_resource_names: List[
-        str
-    ] = create_multiple_text_assets(
+    description_asset_resource_names: List[str] = create_multiple_text_assets(
         client,
         customer_id,
         [
@@ -229,11 +205,11 @@ def main(
             brand_guidelines_enabled,
         )
     )
-    campaign_criterion_operations: List[
-        MutateOperation
-    ] = create_campaign_criterion_operations(
-        client,
-        customer_id,
+    campaign_criterion_operations: List[MutateOperation] = (
+        create_campaign_criterion_operations(
+            client,
+            customer_id,
+        )
     )
     asset_group_operation: MutateOperation = create_asset_group_operation(
         client, customer_id, final_url
@@ -250,12 +226,12 @@ def main(
             brand_guidelines_enabled,
         )
     )
-    conversion_goal_operations: List[
-        MutateOperation
-    ] = create_conversion_goal_operations(
-        client,
-        customer_id,
-        customer_conversion_goals,
+    conversion_goal_operations: List[MutateOperation] = (
+        create_conversion_goal_operations(
+            client,
+            customer_id,
+            customer_conversion_goals,
+        )
     )
 
     # Send the operations in a single Mutate request.
@@ -313,8 +289,10 @@ def create_campaign_budget_operation(
     campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
         "CampaignBudgetService"
     )
-    campaign_budget.resource_name = campaign_budget_service.campaign_budget_path(
-        customer_id, _BUDGET_TEMPORARY_ID
+    campaign_budget.resource_name = (
+        campaign_budget_service.campaign_budget_path(
+            customer_id, _BUDGET_TEMPORARY_ID
+        )
     )
 
     return mutate_operation
@@ -565,9 +543,6 @@ def create_asset_group_operation(
     Returns:
         a MutateOperation that creates a new asset group.
     """
-    googleads_service: GoogleAdsServiceClient = client.get_service(
-        "GoogleAdsService"
-    )
     campaign_service: CampaignServiceClient = client.get_service(
         "CampaignService"
     )
@@ -913,9 +888,10 @@ def sort_asset_and_asset_group_asset_operations(
             True if the MutateOperation creates an asset group asset.
         """
         # Check if the oneof field 'asset_group_asset_operation' is set.
-        return operation.asset_group_asset_operation != type(
+        return (
             operation.asset_group_asset_operation
-        )()
+            != type(operation.asset_group_asset_operation)()
+        )
 
     return sorted(operations, key=sorter)
     # [END add_performance_max_retail_campaign_12]
@@ -924,7 +900,15 @@ def sort_asset_and_asset_group_asset_operations(
 # [START add_performance_max_retail_campaign_9]
 def get_customer_conversion_goals(
     client: GoogleAdsClient, customer_id: str
-) -> List[Dict[str, Any]]:
+) -> List[
+    Dict[
+        str,
+        Union[
+            ConversionActionCategoryEnum.ConversionActionCategory,
+            ConversionOriginEnum.ConversionOrigin,
+        ],
+    ]
+]:
     """Retrieves the list of customer conversion goals.
 
     Args:
@@ -936,7 +920,15 @@ def get_customer_conversion_goals(
         conversion goals.
     """
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
-    customer_conversion_goals: List[Dict[str, Any]] = []
+    customer_conversion_goals: List[
+        Dict[
+            str,
+            Union[
+                ConversionActionCategoryEnum.ConversionActionCategory,
+                ConversionOriginEnum.ConversionOrigin,
+            ],
+        ]
+    ] = []
     query: str = """
             SELECT
               customer_conversion_goal.category,
@@ -966,7 +958,15 @@ def get_customer_conversion_goals(
 def create_conversion_goal_operations(
     client: GoogleAdsClient,
     customer_id: str,
-    customer_conversion_goals: List[Dict[str, Any]],
+    customer_conversion_goals: List[
+        Dict[
+            str,
+            Union[
+                ConversionActionCategoryEnum.ConversionActionCategory,
+                ConversionOriginEnum.ConversionOrigin,
+            ],
+        ]
+    ],
 ) -> List[MutateOperation]:
     """Creates a list of MutateOperations that override customer conversion goals.
 
@@ -993,12 +993,12 @@ def create_conversion_goal_operations(
             mutate_operation.campaign_conversion_goal_operation.update
         )
 
-        category_enum_value: ConversionActionCategoryEnum.ConversionActionCategory = customer_goal_dict[
-            "category"
-        ]
-        origin_enum_value: ConversionOriginEnum.ConversionOrigin = customer_goal_dict[
-            "origin"
-        ]
+        category_enum_value: (
+            ConversionActionCategoryEnum.ConversionActionCategory
+        ) = customer_goal_dict["category"]
+        origin_enum_value: ConversionOriginEnum.ConversionOrigin = (
+            customer_goal_dict["origin"]
+        )
 
         campaign_conversion_goal.resource_name = (
             campaign_conversion_goal_service.campaign_conversion_goal_path(
@@ -1019,8 +1019,7 @@ def create_conversion_goal_operations(
         if (
             category_enum_value
             == client.enums.ConversionActionCategoryEnum.PURCHASE
-            and origin_enum_value
-            == client.enums.ConversionOriginEnum.WEBSITE
+            and origin_enum_value == client.enums.ConversionOriginEnum.WEBSITE
         ):
             biddable = True
         else:

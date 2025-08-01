@@ -29,7 +29,7 @@ scopes before running this example.
 
 import argparse
 import sys
-from typing import Any, List
+from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -51,14 +51,13 @@ from google.ads.googleads.v20.services.services.campaign_criterion_service impor
 from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_criterion_operation import (
+from google.ads.googleads.v20.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
+    MutateCampaignCriteriaResponse,
 )
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
     campaign_service: CampaignServiceClient = client.get_service(
         "CampaignService"
     )
@@ -121,7 +120,7 @@ def main(
         client.get_service("CampaignCriterionService")
     )
 
-    campaign_criterion_response: Any = (
+    campaign_criterion_response: MutateCampaignCriteriaResponse = (
         campaign_criterion_service.mutate_campaign_criteria(
             customer_id=customer_id, operations=[campaign_criterion_operation]
         )

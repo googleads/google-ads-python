@@ -31,30 +31,6 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.bidding import ManualCpc
-from google.ads.googleads.v20.common.types.ads import ShoppingProductAdInfo
-from google.ads.googleads.v20.enums.types.ad_group_ad_status import (
-    AdGroupAdStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.ad_group_criterion_status import (
-    AdGroupCriterionStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.ad_group_status import (
-    AdGroupStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.ad_group_type import AdGroupTypeEnum
-from google.ads.googleads.v20.enums.types.advertising_channel_type import (
-    AdvertisingChannelTypeEnum,
-)
-from google.ads.googleads.v20.enums.types.budget_delivery_method import (
-    BudgetDeliveryMethodEnum,
-)
-from google.ads.googleads.v20.enums.types.campaign_status import (
-    CampaignStatusEnum,
-)
-from google.ads.googleads.v20.enums.types.listing_group_type import (
-    ListingGroupTypeEnum,
-)
 from google.ads.googleads.v20.resources.types.ad_group import AdGroup
 from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
 from google.ads.googleads.v20.resources.types.ad_group_criterion import (
@@ -79,19 +55,19 @@ from google.ads.googleads.v20.services.services.campaign_budget_service import (
 from google.ads.googleads.v20.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_ad_operation import (
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_criterion_operation import (
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_operation import (
+from google.ads.googleads.v20.services.types.ad_group_service import (
     AdGroupOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_budget_operation import (
+from google.ads.googleads.v20.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_operation import (
+from google.ads.googleads.v20.services.types.campaign_service import (
     CampaignOperation,
 )
 
@@ -116,9 +92,6 @@ def main(
     )
 
     # Create a shopping product ad group ad.
-    # Note: The function add_shopping_product_ad_group_ad currently returns
-    # the ad_group_resource_name, not the ad_group_ad_resource_name.
-    # This is being kept as per the original code.
     add_shopping_product_ad_group_ad(
         client, customer_id, ad_group_resource_name
     )
@@ -132,9 +105,7 @@ def main(
         )
 
 
-def add_campaign_budget(
-    client: GoogleAdsClient, customer_id: str
-) -> str:
+def add_campaign_budget(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a new campaign budget in the specified client account."""
     campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
         "CampaignBudgetService"
@@ -202,11 +173,6 @@ def add_shopping_product_ad_group_ad(
     print(
         f"Created shopping product ad group ad '{ad_group_ad_resource_name}'."
     )
-
-    # Note: Original code returns ad_group_resource_name.
-    # Based on the print and function name, it seems like ad_group_ad_resource_name
-    # would be more appropriate. Sticking to original for now.
-    return ad_group_resource_name
     # [END add_shopping_product_ad]
 
 
@@ -331,13 +297,9 @@ def add_default_shopping_listing_group(
     ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
-    ad_group_criterion: AdGroupCriterion = (
-        ad_group_criterion_operation.create
-    )
+    ad_group_criterion: AdGroupCriterion = ad_group_criterion_operation.create
     ad_group_criterion.ad_group = ad_group_resource_name
-    ad_group_criterion.status = (
-        client.enums.AdGroupCriterionStatusEnum.ENABLED
-    )
+    ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     ad_group_criterion.listing_group.type_ = (
         client.enums.ListingGroupTypeEnum.UNIT
     )

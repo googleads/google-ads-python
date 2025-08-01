@@ -31,9 +31,28 @@ listing group tree to an ad group that already has one will fail.
 
 import argparse
 import sys
+from typing import List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.criteria import (
+    ListingDimensionInfo,
+    ListingGroupInfo,
+)
+from google.ads.googleads.v20.enums.types.listing_group_type import (
+    ListingGroupTypeEnum,
+)
+from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+    AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
+    MutateAdGroupCriterionResult,
+)
 
 # The next temporary criterion ID to be used, which is a negative integer.
 #
@@ -47,10 +66,15 @@ from google.ads.googleads.errors import GoogleAdsException
 #
 # See https://developers.google.com/google-ads/api/docs/mutating/best-practices
 # for further details.
-next_temp_id = -1
+next_temp_id: int = -1
 
 
-def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    percent_cpc_bid_micro_amount: int,
+) -> None:
     """Shows how to add a hotel listing group tree with two levels.
 
     Args:
@@ -62,12 +86,14 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
             created ad group criterion.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = client.get_service(
+        "AdGroupCriterionService"
+    )
 
-    operations = []
+    operations: List[AdGroupCriterionOperation] = []
 
     # Creates the root of the tree as a SUBDIVISION node.
-    root_resource_name = add_root_node(
+    root_resource_name: str = add_root_node(
         client,
         customer_id,
         ad_group_id,
@@ -76,7 +102,7 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
     )
 
     # Creates child nodes of level 1, partitioned by the hotel class info.
-    other_hotel_resource_name = add_level1_nodes(
+    other_hotel_resource_name: str = add_level1_nodes(
         client,
         customer_id,
         ad_group_id,
@@ -97,23 +123,29 @@ def main(client, customer_id, ad_group_id, percent_cpc_bid_micro_amount):
     )
 
     # Adds the listing group and prints the resulting node resource names.
-    mutate_ad_group_criteria_response = (
+    mutate_ad_group_criteria_response: MutateAdGroupCriteriaResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id, operations=operations
         )
     )
-    results = mutate_ad_group_criteria_response.results
+    results: List[
+        MutateAdGroupCriterionResult
+    ] = mutate_ad_group_criteria_response.results
     print(
         f"Added {len(results)} listing group info entities with resource "
         "names:"
     )
-    for ad_group_criterion_result in mutate_ad_group_criteria_response.results:
+    for ad_group_criterion_result in results:
         print(f"\t'{ad_group_criterion_result.resource_name}'")
 
 
 def add_root_node(
-    client, customer_id, ad_group_id, operations, percent_cpc_bid_micro_amount
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    operations: List[AdGroupCriterionOperation],
+    percent_cpc_bid_micro_amount: int,
+) -> str:
     """Creates the root node of the listing group tree.
 
     Also adds its create operation to the operations list.
@@ -133,12 +165,12 @@ def add_root_node(
     global next_temp_id
 
     # Create the root of the tree as a SUBDIVISION node.
-    root_listing_group_info = create_listing_group_info(
+    root_listing_group_info: ListingGroupInfo = create_listing_group_info(
         client,
         client.enums.ListingGroupTypeEnum.SUBDIVISION,
     )
 
-    root_ad_group_criterion = create_ad_group_criterion(
+    root_ad_group_criterion: AdGroupCriterion = create_ad_group_criterion(
         client,
         customer_id,
         ad_group_id,
@@ -147,7 +179,7 @@ def add_root_node(
     )
 
     # Create an operation and add it to the list of operations.
-    root_ad_group_criterion_operation = client.get_type(
+    root_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
     client.copy_from(
@@ -163,13 +195,13 @@ def add_root_node(
 
 # [START add_hotel_listing_group_tree]
 def add_level1_nodes(
-    client,
-    customer_id,
-    ad_group_id,
-    root_resource_name,
-    operations,
-    percent_cpc_bid_micro_amount,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    root_resource_name: str,
+    operations: List[AdGroupCriterionOperation],
+    percent_cpc_bid_micro_amount: int,
+) -> str:
     """Creates child nodes on level 1, partitioned by the hotel class info.
 
     Args:
@@ -190,13 +222,13 @@ def add_level1_nodes(
     global next_temp_id
 
     # Create listing dimension info for 5-star class hotels.
-    five_starred_listing_dimension_info = client.get_type(
+    five_starred_listing_dimension_info: ListingDimensionInfo = client.get_type(
         "ListingDimensionInfo"
     )
     five_starred_listing_dimension_info.hotel_class.value = 5
 
     # Create a listing group info for 5-star hotels as a UNIT node.
-    five_starred_unit = create_listing_group_info(
+    five_starred_unit: ListingGroupInfo = create_listing_group_info(
         client,
         client.enums.ListingGroupTypeEnum.UNIT,
         root_resource_name,
@@ -204,7 +236,7 @@ def add_level1_nodes(
     )
 
     # Create an ad group criterion for 5-star hotels.
-    five_starred_ad_group_criterion = create_ad_group_criterion(
+    five_starred_ad_group_criterion: AdGroupCriterion = create_ad_group_criterion(
         client,
         customer_id,
         ad_group_id,
@@ -213,7 +245,7 @@ def add_level1_nodes(
     )
 
     # Create an operation and add it to the list of operations.
-    five_starred_ad_group_criterion_operation = client.get_type(
+    five_starred_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
     client.copy_from(
@@ -233,7 +265,7 @@ def add_level1_nodes(
     # Create hotel class info and dimension info without any specifying
     # attributes. This node will then represent hotel classes other than those
     # already covered by UNIT nodes at this level.
-    other_hotels_listing_dimension_info = client.get_type(
+    other_hotels_listing_dimension_info: ListingDimensionInfo = client.get_type(
         "ListingDimensionInfo"
     )
     # Set "hotel_class" as the oneof field on the ListingDimensionInfo object
@@ -245,15 +277,17 @@ def add_level1_nodes(
 
     # Create listing group info for other hotel classes as a SUBDIVISION node,
     # which will be used as a parent node for children nodes of the next level.
-    other_hotels_subdivision_listing_group_info = create_listing_group_info(
-        client,
-        client.enums.ListingGroupTypeEnum.SUBDIVISION,
-        root_resource_name,
-        other_hotels_listing_dimension_info,
+    other_hotels_subdivision_listing_group_info: ListingGroupInfo = (
+        create_listing_group_info(
+            client,
+            client.enums.ListingGroupTypeEnum.SUBDIVISION,
+            root_resource_name,
+            other_hotels_listing_dimension_info,
+        )
     )
 
     # Create an ad group criterion for other hotel classes.
-    other_hotels_ad_group_criterion = create_ad_group_criterion(
+    other_hotels_ad_group_criterion: AdGroupCriterion = create_ad_group_criterion(
         client,
         customer_id,
         ad_group_id,
@@ -262,7 +296,7 @@ def add_level1_nodes(
     )
 
     # Create an operation and add it to the list of operations.
-    other_hotels_ad_group_criterion_operation = client.get_type(
+    other_hotels_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
     client.copy_from(
@@ -279,13 +313,13 @@ def add_level1_nodes(
 
 
 def add_level2_nodes(
-    client,
-    customer_id,
-    ad_group_id,
-    parent_resource_name,
-    operations,
-    percent_cpc_bid_micro_amount,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    parent_resource_name: str,
+    operations: List[AdGroupCriterionOperation],
+    percent_cpc_bid_micro_amount: int,
+) -> None:
     """Creates child nodes on level 2, partitioned by the country region.
 
     Args:
@@ -298,9 +332,6 @@ def add_level2_nodes(
         operations: A list of AdGroupCriterionOperations.
         percent_cpc_bid_micro_amount: The CPC bid micro amount to be set on
             created ad group criteria.
-    Returns:
-        The string resource name of the "other hotel classes" node, which serves
-        as the parent node for the next level of the listing tree.
     """
     global next_temp_id
 
@@ -308,7 +339,9 @@ def add_level2_nodes(
     # Japan is 2392. See:
     # https://developers.google.com/google-ads/api/reference/data/geotargets for
     # criteria ID of other countries.
-    japan_listing_dimension_info = client.get_type("ListingDimensionInfo")
+    japan_listing_dimension_info: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
     japan_listing_dimension_info.hotel_country_region.country_region_criterion = client.get_service(
         "GeoTargetConstantService"
     ).geo_target_constant_path(
@@ -316,7 +349,7 @@ def add_level2_nodes(
     )
 
     # Create listing group info for hotels in Japan as a UNIT node.
-    japan_hotels_unit = create_listing_group_info(
+    japan_hotels_unit: ListingGroupInfo = create_listing_group_info(
         client,
         client.enums.ListingGroupTypeEnum.UNIT,
         parent_resource_name,
@@ -324,7 +357,7 @@ def add_level2_nodes(
     )
 
     # Create an ad group criterion for hotels in Japan.
-    japan_hotels_ad_group_criterion = create_ad_group_criterion(
+    japan_hotels_ad_group_criterion: AdGroupCriterion = create_ad_group_criterion(
         client,
         customer_id,
         ad_group_id,
@@ -333,7 +366,7 @@ def add_level2_nodes(
     )
 
     # Create an operation and add it to the list of operations.
-    japan_hotels_ad_group_criterion_operation = client.get_type(
+    japan_hotels_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
     client.copy_from(
@@ -346,7 +379,7 @@ def add_level2_nodes(
     next_temp_id -= 1
 
     # Create hotel class info and dimension info for hotels in other regions.
-    other_hotel_regions_listing_dimension_info = client.get_type(
+    other_hotel_regions_listing_dimension_info: ListingDimensionInfo = client.get_type(
         "ListingDimensionInfo"
     )
     # Set "hotel_country_region" as the oneof field on the ListingDimensionInfo
@@ -359,7 +392,7 @@ def add_level2_nodes(
 
     # Create listing group info for hotels in other regions as a UNIT node.
     # The "others" node is always required for every level of the tree.
-    other_hotel_regions_unit = create_listing_group_info(
+    other_hotel_regions_unit: ListingGroupInfo = create_listing_group_info(
         client,
         client.enums.ListingGroupTypeEnum.UNIT,
         parent_resource_name,
@@ -367,7 +400,7 @@ def add_level2_nodes(
     )
 
     # Create an ad group criterion for other hotel country regions.
-    other_hotel_regions_ad_group_criterion = create_ad_group_criterion(
+    other_hotel_regions_ad_group_criterion: AdGroupCriterion = create_ad_group_criterion(
         client,
         customer_id,
         ad_group_id,
@@ -376,7 +409,7 @@ def add_level2_nodes(
     )
 
     # Create an operation and add it to the list of operations.
-    other_hotel_regions_ad_group_criterion_operation = client.get_type(
+    other_hotel_regions_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
         "AdGroupCriterionOperation"
     )
     client.copy_from(
@@ -390,11 +423,11 @@ def add_level2_nodes(
 
 
 def create_listing_group_info(
-    client,
-    listing_group_type,
-    parent_criterion_resource_name=None,
-    case_value=None,
-):
+    client: GoogleAdsClient,
+    listing_group_type: ListingGroupTypeEnum.ListingGroupType,
+    parent_criterion_resource_name: Optional[str] = None,
+    case_value: Optional[ListingDimensionInfo] = None,
+) -> ListingGroupInfo:
     """Creates the listing group info with the provided parameters.
 
     Args:
@@ -406,7 +439,7 @@ def create_listing_group_info(
     Returns:
         A populated ListingGroupInfo object.
     """
-    listing_group_info = client.get_type("ListingGroupInfo")
+    listing_group_info: ListingGroupInfo = client.get_type("ListingGroupInfo")
     listing_group_info.type_ = listing_group_type
 
     if parent_criterion_resource_name is not None and case_value is not None:
@@ -419,12 +452,12 @@ def create_listing_group_info(
 
 
 def create_ad_group_criterion(
-    client,
-    customer_id,
-    ad_group_id,
-    listing_group_info,
-    percent_cpc_bid_micro_amount,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    listing_group_info: ListingGroupInfo,
+    percent_cpc_bid_micro_amount: int,
+) -> AdGroupCriterion:
     """Creates an ad group criterion from the provided listing group info.
 
     Bid amount will be set on the created ad group criterion when listing group
@@ -442,7 +475,7 @@ def create_ad_group_criterion(
     Returns:
         A populated AdGroupCriterion object.
     """
-    ad_group_criterion = client.get_type("AdGroupCriterion")
+    ad_group_criterion: AdGroupCriterion = client.get_type("AdGroupCriterion")
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
     client.copy_from(ad_group_criterion.listing_group, listing_group_info)
     ad_group_criterion.resource_name = client.get_service(
@@ -457,7 +490,7 @@ def create_ad_group_criterion(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Shows how to add a hotel listing group tree with two "
         "levels."
     )
@@ -472,7 +505,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-a",
         "--ad_group_id",
-        type=int,
+        type=str,
         required=True,
         help="The ad group ID to which the hotel listing will be added.",
     )
@@ -486,11 +519,13 @@ if __name__ == "__main__":
         "amount equally. In practice, you probably want to use different "
         "values for each ad group criterion.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

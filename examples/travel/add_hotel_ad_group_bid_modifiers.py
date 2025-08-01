@@ -23,16 +23,37 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.criteria import HotelLengthOfStayInfo
+from google.ads.googleads.v20.resources.types.ad_group_bid_modifier import (
+    AdGroupBidModifier,
+)
+from google.ads.googleads.v20.services.services.ad_group_bid_modifier_service import (
+    AdGroupBidModifierServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_bid_modifier_service import (
+    AdGroupBidModifierOperation,
+    MutateAdGroupBidModifierResult,
+    MutateAdGroupBidModifiersResponse,
+)
 
 
 # [START add_hotel_ad_group_bid_modifiers]
-def main(client, customer_id, ad_group_id):
-    ad_group_service = client.get_service("AdGroupService")
-    ag_bm_service = client.get_service("AdGroupBidModifierService")
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
+    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
+    ag_bm_service: AdGroupBidModifierServiceClient = client.get_service(
+        "AdGroupBidModifierService"
+    )
 
     # Create ad group bid modifier based on hotel check-in day.
-    check_in_ag_bm_operation = client.get_type("AdGroupBidModifierOperation")
-    check_in_ag_bid_modifier = check_in_ag_bm_operation.create
+    check_in_ag_bm_operation: AdGroupBidModifierOperation = client.get_type(
+        "AdGroupBidModifierOperation"
+    )
+    check_in_ag_bid_modifier: AdGroupBidModifier = (
+        check_in_ag_bm_operation.create
+    )
     check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = (
         client.enums.DayOfWeekEnum.MONDAY
     )
@@ -43,34 +64,41 @@ def main(client, customer_id, ad_group_id):
     check_in_ag_bid_modifier.bid_modifier = 1.5
 
     # Create ad group bid modifier based on hotel length of stay info.
-    los_ag_bm_operation = client.get_type("AdGroupBidModifierOperation")
-    los_ag_bid_modifier = los_ag_bm_operation.create
+    los_ag_bm_operation: AdGroupBidModifierOperation = client.get_type(
+        "AdGroupBidModifierOperation"
+    )
+    los_ag_bid_modifier: AdGroupBidModifier = los_ag_bm_operation.create
     los_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     # Creates the hotel length of stay info.
-    hotel_length_of_stay_info = los_ag_bid_modifier.hotel_length_of_stay
+    hotel_length_of_stay_info: HotelLengthOfStayInfo = (
+        los_ag_bid_modifier.hotel_length_of_stay
+    )
     hotel_length_of_stay_info.min_nights = 3
     hotel_length_of_stay_info.max_nights = 7
     # Sets the bid modifier value to 170%.
     los_ag_bid_modifier.bid_modifier = 1.7
 
     # Add the bid modifiers
-    ag_bm_response = ag_bm_service.mutate_ad_group_bid_modifiers(
-        customer_id=customer_id,
-        operations=[check_in_ag_bm_operation, los_ag_bm_operation],
+    ag_bm_response: MutateAdGroupBidModifiersResponse = (
+        ag_bm_service.mutate_ad_group_bid_modifiers(
+            customer_id=customer_id,
+            operations=[check_in_ag_bm_operation, los_ag_bm_operation],
+        )
     )
 
     # Print out resource names of the added ad group bid modifiers.
     print(f"Added {len(ag_bm_response.results)} hotel ad group bid modifiers:")
 
+    result: MutateAdGroupBidModifierResult
     for result in ag_bm_response.results:
         print(result.resource_name)
         # [END add_hotel_ad_group_bid_modifiers]
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=("Adds an ad group bid modifier to a hotel ad group.")
     )
     # The following argument(s) should be provided to run the example.
@@ -88,11 +116,13 @@ if __name__ == "__main__":
         required=True,
         help="The ad group ID of the hotel ad group.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(googleads_client, args.customer_id, args.ad_group_id)

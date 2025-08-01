@@ -26,9 +26,47 @@ import sys
 from examples.utils.example_helpers import get_printable_datetime
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.resources.types.ad_group import AdGroup
+from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v20.resources.types.campaign_budget import (
+    CampaignBudget,
+)
+from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
+from google.ads.googleads.v20.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
+from google.ads.googleads.v20.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v20.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+    MutateCampaignBudgetsResponse,
+)
+from google.ads.googleads.v20.services.types.campaign_service import (
+    CampaignOperation,
+    MutateCampaignsResponse,
+)
 
 
-def main(client, customer_id, things_to_do_center_account_id):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    things_to_do_center_account_id: int,
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -37,23 +75,23 @@ def main(client, customer_id, things_to_do_center_account_id):
         things_to_do_center_account_id: the Things to Do Center account ID.
     """
     # Creates a budget to be used by the campaign that will be created below.
-    budget_resource_name = add_campaign_budget(client, customer_id)
+    budget_resource_name: str = add_campaign_budget(client, customer_id)
     # Creates a Things to do campaign.
-    campaign_resource_name = add_things_to_do_campaign(
+    campaign_resource_name: str = add_things_to_do_campaign(
         client,
         customer_id,
         budget_resource_name,
         things_to_do_center_account_id,
     )
     # Creates an ad group.
-    ad_group_resource_name = add_ad_group(
+    ad_group_resource_name: str = add_ad_group(
         client, customer_id, campaign_resource_name
     )
     # Creates an ad group ad.
     add_ad_group_ad(client, customer_id, ad_group_resource_name)
 
 
-def add_campaign_budget(client, customer_id):
+def add_campaign_budget(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a new campaign budget in the specified customer account.
 
     Args:
@@ -64,9 +102,9 @@ def add_campaign_budget(client, customer_id):
         The resource name of the newly created budget.
     """
     # Creates a campaign budget operation.
-    operation = client.get_type("CampaignBudgetOperation")
+    operation: CampaignBudgetOperation = client.get_type("CampaignBudgetOperation")
     # Creates a campaign budget.
-    campaign_budget = operation.create
+    campaign_budget: CampaignBudget = operation.create
     campaign_budget.name = (
         f"Interplanetary Cruise Budget #{get_printable_datetime()}"
     )
@@ -80,20 +118,25 @@ def add_campaign_budget(client, customer_id):
     campaign_budget.explicitly_shared = True
 
     # Issues a mutate request.
-    campaign_budget_service = client.get_service("CampaignBudgetService")
-    response = campaign_budget_service.mutate_campaign_budgets(
+    campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
+        "CampaignBudgetService"
+    )
+    response: MutateCampaignBudgetsResponse = campaign_budget_service.mutate_campaign_budgets(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Added a budget with resource name: '{resource_name}'.")
     return resource_name
 
 
 # [START add_things_to_do_ad]
 def add_things_to_do_campaign(
-    client, customer_id, budget_resource_name, things_to_do_center_account_id
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    budget_resource_name: str,
+    things_to_do_center_account_id: int,
+) -> str:
     """Creates a new Things to do campaign in the specified customer account.
 
     Args:
@@ -107,9 +150,9 @@ def add_things_to_do_campaign(
     """
     # [START add_things_to_do_ad_1]
     # Creates a campaign operation.
-    operation = client.get_type("CampaignOperation")
+    operation: CampaignOperation = client.get_type("CampaignOperation")
     # Creates a campaign.
-    campaign = operation.create
+    campaign: Campaign = operation.create
     campaign.name = (
         f"Interplanetary Cruise Campaign #{get_printable_datetime()}"
     )
@@ -142,12 +185,12 @@ def add_things_to_do_campaign(
     # [END add_things_to_do_ad_1]
 
     # Issues a mutate request to add campaigns.
-    campaign_service = client.get_service("CampaignService")
-    response = campaign_service.mutate_campaigns(
+    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    response: MutateCampaignsResponse = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(
         f"Added a Things to do campaign with resource name: '{resource_name}'."
     )
@@ -156,7 +199,9 @@ def add_things_to_do_campaign(
 
 
 # [START add_things_to_do_ad_2]
-def add_ad_group(client, customer_id, campaign_resource_name):
+def add_ad_group(
+    client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
+) -> str:
     """Creates a new ad group in the specified Things to do campaign.
 
     Args:
@@ -169,9 +214,9 @@ def add_ad_group(client, customer_id, campaign_resource_name):
         The resource name of the newly created ad group.
     """
     # Creates an ad group operation.
-    operation = client.get_type("AdGroupOperation")
+    operation: AdGroupOperation = client.get_type("AdGroupOperation")
     # Creates an ad group.
-    ad_group = operation.create
+    ad_group: AdGroup = operation.create
     ad_group.name = f"Earth to Mars cruise #{get_printable_datetime()}"
     # Sets the campaign.
     ad_group.campaign = campaign_resource_name
@@ -181,19 +226,21 @@ def add_ad_group(client, customer_id, campaign_resource_name):
     ad_group.status = client.enums.AdGroupStatusEnum.ENABLED
 
     # Issues a mutate request to add an ad group.
-    ad_group_service = client.get_service("AdGroupService")
-    ad_group_response = ad_group_service.mutate_ad_groups(
+    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
+    ad_group_response: MutateAdGroupsResponse = ad_group_service.mutate_ad_groups(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = ad_group_response.results[0].resource_name
+    resource_name: str = ad_group_response.results[0].resource_name
     print(f"Added an ad group with resource name: '{resource_name}'.")
     return resource_name
     # [END add_things_to_do_ad_2]
 
 
 # [START add_things_to_do_ad_3]
-def add_ad_group_ad(client, customer_id, ad_group_resource_name):
+def add_ad_group_ad(
+    client: GoogleAdsClient, customer_id: str, ad_group_resource_name: str
+) -> None:
     """Creates a new ad group ad in the specified ad group.
 
     Args:
@@ -203,9 +250,9 @@ def add_ad_group_ad(client, customer_id, ad_group_resource_name):
             group ad will belong to.
     """
     # Creates an ad group ad operation.
-    operation = client.get_type("AdGroupAdOperation")
+    operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
     # Creates a new ad group ad and sets a travel ad info.
-    ad_group_ad = operation.create
+    ad_group_ad: AdGroupAd = operation.create
     # Sets the ad group ad to enabled. Setting this to paused will cause an error
     # for Things to do campaigns. Pausing should happen at either the ad group
     # or campaign level.
@@ -215,18 +262,18 @@ def add_ad_group_ad(client, customer_id, ad_group_resource_name):
     ad_group_ad.ad_group = ad_group_resource_name
 
     # Issues a mutate request to add an ad group ad.
-    ad_group_ad_service = client.get_service("AdGroupAdService")
-    response = ad_group_ad_service.mutate_ad_group_ads(
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service("AdGroupAdService")
+    response: MutateAdGroupAdsResponse = ad_group_ad_service.mutate_ad_group_ads(
         customer_id=customer_id, operations=[operation]
     )
 
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
     print(f"Added an ad group ad with resource name: '{resource_name}'.")
     # [END add_things_to_do_ad_3]
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description=(
             "Adds a Things to do campaign, ad group, and a Things to do ad."
         )
@@ -246,11 +293,13 @@ if __name__ == "__main__":
         required=True,
         help=("The Things to Do Center account ID."),
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

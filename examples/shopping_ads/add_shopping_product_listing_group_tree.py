@@ -27,14 +27,41 @@ ProductCanonicalCondition null (everything else)
 
 import argparse
 import sys
+from typing import List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v20.common.types.criteria import (
+    ListingDimensionInfo,
+    ListingGroupInfo,
+)
+from google.ads.googleads.v20.enums.types.product_condition import (
+    ProductConditionEnum,
+)
+from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v20.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v20.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+    AdGroupCriterionOperation,
+)
+from google.ads.googleads.v20.services.types.google_ads_service import (
+    MutateGoogleAdsResponse,
+    SearchGoogleAdsResponse,
+)
 
-last_criterion_id = 0
+last_criterion_id: int = 0
 
 
-def next_id():
+def next_id() -> str:
     """Returns a decreasing negative number for temporary ad group criteria IDs.
 
     The ad group criteria will get real IDs when created on the server.
@@ -49,7 +76,12 @@ def next_id():
 
 
 # [START add_shopping_product_listing_group_tree]
-def main(client, customer_id, ad_group_id, replace_existing_tree):
+def main(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    replace_existing_tree: bool,
+) -> None:
     """Adds a shopping listing group tree to a shopping ad group.
 
     Args:
@@ -60,7 +92,9 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
             group tree on the ad group. Defaults to false.
     """
     # Get the AdGroupCriterionService client.
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
 
     # Optional: Remove the existing listing group tree, if it already exists
     # on the ad group. The example will throw a LISTING_GROUP_ALREADY_EXISTS
@@ -70,25 +104,29 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         remove_listing_group_tree(client, customer_id, ad_group_id)
 
     # Create a list of ad group criteria operations.
-    operations = []
+    operations: List[AdGroupCriterionOperation] = []
 
     # Construct the listing group tree "root" node.
     # Subdivision node: (Root node)
-    ad_group_criterion_root_operation = create_listing_group_subdivision(
-        client, customer_id, ad_group_id
+    ad_group_criterion_root_operation: AdGroupCriterionOperation = (
+        create_listing_group_subdivision(client, customer_id, ad_group_id)
     )
 
     # Get the resource name that will be used for the root node.
     # This resource has not been created yet and will include the temporary
     # ID as part of the criterion ID.
-    ad_group_criterion_root_resource_name = (
+    ad_group_criterion_root_resource_name: str = (
         ad_group_criterion_root_operation.create.resource_name
     )
     operations.append(ad_group_criterion_root_operation)
 
     # Construct the listing group unit nodes for NEW, USED, and other.
-    product_condition_enum = client.enums.ProductConditionEnum
-    condition_dimension_info = client.get_type("ListingDimensionInfo")
+    product_condition_enum: ProductConditionEnum = (
+        client.enums.ProductConditionEnum
+    )
+    condition_dimension_info: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
 
     # Biddable Unit node: (Condition NEW node)
     # * Product Condition: NEW
@@ -132,23 +170,27 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
         condition_dimension_info.product_condition,
         client.get_type("ProductConditionInfo"),
     )
-    ad_group_criterion_other_operation = create_listing_group_subdivision(
-        client,
-        customer_id,
-        ad_group_id,
-        ad_group_criterion_root_resource_name,
-        condition_dimension_info,
+    ad_group_criterion_other_operation: AdGroupCriterionOperation = (
+        create_listing_group_subdivision(
+            client,
+            customer_id,
+            ad_group_id,
+            ad_group_criterion_root_resource_name,
+            condition_dimension_info,
+        )
     )
     # Get the resource name that will be used for the condition other node.
     # This resource has not been created yet and will include the temporary
     # ID as part of the criterion ID.
-    ad_group_criterion_other_resource_name = (
+    ad_group_criterion_other_resource_name: str = (
         ad_group_criterion_other_operation.create.resource_name
     )
     operations.append(ad_group_criterion_other_operation)
 
     # Build the listing group nodes for CoolBrand, CheapBrand, and other.
-    brand_dimension_info = client.get_type("ListingDimensionInfo")
+    brand_dimension_info: ListingDimensionInfo = client.get_type(
+        "ListingDimensionInfo"
+    )
 
     # Biddable Unit node: (Brand CoolBrand node)
     # * Brand: CoolBrand
@@ -198,7 +240,7 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response = (
+    mutate_ad_group_criteria_response: MutateGoogleAdsResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id, operations=operations
         )
@@ -216,7 +258,11 @@ def main(client, customer_id, ad_group_id, replace_existing_tree):
     # [END add_shopping_product_listing_group_tree]
 
 
-def remove_listing_group_tree(client, customer_id, ad_group_id):
+def remove_listing_group_tree(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+) -> None:
     """Removes ad group criteria for an ad group's existing listing group tree.
 
     Args:
@@ -226,13 +272,16 @@ def remove_listing_group_tree(client, customer_id, ad_group_id):
             tree.
     """
     # Get the GoogleAdsService client.
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     print("Removing existing listing group tree...")
     # Create a search Google Ads request that will retrieve all listing groups
     # where the parent ad group criterion is NULL (and hence the root node in
     # the tree) for a given ad group id.
-    query = f"""
+    # Note: ad_group_id is used as an int in the query.
+    query: str = f"""
         SELECT ad_group_criterion.resource_name
         FROM ad_group_criterion
         WHERE
@@ -240,40 +289,45 @@ def remove_listing_group_tree(client, customer_id, ad_group_id):
           AND ad_group_criterion.listing_group.parent_ad_group_criterion IS NULL
           AND ad_group.id = {ad_group_id}"""
 
-    results = googleads_service.search(customer_id=customer_id, query=query)
-    ad_group_criterion_operations = []
+    results: SearchGoogleAdsResponse = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
+    ad_group_criterion_operations: List[AdGroupCriterionOperation] = []
 
     # Iterate over all rows to find the ad group criteria to remove.
     for row in results:
-        criterion = row.ad_group_criterion
+        criterion: AdGroupCriterion = row.ad_group_criterion
         print(
             "Found an ad group criterion with resource name: "
             f"'{criterion.resource_name}'."
         )
-        ad_group_criterion_operation = client.get_type(
-            "AdGroupCriterionOperation"
+        ad_group_criterion_operation: AdGroupCriterionOperation = (
+            client.get_type("AdGroupCriterionOperation")
         )
         ad_group_criterion_operation.remove = criterion.resource_name
         ad_group_criterion_operations.append(ad_group_criterion_operation)
 
     if ad_group_criterion_operations:
         # Remove the ad group criteria that define the listing group tree.
-        ad_group_criterion_service = client.get_service(
-            "AdGroupCriterionService"
+        ad_group_criterion_service: AdGroupCriterionServiceClient = (
+            client.get_service("AdGroupCriterionService")
         )
-        response = ad_group_criterion_service.mutate_ad_group_criteria(
-            customer_id=customer_id, operations=ad_group_criterion_operations
+        response: MutateGoogleAdsResponse = (
+            ad_group_criterion_service.mutate_ad_group_criteria(
+                customer_id=customer_id,
+                operations=ad_group_criterion_operations,
+            )
         )
         print(f"Removed {len(response.results)} ad group criteria.")
 
 
 def create_listing_group_subdivision(
-    client,
-    customer_id,
-    ad_group_id,
-    parent_ad_group_criterion_resource_name=None,
-    listing_dimension_info=None,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    parent_ad_group_criterion_resource_name: Optional[str] = None,
+    listing_dimension_info: Optional[ListingDimensionInfo] = None,
+) -> AdGroupCriterionOperation:
     """Creates a new criterion containing a subdivision listing group node.
 
     If the parent ad group criterion resource name or listing dimension info are
@@ -292,16 +346,23 @@ def create_listing_group_subdivision(
         An AdGroupCriterionOperation containing a populated ad group criterion.
     """
     # Create an ad group criterion operation and populate the criterion.
-    operation = client.get_type("AdGroupCriterionOperation")
-    ad_group_criterion = operation.create
+    operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
+    ad_group_criterion: AdGroupCriterion = operation.create
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
     # The resource name the criterion will be created with. This will define
     # the ID for the ad group criterion.
-    ad_group_criterion.resource_name = client.get_service(
-        "AdGroupCriterionService"
-    ).ad_group_criterion_path(customer_id, ad_group_id, next_id())
+    ad_group_criterion.resource_name = (
+        ad_group_criterion_service.ad_group_criterion_path(
+            customer_id, ad_group_id, next_id()
+        )
+    )
     ad_group_criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
 
-    listing_group_info = ad_group_criterion.listing_group
+    listing_group_info: ListingGroupInfo = ad_group_criterion.listing_group
     # Set the type as a SUBDIVISION, which will allow the node to be the
     # parent of another sub-tree.
     listing_group_info.type_ = client.enums.ListingGroupTypeEnum.SUBDIVISION
@@ -310,7 +371,7 @@ def create_listing_group_subdivision(
     # value.
     if (
         parent_ad_group_criterion_resource_name
-        and listing_dimension_info != None
+        and listing_dimension_info is not None
     ):
         # Set the ad group criterion resource name for the parent listing group.
         # This can include a temporary ID if the parent criterion is not yet
@@ -326,13 +387,13 @@ def create_listing_group_subdivision(
 
 
 def create_listing_group_unit_biddable(
-    client,
-    customer_id,
-    ad_group_id,
-    parent_ad_group_criterion_resource_name,
-    listing_dimension_info,
-    cpc_bid_micros=None,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_group_id: str,
+    parent_ad_group_criterion_resource_name: str,
+    listing_dimension_info: ListingDimensionInfo,
+    cpc_bid_micros: Optional[int] = None,
+) -> AdGroupCriterionOperation:
     """Creates a new criterion containing a biddable unit listing group node.
 
     Args:
@@ -356,10 +417,15 @@ def create_listing_group_unit_biddable(
     # In both cases you must set the parent ad group criterion's resource name
     # on the listing group for non-root nodes.
     # This example demonstrates method (1).
-    operation = client.get_type("AdGroupCriterionOperation")
+    operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
 
-    criterion = operation.create
-    criterion.ad_group = client.get_service("AdGroupService").ad_group_path(
+    criterion: AdGroupCriterion = operation.create
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
+    criterion.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     criterion.status = client.enums.AdGroupCriterionStatusEnum.ENABLED
@@ -369,7 +435,7 @@ def create_listing_group_unit_biddable(
     if cpc_bid_micros:
         criterion.cpc_bid_micros = cpc_bid_micros
 
-    listing_group = criterion.listing_group
+    listing_group: ListingGroupInfo = criterion.listing_group
     # Set the type as a UNIT, which will allow the group to be biddable.
     listing_group.type_ = client.enums.ListingGroupTypeEnum.UNIT
     # Set the ad group criterion resource name for the parent listing group.
@@ -378,7 +444,7 @@ def create_listing_group_unit_biddable(
         parent_ad_group_criterion_resource_name
     )
     # Case values contain the listing dimension used for the node.
-    if listing_dimension_info != None:
+    if listing_dimension_info is not None:
         client.copy_from(listing_group.case_value, listing_dimension_info)
 
     return operation
@@ -414,11 +480,13 @@ if __name__ == "__main__":
         "the ad group if one already exists. Defaults to false.",
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v20"
+    )
 
     try:
         main(

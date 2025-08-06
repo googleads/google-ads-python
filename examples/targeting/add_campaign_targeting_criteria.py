@@ -21,24 +21,24 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.criteria import (
+from google.ads.googleads.v21.common.types.criteria import (
     KeywordInfo,
 )
-from google.ads.googleads.v20.resources.types.campaign_criterion import (
+from google.ads.googleads.v21.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_criterion_service import (
+from google.ads.googleads.v21.services.services.campaign_criterion_service import (
     CampaignCriterionServiceClient,
 )
-from google.ads.googleads.v20.services.services.geo_target_constant_service import (
+from google.ads.googleads.v21.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_criterion_service import (
+from google.ads.googleads.v21.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
-    MutateCampaignCriteriaResponse
+    MutateCampaignCriteriaResponse,
 )
 
 
@@ -49,8 +49,8 @@ def main(
     keyword_text: str,
     location_id: str,
 ) -> None:
-    campaign_criterion_service: CampaignCriterionServiceClient = client.get_service(
-        "CampaignCriterionService"
+    campaign_criterion_service: CampaignCriterionServiceClient = (
+        client.get_service("CampaignCriterionService")
     )
 
     operations: List[CampaignCriterionOperation] = [
@@ -73,11 +73,16 @@ def main(
 
 # [START add_campaign_targeting_criteria]
 def create_location_op(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str, location_id: str
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    location_id: str,
 ) -> CampaignCriterionOperation:
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
-    geo_target_constant_service: GeoTargetConstantServiceClient = client.get_service(
-        "GeoTargetConstantService"
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
+    geo_target_constant_service: GeoTargetConstantServiceClient = (
+        client.get_service("GeoTargetConstantService")
     )
 
     # Create the campaign criterion.
@@ -102,9 +107,14 @@ def create_location_op(
 
 
 def create_negative_keyword_op(
-    client: GoogleAdsClient, customer_id: str, campaign_id: str, keyword_text: str
+    client: GoogleAdsClient,
+    customer_id: str,
+    campaign_id: str,
+    keyword_text: str,
 ) -> CampaignCriterionOperation:
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # Create the campaign criterion.
     campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
@@ -126,7 +136,9 @@ def create_negative_keyword_op(
 def create_proximity_op(
     client: GoogleAdsClient, customer_id: str, campaign_id: str
 ) -> CampaignCriterionOperation:
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # Create the campaign criterion.
     campaign_criterion_operation: CampaignCriterionOperation = client.get_type(
@@ -193,7 +205,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

@@ -318,6 +318,14 @@ def create_performance_max_campaign_operation(
         customer_id, _BUDGET_TEMPORARY_ID
     )
 
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
+
     # Optional fields
     campaign.start_date = (datetime.now() + timedelta(1)).strftime("%Y%m%d")
     campaign.end_date = (datetime.now() + timedelta(365)).strftime("%Y%m%d")

@@ -26,22 +26,22 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsRequest,
 )
-from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v20.services.services.ad_group_service import (
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v20.common.types.ad_type_infos import AdTextAsset
-from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+from google.ads.googleads.v21.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v20.errors.types.policy_finding_error import (
+from google.ads.googleads.v21.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
-from google.ads.googleads.v20.common.types.policy import PolicyTopicEntry
+from google.ads.googleads.v21.common.types.policy import PolicyTopicEntry
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     main(googleads_client, args.customer_id, args.ad_group_id)

@@ -22,31 +22,31 @@ from google.protobuf.field_mask_pb2 import FieldMask
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.customer_client_link_service.client import (
+from google.ads.googleads.v21.services.services.customer_client_link_service.client import (
     CustomerClientLinkServiceClient,
 )
-from google.ads.googleads.v20.services.types.customer_client_link_service import (
+from google.ads.googleads.v21.services.types.customer_client_link_service import (
     CustomerClientLinkOperation,
     MutateCustomerClientLinkResponse,
 )
-from google.ads.googleads.v20.resources.types.customer_client_link import (
+from google.ads.googleads.v21.resources.types.customer_client_link import (
     CustomerClientLink,
 )
-from google.ads.googleads.v20.services.services.google_ads_service.client import (
+from google.ads.googleads.v21.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     SearchPagedResponse,
     GoogleAdsRow,
 )
-from google.ads.googleads.v20.services.services.customer_manager_link_service.client import (
+from google.ads.googleads.v21.services.services.customer_manager_link_service.client import (
     CustomerManagerLinkServiceClient,
 )
-from google.ads.googleads.v20.services.types.customer_manager_link_service import (
+from google.ads.googleads.v21.services.types.customer_manager_link_service import (
     CustomerManagerLinkOperation,
     MutateCustomerManagerLinkResponse,
 )
-from google.ads.googleads.v20.resources.types.customer_manager_link import (
+from google.ads.googleads.v21.resources.types.customer_manager_link import (
     CustomerManagerLink,
 )
 
@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
     try:
         main(googleads_client, args.customer_id, args.manager_customer_id)
     except GoogleAdsException as ex:

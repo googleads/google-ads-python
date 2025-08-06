@@ -26,20 +26,20 @@ from google.protobuf.any_pb2 import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.conversion_adjustment_type import (
+from google.ads.googleads.v21.enums.types.conversion_adjustment_type import (
     ConversionAdjustmentTypeEnum,
 )
-from google.ads.googleads.v20.errors.types.errors import (
+from google.ads.googleads.v21.errors.types.errors import (
     GoogleAdsError,
     GoogleAdsFailure,
 )
-from google.ads.googleads.v20.services.services.conversion_action_service import (
+from google.ads.googleads.v21.services.services.conversion_action_service import (
     ConversionActionServiceClient,
 )
-from google.ads.googleads.v20.services.services.conversion_adjustment_upload_service import (
+from google.ads.googleads.v21.services.services.conversion_adjustment_upload_service import (
     ConversionAdjustmentUploadServiceClient,
 )
-from google.ads.googleads.v20.services.types.conversion_adjustment_upload_service import (
+from google.ads.googleads.v21.services.types.conversion_adjustment_upload_service import (
     ConversionAdjustment,
     ConversionAdjustmentResult,
     UploadConversionAdjustmentsRequest,
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(

@@ -40,7 +40,7 @@ __protobuf__ = proto.module(
 
 class AdGroupAdAssetView(proto.Message):
     r"""A link between an AdGroupAd and an Asset. AdGroupAdAssetView
-    supports AppAds, Demand Gen camapaigns, and Responsive Search
+    supports AppAds, Demand Gen campaigns, and Responsive Search
     Ads.
 
 

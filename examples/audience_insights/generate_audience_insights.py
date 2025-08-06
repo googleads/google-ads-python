@@ -20,16 +20,16 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types import (
+from google.ads.googleads.v21.enums.types import (
     AudienceInsightsDimensionEnum,
 )
-from google.ads.googleads.v20.services.services.audience_insights_service import (
+from google.ads.googleads.v21.services.services.audience_insights_service import (
     AudienceInsightsServiceClient,
 )
-from google.ads.googleads.v20.services.services.google_ads_service import (
+from google.ads.googleads.v21.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.audience_insights_service import (
+from google.ads.googleads.v21.services.types.audience_insights_service import (
     GenerateAudienceCompositionInsightsRequest,
     GenerateAudienceCompositionInsightsResponse,
     GenerateSuggestedTargetingInsightsRequest,
@@ -38,14 +38,13 @@ from google.ads.googleads.v20.services.types.audience_insights_service import (
     ListAudienceInsightsAttributesRequest,
     ListAudienceInsightsAttributesResponse,
 )
-from google.ads.googleads.v20.common.types import (
+from google.ads.googleads.v21.common.types import (
     AudienceInsightsAttribute,
-    LocationInfo
+    LocationInfo,
 )
 
-def main(
-    client: GoogleAdsClient, customer_id: str, custom_name: str
-) -> None:
+
+def main(client: GoogleAdsClient, customer_id: str, custom_name: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -57,8 +56,8 @@ def main(
     product_name: str = "Google"
     user_interest_category: str = "92948"  # Technology
     # Initialize appropriate services.
-    audience_insights_service: AudienceInsightsServiceClient = client.get_service(
-        "AudienceInsightsService"
+    audience_insights_service: AudienceInsightsServiceClient = (
+        client.get_service("AudienceInsightsService")
     )
     googleads_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService"
@@ -223,9 +222,9 @@ def list_audience_insights_attributes(
 
     request.customer_id = customer_id
     request.query_text = product_name
-    category_dimension: AudienceInsightsDimensionEnum.AudienceInsightsDimension = (
-        client.enums.AudienceInsightsDimensionEnum.CATEGORY
-    )
+    category_dimension: (
+        AudienceInsightsDimensionEnum.AudienceInsightsDimension
+    ) = client.enums.AudienceInsightsDimensionEnum.CATEGORY
     kg_dimension: AudienceInsightsDimensionEnum.AudienceInsightsDimension = (
         client.enums.AudienceInsightsDimensionEnum.KNOWLEDGE_GRAPH
     )
@@ -272,7 +271,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:
@@ -286,7 +285,5 @@ if __name__ == "__main__":
             print(f'\tError with message "{error.message}".')
             if error.location:
                 for field_path_element in error.location.field_path_elements:
-                    print(
-                        f"\t\tOn field: {field_path_element.field_name}"
-                    )
+                    print(f"\t\tOn field: {field_path_element.field_name}")
         sys.exit(1)

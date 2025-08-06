@@ -454,6 +454,9 @@ from .display_upload_product_type import (
 from .distance_bucket import (
     DistanceBucketEnum,
 )
+from .eu_political_advertising_status import (
+    EuPoliticalAdvertisingStatusEnum,
+)
 from .experiment_metric import (
     ExperimentMetricEnum,
 )
@@ -1173,6 +1176,7 @@ __all__ = (
     "DisplayAdFormatSettingEnum",
     "DisplayUploadProductTypeEnum",
     "DistanceBucketEnum",
+    "EuPoliticalAdvertisingStatusEnum",
     "ExperimentMetricEnum",
     "ExperimentMetricDirectionEnum",
     "ExperimentStatusEnum",

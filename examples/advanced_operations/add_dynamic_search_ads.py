@@ -160,6 +160,15 @@ def create_campaign(
     # search ads setting domain name and language.
     campaign.dynamic_search_ads_setting.domain_name = "example.com"
     campaign.dynamic_search_ads_setting.language_code = "en"
+
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
+
     # Optional: Sets the start and end dates for the campaign, beginning one day
     # from now and ending a month from now.
     campaign.start_date = (datetime.now() + timedelta(days=1)).strftime(

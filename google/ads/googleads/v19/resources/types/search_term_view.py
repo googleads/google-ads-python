@@ -32,7 +32,9 @@ __protobuf__ = proto.module(
 
 class SearchTermView(proto.Message):
     r"""A search term view with metrics aggregated by search term at
-    the ad group level.
+    the ad group level. This view does not include Performance Max
+    data. If you are looking for Performance Max search term data,
+    use the CampaignSearchTermView instead.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

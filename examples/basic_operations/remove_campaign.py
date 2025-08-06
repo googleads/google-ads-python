@@ -21,10 +21,10 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v21.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

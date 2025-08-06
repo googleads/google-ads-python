@@ -19,22 +19,22 @@ import argparse
 import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.keyword_plan_competition_level import (
+from google.ads.googleads.v21.enums.types.keyword_plan_competition_level import (
     KeywordPlanCompetitionLevelEnum,
 )
-from google.ads.googleads.v20.enums.types.keyword_plan_network import (
+from google.ads.googleads.v21.enums.types.keyword_plan_network import (
     KeywordPlanNetworkEnum,
 )
-from google.ads.googleads.v20.services.services.geo_target_constant_service.client import (
+from google.ads.googleads.v21.services.services.geo_target_constant_service.client import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v20.services.services.google_ads_service.client import (
+from google.ads.googleads.v21.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.services.keyword_plan_idea_service.client import (
+from google.ads.googleads.v21.services.services.keyword_plan_idea_service.client import (
     KeywordPlanIdeaServiceClient,
 )
-from google.ads.googleads.v20.services.types.keyword_plan_idea_service import (
+from google.ads.googleads.v21.services.types.keyword_plan_idea_service import (
     GenerateKeywordIdeasRequest,
     GenerateKeywordIdeaResult,
 )
@@ -205,7 +205,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
 
     try:
         main(

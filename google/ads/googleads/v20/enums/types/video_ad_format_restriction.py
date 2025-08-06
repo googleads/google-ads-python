@@ -29,8 +29,8 @@ __protobuf__ = proto.module(
 
 
 class VideoAdFormatRestrictionEnum(proto.Message):
-    r"""Container for enum describing format restrictions for Video
-    Responsive Ads in video campaigns.
+    r"""Container for enum describing format restrictions for video
+    responsive ads in video campaigns.
 
     """
 
@@ -45,7 +45,7 @@ class VideoAdFormatRestrictionEnum(proto.Message):
                 Used for return value only. Represents value
                 unknown in this version.
             NON_SKIPPABLE_IN_STREAM (2):
-                Non-skippable in-stream Video Responsive Ad.
+                Non-skippable in-stream video responsive ad.
         """
 
         UNSPECIFIED = 0

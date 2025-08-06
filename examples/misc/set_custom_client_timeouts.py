@@ -30,10 +30,10 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.google_ads_service.client import (
+from google.ads.googleads.v21.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     GoogleAdsRow,
     SearchGoogleAdsRequest,
     SearchGoogleAdsStreamRequest,
@@ -72,16 +72,16 @@ def make_server_streaming_call(
         )
         search_request.customer_id = customer_id
         search_request.query = _QUERY
-        stream: Iterator[
-            SearchGoogleAdsStreamResponse
-        ] = ga_service.search_stream(
-            request=search_request,
-            # When making any request, an optional "timeout" parameter can be
-            # provided to specify a client-side response deadline in seconds.
-            # If not set, then no timeout will be enforced by the client and
-            # the channel will remain open until the response is completed or
-            # severed, either manually or by the server.
-            timeout=_CLIENT_TIMEOUT_SECONDS,
+        stream: Iterator[SearchGoogleAdsStreamResponse] = (
+            ga_service.search_stream(
+                request=search_request,
+                # When making any request, an optional "timeout" parameter can be
+                # provided to specify a client-side response deadline in seconds.
+                # If not set, then no timeout will be enforced by the client and
+                # the channel will remain open until the response is completed or
+                # severed, either manually or by the server.
+                timeout=_CLIENT_TIMEOUT_SECONDS,
+            )
         )
 
         batch: SearchGoogleAdsStreamResponse
@@ -194,6 +194,6 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
 
     main(googleads_client, args.customer_id)

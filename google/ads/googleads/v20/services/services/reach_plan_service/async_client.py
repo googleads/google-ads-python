@@ -661,7 +661,12 @@ class ReachPlanServiceAsyncClient:
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ) -> reach_plan_service.ListPlannableUserListsResponse:
         r"""Returns the list of plannable user lists with their plannable
-        status.
+        status. User lists may not be plannable for a number of reasons,
+        including:
+
+        -  They are less than 10 days old.
+        -  They have a membership lifespan that is less than 30 days
+        -  They have less than 10,000 or more than 700,000 users.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `FieldError <>`__ `HeaderError <>`__

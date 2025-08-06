@@ -47,48 +47,49 @@ from examples.utils.example_helpers import (
 )
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.asset_field_type import (
+from google.ads.googleads.v21.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v20.enums.types.hotel_asset_suggestion_status import (
+from google.ads.googleads.v21.enums.types.hotel_asset_suggestion_status import (
     HotelAssetSuggestionStatusEnum,
 )
-from google.ads.googleads.v20.resources.types import CampaignBudget
-from google.ads.googleads.v20.resources.types.campaign import Campaign
-from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v20.resources.types.asset_group_asset import (
+from google.ads.googleads.v21.resources.types import CampaignBudget
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.asset import Asset
+from google.ads.googleads.v21.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v21.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v20.services.services.google_ads_service import (
+from google.ads.googleads.v21.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     MutateOperationResponse,
 )
 
-from google.ads.googleads.v20.resources.types.asset_set import AssetSet
-from google.ads.googleads.v20.resources.types.asset_set_asset import AssetSetAsset
-from google.ads.googleads.v20.services.services.asset_set_service import (
+from google.ads.googleads.v21.resources.types.asset_set import AssetSet
+from google.ads.googleads.v21.resources.types.asset_set_asset import (
+    AssetSetAsset,
+)
+from google.ads.googleads.v21.services.services.asset_set_service import (
     AssetSetServiceClient,
 )
-from google.ads.googleads.v20.services.types.asset_set_service import (
+from google.ads.googleads.v21.services.types.asset_set_service import (
     AssetSetOperation,
     MutateAssetSetsResponse,
 )
-from google.ads.googleads.v20.services.services.travel_asset_suggestion_service import (
+from google.ads.googleads.v21.services.services.travel_asset_suggestion_service import (
     TravelAssetSuggestionServiceClient,
 )
-from google.ads.googleads.v20.services.types.travel_asset_suggestion_service import (
+from google.ads.googleads.v21.services.types.travel_asset_suggestion_service import (
     HotelAssetSuggestion,
     SuggestTravelAssetsRequest,
     SuggestTravelAssetsResponse,
 )
-
 
 
 MIN_REQUIRED_TEXT_ASSET_COUNTS: Dict[str, int] = {
@@ -137,9 +138,7 @@ ASSET_GROUP_TEMPORARY_ID: int = -4
 next_temp_id: int = ASSET_GROUP_TEMPORARY_ID - 1
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, place_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, place_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -160,20 +159,15 @@ def main(
     # This step is the same for all types of Performance Max campaigns.
 
     # Creates the headlines using the hotel asset suggestion.
-    headline_asset_resource_names: List[
-        str
-    ] = create_multiple_text_assets(
+    headline_asset_resource_names: List[str] = create_multiple_text_assets(
         client,
         customer_id,
         client.enums.AssetFieldTypeEnum.HEADLINE,
         hotel_asset_suggestion,
     )
 
-
     # Creates the descriptions using the hotel asset suggestion.
-    description_asset_resource_names: List[
-        str
-    ] = create_multiple_text_assets(
+    description_asset_resource_names: List[str] = create_multiple_text_assets(
         client,
         customer_id,
         client.enums.AssetFieldTypeEnum.DESCRIPTION,
@@ -205,23 +199,27 @@ def main(
     # to create them in a single Mutate request so they all complete
     # successfully or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview.
-    campaign_budget_operation: MutateOperation = create_campaign_budget_operation(
-        client, customer_id
+    campaign_budget_operation: MutateOperation = (
+        create_campaign_budget_operation(client, customer_id)
     )
     campaign_operation: MutateOperation = create_campaign_operation(
         client, customer_id, hotel_property_asset_set_resource_name
     )
-    asset_group_operations: List[MutateOperation] = create_asset_group_operations(
-        client,
-        customer_id,
-        hotel_property_asset_resource_name,
-        headline_asset_resource_names,
-        description_asset_resource_names,
-        hotel_asset_suggestion,
+    asset_group_operations: List[MutateOperation] = (
+        create_asset_group_operations(
+            client,
+            customer_id,
+            hotel_property_asset_resource_name,
+            headline_asset_resource_names,
+            description_asset_resource_names,
+            hotel_asset_suggestion,
+        )
     )
 
     # Issues a mutate request to create everything.
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # The list of operations is a MutableSequence because it is modified by
     # the `extend` method.
     operations: List[MutateOperation] = [
@@ -266,11 +264,11 @@ def get_hotel_asset_suggestion(
     # In this example we only use a single place ID for the purpose of
     # demonstration, but it's possible to append more than one here if needed.
     request.place_ids.append(place_id)
-    travel_asset_suggestion_service: TravelAssetSuggestionServiceClient = client.get_service(
-        "TravelAssetSuggestionService"
+    travel_asset_suggestion_service: TravelAssetSuggestionServiceClient = (
+        client.get_service("TravelAssetSuggestionService")
     )
-    response: SuggestTravelAssetsResponse = travel_asset_suggestion_service.suggest_travel_assets(
-        request=request
+    response: SuggestTravelAssetsResponse = (
+        travel_asset_suggestion_service.suggest_travel_assets(request=request)
     )
     print(f"Fetched a hotel asset suggestion for the place ID: '{place_id}'.")
 
@@ -307,9 +305,9 @@ def create_multiple_text_assets(
     # request. First, adds all the text assets of the specified asset field
     # type.
     operations: List[MutateOperation] = []
-    success_status: HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus = (
-        client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
-    )
+    success_status: (
+        HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
+    ) = client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
 
     if hotel_asset_suggestion.status == success_status:
         for text_asset in hotel_asset_suggestion.text_assets:
@@ -347,7 +345,9 @@ def create_multiple_text_assets(
             operations.append(operation)
 
     # Issues a mutate request to add all assets.
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     response: MutateGoogleAdsResponse = googleads_service.mutate(
         customer_id=customer_id, mutate_operations=operations
     )
@@ -417,7 +417,9 @@ def create_hotel_asset(
     Returns:
         the created hotel property asset's resource name.
     """
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # We use the GoogleAdService to create an asset and asset set asset in a
     # single request.
 
@@ -434,7 +436,9 @@ def create_hotel_asset(
     asset.hotel_property_asset.place_id = place_id
 
     # Creates a mutate operation for an asset set asset.
-    asset_set_asset_mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    asset_set_asset_mutate_operation: MutateOperation = client.get_type(
+        "MutateOperation"
+    )
     # Creates an asset set asset.
 
     asset_set_asset: AssetSetAsset = (
@@ -472,7 +476,9 @@ def create_campaign_budget_operation(
 
     Returns: A MutateOperation that creates a new campaign budget.
     """
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # Creates a mutate operation that creates a campaign budget.
     operation: MutateOperation = client.get_type("MutateOperation")
     budget: CampaignBudget = operation.campaign_budget_operation.create
@@ -517,7 +523,9 @@ def create_campaign_operation(
     Returns:
         a MutateOperation message that creates a new Performance Max campaign.
     """
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     # Creates a mutate operation that creates a campaign.
     operation: MutateOperation = client.get_type("MutateOperation")
     campaign: Campaign = operation.campaign_operation.create
@@ -542,6 +550,13 @@ def create_campaign_operation(
     # PERFORMANCE_MAX. The advertising_channel_sub_type should not be set.
     campaign.advertising_channel_type = (
         client.enums.AdvertisingChannelTypeEnum.PERFORMANCE_MAX
+    )
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
     )
     # To create a Performance Max for travel goals campaign, you need to set
     # the `hotel_property_asset_set` field.
@@ -593,14 +608,16 @@ def create_asset_group_operations(
         a list of mutate operations that create the asset group.
     """
     global next_temp_id
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     operations: List[MutateOperation] = []
 
     # Creates a new mutate operation that creates an asset group using suggested
     # information when available.
-    success_status: HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus = (
-        client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
-    )
+    success_status: (
+        HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
+    ) = client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
     asset_group_name: str
     asset_group_final_urls: List[str]
     if hotel_asset_suggestion.status == success_status:
@@ -616,8 +633,12 @@ def create_asset_group_operations(
     asset_group_resource_name: str = googleads_service.asset_group_path(
         customer_id, ASSET_GROUP_TEMPORARY_ID
     )
-    asset_group_mutate_operation: MutateOperation = client.get_type("MutateOperation")
-    asset_group: AssetGroup = asset_group_mutate_operation.asset_group_operation.create
+    asset_group_mutate_operation: MutateOperation = client.get_type(
+        "MutateOperation"
+    )
+    asset_group: AssetGroup = (
+        asset_group_mutate_operation.asset_group_operation.create
+    )
     asset_group.resource_name = asset_group_resource_name
     asset_group.name = asset_group_name
     asset_group.campaign = googleads_service.campaign_path(
@@ -653,7 +674,9 @@ def create_asset_group_operations(
 
     # Links the description assets to the asset group.
     for resource_name in description_asset_resource_names:
-        description_operation: MutateOperation = client.get_type("MutateOperation")
+        description_operation: MutateOperation = client.get_type(
+            "MutateOperation"
+        )
         asset_group_asset_desc: AssetGroupAsset = (
             description_operation.asset_group_asset_operation.create
         )
@@ -701,7 +724,9 @@ def create_asset_group_operations(
     if hotel_asset_suggestion.status == success_status:
         # Creates a new mutate operation for a suggested call-to-action asset
         # and link it to the asset group.
-        asset_mutate_operation_cta: MutateOperation = client.get_type("MutateOperation")
+        asset_mutate_operation_cta: MutateOperation = client.get_type(
+            "MutateOperation"
+        )
         asset_cta: Asset = asset_mutate_operation_cta.asset_operation.create
         asset_cta.resource_name = googleads_service.asset_path(
             customer_id, next_temp_id
@@ -715,8 +740,8 @@ def create_asset_group_operations(
         operations.append(asset_mutate_operation_cta)
 
         # Creates a new mutate operation for a call-to-action asset group.
-        asset_group_asset_mutate_operation_cta: MutateOperation = client.get_type(
-            "MutateOperation"
+        asset_group_asset_mutate_operation_cta: MutateOperation = (
+            client.get_type("MutateOperation")
         )
         asset_group_asset_cta: AssetGroupAsset = (
             asset_group_asset_mutate_operation_cta.asset_group_asset_operation.create
@@ -760,9 +785,9 @@ def create_text_assets_for_asset_group(
     required_text_asset_counts: Dict[str, int] = {
         key: 0 for key in MIN_REQUIRED_TEXT_ASSET_COUNTS.keys()
     }
-    success_status: HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus = (
-        client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
-    )
+    success_status: (
+        HotelAssetSuggestionStatusEnum.HotelAssetSuggestionStatus
+    ) = client.enums.HotelAssetSuggestionStatusEnum.SUCCESS
     if hotel_asset_suggestion.status == success_status:
         for text_asset in hotel_asset_suggestion.text_assets:
             text: str = text_asset.text
@@ -803,9 +828,7 @@ def create_text_assets_for_asset_group(
         )
         if difference > 0:
             for i in range(difference):
-                default_text: str = DEFAULT_TEXT_ASSETS_INFO[
-                    field_type_name
-                ][i]
+                default_text: str = DEFAULT_TEXT_ASSETS_INFO[field_type_name][i]
                 field_type_enum: AssetFieldTypeEnum.AssetFieldType = (
                     client.enums.AssetFieldTypeEnum[field_type_name]
                 )
@@ -843,7 +866,9 @@ def create_text_asset_and_asset_group_asset_operations(
         a list of mutate operations that create a new linked text asset.
     """
     global next_temp_id
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     operations: List[MutateOperation] = []
 
     # Creates a new mutate operation that creates a text asset.
@@ -857,7 +882,9 @@ def create_text_asset_and_asset_group_asset_operations(
 
     # Creates an asset group asset operation to link the asset to the asset
     # group.
-    asset_group_asset_mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    asset_group_asset_mutate_operation: MutateOperation = client.get_type(
+        "MutateOperation"
+    )
     asset_group_asset: AssetGroupAsset = (
         asset_group_asset_mutate_operation.asset_group_asset_operation.create
     )
@@ -933,9 +960,7 @@ def create_image_assets_for_asset_group(
         )
         if difference > 0:
             for i in range(difference):
-                default_url: str = DEFAULT_IMAGE_ASSETS_INFO[
-                    field_type_name
-                ][i]
+                default_url: str = DEFAULT_IMAGE_ASSETS_INFO[field_type_name][i]
                 name = f"{field_type_name.lower()} {get_printable_datetime()}"
                 field_type_enum: AssetFieldTypeEnum.AssetFieldType = (
                     client.enums.AssetFieldTypeEnum[field_type_name]
@@ -976,7 +1001,9 @@ def create_image_asset_and_image_asset_group_asset_operations(
         a list of mutate operations that create a new linked image asset.
     """
     global next_temp_id
-    googleads_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
     operations: List[MutateOperation] = []
 
     # Creates a new mutate operation that creates an image asset.
@@ -994,7 +1021,9 @@ def create_image_asset_and_image_asset_group_asset_operations(
 
     # Creates an asset group asset operation to link the asset to the asset
     # group.
-    asset_group_asset_mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    asset_group_asset_mutate_operation: MutateOperation = client.get_type(
+        "MutateOperation"
+    )
     asset_group_asset: AssetGroupAsset = (
         asset_group_asset_mutate_operation.asset_group_asset_operation.create
     )
@@ -1081,7 +1110,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

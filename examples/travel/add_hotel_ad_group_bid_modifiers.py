@@ -23,17 +23,17 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.common.types.criteria import HotelLengthOfStayInfo
-from google.ads.googleads.v20.resources.types.ad_group_bid_modifier import (
+from google.ads.googleads.v21.common.types.criteria import HotelLengthOfStayInfo
+from google.ads.googleads.v21.resources.types.ad_group_bid_modifier import (
     AdGroupBidModifier,
 )
-from google.ads.googleads.v20.services.services.ad_group_bid_modifier_service import (
+from google.ads.googleads.v21.services.services.ad_group_bid_modifier_service import (
     AdGroupBidModifierServiceClient,
 )
-from google.ads.googleads.v20.services.services.ad_group_service import (
+from google.ads.googleads.v21.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_bid_modifier_service import (
+from google.ads.googleads.v21.services.types.ad_group_bid_modifier_service import (
     AdGroupBidModifierOperation,
     MutateAdGroupBidModifierResult,
     MutateAdGroupBidModifiersResponse,
@@ -42,7 +42,9 @@ from google.ads.googleads.v20.services.types.ad_group_bid_modifier_service impor
 
 # [START add_hotel_ad_group_bid_modifiers]
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
-    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
     ag_bm_service: AdGroupBidModifierServiceClient = client.get_service(
         "AdGroupBidModifierService"
     )
@@ -121,7 +123,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

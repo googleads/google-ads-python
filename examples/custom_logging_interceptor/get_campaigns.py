@@ -23,9 +23,15 @@ from typing import Any, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.google_ads_service import GoogleAdsServiceClient
-from google.ads.googleads.v20.services.types.google_ads_service import SearchGoogleAdsStreamResponse
-from google.ads.googleads.v20.types.google_ads_row import GoogleAdsRow
+from google.ads.googleads.v21.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v21.services.types.google_ads_service import (
+    SearchGoogleAdsStreamResponse,
+)
+from google.ads.googleads.v21.services.types.google_ads_service import (
+    GoogleAdsRow,
+)
 
 from cloud_logging_interceptor import CloudLoggingInterceptor
 
@@ -34,7 +40,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Instantiate the GoogleAdsService object with a custom interceptor.
     ga_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService",
-        interceptors=[CloudLoggingInterceptor(api_version="v20")],
+        interceptors=[CloudLoggingInterceptor(api_version="v21")],
     )
 
     query: str = """
@@ -46,10 +52,13 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         LIMIT 10"""
 
     # Issues a search request using streaming.
-    stream: Iterable[SearchGoogleAdsStreamResponse] = ga_service.search_stream(customer_id=customer_id, query=query)
+    stream: Iterable[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
+        customer_id=customer_id, query=query
+    )
 
     for batch in stream:
-        for row: GoogleAdsRow in batch.results:
+        results: Iterable[GoogleAdsRow] = batch.results
+        for row in results:
             print(
                 f"Campaign with ID {row.campaign.id} and name "
                 f'"{row.campaign.name}" was found.'
@@ -73,7 +82,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

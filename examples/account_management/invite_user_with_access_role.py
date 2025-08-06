@@ -23,14 +23,14 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.customer_user_access_invitation_service.client import (
+from google.ads.googleads.v21.services.services.customer_user_access_invitation_service.client import (
     CustomerUserAccessInvitationServiceClient,
 )
-from google.ads.googleads.v20.services.types.customer_user_access_invitation_service import (
+from google.ads.googleads.v21.services.types.customer_user_access_invitation_service import (
     CustomerUserAccessInvitationOperation,
     MutateCustomerUserAccessInvitationResponse,
 )
-from google.ads.googleads.v20.resources.types.customer_user_access_invitation import (
+from google.ads.googleads.v21.resources.types.customer_user_access_invitation import (
     CustomerUserAccessInvitation,
 )
 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
 
     try:
         main(

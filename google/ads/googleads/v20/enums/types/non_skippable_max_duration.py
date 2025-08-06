@@ -30,13 +30,13 @@ __protobuf__ = proto.module(
 
 class NonSkippableMaxDurationEnum(proto.Message):
     r"""Container for enum describing the allowed maximum duration
-    values for videos used in non-skippable Responsive Video Ads.
+    values for videos used in non-skippable video responsive ads.
 
     """
 
     class NonSkippableMaxDuration(proto.Enum):
         r"""Enum describing the allowed maximum duration values for
-        videos used in non-skippable Responsive Video Ads.
+        videos used in non-skippable video responsive ads.
 
         Values:
             UNSPECIFIED (0):

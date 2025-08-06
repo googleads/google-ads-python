@@ -26,24 +26,24 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.campaign_budget_service import (
+from google.ads.googleads.v21.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_budget_service import (
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v21.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
-from google.ads.googleads.v20.resources.types.campaign_budget import (
+from google.ads.googleads.v21.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v20.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign import Campaign
 
 
 _DATE_FORMAT: str = "%Y%m%d"
@@ -113,7 +113,14 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Enable Display Expansion on Search campaigns. For more details see:
     # https://support.google.com/google-ads/answer/7193800
     campaign.network_settings.target_content_network = True
-    # [END add_campaigns_1]
+
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
 
     # Optional: Set the start date.
     start_time: datetime.date = datetime.date.today() + datetime.timedelta(
@@ -124,6 +131,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Optional: Set the end date.
     end_time: datetime.date = start_time + datetime.timedelta(weeks=4)
     campaign.end_date = datetime.date.strftime(end_time, _DATE_FORMAT)
+    # [END add_campaigns_1]
 
     # Add the campaign.
     campaign_response: MutateCampaignsResponse
@@ -167,7 +175,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     main(googleads_client, args.customer_id)

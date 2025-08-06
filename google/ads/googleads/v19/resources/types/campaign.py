@@ -62,6 +62,7 @@ from google.ads.googleads.v19.enums.types import campaign_primary_status
 from google.ads.googleads.v19.enums.types import campaign_primary_status_reason
 from google.ads.googleads.v19.enums.types import campaign_serving_status
 from google.ads.googleads.v19.enums.types import campaign_status
+from google.ads.googleads.v19.enums.types import eu_political_advertising_status
 from google.ads.googleads.v19.enums.types import (
     listing_type as gage_listing_type,
 )
@@ -415,6 +416,10 @@ class Campaign(proto.Message):
             within this campaign. Note: These settings can
             only be used for Performance Max campaigns that
             have Brand Guidelines enabled.
+        contains_eu_political_advertising (google.ads.googleads.v19.enums.types.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus):
+            The advertiser should self-declare whether
+            this campaign contains political advertising
+            content targeted towards the European Union.
         bidding_strategy (str):
             The resource name of the portfolio bidding
             strategy used by the campaign.
@@ -708,8 +713,13 @@ class Campaign(proto.Message):
                 setting Vehicle Listing inventory in Performance Max
                 campaigns, use ``listing_type`` instead.
             advertising_partner_ids (MutableSequence[int]):
-                Immutable. The ads account IDs of advertising
-                partners cooperating within the campaign.
+                Immutable. The list of Google Ads accounts
+                IDs of advertising partners cooperating within
+                the campaign. This feature is currently
+                available only for accounts having an
+                advertising partner link. This feature is
+                currently supported only for Performance Max,
+                Shopping, Search and Demand Gen campaign types.
             disable_product_feed (bool):
                 Disable the optional product feed. This field
                 is currently supported only for Demand Gen
@@ -1046,12 +1056,12 @@ class Campaign(proto.Message):
 
         Attributes:
             video_ad_inventory_control (google.ads.googleads.v19.resources.types.Campaign.VideoCampaignSettings.VideoAdInventoryControl):
-                Inventory control for responsive ad
-                containers in reach campaigns.
+                Inventory control for video responsive ads in
+                reach campaigns.
         """
 
         class VideoAdInventoryControl(proto.Message):
-            r"""For campaigns using responsive ad containers inventory controls
+            r"""For campaigns using video responsive ads inventory controls
             determine on which inventories the ads can be shown. This only
             applies for campaigns with the bidding strategies TARGET_CPM and
             FIXED_CPM.
@@ -1061,17 +1071,17 @@ class Campaign(proto.Message):
 
             Attributes:
                 allow_in_stream (bool):
-                    Determine if VideoResponsiveAds can be used
+                    Determine if video responsive ads can be used
                     for in-stream video ads.
 
                     This field is a member of `oneof`_ ``_allow_in_stream``.
                 allow_in_feed (bool):
-                    Determine if VideoResponsiveAds can be used
+                    Determine if video responsive ads can be used
                     for in-feed video ads.
 
                     This field is a member of `oneof`_ ``_allow_in_feed``.
                 allow_shorts (bool):
-                    Determine if VideoResponsiveAds can be used
+                    Determine if video responsive ads can be used
                     as shorts format.
 
                     This field is a member of `oneof`_ ``_allow_shorts``.
@@ -1522,6 +1532,13 @@ class Campaign(proto.Message):
         proto.MESSAGE,
         number=98,
         message=BrandGuidelines,
+    )
+    contains_eu_political_advertising: (
+        eu_political_advertising_status.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus
+    ) = proto.Field(
+        proto.ENUM,
+        number=102,
+        enum=eu_political_advertising_status.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus,
     )
     bidding_strategy: str = proto.Field(
         proto.STRING,

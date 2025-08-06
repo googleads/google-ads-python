@@ -22,35 +22,35 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+from google.ads.googleads.v21.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v21.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v20.services.services.ad_group_service import (
+from google.ads.googleads.v21.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
 )
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, ad_group_id: str
-) -> None:
-    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
-    ad_group_criterion_service: AdGroupCriterionServiceClient = client.get_service(
-        "AdGroupCriterionService"
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
     )
 
     ad_group_resource_name: str = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
     # Create a positive ad group criterion for the gender MALE.
-    gender_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
-        "AdGroupCriterionOperation"
+    gender_ad_group_criterion_operation: AdGroupCriterionOperation = (
+        client.get_type("AdGroupCriterionOperation")
     )
     gender_ad_group_criterion: AdGroupCriterion = (
         gender_ad_group_criterion_operation.create
@@ -59,8 +59,8 @@ def main(
     gender_ad_group_criterion.gender.type_ = client.enums.GenderTypeEnum.MALE
 
     # Create a negative ad group criterion for age range of 18 to 24.
-    age_range_ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
-        "AdGroupCriterionOperation"
+    age_range_ad_group_criterion_operation: AdGroupCriterionOperation = (
+        client.get_type("AdGroupCriterionOperation")
     )
     age_range_ad_group_criterion: AdGroupCriterion = (
         age_range_ad_group_criterion_operation.create
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

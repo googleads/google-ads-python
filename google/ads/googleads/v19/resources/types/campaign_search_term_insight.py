@@ -29,7 +29,9 @@ __protobuf__ = proto.module(
 
 
 class CampaignSearchTermInsight(proto.Message):
-    r"""A Campaign search term view.
+    r"""This report provides a high-level view of search demand at
+    the campaign level by grouping similar search terms into
+    categories and showing their search volume.
     Historical data is available starting March 2023.
 
 

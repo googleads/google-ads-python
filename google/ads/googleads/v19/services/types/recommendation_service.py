@@ -1319,9 +1319,9 @@ class GenerateRecommendationsRequest(proto.Message):
 
         Attributes:
             current_budget (int):
-                Required. Current budget amount. This field is necessary for
-                the following recommendation_types if budget_info is set:
-                CAMPAIGN_BUDGET
+                Required. Current budget amount in micros. This field is
+                necessary for the following recommendation_types if
+                budget_info is set: CAMPAIGN_BUDGET
 
                 This field is a member of `oneof`_ ``_current_budget``.
         """

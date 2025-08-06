@@ -59,12 +59,6 @@ local_services_lead_conversation = import_module(
 )
 
 
-v18_google_ads_service = import_module(
-    "google.ads.googleads.v18.services.types.google_ads_service"
-)
-v18_feed = import_module("google.ads.googleads.v18.resources.types.feed")
-
-
 class LoggingInterceptorTest(TestCase):
     """Tests for the google.ads.googleads.client.LoggingInterceptor class."""
 
@@ -311,9 +305,10 @@ class LoggingInterceptorTest(TestCase):
         )
         mock_trailing_metadata = mock_response.trailing_metadata()
 
-        with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.googleads.client._logger"
-        ) as mock_logger:
+        with (
+            mock.patch("logging.config.dictConfig"),
+            mock.patch("google.ads.googleads.client._logger") as mock_logger,
+        ):
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_unary(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -366,9 +361,10 @@ class LoggingInterceptorTest(TestCase):
 
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.googleads.client._logger"
-        ) as mock_logger:
+        with (
+            mock.patch("logging.config.dictConfig"),
+            mock.patch("google.ads.googleads.client._logger") as mock_logger,
+        ):
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_stream(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -420,9 +416,10 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
 
-        with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.googleads.client._logger"
-        ) as mock_logger:
+        with (
+            mock.patch("logging.config.dictConfig"),
+            mock.patch("google.ads.googleads.client._logger") as mock_logger,
+        ):
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_unary(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -475,9 +472,10 @@ class LoggingInterceptorTest(TestCase):
         mock_response.add_done_callback = mock_add_done_callback
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with mock.patch("logging.config.dictConfig"), mock.patch(
-            "google.ads.googleads.client._logger"
-        ) as mock_logger:
+        with (
+            mock.patch("logging.config.dictConfig"),
+            mock.patch("google.ads.googleads.client._logger") as mock_logger,
+        ):
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_stream(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -556,9 +554,10 @@ class LoggingInterceptorTest(TestCase):
         """Calls _format_json_object with error obj's debug_error_string."""
         interceptor = self._create_test_interceptor()
 
-        with mock.patch("logging.config.dictConfig"), mock.patch.object(
-            interceptor, "format_json_object"
-        ) as mock_parser:
+        with (
+            mock.patch("logging.config.dictConfig"),
+            mock.patch.object(interceptor, "format_json_object") as mock_parser,
+        ):
             mock_exception = self._get_mock_transport_exception()
             interceptor._parse_exception_to_str(mock_exception)
             mock_parser.assert_called_once_with(
@@ -822,24 +821,6 @@ class LoggingInterceptorTest(TestCase):
         copy = mask_message(response, "REDACTED")
         self.assertEqual(copy.results[0].change_event.user_email, "REDACTED")
 
-    def test_mask_search_places_location_feed_data(self):
-        """Masks Feed.places_location_feed_data on a SearchStream response."""
-        # This only applies in v18 and below because Feeds were removed in v19
-        response = v18_google_ads_service.SearchGoogleAdsStreamResponse()
-        row = v18_google_ads_service.GoogleAdsRow(
-            feed=v18_feed.Feed(
-                places_location_feed_data=v18_feed.Feed.PlacesLocationFeedData(
-                    email_address="test@test.com"
-                )
-            )
-        )
-        response.results.append(row)
-        copy = mask_message(response, "REDACTED")
-        self.assertEqual(
-            copy.results[0].feed.places_location_feed_data.email_address,
-            "REDACTED",
-        )
-
     def test_mask_customer_user_access(self):
         """Copies and masks a CustomerUserAccess message instance."""
         customer_user_access_obj = customer_user_access.CustomerUserAccess(
@@ -879,20 +860,6 @@ class LoggingInterceptorTest(TestCase):
         self.assertIsInstance(copy, request.__class__)
         self.assertIsNot(copy, request)
         self.assertEqual(copy.email_address, "REDACTED")
-
-    def test_mask_places_location_feed_data(self):
-        """Copies and masks a PlacesLocationFeedData instance."""
-        message = v18_feed.Feed(
-            places_location_feed_data=v18_feed.Feed.PlacesLocationFeedData(
-                email_address="test@test.com"
-            )
-        )
-        copy = mask_message(message, "REDACTED")
-        self.assertIsInstance(copy, message.__class__)
-        self.assertIsNot(copy, message)
-        self.assertEqual(
-            copy.places_location_feed_data.email_address, "REDACTED"
-        )
 
     def test_mask_customer_user_access_invitation_email(self):
         """Copies and masks a CustomerUserAccessInvitation instance."""

@@ -35,7 +35,7 @@ class AdFormatTypeEnum(proto.Message):
         r"""Enumerates Google Ads format types.
 
         Note that this segmentation is available only for Video and
-        Discovery campaigns. For assets, only video assets are
+        Demand Gen campaigns. For assets, only video assets are
         supported.
 
         Values:
@@ -47,7 +47,7 @@ class AdFormatTypeEnum(proto.Message):
             OTHER (2):
                 Value assigned to formats (such as
                 experimental formats) which don't support format
-                segmentation in Video and Discovery campaigns.
+                segmentation in Video and Demand Gen campaigns.
 
                 Note that these formats may change categories in
                 the future, for example if an experimental
@@ -67,9 +67,9 @@ class AdFormatTypeEnum(proto.Message):
             INSTREAM_NON_SKIPPABLE (5):
                 Non-skippable in-stream ads.
             INFEED (6):
-                In-feed YouTube or discovery image ads served
-                on feed surfaces (e.g. Discover Feed, YouTube
-                Home, etc.).
+                In-feed YouTube or image ads served on feed
+                surfaces (e.g. Discover Feed, YouTube Home,
+                etc.).
             BUMPER (7):
                 Short (<7 secs) in-stream non-skippable
                 YouTube ads.
@@ -80,8 +80,8 @@ class AdFormatTypeEnum(proto.Message):
             AUDIO (10):
                 Audio ads.
             SHORTS (11):
-                Vertical full-screen video or discovery image
-                ad served on YouTube Shorts or BrandConnect ads
+                Vertical full-screen video or image ads
+                served on YouTube Shorts or BrandConnect ads
                 served as organic YouTube Shorts.
         """
 

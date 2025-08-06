@@ -24,11 +24,20 @@ https://developers.google.com/google-ads/api/docs/campaigns/bidding/seasonality-
 
 import argparse
 import sys
-from typing import Any
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.resources.types.bidding_seasonality_adjustment import (
+    BiddingSeasonalityAdjustment,
+)
+from google.ads.googleads.v21.services.services.bidding_seasonality_adjustment_service import (
+    BiddingSeasonalityAdjustmentServiceClient,
+)
+from google.ads.googleads.v21.services.types.bidding_seasonality_adjustment_service import (
+    BiddingSeasonalityAdjustmentOperation,
+    MutateBiddingSeasonalityAdjustmentsResponse,
+)
 
 
 def main(
@@ -49,11 +58,15 @@ def main(
             the given time period.
     """
     # [START add_bidding_seasonality_adjustment]
-    bidding_seasonality_adjustment_service: Any = client.get_service(
-        "BiddingSeasonalityAdjustmentService"
+    bidding_seasonality_adjustment_service: (
+        BiddingSeasonalityAdjustmentServiceClient
+    ) = client.get_service("BiddingSeasonalityAdjustmentService")
+    operation: BiddingSeasonalityAdjustmentOperation = client.get_type(
+        "BiddingSeasonalityAdjustmentOperation"
     )
-    operation: Any = client.get_type("BiddingSeasonalityAdjustmentOperation")
-    bidding_seasonality_adjustment: Any = operation.create
+    bidding_seasonality_adjustment: BiddingSeasonalityAdjustment = (
+        operation.create
+    )
     # A unique name is required for every seasonality adjustment.
     bidding_seasonality_adjustment.name = f"Seasonality adjustment #{uuid4()}"
     # The CHANNEL scope applies the conversion_rate_modifier to all campaigns of
@@ -82,8 +95,10 @@ def main(
         conversion_rate_modifier
     )
 
-    response: Any = bidding_seasonality_adjustment_service.mutate_bidding_seasonality_adjustments(
-        customer_id=customer_id, operations=[operation]
+    response: MutateBiddingSeasonalityAdjustmentsResponse = (
+        bidding_seasonality_adjustment_service.mutate_bidding_seasonality_adjustments(
+            customer_id=customer_id, operations=[operation]
+        )
     )
 
     resource_name: str = response.results[0].resource_name

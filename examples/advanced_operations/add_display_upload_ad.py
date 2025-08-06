@@ -20,20 +20,34 @@ To get ad groups, run get_ad_groups.py.
 
 import argparse
 import sys
-from typing import Any
 
 import requests
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.resources.types.ad import Ad
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.asset import Asset
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v21.services.services.asset_service import (
+    AssetServiceClient,
+)
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
+from google.ads.googleads.v21.services.types.asset_service import (
+    AssetOperation,
+    MutateAssetsResponse,
+)
 
 
 BUNDLE_URL: str = "https://gaagl.page.link/ib87"
 
 
-def main(
-    client: GoogleAdsClient, customer_id: str, ad_group_id: str
-) -> None:
+def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     """Adds a display upload ad to a given ad group.
 
     Args:
@@ -49,9 +63,7 @@ def main(
     # https://developers.google.com/google-ads/api/reference/rpc/latest/DisplayUploadAdInfo
 
     # Creates a new media bundle asset and returns the resource name.
-    ad_asset_resource_name: str = create_media_bundle_asset(
-        client, customer_id
-    )
+    ad_asset_resource_name: str = create_media_bundle_asset(client, customer_id)
 
     # Creates a new display upload ad and associates it with the specified
     # ad group.
@@ -60,9 +72,7 @@ def main(
     )
 
 
-def create_media_bundle_asset(
-    client: GoogleAdsClient, customer_id: str
-) -> str:
+def create_media_bundle_asset(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a media bundle from the assets in a zip file.
 
     The zip file contains the HTML5 components.
@@ -74,11 +84,11 @@ def create_media_bundle_asset(
         The string resource name of the newly uploaded media bundle.
     """
     # Get the AssetService client.
-    asset_service: Any = client.get_service("AssetService")
+    asset_service: AssetServiceClient = client.get_service("AssetService")
 
     # Construct an asset operation and populate its fields.
-    asset_operation: Any = client.get_type("AssetOperation")
-    media_bundle_asset: Any = asset_operation.create
+    asset_operation: AssetOperation = client.get_type("AssetOperation")
+    media_bundle_asset: Asset = asset_operation.create
     media_bundle_asset.type_ = client.enums.AssetTypeEnum.MEDIA_BUNDLE
     media_bundle_asset.name = "Ad Media Bundle"
     # The HTML5 zip file contains all the HTML, CSS, and images needed for the
@@ -90,7 +100,7 @@ def create_media_bundle_asset(
     ).content
 
     # Adds the asset to the client account.
-    mutate_asset_response: Any = asset_service.mutate_assets(
+    mutate_asset_response: MutateAssetsResponse = asset_service.mutate_assets(
         customer_id=customer_id, operations=[asset_operation]
     )
 
@@ -119,20 +129,24 @@ def create_display_upload_ad_group_ad(
             the HTML5 components.
     """
     # Get the AdGroupAdService client.
-    ad_group_ad_service: Any = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
 
     # Create an AdGroupAdOperation.
-    ad_group_ad_operation: Any = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
 
     # Configure the ad group ad fields.
-    ad_group_ad: Any = ad_group_ad_operation.create
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     ad_group_ad.ad_group = client.get_service("AdGroupService").ad_group_path(
         customer_id, ad_group_id
     )
 
     # Configured the ad as a display upload ad.
-    display_upload_ad: Any = ad_group_ad.ad
+    display_upload_ad: Ad = ad_group_ad.ad
     display_upload_ad.name = "Ad for HTML5"
     display_upload_ad.final_urls.append("http://example.com/html5")
     # Exactly one of the ad_data "oneof" fields must be included to specify the
@@ -148,7 +162,7 @@ def create_display_upload_ad_group_ad(
 
     # Add the ad group ad to the client account and display the resulting
     # ad's resource name.
-    mutate_ad_group_ads_response: Any = (
+    mutate_ad_group_ads_response: MutateAdGroupAdsResponse = (
         ad_group_ad_service.mutate_ad_group_ads(
             customer_id=customer_id, operations=[ad_group_ad_operation]
         )
@@ -174,7 +188,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-a",
         "--ad_group_id",
-        type=str,  # Changed to str to match main function signature
+        type=str,
         required=True,
         help="The ID of the ad group to which the new ad will be added.",
     )

@@ -20,11 +20,86 @@ https://support.google.com/google-ads/answer/7652860
 
 import argparse
 import sys
+from typing import List, Optional
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
+from google.ads.googleads.v21.common.types.ad_asset import AdTextAsset
+from google.ads.googleads.v21.common.types.ad_type_infos import (
+    SmartCampaignAdInfo,
+)
+from google.ads.googleads.v21.common.types.criteria import (
+    AdScheduleInfo,
+    KeywordThemeInfo,
+    LocationInfo,
+)
+from google.ads.googleads.v21.resources.types.ad_group import AdGroup
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign_budget import (
+    CampaignBudget,
+)
+from google.ads.googleads.v21.resources.types.campaign_criterion import (
+    CampaignCriterion,
+)
+from google.ads.googleads.v21.resources.types.keyword_theme_constant import (
+    KeywordThemeConstant,
+)
+from google.ads.googleads.v21.resources.types.smart_campaign_setting import (
+    SmartCampaignSetting,
+)
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+)
+from google.ads.googleads.v21.services.types.ad_group_service import (
+    AdGroupOperation,
+)
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+)
+from google.ads.googleads.v21.services.types.campaign_criterion_service import (
+    CampaignCriterionOperation,
+)
+from google.ads.googleads.v21.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v21.enums.types.minute_of_hour import (
+    MinuteOfHourEnum,
+)
+from google.ads.googleads.v21.services.types.campaign_service import (
+    CampaignOperation,
+)
+from google.ads.googleads.v21.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v21.services.types.google_ads_service import (
+    MutateGoogleAdsResponse,
+    MutateOperation,
+    MutateOperationResponse,
+)
+from google.ads.googleads.v21.services.services.keyword_theme_constant_service import (
+    KeywordThemeConstantServiceClient,
+)
+from google.ads.googleads.v21.services.types.keyword_theme_constant_service import (
+    SuggestKeywordThemeConstantsRequest,
+    SuggestKeywordThemeConstantsResponse,
+)
+from google.ads.googleads.v21.services.services.smart_campaign_suggest_service import (
+    SmartCampaignSuggestServiceClient,
+)
+from google.ads.googleads.v21.services.types.smart_campaign_suggest_service import (
+    SmartCampaignSuggestionInfo,
+    SuggestKeywordThemesResponse,
+    SuggestKeywordThemesRequest,
+    SuggestSmartCampaignAdResponse,
+    SuggestSmartCampaignAdRequest,
+    SuggestSmartCampaignBudgetOptionsResponse,
+    SuggestSmartCampaignBudgetOptionsRequest,
+)
+from google.ads.googleads.v21.services.types.smart_campaign_setting_service import (
+    SmartCampaignSettingOperation,
+)
 from google.api_core import protobuf_helpers
 
 # Geo target constant for New York City.
@@ -47,13 +122,13 @@ _REQUIRED_NUM_DESCRIPTIONS = 2
 
 
 def main(
-    client,
-    customer_id,
-    keyword_text,
-    free_form_keyword_text,
-    business_profile_location,
-    business_name,
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    keyword_text: Optional[str],
+    free_form_keyword_text: Optional[str],
+    business_profile_location: Optional[str],
+    business_name: Optional[str],
+) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
@@ -70,16 +145,18 @@ def main(
     # entities necessary to create a Smart campaign. It will be reused a number
     # of times to retrieve suggestions for keyword themes, budget amount,
     # ad creatives, and campaign criteria.
-    suggestion_info = get_smart_campaign_suggestion_info(
-        client, business_profile_location, business_name
+    suggestion_info: SmartCampaignSuggestionInfo = (
+        get_smart_campaign_suggestion_info(
+            client, business_profile_location, business_name
+        )
     )
 
     # After creating a SmartCampaignSuggestionInfo object we first use it to
     # generate a list of keyword themes using the SuggestKeywordThemes method
     # on the SmartCampaignSuggestService. It is strongly recommended that you
     # use this strategy for generating keyword themes.
-    keyword_themes = get_keyword_theme_suggestions(
-        client, customer_id, suggestion_info
+    keyword_themes: List[SuggestKeywordThemesResponse.KeywordTheme] = (
+        get_keyword_theme_suggestions(client, customer_id, suggestion_info)
     )
 
     # If a keyword text is given, retrieve keyword theme constant suggestions
@@ -94,8 +171,8 @@ def main(
 
     # Map the KeywordThemes retrieved by the previous two steps to
     # KeywordThemeInfo instances.
-    keyword_theme_infos = map_keyword_themes_to_keyword_infos(
-        client, keyword_themes
+    keyword_theme_infos: List[KeywordThemeInfo] = (
+        map_keyword_themes_to_keyword_infos(client, keyword_themes)
     )
 
     # If a free-form keyword text is given we create a KeywordThemeInfo instance
@@ -106,16 +183,18 @@ def main(
         )
 
     # Now add the generated keyword themes to the suggestion info instance.
-    suggestion_info.keyword_themes = keyword_theme_infos
+    suggestion_info.keyword_themes.extend(keyword_theme_infos)
     # [END add_smart_campaign_12]
 
     # Retrieve a budget amount suggestion.
-    suggested_budget_amount = get_budget_suggestion(
+    suggested_budget_amount: int = get_budget_suggestion(
         client, customer_id, suggestion_info
     )
 
     # Retrieve Smart campaign ad creative suggestions.
-    ad_suggestions = get_ad_suggestions(client, customer_id, suggestion_info)
+    ad_suggestions: SmartCampaignAdInfo = get_ad_suggestions(
+        client, customer_id, suggestion_info
+    )
 
     # [START add_smart_campaign_7]
     # The below methods create and return MutateOperations that we later
@@ -125,27 +204,37 @@ def main(
     # create them in a single Mutate request so they all complete successfully
     # or fail entirely, leaving no orphaned entities. See:
     # https://developers.google.com/google-ads/api/docs/mutating/overview
-    campaign_budget_operation = create_campaign_budget_operation(
-        client, customer_id, suggested_budget_amount
+    campaign_budget_operation: MutateOperation = (
+        create_campaign_budget_operation(
+            client, customer_id, suggested_budget_amount
+        )
     )
-    smart_campaign_operation = create_smart_campaign_operation(
+    smart_campaign_operation: MutateOperation = create_smart_campaign_operation(
         client, customer_id
     )
-    smart_campaign_setting_operation = create_smart_campaign_setting_operation(
-        client, customer_id, business_profile_location, business_name
+    smart_campaign_setting_operation: MutateOperation = (
+        create_smart_campaign_setting_operation(
+            client, customer_id, business_profile_location, business_name
+        )
     )
-    campaign_criterion_operations = create_campaign_criterion_operations(
-        client, customer_id, keyword_theme_infos, suggestion_info
+    campaign_criterion_operations: List[MutateOperation] = (
+        create_campaign_criterion_operations(
+            client, customer_id, keyword_theme_infos, suggestion_info
+        )
     )
-    ad_group_operation = create_ad_group_operation(client, customer_id)
-    ad_group_ad_operation = create_ad_group_ad_operation(
+    ad_group_operation: MutateOperation = create_ad_group_operation(
+        client, customer_id
+    )
+    ad_group_ad_operation: MutateOperation = create_ad_group_ad_operation(
         client, customer_id, ad_suggestions
     )
 
-    googleads_service = client.get_service("GoogleAdsService")
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
 
     # Send the operations into a single Mutate request.
-    response = googleads_service.mutate(
+    response: MutateGoogleAdsResponse = googleads_service.mutate(
         customer_id=customer_id,
         mutate_operations=[
             # It's important to create these entities in this order because
@@ -168,7 +257,11 @@ def main(
 
 
 # [START add_smart_campaign_11]
-def get_keyword_theme_suggestions(client, customer_id, suggestion_info):
+def get_keyword_theme_suggestions(
+    client: GoogleAdsClient,
+    customer_id: str,
+    suggestion_info: SmartCampaignSuggestionInfo,
+) -> List[SuggestKeywordThemesResponse.KeywordTheme]:
     """Retrieves KeywordThemes using the given suggestion info.
 
     Here we use the SuggestKeywordThemes method, which uses all of the business
@@ -186,15 +279,17 @@ def get_keyword_theme_suggestions(client, customer_id, suggestion_info):
     Returns:
         a list of KeywordThemes.
     """
-    smart_campaign_suggest_service = client.get_service(
-        "SmartCampaignSuggestService"
+    smart_campaign_suggest_service: SmartCampaignSuggestServiceClient = (
+        client.get_service("SmartCampaignSuggestService")
     )
-    request = client.get_type("SuggestKeywordThemesRequest")
+    request: SuggestKeywordThemesRequest = client.get_type(
+        "SuggestKeywordThemesRequest"
+    )
     request.customer_id = customer_id
     request.suggestion_info = suggestion_info
 
-    response = smart_campaign_suggest_service.suggest_keyword_themes(
-        request=request
+    response: SuggestKeywordThemesResponse = (
+        smart_campaign_suggest_service.suggest_keyword_themes(request=request)
     )
 
     print(
@@ -206,7 +301,9 @@ def get_keyword_theme_suggestions(client, customer_id, suggestion_info):
 
 
 # [START add_smart_campaign]
-def get_keyword_text_auto_completions(client, keyword_text):
+def get_keyword_text_auto_completions(
+    client: GoogleAdsClient, keyword_text: str
+) -> List[SuggestKeywordThemesResponse.KeywordTheme]:
     """Retrieves KeywordThemeConstants for the given keyword text.
 
     These KeywordThemeConstants are derived from autocomplete data for the
@@ -219,16 +316,20 @@ def get_keyword_text_auto_completions(client, keyword_text):
     Returns:
         a list of KeywordThemes.
     """
-    keyword_theme_constant_service = client.get_service(
-        "KeywordThemeConstantService"
+    keyword_theme_constant_service: KeywordThemeConstantServiceClient = (
+        client.get_service("KeywordThemeConstantService")
     )
-    request = client.get_type("SuggestKeywordThemeConstantsRequest")
+    request: SuggestKeywordThemeConstantsRequest = client.get_type(
+        "SuggestKeywordThemeConstantsRequest"
+    )
     request.query_text = keyword_text
     request.country_code = _COUNTRY_CODE
     request.language_code = _LANGUAGE_CODE
 
-    response = keyword_theme_constant_service.suggest_keyword_theme_constants(
-        request=request
+    response: SuggestKeywordThemeConstantsResponse = (
+        keyword_theme_constant_service.suggest_keyword_theme_constants(
+            request=request
+        )
     )
 
     print(
@@ -238,10 +339,14 @@ def get_keyword_text_auto_completions(client, keyword_text):
 
     # Map the keyword theme constants to KeywordTheme instances for consistency
     # with the response from SmartCampaignSuggestService.SuggestKeywordThemes.
-    keyword_themes = []
-    KeywordTheme = client.get_type("SuggestKeywordThemesResponse").KeywordTheme
+    keyword_themes: List[SuggestKeywordThemesResponse.KeywordTheme] = []
+    keyword_theme_constant: KeywordThemeConstant
     for keyword_theme_constant in response.keyword_theme_constants:
-        keyword_theme = KeywordTheme()
+        # Note that the SuggestKeywordThemesResponse.KeywordTheme is a nested
+        # type and not the same as the top-level KeywordTheme message.
+        keyword_theme: SuggestKeywordThemesResponse.KeywordTheme = (
+            client.get_type("SuggestKeywordThemesResponse").KeywordTheme()
+        )
         keyword_theme.keyword_theme_constant = keyword_theme_constant
         keyword_themes.append(keyword_theme)
 
@@ -250,7 +355,9 @@ def get_keyword_text_auto_completions(client, keyword_text):
 
 
 # [START add_smart_campaign_13]
-def get_free_form_keyword_theme_info(client, free_form_keyword_text):
+def get_free_form_keyword_theme_info(
+    client: GoogleAdsClient, free_form_keyword_text: str
+) -> KeywordThemeInfo:
     """Creates a KeywordThemeInfo using the given free-form keyword text.
 
     Args:
@@ -261,13 +368,16 @@ def get_free_form_keyword_theme_info(client, free_form_keyword_text):
     Returns:
         a KeywordThemeInfo instance.
     """
-    info = client.get_type("KeywordThemeInfo")
+    info: KeywordThemeInfo = client.get_type("KeywordThemeInfo")
     info.free_form_keyword_theme = free_form_keyword_text
     return info
     # [END add_smart_campaign_13]
 
 
-def map_keyword_themes_to_keyword_infos(client, keyword_themes):
+def map_keyword_themes_to_keyword_infos(
+    client: GoogleAdsClient,
+    keyword_themes: List[SuggestKeywordThemesResponse.KeywordTheme],
+) -> List[KeywordThemeInfo]:
     """Maps a list of KeywordThemes to KeywordThemeInfos.
 
     Args:
@@ -277,9 +387,10 @@ def map_keyword_themes_to_keyword_infos(client, keyword_themes):
     Returns:
         a list of KeywordThemeInfos.
     """
-    infos = []
+    infos: List[KeywordThemeInfo] = []
+    keyword_theme: SuggestKeywordThemesResponse.KeywordTheme
     for keyword_theme in keyword_themes:
-        info = client.get_type("KeywordThemeInfo")
+        info: KeywordThemeInfo = client.get_type("KeywordThemeInfo")
         # Check if the keyword_theme_constant field is set.
         if "keyword_theme_constant" in keyword_theme:
             info.keyword_theme_constant = (
@@ -300,8 +411,10 @@ def map_keyword_themes_to_keyword_infos(client, keyword_themes):
 
 # [START add_smart_campaign_9]
 def get_smart_campaign_suggestion_info(
-    client, business_profile_location, business_name
-):
+    client: GoogleAdsClient,
+    business_profile_location: Optional[str],
+    business_name: Optional[str],
+) -> SmartCampaignSuggestionInfo:
     """Builds a SmartCampaignSuggestionInfo object with business details.
 
     The details are used by the SmartCampaignSuggestService to suggest a
@@ -320,7 +433,9 @@ def get_smart_campaign_suggestion_info(
     Returns:
         A SmartCampaignSuggestionInfo instance.
     """
-    suggestion_info = client.get_type("SmartCampaignSuggestionInfo")
+    suggestion_info: SmartCampaignSuggestionInfo = client.get_type(
+        "SmartCampaignSuggestionInfo"
+    )
 
     # Add the URL of the campaign's landing page.
     suggestion_info.final_url = _LANDING_PAGE_URL
@@ -344,7 +459,7 @@ def get_smart_campaign_suggestion_info(
     #
     # For more information on proximities see:
     # https://developers.google.com/google-ads/api/reference/rpc/latest/ProximityInfo
-    location = client.get_type("LocationInfo")
+    location: LocationInfo = client.get_type("LocationInfo")
     # Set the location to the resource name of the given geo target constant.
     location.geo_target_constant = client.get_service(
         "GeoTargetConstantService"
@@ -364,7 +479,7 @@ def get_smart_campaign_suggestion_info(
     # Add a schedule detailing which days of the week the business is open.
     # This schedule describes a schedule in which the business is open on
     # Mondays from 9am to 5pm.
-    ad_schedule_info = client.get_type("AdScheduleInfo")
+    ad_schedule_info: AdScheduleInfo = client.get_type("AdScheduleInfo")
     # Set the day of this schedule as Monday.
     ad_schedule_info.day_of_week = client.enums.DayOfWeekEnum.MONDAY
     # Set the start hour to 9am.
@@ -372,7 +487,9 @@ def get_smart_campaign_suggestion_info(
     # Set the end hour to 5pm.
     ad_schedule_info.end_hour = 17
     # Set the start and end minute of zero, for example: 9:00 and 5:00.
-    zero_minute_of_hour = client.enums.MinuteOfHourEnum.ZERO
+    zero_minute_of_hour: MinuteOfHourEnum.MinuteOfHour = (
+        client.enums.MinuteOfHourEnum.ZERO
+    )
     ad_schedule_info.start_minute = zero_minute_of_hour
     ad_schedule_info.end_minute = zero_minute_of_hour
     suggestion_info.ad_schedules.append(ad_schedule_info)
@@ -382,7 +499,11 @@ def get_smart_campaign_suggestion_info(
 
 
 # [START add_smart_campaign_1]
-def get_budget_suggestion(client, customer_id, suggestion_info):
+def get_budget_suggestion(
+    client: GoogleAdsClient,
+    customer_id: str,
+    suggestion_info: SmartCampaignSuggestionInfo,
+) -> int:
     """Retrieves a suggested budget amount for a new budget.
 
     Using the SmartCampaignSuggestService to determine a daily budget for new
@@ -398,8 +519,12 @@ def get_budget_suggestion(client, customer_id, suggestion_info):
     Returns:
         a daily budget amount in micros.
     """
-    sc_suggest_service = client.get_service("SmartCampaignSuggestService")
-    request = client.get_type("SuggestSmartCampaignBudgetOptionsRequest")
+    sc_suggest_service: SmartCampaignSuggestServiceClient = client.get_service(
+        "SmartCampaignSuggestService"
+    )
+    request: SuggestSmartCampaignBudgetOptionsRequest = client.get_type(
+        "SuggestSmartCampaignBudgetOptionsRequest"
+    )
     request.customer_id = customer_id
     # You can retrieve suggestions for an existing campaign by setting the
     # "campaign" field of the request equal to the resource name of a campaign
@@ -411,14 +536,18 @@ def get_budget_suggestion(client, customer_id, suggestion_info):
     request.suggestion_info = suggestion_info
 
     # Issue a request to retrieve a budget suggestion.
-    response = sc_suggest_service.suggest_smart_campaign_budget_options(
-        request=request
+    response: SuggestSmartCampaignBudgetOptionsResponse = (
+        sc_suggest_service.suggest_smart_campaign_budget_options(
+            request=request
+        )
     )
 
     # Three tiers of options will be returned, a "low", "high" and
     # "recommended". Here we will use the "recommended" option. The amount is
     # specified in micros, where one million is equivalent to one currency unit.
-    recommendation = response.recommended
+    recommendation: SuggestSmartCampaignBudgetOptionsResponse.BudgetOption = (
+        response.recommended
+    )
     print(
         f"A daily budget amount of {recommendation.daily_amount_micros} micros "
         "was suggested, garnering an estimated minimum of "
@@ -431,7 +560,11 @@ def get_budget_suggestion(client, customer_id, suggestion_info):
 
 
 # [START add_smart_campaign_10]
-def get_ad_suggestions(client, customer_id, suggestion_info):
+def get_ad_suggestions(
+    client: GoogleAdsClient,
+    customer_id: str,
+    suggestion_info: SmartCampaignSuggestionInfo,
+) -> SmartCampaignAdInfo:
     """Retrieves creative suggestions for a Smart campaign ad.
 
     Using the SmartCampaignSuggestService to suggest creatives for new and
@@ -448,8 +581,12 @@ def get_ad_suggestions(client, customer_id, suggestion_info):
         a SmartCampaignAdInfo instance with suggested headlines and
             descriptions.
     """
-    sc_suggest_service = client.get_service("SmartCampaignSuggestService")
-    request = client.get_type("SuggestSmartCampaignAdRequest")
+    sc_suggest_service: SmartCampaignSuggestServiceClient = client.get_service(
+        "SmartCampaignSuggestService"
+    )
+    request: SuggestSmartCampaignAdRequest = client.get_type(
+        "SuggestSmartCampaignAdRequest"
+    )
     request.customer_id = customer_id
 
     # Unlike the SuggestSmartCampaignBudgetOptions method, it's only possible
@@ -457,19 +594,23 @@ def get_ad_suggestions(client, customer_id, suggestion_info):
     request.suggestion_info = suggestion_info
 
     # Issue a request to retrieve ad creative suggestions.
-    response = sc_suggest_service.suggest_smart_campaign_ad(request=request)
+    response: SuggestSmartCampaignAdResponse = (
+        sc_suggest_service.suggest_smart_campaign_ad(request=request)
+    )
 
     # The SmartCampaignAdInfo object in the response contains a list of up to
     # three headlines and two descriptions. Note that some of the suggestions
     # may have empty strings as text. Before setting these on the ad you should
     # review them and filter out any empty values.
-    ad_suggestions = response.ad_info
+    ad_suggestions: SmartCampaignAdInfo = response.ad_info
 
     print("The following headlines were suggested:")
+    headline: AdTextAsset
     for headline in ad_suggestions.headlines:
         print(f"\t{headline.text or '<None>'}")
 
     print("And the following descriptions were suggested:")
+    description: AdTextAsset
     for description in ad_suggestions.descriptions:
         print(f"\t{description.text or '<None>'}")
 
@@ -479,8 +620,8 @@ def get_ad_suggestions(client, customer_id, suggestion_info):
 
 # [START add_smart_campaign_2]
 def create_campaign_budget_operation(
-    client, customer_id, suggested_budget_amount
-):
+    client: GoogleAdsClient, customer_id: str, suggested_budget_amount: int
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new CampaignBudget.
 
     A temporary ID will be assigned to this campaign budget so that it can be
@@ -494,9 +635,11 @@ def create_campaign_budget_operation(
     Returns:
         a MutateOperation that creates a CampaignBudget.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    campaign_budget_operation = mutate_operation.campaign_budget_operation
-    campaign_budget = campaign_budget_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    campaign_budget_operation: CampaignBudgetOperation = (
+        mutate_operation.campaign_budget_operation
+    )
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Smart campaign budget #{uuid4()}"
     # A budget used for Smart campaigns must have the type SMART_CAMPAIGN.
     # Note that the field name "type_" is an implementation detail in Python,
@@ -517,7 +660,9 @@ def create_campaign_budget_operation(
 
 
 # [START add_smart_campaign_3]
-def create_smart_campaign_operation(client, customer_id):
+def create_smart_campaign_operation(
+    client: GoogleAdsClient, customer_id: str
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new Smart campaign.
 
     A temporary ID will be assigned to this campaign so that it can
@@ -530,8 +675,9 @@ def create_smart_campaign_operation(client, customer_id):
     Returns:
         a MutateOperation that creates a campaign.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    campaign = mutate_operation.campaign_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    campaign_operation: CampaignOperation = mutate_operation.campaign_operation
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Smart campaign #{uuid4()}"
     # Set the campaign status as PAUSED. The campaign is the only entity in
     # the mutate request that should have its' status set.
@@ -545,14 +691,13 @@ def create_smart_campaign_operation(client, customer_id):
         client.enums.AdvertisingChannelSubTypeEnum.SMART_CAMPAIGN
     )
     # Assign the resource name with a temporary ID.
-    campaign_service = client.get_service("CampaignService")
-    campaign.resource_name = campaign_service.campaign_path(
-        customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
-    )
+    campaign.resource_name = client.get_service(
+        "CampaignService"
+    ).campaign_path(customer_id, _SMART_CAMPAIGN_TEMPORARY_ID)
     # Set the budget using the given budget resource name.
-    campaign.campaign_budget = campaign_service.campaign_budget_path(
-        customer_id, _BUDGET_TEMPORARY_ID
-    )
+    campaign.campaign_budget = client.get_service(
+        "CampaignBudgetService"
+    ).campaign_budget_path(customer_id, _BUDGET_TEMPORARY_ID)
 
     return mutate_operation
     # [END add_smart_campaign_3]
@@ -560,8 +705,11 @@ def create_smart_campaign_operation(client, customer_id):
 
 # [START add_smart_campaign_4]
 def create_smart_campaign_setting_operation(
-    client, customer_id, business_profile_location, business_name
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    business_profile_location: Optional[str],
+    business_name: Optional[str],
+) -> MutateOperation:
     """Creates a MutateOperation to create a new SmartCampaignSetting.
 
     SmartCampaignSettings are unique in that they only support UPDATE
@@ -579,9 +727,12 @@ def create_smart_campaign_setting_operation(
     Returns:
         a MutateOperation that creates a SmartCampaignSetting.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    smart_campaign_setting = (
-        mutate_operation.smart_campaign_setting_operation.update
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    smart_campaign_setting_operation: SmartCampaignSettingOperation = (
+        mutate_operation.smart_campaign_setting_operation
+    )
+    smart_campaign_setting: SmartCampaignSetting = (
+        smart_campaign_setting_operation.update
     )
     # Set a temporary ID in the campaign setting's resource name to associate it
     # with the campaign created in the previous step.
@@ -610,7 +761,7 @@ def create_smart_campaign_setting_operation(
     # mask will be a list of all the fields that were set on the
     # SmartCampaignSetting.
     client.copy_from(
-        mutate_operation.smart_campaign_setting_operation.update_mask,
+        smart_campaign_setting_operation.update_mask,
         protobuf_helpers.field_mask(None, smart_campaign_setting._pb),
     )
 
@@ -620,8 +771,11 @@ def create_smart_campaign_setting_operation(
 
 # [START add_smart_campaign_8]
 def create_campaign_criterion_operations(
-    client, customer_id, keyword_theme_infos, suggestion_info
-):
+    client: GoogleAdsClient,
+    customer_id: str,
+    keyword_theme_infos: List[KeywordThemeInfo],
+    suggestion_info: SmartCampaignSuggestionInfo,
+) -> List[MutateOperation]:
     """Creates a list of MutateOperations that create new campaign criteria.
 
     Args:
@@ -633,36 +787,46 @@ def create_campaign_criterion_operations(
     Returns:
         a list of MutateOperations that create new campaign criteria.
     """
-    campaign_service = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
-    operations = []
+    operations: List[MutateOperation] = []
+    info: KeywordThemeInfo
     for info in keyword_theme_infos:
-        mutate_operation = client.get_type("MutateOperation")
-        campaign_criterion = (
-            mutate_operation.campaign_criterion_operation.create
+        mutate_operation: MutateOperation = client.get_type("MutateOperation")
+        campaign_criterion_operation: CampaignCriterionOperation = (
+            mutate_operation.campaign_criterion_operation
+        )
+        campaign_criterion: CampaignCriterion = (
+            campaign_criterion_operation.create
         )
         # Set the campaign ID to a temporary ID.
         campaign_criterion.campaign = campaign_service.campaign_path(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
         # Set the keyword theme to the given KeywordThemeInfo.
-        campaign_criterion.keyword_theme = info
+        campaign_criterion.keyword_theme.CopyFrom(info)
         # Add the mutate operation to the list of other operations.
         operations.append(mutate_operation)
 
     # Create a location criterion for each location in the suggestion info
     # object to add corresponding location targeting to the Smart campaign
+    location_info: LocationInfo
     for location_info in suggestion_info.location_list.locations:
-        mutate_operation = client.get_type("MutateOperation")
-        campaign_criterion = (
-            mutate_operation.campaign_criterion_operation.create
+        mutate_operation: MutateOperation = client.get_type("MutateOperation")
+        campaign_criterion_operation: CampaignCriterionOperation = (
+            mutate_operation.campaign_criterion_operation
+        )
+        campaign_criterion: CampaignCriterion = (
+            campaign_criterion_operation.create
         )
         # Set the campaign ID to a temporary ID.
         campaign_criterion.campaign = campaign_service.campaign_path(
             customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
         )
         # Set the location to the given location.
-        campaign_criterion.location = location_info
+        campaign_criterion.location.CopyFrom(location_info)
         # Add the mutate operation to the list of other operations.
         operations.append(mutate_operation)
 
@@ -671,7 +835,9 @@ def create_campaign_criterion_operations(
 
 
 # [START add_smart_campaign_5]
-def create_ad_group_operation(client, customer_id):
+def create_ad_group_operation(
+    client: GoogleAdsClient, customer_id: str
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new ad group.
 
     A temporary ID will be used in the campaign resource name for this
@@ -688,8 +854,9 @@ def create_ad_group_operation(client, customer_id):
     Returns:
         a MutateOperation that creates a new ad group.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    ad_group = mutate_operation.ad_group_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    ad_group_operation: AdGroupOperation = mutate_operation.ad_group_operation
+    ad_group: AdGroup = ad_group_operation.create
     # Set the ad group ID to a temporary ID.
     ad_group.resource_name = client.get_service("AdGroupService").ad_group_path(
         customer_id, _AD_GROUP_TEMPORARY_ID
@@ -697,7 +864,7 @@ def create_ad_group_operation(client, customer_id):
     ad_group.name = f"Smart campaign ad group #{uuid4()}"
     # Set the campaign ID to a temporary ID.
     ad_group.campaign = client.get_service("CampaignService").campaign_path(
-        customer_id, _SMART_CAMPAIGN_TEMPORARY_ID
+        customer_id, _BUDGET_TEMPORARY_ID
     )
     # The ad group type must be set to SMART_CAMPAIGN_ADS.
     ad_group.type_ = client.enums.AdGroupTypeEnum.SMART_CAMPAIGN_ADS
@@ -707,7 +874,11 @@ def create_ad_group_operation(client, customer_id):
 
 
 # [START add_smart_campaign_6]
-def create_ad_group_ad_operation(client, customer_id, ad_suggestions):
+def create_ad_group_ad_operation(
+    client: GoogleAdsClient,
+    customer_id: str,
+    ad_suggestions: SmartCampaignAdInfo,
+) -> MutateOperation:
     """Creates a MutateOperation that creates a new ad group ad.
 
     A temporary ID will be used in the ad group resource name for this
@@ -722,15 +893,18 @@ def create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     Returns:
         a MutateOperation that creates a new ad group ad.
     """
-    mutate_operation = client.get_type("MutateOperation")
-    ad_group_ad = mutate_operation.ad_group_ad_operation.create
+    mutate_operation: MutateOperation = client.get_type("MutateOperation")
+    ad_group_ad_operation: AdGroupAdOperation = (
+        mutate_operation.ad_group_ad_operation
+    )
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     # Set the ad group ID to a temporary ID.
     ad_group_ad.ad_group = client.get_service("AdGroupService").ad_group_path(
         customer_id, _AD_GROUP_TEMPORARY_ID
     )
     # Set the type to SMART_CAMPAIGN_AD.
     ad_group_ad.ad.type_ = client.enums.AdTypeEnum.SMART_CAMPAIGN_AD
-    ad = ad_group_ad.ad.smart_campaign_ad
+    ad: SmartCampaignAdInfo = ad_group_ad.ad.smart_campaign_ad
 
     # The SmartCampaignAdInfo object includes headlines and descriptions
     # retrieved from the SmartCampaignSuggestService.SuggestSmartCampaignAd
@@ -742,25 +916,29 @@ def create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     # assets. If no headlines or descriptions were suggested, then we manually
     # add some, otherwise this operation will generate an INVALID_ARGUMENT
     # error. Individual workflows will likely vary here.
-    ad.headlines = [asset for asset in ad_suggestions.headlines if asset.text]
-    num_missing_headlines = _REQUIRED_NUM_HEADLINES - len(ad.headlines)
+    ad.headlines.extend(
+        [asset for asset in ad_suggestions.headlines if asset.text]
+    )
+    num_missing_headlines: int = _REQUIRED_NUM_HEADLINES - len(ad.headlines)
 
     # If there are fewer headlines than are required, we manually add additional
     # headlines to make up for the difference.
     for i in range(num_missing_headlines):
-        headline = client.get_type("AdTextAsset")
+        headline: AdTextAsset = client.get_type("AdTextAsset")
         headline.text = f"placeholder headline {i}"
         ad.headlines.append(headline)
 
-    ad.descriptions = [
+    ad.descriptions.extend(
         asset for asset in ad_suggestions.descriptions if asset.text
-    ]
-    num_missing_descriptions = _REQUIRED_NUM_DESCRIPTIONS - len(ad.descriptions)
+    )
+    num_missing_descriptions: int = _REQUIRED_NUM_DESCRIPTIONS - len(
+        ad.descriptions
+    )
 
     # If there are fewer descriptions than are required, we manually add
     # additional descriptions to make up for the difference.
     for i in range(num_missing_descriptions):
-        description = client.get_type("AdTextAsset")
+        description: AdTextAsset = client.get_type("AdTextAsset")
         description.text = f"placeholder description {i}"
         ad.descriptions.append(description)
 
@@ -768,7 +946,7 @@ def create_ad_group_ad_operation(client, customer_id, ad_suggestions):
     # [END add_smart_campaign_6]
 
 
-def print_response_details(response):
+def print_response_details(response: MutateGoogleAdsResponse) -> None:
     """Prints the details of a MutateGoogleAdsResponse.
 
     Parses the "response" oneof field name and uses it to extract the new
@@ -779,9 +957,10 @@ def print_response_details(response):
     """
     # Parse the Mutate response to print details about the entities that
     # were created by the request.
+    result: MutateOperationResponse
     for result in response.mutate_operation_responses:
-        resource_type = "unrecognized"
-        resource_name = "not found"
+        resource_type: str = "unrecognized"
+        resource_name: str = "not found"
 
         if result._pb.HasField("campaign_budget_result"):
             resource_type = "CampaignBudget"
@@ -809,7 +988,9 @@ def print_response_details(response):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=("Creates a Smart campaign."))
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
+        description=("Creates a Smart campaign.")
+    )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
         "-c",
@@ -845,7 +1026,9 @@ if __name__ == "__main__":
             "very specific term needs to be targeted."
         ),
     )
-    group = parser.add_mutually_exclusive_group(required=True)
+    group: argparse._MutuallyExclusiveGroup = (
+        parser.add_mutually_exclusive_group(required=True)
+    )
     group.add_argument(
         "-b",
         "--business_profile_location",
@@ -868,7 +1051,7 @@ if __name__ == "__main__":
         ),
     )
 
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.

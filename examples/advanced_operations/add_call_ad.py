@@ -23,10 +23,22 @@ To get ad group IDs, run basic_operations/get_ad_groups.py.
 
 import argparse
 import sys
-from typing import Any, Optional
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.resources.types.ad import Ad
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v21.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
 
 # Country code is a two-letter ISO-3166 code, for a list of all codes see:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-17
@@ -51,14 +63,16 @@ def main(
         phone_country: a two-letter ISO-3166 code.
         conversion_action_id: an ID for a conversion action.
     """
-    googleads_service: Any = client.get_service("GoogleAdsService")
-    operation: Any = client.get_type("AdGroupAdOperation")
-    ad_group_ad: Any = operation.create
+    googleads_service: GoogleAdsServiceClient = client.get_service(
+        "GoogleAdsService"
+    )
+    operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
+    ad_group_ad: AdGroupAd = operation.create
     ad_group_ad.ad_group = googleads_service.ad_group_path(
         customer_id, ad_group_id
     )
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
-    ad: Any = ad_group_ad.ad
+    ad: Ad = ad_group_ad.ad
     # The URL of the webpage to refer to.
     ad.final_urls.append("https://www.example.com")
     # Sets basic information.
@@ -91,9 +105,13 @@ def main(
         )
 
     # Issues a mutate request to add the ad group ad.
-    ad_group_ad_service: Any = client.get_service("AdGroupAdService")
-    response: Any = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id=customer_id, operations=[operation]
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
+    response: MutateAdGroupAdsResponse = (
+        ad_group_ad_service.mutate_ad_group_ads(
+            customer_id=customer_id, operations=[operation]
+        )
     )
     resource_name: str = response.results[0].resource_name
     print(f"Created ad group ad with resource name: '{resource_name}'")

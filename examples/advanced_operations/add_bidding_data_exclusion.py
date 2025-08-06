@@ -24,11 +24,20 @@ https://developers.google.com/google-ads/api/docs/campaigns/bidding/data-exclusi
 
 import argparse
 import sys
-from typing import Any
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.resources.types.bidding_data_exclusion import (
+    BiddingDataExclusion,
+)
+from google.ads.googleads.v21.services.services.bidding_data_exclusion_service import (
+    BiddingDataExclusionServiceClient,
+)
+from google.ads.googleads.v21.services.types.bidding_data_exclusion_service import (
+    BiddingDataExclusionOperation,
+    MutateBiddingDataExclusionsResponse,
+)
 
 
 def main(
@@ -46,11 +55,13 @@ def main(
         end_date_time: a str of the end date for the exclusion period.
     """
     # [START add_bidding_data_exclusion]
-    bidding_data_exclusion_service: Any = client.get_service(
-        "BiddingDataExclusionService"
+    bidding_data_exclusion_service: BiddingDataExclusionServiceClient = (
+        client.get_service("BiddingDataExclusionService")
     )
-    operation: Any = client.get_type("BiddingDataExclusionOperation")
-    bidding_data_exclusion: Any = operation.create
+    operation: BiddingDataExclusionOperation = client.get_type(
+        "BiddingDataExclusionOperation"
+    )
+    bidding_data_exclusion: BiddingDataExclusion = operation.create
     # A unique name is required for every data exclusion
     bidding_data_exclusion.name = f"Data exclusion #{uuid4()}"
     # The CHANNEL scope applies the data exclusion to all campaigns of specific
@@ -73,7 +84,7 @@ def main(
     bidding_data_exclusion.start_date_time = start_date_time
     bidding_data_exclusion.end_date_time = end_date_time
 
-    response: Any = (
+    response: MutateBiddingDataExclusionsResponse = (
         bidding_data_exclusion_service.mutate_bidding_data_exclusions(
             customer_id=customer_id, operations=[operation]
         )

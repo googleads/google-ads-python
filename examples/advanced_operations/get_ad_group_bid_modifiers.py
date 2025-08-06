@@ -17,14 +17,29 @@
 
 import argparse
 import sys
+from typing import Optional
+
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.resources.types.ad_group_bid_modifier import (
+    AdGroupBidModifier,
+)
+from google.ads.googleads.v21.services.services.google_ads_service import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v21.services.types.google_ads_service import (
+    GoogleAdsRow,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
+)
 
 
-def main(client, customer_id, ad_group_id=None):
-    ga_service = client.get_service("GoogleAdsService")
+def main(
+    client: GoogleAdsClient, customer_id: str, ad_group_id: Optional[str] = None
+) -> None:
+    ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    query = """
+    query: str = """
         SELECT
           campaign.id,
           ad_group.id,
@@ -47,14 +62,17 @@ def main(client, customer_id, ad_group_id=None):
     # Limit results to 10,000 rows as the number of bid modifiers can be large.
     query += " LIMIT 10000"
 
-    search_request = client.get_type("SearchGoogleAdsRequest")
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
+    )
     search_request.customer_id = customer_id
     search_request.query = query
 
-    results = ga_service.search(request=search_request)
+    results: SearchGoogleAdsResponse = ga_service.search(request=search_request)
 
+    row: GoogleAdsRow
     for row in results:
-        modifier = row.ad_group_bid_modifier
+        modifier: AdGroupBidModifier = row.ad_group_bid_modifier
         print(
             "Ad group bid modifier with criterion ID "
             f"'{modifier.criterion_id}', bid modifier value "
@@ -63,8 +81,10 @@ def main(client, customer_id, ad_group_id=None):
             f"'{row.ad_group.id}' of campaign with ID '{row.campaign.id}'."
         )
 
-        criterion_field = type(modifier).pb(modifier).WhichOneof("criterion")
-        criterion_details = f"  - Criterion type: {criterion_field}, "
+        criterion_field: str = (
+            type(modifier).pb(modifier).WhichOneof("criterion")
+        )
+        criterion_details: str = f"  - Criterion type: {criterion_field}, "
 
         if criterion_field == "device":
             criterion_details += f"Type: {modifier.device.type_}"
@@ -91,7 +111,7 @@ def main(client, customer_id, ad_group_id=None):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="List ad group bid modifiers for specified customer."
     )
     # The following argument(s) should be provided to run the example.
@@ -112,7 +132,7 @@ if __name__ == "__main__":
             "bid modifiers solely for this ad group ID."
         ),
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.

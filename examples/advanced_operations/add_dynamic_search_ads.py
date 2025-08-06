@@ -25,27 +25,72 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v21.common.types.criteria import WebpageConditionInfo
+from google.ads.googleads.v21.resources.types.ad_group import AdGroup
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.ad_group_criterion import (
+    AdGroupCriterion,
+)
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign_budget import (
+    CampaignBudget,
+)
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
+    AdGroupAdServiceClient,
+)
+from google.ads.googleads.v21.services.services.ad_group_criterion_service import (
+    AdGroupCriterionServiceClient,
+)
+from google.ads.googleads.v21.services.services.ad_group_service import (
+    AdGroupServiceClient,
+)
+from google.ads.googleads.v21.services.services.campaign_budget_service import (
+    CampaignBudgetServiceClient,
+)
+from google.ads.googleads.v21.services.services.campaign_service import (
+    CampaignServiceClient,
+)
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
+from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
+    AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
+)
+from google.ads.googleads.v21.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+    MutateCampaignBudgetsResponse,
+)
+from google.ads.googleads.v21.services.types.campaign_service import (
+    CampaignOperation,
+    MutateCampaignsResponse,
+)
 
 
-def main(client, customer_id):
+def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID str.
     """
-    budget_resource_name = create_budget(client, customer_id)
-    campaign_resource_name = create_campaign(
+    budget_resource_name: str = create_budget(client, customer_id)
+    campaign_resource_name: str = create_campaign(
         client, customer_id, budget_resource_name
     )
-    ad_group_resource_name = create_ad_group(
+    ad_group_resource_name: str = create_ad_group(
         client, customer_id, campaign_resource_name
     )
     create_expanded_dsa(client, customer_id, ad_group_resource_name)
     add_webpage_criterion(client, customer_id, ad_group_resource_name)
 
 
-def create_budget(client, customer_id):
+def create_budget(client: GoogleAdsClient, customer_id: str) -> str:
     """Creates a budget under the given customer ID.
 
     Args:
@@ -56,11 +101,15 @@ def create_budget(client, customer_id):
         A resource_name str for the newly created Budget.
     """
     # Retrieve the campaign budget service.
-    campaign_budget_service = client.get_service("CampaignBudgetService")
+    campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
+        "CampaignBudgetService"
+    )
     # Creates a campaign budget operation.
-    campaign_budget_operation = client.get_type("CampaignBudgetOperation")
+    campaign_budget_operation: CampaignBudgetOperation = client.get_type(
+        "CampaignBudgetOperation"
+    )
     # Issues a mutate request to add campaign budgets.
-    campaign_budget = campaign_budget_operation.create
+    campaign_budget: CampaignBudget = campaign_budget_operation.create
     campaign_budget.name = f"Interplanetary Cruise #{uuid4()}"
     campaign_budget.amount_micros = 50000000
     campaign_budget.delivery_method = (
@@ -68,10 +117,12 @@ def create_budget(client, customer_id):
     )
 
     # Submit the campaign budget operation to add the campaign budget.
-    response = campaign_budget_service.mutate_campaign_budgets(
-        customer_id=customer_id, operations=[campaign_budget_operation]
+    response: MutateCampaignBudgetsResponse = (
+        campaign_budget_service.mutate_campaign_budgets(
+            customer_id=customer_id, operations=[campaign_budget_operation]
+        )
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f'Created campaign budget with resource_name: "{resource_name}"')
 
@@ -79,7 +130,9 @@ def create_budget(client, customer_id):
 
 
 # [START add_dynamic_search_ads]
-def create_campaign(client, customer_id, budget_resource_name):
+def create_campaign(
+    client: GoogleAdsClient, customer_id: str, budget_resource_name: str
+) -> str:
     """Creates a Dynamic Search Ad Campaign under the given customer ID.
 
     Args:
@@ -91,8 +144,8 @@ def create_campaign(client, customer_id, budget_resource_name):
         A resource_name str for the newly created Campaign.
     """
     # Retrieve a new campaign operation object.
-    campaign_operation = client.get_type("CampaignOperation")
-    campaign = campaign_operation.create
+    campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
+    campaign: Campaign = campaign_operation.create
     campaign.name = f"Interplanetary Cruise #{uuid4()}"
     campaign.advertising_channel_type = (
         client.enums.AdvertisingChannelTypeEnum.SEARCH
@@ -124,13 +177,15 @@ def create_campaign(client, customer_id, budget_resource_name):
     campaign.end_date = (datetime.now() + timedelta(days=30)).strftime("%Y%m%d")
 
     # Retrieve the campaign service.
-    campaign_service = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # Issues a mutate request to add campaign.
-    response = campaign_service.mutate_campaigns(
+    response: MutateCampaignsResponse = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f'Created campaign with resource_name: "{resource_name}"')
     # [END add_dynamic_search_ads]
@@ -139,7 +194,9 @@ def create_campaign(client, customer_id, budget_resource_name):
 
 
 # [START add_dynamic_search_ads_1]
-def create_ad_group(client, customer_id, campaign_resource_name):
+def create_ad_group(
+    client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
+) -> str:
     """Creates a Dynamic Search Ad Group under the given Campaign.
 
     Args:
@@ -151,9 +208,9 @@ def create_ad_group(client, customer_id, campaign_resource_name):
         A resource_name str for the newly created Ad Group.
     """
     # Retrieve a new ad group operation object.
-    ad_group_operation = client.get_type("AdGroupOperation")
+    ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
     # Create an ad group.
-    ad_group = ad_group_operation.create
+    ad_group: AdGroup = ad_group_operation.create
     # Required: set the ad group's type to Dynamic Search Ads.
     ad_group.type_ = client.enums.AdGroupTypeEnum.SEARCH_DYNAMIC_ADS
     ad_group.name = f"Earth to Mars Cruises {uuid4()}"
@@ -168,13 +225,15 @@ def create_ad_group(client, customer_id, campaign_resource_name):
     ad_group.cpc_bid_micros = 10000000
 
     # Retrieve the ad group service.
-    ad_group_service = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
 
     # Issues a mutate request to add the ad group.
-    response = ad_group_service.mutate_ad_groups(
+    response: MutateAdGroupsResponse = ad_group_service.mutate_ad_groups(
         customer_id=customer_id, operations=[ad_group_operation]
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f'Created Ad Group with resource_name: "{resource_name}"')
     # [END add_dynamic_search_ads_1]
@@ -183,7 +242,9 @@ def create_ad_group(client, customer_id, campaign_resource_name):
 
 
 # [START add_dynamic_search_ads_2]
-def create_expanded_dsa(client, customer_id, ad_group_resource_name):
+def create_expanded_dsa(
+    client: GoogleAdsClient, customer_id: str, ad_group_resource_name: str
+) -> None:
     """Creates a dynamic search ad under the given ad group.
 
     Args:
@@ -192,12 +253,14 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
         ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group ad operation object.
-    ad_group_ad_operation = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
     # Create and expanded dynamic search ad. This ad will have its headline,
     # display URL and final URL auto-generated at serving time according to
     # domain name specific information provided by DynamicSearchAdSetting at
     # the campaign level.
-    ad_group_ad = ad_group_ad_operation.create
+    ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     # Optional: set the ad status.
     ad_group_ad.status = client.enums.AdGroupAdStatusEnum.PAUSED
     # Set the ad description.
@@ -205,19 +268,25 @@ def create_expanded_dsa(client, customer_id, ad_group_resource_name):
     ad_group_ad.ad_group = ad_group_resource_name
 
     # Retrieve the ad group ad service.
-    ad_group_ad_service = client.get_service("AdGroupAdService")
+    ad_group_ad_service: AdGroupAdServiceClient = client.get_service(
+        "AdGroupAdService"
+    )
 
     # Submit the ad group ad operation to add the ad group ad.
-    response = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id=customer_id, operations=[ad_group_ad_operation]
+    response: MutateAdGroupAdsResponse = (
+        ad_group_ad_service.mutate_ad_group_ads(
+            customer_id=customer_id, operations=[ad_group_ad_operation]
+        )
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f'Created Ad Group Ad with resource_name: "{resource_name}"')
     # [END add_dynamic_search_ads_2]
 
 
-def add_webpage_criterion(client, customer_id, ad_group_resource_name):
+def add_webpage_criterion(
+    client: GoogleAdsClient, customer_id: str, ad_group_resource_name: str
+) -> None:
     """Creates a web page criterion to the given ad group.
 
     Args:
@@ -226,9 +295,11 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
         ad_group_resource_name: a resource_name str for an Ad Group.
     """
     # Retrieve a new ad group criterion operation.
-    ad_group_criterion_operation = client.get_type("AdGroupCriterionOperation")
+    ad_group_criterion_operation: AdGroupCriterionOperation = client.get_type(
+        "AdGroupCriterionOperation"
+    )
     # Create an ad group criterion for special offers for Mars Cruise.
-    criterion = ad_group_criterion_operation.create
+    criterion: AdGroupCriterion = ad_group_criterion_operation.create
     criterion.ad_group = ad_group_resource_name
     # Optional: set custom bid amount.
     criterion.cpc_bid_micros = 10000000
@@ -238,13 +309,17 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
     # Sets the criterion to match a specific page URL and title.
     criterion.webpage.criterion_name = "Special Offers"
     # First condition info - URL
-    webpage_condition_info_url = client.get_type("WebpageConditionInfo")
+    webpage_condition_info_url: WebpageConditionInfo = client.get_type(
+        "WebpageConditionInfo"
+    )
     webpage_condition_info_url.operand = (
         client.enums.WebpageConditionOperandEnum.URL
     )
     webpage_condition_info_url.argument = "/specialoffers"
     # Second condition info - Page title
-    webpage_condition_info_page_title = client.get_type("WebpageConditionInfo")
+    webpage_condition_info_page_title: WebpageConditionInfo = client.get_type(
+        "WebpageConditionInfo"
+    )
     webpage_condition_info_page_title.operand = (
         client.enums.WebpageConditionOperandEnum.PAGE_TITLE
     )
@@ -255,13 +330,17 @@ def add_webpage_criterion(client, customer_id, ad_group_resource_name):
     )
 
     # Retrieve the ad group criterion service.
-    ad_group_criterion_service = client.get_service("AdGroupCriterionService")
+    ad_group_criterion_service: AdGroupCriterionServiceClient = (
+        client.get_service("AdGroupCriterionService")
+    )
 
     # Issues a mutate request to add the ad group criterion.
-    response = ad_group_criterion_service.mutate_ad_group_criteria(
-        customer_id=customer_id, operations=[ad_group_criterion_operation]
+    response: MutateAdGroupCriteriaResponse = (
+        ad_group_criterion_service.mutate_ad_group_criteria(
+            customer_id=customer_id, operations=[ad_group_criterion_operation]
+        )
     )
-    resource_name = response.results[0].resource_name
+    resource_name: str = response.results[0].resource_name
 
     print(f'Created Ad Group Criterion with resource_name: "{resource_name}"')
 
@@ -280,11 +359,13 @@ if __name__ == "__main__":
         required=True,
         help="The Google Ads customer ID.",
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v21"
+    )
 
     try:
         main(googleads_client, args.customer_id)

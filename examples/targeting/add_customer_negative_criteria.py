@@ -23,16 +23,17 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.resources.types.customer_negative_criterion import (
+from google.ads.googleads.v21.resources.types.customer_negative_criterion import (
     CustomerNegativeCriterion,
 )
-from google.ads.googleads.v20.services.services.customer_negative_criterion_service import (
+from google.ads.googleads.v21.services.services.customer_negative_criterion_service import (
     CustomerNegativeCriterionServiceClient,
 )
-from google.ads.googleads.v20.services.types.customer_negative_criterion_service import (
+from google.ads.googleads.v21.services.types.customer_negative_criterion_service import (
     CustomerNegativeCriterionOperation,
-    MutateCustomerNegativeCriteriaResponse
+    MutateCustomerNegativeCriteriaResponse,
 )
+
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
     """The main method that creates all necessary entities for the example.
@@ -51,17 +52,19 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
         client.enums.ContentLabelTypeEnum.TRAGEDY
     )
 
-    placement_criterion_op: CustomerNegativeCriterionOperation = client.get_type(
-        "CustomerNegativeCriterionOperation"
+    placement_criterion_op: CustomerNegativeCriterionOperation = (
+        client.get_type("CustomerNegativeCriterionOperation")
     )
-    placement_criterion: CustomerNegativeCriterion = placement_criterion_op.create
+    placement_criterion: CustomerNegativeCriterion = (
+        placement_criterion_op.create
+    )
     # Creates a negative customer criterion excluding the placement with URL
     # 'http://www.example.com'.
     placement_criterion.placement.url = "http://www.example.com"
 
-    customer_negative_criterion_service: CustomerNegativeCriterionServiceClient = client.get_service(
-        "CustomerNegativeCriterionService"
-    )
+    customer_negative_criterion_service: (
+        CustomerNegativeCriterionServiceClient
+    ) = client.get_service("CustomerNegativeCriterionService")
 
     # Issues a mutate request to add the negative customer criteria.
     response: MutateCustomerNegativeCriteriaResponse = (
@@ -97,7 +100,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

@@ -14,12 +14,13 @@
 import unittest
 from unittest import mock
 import csv
-import io # Use io.StringIO for mocking file operations in memory
-import os # Added import os
+import io  # Use io.StringIO for mocking file operations in memory
+import os  # Added import os
 
 # Assuming the script to be tested is in the parent directory.
-import argparse # Ensure argparse is imported
-import argparse # Ensure argparse is imported
+import argparse  # Ensure argparse is imported
+import argparse  # Ensure argparse is imported
+
 # Adjust the import path as necessary.
 from examples.misc import campaign_report_to_csv
 from google.ads.googleads.errors import GoogleAdsException
@@ -31,13 +32,17 @@ class MockCSVCustomer:
     def __init__(self, descriptive_name="Test Customer Name"):
         self.descriptive_name = descriptive_name
 
+
 class MockCSVSegments:
     def __init__(self, date="2023-01-01"):
         self.date = date
 
+
 class MockCSVCampaign:
     def __init__(self, name="Test Campaign"):
         self.name = name
+
+
 # Removed campaign_id from MockCSVCampaign as it's not in the script's output for row.campaign.name
 # The script uses row.campaign.name, row.ad_group.name etc. The IDs are used for the CSV header but not directly from these nested objects in the row data part.
 # The _create_mock_row helper was for the raw GoogleAdsRow, which has .id attributes.
@@ -45,14 +50,30 @@ class MockCSVCampaign:
 # The script writes: row.customer.descriptive_name, row.segments.date, row.campaign.name
 # So the helper classes should reflect what's accessed on the GoogleAdsRow for CSV writing.
 
+
 class MockCSVMetrics:
     def __init__(self, impressions=0, clicks=0, cost_micros=0):
         self.impressions = impressions
         self.clicks = clicks
         self.cost_micros = cost_micros
 
-class MockCSVRow: # For the GoogleAdsRow structure as accessed by the script
-    def __init__(self, customer_name, segment_date, campaign_name, impressions, clicks, cost_micros):
+
+class MockEuPoliticalAdvertisingStatusEnum:
+    def __init__(self):
+        self.name = "DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING"
+        self.value = 3
+
+
+class MockCSVRow:  # For the GoogleAdsRow structure as accessed by the script
+    def __init__(
+        self,
+        customer_name,
+        segment_date,
+        campaign_name,
+        impressions,
+        clicks,
+        cost_micros,
+    ):
         self.customer = MockCSVCustomer(descriptive_name=customer_name)
         self.segments = MockCSVSegments(date=segment_date)
         self.campaign = MockCSVCampaign(name=campaign_name)
@@ -66,12 +87,17 @@ class MockCSVRow: # For the GoogleAdsRow structure as accessed by the script
         # or adapt MockCSVRow to be more like GoogleAdsRow.
         # The prompt asks for new classes, so let's use them but make them compatible.
         # For simplicity, the new helper classes will directly provide the structure needed by the script's iteration.
-        self.metrics = MockCSVMetrics(impressions=impressions, clicks=clicks, cost_micros=cost_micros)
+        self.metrics = MockCSVMetrics(
+            impressions=impressions, clicks=clicks, cost_micros=cost_micros
+        )
         # Add id fields directly if they are accessed as row.campaign.id
-        self.campaign.id = "mock_campaign_id_from_MockCSVRow" # Example
-        self.ad_group = mock.Mock() # Create a mock for ad_group
-        self.ad_group.id = "mock_ad_group_id_from_MockCSVRow" # Example
-        self.ad_group.name = "mock_ad_group_name_from_MockCSVRow" # Example
+        self.campaign.id = "mock_campaign_id_from_MockCSVRow"  # Example
+        self.campaign.contains_eu_political_advertising = (
+            MockEuPoliticalAdvertisingStatusEnum()
+        )
+        self.ad_group = mock.Mock()  # Create a mock for ad_group
+        self.ad_group.id = "mock_ad_group_id_from_MockCSVRow"  # Example
+        self.ad_group.name = "mock_ad_group_name_from_MockCSVRow"  # Example
 
 
 class MockCSVBatch:
@@ -85,28 +111,41 @@ class TestCampaignReportToCsv(unittest.TestCase):
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
     def setUp(self, mock_google_ads_client_class):
         """Set up mock objects for testing."""
-        self.mock_client = mock_google_ads_client_class.load_from_storage.return_value
-        self.mock_google_ads_service = self.mock_client.get_service("GoogleAdsService")
+        self.mock_client = (
+            mock_google_ads_client_class.load_from_storage.return_value
+        )
+        self.mock_google_ads_service = self.mock_client.get_service(
+            "GoogleAdsService"
+        )
 
-        self.mock_search_stream_request_obj = mock.Mock(name="SearchGoogleAdsStreamRequestInstance")
+        self.mock_search_stream_request_obj = mock.Mock(
+            name="SearchGoogleAdsStreamRequestInstance"
+        )
 
         self._original_get_type = self.mock_client.get_type
+
         def mock_get_type_side_effect(type_name):
             if type_name == "SearchGoogleAdsStreamRequest":
-                return self.mock_search_stream_request_obj # This is an instance mock
+                return (
+                    self.mock_search_stream_request_obj
+                )  # This is an instance mock
             # Fallback for create_mock_google_ads_exception which needs get_type to return types
             if type_name in ("GoogleAdsFailure", "ErrorInfo"):
-                 # Return a mock that when called returns another mock (simulating Type then Instance)
+                # Return a mock that when called returns another mock (simulating Type then Instance)
                 type_mock = mock.Mock(name=f"{type_name}_Type")
                 instance_mock = mock.Mock(name=f"{type_name}_Instance")
                 if type_name == "GoogleAdsFailure":
                     instance_mock.errors = []
                 type_mock.return_value = instance_mock
                 return type_mock
-            if self._original_get_type is not mock_get_type_side_effect: # Avoid recursion if it's already this side_effect
-                 if isinstance(self._original_get_type, mock.Mock):
-                    return self._original_get_type(type_name) # Call original mock's behavior
-            return mock.DEFAULT # For any other types
+            if (
+                self._original_get_type is not mock_get_type_side_effect
+            ):  # Avoid recursion if it's already this side_effect
+                if isinstance(self._original_get_type, mock.Mock):
+                    return self._original_get_type(
+                        type_name
+                    )  # Call original mock's behavior
+            return mock.DEFAULT  # For any other types
 
         self.mock_client.get_type.side_effect = mock_get_type_side_effect
 
@@ -115,11 +154,15 @@ class TestCampaignReportToCsv(unittest.TestCase):
     # For now, removing it to avoid confusion with the new MockCSVRow.
     # def _create_mock_row(...):
 
-    @mock.patch("os.path.abspath") # Added
+    @mock.patch("os.path.abspath")  # Added
     @mock.patch("builtins.open", new_callable=mock.mock_open)
-    def test_main_success_with_headers(self, mock_open_file, mock_abspath): # Added mock_abspath
+    def test_main_success_with_headers(
+        self, mock_open_file, mock_abspath
+    ):  # Added mock_abspath
         """Test a successful run of main with header writing."""
-        mock_abspath.return_value = "/fake/examples/misc/campaign_report_to_csv.py" # Configure mock
+        mock_abspath.return_value = (
+            "/fake/examples/misc/campaign_report_to_csv.py"  # Configure mock
+        )
         customer_id = "1234567890"
         output_filepath = "test_report.csv"
         write_headers = True
@@ -154,37 +197,68 @@ class TestCampaignReportToCsv(unittest.TestCase):
 
         # Using the defined MockCSVRow and providing all necessary fields for CSV output:
         # The script also uses row.customer.descriptive_name, row.segments.date
-        mock_csv_row1 = MockCSVRow(customer_name="CustName1", segment_date="2023-01-01", campaign_name="Camp1 Name", impressions=100, clicks=10, cost_micros=10000)
+        mock_csv_row1 = MockCSVRow(
+            customer_name="CustName1",
+            segment_date="2023-01-01",
+            campaign_name="Camp1 Name",
+            impressions=100,
+            clicks=10,
+            cost_micros=10000,
+        )
         # Manually set IDs as they are not in MockCSVRow constructor yet based on initial prompt:
         mock_csv_row1.campaign.id = "camp_id_1"
         mock_csv_row1.ad_group.id = "ag_id_1"
         mock_csv_row1.ad_group.name = "Ag1 Name"
 
-
-        mock_csv_row2 = MockCSVRow(customer_name="CustName1", segment_date="2023-01-02", campaign_name="Camp2 Name", impressions=200, clicks=20, cost_micros=20000)
+        mock_csv_row2 = MockCSVRow(
+            customer_name="CustName1",
+            segment_date="2023-01-02",
+            campaign_name="Camp2 Name",
+            impressions=200,
+            clicks=20,
+            cost_micros=20000,
+        )
         mock_csv_row2.campaign.id = "camp_id_2"
         mock_csv_row2.ad_group.id = "ag_id_2"
         mock_csv_row2.ad_group.name = "Ag2 Name"
 
         mock_batch1 = MockCSVBatch(rows=[mock_csv_row1])
-        mock_batch2 = MockCSVBatch(rows=[mock_csv_row2]) # If script handles multiple batches
+        mock_batch2 = MockCSVBatch(
+            rows=[mock_csv_row2]
+        )  # If script handles multiple batches
 
-        self.mock_google_ads_service.search_stream.return_value = [mock_batch1, mock_batch2]
+        self.mock_google_ads_service.search_stream.return_value = [
+            mock_batch1,
+            mock_batch2,
+        ]
         self.mock_google_ads_service.search_stream.side_effect = None
 
         campaign_report_to_csv.main(
             self.mock_client, customer_id, output_filepath, write_headers
         )
 
-        self.assertEqual(self.mock_search_stream_request_obj.customer_id, customer_id)
-        self.assertEqual(self.mock_search_stream_request_obj.query, campaign_report_to_csv._QUERY)
-        self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_stream_request_obj)
+        self.assertEqual(
+            self.mock_search_stream_request_obj.customer_id, customer_id
+        )
+        self.assertEqual(
+            self.mock_search_stream_request_obj.query,
+            campaign_report_to_csv._QUERY,
+        )
+        self.mock_google_ads_service.search_stream.assert_called_once_with(
+            self.mock_search_stream_request_obj
+        )
 
         # Check what was written to the file
-        expected_full_path = os.path.join("/fake/examples/misc", output_filepath)
-        mock_open_file.assert_called_once_with(expected_full_path, "w", newline="")
+        expected_full_path = os.path.join(
+            "/fake/examples/misc", output_filepath
+        )
+        mock_open_file.assert_called_once_with(
+            expected_full_path, "w", newline=""
+        )
         # Get all write calls made to the mock file handle
-        written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
+        written_content = "".join(
+            call.args[0] for call in mock_open_file().write.call_args_list
+        )
 
         # Verify CSV content
         # CSV headers are: "Account", "Date", "Campaign", "Impressions", "Clicks", "Cost" (from script)
@@ -195,25 +269,35 @@ class TestCampaignReportToCsv(unittest.TestCase):
         # The test's expected_header was: "campaign_id", "campaign_name", "ad_group_id", "ad_group_name", "impressions", "clicks", "cost_micros"
         # This needs to align with the script's actual output columns.
 
-        expected_header = [ # Script's actual headers if write_headers=True
-            "Account", "Date", "Campaign", "Impressions", "Clicks", "Cost"
+        expected_header = [  # Script's actual headers if write_headers=True
+            "Account",
+            "Date",
+            "Campaign",
+            "Contains EU Political Advertising",
+            "Impressions",
+            "Clicks",
+            "Cost",
         ]
         # Data should match mock_csv_row1 and mock_csv_row2 based on what the script writes
         expected_row_1_data = [
             mock_csv_row1.customer.descriptive_name,
             mock_csv_row1.segments.date,
             mock_csv_row1.campaign.name,
-            str(mock_csv_row1.metrics.impressions), # metrics are converted to str by csv.writer implicitly
+            mock_csv_row1.campaign.contains_eu_political_advertising.name,
+            str(
+                mock_csv_row1.metrics.impressions
+            ),  # metrics are converted to str by csv.writer implicitly
             str(mock_csv_row1.metrics.clicks),
-            str(mock_csv_row1.metrics.cost_micros)
+            str(mock_csv_row1.metrics.cost_micros),
         ]
         expected_row_2_data = [
             mock_csv_row2.customer.descriptive_name,
             mock_csv_row2.segments.date,
             mock_csv_row2.campaign.name,
+            mock_csv_row1.campaign.contains_eu_political_advertising.name,
             str(mock_csv_row2.metrics.impressions),
             str(mock_csv_row2.metrics.clicks),
-            str(mock_csv_row2.metrics.cost_micros)
+            str(mock_csv_row2.metrics.cost_micros),
         ]
 
         # Use io.StringIO to read the written content as a CSV
@@ -225,45 +309,70 @@ class TestCampaignReportToCsv(unittest.TestCase):
         row2 = next(csv_reader)
         self.assertEqual(row2, expected_row_2_data)
 
-
-    @mock.patch("os.path.abspath") # Added
+    @mock.patch("os.path.abspath")  # Added
     @mock.patch("builtins.open", new_callable=mock.mock_open)
-    def test_main_success_without_headers(self, mock_open_file, mock_abspath): # Added mock_abspath
+    def test_main_success_without_headers(
+        self, mock_open_file, mock_abspath
+    ):  # Added mock_abspath
         """Test a successful run of main without header writing."""
-        mock_abspath.return_value = "/fake/examples/misc/campaign_report_to_csv.py" # Configure mock
+        mock_abspath.return_value = (
+            "/fake/examples/misc/campaign_report_to_csv.py"  # Configure mock
+        )
         customer_id = "1234567890"
         output_filepath = "test_report_no_headers.csv"
         write_headers = False
 
-        mock_csv_row_no_header = MockCSVRow(customer_name="CustNoHeader", segment_date="2023-01-03", campaign_name="CampNoHeader", impressions=50, clicks=5, cost_micros=5000)
+        mock_csv_row_no_header = MockCSVRow(
+            customer_name="CustNoHeader",
+            segment_date="2023-01-03",
+            campaign_name="CampNoHeader",
+            impressions=50,
+            clicks=5,
+            cost_micros=5000,
+        )
         mock_csv_row_no_header.campaign.id = "camp_id_3"
         mock_csv_row_no_header.ad_group.id = "ag_id_3"
         mock_csv_row_no_header.ad_group.name = "Ag NH Name"
 
-
         mock_batch_no_header = MockCSVBatch(rows=[mock_csv_row_no_header])
-        self.mock_google_ads_service.search_stream.return_value = [mock_batch_no_header]
+        self.mock_google_ads_service.search_stream.return_value = [
+            mock_batch_no_header
+        ]
         self.mock_google_ads_service.search_stream.side_effect = None
 
         campaign_report_to_csv.main(
             self.mock_client, customer_id, output_filepath, write_headers
         )
 
-        self.assertEqual(self.mock_search_stream_request_obj.customer_id, customer_id)
-        self.assertEqual(self.mock_search_stream_request_obj.query, campaign_report_to_csv._QUERY)
-        self.mock_google_ads_service.search_stream.assert_called_once_with(self.mock_search_stream_request_obj)
+        self.assertEqual(
+            self.mock_search_stream_request_obj.customer_id, customer_id
+        )
+        self.assertEqual(
+            self.mock_search_stream_request_obj.query,
+            campaign_report_to_csv._QUERY,
+        )
+        self.mock_google_ads_service.search_stream.assert_called_once_with(
+            self.mock_search_stream_request_obj
+        )
 
-        expected_full_path = os.path.join("/fake/examples/misc", output_filepath)
-        mock_open_file.assert_called_once_with(expected_full_path, "w", newline="")
-        written_content = "".join(call.args[0] for call in mock_open_file().write.call_args_list)
+        expected_full_path = os.path.join(
+            "/fake/examples/misc", output_filepath
+        )
+        mock_open_file.assert_called_once_with(
+            expected_full_path, "w", newline=""
+        )
+        written_content = "".join(
+            call.args[0] for call in mock_open_file().write.call_args_list
+        )
 
         expected_row_1_data = [
             mock_csv_row_no_header.customer.descriptive_name,
             mock_csv_row_no_header.segments.date,
             mock_csv_row_no_header.campaign.name,
+            mock_csv_row_no_header.campaign.contains_eu_political_advertising.name,
             str(mock_csv_row_no_header.metrics.impressions),
             str(mock_csv_row_no_header.metrics.clicks),
-            str(mock_csv_row_no_header.metrics.cost_micros)
+            str(mock_csv_row_no_header.metrics.cost_micros),
         ]
         csv_reader = csv.reader(io.StringIO(written_content))
         # No header expected, so the first row should be data
@@ -273,14 +382,17 @@ class TestCampaignReportToCsv(unittest.TestCase):
         with self.assertRaises(StopIteration):
             next(csv_reader)
 
-
     def test_main_google_ads_exception(self):
         """Test handling of GoogleAdsException during search_stream."""
         customer_id = "1234567890"
         output_filepath = "test_error.csv"
         write_headers = True
 
-        mock_ex = create_mock_google_ads_exception(self.mock_client, request_id="ga_ex_csv", message="Error generating CSV")
+        mock_ex = create_mock_google_ads_exception(
+            self.mock_client,
+            request_id="ga_ex_csv",
+            message="Error generating CSV",
+        )
         self.mock_google_ads_service.search_stream.side_effect = mock_ex
 
         with self.assertRaises(GoogleAdsException):
@@ -295,8 +407,8 @@ class TestCampaignReportToCsv(unittest.TestCase):
         mock_main_func_from_decorator,
         # Expected script arguments for this test run
         expected_customer_id,
-        expected_output_file_val, # Renamed to match script's args
-        expected_write_headers_val
+        expected_output_file_val,  # Renamed to match script's args
+        expected_write_headers_val,
     ):
         # This function simulates the script's if __name__ == "__main__": block logic.
 
@@ -306,55 +418,81 @@ class TestCampaignReportToCsv(unittest.TestCase):
 
         mock_parsed_args_obj = argparse.Namespace(
             customer_id=expected_customer_id,
-            output_file=expected_output_file_val, # Attribute is output_file
-            write_headers=expected_write_headers_val # Attribute is write_headers
+            output_file=expected_output_file_val,  # Attribute is output_file
+            write_headers=expected_write_headers_val,  # Attribute is write_headers
         )
         mock_parser_instance.parse_args.return_value = mock_parsed_args_obj
 
         # Script's ArgumentParser instantiation
-        script_description = "Retrieves a campaign stats and writes to CSV file."
-        parser = mock_argparse_class_from_decorator(description=script_description)
+        script_description = (
+            "Retrieves a campaign stats and writes to CSV file."
+        )
+        parser = mock_argparse_class_from_decorator(
+            description=script_description
+        )
 
         # Script's add_argument calls
         parser.add_argument(
-            "-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."
+            "-c",
+            "--customer_id",
+            type=str,
+            required=True,
+            help="The Google Ads customer ID.",
         )
         parser.add_argument(
-            "-o", "--output_file", type=str, required=False,
+            "-o",
+            "--output_file",
+            type=str,
+            required=False,
             default=campaign_report_to_csv._DEFAULT_FILE_NAME,
             help="Name of the local CSV file to save the report to. File will be "
-                 "saved in the same directory as the script." # Exact help string from script
+            "saved in the same directory as the script.",  # Exact help string from script
         )
         parser.add_argument(
-            "-w", "--write_headers", action="store_true",
+            "-w",
+            "--write_headers",
+            action="store_true",
             help="Writes headers to the CSV file if argument is supplied. Simply "
-                 "add -w if you want the headers defined in the script to be "
-                 "added as the first row in the CSV file." # Exact help string
+            "add -w if you want the headers defined in the script to be "
+            "added as the first row in the CSV file.",  # Exact help string
         )
 
         args = parser.parse_args()
 
         # Script's GoogleAdsClient.load_from_storage call
         mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
-        mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
-        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v20")
+        mock_gads_client_class_from_decorator.load_from_storage.return_value = (
+            mock_client_instance
+        )
+        googleads_client = (
+            mock_gads_client_class_from_decorator.load_from_storage(
+                version="v20"
+            )
+        )
 
         # Script's main function call
         mock_main_func_from_decorator(
             googleads_client,
             args.customer_id,
             args.output_file,
-            args.write_headers
+            args.write_headers,
         )
 
     @mock.patch("sys.exit")
-    @mock.patch("os.path.dirname") # No longer needed with helper
-    @mock.patch("os.path.abspath") # No longer needed with helper
+    @mock.patch("os.path.dirname")  # No longer needed with helper
+    @mock.patch("os.path.abspath")  # No longer needed with helper
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
     @mock.patch("examples.misc.campaign_report_to_csv.main")
-    def test_argument_parsing(self, mock_script_main, mock_gads_client_class,
-                              mock_arg_parser_class, mock_os_abspath, mock_os_dirname, mock_sys_exit): # Removed os mocks from signature
+    def test_argument_parsing(
+        self,
+        mock_script_main,
+        mock_gads_client_class,
+        mock_arg_parser_class,
+        mock_os_abspath,
+        mock_os_dirname,
+        mock_sys_exit,
+    ):  # Removed os mocks from signature
         """Test that main is called with parsed arguments when headers are requested."""
         expected_cust_id = "test_cust_csv_headers"
         expected_filepath = "parsed_output_with_headers.csv"
@@ -366,7 +504,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
             mock_main_func_from_decorator=mock_script_main,
             expected_customer_id=expected_cust_id,
             expected_output_file_val=expected_filepath,
-            expected_write_headers_val=expected_headers_bool
+            expected_write_headers_val=expected_headers_bool,
         )
 
         script_desc = "Retrieves a campaign stats and writes to CSV file."
@@ -374,43 +512,74 @@ class TestCampaignReportToCsv(unittest.TestCase):
 
         mock_parser_inst_for_assert = mock_arg_parser_class.return_value
         expected_calls_add_arg = [
-            mock.call("-c", "--customer_id", type=str, required=True, help="The Google Ads customer ID."),
-            mock.call("-o", "--output_file", type=str, required=False,
-                      default=campaign_report_to_csv._DEFAULT_FILE_NAME,
-                      help="Name of the local CSV file to save the report to. File will be "
-                           "saved in the same directory as the script."),
-            mock.call("-w", "--write_headers", action="store_true",
-                      help="Writes headers to the CSV file if argument is supplied. Simply "
-                           "add -w if you want the headers defined in the script to be "
-                           "added as the first row in the CSV file.")
+            mock.call(
+                "-c",
+                "--customer_id",
+                type=str,
+                required=True,
+                help="The Google Ads customer ID.",
+            ),
+            mock.call(
+                "-o",
+                "--output_file",
+                type=str,
+                required=False,
+                default=campaign_report_to_csv._DEFAULT_FILE_NAME,
+                help="Name of the local CSV file to save the report to. File will be "
+                "saved in the same directory as the script.",
+            ),
+            mock.call(
+                "-w",
+                "--write_headers",
+                action="store_true",
+                help="Writes headers to the CSV file if argument is supplied. Simply "
+                "add -w if you want the headers defined in the script to be "
+                "added as the first row in the CSV file.",
+            ),
         ]
-        mock_parser_inst_for_assert.add_argument.assert_has_calls(expected_calls_add_arg, any_order=True)
-        self.assertEqual(mock_parser_inst_for_assert.add_argument.call_count, len(expected_calls_add_arg))
+        mock_parser_inst_for_assert.add_argument.assert_has_calls(
+            expected_calls_add_arg, any_order=True
+        )
+        self.assertEqual(
+            mock_parser_inst_for_assert.add_argument.call_count,
+            len(expected_calls_add_arg),
+        )
 
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
-        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v20")
+        mock_gads_client_class.load_from_storage.assert_called_once_with(
+            version="v20"
+        )
 
-        client_inst_for_assert = mock_gads_client_class.load_from_storage.return_value
+        client_inst_for_assert = (
+            mock_gads_client_class.load_from_storage.return_value
+        )
         mock_script_main.assert_called_once_with(
             client_inst_for_assert,
             expected_cust_id,
             expected_filepath,
-            expected_headers_bool
+            expected_headers_bool,
         )
 
     @mock.patch("sys.exit")
-    @mock.patch("os.path.dirname") # No longer needed
-    @mock.patch("os.path.abspath") # No longer needed
+    @mock.patch("os.path.dirname")  # No longer needed
+    @mock.patch("os.path.abspath")  # No longer needed
     @mock.patch("examples.misc.campaign_report_to_csv.argparse.ArgumentParser")
     @mock.patch("examples.misc.campaign_report_to_csv.GoogleAdsClient")
     @mock.patch("examples.misc.campaign_report_to_csv.main")
-    def test_argument_parsing_no_headers_flag(self, mock_script_main, mock_gads_client_class,
-                                               mock_arg_parser_class, mock_os_abspath, mock_os_dirname, mock_sys_exit): # Removed os mocks
+    def test_argument_parsing_no_headers_flag(
+        self,
+        mock_script_main,
+        mock_gads_client_class,
+        mock_arg_parser_class,
+        mock_os_abspath,
+        mock_os_dirname,
+        mock_sys_exit,
+    ):  # Removed os mocks
         """Test argument parsing when --no-headers (meaning -w is NOT passed) is specified."""
         expected_cust_id = "test_cust_csv_no_headers"
         expected_filepath = "parsed_output_no_headers.csv"
-        expected_headers_bool = False # For this test, headers are NOT written
+        expected_headers_bool = False  # For this test, headers are NOT written
 
         self._simulate_script_main_block(
             mock_argparse_class_from_decorator=mock_arg_parser_class,
@@ -418,7 +587,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
             mock_main_func_from_decorator=mock_script_main,
             expected_customer_id=expected_cust_id,
             expected_output_file_val=expected_filepath,
-            expected_write_headers_val=expected_headers_bool
+            expected_write_headers_val=expected_headers_bool,
         )
 
         script_desc = "Retrieves a campaign stats and writes to CSV file."
@@ -430,12 +599,16 @@ class TestCampaignReportToCsv(unittest.TestCase):
         # For brevity, only checking parse_args and main call here, assuming add_argument calls are covered.
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
-        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v20")
+        mock_gads_client_class.load_from_storage.assert_called_once_with(
+            version="v20"
+        )
 
-        client_inst_for_assert = mock_gads_client_class.load_from_storage.return_value
+        client_inst_for_assert = (
+            mock_gads_client_class.load_from_storage.return_value
+        )
         mock_script_main.assert_called_once_with(
             client_inst_for_assert,
             expected_cust_id,
             expected_filepath,
-            expected_headers_bool
+            expected_headers_bool,
         )

@@ -467,6 +467,10 @@ class CriterionErrorEnum(proto.Message):
             LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN (166):
                 Cannot positively target locations outside of
                 restricted area for campaign.
+            MISSING_EU_POLITICAL_ADVERTISING_SELF_DECLARATION (176):
+                The operation failed because the campaign is
+                missing the self-declaration on political
+                advertising status in the EU.
         """
 
         UNSPECIFIED = 0
@@ -620,6 +624,7 @@ class CriterionErrorEnum(proto.Message):
         CANNOT_ADD_REMOVED_BRAND_SHARED_SET = 157
         ONLY_EXCLUSION_BRAND_LIST_ALLOWED_FOR_CAMPAIGN_TYPE = 158
         LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN = 166
+        MISSING_EU_POLITICAL_ADVERTISING_SELF_DECLARATION = 176
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

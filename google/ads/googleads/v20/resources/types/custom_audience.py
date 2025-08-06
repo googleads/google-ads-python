@@ -35,7 +35,10 @@ __protobuf__ = proto.module(
 
 
 class CustomAudience(proto.Message):
-    r"""A custom audience. This is a list of users by interest.
+    r"""A custom audience. This is a list of users by interest. The unique
+    key of a custom audience consists of the following fields: name.
+    Violating the unique key constraint produces error:
+    CustomAudienceError.NAME_ALREADY_USED
 
     Attributes:
         resource_name (str):

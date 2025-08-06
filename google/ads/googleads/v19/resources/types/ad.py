@@ -118,7 +118,8 @@ class Ad(proto.Message):
             need to be unique and does not affect the served
             ad. The name field is currently only supported
             for DisplayUploadAd, ImageAd,
-            ShoppingComparisonListingAd and VideoAd.
+            LegacyAppInstallAd, ShoppingComparisonListingAd,
+            VideoAd, VideoResponsiveAd and DemandGen ads.
 
             This field is a member of `oneof`_ ``_name``.
         system_managed_resource_source (google.ads.googleads.v19.enums.types.SystemManagedResourceSourceEnum.SystemManagedResourceSource):

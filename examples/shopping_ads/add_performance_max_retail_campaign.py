@@ -47,64 +47,64 @@ from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-from google.ads.googleads.v20.enums.types.conversion_action_category import (
+from google.ads.googleads.v21.enums.types.conversion_action_category import (
     ConversionActionCategoryEnum,
 )
-from google.ads.googleads.v20.enums.types.conversion_origin import (
+from google.ads.googleads.v21.enums.types.conversion_origin import (
     ConversionOriginEnum,
 )
-from google.ads.googleads.v20.enums.types.asset_field_type import (
+from google.ads.googleads.v21.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v20.resources.types.asset_group_asset import (
+from google.ads.googleads.v21.resources.types.asset import Asset
+from google.ads.googleads.v21.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v21.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v20.resources.types.asset_group_listing_group_filter import (
+from google.ads.googleads.v21.resources.types.asset_group_listing_group_filter import (
     AssetGroupListingGroupFilter,
 )
-from google.ads.googleads.v20.resources.types.campaign import Campaign
-from google.ads.googleads.v20.resources.types.campaign_asset import (
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign_asset import (
     CampaignAsset,
 )
-from google.ads.googleads.v20.resources.types.campaign_budget import (
+from google.ads.googleads.v21.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v20.resources.types.campaign_conversion_goal import (
+from google.ads.googleads.v21.resources.types.campaign_conversion_goal import (
     CampaignConversionGoal,
 )
-from google.ads.googleads.v20.resources.types.campaign_criterion import (
+from google.ads.googleads.v21.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v20.services.services.asset_group_service import (
+from google.ads.googleads.v21.services.services.asset_group_service import (
     AssetGroupServiceClient,
 )
-from google.ads.googleads.v20.services.services.asset_service import (
+from google.ads.googleads.v21.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_budget_service import (
+from google.ads.googleads.v21.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_conversion_goal_service import (
+from google.ads.googleads.v21.services.services.campaign_conversion_goal_service import (
     CampaignConversionGoalServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.services.geo_target_constant_service import (
+from google.ads.googleads.v21.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v20.services.services.google_ads_service import (
+from google.ads.googleads.v21.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperationResponse,
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     MutateOperation,
 )
 
@@ -389,6 +389,14 @@ def create_performance_max_campaign_operation(
     )
     campaign.campaign_budget = campaign_budget_service.campaign_budget_path(
         customer_id, _BUDGET_TEMPORARY_ID
+    )
+
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
     )
 
     # Optional fields
@@ -1240,7 +1248,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

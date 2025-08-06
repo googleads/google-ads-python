@@ -97,6 +97,9 @@ def main(client, customer_id):
     campaign.network_settings.target_search_network = True
     campaign.network_settings.target_content_network = False
     campaign.network_settings.target_partner_search_network = False
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
     # [END use_portfolio_bidding_strategy_2]
 
     # Add the campaign.
@@ -138,6 +141,6 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
 
     main(googleads_client, args.customer_id)

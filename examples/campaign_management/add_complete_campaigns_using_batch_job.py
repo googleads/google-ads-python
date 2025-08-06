@@ -28,38 +28,38 @@ from google.api_core.operation import Operation
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.batch_job_service import (
+from google.ads.googleads.v21.services.services.batch_job_service import (
     BatchJobServiceClient,
 )
-from google.ads.googleads.v20.services.types.batch_job_service import (
+from google.ads.googleads.v21.services.types.batch_job_service import (
     MutateBatchJobResponse,
     AddBatchJobOperationsResponse,
     ListBatchJobResultsRequest,
     ListBatchJobResultsResponse,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     MutateOperation,
 )
-from google.ads.googleads.v20.resources.types.batch_job import BatchJob
-from google.ads.googleads.v20.services.types.campaign_budget_service import (
+from google.ads.googleads.v21.resources.types.batch_job import BatchJob
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v21.services.types.campaign_service import (
     CampaignOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_criterion_service import (
+from google.ads.googleads.v21.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_service import (
+from google.ads.googleads.v21.services.types.ad_group_service import (
     AdGroupOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
 )
-from google.ads.googleads.v20.services.types.batch_job_service import (
+from google.ads.googleads.v21.services.types.batch_job_service import (
     BatchJobOperation,
 )
 
@@ -400,6 +400,14 @@ def build_campaign_operation(
     # ManualCpc instance.
     client.copy_from(campaign.manual_cpc, client.get_type("ManualCpc"))
     campaign.campaign_budget = campaign_budget_resource_name
+
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
 
     return campaign_operation
 
@@ -772,7 +780,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     asyncio.run(main(googleads_client, args.customer_id))

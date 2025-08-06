@@ -22,13 +22,13 @@ from typing import DefaultDict, List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.resources.types.product_category_constant import (
+from google.ads.googleads.v21.resources.types.product_category_constant import (
     ProductCategoryConstant,
 )
-from google.ads.googleads.v20.services.services.google_ads_service import (
+from google.ads.googleads.v21.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     SearchGoogleAdsStreamRequest,
     SearchGoogleAdsStreamResponse,
 )
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

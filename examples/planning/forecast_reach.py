@@ -20,19 +20,19 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.enums.types.reach_plan_age_range import (
+from google.ads.googleads.v21.enums.types.reach_plan_age_range import (
     ReachPlanAgeRangeEnum,
 )
-from google.ads.googleads.v20.enums.types.gender_type import GenderTypeEnum
-from google.ads.googleads.v20.enums.types.device import DeviceEnum
-from google.ads.googleads.v20.common.types.criteria import (
+from google.ads.googleads.v21.enums.types.gender_type import GenderTypeEnum
+from google.ads.googleads.v21.enums.types.device import DeviceEnum
+from google.ads.googleads.v21.common.types.criteria import (
     GenderInfo,
     DeviceInfo,
 )
-from google.ads.googleads.v20.services.services.reach_plan_service.client import (
+from google.ads.googleads.v21.services.services.reach_plan_service.client import (
     ReachPlanServiceClient,
 )
-from google.ads.googleads.v20.services.types.reach_plan_service import (
+from google.ads.googleads.v21.services.types.reach_plan_service import (
     ListPlannableLocationsResponse,
     PlannableLocation,
     ListPlannableProductsResponse,
@@ -273,7 +273,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v20")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
 
     try:
         main(googleads_client, args.customer_id)

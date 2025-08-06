@@ -20,16 +20,16 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.services.google_ads_service import (
+from google.ads.googleads.v21.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v20.services.types.google_ads_service import (
+from google.ads.googleads.v21.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v20.resources.types.ad import Ad
-from google.ads.googleads.v20.enums.types.policy_approval_status import (
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.ad import Ad
+from google.ads.googleads.v21.enums.types.policy_approval_status import (
     PolicyApprovalStatusEnum,
 )
 
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

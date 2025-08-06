@@ -22,13 +22,19 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.services.types.asset_service import AssetOperation
-from google.ads.googleads.v20.resources.types.asset import Asset
-from google.ads.googleads.v20.common.types.asset_types import PriceAsset
-from google.ads.googleads.v20.common.types.asset_types import PriceOffering
-from google.ads.googleads.v20.enums.types.price_extension_price_unit import PriceExtensionPriceUnitEnum
-from google.ads.googleads.v20.services.types.customer_asset_service import CustomerAssetOperation
-from google.ads.googleads.v20.resources.types.customer_asset import CustomerAsset
+from google.ads.googleads.v21.services.types.asset_service import AssetOperation
+from google.ads.googleads.v21.resources.types.asset import Asset
+from google.ads.googleads.v21.common.types.asset_types import PriceAsset
+from google.ads.googleads.v21.common.types.asset_types import PriceOffering
+from google.ads.googleads.v21.enums.types.price_extension_price_unit import (
+    PriceExtensionPriceUnitEnum,
+)
+from google.ads.googleads.v21.services.types.customer_asset_service import (
+    CustomerAssetOperation,
+)
+from google.ads.googleads.v21.resources.types.customer_asset import (
+    CustomerAsset,
+)
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
@@ -210,7 +216,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

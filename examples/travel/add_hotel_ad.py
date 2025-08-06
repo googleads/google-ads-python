@@ -27,37 +27,37 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.resources.types.ad_group import AdGroup
-from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v20.resources.types.campaign import Campaign
-from google.ads.googleads.v20.resources.types.campaign_budget import (
+from google.ads.googleads.v21.resources.types.ad_group import AdGroup
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v20.services.services.ad_group_service import (
+from google.ads.googleads.v21.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_budget_service import (
+from google.ads.googleads.v21.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
-from google.ads.googleads.v20.services.types.ad_group_service import (
+from google.ads.googleads.v21.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
-from google.ads.googleads.v20.services.types.campaign_budget_service import (
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v21.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -127,7 +127,9 @@ def add_hotel_ad(
     )
 
     # Creates a new ad group ad and sets the hotel ad to it.
-    ad_group_ad_operation: AdGroupAdOperation = client.get_type("AdGroupAdOperation")
+    ad_group_ad_operation: AdGroupAdOperation = client.get_type(
+        "AdGroupAdOperation"
+    )
     ad_group_ad: AdGroupAd = ad_group_ad_operation.create
     ad_group_ad.ad_group = ad_group_resource_name
     # Set the ad group ad to enabled.  Setting this to paused will cause an error
@@ -137,8 +139,10 @@ def add_hotel_ad(
     client.copy_from(ad_group_ad.ad.hotel_ad, client.get_type("HotelAdInfo"))
 
     # Add the ad group ad.
-    ad_group_ad_response: MutateAdGroupAdsResponse = ad_group_ad_service.mutate_ad_group_ads(
-        customer_id=customer_id, operations=[ad_group_ad_operation]
+    ad_group_ad_response: MutateAdGroupAdsResponse = (
+        ad_group_ad_service.mutate_ad_group_ads(
+            customer_id=customer_id, operations=[ad_group_ad_operation]
+        )
     )
 
     ad_group_ad_resource_name: str = ad_group_ad_response.results[
@@ -155,7 +159,9 @@ def add_hotel_ad(
 def add_hotel_ad_group(
     client: GoogleAdsClient, customer_id: str, campaign_resource_name: str
 ) -> str:
-    ad_group_service: AdGroupServiceClient = client.get_service("AdGroupService")
+    ad_group_service: AdGroupServiceClient = client.get_service(
+        "AdGroupService"
+    )
 
     # Create ad group.
     ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
@@ -168,8 +174,10 @@ def add_hotel_ad_group(
     ad_group.cpc_bid_micros = 10000000
 
     # Add the ad group.
-    ad_group_response: MutateAdGroupsResponse = ad_group_service.mutate_ad_groups(
-        customer_id=customer_id, operations=[ad_group_operation]
+    ad_group_response: MutateAdGroupsResponse = (
+        ad_group_service.mutate_ad_groups(
+            customer_id=customer_id, operations=[ad_group_operation]
+        )
     )
 
     ad_group_resource_name: str = ad_group_response.results[0].resource_name
@@ -190,7 +198,9 @@ def add_hotel_campaign(
     hotel_center_account_id: int,
     cpc_bid_ceiling_micro_amount: int,
 ) -> str:
-    campaign_service: CampaignServiceClient = client.get_service("CampaignService")
+    campaign_service: CampaignServiceClient = client.get_service(
+        "CampaignService"
+    )
 
     # [START add_hotel_ad_1]
     # Create campaign.
@@ -220,11 +230,21 @@ def add_hotel_campaign(
     # Set the campaign network options. Only Google Search is allowed for hotel
     # campaigns.
     campaign.network_settings.target_google_search = True
+
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
     # [END add_hotel_ad_1]
 
     # Add the campaign.
-    campaign_response: MutateCampaignsResponse = campaign_service.mutate_campaigns(
-        customer_id=customer_id, operations=[campaign_operation]
+    campaign_response: MutateCampaignsResponse = (
+        campaign_service.mutate_campaigns(
+            customer_id=customer_id, operations=[campaign_operation]
+        )
     )
 
     campaign_resource_name: str = campaign_response.results[0].resource_name
@@ -271,7 +291,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

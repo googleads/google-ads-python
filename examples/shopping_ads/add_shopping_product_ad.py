@@ -31,43 +31,43 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v20.resources.types.ad_group import AdGroup
-from google.ads.googleads.v20.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v20.resources.types.ad_group_criterion import (
+from google.ads.googleads.v21.resources.types.ad_group import AdGroup
+from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v21.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v20.resources.types.campaign import Campaign
-from google.ads.googleads.v20.resources.types.campaign_budget import (
+from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v21.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v20.services.services.ad_group_ad_service import (
+from google.ads.googleads.v21.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v20.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v21.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v20.services.services.ad_group_service import (
+from google.ads.googleads.v21.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_budget_service import (
+from google.ads.googleads.v21.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v20.services.services.campaign_service import (
+from google.ads.googleads.v21.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v20.services.types.ad_group_ad_service import (
+from google.ads.googleads.v21.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
-from google.ads.googleads.v20.services.types.ad_group_service import (
+from google.ads.googleads.v21.services.types.ad_group_service import (
     AdGroupOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_budget_service import (
+from google.ads.googleads.v21.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v20.services.types.campaign_service import (
+from google.ads.googleads.v21.services.types.campaign_service import (
     CampaignOperation,
 )
 
@@ -260,6 +260,14 @@ def add_standard_shopping_campaign(
     # Sets the budget.
     campaign.campaign_budget = budget_resource_name
 
+    # Declare whether or not this campaign serves political ads targeting the
+    # EU. Valid values are:
+    #   CONTAINS_EU_POLITICAL_ADVERTISING
+    #   DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    campaign.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
+
     # Add the campaign.
     campaign_response = campaign_service.mutate_campaigns(
         customer_id=customer_id, operations=[campaign_operation]
@@ -353,7 +361,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v20"
+        version="v21"
     )
 
     try:

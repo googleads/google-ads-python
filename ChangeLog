@@ -1,3 +1,11 @@
+* 28.0.0
+- Google Ads API v21_0 release.
+- Updated to Google Ads API v19_0 and v20_0 to include EU political advertising changes.
+- Remove Google Ads API v18.
+- Add deprecation warnings for Python 3.9 users.
+- Add type annotations to all examples.
+- Add unit tests covering some examples.
+
 * 27.0.0
 - Google Ads API v20_0 release.
 - Remove Google Ads API v17.

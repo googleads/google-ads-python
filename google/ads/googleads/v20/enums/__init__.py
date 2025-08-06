@@ -231,6 +231,9 @@ from .types.device import DeviceEnum
 from .types.display_ad_format_setting import DisplayAdFormatSettingEnum
 from .types.display_upload_product_type import DisplayUploadProductTypeEnum
 from .types.distance_bucket import DistanceBucketEnum
+from .types.eu_political_advertising_status import (
+    EuPoliticalAdvertisingStatusEnum,
+)
 from .types.experiment_metric import ExperimentMetricEnum
 from .types.experiment_metric_direction import ExperimentMetricDirectionEnum
 from .types.experiment_status import ExperimentStatusEnum
@@ -694,6 +697,7 @@ __all__ = (
     "DisplayAdFormatSettingEnum",
     "DisplayUploadProductTypeEnum",
     "DistanceBucketEnum",
+    "EuPoliticalAdvertisingStatusEnum",
     "ExperimentMetricDirectionEnum",
     "ExperimentMetricEnum",
     "ExperimentStatusEnum",

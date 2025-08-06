@@ -47,8 +47,7 @@ class ConversionUploadErrorEnum(proto.Message):
                 Upload fewer than 2001 events in a single
                 request.
             UNPARSEABLE_GCLID (3):
-                The imported gclid could not be decoded. Make
-                sure you have not modified the click IDs.
+                The imported gclid could not be decoded.
             CONVERSION_PRECEDES_EVENT (42):
                 The imported event has a ``conversion_date_time`` that
                 precedes the click. Make sure your ``conversion_date_time``

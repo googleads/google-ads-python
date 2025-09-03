@@ -183,7 +183,7 @@ if __name__ == "__main__":
         help="Space-delimited list of location criteria IDs",
     )
     # To determine the appropriate language ID, see:
-    # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-7
+    # https://developers.google.com/google-ads/api/data/codes-formats#languages
     parser.add_argument(
         "-i",
         "--language_id",

@@ -19,7 +19,7 @@ import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "28.0.0.post1"
+VERSION = "28.0.0.post2"
 
 # Warns that this version of the library is intended as a temporary workaround
 # for Python 3.8 users.

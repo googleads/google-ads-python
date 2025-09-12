@@ -19,12 +19,17 @@ import google.ads.googleads.client
 import google.ads.googleads.errors
 import google.ads.googleads.util
 
-VERSION = "28.0.0"
+VERSION = "28.0.0.post1"
 
-# Checks if the current runtime is Python 3.9.
-if sys.version_info.major == 3 and sys.version_info.minor <= 9:
-    warnings.warn(
-        "Support for Python versions less than 3.9 is deprecated in the "
-        "google-ads package. Please upgrade to Python 3.10 or higher.",
-        category=DeprecationWarning,
-    )
+# Warns that this version of the library is intended as a temporary workaround
+# for Python 3.8 users.
+warnings.warn(
+    "This version of google-ads-python (28.0.0.post1) is only intended for "
+    "use by Python 3.8 users who cannot upgrade to a newer version of Python "
+    "and are blocked from accessing the Google Ads API due to changes made to"
+    "comply with European Union Political Ads Regulation. For more details, "
+    "see: https://ads-developers.googleblog.com/2025/08/eu-par-google-ads-api-scripts.html. "
+    "We recommend upgrading to Python >=3.10 and google-ads-python >=28.0.0 "
+    "as soon as possible.",
+    category=Warning,
+)

@@ -1,3 +1,6 @@
+* 28.0.0.post1
+- Temporarily remove incompatibility with Python 3.8.
+
 * 28.0.0
 - Google Ads API v21_0 release.
 - Updated to Google Ads API v19_0 and v20_0 to include EU political advertising changes.

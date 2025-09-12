@@ -17,7 +17,7 @@ import os
 import pathlib
 
 
-PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+PYTHON_VERSIONS = ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
 PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
@@ -39,20 +39,13 @@ COVERAGE_COMMAND = [
     "--omit=.nox/*,examples/*,*/__init__.py",
 ]
 FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
-TEST_DEPENDENCIES = [
-    "pyfakefs>=5.0.0,<6.0",
-    "coverage==6.5.0",
-]
 CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
 CONSTRAINTS_DIR = os.path.join(CURRENT_DIR, "tests", "constraints")
-
 
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
 def tests(session, protobuf_implementation):
-    session.install("-e", ".")
-    # modules for testing
-    session.install(*TEST_DEPENDENCIES)
+    session.install("-e", ".[tests]")
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
@@ -79,8 +72,8 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
 
     constraints_file = os.path.join(CONSTRAINTS_DIR, "minimums", filename)
 
-    session.install("-e", ".")
-    session.install(*TEST_DEPENDENCIES, "-c", constraints_file)
+    session.install("-e", ".[tests]", "-c", constraints_file)
+    # session.install()
     session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,

@@ -305,10 +305,7 @@ class LoggingInterceptorTest(TestCase):
         )
         mock_trailing_metadata = mock_response.trailing_metadata()
 
-        with (
-            mock.patch("logging.config.dictConfig"),
-            mock.patch("google.ads.googleads.client._logger") as mock_logger,
-        ):
+        with mock.patch("logging.config.dictConfig"), mock.patch("google.ads.googleads.client._logger") as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_unary(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -361,10 +358,7 @@ class LoggingInterceptorTest(TestCase):
 
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with (
-            mock.patch("logging.config.dictConfig"),
-            mock.patch("google.ads.googleads.client._logger") as mock_logger,
-        ):
+        with mock.patch("logging.config.dictConfig"), mock.patch("google.ads.googleads.client._logger") as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             interceptor.intercept_unary_stream(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -416,10 +410,7 @@ class LoggingInterceptorTest(TestCase):
         mock_continuation_fn = self._get_mock_continuation_fn(fail=True)
         mock_request = self._get_mock_request()
 
-        with (
-            mock.patch("logging.config.dictConfig"),
-            mock.patch("google.ads.googleads.client._logger") as mock_logger,
-        ):
+        with mock.patch("logging.config.dictConfig"), mock.patch("google.ads.googleads.client._logger") as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_unary(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -472,10 +463,7 @@ class LoggingInterceptorTest(TestCase):
         mock_response.add_done_callback = mock_add_done_callback
         mock_continuation_fn = mock.Mock(return_value=mock_response)
 
-        with (
-            mock.patch("logging.config.dictConfig"),
-            mock.patch("google.ads.googleads.client._logger") as mock_logger,
-        ):
+        with mock.patch("logging.config.dictConfig"), mock.patch("google.ads.googleads.client._logger") as mock_logger:
             interceptor = self._create_test_interceptor(logger=mock_logger)
             mock_response = interceptor.intercept_unary_stream(
                 mock_continuation_fn, mock_client_call_details, mock_request
@@ -554,10 +542,7 @@ class LoggingInterceptorTest(TestCase):
         """Calls _format_json_object with error obj's debug_error_string."""
         interceptor = self._create_test_interceptor()
 
-        with (
-            mock.patch("logging.config.dictConfig"),
-            mock.patch.object(interceptor, "format_json_object") as mock_parser,
-        ):
+        with mock.patch("logging.config.dictConfig"), mock.patch.object(interceptor, "format_json_object") as mock_parser:
             mock_exception = self._get_mock_transport_exception()
             interceptor._parse_exception_to_str(mock_exception)
             mock_parser.assert_called_once_with(

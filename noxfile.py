@@ -17,7 +17,7 @@ import os
 import pathlib
 
 
-PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
 PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
@@ -67,7 +67,10 @@ def tests(session, protobuf_implementation):
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
 def tests_minimum_dependency_versions(session, protobuf_implementation):
-    if session.python == "3.13":
+    if session.python == "3.14":
+        # If running Python 3.14 use the constraints file intended for it.
+        filename = "constraints-3.14.txt"
+    elif session.python == "3.13":
         # If running Python 3.13 use the constraints file intended for it.
         filename = "constraints-3.13.txt"
     else:

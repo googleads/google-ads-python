@@ -22,8 +22,8 @@
 # https://support.google.com/google-ads/answer/7684791
 
 require 'google/ads/google_ads'
-require 'optimist'
-require 'securerandom' # For UUIDs
+require 'optparse'
+require 'uuid'
 
 # Keywords from user.
 KEYWORD_TEXT_EXACT = "example of exact match"
@@ -62,87 +62,6 @@ def create_ad_text_asset(client, text, pinned_field = nil)
   end
 end
 
-# Helper function to create an AdTextAsset with a customizer.
-#
-# Args:
-#   client: An initialized GoogleAdsClient instance.
-#   customizer_attribute_resource_name: The resource name of the customizer attribute.
-#
-# Returns:
-#   An AdTextAsset.
-def create_ad_text_asset_with_customizer(client, customizer_attribute_resource_name)
-  client.resource.ad_text_asset do |ad_text_asset|
-    # Create this particular description using the ad customizer. Visit
-    # https://developers.google.com/google-ads/api/docs/ads/customize-responsive-search-ads#ad_customizers_in_responsive_search_ads
-    # for details about the placeholder format. The ad customizer replaces the
-    # placeholder with the value we previously created and linked to the
-    # customer using CustomerCustomizer.
-    ad_text_asset.text = "Just {CUSTOMIZER.#{customizer_attribute_resource_name}:10USD}"
-  end
-end
-
-# Creates a customizer attribute with the given customizer attribute name.
-#
-# Args:
-#   client: An initialized GoogleAdsClient instance.
-#   customer_id: A client customer ID.
-#   customizer_attribute_name: The name for the customizer attribute.
-#
-# Returns:
-#   A resource name for a customizer attribute.
-def create_customizer_attribute(client, customer_id, customizer_attribute_name)
-  # Create a customizer attribute operation for creating a customizer attribute.
-  operation = client.operation.create_customizer_attribute do |ca|
-    ca.name = customizer_attribute_name
-    # Specify the type to be 'PRICE' so that we can dynamically customize the
-    # part of the ad's description that is a price of a product/service we
-    # advertise.
-    ca.type = :PRICE
-  end
-
-  # Issue a mutate request to add the customizer attribute and print its
-  # information.
-  customizer_attribute_service = client.service.customizer_attribute
-  response = customizer_attribute_service.mutate_customizer_attributes(
-    customer_id: customer_id,
-    operations: [operation],
-  )
-  resource_name = response.results.first.resource_name
-
-  puts "Added a customizer attribute with resource name: '#{resource_name}'"
-
-  resource_name
-end
-
-# Links the customizer attribute to the customer.
-#
-# Args:
-#   client: An initialized GoogleAdsClient instance.
-#   customer_id: A client customer ID.
-#   customizer_attribute_resource_name: A resource name for a customizer attribute.
-def link_customizer_attribute_to_customer(client, customer_id, customizer_attribute_resource_name)
-  # Create a customer customizer operation.
-  operation = client.operation.create_customer_customizer do |cc|
-    cc.customizer_attribute = customizer_attribute_resource_name
-    cc.value = client.resource.customizer_value do |val|
-      val.type = :PRICE
-      # The ad customizer will dynamically replace the placeholder with this value
-      # when the ad serves.
-      val.string_value = "100USD"
-    end
-  end
-
-  customer_customizer_service = client.service.customer_customizer
-  # Issue a mutate request to create the customer customizer and prints its
-  # information.
-  response = customer_customizer_service.mutate_customer_customizers(
-    customer_id: customer_id,
-    operations: [operation],
-  )
-  resource_name = response.results.first.resource_name
-
-  puts "Added a customer customizer to the customer with resource name: '#{resource_name}'"
-end
 
 # Creates a campaign budget resource.
 #
@@ -156,7 +75,7 @@ def create_campaign_budget(client, customer_id)
   # Create a budget, which can be shared by multiple campaigns.
   campaign_budget_service = client.service.campaign_budget
   operation = client.operation.create_campaign_budget do |cb|
-    cb.name = "Campaign budget \#{SecureRandom.uuid}"
+    cb.name = "Campaign budget \#{UUID.new.generate}"
     cb.delivery_method = :STANDARD
     cb.amount_micros = 500_000 # 500,000
     # cb.explicitly_shared = false # Not setting this, as per Python version for non-MCC
@@ -184,7 +103,7 @@ end
 def create_campaign(client, customer_id, campaign_budget_resource_name)
   campaign_service = client.service.campaign
   operation = client.operation.create_campaign do |campaign|
-    campaign.name = "Testing RSA via API \#{SecureRandom.uuid}"
+    campaign.name = "Testing RSA via API \#{UUID.new.generate}"
     campaign.advertising_channel_type = :SEARCH
 
     # Recommendation: Set the campaign to PAUSED when creating it to prevent
@@ -248,7 +167,7 @@ def create_ad_group(client, customer_id, campaign_resource_name)
   ad_group_service = client.service.ad_group
 
   operation = client.operation.create_ad_group do |ag|
-    ag.name = "Testing RSA via API \#{SecureRandom.uuid}"
+    ag.name = "Testing RSA via API \#{UUID.new.generate}"
     ag.status = :ENABLED
     ag.campaign = campaign_resource_name
     ag.type = :SEARCH_STANDARD
@@ -272,12 +191,10 @@ end
 #   client: An initialized GoogleAdsClient instance.
 #   customer_id: A client customer ID.
 #   ad_group_resource_name: An ad group resource name.
-#   customizer_attribute_resource_name: (optional) If present, indicates the resource
-#     name of the customizer attribute to use in one of the descriptions.
 #
 # Returns:
 #   Ad group ad resource name.
-def create_ad_group_ad(client, customer_id, ad_group_resource_name, customizer_attribute_resource_name)
+def create_ad_group_ad(client, customer_id, ad_group_resource_name)
   ad_group_ad_service = client.service.ad_group_ad
 
   operation = client.operation.create_ad_group_ad do |aga|
@@ -304,11 +221,7 @@ def create_ad_group_ad(client, customer_id, ad_group_resource_name, customizer_a
 
         # Descriptions
         description_1 = create_ad_text_asset(client, "Desc 1 testing")
-        description_2 = if customizer_attribute_resource_name
-          create_ad_text_asset_with_customizer(client, customizer_attribute_resource_name)
-        else
-          create_ad_text_asset(client, "Desc 2 testing")
-        end
+        description_2 = create_ad_text_asset(client, "Desc 2 testing")
         rsa.descriptions << description_1
         rsa.descriptions << description_2
 
@@ -427,23 +340,7 @@ end
 # Args:
 #   client: An initialized GoogleAdsClient instance.
 #   customer_id: A client customer ID.
-#   customizer_attribute_name: The name of the customizer attribute to be created.
-def main_function(client, customer_id, customizer_attribute_name = nil)
-  customizer_attribute_resource_name = nil
-  if customizer_attribute_name
-    customizer_attribute_resource_name = create_customizer_attribute(
-      client,
-      customer_id,
-      customizer_attribute_name,
-    )
-
-    link_customizer_attribute_to_customer(
-      client,
-      customer_id,
-      customizer_attribute_resource_name,
-    )
-  end
-
+def main_function(client, customer_id)
   # Create a budget, which can be shared by multiple campaigns.
   campaign_budget_resource_name = create_campaign_budget(client, customer_id)
 
@@ -463,7 +360,6 @@ def main_function(client, customer_id, customizer_attribute_name = nil)
     client,
     customer_id,
     ad_group_resource_name,
-    customizer_attribute_resource_name, # Pass the resource name here
   )
 
   add_keywords(client, customer_id, ad_group_resource_name)
@@ -473,13 +369,18 @@ end
 
 # Entry point of the script
 if __FILE__ == $0
-  options = Optimist.options do
-    opt :customer_id, "The Google Ads customer ID.", type: :string, required: true, short: "-c"
-    opt :customizer_attribute_name,
-        "The name of the customizer attribute to be created. The name must "         "be unique across a client account, so be sure not to use "         "the same value more than once.",
-        type: :string,
-        short: "-n"
-  end
+  options = {}
+  # The following parameter(s) should be provided to run the example. You can
+  # either specify them here or provide them as command-line arguments.
+  #
+  # e.g. add_responsive_search_ad_full.rb -c YOUR_CUSTOMER_ID
+  OptionParser.new do |opts|
+    opts.banner = "Usage: add_responsive_search_ad_full.rb [options]"
+
+    opts.on("-c", "--customer-id CUSTOMER-ID", "Customer ID") do |v|
+      options[:customer_id] = v
+    end
+  end.parse!
 
   # GoogleAdsClient will read the google-ads.yaml configuration file in the
   # home directory if none is specified.
@@ -488,8 +389,7 @@ if __FILE__ == $0
   begin
     main_function(
       client,
-      options[:customer_id],
-      options[:customizer_attribute_name_given] ? options[:customizer_attribute_name] : nil,
+      options.fetch(:customer_id).tr("-", ""),
     )
   rescue Google::Ads::GoogleAds::Errors::GoogleAdsError => e
     STDERR.puts "Request with ID '#{e.request_id}' failed with status "                  "'#{e.error.code}' and includes the following errors:"
@@ -504,6 +404,9 @@ if __FILE__ == $0
     exit 1
   rescue Google::Gax::RetryError => e
     STDERR.puts "RetryError: #{e}"
+    exit 1
+  rescue OptionParser::MissingArgument, KeyError
+    puts "Missing required argument: -c or --customer-id"
     exit 1
   end
 end

@@ -23,7 +23,7 @@ from google.auth.transport.requests import Request
 
 from google.ads.googleads import config
 
-from typing import Any, Callable, TypeVar
+from typing import Any, Callable, TypeVar, Union
 
 _SERVICE_ACCOUNT_SCOPES: list[str] = [
     "https://www.googleapis.com/auth/adwords"
@@ -42,19 +42,19 @@ def _initialize_credentials_decorator(func: F) -> F:
 
     @functools.wraps(func)
     def initialize_credentials_wrapper(*args: Any, **kwargs: Any) -> Any:
-        credentials = func(*args, **kwargs)
+        credentials: Union[InstalledAppCredentials, ServiceAccountCreds] = func(*args, **kwargs)
         # If the configs contain an http_proxy, refresh credentials through the
         # proxy URI
-        proxy: str | None = kwargs.get("http_proxy")
+        proxy: Union[str, None] = kwargs.get("http_proxy")
         if proxy:
-            session = Session()
+            session: Session = Session()
             session.proxies.update({"http": proxy, "https": proxy})
             credentials.refresh(Request(session=session))
         else:
-            credentials.refresh(Request())  # type: ignore[no-untyped-call]
+            credentials.refresh(Request())
         return credentials
 
-    return initialize_credentials_wrapper  # type: ignore[return-value]
+    return initialize_credentials_wrapper
 
 
 @_initialize_credentials_decorator
@@ -62,7 +62,7 @@ def get_installed_app_credentials(
     client_id: str,
     client_secret: str,
     refresh_token: str,
-    http_proxy: str | None = None,
+    http_proxy: Union[str, None] = None,
     token_uri: str = _DEFAULT_TOKEN_URI,
 ) -> InstalledAppCredentials:
     """Creates and returns an instance of oauth2.credentials.Credentials.
@@ -90,7 +90,7 @@ def get_installed_app_credentials(
 def get_service_account_credentials(
     json_key_file_path: str,
     subject: str,
-    http_proxy: str | None = None,
+    http_proxy: Union[str, None] = None,
     scopes: list[str] = _SERVICE_ACCOUNT_SCOPES,
 ) -> ServiceAccountCreds:
     """Creates and returns an instance of oauth2.service_account.Credentials.
@@ -111,7 +111,7 @@ def get_service_account_credentials(
 
 def get_credentials(
     config_data: dict[str, Any]
-) -> InstalledAppCredentials | ServiceAccountCreds:
+) -> Union[InstalledAppCredentials, ServiceAccountCreds]:
     """Decides which type of credentials to return based on the given config.
 
     Args:

@@ -19,7 +19,7 @@ import re
 from google.protobuf.message import Message as ProtobufMessageType
 import proto
 
-from typing import Any, TypeVar, overload, Union
+from typing import Any, List, TypeVar, overload, Union
 
 # This regex matches characters preceded by start of line or an underscore.
 _RE_FIND_CHARS_TO_UPPERCASE = re.compile(r"(?:_|^)([a-z])")
@@ -88,9 +88,9 @@ def set_nested_message_field(
         value: The value that the nested attribute should be set to.
     """
     if isinstance(field_path, str):
-        field_path_list = field_path.split(".")
+        field_path_list: List[str] = field_path.split(".")
     else:
-        field_path_list = field_path
+        field_path_list: Union[str, list[str]] = field_path
 
     if len(field_path_list) == 1:
         setattr(message, field_path_list[0], value)
@@ -149,7 +149,7 @@ PPM = TypeVar("PPM", bound=proto.Message)
 PBPM = TypeVar("PBPM", bound=ProtobufMessageType)
 
 
-def convert_proto_plus_to_protobuf(message: PPM | PBPM) -> PBPM:
+def convert_proto_plus_to_protobuf(message: Union[PPM, PBPM]) -> PBPM:
     """Converts a proto-plus  message to its protobuf counterpart.
 
     Args:
@@ -168,7 +168,7 @@ def convert_proto_plus_to_protobuf(message: PPM | PBPM) -> PBPM:
         )
 
 
-def convert_protobuf_to_proto_plus(message: PBPM | PPM) -> PPM:
+def convert_protobuf_to_proto_plus(message: Union[PPM, PBPM]) -> PPM:
     """Converts a protobuf message to a proto-plus message.
 
     Args:
@@ -187,7 +187,7 @@ def convert_protobuf_to_proto_plus(message: PBPM | PPM) -> PPM:
         )
 
 
-def proto_copy_from(destination: PPM | PBPM, origin: PPM | PBPM) -> None:
+def proto_copy_from(destination: Union[PPM, PBPM], origin: Union[PPM, PBPM]) -> None:
     """Copies protobuf and proto-plus messages into one-another.
 
     This method consolidates the CopyFrom logic of protobuf and proto-plus
@@ -198,10 +198,10 @@ def proto_copy_from(destination: PPM | PBPM, origin: PPM | PBPM) -> None:
         destination: The protobuf message where changes are being copied.
         origin: The protobuf message where changes are being copied from.
     """
-    is_dest_proto_plus = isinstance(destination, proto.Message)
-    is_orig_proto_plus = isinstance(origin, proto.Message)
-    is_dest_protobuf = isinstance(destination, ProtobufMessageType)
-    is_orig_protobuf = isinstance(origin, ProtobufMessageType)
+    is_dest_proto_plus: bool = isinstance(destination, proto.Message)
+    is_orig_proto_plus: bool = isinstance(origin, proto.Message)
+    is_dest_protobuf: bool = isinstance(destination, ProtobufMessageType)
+    is_orig_protobuf: bool = isinstance(origin, ProtobufMessageType)
 
     if is_dest_proto_plus and is_orig_proto_plus:
         proto.Message.copy_from(destination, origin)

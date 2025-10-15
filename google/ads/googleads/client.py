@@ -31,7 +31,7 @@ from google.ads.googleads.interceptors import (
 )
 
 from types import ModuleType
-from typing import Any, Dict, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 _logger = logging.getLogger(__name__)
 
@@ -74,7 +74,7 @@ class _EnumGetter:
         """
         self._client: "GoogleAdsClient" = client
         self._version: str = client.version or _DEFAULT_VERSION
-        self._enums: Tuple[str] | None = None
+        self._enums: Union[Tuple[str], None] = None
         self._use_proto_plus: bool = client.use_proto_plus
 
     def __dir__(self) -> Tuple[str]:
@@ -107,7 +107,7 @@ class _EnumGetter:
         try:
             enum_class = self._client.get_type(name)
 
-            if self._use_proto_plus == True:
+            if self._use_proto_plus:
                 for attr in dir(enum_class):
                     attr_val = getattr(enum_class, attr)
                     if isinstance(attr_val, ProtoEnumMeta):
@@ -414,28 +414,28 @@ class GoogleAdsClient:
             options=_GRPC_CHANNEL_OPTIONS,
         )
 
-        interceptors: List[grpc.UnaryUnaryClientInterceptor, grpc.UnaryStreamClientInterceptor] = interceptors + [
-            MetadataInterceptor(  # type: ignore[no-untyped-call]
+        interceptors: List[Union[grpc.UnaryUnaryClientInterceptor, grpc.UnaryStreamClientInterceptor]] = interceptors + [
+            MetadataInterceptor(
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
                 self.use_cloud_org_for_api_access,
             ),
-            LoggingInterceptor(_logger, version, endpoint),  # type: ignore[no-untyped-call]
-            ExceptionInterceptor(  # type: ignore[no-untyped-call]
+            LoggingInterceptor(_logger, version, endpoint),
+            ExceptionInterceptor(
                 version, use_proto_plus=self.use_proto_plus
             ),
         ]
 
-        channel = grpc.intercept_channel(channel, *interceptors)  # type: ignore[no-untyped-call]
+        channel: grpc.Channel = grpc.intercept_channel(channel, *interceptors)
 
-        service_transport = service_transport_class(
+        service_transport: Any = service_transport_class(
             channel=channel, client_info=_CLIENT_INFO
         )
 
         return service_client_class(transport=service_transport)
 
-    def get_type(self, name: str, version: str = _DEFAULT_VERSION):  # type: ignore[no-untyped-def]
+    def get_type(self, name: str, version: str = _DEFAULT_VERSION) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
         """Returns the specified common, enum, error, or resource type.
 
         Args:
@@ -469,19 +469,19 @@ class GoogleAdsClient:
 
         # If version is specified when the instance is created,
         # override any version specified as an argument.
-        version = self.version if self.version else version
-        type_classes = self._get_api_services_by_version(version)
+        version: str = self.version if self.version else version
+        type_classes: ModuleType = self._get_api_services_by_version(version)
 
         for type_name in _MESSAGE_TYPES:
             if type_name == "services":
-                path = f"{type_name}.types.{name}"
+                path: str = f"{type_name}.types.{name}"
             else:
-                path = f"{type_name}.{name}"
+                path: str = f"{type_name}.{name}"
 
             try:
-                message_class = util.get_nested_attr(type_classes, path)  # type: ignore[no-untyped-call]
+                message_class: Union[ProtoPlusMessageType, ProtobufMessageType] = util.get_nested_attr(type_classes, path)  # type: ignore[no-untyped-call]
 
-                if self.use_proto_plus == True:
+                if self.use_proto_plus:
                     return message_class()
                 else:
                     return util.convert_proto_plus_to_protobuf(message_class())  # type: ignore[no-untyped-call]

@@ -18,6 +18,7 @@ import json
 import logging.config
 import os
 import re
+from typing import Any, Callable, List, Tuple, TypeVar, Union
 import yaml
 
 
@@ -45,7 +46,6 @@ _SECONDARY_OAUTH2_SERVICE_ACCOUNT_KEYS = (
     "path_to_private_key_file",
     "delegated_account",
 )
-from typing import Any, Callable, TypeVar
 
 _KEYS_ENV_VARIABLES_MAP: dict[str, str] = {
     key: _ENV_PREFIX + key.upper()
@@ -71,12 +71,12 @@ def _config_validation_decorator(func: F) -> F:
     """
 
     @functools.wraps(func)
-    def validation_wrapper(*args: Any, **kwargs: Any) -> Any:
+    def validation_wrapper(*args: Any, **kwargs: Any) -> dict[str, Any]:
         config_dict: dict[str, Any] = func(*args, **kwargs)
         validate_dict(config_dict)
         return config_dict
 
-    return validation_wrapper  # type: ignore[return-value]
+    return validation_wrapper
 
 
 def _config_parser_decorator(func: F) -> F:
@@ -94,17 +94,17 @@ def _config_parser_decorator(func: F) -> F:
         parsed_config: dict[str, Any] = convert_login_customer_id_to_str(
             config_dict
         )
-        parsed_config = convert_linked_customer_id_to_str(parsed_config)
+        parsed_config: dict[str, Any] = convert_linked_customer_id_to_str(parsed_config)
 
-        config_keys = parsed_config.keys()
+        config_keys: List[str] = parsed_config.keys()
 
         if "logging" in config_keys:
-            logging_config = parsed_config["logging"]
+            logging_config: dict[str, Any] = parsed_config["logging"]
             # If the logging config is a dict then it is already in the format
             # that needs to be returned by this method.
             if type(logging_config) is not dict:
                 try:
-                    parsed_config["logging"] = json.loads(logging_config)
+                    parsed_config["logging"]: dict[str, Any] = json.loads(logging_config)
                     # The logger is configured here in case deprecation warnings
                     # need to be logged further down in this method. The logger
                     # is otherwise configured by the GoogleAdsClient class.
@@ -156,12 +156,12 @@ def _config_parser_decorator(func: F) -> F:
             # variable we need to manually change it to the bool False because
             # the string "False" is truthy and can easily be incorrectly
             # converted to the boolean True.
-            value = parsed_config.get("use_proto_plus", False)
-            parsed_config["use_proto_plus"] = disambiguate_string_bool(value)
+            value: Union[str, bool] = parsed_config.get("use_proto_plus", False)
+            parsed_config["use_proto_plus"]: bool = disambiguate_string_bool(value)
 
         return parsed_config
 
-    return parser_wrapper  # type: ignore[return-value]
+    return parser_wrapper
 
 
 def validate_dict(config_data: dict[str, Any]) -> None:
@@ -178,7 +178,7 @@ def validate_dict(config_data: dict[str, Any]) -> None:
     Raises:
         ValueError: If the dict does not contain all required config keys.
     """
-    if not "use_proto_plus" in config_data.keys():
+    if "use_proto_plus" not in config_data.keys():
         raise ValueError(
             "The client library configuration is missing the required "
             '"use_proto_plus" key. Please set this option to either "True" '
@@ -200,7 +200,7 @@ def validate_dict(config_data: dict[str, Any]) -> None:
         validate_linked_customer_id(str(config_data["linked_customer_id"]))
 
 
-def _validate_customer_id(customer_id: str | None, id_type: str) -> None:
+def _validate_customer_id(customer_id: Union[str, None], id_type: str) -> None:
     """Validates a customer ID.
 
     Args:
@@ -214,7 +214,7 @@ def _validate_customer_id(customer_id: str | None, id_type: str) -> None:
     """
     if customer_id is not None:
         # Checks that the string is comprised only of 10 digits.
-        pattern = re.compile(r"^\d{10}", re.ASCII)
+        pattern: re.Pattern = re.compile(r"^\d{10}", re.ASCII)
         if not pattern.fullmatch(customer_id):
             raise ValueError(
                 f"The specified {id_type} customer ID is invalid. It must be a "
@@ -222,7 +222,7 @@ def _validate_customer_id(customer_id: str | None, id_type: str) -> None:
             )
 
 
-def validate_login_customer_id(login_customer_id: str | None) -> None:
+def validate_login_customer_id(login_customer_id: Union[str, None]) -> None:
     """Validates a login customer ID.
     Args:
         login_customer_id: a str from config indicating a login customer ID.
@@ -233,7 +233,7 @@ def validate_login_customer_id(login_customer_id: str | None) -> None:
     _validate_customer_id(login_customer_id, "login")
 
 
-def validate_linked_customer_id(linked_customer_id: str | None) -> None:
+def validate_linked_customer_id(linked_customer_id: Union[str, None]) -> None:
     """Validates a linked customer ID.
     Args:
         linked_customer_id: a str from config indicating a linked customer ID.
@@ -246,7 +246,7 @@ def validate_linked_customer_id(linked_customer_id: str | None) -> None:
 
 @_config_validation_decorator
 @_config_parser_decorator
-def load_from_yaml_file(path: str | None = None) -> dict[str, Any]:
+def load_from_yaml_file(path: Union[str, None] = None) -> dict[str, Any]:
     """Loads configuration data from a YAML file and returns it as a dict.
 
     Args:
@@ -264,20 +264,20 @@ def load_from_yaml_file(path: str | None = None) -> dict[str, Any]:
         # If no path is specified then we check for the environment variable
         # that may define the path. If that is not defined then we use the
         # default path.
-        path_from_env_var = os.environ.get(
+        path_from_env_var: str = os.environ.get(
             _ENV_PREFIX + _CONFIG_FILE_PATH_KEY[0].upper()
         )
-        path = (
+        path: Tuple[str] = (
             path_from_env_var
             if path_from_env_var
             else os.path.join(os.path.expanduser("~"), "google-ads.yaml")
         )
 
     if not os.path.isabs(path):
-        path = os.path.expanduser(path)
+        path: str = os.path.expanduser(path)
 
     with open(path, "rb") as handle:
-        yaml_doc = handle.read()
+        yaml_doc: bytes = handle.read()
 
     return parse_yaml_document_to_dict(yaml_doc)
 
@@ -308,7 +308,7 @@ def load_from_dict(config_dict: dict[str, Any]) -> dict[str, Any]:
 
 @_config_validation_decorator
 @_config_parser_decorator
-def parse_yaml_document_to_dict(yaml_doc: str | bytes) -> dict[str, Any]:
+def parse_yaml_document_to_dict(yaml_doc: Union[str, bytes]) -> dict[str, Any]:
     """Parses a YAML document to a dict.
 
     Args:
@@ -382,10 +382,10 @@ def convert_login_customer_id_to_str(
     Returns:
         The same config dict object with a mutated login_customer_id attr.
     """
-    login_customer_id: Any = config_data.get("login_customer_id")
+    login_customer_id: str = config_data.get("login_customer_id")
 
     if login_customer_id:
-        config_data["login_customer_id"] = str(login_customer_id)
+        config_data["login_customer_id"]: str = str(login_customer_id)
 
     return config_data
 
@@ -405,15 +405,15 @@ def convert_linked_customer_id_to_str(
     Returns:
         The same config dict object with a mutated linked_customer_id attr.
     """
-    linked_customer_id: Any = config_data.get("linked_customer_id")
+    linked_customer_id: str = config_data.get("linked_customer_id")
 
     if linked_customer_id:
-        config_data["linked_customer_id"] = str(linked_customer_id)
+        config_data["linked_customer_id"]: str = str(linked_customer_id)
 
     return config_data
 
 
-def disambiguate_string_bool(value: str | bool) -> bool:
+def disambiguate_string_bool(value: Union[str, bool]) -> bool:
     """Converts a stringified boolean to its bool representation.
 
     Args:

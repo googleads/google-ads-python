@@ -13,9 +13,8 @@
 # limitations under the License.
 """Errors used by the Google Ads API library."""
 
-
-from typing import Any
 import grpc
+from proto import Message as ProtobufMessageType
 
 
 class GoogleAdsException(Exception):
@@ -25,7 +24,7 @@ class GoogleAdsException(Exception):
         self,
         error: grpc.RpcError,
         call: grpc.Call,
-        failure: Any,  # Replace Any with GoogleAdsFailure when available
+        failure: ProtobufMessageType,
         request_id: str,
     ) -> None:
         """Initializer.
@@ -39,5 +38,5 @@ class GoogleAdsException(Exception):
         """
         self.error: grpc.RpcError = error
         self.call: grpc.Call = call
-        self.failure: Any = failure  # Replace Any with GoogleAdsFailure
+        self.failure: ProtobufMessageType = failure
         self.request_id: str = request_id

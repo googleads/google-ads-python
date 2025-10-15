@@ -20,16 +20,16 @@ from typing import Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.enums.types import (
+from google.ads.googleads.v22.enums.types import (
     AudienceInsightsDimensionEnum,
 )
-from google.ads.googleads.v21.services.services.audience_insights_service import (
+from google.ads.googleads.v22.services.services.audience_insights_service import (
     AudienceInsightsServiceClient,
 )
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v21.services.types.audience_insights_service import (
+from google.ads.googleads.v22.services.types.audience_insights_service import (
     GenerateAudienceCompositionInsightsRequest,
     GenerateAudienceCompositionInsightsResponse,
     GenerateSuggestedTargetingInsightsRequest,
@@ -38,7 +38,7 @@ from google.ads.googleads.v21.services.types.audience_insights_service import (
     ListAudienceInsightsAttributesRequest,
     ListAudienceInsightsAttributesResponse,
 )
-from google.ads.googleads.v21.common.types import (
+from google.ads.googleads.v22.common.types import (
     AudienceInsightsAttribute,
     LocationInfo,
 )
@@ -271,7 +271,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

@@ -21,32 +21,32 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.common.types.bidding import TargetSpend
-from google.ads.googleads.v21.resources.types.bidding_strategy import (
+from google.ads.googleads.v22.common.types.bidding import TargetSpend
+from google.ads.googleads.v22.resources.types.bidding_strategy import (
     BiddingStrategy,
 )
-from google.ads.googleads.v21.resources.types.campaign import Campaign
-from google.ads.googleads.v21.resources.types.campaign_budget import (
+from google.ads.googleads.v22.resources.types.campaign import Campaign
+from google.ads.googleads.v22.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v21.services.services.bidding_strategy_service import (
+from google.ads.googleads.v22.services.services.bidding_strategy_service import (
     BiddingStrategyServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_budget_service import (
+from google.ads.googleads.v22.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_service import (
+from google.ads.googleads.v22.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v21.services.types.bidding_strategy_service import (
+from google.ads.googleads.v22.services.types.bidding_strategy_service import (
     BiddingStrategyOperation,
     MutateBiddingStrategiesResponse,
 )
-from google.ads.googleads.v21.services.types.campaign_budget_service import (
+from google.ads.googleads.v22.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v21.services.types.campaign_service import (
+from google.ads.googleads.v22.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     main(googleads_client, args.customer_id)

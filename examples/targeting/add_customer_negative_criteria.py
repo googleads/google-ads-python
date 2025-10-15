@@ -23,13 +23,13 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.resources.types.customer_negative_criterion import (
+from google.ads.googleads.v22.resources.types.customer_negative_criterion import (
     CustomerNegativeCriterion,
 )
-from google.ads.googleads.v21.services.services.customer_negative_criterion_service import (
+from google.ads.googleads.v22.services.services.customer_negative_criterion_service import (
     CustomerNegativeCriterionServiceClient,
 )
-from google.ads.googleads.v21.services.types.customer_negative_criterion_service import (
+from google.ads.googleads.v22.services.types.customer_negative_criterion_service import (
     CustomerNegativeCriterionOperation,
     MutateCustomerNegativeCriteriaResponse,
 )
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

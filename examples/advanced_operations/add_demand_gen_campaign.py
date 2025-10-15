@@ -25,13 +25,13 @@ from uuid import uuid4
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.common.types import (
+from google.ads.googleads.v22.common.types import (
     AdImageAsset,
     AdTextAsset,
     AdVideoAsset,
     DemandGenVideoResponsiveAdInfo,
 )
-from google.ads.googleads.v21.resources.types import (
+from google.ads.googleads.v22.resources.types import (
     Ad,
     AdGroup,
     AdGroupAd,
@@ -39,10 +39,10 @@ from google.ads.googleads.v21.resources.types import (
     Campaign,
     CampaignBudget,
 )
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v21.services.types import (
+from google.ads.googleads.v22.services.types import (
     AdGroupAdOperation,
     AdGroupOperation,
     AssetOperation,
@@ -430,7 +430,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

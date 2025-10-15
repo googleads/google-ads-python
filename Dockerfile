@@ -1,40 +1,25 @@
-ARG image_name=ubuntu:20.04
-FROM ${image_name}
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG PYTHON_VERSIONS="3.13 3.12 3.11 3.10 3.9"
+
 ENV TZ=Etc/GMT
+ENV PATH="$PATH:/root/.local/bin"
+ENV NOX_DEFAULT_VENV_BACKEND=uv
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 COPY . /google-ads-python
+
+RUN uv python install ${PYTHON_VERSIONS} && \
+    uv tool install nox[uv]
+
 RUN apt-get update -qy && \
+    apt-get upgrade -qy && \
     apt-get install -qy --no-install-recommends \
         ca-certificates \
         curl \
-        gnupg2 && \
-    . /etc/os-release && \
-    echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu ${UBUNTU_CODENAME} main" > /etc/apt/sources.list.d/deadsnakes.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F23C5A6CF475977595C89F51BA6932366A755776 && \
-    apt-get update -qy && \
-    apt-get install -qy --no-install-recommends \
+        gnupg2 \
         git \
-        openssh-client \
-        python3.8 \
-        python3.8-distutils \
-        python3.9 \
-        python3.10 \
-        python3.11 \
-        python3.12 && \
-    curl -fsSo /tmp/get-pip.py https://bootstrap.pypa.io/pip/3.8/get-pip.py && \
-    python3.8 /tmp/get-pip.py && \
-    python3.8 -m pip install --no-cache-dir --upgrade pip && \
-    python3.9 /tmp/get-pip.py && \
-    python3.9 -m pip install --no-cache-dir --upgrade pip && \
-    python3.10 /tmp/get-pip.py && \
-    python3.10 -m pip install --no-cache-dir --upgrade pip && \
-    python3.11 /tmp/get-pip.py && \
-    python3.11 -m pip install --no-cache-dir --upgrade pip && \
-    python3.12 /tmp/get-pip.py && \
-    python3.12 -m pip install --no-cache-dir --upgrade pip && \
-    rm /tmp/get-pip.py && \
-    python3 -m pip install --no-cache-dir "nox>=2020.12.31,<2022.6" && \
-    rm -rf /var/cache/apt/lists
+        openssh-client
 
 WORKDIR "/google-ads-python"

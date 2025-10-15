@@ -24,10 +24,10 @@ from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.services.services.conversion_upload_service import (
+from google.ads.googleads.v22.services.services.conversion_upload_service import (
     ConversionUploadServiceClient,
 )
-from google.ads.googleads.v21.services.types.conversion_upload_service import (
+from google.ads.googleads.v22.services.types.conversion_upload_service import (
     CallConversion,
     CustomVariable,
     UploadCallConversionsResponse,
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     parser = argparse.ArgumentParser(

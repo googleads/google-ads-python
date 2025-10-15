@@ -26,53 +26,53 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.resources.types.ad_group import AdGroup
-from google.ads.googleads.v21.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v21.resources.types.ad_group_criterion import (
+from google.ads.googleads.v22.resources.types.ad_group import AdGroup
+from google.ads.googleads.v22.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v22.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v21.resources.types.asset import Asset
-from google.ads.googleads.v21.resources.types.campaign import Campaign
-from google.ads.googleads.v21.services.services.ad_group_ad_service import (
+from google.ads.googleads.v22.resources.types.asset import Asset
+from google.ads.googleads.v22.resources.types.campaign import Campaign
+from google.ads.googleads.v22.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v21.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v22.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v21.services.services.ad_group_service import (
+from google.ads.googleads.v22.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v21.services.services.asset_service import (
+from google.ads.googleads.v22.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_service import (
+from google.ads.googleads.v22.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v21.services.types.ad_group_ad_service import (
+from google.ads.googleads.v22.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
-from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v22.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
 )
-from google.ads.googleads.v21.services.types.ad_group_service import (
+from google.ads.googleads.v22.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
-from google.ads.googleads.v21.services.types.asset_service import (
+from google.ads.googleads.v22.services.types.asset_service import (
     AssetOperation,
     MutateAssetsResponse,
 )
-from google.ads.googleads.v21.services.types.campaign_service import (
+from google.ads.googleads.v22.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
-from google.ads.googleads.v21.common.types.ad_asset import (
+from google.ads.googleads.v22.common.types.ad_asset import (
     AdImageAsset,
     AdTextAsset,
 )
-from google.ads.googleads.v21.common.types.ad_type_infos import (
+from google.ads.googleads.v22.common.types.ad_type_infos import (
     ResponsiveDisplayAdInfo,
 )
 
@@ -427,7 +427,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

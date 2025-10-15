@@ -29,36 +29,36 @@ from google.rpc import status_pb2
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.common.types.offline_user_data import (
+from google.ads.googleads.v22.common.types.offline_user_data import (
     ItemAttribute,
     StoreSalesMetadata,
     StoreSalesThirdPartyMetadata,
     UserData,
     UserIdentifier,
 )
-from google.ads.googleads.v21.enums.types.offline_user_data_job_status import (
+from google.ads.googleads.v22.enums.types.offline_user_data_job_status import (
     OfflineUserDataJobStatusEnum,
 )
-from google.ads.googleads.v21.enums.types.offline_user_data_job_type import (
+from google.ads.googleads.v22.enums.types.offline_user_data_job_type import (
     OfflineUserDataJobTypeEnum,
 )
-from google.ads.googleads.v21.errors.types.errors import (
+from google.ads.googleads.v22.errors.types.errors import (
     GoogleAdsError,
     GoogleAdsFailure,
 )
-from google.ads.googleads.v21.resources.types.offline_user_data_job import (
+from google.ads.googleads.v22.resources.types.offline_user_data_job import (
     OfflineUserDataJob,
 )
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v21.services.services.offline_user_data_job_service import (
+from google.ads.googleads.v22.services.services.offline_user_data_job_service import (
     OfflineUserDataJobServiceClient,
 )
-from google.ads.googleads.v21.services.types.google_ads_service import (
+from google.ads.googleads.v22.services.types.google_ads_service import (
     GoogleAdsRow,
 )
-from google.ads.googleads.v21.services.types.offline_user_data_job_service import (
+from google.ads.googleads.v22.services.types.offline_user_data_job_service import (
     AddOfflineUserDataJobOperationsRequest,
     AddOfflineUserDataJobOperationsResponse,
     CreateOfflineUserDataJobResponse,
@@ -670,7 +670,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(

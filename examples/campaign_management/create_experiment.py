@@ -28,32 +28,32 @@ from google.api_core import protobuf_helpers
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.services.types.experiment_service import (
+from google.ads.googleads.v22.services.types.experiment_service import (
     ExperimentOperation,
     MutateExperimentsResponse,
 )
-from google.ads.googleads.v21.services.types.experiment_arm_service import (
+from google.ads.googleads.v22.services.types.experiment_arm_service import (
     ExperimentArmOperation,
     MutateExperimentArmsRequest,
     MutateExperimentArmsResponse,
 )
-from google.ads.googleads.v21.resources.types.experiment import Experiment
-from google.ads.googleads.v21.resources.types.experiment_arm import (
+from google.ads.googleads.v22.resources.types.experiment import Experiment
+from google.ads.googleads.v22.resources.types.experiment_arm import (
     ExperimentArm,
 )
-from google.ads.googleads.v21.services.services.experiment_service import (
+from google.ads.googleads.v22.services.services.experiment_service import (
     ExperimentServiceClient,
 )
-from google.ads.googleads.v21.services.services.experiment_arm_service import (
+from google.ads.googleads.v22.services.services.experiment_arm_service import (
     ExperimentArmServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_service import (
+from google.ads.googleads.v22.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v21.services.types.campaign_service import (
+from google.ads.googleads.v22.services.types.campaign_service import (
     CampaignOperation,
 )
-from google.ads.googleads.v21.resources.types.campaign import Campaign
+from google.ads.googleads.v22.resources.types.campaign import Campaign
 
 
 def main(
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

@@ -37,40 +37,40 @@ from google.rpc import status_pb2
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v21.services.services.user_list_service import (
+from google.ads.googleads.v22.services.services.user_list_service import (
     UserListServiceClient,
 )
-from google.ads.googleads.v21.services.services.offline_user_data_job_service import (
+from google.ads.googleads.v22.services.services.offline_user_data_job_service import (
     OfflineUserDataJobServiceClient,
 )
-from google.ads.googleads.v21.services.types.google_ads_service import (
+from google.ads.googleads.v22.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
 )
-from google.ads.googleads.v21.services.types.user_list_service import (
+from google.ads.googleads.v22.services.types.user_list_service import (
     UserListOperation,
     MutateUserListsResponse,
 )
-from google.ads.googleads.v21.resources.types.user_list import UserList
-from google.ads.googleads.v21.services.types.offline_user_data_job_service import (
+from google.ads.googleads.v22.resources.types.user_list import UserList
+from google.ads.googleads.v22.services.types.offline_user_data_job_service import (
     AddOfflineUserDataJobOperationsRequest,
     OfflineUserDataJobOperation,
     AddOfflineUserDataJobOperationsResponse,
     CreateOfflineUserDataJobResponse,
 )
-from google.ads.googleads.v21.resources.types.offline_user_data_job import (
+from google.ads.googleads.v22.resources.types.offline_user_data_job import (
     OfflineUserDataJob,
 )
-from google.ads.googleads.v21.common.types.criteria import (
+from google.ads.googleads.v22.common.types.criteria import (
     AddressInfo,
 )
-from google.ads.googleads.v21.common.types.offline_user_data import (
+from google.ads.googleads.v22.common.types.offline_user_data import (
     UserData,
     UserIdentifier,
 )
-from google.ads.googleads.v21.errors.types.errors import (
+from google.ads.googleads.v22.errors.types.errors import (
     GoogleAdsFailure,
     GoogleAdsError,
 )
@@ -623,7 +623,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(

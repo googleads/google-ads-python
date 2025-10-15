@@ -21,46 +21,46 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.common.types.asset_types import (
+from google.ads.googleads.v22.common.types.asset_types import (
     DynamicEducationAsset,
 )
-from google.ads.googleads.v21.resources.types.asset import Asset
-from google.ads.googleads.v21.resources.types.asset_set import AssetSet
-from google.ads.googleads.v21.resources.types.asset_set_asset import (
+from google.ads.googleads.v22.resources.types.asset import Asset
+from google.ads.googleads.v22.resources.types.asset_set import AssetSet
+from google.ads.googleads.v22.resources.types.asset_set_asset import (
     AssetSetAsset,
 )
-from google.ads.googleads.v21.resources.types.campaign_asset_set import (
+from google.ads.googleads.v22.resources.types.campaign_asset_set import (
     CampaignAssetSet,
 )
-from google.ads.googleads.v21.services.services.asset_service import (
+from google.ads.googleads.v22.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v21.services.types.asset_service import (
+from google.ads.googleads.v22.services.types.asset_service import (
     AssetOperation,
     MutateAssetsResponse,
 )
-from google.ads.googleads.v21.services.services.asset_set_service import (
+from google.ads.googleads.v22.services.services.asset_set_service import (
     AssetSetServiceClient,
 )
-from google.ads.googleads.v21.services.types.asset_set_service import (
+from google.ads.googleads.v22.services.types.asset_set_service import (
     AssetSetOperation,
     MutateAssetSetsResponse,
 )
-from google.ads.googleads.v21.services.services.asset_set_asset_service import (
+from google.ads.googleads.v22.services.services.asset_set_asset_service import (
     AssetSetAssetServiceClient,
 )
-from google.ads.googleads.v21.services.types.asset_set_asset_service import (
+from google.ads.googleads.v22.services.types.asset_set_asset_service import (
     AssetSetAssetOperation,
     MutateAssetSetAssetsResponse,
 )
-from google.ads.googleads.v21.services.services.campaign_asset_set_service import (
+from google.ads.googleads.v22.services.services.campaign_asset_set_service import (
     CampaignAssetSetServiceClient,
 )
-from google.ads.googleads.v21.services.types.campaign_asset_set_service import (
+from google.ads.googleads.v22.services.types.campaign_asset_set_service import (
     CampaignAssetSetOperation,
     MutateCampaignAssetSetsResponse,
 )
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
 
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

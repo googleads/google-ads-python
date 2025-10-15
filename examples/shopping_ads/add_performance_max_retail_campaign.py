@@ -47,64 +47,64 @@ from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-from google.ads.googleads.v21.enums.types.conversion_action_category import (
+from google.ads.googleads.v22.enums.types.conversion_action_category import (
     ConversionActionCategoryEnum,
 )
-from google.ads.googleads.v21.enums.types.conversion_origin import (
+from google.ads.googleads.v22.enums.types.conversion_origin import (
     ConversionOriginEnum,
 )
-from google.ads.googleads.v21.enums.types.asset_field_type import (
+from google.ads.googleads.v22.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v21.resources.types.asset import Asset
-from google.ads.googleads.v21.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v21.resources.types.asset_group_asset import (
+from google.ads.googleads.v22.resources.types.asset import Asset
+from google.ads.googleads.v22.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v22.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v21.resources.types.asset_group_listing_group_filter import (
+from google.ads.googleads.v22.resources.types.asset_group_listing_group_filter import (
     AssetGroupListingGroupFilter,
 )
-from google.ads.googleads.v21.resources.types.campaign import Campaign
-from google.ads.googleads.v21.resources.types.campaign_asset import (
+from google.ads.googleads.v22.resources.types.campaign import Campaign
+from google.ads.googleads.v22.resources.types.campaign_asset import (
     CampaignAsset,
 )
-from google.ads.googleads.v21.resources.types.campaign_budget import (
+from google.ads.googleads.v22.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v21.resources.types.campaign_conversion_goal import (
+from google.ads.googleads.v22.resources.types.campaign_conversion_goal import (
     CampaignConversionGoal,
 )
-from google.ads.googleads.v21.resources.types.campaign_criterion import (
+from google.ads.googleads.v22.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v21.services.services.asset_group_service import (
+from google.ads.googleads.v22.services.services.asset_group_service import (
     AssetGroupServiceClient,
 )
-from google.ads.googleads.v21.services.services.asset_service import (
+from google.ads.googleads.v22.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_budget_service import (
+from google.ads.googleads.v22.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_conversion_goal_service import (
+from google.ads.googleads.v22.services.services.campaign_conversion_goal_service import (
     CampaignConversionGoalServiceClient,
 )
-from google.ads.googleads.v21.services.services.campaign_service import (
+from google.ads.googleads.v22.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v21.services.services.geo_target_constant_service import (
+from google.ads.googleads.v22.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v21.services.services.google_ads_service import (
+from google.ads.googleads.v22.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v21.services.types.google_ads_service import (
+from google.ads.googleads.v22.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperationResponse,
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v21.services.types.google_ads_service import (
+from google.ads.googleads.v22.services.types.google_ads_service import (
     MutateOperation,
 )
 
@@ -362,16 +362,6 @@ def create_performance_max_campaign_operation(
     # feeds.
     # campaign.shopping_setting.feed_label = "INSERT_FEED_LABEL_HERE"
 
-    # Set the Final URL expansion opt out. This flag is specific to
-    # Performance Max campaigns. If opted out (True), only the final URLs in
-    # the asset group or URLs specified in the advertiser's Google Merchant
-    # If opted in (False), the entire domain will be targeted. For best
-    # results, set this value to false to opt in and allow URL expansions. You
-    # can optionally add exclusions to limit traffic to parts of your website.
-    # For a Retail campaign, we want the final URL's to be limited to
-    # those explicitly surfaced via GMC.
-    campaign.url_expansion_opt_out = True
-
     # Set if the campaign is enabled for brand guidelines. For more information
     # on brand guidelines, see https://support.google.com/google-ads/answer/14934472.
     campaign.brand_guidelines_enabled = brand_guidelines_enabled
@@ -402,6 +392,19 @@ def create_performance_max_campaign_operation(
     # Optional fields
     campaign.start_date = (datetime.now() + timedelta(1)).strftime("%Y%m%d")
     campaign.end_date = (datetime.now() + timedelta(365)).strftime("%Y%m%d")
+
+    # Configures the optional opt-in/out status for asset automation settings.
+    for asset_automation_type_enum in [
+        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_EXTRACTION,
+        client.enums.AssetAutomationTypeEnum.FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION,
+        client.enums.AssetAutomationTypeEnum.TEXT_ASSET_AUTOMATION,
+        client.enums.AssetAutomationTypeEnum.GENERATE_ENHANCED_YOUTUBE_VIDEOS,
+        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_ENHANCEMENT
+    ]:
+        asset_automattion_setting: Campaign.AssetAutomationSetting = client.get_type("Campaign").AssetAutomationSetting()
+        asset_automattion_setting.asset_automation_type = asset_automation_type_enum
+        asset_automattion_setting.asset_automation_status = client.enums.AssetAutomationStatusEnum.OPTED_IN
+        campaign.asset_automation_settings.append(asset_automattion_setting)
 
     return mutate_operation
     # [END add_performance_max_retail_campaign_3]
@@ -1248,7 +1251,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     try:

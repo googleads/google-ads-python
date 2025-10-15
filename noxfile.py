@@ -38,7 +38,6 @@ COVERAGE_COMMAND = [
     "-m",
     "--omit=.nox/*,examples/*,*/__init__.py",
 ]
-FREEZE_COMMAND = ["python", "-m", "pip", "freeze"]
 TEST_DEPENDENCIES = [
     "pyfakefs>=5.0.0,<6.0",
     "coverage==6.5.0",
@@ -46,6 +45,7 @@ TEST_DEPENDENCIES = [
 CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
 CONSTRAINTS_DIR = os.path.join(CURRENT_DIR, "tests", "constraints")
 
+nox.options.default_venv_backend = "uv|virtualenv"
 
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
@@ -53,7 +53,6 @@ def tests(session, protobuf_implementation):
     session.install("-e", ".")
     # modules for testing
     session.install(*TEST_DEPENDENCIES)
-    session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
         env={
@@ -81,7 +80,6 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
 
     session.install("-e", ".")
     session.install(*TEST_DEPENDENCIES, "-c", constraints_file)
-    session.run(*FREEZE_COMMAND)
     session.run(
         *TEST_COMMAND,
         env={

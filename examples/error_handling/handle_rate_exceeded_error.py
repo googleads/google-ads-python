@@ -29,14 +29,14 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v21.errors.types.quota_error import QuotaErrorEnum
-from google.ads.googleads.v21.services.services.ad_group_service import (
+from google.ads.googleads.v22.errors.types.quota_error import QuotaErrorEnum
+from google.ads.googleads.v22.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v21.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v22.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v21.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v22.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaRequest,
     MutateAdGroupCriteriaResponse,
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v21"
+        version="v22"
     )
 
     main(googleads_client, args.customer_id, args.ad_group_id)

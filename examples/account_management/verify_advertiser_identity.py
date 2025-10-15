@@ -24,13 +24,13 @@ from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v19.enums.types.identity_verification_program_status import (
+from google.ads.googleads.v22.enums.types.identity_verification_program_status import (
     IdentityVerificationProgramStatusEnum,
 )
-from google.ads.googleads.v19.services.services.identity_verification_service.client import (
+from google.ads.googleads.v22.services.services.identity_verification_service.client import (
     IdentityVerificationServiceClient,
 )
-from google.ads.googleads.v19.services.types.identity_verification_service import (
+from google.ads.googleads.v22.services.types.identity_verification_service import (
     GetIdentityVerificationResponse,
     IdentityVerification,
     IdentityVerificationProgress,
@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v21")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v22")
 
     try:
         main(googleads_client, args.customer_id)

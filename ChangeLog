@@ -1,3 +1,6 @@
+* 28.2.0
+- Add support for Python 3.14.
+
 * 28.1.1
 - Upgrade minimum version of nox so it's compatible with the "uv" backend.
 

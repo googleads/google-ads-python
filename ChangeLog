@@ -1,3 +1,6 @@
+* 28.1.1
+- Upgrade minimum version of nox so it's compatible with the "uv" backend.
+
 * 28.1.0
 - Google Ads API v22_0 release.
 

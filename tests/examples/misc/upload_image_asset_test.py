@@ -96,7 +96,8 @@ class TestUploadImageAsset(unittest.TestCase):
 
     @mock.patch("sys.exit")
     @mock.patch("builtins.print")
-    def test_main_google_ads_exception(self, mock_print_for_exception, mock_sys_exit_for_exception): # Renamed for clarity
+    @mock.patch("examples.misc.upload_image_asset.get_image_bytes_from_url")
+    def test_main_google_ads_exception(self, mock_print_for_exception, mock_sys_exit_for_exception, bytes_from_url_mock): # Renamed for clarity
         """Tests handling of GoogleAdsException."""
         customer_id = "1234567890"
 

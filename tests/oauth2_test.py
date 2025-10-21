@@ -178,7 +178,7 @@ class OAuth2Tests(TestCase):
         mock_credentials = mock.Mock()
         mock_request = mock.Mock()
         with mock.patch.object(
-            oauth2, "ApplicationDefaultCredentials", return_value=mock_credentials
+            oauth2, "ApplicationDefaultCredentials", return_value=(mock_credentials, None)
         ) as mock_initializer, mock.patch.object(
             oauth2, "Request", return_value=mock_request
         ) as mock_request_class:

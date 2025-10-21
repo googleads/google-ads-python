@@ -81,3 +81,11 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 # don't have username and password, just specify host and port.                          #
 # ########################################################################################
 # http_proxy: http://user:password@localhost:8000
+
+# Application default credentials configuration
+##########################################################################################
+# Below you can specify whether to initialize the library using Application Default      #
+# Credentials (ADC). To understand how ADC discovers credentials in a given environment, #
+# see: https://developers.google.com/identity/protocols/application-default-credentials  #
+# ########################################################################################
+# use_application_default_credentials: True

@@ -19,6 +19,8 @@ from requests import Session
 
 from google.oauth2.service_account import Credentials as ServiceAccountCreds
 from google.oauth2.credentials import Credentials as InstalledAppCredentials
+from google.auth import default as ApplicationDefaultCredentials
+from google.auth.credentials import Credentials as CredentialsBaseClass
 from google.auth.transport.requests import Request
 
 from google.ads.googleads import config
@@ -109,9 +111,23 @@ def get_service_account_credentials(
     )
 
 
-def get_credentials(
-    config_data: dict[str, Any]
-) -> Union[InstalledAppCredentials, ServiceAccountCreds]:
+@_initialize_credentials_decorator
+def get_application_default_credentials(
+    scopes: list[str] = _SERVICE_ACCOUNT_SCOPES
+) -> CredentialsBaseClass:
+    """Loads Application Default Credentials as returns them.
+
+    Args:
+        scopes: A list of additional scopes.
+
+    Returns:
+        An instance of auth.credentials.Credentials
+    """
+    (credentials, _) = ApplicationDefaultCredentials(scopes=scopes)
+    return credentials
+
+
+def get_credentials(config_data: dict[str, Any]) -> CredentialsBaseClass:
     """Decides which type of credentials to return based on the given config.
 
     Args:
@@ -127,20 +143,23 @@ def get_credentials(
         str, ...
     ] = config.get_oauth2_required_service_account_keys()
 
+    if config_data.get("use_application_default_credentials"):
+        # Using Application Default Credentials
+        return get_application_default_credentials()
     if all(key in config_data for key in required_installed_app_keys):
         # Using the Installed App Flow
         return get_installed_app_credentials(
-            config_data.get("client_id"),  # type: ignore[arg-type]
-            config_data.get("client_secret"),  # type: ignore[arg-type]
-            config_data.get("refresh_token"),  # type: ignore[arg-type]
-            http_proxy=config_data.get("http_proxy"),  # type: ignore[arg-type]
+            config_data.get("client_id"),
+            config_data.get("client_secret"),
+            config_data.get("refresh_token"),
+            http_proxy=config_data.get("http_proxy"),
         )
     elif all(key in config_data for key in required_service_account_keys):
         # Using the Service Account Flow
         return get_service_account_credentials(
-            config_data.get("json_key_file_path"),  # type: ignore[arg-type]
-            config_data.get("impersonated_email"),  # type: ignore[arg-type]
-            http_proxy=config_data.get("http_proxy"),  # type: ignore[arg-type]
+            config_data.get("json_key_file_path"),
+            config_data.get("impersonated_email"),
+            http_proxy=config_data.get("http_proxy"),
         )
     else:
         raise ValueError(

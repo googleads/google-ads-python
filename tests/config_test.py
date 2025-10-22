@@ -38,6 +38,7 @@ class ConfigTest(FileTestCase):
         self.impersonated_email = "impersonated@account.com"
         self.use_proto_plus = False
         self.use_cloud_org_for_api_access = False
+        self.use_application_default_credentials = True
         # The below fields are defaults that include required keys.
         # They are merged with other keys in individual tests, and isolated
         # here so that new required keys don't need to be added to each test.
@@ -355,6 +356,7 @@ class ConfigTest(FileTestCase):
                 "GOOGLE_ADS_LINKED_CUSTOMER_ID": self.linked_customer_id,
                 "GOOGLE_ADS_JSON_KEY_FILE_PATH": self.json_key_file_path,
                 "GOOGLE_ADS_IMPERSONATED_EMAIL": self.impersonated_email,
+                "GOOGLE_ADS_USE_APPLICATION_DEFAULT_CREDENTIALS": self.use_application_default_credentials,
             },
         }
 
@@ -374,6 +376,7 @@ class ConfigTest(FileTestCase):
                     "linked_customer_id": self.linked_customer_id,
                     "json_key_file_path": self.json_key_file_path,
                     "impersonated_email": self.impersonated_email,
+                    "use_application_default_credentials": self.use_application_default_credentials
                 },
             )
             config_spy.assert_called_once()
@@ -689,3 +692,16 @@ class ConfigTest(FileTestCase):
         self._create_mock_yaml({})
         result = config.load_from_yaml_file()
         self.assertEqual(result.get("use_cloud_org_for_api_access"), None)
+
+    def test_load_from_yaml_file_use_account_default_credentials(self):
+        """Should load "use_account_default_credentials" config from a yaml."""
+        self._create_mock_yaml({"use_account_default_credentials": True})
+
+        result = config.load_from_yaml_file()
+        self.assertEqual(result["use_account_default_credentials"], True)
+
+    def test_load_from_yaml_file_use_account_default_credentials_not_set(self):
+        """Should set "use_account_default_credentials" as None when not set."""
+        self._create_mock_yaml({})
+        result = config.load_from_yaml_file()
+        self.assertEqual(result.get("use_account_default_credentials"), None)

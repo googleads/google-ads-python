@@ -34,6 +34,7 @@ _OPTIONAL_KEYS = (
     "linked_customer_id",
     "http_proxy",
     "use_cloud_org_for_api_access",
+    "use_application_default_credentials"
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
@@ -158,6 +159,16 @@ def _config_parser_decorator(func: F) -> F:
             # converted to the boolean True.
             value: Union[str, bool] = parsed_config.get("use_proto_plus", False)
             parsed_config["use_proto_plus"]: bool = disambiguate_string_bool(value)
+
+        if "use_application_default_credentials" in config_keys:
+            # When loaded from YAML, YAML string or a dict, this value is
+            # evaluated as a bool. If it's loaded from an environment variable
+            # it's evaluated as a string. If set to "False" as an environment
+            # variable we need to manually change it to the bool False because
+            # the string "False" is truthy and can easily be incorrectly
+            # converted to the boolean True.
+            value: Union[str, bool] = parsed_config.get("use_application_default_credentials", False)
+            parsed_config["use_application_default_credentials"]: bool = disambiguate_string_bool(value)
 
         return parsed_config
 

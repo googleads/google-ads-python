@@ -173,3 +173,28 @@ class OAuth2Tests(TestCase):
                 self.client_id, self.client_secret, self.refresh_token
             )
             mock_request_class.assert_called_once_with()
+
+    def test_get_application_default_credentials(self):
+        mock_credentials = mock.Mock()
+        mock_request = mock.Mock()
+        with mock.patch.object(
+            oauth2, "ApplicationDefaultCredentials", return_value=(mock_credentials, None)
+        ) as mock_initializer, mock.patch.object(
+            oauth2, "Request", return_value=mock_request
+        ) as mock_request_class:
+            result = oauth2.get_application_default_credentials(self.scopes)
+
+            mock_initializer.assert_called_once_with(scopes=self.scopes)
+            mock_request_class.assert_called_once()
+            result.refresh.assert_called_once_with(mock_request)
+
+    def test_get_credentials_application_default(self):
+        mock_config = {
+            "use_application_default_credentials": True
+        }
+
+        with mock.patch.object(
+            oauth2, "get_application_default_credentials", return_value=None
+        ) as mock_initializer:
+            oauth2.get_credentials(mock_config)
+            mock_initializer.assert_called_once()

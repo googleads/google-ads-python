@@ -1,3 +1,8 @@
+* 28.3.0
+- Add support for Application Default Credentials (ADC) functionality.
+- Add annotations to google/ads/googleads/*.py files.
+- Add minor unit test improvements.
+
 * 28.2.0
 - Add support for Python 3.14.
 

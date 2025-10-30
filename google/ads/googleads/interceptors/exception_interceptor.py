@@ -19,9 +19,13 @@ to determine if a non-retryable Google Ads API error has been encountered. If
 so it translates the error to a GoogleAdsFailure instance and raises it.
 """
 
+from typing import Any, Callable, Union
+
+from google.protobuf.message import Message
 import grpc
 
 from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+from grpc._interceptor import _UnaryOutcome as UnaryOutcome
 
 from .interceptor import Interceptor
 from .response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
@@ -32,7 +36,7 @@ class ExceptionInterceptor(
 ):
     """An interceptor that wraps rpc exceptions."""
 
-    def __init__(self, api_version, use_proto_plus=False):
+    def __init__(self, api_version: str, use_proto_plus: bool = False):
         """Initializes the ExceptionInterceptor.
 
         Args:
@@ -44,7 +48,7 @@ class ExceptionInterceptor(
         self._api_version = api_version
         self._use_proto_plus = use_proto_plus
 
-    def _handle_grpc_failure(self, response):
+    def _handle_grpc_failure(self, response: Union[grpc.Call, grpc.Future]):
         """Attempts to convert failed responses to a GoogleAdsException object.
 
         Handles failed gRPC responses of by attempting to convert them
@@ -70,7 +74,12 @@ class ExceptionInterceptor(
         """
         raise self._get_error_from_response(response)
 
-    def intercept_unary_unary(self, continuation, client_call_details, request):
+    def intercept_unary_unary(
+        self,
+        continuation: Callable[[grpc.ClientCallDetails, Message], grpc.Call],
+        client_call_details: grpc.ClientCallDetails,
+        request: Message,
+    ):
         """Intercepts and wraps exceptions in the rpc response.
 
         Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
@@ -92,8 +101,8 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response = continuation(client_call_details, request)
-        exception = response.exception()
+        response: UnaryOutcome = continuation(client_call_details, request)
+        exception: Optional[grpc.RpcError] = response.exception()
 
         if exception:
             self._handle_grpc_failure(response)
@@ -103,7 +112,10 @@ class ExceptionInterceptor(
             )
 
     def intercept_unary_stream(
-        self, continuation, client_call_details, request
+        self,
+        continuation: Callable[[grpc.ClientCallDetails, Message], grpc.Call],
+        client_call_details: grpc.ClientCallDetails,
+        request: Message,
     ):
         """Intercepts and wraps exceptions in the rpc response.
 
@@ -126,7 +138,7 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response = continuation(client_call_details, request)
+        response: UnaryOutcome = continuation(client_call_details, request)
         return _UnaryStreamWrapper(
             response,
             self._handle_grpc_failure,

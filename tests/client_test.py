@@ -490,18 +490,49 @@ class GoogleAdsClientTest(TestCase):
     def test_get_service(self):
         # Retrieve service names for all defined service clients.
         for ver in valid_versions:
-            services_path = f"google.ads.googleads.{ver}"
-            service_names = [
-                f'{name.rsplit("ServiceClient")[0]}Service'
-                for name in dir(import_module(services_path))
-                if "ServiceClient" in name
+            services_filepath = f"google/ads/googleads/{ver}/services/services"
+            # Retrieve list of all the services that exist under the
+            # {version}/services/services directory.
+            service_dir_names = [
+                name for name in os.listdir(services_filepath) if name.endswith("_service")
             ]
 
-            client = self._create_test_client()
+            client = self._create_test_client(version=ver)
 
-            # Iterate through retrieval of all service clients by name.
-            for service_name in service_names:
-                client.get_service(service_name, version=ver)
+            for dir_name in service_dir_names:
+                # Converts from snake case to title case, for example:
+                # google_ads_service --> GoogleAdsService
+                service_name = ''.join(
+                    [part.capitalize() for part in dir_name.split("_")]
+                )
+
+                # Load each service module
+                svc = client.get_service(service_name)
+                self.assertEqual(svc.__class__.__name__, f"{service_name}Client")
+
+    def test_get_async_service(self):
+        # Retrieve service names for all defined service clients.
+        for ver in valid_versions:
+            services_filepath = f"google/ads/googleads/{ver}/services/services"
+            # Retrieve list of all the services that exist under the
+            # {version}/services/services directory.
+            service_dir_names = [
+                name for name in os.listdir(services_filepath) if name.endswith("_service")
+            ]
+
+            client = self._create_test_client(version=ver)
+
+            for dir_name in service_dir_names:
+                # Converts from snake case to title case, for example:
+                # google_ads_service --> GoogleAdsService
+                service_name = ''.join(
+                    [part.capitalize() for part in dir_name.split("_")]
+                )
+
+                # Load each service module
+                svc = client.get_service(service_name, is_async=True)
+                self.assertEqual(svc.__class__.__name__, f"{service_name}AsyncClient")
+
 
     def test_get_service_custom_endpoint(self):
         service_name = "GoogleAdsService"

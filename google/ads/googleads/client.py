@@ -36,6 +36,7 @@ from typing import Any, Dict, List, Tuple, Union
 _logger = logging.getLogger(__name__)
 
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
+_ASYNC_SERVICE_CLIENT_TEMPLATE = "{}AsyncClient"
 
 _VALID_API_VERSIONS = ["v22", "v21", "v20", "v19"]
 _MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
@@ -360,6 +361,7 @@ class GoogleAdsClient:
         name: str,
         version: str = _DEFAULT_VERSION,
         interceptors: Union[list, None] = None,
+        is_async: bool = False,
     ) -> Any:
         """Returns a service client instance for the specified service_name.
 
@@ -372,6 +374,8 @@ class GoogleAdsClient:
             interceptors: an optional list of interceptors to include in
               requests. NOTE: this parameter is not intended for non-Google use
               and is not officially supported.
+            is_async: whether or not to retrieve the async version of the
+              service client being requested.
 
         Returns:
             A service client instance associated with the given service_name.
@@ -391,8 +395,14 @@ class GoogleAdsClient:
 
         try:
             service_module: Any = import_module(f"{services_path}.{snaked}")
+
+            if is_async:
+                service_name = _ASYNC_SERVICE_CLIENT_TEMPLATE.format(name)
+            else:
+                service_name = _SERVICE_CLIENT_TEMPLATE.format(name)
+
             service_client_class: Any = util.get_nested_attr(
-                service_module, _SERVICE_CLIENT_TEMPLATE.format(name)
+                service_module, service_name
             )
         except (AttributeError, ModuleNotFoundError):
             raise ValueError(

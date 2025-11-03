@@ -1,3 +1,6 @@
+* 28.4.0
+-  Update GoogleAdsClient.get_services method to expose async service clients.
+
 * 28.3.0
 - Add support for Application Default Credentials (ADC) functionality.
 - Add annotations to google/ads/googleads/*.py files.

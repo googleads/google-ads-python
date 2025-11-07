@@ -16,7 +16,7 @@ from copy import deepcopy
 from typing import Any, Dict, List, Tuple, Union
 
 from google.protobuf.descriptor import FieldDescriptor
-from google.protobuf.message import ProtobufMessage
+from google.protobuf.message import Message as ProtobufMessage
 from proto import Message as ProtoPlusMessage
 
 from google.ads.googleads.util import (

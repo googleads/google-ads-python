@@ -19,7 +19,7 @@ to determine if a non-retryable Google Ads API error has been encountered. If
 so it translates the error to a GoogleAdsFailure instance and raises it.
 """
 
-from typing import Any, Callable, Union
+from typing import Callable, Optional, Union
 
 from google.protobuf.message import Message
 import grpc

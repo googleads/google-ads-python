@@ -13,6 +13,12 @@
 # limitations under the License.
 
 from copy import deepcopy
+from typing import Any, Dict, List, Tuple, Union
+
+from google.protobuf.descriptor import FieldDescriptor
+from google.protobuf.message import ProtobufMessage
+from proto import Message as ProtoPlusMessage
+
 from google.ads.googleads.util import (
     set_nested_message_field,
     get_nested_attr,
@@ -29,7 +35,7 @@ from google.ads.googleads.util import (
 #     1. They are returned as part of a Search or SearchStream request.
 #     2. They are returned individually in a Get request.
 #     3. They are sent to the API as part of a Mutate request.
-_MESSAGES_WITH_SENSITIVE_FIELDS = {
+_MESSAGES_WITH_SENSITIVE_FIELDS: Dict[str, List[str]] = {
     "CustomerUserAccess": ["email_address", "inviter_user_email_address"],
     "CustomerUserAccessInvitation": ["email_address"],
     "MutateCustomerUserAccessRequest": [
@@ -50,13 +56,15 @@ _MESSAGES_WITH_SENSITIVE_FIELDS = {
 # This is a list of the names of messages that return search results from the
 # API. These messages contain other messages that may contain sensitive
 # information that needs to be masked before being logged.
-_SEARCH_RESPONSE_MESSAGE_NAMES = [
+_SEARCH_RESPONSE_MESSAGE_NAMES: List[str] = [
     "SearchGoogleAdsResponse",
     "SearchGoogleAdsStreamResponse",
 ]
 
 
-def _copy_message(message):
+def _copy_message(
+    message: Union[ProtobufMessage, ProtoPlusMessage]
+) -> Union[ProtobufMessage, ProtoPlusMessage]:
     """Returns a copy of the given message.
 
     Args:
@@ -69,7 +77,11 @@ def _copy_message(message):
     return deepcopy(message)
 
 
-def _mask_message_fields(field_list, message, mask):
+def _mask_message_fields(
+    field_list: List[str],
+    message: Union[ProtobufMessage, ProtoPlusMessage],
+    mask: str
+) -> Union[ProtobufMessage, ProtoPlusMessage]:
     """Copies the given message and masks sensitive fields.
 
     Sensitive fields are given as a list of strings and are overridden
@@ -87,7 +99,7 @@ def _mask_message_fields(field_list, message, mask):
         A new instance of the message object with fields copied and masked
             where necessary.
     """
-    copy = _copy_message(message)
+    copy: Union[ProtobufMessage, ProtoPlusMessage] = _copy_message(message)
 
     for field_path in field_list:
         try:
@@ -103,7 +115,9 @@ def _mask_message_fields(field_list, message, mask):
     return copy
 
 
-def _mask_google_ads_search_response(message, mask):
+def _mask_google_ads_search_response(
+    message: Union[ProtobufMessage, ProtoPlusMessage], mask: str
+) -> Union[ProtobufMessage, ProtoPlusMessage]:
     """Copies and masks sensitive data in a Search response
 
     Response messages include instances of GoogleAdsSearchResponse and
@@ -118,7 +132,7 @@ def _mask_google_ads_search_response(message, mask):
     Returns:
         A copy of the message with sensitive fields masked.
     """
-    copy = _copy_message(message)
+    copy: Union[ProtobufMessage, ProtoPlusMessage] = _copy_message(message)
 
     for row in copy.results:
         # Each row is an instance of GoogleAdsRow. The ListFields method
@@ -127,21 +141,21 @@ def _mask_google_ads_search_response(message, mask):
         # then we need to access the native proto to call ListFields. If it's
         # not proto_plus we can assume it's protobuf and can access ListFields
         # directly.
-        if hasattr(row, "_pb"):
-            row_fields = convert_proto_plus_to_protobuf(row).ListFields()
+        if hasattr(row, "_pb"):  # proto-plus message
+            row_fields: List[Tuple(FieldDescriptor, Any)] = convert_proto_plus_to_protobuf(row).ListFields()
         else:
-            row_fields = row.ListFields()
+            row_fields: List[Tuple(FieldDescriptor, Any)] = row.ListFields()
         for field in row_fields:
             field_descriptor = field[0]
             # field_name is the name of the field on the GoogleAdsRow instance,
             # for example "campaign" or "customer_user_access"
-            field_name = field_descriptor.name
+            field_name: str = field_descriptor.name
             # message_name is the name of the message, similar to the class
             # name, for example "Campaign" or "CustomerUserAccess"
-            message_name = field_descriptor.message_type.name
+            message_name: str = field_descriptor.message_type.name
             if message_name in _MESSAGES_WITH_SENSITIVE_FIELDS.keys():
-                nested_message = getattr(row, field_name)
-                masked_message = _mask_message_fields(
+                nested_message: Union[ProtobufMessage, ProtoPlusMessage] = getattr(row, field_name)
+                masked_message: Union[ProtobufMessage, ProtoPlusMessage] = _mask_message_fields(
                     _MESSAGES_WITH_SENSITIVE_FIELDS[message_name],
                     nested_message,
                     mask,
@@ -153,7 +167,7 @@ def _mask_google_ads_search_response(message, mask):
     return copy
 
 
-def mask_message(message, mask):
+def mask_message(message: Union[ProtobufMessage, ProtoPlusMessage], mask: str) -> Union[ProtobufMessage, ProtoPlusMessage]:
     """Copies and returns a message with sensitive fields masked.
 
     Args:
@@ -165,12 +179,12 @@ def mask_message(message, mask):
     Returns:
         A copy of the message instance with sensitive fields masked.
     """
-    class_name = message.__class__.__name__
+    class_name: str = message.__class__.__name__
 
     if class_name in _SEARCH_RESPONSE_MESSAGE_NAMES:
         return _mask_google_ads_search_response(message, mask)
     elif class_name in _MESSAGES_WITH_SENSITIVE_FIELDS.keys():
-        sensitive_fields = _MESSAGES_WITH_SENSITIVE_FIELDS[class_name]
+        sensitive_fields: List[str] = _MESSAGES_WITH_SENSITIVE_FIELDS[class_name]
         return _mask_message_fields(sensitive_fields, message, mask)
     else:
         return message

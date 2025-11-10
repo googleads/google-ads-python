@@ -19,12 +19,12 @@ to determine if a non-retryable Google Ads API error has been encountered. If
 so it translates the error to a GoogleAdsFailure instance and raises it.
 """
 
-from typing import Callable, Optional, Union
+from typing import Optional, Union
 
 from google.protobuf.message import Message
 import grpc
 
-from google.ads.googleads.interceptors import Interceptor
+from google.ads.googleads.interceptors import Interceptor, ContinuationType
 from google.ads.googleads.response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
 
 
@@ -73,7 +73,7 @@ class ExceptionInterceptor(
 
     def intercept_unary_unary(
         self,
-        continuation: Callable[[grpc.ClientCallDetails, Message], grpc.Call],
+        continuation: ContinuationType,
         client_call_details: grpc.ClientCallDetails,
         request: Message,
     ):
@@ -98,7 +98,7 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
+        response: grpc.Call = continuation(client_call_details, request)
         exception: Optional[grpc.RpcError] = response.exception()
 
         if exception:
@@ -110,7 +110,7 @@ class ExceptionInterceptor(
 
     def intercept_unary_stream(
         self,
-        continuation: Callable[[grpc.ClientCallDetails, Message], grpc.Call],
+        continuation: ContinuationType,
         client_call_details: grpc.ClientCallDetails,
         request: Message,
     ):
@@ -135,7 +135,7 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
+        response: grpc.Call = continuation(client_call_details, request)
         return _UnaryStreamWrapper(
             response,
             self._handle_grpc_failure,

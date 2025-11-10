@@ -21,12 +21,14 @@ the passed in logger instance.
 
 import json
 import logging
-from typing import Callable, Optional, Union
+from typing import Optional, Union
 
 from google.protobuf.message import Message as ProtobufMessageType
 import grpc
 
-from google.ads.googleads.interceptors import Interceptor, MetadataType, mask_message
+from google.ads.googleads.interceptors import (
+    Interceptor, MetadataType, ContinuationType, mask_message
+)
 
 
 class LoggingInterceptor(
@@ -339,7 +341,7 @@ class LoggingInterceptor(
 
     def intercept_unary_unary(
         self,
-        continuation: Callable[[grpc.ClientCallDetails, ProtobufMessageType], grpc.Call],
+        continuation: ContinuationType,
         client_call_details: grpc.ClientCallDetails,
         request: ProtobufMessageType,
     ) -> Union[grpc.Call, grpc.Future]:
@@ -357,7 +359,7 @@ class LoggingInterceptor(
         Returns:
             A grpc.Call/grpc.Future instance representing a service response.
         """
-        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
+        response: grpc.Call = continuation(client_call_details, request)
 
         if self.logger.isEnabledFor(logging.WARNING):
             self.log_request(client_call_details, request, response)
@@ -366,7 +368,7 @@ class LoggingInterceptor(
 
     def intercept_unary_stream(
         self,
-        continuation: Callable[[grpc.ClientCallDetails, ProtobufMessageType], grpc.Call],
+        continuation: ContinuationType,
         client_call_details: grpc.ClientCallDetails,
         request: ProtobufMessageType,
     ) -> Union[grpc.Call, grpc.Future]:
@@ -388,7 +390,7 @@ class LoggingInterceptor(
             if self.logger.isEnabledFor(logging.WARNING):
                 self.log_request(client_call_details, request, response_future)
 
-        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
+        response: grpc.Call = continuation(client_call_details, request)
 
         response.add_done_callback(on_rpc_complete)
         self._cache = response.get_cache()

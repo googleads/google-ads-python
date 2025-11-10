@@ -13,7 +13,16 @@
 # limitations under the License.
 
 from .helpers import mask_message
-from .interceptor import Interceptor
+from .interceptor import Interceptor, MetadataType
 from .metadata_interceptor import MetadataInterceptor
 from .exception_interceptor import ExceptionInterceptor
 from .logging_interceptor import LoggingInterceptor
+
+__all__ = [
+    "ExceptionInterceptor",
+    "Interceptor",
+    "LoggingInterceptor",
+    "mask_message",
+    "MetadataInterceptor",
+    "MetadataType",
+]

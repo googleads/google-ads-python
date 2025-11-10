@@ -24,15 +24,12 @@ from typing import Callable, Optional, Union
 from google.protobuf.message import Message
 import grpc
 
-from grpc import UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
-from grpc._interceptor import _UnaryOutcome as UnaryOutcome
-
-from .interceptor import Interceptor
-from .response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
+from google.ads.googleads.interceptors import Interceptor
+from google.ads.googleads.response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
 
 
 class ExceptionInterceptor(
-    Interceptor, UnaryUnaryClientInterceptor, UnaryStreamClientInterceptor
+    Interceptor, grpc.UnaryUnaryClientInterceptor, grpc.UnaryStreamClientInterceptor
 ):
     """An interceptor that wraps rpc exceptions."""
 
@@ -101,7 +98,7 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response: UnaryOutcome = continuation(client_call_details, request)
+        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
         exception: Optional[grpc.RpcError] = response.exception()
 
         if exception:
@@ -138,7 +135,7 @@ class ExceptionInterceptor(
                 indicative of a GoogleAdsException, or if the exception has a
                 status code of INTERNAL or RESOURCE_EXHAUSTED.
         """
-        response: UnaryOutcome = continuation(client_call_details, request)
+        response: grpc._interceptor._UnaryOutcome = continuation(client_call_details, request)
         return _UnaryStreamWrapper(
             response,
             self._handle_grpc_failure,

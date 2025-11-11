@@ -19,6 +19,7 @@ import logging.config
 from google.api_core.gapic_v1.client_info import ClientInfo
 import grpc
 from proto.enums import ProtoEnumMeta
+from google.auth.credentials import Credentials
 
 from google.protobuf.message import Message as ProtobufMessageType
 from proto import Message as ProtoPlusMessageType
@@ -339,7 +340,7 @@ class GoogleAdsClient:
         if logging_config:
             logging.config.dictConfig(logging_config)
 
-        self.credentials: Dict[str, Any] = credentials
+        self.credentials: Credentials = credentials
         self.developer_token: str = developer_token
         self.endpoint: Union[str, None] = endpoint
         self.login_customer_id: Union[str, None] = login_customer_id

@@ -20,33 +20,48 @@ instances of grpc.ClientCallDetails.
 
 from dataclasses import dataclass
 from importlib import import_module
-from typing import AnyStr, Optional, Sequence, Tuple
 import json
+from types import ModuleType
+from typing import (
+    Any,
+    AnyStr,
+    Callable,
+    Dict,
+    Optional,
+    Sequence,
+    Tuple
+)
 
-from google.protobuf.message import DecodeError
-from grpc import ClientCallDetails, StatusCode, CallCredentials
+from google.protobuf.message import DecodeError, Message
+import grpc
+# from grpc import Call, ClientCallDetails, StatusCode, CallCredentials, RpcError
 
 from google.ads.googleads.errors import GoogleAdsException
 
-_REQUEST_ID_KEY = "request-id"
-# Codes that are retried upon by google.api_core.
-_RETRY_STATUS_CODES = (StatusCode.INTERNAL, StatusCode.RESOURCE_EXHAUSTED)
 
+_REQUEST_ID_KEY: str = "request-id"
+# Codes that are retried upon by google.api_core.
+_RETRY_STATUS_CODES: Tuple[grpc.StatusCode]= (grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED)
+
+MetadataType = Sequence[Tuple[str, AnyStr]]
+ContinuationType = Callable[[grpc.ClientCallDetails, Message], grpc.Call]
 
 class Interceptor:
-    _SENSITIVE_INFO_MASK = "REDACTED"
+    _SENSITIVE_INFO_MASK: str = "REDACTED"
 
     @dataclass
-    class _ClientCallDetails(ClientCallDetails):
+    class _ClientCallDetails(grpc.ClientCallDetails):
         """Wrapper class for initializing a new ClientCallDetails instance."""
 
         method: str
         timeout: Optional[float]
-        metadata: Optional[Sequence[Tuple[str, AnyStr]]]
-        credentials: Optional[CallCredentials]
+        metadata: Optional[MetadataType]
+        credentials: Optional[grpc.CallCredentials]
 
     @classmethod
-    def get_request_id_from_metadata(cls, trailing_metadata):
+    def get_request_id_from_metadata(
+        cls, trailing_metadata: MetadataType
+    ) -> Optional[str]:
         """Gets the request ID for the Google Ads API request.
 
         Args:
@@ -58,12 +73,12 @@ class Interceptor:
         """
         for kv in trailing_metadata:
             if kv[0] == _REQUEST_ID_KEY:
-                return kv[1]  # Return the found request ID.
+                return kv[1]
 
         return None
 
     @classmethod
-    def parse_metadata_to_json(cls, metadata):
+    def parse_metadata_to_json(cls, metadata: Optional[MetadataType]) -> str:
         """Parses metadata from gRPC request and response messages to a JSON str.
 
         Obscures the value for "developer-token".
@@ -74,23 +89,23 @@ class Interceptor:
         Returns:
             A str of metadata formatted as JSON key/value pairs.
         """
-        metadata_dict = {}
+        metadata_dict: Dict = {}
 
         if metadata is None:
             return "{}"
 
         for datum in metadata:
-            key = datum[0]
+            key: str = datum[0]
             if key == "developer-token":
                 metadata_dict[key] = cls._SENSITIVE_INFO_MASK
             else:
-                value = datum[1]
+                value: AnyStr = datum[1]
                 metadata_dict[key] = value
 
         return cls.format_json_object(metadata_dict)
 
     @classmethod
-    def format_json_object(cls, obj):
+    def format_json_object(cls, obj: Dict) -> str:
         """Parses a serializable object into a consistently formatted JSON string.
 
         Returns:
@@ -102,8 +117,7 @@ class Interceptor:
         Returns:
             A str of metadata formatted as JSON key/value pairs.
         """
-
-        def default_serializer(value):
+        def default_serializer(value: Any) -> Optional[str]:
             if isinstance(value, bytes):
                 return value.decode(errors="ignore")
             else:
@@ -121,7 +135,9 @@ class Interceptor:
         )
 
     @classmethod
-    def get_trailing_metadata_from_interceptor_exception(cls, exception):
+    def get_trailing_metadata_from_interceptor_exception(
+        cls, exception: grpc.RpcError
+    ) -> MetadataType:
         """Retrieves trailing metadata from an exception object.
 
         Args:
@@ -146,8 +162,12 @@ class Interceptor:
 
     @classmethod
     def get_client_call_details_instance(
-        cls, method, timeout, metadata, credentials=None
-    ):
+        cls,
+        method: str,
+        timeout: float,
+        metadata: MetadataType,
+        credentials: Optional[grpc.CallCredentials] = None,
+    ) -> grpc.ClientCallDetails:
         """Initializes an instance of the ClientCallDetails with the given data.
 
         Args:
@@ -161,14 +181,14 @@ class Interceptor:
         """
         return cls._ClientCallDetails(method, timeout, metadata, credentials)
 
-    def __init__(self, api_version):
-        self._error_protos = None
-        self._failure_key = (
+    def __init__(self, api_version: str):
+        self._error_protos: Optional[ModuleType] = None
+        self._failure_key: str = (
             f"google.ads.googleads.{api_version}.errors.googleadsfailure-bin"
         )
-        self._api_version = api_version
+        self._api_version: str = api_version
 
-    def _get_error_from_response(self, response):
+    def _get_error_from_response(self, response: grpc.Call) -> grpc.Call:
         """Attempts to wrap failed responses as GoogleAdsException instances.
 
         Handles failed gRPC responses of by attempting to convert them
@@ -192,15 +212,17 @@ class Interceptor:
             Exception: If not a GoogleAdsException or RpcException the error
                 will be raised as-is.
         """
-        status_code = response.code()
-        response_exception = response.exception()
+        status_code: grpc.StatusCode = response.code()
+        response_exception: grpc.Call = response.exception()
 
         if status_code not in _RETRY_STATUS_CODES:
-            trailing_metadata = response.trailing_metadata()
-            google_ads_failure = self._get_google_ads_failure(trailing_metadata)
+            trailing_metadata: MetadataType = response.trailing_metadata()
+            google_ads_failure: Optional[Message] = self._get_google_ads_failure(
+                trailing_metadata
+            )
 
-            if google_ads_failure:
-                request_id = self.get_request_id_from_metadata(
+            if google_ads_failure and response_exception:
+                request_id: Optional[str] = self.get_request_id_from_metadata(
                     trailing_metadata
                 )
 
@@ -211,17 +233,18 @@ class Interceptor:
                 return GoogleAdsException(
                     response_exception, response, google_ads_failure, request_id
                 )
-            else:
+            elif response_exception:
                 # Raise the original exception if not a GoogleAdsFailure. This
                 # type of error is generally caused by problems at the request
                 # level, such as when an invalid endpoint is given.
                 return response_exception
-        else:
+        elif response_exception:
             # Raise the original exception if error has status code
             # INTERNAL or RESOURCE_EXHAUSTED, meaning that
             return response_exception
+        raise response.exception()
 
-    def _get_google_ads_failure(self, trailing_metadata):
+    def _get_google_ads_failure(self, trailing_metadata: MetadataType) -> Optional[Message]:
         """Gets the Google Ads failure details if they exist.
 
         Args:

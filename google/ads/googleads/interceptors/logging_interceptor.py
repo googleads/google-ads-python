@@ -142,7 +142,6 @@ class LoggingInterceptor(
         Args:
             request: An instance of a request proto message.
         """
-        breakpoint()
         if hasattr(request, "customer_id"):
             return getattr(request, "customer_id")
         elif hasattr(request, "resource_name"):

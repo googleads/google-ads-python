@@ -25,7 +25,7 @@ from google.protobuf.message import Message
 import grpc
 
 from google.ads.googleads.interceptors import Interceptor, ContinuationType
-from google.ads.googleads.response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
+from google.ads.googleads.interceptors.response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
 
 
 class ExceptionInterceptor(

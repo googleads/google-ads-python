@@ -951,6 +951,16 @@ class GoogleAdsClientTest(TestCase):
                 use_cloud_org_for_api_access=None,
             )
 
+    def test_client_info_package_not_found(self):
+        with mock.patch("google.ads.googleads.client.metadata.version") as mock_version:
+            mock_version.side_effect = Client.metadata.PackageNotFoundError
+            from importlib import reload
+            reload(Client)
+            self.assertIsInstance(Client._CLIENT_INFO, Client.ClientInfo)
+            self.assertIsNone(Client._CLIENT_INFO.client_library_version)
+
+        reload(Client)
+
 
 class GoogleAdsClientTestFs(FileTestCase):
     """Tests for the GoogleAdsClient class that require a fake filesystem."""

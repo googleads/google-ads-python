@@ -45,7 +45,12 @@ _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
 # information of API calls.
-_CLIENT_INFO = ClientInfo(client_library_version=metadata.version("google-ads"))
+try:
+    _CLIENT_INFO = ClientInfo(
+        client_library_version=metadata.version("google-ads")
+    )
+except metadata.PackageNotFoundError:
+    _CLIENT_INFO = ClientInfo()
 
 # See options at grpc.github.io/grpc/core/group__grpc__arg__keys.html
 _GRPC_CHANNEL_OPTIONS = [

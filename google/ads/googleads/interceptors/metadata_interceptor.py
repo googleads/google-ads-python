@@ -109,6 +109,7 @@ class MetadataInterceptor(
             client_call_details.timeout,
             metadata,
             client_call_details.credentials,
+            getattr(client_call_details, "wait_for_ready", None),
         )
 
         return client_call_details
@@ -216,3 +217,133 @@ class MetadataInterceptor(
             A grpc.Call/grpc.Future instance representing a service response.
         """
         return self._intercept(continuation, client_call_details, request)
+
+
+class _AsyncMetadataInterceptor(
+    MetadataInterceptor
+):
+    """An interceptor that appends custom metadata to requests."""
+
+    async def _intercept(
+        self,
+        continuation: ContinuationType,
+        client_call_details: grpc.ClientCallDetails,
+        request: ProtobufMessageType,
+    ) -> Union[grpc.Call, grpc.Future]:
+        """Generic interceptor used for Unary-Unary and Unary-Stream requests.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        if client_call_details.metadata is None:
+            metadata: MetadataType = []
+        else:
+            metadata: MetadataType = list(client_call_details.metadata)
+
+        # If self.use_cloud_org_for_api_access is not True, add the developer
+        # token to the request's metadata
+        if not self.use_cloud_org_for_api_access:
+            metadata.append(self.developer_token_meta)
+
+        if self.login_customer_id_meta:
+            metadata.append(self.login_customer_id_meta)
+
+        if self.linked_customer_id_meta:
+            metadata.append(self.linked_customer_id_meta)
+
+        # TODO: This logic should be updated or removed once the following is
+        # fixed: https://github.com/googleapis/python-api-core/issues/416
+        for i, metadatum_tuple in enumerate(metadata):
+            # Check if the user agent header key is in the current metadatum
+            if "x-goog-api-client" in metadatum_tuple and _PROTOBUF_VERSION:
+                # Convert the tuple to a list so it can be modified.
+                metadatum: List[str] = list(metadatum_tuple)
+                # Check that "pb" isn't already included in the user agent.
+                if "pb" not in metadatum[1]:
+                    # Append the protobuf version key value pair to the end of
+                    # the string.
+                    metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
+                    # Convert the metadatum back to a tuple.
+                    metadatum_tuple: Tuple[str, str] = tuple(metadatum)
+                    # Splice the metadatum back in its original position in
+                    # order to preserve the order of the metadata list.
+                    metadata[i] = metadatum_tuple
+                    # Exit the loop since we already found the user agent.
+                    break
+
+        client_call_details: grpc.ClientCallDetails = (
+            self._update_client_call_details_metadata(
+                client_call_details, metadata
+            )
+        )
+
+        return await continuation(client_call_details, request)
+
+    async def intercept_unary_unary(
+        self,
+        continuation: ContinuationType,
+        client_call_details: grpc.ClientCallDetails,
+        request: ProtobufMessageType,
+    ) -> Union[grpc.Call, grpc.Future]:
+        """Intercepts and appends custom metadata for Unary-Unary requests.
+
+        Overrides abstract method defined in grpc.UnaryUnaryClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        return await self._intercept(continuation, client_call_details, request)
+
+    async def intercept_unary_stream(
+        self,
+        continuation: ContinuationType,
+        client_call_details: grpc.ClientCallDetails,
+        request: ProtobufMessageType,
+    ) -> Union[grpc.Call, grpc.Future]:
+        """Intercepts and appends custom metadata to Unary-Stream requests.
+
+        Overrides abstract method defined in grpc.UnaryStreamClientInterceptor.
+
+        Args:
+            continuation: a function to continue the request process.
+            client_call_details: a grpc._interceptor._ClientCallDetails
+                instance containing request metadata.
+            request: a SearchGoogleAdsRequest or SearchGoogleAdsStreamRequest
+                message class instance.
+
+        Returns:
+            A grpc.Call/grpc.Future instance representing a service response.
+        """
+        return await self._intercept(continuation, client_call_details, request)
+
+class AsyncUnaryUnaryMetadataInterceptor(
+    _AsyncMetadataInterceptor,
+    grpc.aio.UnaryUnaryClientInterceptor,
+):
+    """An interceptor that appends custom metadata to Unary-Unary requests."""
+
+class AsyncUnaryStreamMetadataInterceptor(
+    _AsyncMetadataInterceptor,
+    grpc.aio.UnaryStreamClientInterceptor,
+):
+    """An interceptor that appends custom metadata to Unary-Stream requests."""
+
+__all__ = [
+    "MetadataInterceptor",
+    "AsyncUnaryUnaryMetadataInterceptor",
+    "AsyncUnaryStreamMetadataInterceptor",
+]

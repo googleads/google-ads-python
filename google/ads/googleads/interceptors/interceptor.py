@@ -57,6 +57,7 @@ class Interceptor:
         timeout: Optional[float]
         metadata: Optional[MetadataType]
         credentials: Optional[grpc.CallCredentials]
+        wait_for_ready: Optional[bool] = None
 
     @classmethod
     def get_request_id_from_metadata(
@@ -167,6 +168,7 @@ class Interceptor:
         timeout: float,
         metadata: MetadataType,
         credentials: Optional[grpc.CallCredentials] = None,
+        wait_for_ready: Optional[bool] = None,
     ) -> grpc.ClientCallDetails:
         """Initializes an instance of the ClientCallDetails with the given data.
 
@@ -175,11 +177,15 @@ class Interceptor:
             timeout: A float of the request timeout
             metadata: A list of metadata tuples
             credentials: An optional grpc.CallCredentials instance for the RPC
+            wait_for_ready: An optional bool indicating if the RPC should wait
+                for the channel to be ready.
 
         Returns:
             An instance of _ClientCallDetails that wraps grpc.ClientCallDetails.
         """
-        return cls._ClientCallDetails(method, timeout, metadata, credentials)
+        return cls._ClientCallDetails(
+            method, timeout, metadata, credentials, wait_for_ready
+        )
 
     def __init__(self, api_version: str):
         self._error_protos: Optional[ModuleType] = None

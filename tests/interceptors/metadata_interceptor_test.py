@@ -14,10 +14,13 @@
 """Tests for the Metadata gRPC Interceptor."""
 
 from unittest import mock
-from unittest import TestCase
+from unittest import TestCase, IsolatedAsyncioTestCase
 import sys
 
 from google.ads.googleads.interceptors import MetadataInterceptor
+from google.ads.googleads.interceptors.metadata_interceptor import (
+    _AsyncMetadataInterceptor as AsyncMetadataInterceptor,
+)
 
 # Dynamically generate the current Python version as a string in the format
 # "X.Y.Z" for use in tests.
@@ -306,6 +309,302 @@ class MetadataInterceptorTest(TestCase):
             wraps=interceptor._update_client_call_details_metadata,
         ) as mock_updater:
             interceptor.intercept_unary_stream(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+            # Assets that if "use_cloud_org_for_api_access" is passed into
+            # MetadataInterceptor as True, then
+            mock_updater.assert_called_once_with(
+                mock_client_call_details,
+                [
+                    mock_client_call_details.metadata[0],
+                    interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
+                ],
+            )
+
+            mock_continuation.assert_called_once()
+
+
+class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.mock_developer_token = "1234567890"
+        self.mock_login_customer_id = "0987654321"
+        self.mock_linked_customer_id = "5555555555"
+        self.use_cloud_org_for_api_access = True
+        self.python_version = python_version
+
+    def test_init(self):
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token, self.mock_login_customer_id
+        )
+
+        self.assertEqual(
+            interceptor.developer_token_meta,
+            ("developer-token", self.mock_developer_token),
+        )
+
+        self.assertEqual(
+            interceptor.login_customer_id_meta,
+            ("login-customer-id", self.mock_login_customer_id),
+        )
+
+    def test_init_no_login_customer_id(self):
+        interceptor = AsyncMetadataInterceptor(self.mock_developer_token, None)
+
+        self.assertEqual(
+            interceptor.developer_token_meta,
+            ("developer-token", self.mock_developer_token),
+        )
+
+        self.assertEqual(interceptor.login_customer_id_meta, None)
+
+    def test_init_no_linked_customer_id(self):
+        interceptor = AsyncMetadataInterceptor(self.mock_developer_token, None, None)
+
+        self.assertEqual(
+            interceptor.developer_token_meta,
+            ("developer-token", self.mock_developer_token),
+        )
+
+        self.assertEqual(interceptor.linked_customer_id_meta, None)
+
+    def test_update_client_call_details_metadata(self):
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token, self.mock_login_customer_id
+        )
+
+        mock_metadata = list([("test-key", "test-value")])
+        mock_client_call_details = mock.Mock()
+
+        client_call_details = interceptor._update_client_call_details_metadata(
+            mock_client_call_details, mock_metadata
+        )
+
+        self.assertEqual(client_call_details.metadata, mock_metadata)
+
+    async def test_intercept_unary_unary(self):
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_continuation = mock.AsyncMock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [("apples", "oranges")]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            await interceptor.intercept_unary_unary(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            mock_updater.assert_called_once_with(
+                mock_client_call_details,
+                [
+                    mock_client_call_details.metadata[0],
+                    interceptor.developer_token_meta,
+                    interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
+                ],
+            )
+
+            mock_continuation.assert_called_once()
+
+    async def test_intercept_unary_stream(self):
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_continuation = mock.AsyncMock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [("apples", "oranges")]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            await interceptor.intercept_unary_stream(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            mock_updater.assert_called_once_with(
+                mock_client_call_details,
+                [
+                    mock_client_call_details.metadata[0],
+                    interceptor.developer_token_meta,
+                    interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
+                ],
+            )
+
+            mock_continuation.assert_called_once()
+
+    async def test_intercept_updates_user_agent_add_pb(self):
+        """Asserts that the protobuf version is included in the user agent.
+
+        This test should be removed or updated once this functionality is
+        incorporated into python-api-core per this feature request:
+        https://github.com/googleapis/python-api-core/issues/416
+        """
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            (
+                "x-goog-api-client",
+                f"gl-python/{self.python_version} grpc/1.45.0 gax/2.2.2",
+            ),
+        ]
+        # Create a simple function that just returns the client_call_details
+        # so we can make assertions about what was modified in the _intercept
+        # method.
+        async def mock_continuation(client_call_details, request):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            modified_client_call_details = await interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            self.assertEqual(user_agent.count("pb"), 1)
+
+    async def test_intercept_updates_user_agent_existing_pb(self):
+        """Asserts that the protobuf version is not added if already present.
+
+        This test should be removed or updated once this functionality is
+        incorporated into python-api-core per this feature request:
+        https://github.com/googleapis/python-api-core/issues/416
+        """
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            (
+                "x-goog-api-client",
+                f"gl-python/{self.python_version} grpc/1.45.0 pb/3.21.0",
+            ),
+        ]
+        # Create a simple function that just returns the client_call_details
+        # so we can make assertions about what was modified in the _intercept
+        # method.
+        async def mock_continuation(client_call_details, request):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            modified_client_call_details = await interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            # We assert that the _intercept method did not add the "pb" key
+            # value pair because it was already present when passed in.
+            self.assertEqual(user_agent.count("pb"), 1)
+
+    @mock.patch(
+        "google.ads.googleads.interceptors.metadata_interceptor._PROTOBUF_VERSION",
+        None,
+    )
+    async def test_absent_pb_version(self):
+        """Asserts that the protobuf package version is left out if not present.
+
+        In a situation where the `metadata` package cannot find a version for
+        the `protobuf` package, we assert that the "pb/x.y.x" substring is left
+        out of the user agent of the request.
+        """
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_request = mock.Mock()
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [
+            ("apples", "oranges"),
+            (
+                "x-goog-api-client",
+                f"gl-python/{self.python_version} grpc/1.45.0",
+            ),
+        ]
+
+        async def mock_continuation(client_call_details, _):
+            return client_call_details
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ):
+            modified_client_call_details = await interceptor._intercept(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            user_agent = modified_client_call_details.metadata[1][1]
+            # We assert that the _intercept method did not add the "pb" key
+            # value pair because it was already present when passed in.
+            self.assertEqual(user_agent.count("pb"), 0)
+
+    async def test_intercept_unary_stream_use_cloud_org_for_api_access(self):
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+            self.use_cloud_org_for_api_access,
+        )
+
+        mock_continuation = mock.AsyncMock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [("apples", "oranges")]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            await interceptor.intercept_unary_stream(
                 mock_continuation, mock_client_call_details, mock_request
             )
             # Assets that if "use_cloud_org_for_api_access" is passed into

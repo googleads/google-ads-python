@@ -27,8 +27,14 @@ from proto import Message as ProtoPlusMessageType
 from google.ads.googleads import config, oauth2, util
 from google.ads.googleads.interceptors import (
     MetadataInterceptor,
+    AsyncUnaryUnaryMetadataInterceptor,
+    AsyncUnaryStreamMetadataInterceptor,
     ExceptionInterceptor,
+    AsyncUnaryUnaryExceptionInterceptor,
+    AsyncUnaryStreamExceptionInterceptor,
     LoggingInterceptor,
+    AsyncUnaryUnaryLoggingInterceptor,
+    AsyncUnaryStreamLoggingInterceptor,
 )
 
 from types import ModuleType
@@ -416,13 +422,55 @@ class GoogleAdsClient:
                 "Ads API {}.".format(name, version)
             )
 
-        service_transport_class: Any = service_client_class.get_transport_class()
+        service_transport_class: Any = service_client_class.get_transport_class(
+            "grpc_asyncio" if is_async else None
+        )
 
         endpoint: str = (
             self.endpoint
             if self.endpoint
             else service_client_class.DEFAULT_ENDPOINT
         )
+
+        if is_async:
+            # In async requests, separate UnaryUnary and UnaryStream
+            # interceptors need to be added to the channel.
+            interceptors: List = interceptors or []
+            interceptors = interceptors + [
+                AsyncUnaryUnaryMetadataInterceptor(
+                    self.developer_token,
+                    self.login_customer_id,
+                    self.linked_customer_id,
+                    self.use_cloud_org_for_api_access,
+                ),
+                AsyncUnaryStreamMetadataInterceptor(
+                    self.developer_token,
+                    self.login_customer_id,
+                    self.linked_customer_id,
+                    self.use_cloud_org_for_api_access,
+                ),
+                AsyncUnaryUnaryLoggingInterceptor(_logger, version, endpoint),
+                AsyncUnaryStreamLoggingInterceptor(_logger, version, endpoint),
+                AsyncUnaryUnaryExceptionInterceptor(
+                    version, use_proto_plus=self.use_proto_plus
+                ),
+                AsyncUnaryStreamExceptionInterceptor(
+                    version, use_proto_plus=self.use_proto_plus
+                ),
+            ]
+
+            channel: grpc.aio.Channel = service_transport_class.create_channel(
+                host=endpoint,
+                credentials=self.credentials,
+                options=_GRPC_CHANNEL_OPTIONS,
+                interceptors=interceptors,
+            )
+
+            service_transport: Any = service_transport_class(
+                channel=channel, client_info=_CLIENT_INFO
+            )
+
+            return service_client_class(transport=service_transport)
 
         channel: grpc.Channel = service_transport_class.create_channel(
             host=endpoint,

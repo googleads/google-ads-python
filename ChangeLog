@@ -1,3 +1,6 @@
+* 28.4.1
+-  Fix issues with async functionality per issue #1045.
+
 * 28.4.0
 -  Update GoogleAdsClient.get_services method to expose async service clients.
 

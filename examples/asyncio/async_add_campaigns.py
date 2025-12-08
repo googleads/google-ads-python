@@ -51,6 +51,7 @@ async def main(client: GoogleAdsClient, customer_id: str) -> None:
     # we need to use a temporary resource name for the budget to reference it
     # in the campaign.
     # Temporary resource names must be negative integers formatted as strings.
+    # https://developers.google.com/google-ads/api/docs/batch-processing/temporary-ids
     budget_resource_name: str = f"customers/{customer_id}/campaignBudgets/-1"
 
     mutate_operations: List[MutateOperation] = []

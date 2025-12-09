@@ -20,8 +20,10 @@ account_management/list_accessible_customers.py examples.
 """
 
 import argparse
+import hashlib
 from itertools import product
 import multiprocessing
+import os
 import time
 from typing import Any, Dict, Iterable, List, Tuple
 
@@ -94,10 +96,7 @@ def main(client: GoogleAdsClient, customer_ids: List[str]) -> None:
         print("Successes:") if len(successes) else None
         success: Dict[str, Any]
         for success in successes:
-            # success["results"] represents an array of result strings for one
-            # customer ID / query combination.
-            result_str: str = "\n".join(success["results"])
-            print(result_str)
+            print(f"Report written to file: {success['filename']}")
 
         print("Failures:") if len(failures) else None
         failure: Dict[str, Any]
@@ -141,27 +140,30 @@ def issue_search_request(
             stream: Iterable[SearchGoogleAdsStreamResponse] = (
                 ga_service.search_stream(customer_id=customer_id, query=query)
             )
-            # Returning a list of GoogleAdsRows will result in a
-            # PicklingError, so instead we put the GoogleAdsRow data
-            # into a list of str results and return that.
-            result_strings: List[str] = []
-            batch: SearchGoogleAdsStreamResponse
-            for batch in stream:
-                row: GoogleAdsRow
-                for row in batch.results:
-                    ad_group_id: str = (
-                        f"Ad Group ID {row.ad_group.id} in "
-                        if "ad_group.id" in query
-                        else ""
-                    )
-                    result_string: str = (
-                        f"{ad_group_id}"
-                        f"Campaign ID {row.campaign.id} "
-                        f"had {row.metrics.impressions} impressions "
-                        f"and {row.metrics.clicks} clicks."
-                    )
-                    result_strings.append(result_string)
-            return (True, {"results": result_strings})
+
+            # Create a unique filename for the report.
+            query_hash = hashlib.md5(query.encode("utf-8")).hexdigest()
+            filename = f"report_{customer_id}_{query_hash}.txt"
+
+            with open(filename, "w") as f:
+                batch: SearchGoogleAdsStreamResponse
+                for batch in stream:
+                    row: GoogleAdsRow
+                    for row in batch.results:
+                        ad_group_id: str = (
+                            f"Ad Group ID {row.ad_group.id} in "
+                            if "ad_group.id" in query
+                            else ""
+                        )
+                        result_string: str = (
+                            f"{ad_group_id}"
+                            f"Campaign ID {row.campaign.id} "
+                            f"had {row.metrics.impressions} impressions "
+                            f"and {row.metrics.clicks} clicks."
+                        )
+                        f.write(result_string + "\n")
+
+            return (True, {"filename": filename})
         except GoogleAdsException as ex:
             # This example retries on all GoogleAdsExceptions. In practice,
             # developers might want to limit retries to only those error codes

@@ -24,58 +24,53 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.services.campaign_budget_service import (
-    CampaignBudgetServiceClient,
-)
-from google.ads.googleads.v22.services.types.campaign_budget_service import (
-    CampaignBudgetOperation,
-    MutateCampaignBudgetsResponse,
-)
-from google.ads.googleads.v22.services.services.campaign_service import (
-    CampaignServiceClient,
-)
-from google.ads.googleads.v22.services.types.campaign_service import (
-    CampaignOperation,
-    MutateCampaignsResponse,
-)
+from google.ads.googleads.v22.resources.types.campaign import Campaign
 from google.ads.googleads.v22.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v22.resources.types.campaign import Campaign
+from google.ads.googleads.v22.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+)
+from google.ads.googleads.v22.services.types.campaign_service import (
+    CampaignOperation,
+)
+from google.ads.googleads.v22.services.types.google_ads_service import (
+    MutateGoogleAdsResponse,
+    MutateOperation,
+)
 
 
 _DATE_FORMAT: str = "%Y%m%d"
 
 
 async def main(client: GoogleAdsClient, customer_id: str) -> None:
-    campaign_budget_service: CampaignBudgetServiceClient = client.get_service(
-        "CampaignBudgetService", is_async=True
-    )
-    campaign_service: CampaignServiceClient = client.get_service(
-        "CampaignService", is_async=True
-    )
+    # Gets the GoogleAdsService client.
+    googleads_service = client.get_service("GoogleAdsService", is_async=True)
+
+    # We are creating both the budget and the campaign in the same request, so
+    # we need to use a temporary resource name for the budget to reference it
+    # in the campaign.
+    # Temporary resource names must be negative integers formatted as strings.
+    # https://developers.google.com/google-ads/api/docs/batch-processing/temporary-ids
+    budget_resource_name: str = f"customers/{customer_id}/campaignBudgets/-1"
+
+    mutate_operations: List[MutateOperation] = []
 
     # Create a budget, which can be shared by multiple campaigns.
     campaign_budget_operation: CampaignBudgetOperation = client.get_type(
         "CampaignBudgetOperation"
     )
     campaign_budget: CampaignBudget = campaign_budget_operation.create
+    campaign_budget.resource_name = budget_resource_name
     campaign_budget.name = f"Interplanetary Budget {uuid.uuid4()}"
     campaign_budget.delivery_method = (
         client.enums.BudgetDeliveryMethodEnum.STANDARD
     )
     campaign_budget.amount_micros = 500000
 
-    # Add budget.
-    budget_operations: List[CampaignBudgetOperation] = [
-        campaign_budget_operation
-    ]
-    campaign_budget_response: MutateCampaignBudgetsResponse = (
-        await campaign_budget_service.mutate_campaign_budgets(
-            customer_id=customer_id,
-            operations=budget_operations,
-        )
-    )
+    mutate_operation_budget: MutateOperation = client.get_type("MutateOperation")
+    mutate_operation_budget.campaign_budget_operation = campaign_budget_operation
+    mutate_operations.append(mutate_operation_budget)
 
     # Create campaign.
     campaign_operation: CampaignOperation = client.get_type("CampaignOperation")
@@ -92,7 +87,8 @@ async def main(client: GoogleAdsClient, customer_id: str) -> None:
 
     # Set the bidding strategy and budget.
     campaign.manual_cpc = client.get_type("ManualCpc")
-    campaign.campaign_budget = campaign_budget_response.results[0].resource_name
+    # Reference the budget created in the same request.
+    campaign.campaign_budget = budget_resource_name
 
     # Set the campaign network options.
     campaign.network_settings.target_google_search = True
@@ -121,12 +117,21 @@ async def main(client: GoogleAdsClient, customer_id: str) -> None:
     campaign.end_date = datetime.date.strftime(end_time, _DATE_FORMAT)
     # [END add_campaigns_1]
 
-    # Add the campaign.
-    campaign_operations: List[CampaignOperation] = [campaign_operation]
-    campaign_response: MutateCampaignsResponse = await campaign_service.mutate_campaigns(
-        customer_id=customer_id, operations=campaign_operations
+    mutate_operation_campaign: MutateOperation = client.get_type(
+        "MutateOperation"
     )
-    print(f"Created campaign {campaign_response.results[0].resource_name}.")
+    mutate_operation_campaign.campaign_operation = campaign_operation
+    mutate_operations.append(mutate_operation_campaign)
+
+    # Issue a mutate request to add the budget and campaign.
+    response: MutateGoogleAdsResponse = await googleads_service.mutate(
+        customer_id=customer_id, mutate_operations=mutate_operations
+    )
+
+    # Check the result for the campaign (index 1 in the operations list).
+    # The response returns results in the same order as operations.
+    campaign_result = response.mutate_operation_responses[1].campaign_result
+    print(f"Created campaign {campaign_result.resource_name}.")
 
 
 if __name__ == "__main__":

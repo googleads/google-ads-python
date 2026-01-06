@@ -235,7 +235,9 @@ def normalize_and_hash_email_address(email_address):
     if len(email_parts) > 1:
         # Removes any '.' and '+' characters from the portion of the email address
         # before the domain
-        email_parts[0] = email_parts[0].replace(".", "").replace("+","")
+        chars_to_remove = ".+"
+        translation_table = str.maketrans('', '', chars_to_remove)
+        email_parts[0] = email_parts[0].translate(translation_table)
         normalized_email = "@".join(email_parts)
 
     return normalize_and_hash(normalized_email)

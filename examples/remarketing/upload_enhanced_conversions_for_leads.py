@@ -254,14 +254,12 @@ def normalize_and_hash_email_address(email_address: str) -> str:
 
     # Check that there are at least two segments
     if len(email_parts) > 1:
-        # Checks whether the domain of the email address is either "gmail.com"
-        # or "googlemail.com". If this regex does not match then this statement
-        # will evaluate to None.
-        if re.match(r"^(gmail|googlemail)\.com$", email_parts[1]):
-            # Removes any '.' characters from the portion of the email address
-            # before the domain if the domain is gmail.com or googlemail.com.
-            email_parts[0] = email_parts[0].replace(".", "")
-            normalized_email = "@".join(email_parts)
+        # Removes any '.' and '+' characters from the portion of the email address
+        # before the domain
+        chars_to_remove = ".+"
+        translation_table = str.maketrans('', '', chars_to_remove)
+        email_parts[0] = email_parts[0].translate(translation_table)
+        normalized_email = "@".join(email_parts)
 
     return normalize_and_hash(normalized_email)
 

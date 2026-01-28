@@ -159,7 +159,7 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
         # Script's GoogleAdsClient.load_from_storage call
         mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
         mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
-        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v23")
 
         # Script's main function call
         mock_main_func_from_decorator(
@@ -207,7 +207,7 @@ class TestAddAdGroupImageAsset(unittest.TestCase):
 
         mock_parser_instance_for_assert.parse_args.assert_called_once_with()
 
-        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v19")
+        mock_gads_client_class.load_from_storage.assert_called_once_with(version="v23")
 
         client_instance_for_assert = mock_gads_client_class.load_from_storage.return_value
         mock_script_main.assert_called_once_with(

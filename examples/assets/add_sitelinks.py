@@ -23,12 +23,12 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.types.asset_service import AssetOperation
-from google.ads.googleads.v22.resources.types.asset import Asset
-from google.ads.googleads.v22.services.types.campaign_asset_service import (
+from google.ads.googleads.v23.services.types.asset_service import AssetOperation
+from google.ads.googleads.v23.resources.types.asset import Asset
+from google.ads.googleads.v23.services.types.campaign_asset_service import (
     CampaignAssetOperation,
 )
-from google.ads.googleads.v22.resources.types.campaign_asset import (
+from google.ads.googleads.v23.resources.types.campaign_asset import (
     CampaignAsset,
 )
 
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

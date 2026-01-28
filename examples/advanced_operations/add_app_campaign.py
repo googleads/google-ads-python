@@ -30,36 +30,36 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.common.types import AdTextAsset
-from google.ads.googleads.v22.resources.types import (
+from google.ads.googleads.v23.common.types import AdTextAsset
+from google.ads.googleads.v23.resources.types import (
     AdGroup,
     AdGroupAd,
     Campaign,
     CampaignBudget,
     CampaignCriterion,
 )
-from google.ads.googleads.v22.services.services.ad_group_ad_service import (
+from google.ads.googleads.v23.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v22.services.services.ad_group_service import (
+from google.ads.googleads.v23.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_budget_service import (
+from google.ads.googleads.v23.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_criterion_service import (
+from google.ads.googleads.v23.services.services.campaign_criterion_service import (
     CampaignCriterionServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.services.services.geo_target_constant_service import (
+from google.ads.googleads.v23.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v22.services.services.google_ads_service import (
+from google.ads.googleads.v23.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v22.services.types import *
+from google.ads.googleads.v23.services.types import *
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
@@ -184,8 +184,8 @@ def create_campaign(
     )
 
     # Optional fields
-    campaign.start_date = (datetime.now() + timedelta(1)).strftime("%Y%m%d")
-    campaign.end_date = (datetime.now() + timedelta(365)).strftime("%Y%m%d")
+    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime("%Y%m%d 00:00:00")
+    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime("%Y%m%d 23:59:59")
     # Optional: If you select the
     # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
     # specify your in-app conversion types so the Google Ads API can focus
@@ -392,7 +392,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

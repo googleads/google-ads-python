@@ -27,14 +27,14 @@ from typing import Any, Dict, Iterable, List, Tuple
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.errors.types import (
+from google.ads.googleads.v23.errors.types import (
     ErrorLocation,
     GoogleAdsError,
 )
-from google.ads.googleads.v22.services.services.google_ads_service import (
+from google.ads.googleads.v23.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v22.services.types import (
+from google.ads.googleads.v23.services.types import (
     GoogleAdsRow,
     SearchGoogleAdsStreamResponse,
 )
@@ -224,7 +224,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
     # Override the login_customer_id on the GoogleAdsClient, if specified.
     if args.login_customer_id is not None:

@@ -21,27 +21,27 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.common.types.criteria import KeywordInfo
-from google.ads.googleads.v22.enums.types.criterion_type import (
+from google.ads.googleads.v23.common.types.criteria import KeywordInfo
+from google.ads.googleads.v23.enums.types.criterion_type import (
     CriterionTypeEnum,
 )
-from google.ads.googleads.v22.errors.types.errors import GoogleAdsError
-from google.ads.googleads.v22.resources.types.shared_criterion import (
+from google.ads.googleads.v23.errors.types.errors import GoogleAdsError
+from google.ads.googleads.v23.resources.types.shared_criterion import (
     SharedCriterion,
 )
-from google.ads.googleads.v22.resources.types.shared_set import SharedSet
-from google.ads.googleads.v22.services.services.google_ads_service import (
+from google.ads.googleads.v23.resources.types.shared_set import SharedSet
+from google.ads.googleads.v23.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v22.services.services.shared_criterion_service import (
+from google.ads.googleads.v23.services.services.shared_criterion_service import (
     SharedCriterionServiceClient,
 )
-from google.ads.googleads.v22.services.types.google_ads_service import (
+from google.ads.googleads.v23.services.types.google_ads_service import (
     GoogleAdsRow,
     SearchGoogleAdsRequest,
     SearchGoogleAdsResponse,
 )
-from google.ads.googleads.v22.services.types.shared_criterion_service import (
+from google.ads.googleads.v23.services.types.shared_criterion_service import (
     MutateSharedCriteriaResponse,
     MutateSharedCriterionResult,
     SharedCriterionOperation,
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     main(googleads_client, args.customer_id, args.campaign_id)

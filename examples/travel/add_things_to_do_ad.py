@@ -26,37 +26,37 @@ import sys
 from examples.utils.example_helpers import get_printable_datetime
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.resources.types.ad_group import AdGroup
-from google.ads.googleads.v22.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v22.resources.types.campaign import Campaign
-from google.ads.googleads.v22.resources.types.campaign_budget import (
+from google.ads.googleads.v23.resources.types.ad_group import AdGroup
+from google.ads.googleads.v23.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v23.resources.types.campaign import Campaign
+from google.ads.googleads.v23.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v22.services.services.ad_group_ad_service import (
+from google.ads.googleads.v23.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v22.services.services.ad_group_service import (
+from google.ads.googleads.v23.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_budget_service import (
+from google.ads.googleads.v23.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.services.types.ad_group_ad_service import (
+from google.ads.googleads.v23.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
-from google.ads.googleads.v22.services.types.ad_group_service import (
+from google.ads.googleads.v23.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
-from google.ads.googleads.v22.services.types.campaign_budget_service import (
+from google.ads.googleads.v23.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v22.services.types.campaign_service import (
+from google.ads.googleads.v23.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -319,7 +319,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

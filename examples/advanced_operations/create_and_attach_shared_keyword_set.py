@@ -25,36 +25,36 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.errors.types.errors import GoogleAdsError
-from google.ads.googleads.v22.resources.types.campaign_shared_set import (
+from google.ads.googleads.v23.errors.types.errors import GoogleAdsError
+from google.ads.googleads.v23.resources.types.campaign_shared_set import (
     CampaignSharedSet,
 )
-from google.ads.googleads.v22.resources.types.shared_criterion import (
+from google.ads.googleads.v23.resources.types.shared_criterion import (
     SharedCriterion,
 )
-from google.ads.googleads.v22.resources.types.shared_set import SharedSet
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.resources.types.shared_set import SharedSet
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_shared_set_service import (
+from google.ads.googleads.v23.services.services.campaign_shared_set_service import (
     CampaignSharedSetServiceClient,
 )
-from google.ads.googleads.v22.services.types.campaign_shared_set_service import (
+from google.ads.googleads.v23.services.types.campaign_shared_set_service import (
     CampaignSharedSetOperation,
     MutateCampaignSharedSetsResponse,
 )
-from google.ads.googleads.v22.services.services.shared_criterion_service import (
+from google.ads.googleads.v23.services.services.shared_criterion_service import (
     SharedCriterionServiceClient,
 )
-from google.ads.googleads.v22.services.services.shared_set_service import (
+from google.ads.googleads.v23.services.services.shared_set_service import (
     SharedSetServiceClient,
 )
-from google.ads.googleads.v22.services.types.shared_criterion_service import (
+from google.ads.googleads.v23.services.types.shared_criterion_service import (
     MutateSharedCriteriaResponse,
     MutateSharedCriterionResult,
     SharedCriterionOperation,
 )
-from google.ads.googleads.v22.services.types.shared_set_service import (
+from google.ads.googleads.v23.services.types.shared_set_service import (
     MutateSharedSetsResponse,
     SharedSetOperation,
 )
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     main(googleads_client, args.customer_id, args.campaign_id)

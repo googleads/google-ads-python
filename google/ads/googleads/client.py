@@ -45,7 +45,7 @@ _logger = logging.getLogger(__name__)
 _SERVICE_CLIENT_TEMPLATE = "{}Client"
 _ASYNC_SERVICE_CLIENT_TEMPLATE = "{}AsyncClient"
 
-_VALID_API_VERSIONS = ["v22", "v21", "v20", "v19"]
+_VALID_API_VERSIONS = ["v23", "v22", "v21", "v20"]
 _MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
 _DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 

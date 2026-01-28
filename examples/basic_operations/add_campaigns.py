@@ -26,27 +26,28 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.services.campaign_budget_service import (
+from google.ads.googleads.v23.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v22.services.types.campaign_budget_service import (
+from google.ads.googleads.v23.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.services.types.campaign_service import (
+from google.ads.googleads.v23.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
-from google.ads.googleads.v22.resources.types.campaign_budget import (
+from google.ads.googleads.v23.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v22.resources.types.campaign import Campaign
+from google.ads.googleads.v23.resources.types.campaign import Campaign
 
 
-_DATE_FORMAT: str = "%Y%m%d"
+_START_DATE_FORMAT: str = "%Y%m%d 00:00:00"
+_END_DATE_FORMAT: str = "%Y%m%d 23:59:59"
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:
@@ -126,11 +127,11 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     start_time: datetime.date = datetime.date.today() + datetime.timedelta(
         days=1
     )
-    campaign.start_date = datetime.date.strftime(start_time, _DATE_FORMAT)
+    campaign.start_date_time = datetime.date.strftime(start_time, _START_DATE_FORMAT)
 
     # Optional: Set the end date.
     end_time: datetime.date = start_time + datetime.timedelta(weeks=4)
-    campaign.end_date = datetime.date.strftime(end_time, _DATE_FORMAT)
+    campaign.end_date_time = datetime.date.strftime(end_time, _END_DATE_FORMAT)
     # [END add_campaigns_1]
 
     # Add the campaign.
@@ -175,7 +176,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     main(googleads_client, args.customer_id)

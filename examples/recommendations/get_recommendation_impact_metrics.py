@@ -31,14 +31,14 @@ from typing import List, Dict, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.services.recommendation_service import (
+from google.ads.googleads.v23.services.services.recommendation_service import (
     RecommendationServiceClient,
 )
-from google.ads.googleads.v22.services.types.recommendation_service import (
+from google.ads.googleads.v23.services.types.recommendation_service import (
     GenerateRecommendationsRequest,
     GenerateRecommendationsResponse,
 )
-from google.ads.googleads.v22.resources.types.recommendation import (
+from google.ads.googleads.v23.resources.types.recommendation import (
     Recommendation,
 )
 
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

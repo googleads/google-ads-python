@@ -256,13 +256,13 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         args = parser.parse_args() # This will return mock_parsed_args_obj
 
         # 4. Script calls GoogleAdsClient.load_from_storage:
-        #    googleads_client = GoogleAdsClient.load_from_storage(version="v19")
+        #    googleads_client = GoogleAdsClient.load_from_storage(version="v23")
         #    This call goes to mock_gads_client_class_from_decorator.
         #    We need to configure what this mock class's method returns (a client instance mock).
         mock_client_instance = mock.Mock(name="GoogleAdsClientInstance")
         mock_gads_client_class_from_decorator.load_from_storage.return_value = mock_client_instance
 
-        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v19")
+        googleads_client = mock_gads_client_class_from_decorator.load_from_storage(version="v23")
 
         # 5. Script calls main function:
         #    main(googleads_client, args.customer_id)
@@ -310,7 +310,7 @@ class TestSetCustomClientTimeouts(unittest.TestCase):
         mock_parser_instance_for_assert.parse_args.assert_called_once_with()
 
         # Assert GoogleAdsClient.load_from_storage was called
-        mock_google_ads_client_class_in_script.load_from_storage.assert_called_once_with(version="v19")
+        mock_google_ads_client_class_in_script.load_from_storage.assert_called_once_with(version="v23")
 
         # Assert the script's main function (mock_script_main_function) was called
         client_instance_for_assert = mock_google_ads_client_class_in_script.load_from_storage.return_value

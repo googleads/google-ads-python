@@ -466,7 +466,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         )
         googleads_client = (
             mock_gads_client_class_from_decorator.load_from_storage(
-                version="v20"
+                version="v23"
             )
         )
 
@@ -548,7 +548,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
         mock_gads_client_class.load_from_storage.assert_called_once_with(
-            version="v20"
+            version="v23"
         )
 
         client_inst_for_assert = (
@@ -600,7 +600,7 @@ class TestCampaignReportToCsv(unittest.TestCase):
         mock_parser_inst_for_assert.parse_args.assert_called_once_with()
 
         mock_gads_client_class.load_from_storage.assert_called_once_with(
-            version="v20"
+            version="v23"
         )
 
         client_inst_for_assert = (

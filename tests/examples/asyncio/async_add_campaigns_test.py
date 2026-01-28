@@ -9,19 +9,19 @@ sys.modules["google.ads"] = mock_google
 sys.modules["google.ads.googleads"] = mock_google
 sys.modules["google.ads.googleads.client"] = mock_google
 sys.modules["google.ads.googleads.errors"] = mock_google
-sys.modules["google.ads.googleads.v22"] = mock_google
-sys.modules["google.ads.googleads.v22.resources"] = mock_google
-sys.modules["google.ads.googleads.v22.resources.types"] = mock_google
-sys.modules["google.ads.googleads.v22.resources.types.campaign"] = mock_google
-sys.modules["google.ads.googleads.v22.resources.types.campaign_budget"] = mock_google
-sys.modules["google.ads.googleads.v22.services"] = mock_google
-sys.modules["google.ads.googleads.v22.services.services"] = mock_google
-sys.modules["google.ads.googleads.v22.services.services.campaign_budget_service"] = mock_google
-sys.modules["google.ads.googleads.v22.services.services.campaign_service"] = mock_google
-sys.modules["google.ads.googleads.v22.services.types"] = mock_google
-sys.modules["google.ads.googleads.v22.services.types.campaign_budget_service"] = mock_google
-sys.modules["google.ads.googleads.v22.services.types.campaign_service"] = mock_google
-sys.modules["google.ads.googleads.v22.services.types.google_ads_service"] = mock_google
+sys.modules["google.ads.googleads.v23"] = mock_google
+sys.modules["google.ads.googleads.v23.resources"] = mock_google
+sys.modules["google.ads.googleads.v23.resources.types"] = mock_google
+sys.modules["google.ads.googleads.v23.resources.types.campaign"] = mock_google
+sys.modules["google.ads.googleads.v23.resources.types.campaign_budget"] = mock_google
+sys.modules["google.ads.googleads.v23.services"] = mock_google
+sys.modules["google.ads.googleads.v23.services.services"] = mock_google
+sys.modules["google.ads.googleads.v23.services.services.campaign_budget_service"] = mock_google
+sys.modules["google.ads.googleads.v23.services.services.campaign_service"] = mock_google
+sys.modules["google.ads.googleads.v23.services.types"] = mock_google
+sys.modules["google.ads.googleads.v23.services.types.campaign_budget_service"] = mock_google
+sys.modules["google.ads.googleads.v23.services.types.campaign_service"] = mock_google
+sys.modules["google.ads.googleads.v23.services.types.google_ads_service"] = mock_google
 
 from examples.asyncio import async_add_campaigns
 

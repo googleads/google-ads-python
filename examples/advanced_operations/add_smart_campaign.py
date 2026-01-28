@@ -25,70 +25,70 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.common.types.ad_asset import AdTextAsset
-from google.ads.googleads.v22.common.types.ad_type_infos import (
+from google.ads.googleads.v23.common.types.ad_asset import AdTextAsset
+from google.ads.googleads.v23.common.types.ad_type_infos import (
     SmartCampaignAdInfo,
 )
-from google.ads.googleads.v22.common.types.criteria import (
+from google.ads.googleads.v23.common.types.criteria import (
     AdScheduleInfo,
     KeywordThemeInfo,
     LocationInfo,
 )
-from google.ads.googleads.v22.resources.types.ad_group import AdGroup
-from google.ads.googleads.v22.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v22.resources.types.campaign import Campaign
-from google.ads.googleads.v22.resources.types.campaign_budget import (
+from google.ads.googleads.v23.resources.types.ad_group import AdGroup
+from google.ads.googleads.v23.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v23.resources.types.campaign import Campaign
+from google.ads.googleads.v23.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v22.resources.types.campaign_criterion import (
+from google.ads.googleads.v23.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v22.resources.types.keyword_theme_constant import (
+from google.ads.googleads.v23.resources.types.keyword_theme_constant import (
     KeywordThemeConstant,
 )
-from google.ads.googleads.v22.resources.types.smart_campaign_setting import (
+from google.ads.googleads.v23.resources.types.smart_campaign_setting import (
     SmartCampaignSetting,
 )
-from google.ads.googleads.v22.services.types.ad_group_ad_service import (
+from google.ads.googleads.v23.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
 )
-from google.ads.googleads.v22.services.types.ad_group_service import (
+from google.ads.googleads.v23.services.types.ad_group_service import (
     AdGroupOperation,
 )
-from google.ads.googleads.v22.services.types.campaign_budget_service import (
+from google.ads.googleads.v23.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v22.services.types.campaign_criterion_service import (
+from google.ads.googleads.v23.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
 )
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.enums.types.minute_of_hour import (
+from google.ads.googleads.v23.enums.types.minute_of_hour import (
     MinuteOfHourEnum,
 )
-from google.ads.googleads.v22.services.types.campaign_service import (
+from google.ads.googleads.v23.services.types.campaign_service import (
     CampaignOperation,
 )
-from google.ads.googleads.v22.services.services.google_ads_service import (
+from google.ads.googleads.v23.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v22.services.types.google_ads_service import (
+from google.ads.googleads.v23.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
     MutateOperationResponse,
 )
-from google.ads.googleads.v22.services.services.keyword_theme_constant_service import (
+from google.ads.googleads.v23.services.services.keyword_theme_constant_service import (
     KeywordThemeConstantServiceClient,
 )
-from google.ads.googleads.v22.services.types.keyword_theme_constant_service import (
+from google.ads.googleads.v23.services.types.keyword_theme_constant_service import (
     SuggestKeywordThemeConstantsRequest,
     SuggestKeywordThemeConstantsResponse,
 )
-from google.ads.googleads.v22.services.services.smart_campaign_suggest_service import (
+from google.ads.googleads.v23.services.services.smart_campaign_suggest_service import (
     SmartCampaignSuggestServiceClient,
 )
-from google.ads.googleads.v22.services.types.smart_campaign_suggest_service import (
+from google.ads.googleads.v23.services.types.smart_campaign_suggest_service import (
     SmartCampaignSuggestionInfo,
     SuggestKeywordThemesResponse,
     SuggestKeywordThemesRequest,
@@ -97,7 +97,7 @@ from google.ads.googleads.v22.services.types.smart_campaign_suggest_service impo
     SuggestSmartCampaignBudgetOptionsResponse,
     SuggestSmartCampaignBudgetOptionsRequest,
 )
-from google.ads.googleads.v22.services.types.smart_campaign_setting_service import (
+from google.ads.googleads.v23.services.types.smart_campaign_setting_service import (
     SmartCampaignSettingOperation,
 )
 from google.api_core import protobuf_helpers
@@ -1064,7 +1064,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

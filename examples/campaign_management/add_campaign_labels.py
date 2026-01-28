@@ -23,19 +23,19 @@ from typing import List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.services.campaign_label_service import (
+from google.ads.googleads.v23.services.services.campaign_label_service import (
     CampaignLabelServiceClient,
 )
-from google.ads.googleads.v22.services.services.campaign_service import (
+from google.ads.googleads.v23.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v22.services.services.label_service import (
+from google.ads.googleads.v23.services.services.label_service import (
     LabelServiceClient,
 )
-from google.ads.googleads.v22.services.types.campaign_label_service import (
+from google.ads.googleads.v23.services.types.campaign_label_service import (
     MutateCampaignLabelsResponse,
 )
-from google.ads.googleads.v22.resources.types.campaign_label import (
+from google.ads.googleads.v23.resources.types.campaign_label import (
     CampaignLabel,
 )
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
     try:
         main(

@@ -35,20 +35,20 @@ from typing import List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.common.types.criteria import (
+from google.ads.googleads.v23.common.types.criteria import (
     ListingDimensionInfo,
     ListingGroupInfo,
 )
-from google.ads.googleads.v22.enums.types.listing_group_type import (
+from google.ads.googleads.v23.enums.types.listing_group_type import (
     ListingGroupTypeEnum,
 )
-from google.ads.googleads.v22.resources.types.ad_group_criterion import (
+from google.ads.googleads.v23.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v22.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v23.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v22.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v23.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
     MutateAdGroupCriterionResult,
@@ -532,7 +532,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

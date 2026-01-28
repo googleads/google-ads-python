@@ -23,13 +23,13 @@ from typing import Any, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v22.services.services.google_ads_service import (
+from google.ads.googleads.v23.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v22.services.types.google_ads_service import (
+from google.ads.googleads.v23.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
 )
-from google.ads.googleads.v22.services.types.google_ads_service import (
+from google.ads.googleads.v23.services.types.google_ads_service import (
     GoogleAdsRow,
 )
 
@@ -40,7 +40,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     # Instantiate the GoogleAdsService object with a custom interceptor.
     ga_service: GoogleAdsServiceClient = client.get_service(
         "GoogleAdsService",
-        interceptors=[CloudLoggingInterceptor(api_version="v22")],
+        interceptors=[CloudLoggingInterceptor(api_version="v23")],
     )
 
     query: str = """
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v22"
+        version="v23"
     )
 
     try:

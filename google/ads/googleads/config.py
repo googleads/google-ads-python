@@ -34,7 +34,8 @@ _OPTIONAL_KEYS = (
     "linked_customer_id",
     "http_proxy",
     "use_cloud_org_for_api_access",
-    "use_application_default_credentials"
+    "use_application_default_credentials",
+    "gaada",
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")

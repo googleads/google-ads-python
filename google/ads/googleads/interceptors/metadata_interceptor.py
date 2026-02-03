@@ -60,6 +60,7 @@ class MetadataInterceptor(
         login_customer_id: Optional[str]= None,
         linked_customer_id: Optional[str] = None,
         use_cloud_org_for_api_access: Optional[bool] = None,
+        gaada: Optional[str] = None,
     ):
         """Initialization method for this class.
 
@@ -72,6 +73,7 @@ class MetadataInterceptor(
                 of developer token to determine your Google Ads API access
                 levels. Use this flag only if you are enrolled into a limited
                 pilot that supports this configuration
+            gaada: a str specifying the Google Ads API Assistant version.
         """
         self.developer_token_meta: Tuple[str, str] = (
             "developer-token",
@@ -87,6 +89,7 @@ class MetadataInterceptor(
             if linked_customer_id
             else None
         )
+        self.gaada: Optional[str] = gaada
         self.use_cloud_org_for_api_access: Optional[
             bool
         ] = use_cloud_org_for_api_access
@@ -152,21 +155,28 @@ class MetadataInterceptor(
         # fixed: https://github.com/googleapis/python-api-core/issues/416
         for i, metadatum_tuple in enumerate(metadata):
             # Check if the user agent header key is in the current metadatum
-            if "x-goog-api-client" in metadatum_tuple and _PROTOBUF_VERSION:
-                # Convert the tuple to a list so it can be modified.
+            if "x-goog-api-client" in metadatum_tuple:
                 metadatum: List[str] = list(metadatum_tuple)
-                # Check that "pb" isn't already included in the user agent.
-                if "pb" not in metadatum[1]:
-                    # Append the protobuf version key value pair to the end of
-                    # the string.
-                    metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
-                    # Convert the metadatum back to a tuple.
-                    metadatum_tuple: Tuple[str, str] = tuple(metadatum)
-                    # Splice the metadatum back in its original position in
-                    # order to preserve the order of the metadata list.
-                    metadata[i] = metadatum_tuple
-                    # Exit the loop since we already found the user agent.
-                    break
+
+                if self.gaada:
+                    metadatum[1] += f" gaada/{self.gaada}"
+
+                if _PROTOBUF_VERSION:
+                    # Convert the tuple to a list so it can be modified.
+                    # Check that "pb" isn't already included in the user agent.
+                    if "pb" not in metadatum[1]:
+                        # Append the protobuf version key value pair to the end of
+                        # the string.
+                        metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
+                        # Convert the metadatum back to a tuple.
+                        metadatum_tuple: Tuple[str, str] = tuple(metadatum)
+
+                # Splice the metadatum back in its original position in
+                # order to preserve the order of the metadata list.
+                metadata[i] = metadatum_tuple
+                # Exit the loop since we already found the user agent.
+                break
+
 
         client_call_details: grpc.ClientCallDetails = self._update_client_call_details_metadata(
             client_call_details, metadata

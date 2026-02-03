@@ -204,6 +204,7 @@ class GoogleAdsClient:
             "use_cloud_org_for_api_access": config_data.get(
                 "use_cloud_org_for_api_access"
             ),
+            "gaada": config_data.get("gaada"),
         }
 
     @classmethod
@@ -328,6 +329,7 @@ class GoogleAdsClient:
         http_proxy: Union[str, None] = None,
         use_proto_plus: bool = False,
         use_cloud_org_for_api_access: Union[str, None] = None,
+        gaada: Union[str, None] = None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -346,7 +348,8 @@ class GoogleAdsClient:
                 Google Cloud Organization of your Google Cloud project instead
                 of developer token to determine your Google Ads API access
                 levels. Use this flag only if you are enrolled into a limited
-                pilot that supports this configuration
+                pilot that supports this configuration.
+            gaada: a str specifying the Google Ads API Assistant version.
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -363,6 +366,7 @@ class GoogleAdsClient:
             use_cloud_org_for_api_access
         )
         self.enums: _EnumGetter = _EnumGetter(self)
+        self.gaada: Union[str, None] = gaada
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
@@ -442,12 +446,14 @@ class GoogleAdsClient:
                     self.login_customer_id,
                     self.linked_customer_id,
                     self.use_cloud_org_for_api_access,
+                    gaada=self.gaada,
                 ),
                 AsyncUnaryStreamMetadataInterceptor(
                     self.developer_token,
                     self.login_customer_id,
                     self.linked_customer_id,
                     self.use_cloud_org_for_api_access,
+                    gaada=self.gaada,
                 ),
                 AsyncUnaryUnaryLoggingInterceptor(_logger, version, endpoint),
                 AsyncUnaryStreamLoggingInterceptor(_logger, version, endpoint),
@@ -484,6 +490,7 @@ class GoogleAdsClient:
                 self.login_customer_id,
                 self.linked_customer_id,
                 self.use_cloud_org_for_api_access,
+                gaada=self.gaada,
             ),
             LoggingInterceptor(_logger, version, endpoint),
             ExceptionInterceptor(

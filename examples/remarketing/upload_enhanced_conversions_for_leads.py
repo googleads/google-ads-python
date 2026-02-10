@@ -182,6 +182,8 @@ def main(
     # [START add_session_attributes]
     # Set one of the session_attributes_encoded or
     # session_attributes_key_value_pairs fields if either are provided.
+    # The session attribute fields are only available to allowlisted users.
+    # To include these fields in conversion imports, upgrade to the Data Manager API.
     if session_attributes_encoded:
         click_conversion.session_attributes_encoded = session_attributes_encoded
     elif session_attributes_dict:

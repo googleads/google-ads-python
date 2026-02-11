@@ -114,6 +114,7 @@ class GoogleAdsClientTest(TestCase):
                     "linked_customer_id": self.linked_customer_id,
                     "http_proxy": None,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -147,6 +148,7 @@ class GoogleAdsClientTest(TestCase):
                     "linked_customer_id": None,
                     "http_proxy": None,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -180,6 +182,7 @@ class GoogleAdsClientTest(TestCase):
                     "linked_customer_id": self.linked_customer_id,
                     "http_proxy": None,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -213,6 +216,7 @@ class GoogleAdsClientTest(TestCase):
                     "login_customer_id": None,
                     "http_proxy": None,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -246,6 +250,7 @@ class GoogleAdsClientTest(TestCase):
                     "linked_customer_id": None,
                     "http_proxy": self.http_proxy,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -280,6 +285,7 @@ class GoogleAdsClientTest(TestCase):
                     "linked_customer_id": None,
                     "http_proxy": None,
                     "use_cloud_org_for_api_access": None,
+                    "gaada": None
                 },
             )
 
@@ -316,6 +322,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_env_versioned(self):
@@ -351,6 +358,7 @@ class GoogleAdsClientTest(TestCase):
                 version="v4",
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_dict(self):
@@ -384,6 +392,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_dict_versioned(self):
@@ -417,6 +426,7 @@ class GoogleAdsClientTest(TestCase):
                 version="v4",
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_string(self):
@@ -450,6 +460,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_string_versioned(self):
@@ -485,6 +496,7 @@ class GoogleAdsClientTest(TestCase):
                 version="v4",
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_get_service(self):
@@ -881,6 +893,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=self.http_proxy,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_http_proxy_from_dict(self):
@@ -915,6 +928,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=self.http_proxy,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_http_proxy_from_string(self):
@@ -949,6 +963,7 @@ class GoogleAdsClientTest(TestCase):
                 version=None,
                 http_proxy=self.http_proxy,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_client_info_package_not_found(self):
@@ -1017,6 +1032,7 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version=None,
                 http_proxy=self.http_proxy,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_storage(self):
@@ -1058,6 +1074,7 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_storage_versioned(self):
@@ -1099,6 +1116,7 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version="v4",
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_storage_login_cid_int(self):
@@ -1142,6 +1160,7 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_storage_custom_path(self):
@@ -1177,6 +1196,7 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version=None,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )
 
     def test_load_from_storage_file_not_found(self):
@@ -1239,4 +1259,5 @@ class GoogleAdsClientTestFs(FileTestCase):
                 version=latest_version,
                 http_proxy=None,
                 use_cloud_org_for_api_access=None,
+                gaada=None
             )

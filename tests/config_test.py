@@ -320,6 +320,17 @@ class ConfigTest(FileTestCase):
         }
         self.assertEqual(config.load_from_dict(config_data), config_data)
 
+    def test_load_from_dict_gaada(self):
+        """Should load "gaada" config from dict."""
+        config_data = {
+            **self.default_dict_config,
+            **{
+                "gaada": "1.6.0",
+            },
+        }
+        result = config.load_from_dict(config_data)
+        self.assertEqual(result["gaada"], "1.6.0")
+
     def test_load_from_dict_secondary_service_account_keys(self):
         """Should convert secondary keys to primary keys."""
         config_data = {
@@ -663,6 +674,35 @@ class ConfigTest(FileTestCase):
 
     def test_disambiguate_string_bool_raises_type_error(self):
         self.assertRaises(TypeError, config.disambiguate_string_bool, {})
+
+    def test_load_from_env_gaada(self):
+        """Should load ads api assistant flag from environment when specified"""
+        environ = {
+            **self.default_env_var_config,
+            **{
+                "GOOGLE_ADS_GAADA": "1.6.0",
+            },
+        }
+
+        with mock.patch("os.environ", environ):
+            results = config.load_from_env()
+            self.assertEqual(
+                results["gaada"],
+                "1.6.0",
+            )
+
+    def test_load_from_yaml_file_gaada(self):
+        """Should load "gaada" config from a yaml."""
+        self._create_mock_yaml({"gaada": "1.6.0"})
+
+        result = config.load_from_yaml_file()
+        self.assertEqual(result["gaada"], "1.6.0")
+
+    def test_load_from_yaml_file_gaada_not_set(self):
+        """Should set "gaada" as False when not set."""
+        self._create_mock_yaml({})
+        result = config.load_from_yaml_file()
+        self.assertEqual(result.get("gaada"), None)
 
     def test_load_from_env_use_cloud_org_for_api_access(self):
         """Should load api access flag from environment when specified"""

@@ -62,7 +62,7 @@ _LOGGER = std_logging.getLogger(__name__)
 from google.ads.googleads.v22.services.types import (
     recommendation_subscription_service,
 )
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import (
     RecommendationSubscriptionServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -154,6 +154,34 @@ class RecommendationSubscriptionServiceClient(
 
     _DEFAULT_ENDPOINT_TEMPLATE = "googleads.{UNIVERSE_DOMAIN}"
     _DEFAULT_UNIVERSE = "googleapis.com"
+
+    @staticmethod
+    def _use_client_cert_effective():
+        """Returns whether client certificate should be used for mTLS if the
+        google-auth version supports should_use_client_cert automatic mTLS enablement.
+
+        Alternatively, read from the GOOGLE_API_USE_CLIENT_CERTIFICATE env var.
+
+        Returns:
+            bool: whether client certificate should be used for mTLS
+        Raises:
+            ValueError: (If using a version of google-auth without should_use_client_cert and
+            GOOGLE_API_USE_CLIENT_CERTIFICATE is set to an unexpected value.)
+        """
+        # check if google-auth version supports should_use_client_cert for automatic mTLS enablement
+        if hasattr(mtls, "should_use_client_cert"):  # pragma: NO COVER
+            return mtls.should_use_client_cert()
+        else:  # pragma: NO COVER
+            # if unsupported, fallback to reading from env var
+            use_client_cert_str = os.getenv(
+                "GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"
+            ).lower()
+            if use_client_cert_str not in ("true", "false"):
+                raise ValueError(
+                    "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be"
+                    " either `true` or `false`"
+                )
+            return use_client_cert_str == "true"
 
     @classmethod
     def from_service_account_info(cls, info: dict, *args, **kwargs):
@@ -346,14 +374,10 @@ class RecommendationSubscriptionServiceClient(
         )
         if client_options is None:
             client_options = client_options_lib.ClientOptions()
-        use_client_cert = os.getenv(
-            "GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"
+        use_client_cert = (
+            RecommendationSubscriptionServiceClient._use_client_cert_effective()
         )
         use_mtls_endpoint = os.getenv("GOOGLE_API_USE_MTLS_ENDPOINT", "auto")
-        if use_client_cert not in ("true", "false"):
-            raise ValueError(
-                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
-            )
         if use_mtls_endpoint not in ("auto", "never", "always"):
             raise MutualTLSChannelError(
                 "Environment variable `GOOGLE_API_USE_MTLS_ENDPOINT` must be `never`, `auto` or `always`"
@@ -361,7 +385,7 @@ class RecommendationSubscriptionServiceClient(
 
         # Figure out the client cert source to use.
         client_cert_source = None
-        if use_client_cert == "true":
+        if use_client_cert:
             if client_options.client_cert_source:
                 client_cert_source = client_options.client_cert_source
             elif mtls.has_default_client_cert_source():
@@ -393,22 +417,18 @@ class RecommendationSubscriptionServiceClient(
             google.auth.exceptions.MutualTLSChannelError: If GOOGLE_API_USE_MTLS_ENDPOINT
                 is not any of ["auto", "never", "always"].
         """
-        use_client_cert = os.getenv(
-            "GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"
-        ).lower()
+        use_client_cert = (
+            RecommendationSubscriptionServiceClient._use_client_cert_effective()
+        )
         use_mtls_endpoint = os.getenv(
             "GOOGLE_API_USE_MTLS_ENDPOINT", "auto"
         ).lower()
         universe_domain_env = os.getenv("GOOGLE_CLOUD_UNIVERSE_DOMAIN")
-        if use_client_cert not in ("true", "false"):
-            raise ValueError(
-                "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be either `true` or `false`"
-            )
         if use_mtls_endpoint not in ("auto", "never", "always"):
             raise MutualTLSChannelError(
                 "Environment variable `GOOGLE_API_USE_MTLS_ENDPOINT` must be `never`, `auto` or `always`"
             )
-        return use_client_cert == "true", use_mtls_endpoint, universe_domain_env
+        return use_client_cert, use_mtls_endpoint, universe_domain_env
 
     @staticmethod
     def _get_client_cert_source(provided_cert_source, use_cert_flag):
@@ -793,13 +813,14 @@ class RecommendationSubscriptionServiceClient(
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `DatabaseError <>`__ `FieldError <>`__
         `HeaderError <>`__ `InternalError <>`__ `MutateError <>`__
-        `QuotaError <>`__ `RecommendationError <>`__ `RequestError <>`__
+        `QuotaError <>`__ `RecommendationError <>`__
+        `RecommendationSubscriptionError <>`__ `RequestError <>`__
         `UrlFieldError <>`__
 
         Args:
             request (Union[google.ads.googleads.v22.services.types.MutateRecommendationSubscriptionRequest, dict]):
                 The request object. Request message for
-                [RecommendationSubscriptionService.MutateRecommendationSubscription]
+                [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
             customer_id (str):
                 Required. The ID of the subscribing
                 customer.
@@ -825,7 +846,7 @@ class RecommendationSubscriptionServiceClient(
         Returns:
             google.ads.googleads.v22.services.types.MutateRecommendationSubscriptionResponse:
                 Response message for
-                   [RecommendationSubscriptionService.MutateRecommendationSubscription]
+                   [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
         """
         # Create or coerce a protobuf request object.

@@ -39,7 +39,12 @@ __protobuf__ = proto.module(
 
 
 class UserList(proto.Message):
-    r"""A user list. This is a list of users a customer may target.
+    r"""A user list. This is a list of users a customer may target. The
+    unique key of a user list consists of the following fields: ``id``.
+    Note that the ``name`` must also be unique for user lists owned by a
+    given customer, except in some cases where ``access_reason`` is set
+    to ``SHARED``. Violating the unique name constraint produces error:
+    ``UserListError.INVALID_NAME``.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -68,9 +73,9 @@ class UserList(proto.Message):
 
             This field is a member of `oneof`_ ``_read_only``.
         name (str):
-            Name of this user list. Depending on its access_reason, the
-            user list name may not be unique (for example, if
-            access_reason=SHARED)
+            Name of this user list. Unique per user list, except in some
+            cases where a user list of the same name has
+            ``access_reason`` set to ``SHARED``.
 
             This field is a member of `oneof`_ ``_name``.
         description (str):

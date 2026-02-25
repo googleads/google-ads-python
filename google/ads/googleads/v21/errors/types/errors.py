@@ -488,8 +488,7 @@ from google.ads.googleads.v21.errors.types import (
 from google.ads.googleads.v21.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
-from google.protobuf import duration_pb2  # type: ignore
-
+import google.protobuf.duration_pb2 as duration_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.errors",
@@ -2801,7 +2800,7 @@ class BudgetPerDayMinimumErrorDetails(proto.Message):
             The minimum budget required by the campaign
             per day, in micros of the advertiser currency.
             Applies to both daily and custom budgets.
-        minimum_bugdet_amount_micros (int):
+        minimum_budget_amount_micros (int):
             The minimum value for the budget's amount
             field required by the campaign, in micros of the
             advertiser currency. Only set if this error is
@@ -2830,7 +2829,7 @@ class BudgetPerDayMinimumErrorDetails(proto.Message):
         proto.INT64,
         number=2,
     )
-    minimum_bugdet_amount_micros: int = proto.Field(
+    minimum_budget_amount_micros: int = proto.Field(
         proto.INT64,
         number=3,
     )

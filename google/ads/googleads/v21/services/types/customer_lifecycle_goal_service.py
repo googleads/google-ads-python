@@ -19,8 +19,7 @@ from __future__ import annotations
 import proto  # type: ignore
 
 from google.ads.googleads.v21.resources.types import customer_lifecycle_goal
-from google.protobuf import field_mask_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
@@ -36,7 +35,7 @@ __protobuf__ = proto.module(
 
 class ConfigureCustomerLifecycleGoalsRequest(proto.Message):
     r"""Request message for
-    [CustomerLifecycleGoalService.configureCustomerLifecycleGoals][].
+    [CustomerLifecycleGoalService.ConfigureCustomerLifecycleGoals][google.ads.googleads.v21.services.CustomerLifecycleGoalService.ConfigureCustomerLifecycleGoals].
 
     Attributes:
         customer_id (str):
@@ -113,7 +112,7 @@ class CustomerLifecycleGoalOperation(proto.Message):
 
 class ConfigureCustomerLifecycleGoalsResponse(proto.Message):
     r"""Response message for
-    [CustomerLifecycleGoalService.configureCustomerLifecycleGoals][].
+    [CustomerLifecycleGoalService.ConfigureCustomerLifecycleGoals][google.ads.googleads.v21.services.CustomerLifecycleGoalService.ConfigureCustomerLifecycleGoals].
 
     Attributes:
         result (google.ads.googleads.v21.services.types.ConfigureCustomerLifecycleGoalsResult):

@@ -24,7 +24,6 @@ from google.ads.googleads.v21.enums.types import (
     identity_verification_program_status,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",
@@ -41,7 +40,7 @@ __protobuf__ = proto.module(
 
 class StartIdentityVerificationRequest(proto.Message):
     r"""Request message for
-    [IdentityVerificationService.StartIdentityVerification].
+    [StartIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.StartIdentityVerification].
 
     Attributes:
         customer_id (str):
@@ -67,7 +66,7 @@ class StartIdentityVerificationRequest(proto.Message):
 
 class GetIdentityVerificationRequest(proto.Message):
     r"""Request message for
-    [IdentityVerificationService.GetIdentityVerification].
+    [GetIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.GetIdentityVerification].
 
     Attributes:
         customer_id (str):
@@ -83,7 +82,7 @@ class GetIdentityVerificationRequest(proto.Message):
 
 class GetIdentityVerificationResponse(proto.Message):
     r"""Response message for
-    [IdentityVerificationService.GetIdentityVerification].
+    [GetIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.GetIdentityVerification].
 
     Attributes:
         identity_verification (MutableSequence[google.ads.googleads.v21.services.types.IdentityVerification]):

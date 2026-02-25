@@ -533,6 +533,7 @@ from google.ads.googleads.v23.resources.types import video as gagr_video
 from google.ads.googleads.v23.resources.types import (
     webpage_view as gagr_webpage_view,
 )
+from google.ads.googleads.v23.resources.types import youtube_video_upload
 from google.ads.googleads.v23.services.types import ad_group_ad_label_service
 from google.ads.googleads.v23.services.types import ad_group_ad_service
 from google.ads.googleads.v23.services.types import ad_group_asset_service
@@ -1347,6 +1348,9 @@ class GoogleAdsRow(proto.Message):
         android_privacy_shared_key_google_network_type (google.ads.googleads.v23.resources.types.AndroidPrivacySharedKeyGoogleNetworkType):
             The android privacy shared key google network
             type referenced in the query.
+        you_tube_video_upload (google.ads.googleads.v23.resources.types.YouTubeVideoUpload):
+            The YouTube video upload referenced in the
+            query.
         applied_incentive (google.ads.googleads.v23.resources.types.AppliedIncentive):
             The applied incentive referenced in the
             query.
@@ -2434,6 +2438,13 @@ class GoogleAdsRow(proto.Message):
         proto.MESSAGE,
         number=219,
         message=gagr_android_privacy_shared_key_google_network_type.AndroidPrivacySharedKeyGoogleNetworkType,
+    )
+    you_tube_video_upload: youtube_video_upload.YouTubeVideoUpload = (
+        proto.Field(
+            proto.MESSAGE,
+            number=245,
+            message=youtube_video_upload.YouTubeVideoUpload,
+        )
     )
     applied_incentive: gagr_applied_incentive.AppliedIncentive = proto.Field(
         proto.MESSAGE,

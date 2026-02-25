@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.errors",
     marshal="google.ads.googleads.v21",
@@ -57,7 +56,7 @@ class DateErrorEnum(proto.Message):
                 yyyy-mm-dd hh:mm:ss.
             INVALID_STRING_DATE_TIME_SECONDS_WITH_OFFSET (12):
                 The string date time's format should be yyyy-mm-dd
-                hh:mm:ss+|-hh:mm.
+                hh:mm:ss+\|-hh:mm.
             EARLIER_THAN_MINIMUM_DATE (7):
                 Date is before allowed minimum.
             LATER_THAN_MAXIMUM_DATE (8):

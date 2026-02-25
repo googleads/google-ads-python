@@ -25,7 +25,6 @@ from google.ads.googleads.v21.resources.types import (
     keyword_theme_constant as gagr_keyword_theme_constant,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",
@@ -355,13 +354,13 @@ class SuggestKeywordThemesRequest(proto.Message):
             Required. Information to get keyword theme suggestions.
             Required fields:
 
-            -  suggestion_info.final_url
-            -  suggestion_info.language_code
-            -  suggestion_info.geo_target
+            - suggestion_info.final_url
+            - suggestion_info.language_code
+            - suggestion_info.geo_target
 
             Recommended fields:
 
-            -  suggestion_info.business_setting
+            - suggestion_info.business_setting
     """
 
     customer_id: str = proto.Field(

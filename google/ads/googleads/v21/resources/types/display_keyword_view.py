@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -30,6 +29,22 @@ __protobuf__ = proto.module(
 
 class DisplayKeywordView(proto.Message):
     r"""A display keyword view.
+
+    Provides performance data for keywords used in Display Network
+    campaigns. This view lets you analyze how your display keywords are
+    performing across various segments.
+
+    This view is primarily used to track the effectiveness of keyword
+    targeting within your Display campaigns. To understand which network
+    the metrics apply to, you can select the
+    ``segments.ad_network_type`` field in your query. This field will
+    segment the data by networks such as the Google Display Network,
+    YouTube, Gmail, and so on.
+
+    You can select fields from this resource along with metrics like
+    impressions, clicks, and conversions to gauge performance.
+    Attributed resources like ``ad_group`` and ``campaign`` can also be
+    selected without segmenting metrics.
 
     Attributes:
         resource_name (str):

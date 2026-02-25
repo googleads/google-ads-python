@@ -470,6 +470,10 @@ class CriterionErrorEnum(proto.Message):
             ONLY_EXCLUSION_BRAND_LIST_ALLOWED_FOR_CAMPAIGN_TYPE (158):
                 Brand list can only be negatively targeted
                 for the campaign type.
+            CANNOT_TARGET_ONLY_UNDETERMINED (165):
+                The combination of demographic criteria would
+                result in only targeting the "undetermined"
+                segment, which is prohibited.
             LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN (166):
                 Cannot positively target locations outside of
                 restricted area for campaign.
@@ -671,6 +675,7 @@ class CriterionErrorEnum(proto.Message):
         BRAND_SHARED_SET_DOES_NOT_EXIST = 156
         CANNOT_ADD_REMOVED_BRAND_SHARED_SET = 157
         ONLY_EXCLUSION_BRAND_LIST_ALLOWED_FOR_CAMPAIGN_TYPE = 158
+        CANNOT_TARGET_ONLY_UNDETERMINED = 165
         LOCATION_TARGETING_NOT_ELIGIBLE_FOR_RESTRICTED_CAMPAIGN = 166
         ONLY_INCLUSION_BRAND_LIST_ALLOWED_FOR_AD_GROUPS = 171
         CANNOT_ADD_REMOVED_PLACEMENT_LIST_SHARED_SET = 172

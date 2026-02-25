@@ -22,7 +22,6 @@ from google.ads.googleads.v21.enums.types import (
     placement_type as gage_placement_type,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -34,7 +33,6 @@ __protobuf__ = proto.module(
 
 class GroupContentSuitabilityPlacementView(proto.Message):
     r"""A group content suitability placement view.
-    {-- next tag to use: 6 --}
 
     Attributes:
         resource_name (str):

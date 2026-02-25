@@ -125,6 +125,7 @@ from .types.benchmarks_marketing_objective import (
     BenchmarksMarketingObjectiveEnum,
 )
 from .types.benchmarks_source_type import BenchmarksSourceTypeEnum
+from .types.benchmarks_time_granularity import BenchmarksTimeGranularityEnum
 from .types.bid_modifier_source import BidModifierSourceEnum
 from .types.bidding_source import BiddingSourceEnum
 from .types.bidding_strategy_status import BiddingStrategyStatusEnum
@@ -133,6 +134,7 @@ from .types.bidding_strategy_system_status import (
 )
 from .types.bidding_strategy_type import BiddingStrategyTypeEnum
 from .types.billing_setup_status import BillingSetupStatusEnum
+from .types.booking_status import BookingStatusEnum
 from .types.brand_request_rejection_reason import (
     BrandRequestRejectionReasonEnum,
 )
@@ -399,6 +401,7 @@ from .types.lookalike_expansion_level import LookalikeExpansionLevelEnum
 from .types.manager_link_status import ManagerLinkStatusEnum
 from .types.match_type import MatchTypeEnum
 from .types.media_type import MediaTypeEnum
+from .types.messaging_restriction_type import MessagingRestrictionTypeEnum
 from .types.mime_type import MimeTypeEnum
 from .types.minute_of_hour import MinuteOfHourEnum
 from .types.mobile_app_vendor import MobileAppVendorEnum
@@ -597,7 +600,9 @@ from .types.video_ad_sequence_minimum_duration import (
 from .types.video_thumbnail import VideoThumbnailEnum
 from .types.webpage_condition_operand import WebpageConditionOperandEnum
 from .types.webpage_condition_operator import WebpageConditionOperatorEnum
+from .types.youtube_video_privacy import YouTubeVideoPrivacyEnum
 from .types.youtube_video_property import YouTubeVideoPropertyEnum
+from .types.youtube_video_upload_state import YouTubeVideoUploadStateEnum
 
 if hasattr(api_core, "check_python_version") and hasattr(
     api_core, "check_dependency_versions"
@@ -763,12 +768,14 @@ __all__ = (
     "BatchJobStatusEnum",
     "BenchmarksMarketingObjectiveEnum",
     "BenchmarksSourceTypeEnum",
+    "BenchmarksTimeGranularityEnum",
     "BidModifierSourceEnum",
     "BiddingSourceEnum",
     "BiddingStrategyStatusEnum",
     "BiddingStrategySystemStatusEnum",
     "BiddingStrategyTypeEnum",
     "BillingSetupStatusEnum",
+    "BookingStatusEnum",
     "BrandRequestRejectionReasonEnum",
     "BrandSafetySuitabilityEnum",
     "BrandStateEnum",
@@ -933,6 +940,7 @@ __all__ = (
     "ManagerLinkStatusEnum",
     "MatchTypeEnum",
     "MediaTypeEnum",
+    "MessagingRestrictionTypeEnum",
     "MimeTypeEnum",
     "MinuteOfHourEnum",
     "MobileAppVendorEnum",
@@ -1055,5 +1063,7 @@ __all__ = (
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",
+    "YouTubeVideoPrivacyEnum",
     "YouTubeVideoPropertyEnum",
+    "YouTubeVideoUploadStateEnum",
 )

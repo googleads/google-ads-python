@@ -25,7 +25,6 @@ from google.ads.googleads.v20.enums.types import (
     insights_knowledge_graph_entity_capabilities,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.common",
     marshal="google.ads.googleads.v20",
@@ -568,7 +567,7 @@ class KnowledgeGraphAttributeMetadata(proto.Message):
     Attributes:
         entity_capabilities (MutableSequence[google.ads.googleads.v20.enums.types.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities]):
             The capabilities of the entity used in
-            [ContentCreatorInsightsService][].
+            [ContentCreatorInsightsService][google.ads.googleads.v20.services.ContentCreatorInsightsService].
     """
 
     entity_capabilities: MutableSequence[

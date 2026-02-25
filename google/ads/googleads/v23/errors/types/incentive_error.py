@@ -43,11 +43,20 @@ class IncentiveErrorEnum(proto.Message):
             INVALID_INCENTIVE_ID (2):
                 The incentive ID is either invalid or not
                 supported for the given country.
+            MAX_INCENTIVES_REDEEMED (3):
+                The maximum number of coupons has been
+                redeemed.
+            ACCOUNT_TOO_OLD (4):
+                This incentive cannot be applied because too
+                much time has passed since the account's first
+                ad impression.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
         INVALID_INCENTIVE_ID = 2
+        MAX_INCENTIVES_REDEEMED = 3
+        ACCOUNT_TOO_OLD = 4
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

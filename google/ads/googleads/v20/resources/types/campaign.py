@@ -90,7 +90,6 @@ from google.ads.googleads.v20.enums.types import (
 )
 from google.ads.googleads.v20.enums.types import video_ad_format_restriction
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -423,6 +422,15 @@ class Campaign(proto.Message):
             The advertiser should self-declare whether
             this campaign contains political advertising
             content targeted towards the European Union.
+        missing_eu_political_advertising_declaration (bool):
+            Output only. Indicates whether this campaign is missing a
+            declaration about whether it contains political advertising
+            targeted towards the EU and is ineligible for any
+            exemptions. If this field is true, use the
+            contains_eu_political_advertising field to add the required
+            declaration.
+
+            This field is read-only.
         bidding_strategy (str):
             The resource name of the portfolio bidding
             strategy used by the campaign.
@@ -691,11 +699,15 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_merchant_id``.
             feed_label (str):
-                Feed label of products to include in the campaign. Only one
-                of feed_label or sales_country can be set. If used instead
-                of sales_country, the feed_label field accepts country codes
-                in the same format for example: 'XX'. Otherwise can be any
-                string used for feed label in Google Merchant Center.
+                Feed label of products to include in the campaign. Valid
+                feed labels may contain a maximum of 20 characters including
+                uppercase letters, numbers, hyphens, and underscores. If you
+                previously used the deprecated ``sales_country`` in the
+                two-letter country code (``XX``) format, the ``feed_label``
+                field should be used instead. For more information see the
+                `feed
+                label <//support.google.com/merchants/answer/12453549>`__
+                support article.
             campaign_priority (int):
                 Priority of the campaign. Campaigns with
                 numerically higher priorities take precedence
@@ -1619,6 +1631,10 @@ class Campaign(proto.Message):
         proto.ENUM,
         number=102,
         enum=eu_political_advertising_status.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus,
+    )
+    missing_eu_political_advertising_declaration: bool = proto.Field(
+        proto.BOOL,
+        number=108,
     )
     bidding_strategy: str = proto.Field(
         proto.STRING,

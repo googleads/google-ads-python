@@ -37,7 +37,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalAsyncRetry = Union[retries_async.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v20.services.types import experiment_service
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 
 class ListExperimentAsyncErrorsPager:

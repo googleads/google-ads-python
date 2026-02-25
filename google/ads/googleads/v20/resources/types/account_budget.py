@@ -25,7 +25,6 @@ from google.ads.googleads.v20.enums.types import (
 )
 from google.ads.googleads.v20.enums.types import time_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -41,11 +40,11 @@ class AccountBudget(proto.Message):
     and proposed changes that are pending approval. The proposed changes
     that are pending approval, if any, are found in 'pending_proposal'.
     Effective details about the budget are found in fields prefixed
-    'approved_', 'adjusted_' and those without a prefix. Since some
+    'approved\_', 'adjusted\_' and those without a prefix. Since some
     effective details may differ from what the user had originally
     requested (for example, spending limit), these differences are
-    juxtaposed through 'proposed_', 'approved_', and possibly
-    'adjusted_' fields.
+    juxtaposed through 'proposed\_', 'approved\_', and possibly
+    'adjusted\_' fields.
 
     This resource is mutated using AccountBudgetProposal and cannot be
     mutated directly. A budget may have at most one pending proposal at

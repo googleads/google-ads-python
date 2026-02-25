@@ -22,7 +22,6 @@ from google.ads.googleads.v20.common.types import simulation
 from google.ads.googleads.v20.enums.types import simulation_modification_method
 from google.ads.googleads.v20.enums.types import simulation_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -37,22 +36,22 @@ class CampaignSimulation(proto.Message):
     type, simulation type and simulation modification method is detailed
     below respectively.
 
-    -  SEARCH - CPC_BID - UNIFORM
-    -  SEARCH - CPC_BID - SCALING
-    -  SEARCH - TARGET_CPA - UNIFORM
-    -  SEARCH - TARGET_CPA - SCALING
-    -  SEARCH - TARGET_ROAS - UNIFORM
-    -  SEARCH - TARGET_IMPRESSION_SHARE - UNIFORM
-    -  SEARCH - BUDGET - UNIFORM
-    -  SHOPPING - BUDGET - UNIFORM
-    -  SHOPPING - TARGET_ROAS - UNIFORM
-    -  MULTI_CHANNEL - TARGET_CPA - UNIFORM
-    -  MULTI_CHANNEL - TARGET_ROAS - UNIFORM
-    -  DEMAND_GEN - TARGET_CPA - DEFAULT
-    -  DISPLAY - TARGET_CPA - UNIFORM
-    -  PERFORMANCE_MAX - TARGET_CPA - UNIFORM
-    -  PERFORMANCE_MAX - TARGET_ROAS - UNIFORM
-    -  PERFORMANCE_MAX - BUDGET - UNIFORM
+    - SEARCH - CPC_BID - UNIFORM
+    - SEARCH - CPC_BID - SCALING
+    - SEARCH - TARGET_CPA - UNIFORM
+    - SEARCH - TARGET_CPA - SCALING
+    - SEARCH - TARGET_ROAS - UNIFORM
+    - SEARCH - TARGET_IMPRESSION_SHARE - UNIFORM
+    - SEARCH - BUDGET - UNIFORM
+    - SHOPPING - BUDGET - UNIFORM
+    - SHOPPING - TARGET_ROAS - UNIFORM
+    - MULTI_CHANNEL - TARGET_CPA - UNIFORM
+    - MULTI_CHANNEL - TARGET_ROAS - UNIFORM
+    - DEMAND_GEN - TARGET_CPA - DEFAULT
+    - DISPLAY - TARGET_CPA - UNIFORM
+    - PERFORMANCE_MAX - TARGET_CPA - UNIFORM
+    - PERFORMANCE_MAX - TARGET_ROAS - UNIFORM
+    - PERFORMANCE_MAX - BUDGET - UNIFORM
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.

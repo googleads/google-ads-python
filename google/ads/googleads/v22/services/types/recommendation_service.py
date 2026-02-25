@@ -39,8 +39,7 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.resources.types import ad as gagr_ad
 from google.ads.googleads.v22.resources.types import asset
 from google.ads.googleads.v22.resources.types import recommendation
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",

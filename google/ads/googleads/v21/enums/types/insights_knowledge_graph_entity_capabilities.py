@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.enums",
     marshal="google.ads.googleads.v21",
@@ -44,10 +43,10 @@ class InsightsKnowledgeGraphEntityCapabilitiesEnum(proto.Message):
                 The value is unknown in this version.
             CONTENT_TRENDING_INSIGHTS (2):
                 An entity that is supported to use as a trending topic in
-                [ContentCreatorInsightsService.GenerateTrendingInsights].
+                [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v21.services.ContentCreatorInsightsService.GenerateTrendingInsights].
             CREATOR_ATTRIBUTE (3):
                 An entity that is supported to use as a creator attribute in
-                [ContentCreatorInsightsService.GenerateCreatorInsights].
+                [ContentCreatorInsightsService.GenerateCreatorInsights][google.ads.googleads.v21.services.ContentCreatorInsightsService.GenerateCreatorInsights].
         """
 
         UNSPECIFIED = 0

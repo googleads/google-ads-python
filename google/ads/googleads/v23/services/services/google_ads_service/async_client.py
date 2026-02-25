@@ -1067,6 +1067,12 @@ class GoogleAdsServiceAsyncClient:
     parse_webpage_view_path = staticmethod(
         GoogleAdsServiceClient.parse_webpage_view_path
     )
+    you_tube_video_upload_path = staticmethod(
+        GoogleAdsServiceClient.you_tube_video_upload_path
+    )
+    parse_you_tube_video_upload_path = staticmethod(
+        GoogleAdsServiceClient.parse_you_tube_video_upload_path
+    )
     common_billing_account_path = staticmethod(
         GoogleAdsServiceClient.common_billing_account_path
     )

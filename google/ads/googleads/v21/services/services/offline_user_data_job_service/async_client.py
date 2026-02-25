@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -37,10 +36,10 @@ from google.ads.googleads.v21.resources.types import offline_user_data_job
 from google.ads.googleads.v21.services.types import (
     offline_user_data_job_service,
 )
-from google.api_core import operation  # type: ignore
-from google.api_core import operation_async  # type: ignore
-from google.protobuf import empty_pb2  # type: ignore
-from google.rpc import status_pb2  # type: ignore
+import google.api_core.operation as operation  # type: ignore
+import google.api_core.operation_async as operation_async  # type: ignore
+import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import (
     OfflineUserDataJobServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -123,7 +122,12 @@ class OfflineUserDataJobServiceAsyncClient:
         Returns:
             OfflineUserDataJobServiceAsyncClient: The constructed client.
         """
-        return OfflineUserDataJobServiceClient.from_service_account_info.__func__(OfflineUserDataJobServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            OfflineUserDataJobServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            OfflineUserDataJobServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -139,7 +143,12 @@ class OfflineUserDataJobServiceAsyncClient:
         Returns:
             OfflineUserDataJobServiceAsyncClient: The constructed client.
         """
-        return OfflineUserDataJobServiceClient.from_service_account_file.__func__(OfflineUserDataJobServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            OfflineUserDataJobServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            OfflineUserDataJobServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 

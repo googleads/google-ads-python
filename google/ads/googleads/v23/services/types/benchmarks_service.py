@@ -21,11 +21,12 @@ import proto  # type: ignore
 
 from google.ads.googleads.v23.common.types import additional_application_info
 from google.ads.googleads.v23.common.types import criteria
-from google.ads.googleads.v23.common.types import dates
+from google.ads.googleads.v23.common.types import dates as gagc_dates
 from google.ads.googleads.v23.enums.types import benchmarks_marketing_objective
 from google.ads.googleads.v23.enums.types import (
     benchmarks_source_type as gage_benchmarks_source_type,
 )
+from google.ads.googleads.v23.enums.types import benchmarks_time_granularity
 
 
 __protobuf__ = proto.module(
@@ -47,7 +48,10 @@ __protobuf__ = proto.module(
         "GenerateBenchmarksMetricsRequest",
         "BenchmarksSource",
         "ProductFilter",
+        "BreakdownDefinition",
         "GenerateBenchmarksMetricsResponse",
+        "BreakdownMetrics",
+        "BreakdownKey",
         "Metrics",
         "RateMetrics",
     },
@@ -84,10 +88,10 @@ class ListBenchmarksAvailableDatesResponse(proto.Message):
             range inclusive.
     """
 
-    supported_dates: dates.DateRange = proto.Field(
+    supported_dates: gagc_dates.DateRange = proto.Field(
         proto.MESSAGE,
         number=1,
-        message=dates.DateRange,
+        message=gagc_dates.DateRange,
     )
 
 
@@ -362,6 +366,10 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
             Required. The products to aggregate metrics
             over. Product filter settings support a list of
             product IDs or a list of marketing objectives.
+        breakdown_definition (google.ads.googleads.v23.services.types.BreakdownDefinition):
+            Optional. The set of dimensions to group
+            metrics by. If multiple dimensions are selected,
+            cross-dimension breakdowns are returned.
         currency_code (str):
             Optional. The three-character ISO 4217
             currency code. If unspecified, the default
@@ -378,10 +386,10 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
         proto.STRING,
         number=1,
     )
-    date_range: dates.DateRange = proto.Field(
+    date_range: gagc_dates.DateRange = proto.Field(
         proto.MESSAGE,
         number=2,
-        message=dates.DateRange,
+        message=gagc_dates.DateRange,
     )
     location: criteria.LocationInfo = proto.Field(
         proto.MESSAGE,
@@ -397,6 +405,11 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
         proto.MESSAGE,
         number=5,
         message="ProductFilter",
+    )
+    breakdown_definition: "BreakdownDefinition" = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        message="BreakdownDefinition",
     )
     currency_code: str = proto.Field(
         proto.STRING,
@@ -507,6 +520,31 @@ class ProductFilter(proto.Message):
     )
 
 
+class BreakdownDefinition(proto.Message):
+    r"""The set of dimensions to group metrics by.
+
+    Attributes:
+        date_breakdown (google.ads.googleads.v23.enums.types.BenchmarksTimeGranularityEnum.BenchmarksTimeGranularity):
+            A date breakdown using the selected
+            granularity. The effective date range is
+            extended to include the full time periods that
+            overlap with the selected start and end dates.
+            For example, a monthly breakdown with a start
+            date of 2025-06-15 will include a breakdown for
+            June. Weeks start on Sunday and end on Saturday.
+            This is different from the ISO 8601 standard,
+            where weeks start on Monday.
+    """
+
+    date_breakdown: (
+        benchmarks_time_granularity.BenchmarksTimeGranularityEnum.BenchmarksTimeGranularity
+    ) = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=benchmarks_time_granularity.BenchmarksTimeGranularityEnum.BenchmarksTimeGranularity,
+    )
+
+
 class GenerateBenchmarksMetricsResponse(proto.Message):
     r"""Response message for
     [BenchmarksService.GenerateBenchmarksMetrics][google.ads.googleads.v23.services.BenchmarksService.GenerateBenchmarksMetrics].
@@ -516,6 +554,8 @@ class GenerateBenchmarksMetricsResponse(proto.Message):
             Metrics belonging to the customer.
         average_benchmarks_metrics (google.ads.googleads.v23.services.types.Metrics):
             Metrics for the selected benchmarks source.
+        breakdown_metrics (MutableSequence[google.ads.googleads.v23.services.types.BreakdownMetrics]):
+            Breakdown metrics grouped by dimensions.
     """
 
     customer_metrics: "Metrics" = proto.Field(
@@ -527,6 +567,60 @@ class GenerateBenchmarksMetricsResponse(proto.Message):
         proto.MESSAGE,
         number=2,
         message="Metrics",
+    )
+    breakdown_metrics: MutableSequence["BreakdownMetrics"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message="BreakdownMetrics",
+        )
+    )
+
+
+class BreakdownMetrics(proto.Message):
+    r"""Metrics for a given breakdown.
+
+    Attributes:
+        breakdown_key (google.ads.googleads.v23.services.types.BreakdownKey):
+            Dimensions by which the breakdown metrics are
+            grouped by.
+        customer_metrics (google.ads.googleads.v23.services.types.Metrics):
+            Metrics belonging to the customer.
+        average_benchmarks_metrics (google.ads.googleads.v23.services.types.Metrics):
+            Metrics for the selected benchmarks source.
+    """
+
+    breakdown_key: "BreakdownKey" = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="BreakdownKey",
+    )
+    customer_metrics: "Metrics" = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="Metrics",
+    )
+    average_benchmarks_metrics: "Metrics" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Metrics",
+    )
+
+
+class BreakdownKey(proto.Message):
+    r"""Dimensions by which the breakdown metrics are grouped by.
+
+    Attributes:
+        dates (google.ads.googleads.v23.common.types.DateRange):
+            Dates used for the breakdown. For example,
+            this represents the start and end dates of the
+            week for a weekly breakdown.
+    """
+
+    dates: gagc_dates.DateRange = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=gagc_dates.DateRange,
     )
 
 

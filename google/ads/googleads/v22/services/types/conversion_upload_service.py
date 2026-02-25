@@ -23,8 +23,7 @@ from google.ads.googleads.v22.common.types import consent as gagc_consent
 from google.ads.googleads.v22.common.types import offline_user_data
 from google.ads.googleads.v22.enums.types import conversion_customer_type
 from google.ads.googleads.v22.enums.types import conversion_environment_enum
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
@@ -241,13 +240,11 @@ class ClickConversion(proto.Message):
 
             This field is a member of `oneof`_ ``_gclid``.
         gbraid (str):
-            The click identifier for clicks associated
-            with app conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            app conversions.
         wbraid (str):
-            The click identifier for clicks associated
-            with web conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            web conversions.
         conversion_action (str):
             Resource name of the conversion action
             associated with this conversion. Note: Although
@@ -324,7 +321,10 @@ class ClickConversion(proto.Message):
             consent where required by law or any applicable
             Google policies. See the
             https://support.google.com/google-ads/answer/2998031
-            page for more details.
+            page for more details. This field is only
+            available to allowlisted users. To include this
+            field in conversion imports, upgrade to the Data
+            Manager API.
 
             This field is a member of `oneof`_ ``_user_ip_address``.
         session_attributes_encoded (bytes):
@@ -332,12 +332,17 @@ class ClickConversion(proto.Message):
             base64-encoded JSON string. The content should be generated
             by Google-provided library. To set session attributes
             individually, use session_attributes_key_value_pairs
-            instead.
+            instead. This field is only available to allowlisted users.
+            To include this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
         session_attributes_key_value_pairs (google.ads.googleads.v22.services.types.SessionAttributesKeyValuePairs):
             The session attributes for the event,
-            represented as key-value pairs.
+            represented as key-value pairs. This field is
+            only available to allowlisted users. To include
+            this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
     """
@@ -581,13 +586,11 @@ class ClickConversionResult(proto.Message):
 
             This field is a member of `oneof`_ ``_gclid``.
         gbraid (str):
-            The click identifier for clicks associated
-            with app conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            app conversions.
         wbraid (str):
-            The click identifier for clicks associated
-            with web conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            web conversions.
         conversion_action (str):
             Resource name of the conversion action
             associated with this conversion.

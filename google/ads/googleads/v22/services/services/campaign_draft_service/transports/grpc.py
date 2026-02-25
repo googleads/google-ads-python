@@ -410,10 +410,11 @@ class CampaignDraftServiceGrpcTransport(CampaignDraftServiceTransport):
         Promotes the changes in a draft back to the base campaign.
 
         This method returns a Long Running Operation (LRO) indicating if
-        the Promote is done. Use [Operations.GetOperation] to poll the
-        LRO until it is done. Only a done status is returned in the
-        response. See the status in the Campaign Draft resource to
-        determine if the promotion was successful. If the LRO failed,
+        the Promote is done. Use
+        [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
+        to poll the LRO until it is done. Only a done status is returned
+        in the response. See the status in the Campaign Draft resource
+        to determine if the promotion was successful. If the LRO failed,
         use
         [CampaignDraftService.ListCampaignDraftAsyncErrors][google.ads.googleads.v22.services.CampaignDraftService.ListCampaignDraftAsyncErrors]
         to view the list of error reasons.

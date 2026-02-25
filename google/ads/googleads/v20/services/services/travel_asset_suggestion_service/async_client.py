@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -112,7 +111,12 @@ class TravelAssetSuggestionServiceAsyncClient:
         Returns:
             TravelAssetSuggestionServiceAsyncClient: The constructed client.
         """
-        return TravelAssetSuggestionServiceClient.from_service_account_info.__func__(TravelAssetSuggestionServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            TravelAssetSuggestionServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            TravelAssetSuggestionServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -128,7 +132,12 @@ class TravelAssetSuggestionServiceAsyncClient:
         Returns:
             TravelAssetSuggestionServiceAsyncClient: The constructed client.
         """
-        return TravelAssetSuggestionServiceClient.from_service_account_file.__func__(TravelAssetSuggestionServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            TravelAssetSuggestionServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            TravelAssetSuggestionServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 

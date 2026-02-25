@@ -58,8 +58,7 @@ from google.ads.googleads.v22.resources.types import (
 from google.ads.googleads.v22.resources.types import (
     customer_asset as gagr_customer_asset,
 )
-from google.protobuf import field_mask_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",

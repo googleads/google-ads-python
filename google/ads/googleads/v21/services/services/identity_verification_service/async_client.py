@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -113,7 +112,12 @@ class IdentityVerificationServiceAsyncClient:
         Returns:
             IdentityVerificationServiceAsyncClient: The constructed client.
         """
-        return IdentityVerificationServiceClient.from_service_account_info.__func__(IdentityVerificationServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            IdentityVerificationServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            IdentityVerificationServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -129,7 +133,12 @@ class IdentityVerificationServiceAsyncClient:
         Returns:
             IdentityVerificationServiceAsyncClient: The constructed client.
         """
-        return IdentityVerificationServiceClient.from_service_account_file.__func__(IdentityVerificationServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            IdentityVerificationServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            IdentityVerificationServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -324,7 +333,7 @@ class IdentityVerificationServiceAsyncClient:
         Args:
             request (Optional[Union[google.ads.googleads.v21.services.types.StartIdentityVerificationRequest, dict]]):
                 The request object. Request message for
-                [IdentityVerificationService.StartIdentityVerification].
+                [StartIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.StartIdentityVerification].
             customer_id (:class:`str`):
                 Required. The Id of the customer for
                 whom we are creating this verification.
@@ -428,7 +437,7 @@ class IdentityVerificationServiceAsyncClient:
         Args:
             request (Optional[Union[google.ads.googleads.v21.services.types.GetIdentityVerificationRequest, dict]]):
                 The request object. Request message for
-                [IdentityVerificationService.GetIdentityVerification].
+                [GetIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.GetIdentityVerification].
             customer_id (:class:`str`):
                 Required.  The ID of the customer for
                 whom we are requesting verification
@@ -448,7 +457,7 @@ class IdentityVerificationServiceAsyncClient:
         Returns:
             google.ads.googleads.v21.services.types.GetIdentityVerificationResponse:
                 Response message for
-                   [IdentityVerificationService.GetIdentityVerification].
+                   [GetIdentityVerification][google.ads.googleads.v21.services.IdentityVerificationService.GetIdentityVerification].
 
         """
         # Create or coerce a protobuf request object.

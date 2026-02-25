@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -34,7 +33,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v20.services.types import ad_group_ad_service
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import AdGroupAdServiceTransport, DEFAULT_CLIENT_INFO
 from .client import AdGroupAdServiceClient
 
@@ -122,7 +121,10 @@ class AdGroupAdServiceAsyncClient:
         Returns:
             AdGroupAdServiceAsyncClient: The constructed client.
         """
-        return AdGroupAdServiceClient.from_service_account_info.__func__(AdGroupAdServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            AdGroupAdServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(AdGroupAdServiceAsyncClient, info, *args, **kwargs)
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -138,7 +140,12 @@ class AdGroupAdServiceAsyncClient:
         Returns:
             AdGroupAdServiceAsyncClient: The constructed client.
         """
-        return AdGroupAdServiceClient.from_service_account_file.__func__(AdGroupAdServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            AdGroupAdServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            AdGroupAdServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -456,7 +463,7 @@ class AdGroupAdServiceAsyncClient:
         Args:
             request (Optional[Union[google.ads.googleads.v20.services.types.RemoveAutomaticallyCreatedAssetsRequest, dict]]):
                 The request object. Request message for
-                [AdGroupAdService.RemoveAutomaticallyCreatedAssetsRequest][].
+                [AdGroupAdService.RemoveAutomaticallyCreatedAssets][google.ads.googleads.v20.services.AdGroupAdService.RemoveAutomaticallyCreatedAssets].
             ad_group_ad (:class:`str`):
                 Required. The resource name of the
                 AdGroupAd from which to remove

@@ -20,8 +20,7 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v20.resources.types import campaign_label
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",

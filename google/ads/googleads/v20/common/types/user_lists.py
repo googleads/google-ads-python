@@ -38,7 +38,6 @@ from google.ads.googleads.v20.enums.types import (
     user_list_string_rule_item_operator,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.common",
     marshal="google.ads.googleads.v20",
@@ -243,9 +242,9 @@ class UserListRuleItemInfo(proto.Message):
             letters or underscore or UTF8 code that is greater than 127
             and consist of US-ascii letters or digits or underscore or
             UTF8 code that is greater than 127. For websites, there are
-            two built-in variable URL (name = 'url__') and referrer URL
-            (name = 'ref_url__'). This field must be populated when
-            creating a new rule item.
+            two built-in variable URL (name = 'url\_\_') and referrer
+            URL (name = 'ref_url\_\_'). This field must be populated
+            when creating a new rule item.
 
             This field is a member of `oneof`_ ``_name``.
         number_rule_item (google.ads.googleads.v20.common.types.UserListNumberRuleItemInfo):

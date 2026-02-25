@@ -37,7 +37,6 @@ from google.ads.googleads.v20.enums.types import (
     user_list_type as gage_user_list_type,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",
     marshal="google.ads.googleads.v20",
@@ -1309,10 +1308,10 @@ class OnTargetAudienceMetrics(proto.Message):
     r"""Audience metrics for the planned products. These metrics consider
     the following targeting dimensions:
 
-    -  Location
-    -  PlannableAgeRange
-    -  Gender
-    -  AudienceTargeting (only for youtube_audience_size)
+    - Location
+    - PlannableAgeRange
+    - Gender
+    - AudienceTargeting (only for youtube_audience_size)
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

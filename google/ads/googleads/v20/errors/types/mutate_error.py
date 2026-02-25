@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.errors",
     marshal="google.ads.googleads.v20",
@@ -62,6 +61,10 @@ class MutateErrorEnum(proto.Message):
                 This operation cannot be used with "partial_failure".
             RESOURCE_READ_ONLY (13):
                 Attempt to write to read-only fields.
+            EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED (17):
+                Mutates are generally not allowed if the
+                customer contains non-exempt campaigns without
+                the EU political advertising declaration.
         """
 
         UNSPECIFIED = 0
@@ -75,6 +78,7 @@ class MutateErrorEnum(proto.Message):
         RESOURCE_DOES_NOT_SUPPORT_VALIDATE_ONLY = 12
         OPERATION_DOES_NOT_SUPPORT_PARTIAL_FAILURE = 16
         RESOURCE_READ_ONLY = 13
+        EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED = 17
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

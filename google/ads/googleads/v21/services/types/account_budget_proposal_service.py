@@ -19,8 +19,7 @@ from __future__ import annotations
 import proto  # type: ignore
 
 from google.ads.googleads.v21.resources.types import account_budget_proposal
-from google.protobuf import field_mask_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",

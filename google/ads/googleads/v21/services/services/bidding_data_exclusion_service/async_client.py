@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -36,7 +35,7 @@ except AttributeError:  # pragma: NO COVER
 from google.ads.googleads.v21.services.types import (
     bidding_data_exclusion_service,
 )
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import (
     BiddingDataExclusionServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -125,7 +124,12 @@ class BiddingDataExclusionServiceAsyncClient:
         Returns:
             BiddingDataExclusionServiceAsyncClient: The constructed client.
         """
-        return BiddingDataExclusionServiceClient.from_service_account_info.__func__(BiddingDataExclusionServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            BiddingDataExclusionServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            BiddingDataExclusionServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -141,7 +145,12 @@ class BiddingDataExclusionServiceAsyncClient:
         Returns:
             BiddingDataExclusionServiceAsyncClient: The constructed client.
         """
-        return BiddingDataExclusionServiceClient.from_service_account_file.__func__(BiddingDataExclusionServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            BiddingDataExclusionServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            BiddingDataExclusionServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 

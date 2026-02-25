@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -36,7 +35,7 @@ except AttributeError:  # pragma: NO COVER
 from google.ads.googleads.v20.services.types import (
     recommendation_subscription_service,
 )
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import (
     RecommendationSubscriptionServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -121,7 +120,12 @@ class RecommendationSubscriptionServiceAsyncClient:
         Returns:
             RecommendationSubscriptionServiceAsyncClient: The constructed client.
         """
-        return RecommendationSubscriptionServiceClient.from_service_account_info.__func__(RecommendationSubscriptionServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            RecommendationSubscriptionServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            RecommendationSubscriptionServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -137,7 +141,15 @@ class RecommendationSubscriptionServiceAsyncClient:
         Returns:
             RecommendationSubscriptionServiceAsyncClient: The constructed client.
         """
-        return RecommendationSubscriptionServiceClient.from_service_account_file.__func__(RecommendationSubscriptionServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            RecommendationSubscriptionServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            RecommendationSubscriptionServiceAsyncClient,
+            filename,
+            *args,
+            **kwargs,
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -333,13 +345,14 @@ class RecommendationSubscriptionServiceAsyncClient:
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `DatabaseError <>`__ `FieldError <>`__
         `HeaderError <>`__ `InternalError <>`__ `MutateError <>`__
-        `QuotaError <>`__ `RecommendationError <>`__ `RequestError <>`__
+        `QuotaError <>`__ `RecommendationError <>`__
+        `RecommendationSubscriptionError <>`__ `RequestError <>`__
         `UrlFieldError <>`__
 
         Args:
             request (Optional[Union[google.ads.googleads.v20.services.types.MutateRecommendationSubscriptionRequest, dict]]):
                 The request object. Request message for
-                [RecommendationSubscriptionService.MutateRecommendationSubscription]
+                [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v20.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
             customer_id (:class:`str`):
                 Required. The ID of the subscribing
                 customer.
@@ -365,7 +378,7 @@ class RecommendationSubscriptionServiceAsyncClient:
         Returns:
             google.ads.googleads.v20.services.types.MutateRecommendationSubscriptionResponse:
                 Response message for
-                   [RecommendationSubscriptionService.MutateRecommendationSubscription]
+                   [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v20.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
         """
         # Create or coerce a protobuf request object.

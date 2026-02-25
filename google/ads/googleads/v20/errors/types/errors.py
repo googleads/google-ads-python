@@ -485,8 +485,7 @@ from google.ads.googleads.v20.errors.types import (
 from google.ads.googleads.v20.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
-from google.protobuf import duration_pb2  # type: ignore
-
+import google.protobuf.duration_pb2 as duration_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.errors",

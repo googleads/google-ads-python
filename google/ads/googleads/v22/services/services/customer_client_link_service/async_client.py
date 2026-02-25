@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -120,7 +119,12 @@ class CustomerClientLinkServiceAsyncClient:
         Returns:
             CustomerClientLinkServiceAsyncClient: The constructed client.
         """
-        return CustomerClientLinkServiceClient.from_service_account_info.__func__(CustomerClientLinkServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            CustomerClientLinkServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            CustomerClientLinkServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -136,7 +140,12 @@ class CustomerClientLinkServiceAsyncClient:
         Returns:
             CustomerClientLinkServiceAsyncClient: The constructed client.
         """
-        return CustomerClientLinkServiceClient.from_service_account_file.__func__(CustomerClientLinkServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            CustomerClientLinkServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            CustomerClientLinkServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 

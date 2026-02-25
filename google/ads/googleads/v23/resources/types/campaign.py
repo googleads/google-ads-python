@@ -61,6 +61,7 @@ from google.ads.googleads.v23.enums.types import (
 from google.ads.googleads.v23.enums.types import (
     bidding_strategy_type as gage_bidding_strategy_type,
 )
+from google.ads.googleads.v23.enums.types import booking_status
 from google.ads.googleads.v23.enums.types import brand_safety_suitability
 from google.ads.googleads.v23.enums.types import campaign_experiment_type
 from google.ads.googleads.v23.enums.types import campaign_keyword_match_type
@@ -75,6 +76,7 @@ from google.ads.googleads.v23.enums.types import (
 from google.ads.googleads.v23.enums.types import (
     location_source_type as gage_location_source_type,
 )
+from google.ads.googleads.v23.enums.types import messaging_restriction_type
 from google.ads.googleads.v23.enums.types import (
     negative_geo_target_type as gage_negative_geo_target_type,
 )
@@ -425,6 +427,11 @@ class Campaign(proto.Message):
             within this campaign. Note: These settings can
             only be used for Performance Max campaigns that
             have Brand Guidelines enabled.
+        text_guidelines (google.ads.googleads.v23.resources.types.Campaign.TextGuidelines):
+            Settings to control automatically generated
+            text assets. Only available in Performance Max
+            and Search campaigns (Brand Guidelines does not
+            need to be enabled).
         third_party_integration_partners (google.ads.googleads.v23.common.types.CampaignThirdPartyIntegrationPartners):
             Third-Party integration partners.
         ai_max_setting (google.ads.googleads.v23.resources.types.Campaign.AiMaxSetting):
@@ -436,6 +443,15 @@ class Campaign(proto.Message):
         feed_types (MutableSequence[google.ads.googleads.v23.enums.types.AssetSetTypeEnum.AssetSetType]):
             Output only. Types of feeds that are attached
             directly to this campaign.
+        missing_eu_political_advertising_declaration (bool):
+            Output only. Indicates whether this campaign is missing a
+            declaration about whether it contains political advertising
+            targeted towards the EU and is ineligible for any
+            exemptions. If this field is true, use the
+            contains_eu_political_advertising field to add the required
+            declaration.
+
+            This field is read-only.
         bidding_strategy (str):
             The resource name of the portfolio bidding
             strategy used by the campaign.
@@ -1092,6 +1108,12 @@ class Campaign(proto.Message):
             video_ad_sequence (google.ads.googleads.v23.resources.types.Campaign.VideoCampaignSettings.VideoAdSequence):
                 Container for video ads sequencing
                 definition.
+            reservation_ad_category_self_disclosure (google.ads.googleads.v23.resources.types.Campaign.VideoCampaignSettings.ReservationAdCategorySelfDisclosure):
+                Ad category self-disclosure for campaigns with the FIXED_CPM
+                or FIXED_SHARE_OF_VOICE bidding strategies.
+            booking_details (google.ads.googleads.v23.resources.types.Campaign.VideoCampaignSettings.BookingDetails):
+                Output only. Booking information for campaigns with the
+                FIXED_CPM or FIXED_SHARE_OF_VOICE bidding strategies.
             video_ad_inventory_control (google.ads.googleads.v23.resources.types.Campaign.VideoCampaignSettings.VideoAdInventoryControl):
                 Inventory control for video responsive ads in
                 reach campaigns.
@@ -1293,11 +1315,90 @@ class Campaign(proto.Message):
                 enum=video_ad_sequence_interaction_type.VideoAdSequenceInteractionTypeEnum.VideoAdSequenceInteractionType,
             )
 
+        class ReservationAdCategorySelfDisclosure(proto.Message):
+            r"""Container for ad category self-disclosure for campaigns with the
+            FIXED_CPM or FIXED_SHARE_OF_VOICE bidding strategies.
+
+            Attributes:
+                gambling (bool):
+                    The campaign is expected to contain
+                    gambling-related ads.
+                alcohol (bool):
+                    The campaign is expected to contain
+                    alcohol-related ads.
+                politics (bool):
+                    The campaign is expected to contain
+                    politics-related ads.
+            """
+
+            gambling: bool = proto.Field(
+                proto.BOOL,
+                number=1,
+            )
+            alcohol: bool = proto.Field(
+                proto.BOOL,
+                number=2,
+            )
+            politics: bool = proto.Field(
+                proto.BOOL,
+                number=3,
+            )
+
+        class BookingDetails(proto.Message):
+            r"""Container for booking details for campaigns with the FIXED_CPM or
+            FIXED_SHARE_OF_VOICE bidding strategies.
+
+            Attributes:
+                status (google.ads.googleads.v23.enums.types.BookingStatusEnum.BookingStatus):
+                    Output only. The status of the booking.
+                hold_expiration_date_time (str):
+                    Output only. Time until which booked inventory will be held
+                    or has been held for this campaign. Available for status
+                    HELD and HOLD_EXPIRED. Format is "yyyy-MM-dd HH:mm:ss" in
+                    the customer's time zone.
+                cancellation_date_time (str):
+                    Output only. Time when the booked inventory of this campaign
+                    will be cancelled or has been cancelled. Available for
+                    primary status NOT_ELIGIBLE if the campaign will be
+                    cancelled and for primary status reason BOOKING_CANCELLED.
+                    Format is "yyyy-MM-dd HH:mm:ss" in the customer's time zone.
+            """
+
+            status: booking_status.BookingStatusEnum.BookingStatus = (
+                proto.Field(
+                    proto.ENUM,
+                    number=1,
+                    enum=booking_status.BookingStatusEnum.BookingStatus,
+                )
+            )
+            hold_expiration_date_time: str = proto.Field(
+                proto.STRING,
+                number=2,
+            )
+            cancellation_date_time: str = proto.Field(
+                proto.STRING,
+                number=3,
+            )
+
         video_ad_sequence: "Campaign.VideoCampaignSettings.VideoAdSequence" = (
             proto.Field(
                 proto.MESSAGE,
                 number=4,
                 message="Campaign.VideoCampaignSettings.VideoAdSequence",
+            )
+        )
+        reservation_ad_category_self_disclosure: (
+            "Campaign.VideoCampaignSettings.ReservationAdCategorySelfDisclosure"
+        ) = proto.Field(
+            proto.MESSAGE,
+            number=5,
+            message="Campaign.VideoCampaignSettings.ReservationAdCategorySelfDisclosure",
+        )
+        booking_details: "Campaign.VideoCampaignSettings.BookingDetails" = (
+            proto.Field(
+                proto.MESSAGE,
+                number=6,
+                message="Campaign.VideoCampaignSettings.BookingDetails",
             )
         )
         video_ad_inventory_control: (
@@ -1422,6 +1523,60 @@ class Campaign(proto.Message):
         predefined_font_family: str = proto.Field(
             proto.STRING,
             number=3,
+        )
+
+    class TextGuidelines(proto.Message):
+        r"""Settings to control automatically generated text assets.
+
+        Attributes:
+            term_exclusions (MutableSequence[str]):
+                Exact words or phrases that will be excluded
+                from generated text assets. At most 25
+                exclusions may be provided. Valid exclusions may
+                contain a maximum of 30 characters.
+            messaging_restrictions (MutableSequence[google.ads.googleads.v23.resources.types.Campaign.MessagingRestriction]):
+                Freeform instructions that will be used to
+                guide text asset generation using LLM inference.
+                At most 40 restrictions may be provided.
+        """
+
+        term_exclusions: MutableSequence[str] = proto.RepeatedField(
+            proto.STRING,
+            number=1,
+        )
+        messaging_restrictions: MutableSequence[
+            "Campaign.MessagingRestriction"
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=2,
+            message="Campaign.MessagingRestriction",
+        )
+
+    class MessagingRestriction(proto.Message):
+        r"""Freeform instructions that will be used to guide text asset
+        generation using LLM inference.
+
+        Attributes:
+            restriction_text (str):
+                Freeform instructions to guide text asset
+                generation using LLM inference. Valid
+                instructions may contain a maximum of 300
+                characters.
+            restriction_type (google.ads.googleads.v23.enums.types.MessagingRestrictionTypeEnum.MessagingRestrictionType):
+                Determines how the guideline is applied. Only
+                ``RESTRICTION_BASED_EXCLUSION`` is currently supported.
+        """
+
+        restriction_text: str = proto.Field(
+            proto.STRING,
+            number=1,
+        )
+        restriction_type: (
+            messaging_restriction_type.MessagingRestrictionTypeEnum.MessagingRestrictionType
+        ) = proto.Field(
+            proto.ENUM,
+            number=2,
+            enum=messaging_restriction_type.MessagingRestrictionTypeEnum.MessagingRestrictionType,
         )
 
     class AiMaxSetting(proto.Message):
@@ -1806,6 +1961,11 @@ class Campaign(proto.Message):
         number=98,
         message=BrandGuidelines,
     )
+    text_guidelines: TextGuidelines = proto.Field(
+        proto.MESSAGE,
+        number=107,
+        message=TextGuidelines,
+    )
     third_party_integration_partners: (
         gagc_third_party_integration_partners.CampaignThirdPartyIntegrationPartners
     ) = proto.Field(
@@ -1831,6 +1991,10 @@ class Campaign(proto.Message):
         proto.ENUM,
         number=103,
         enum=asset_set_type.AssetSetTypeEnum.AssetSetType,
+    )
+    missing_eu_political_advertising_declaration: bool = proto.Field(
+        proto.BOOL,
+        number=108,
     )
     bidding_strategy: str = proto.Field(
         proto.STRING,

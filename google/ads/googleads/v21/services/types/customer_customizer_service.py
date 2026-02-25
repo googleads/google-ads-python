@@ -25,8 +25,7 @@ from google.ads.googleads.v21.enums.types import (
 from google.ads.googleads.v21.resources.types import (
     customer_customizer as gagr_customer_customizer,
 )
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",

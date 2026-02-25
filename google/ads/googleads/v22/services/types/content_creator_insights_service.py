@@ -24,7 +24,6 @@ from google.ads.googleads.v22.common.types import audience_insights_attribute
 from google.ads.googleads.v22.common.types import criteria
 from google.ads.googleads.v22.enums.types import insights_trend
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
     marshal="google.ads.googleads.v22",
@@ -69,24 +68,28 @@ class GenerateCreatorInsightsRequest(proto.Message):
             to the criteria.
         sub_country_locations (MutableSequence[google.ads.googleads.v22.common.types.LocationInfo]):
             The sub-country geographic locations to search that apply to
-            the criteria. Only supported for [SearchAttributes]
+            the criteria. Only supported for
+            [SearchAttributes][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.SearchAttributes]
             criteria.
         search_attributes (google.ads.googleads.v22.services.types.GenerateCreatorInsightsRequest.SearchAttributes):
             The attributes used to identify top creators. Data fetched
             is based on the list of countries or sub-country locations
-            specified in [country_locations] or [sub_country_locations].
+            specified in
+            [country_locations][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.country_locations]
+            or
+            [sub_country_locations][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.sub_country_locations].
 
             This field is a member of `oneof`_ ``criteria``.
         search_brand (google.ads.googleads.v22.services.types.GenerateCreatorInsightsRequest.SearchBrand):
             A brand used to search for top creators. Data fetched is
             based on the list of countries specified in
-            [country_locations].
+            [country_locations][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.country_locations].
 
             This field is a member of `oneof`_ ``criteria``.
         search_channels (google.ads.googleads.v22.services.types.GenerateCreatorInsightsRequest.YouTubeChannels):
             YouTube Channel IDs for Creator Insights. Data fetched for
             channels is based on the list of countries specified in
-            [country_locations].
+            [country_locations][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.country_locations].
 
             This field is a member of `oneof`_ ``criteria``.
     """
@@ -109,7 +112,7 @@ class GenerateCreatorInsightsRequest(proto.Message):
                 types of content. This is used to search for creators whose
                 content matches the input creator attributes. Only Knowledge
                 Graph Entities tagged with
-                [InsightsKnowledgeGraphEntityCapabilities.CREATOR_ATTRIBUTE][]
+                [CREATOR_ATTRIBUTE][google.ads.googleads.v22.enums.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities.CREATOR_ATTRIBUTE]
                 are supported. Use
                 [AudienceInsightsService.ListAudienceInsightsAttributes][google.ads.googleads.v22.services.AudienceInsightsService.ListAudienceInsightsAttributes]
                 to get the list of supported entities. Other attributes
@@ -141,9 +144,10 @@ class GenerateCreatorInsightsRequest(proto.Message):
                 find insights.
             include_related_topics (bool):
                 Optional. When true, we will expand the search to beyond
-                just the entities specified in [brand_entities] to other
-                related knowledge graph entities similar to the brand. The
-                default value is ``false``.
+                just the entities specified in
+                [brand_entities][google.ads.googleads.v22.services.GenerateCreatorInsightsRequest.SearchBrand.brand_entities]
+                to other related knowledge graph entities similar to the
+                brand. The default value is ``false``.
         """
 
         brand_entities: MutableSequence[
@@ -246,7 +250,7 @@ class GenerateCreatorInsightsResponse(proto.Message):
 
 class GenerateTrendingInsightsRequest(proto.Message):
     r"""Request message for
-    [ContentCreatorInsightsService.GenerateTrendingInsights]
+    [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v22.services.ContentCreatorInsightsService.GenerateTrendingInsights].
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -314,7 +318,7 @@ class GenerateTrendingInsightsRequest(proto.Message):
 
 class GenerateTrendingInsightsResponse(proto.Message):
     r"""Response message for
-    [ContentCreatorInsightsService.GenerateTrendingInsights]
+    [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v22.services.ContentCreatorInsightsService.GenerateTrendingInsights].
 
     Attributes:
         trend_insights (MutableSequence[google.ads.googleads.v22.services.types.TrendInsight]):
@@ -618,7 +622,10 @@ class SearchTopics(proto.Message):
         entities (MutableSequence[google.ads.googleads.v22.common.types.AudienceInsightsEntity]):
             Required. A list of knowledge graph entities to retrieve
             trend information for. Supported entities are tagged with
-            [InsightsKnowledgeGraphEntityCapabilities.CONTENT_TRENDING_INSIGHTS][].
+            [CONTENT_TRENDING_INSIGHTS][google.ads.googleads.v22.enums.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities.CONTENT_TRENDING_INSIGHTS].
+            Use
+            [AudienceInsightsService.ListAudienceInsightsAttributes][google.ads.googleads.v22.services.AudienceInsightsService.ListAudienceInsightsAttributes]
+            to get the list of supported entities.
     """
 
     entities: MutableSequence[
@@ -637,7 +644,9 @@ class TrendInsight(proto.Message):
         trend_attribute (google.ads.googleads.v22.common.types.AudienceInsightsAttributeMetadata):
             The attribute this trend is for.
         trend_metrics (google.ads.googleads.v22.services.types.TrendInsightMetrics):
-            Metrics associated with this trend.
+            Metrics associated with this trend. These
+            metrics are for the latest available month and
+            the comparison period is 3 months.
         trend (google.ads.googleads.v22.enums.types.InsightsTrendEnum.InsightsTrend):
             The direction of trend (such as RISING or
             DECLINING).

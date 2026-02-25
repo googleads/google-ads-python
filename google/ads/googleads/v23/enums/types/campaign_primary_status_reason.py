@@ -154,6 +154,26 @@ class CampaignPrimaryStatusReasonEnum(proto.Message):
             MISSING_LOCATION_TARGETING (39):
                 The campaign has location restrictions but
                 does not specify location targeting.
+            CAMPAIGN_NOT_BOOKED (40):
+                The campaign is a campaign with the FIXED_CPM bidding
+                strategy but is not booked. Contributes to
+                CampaignPrimaryStatus.NOT_ELIGIBLE when the campaign is not
+                paused, and CampaignPrimaryStatus.PAUSED when the campaign
+                is paused.
+            BOOKING_HOLD_EXPIRING (41):
+                The campaign is a campaign with the FIXED_CPM bidding
+                strategy for which inventory was held, with the hold
+                expiring. The hold expiry time can be read from
+                Campaign.booking_details.hold_expiration_date_time.
+                Contributes to CampaignPrimaryStatus.PAUSED.
+            BOOKING_HOLD_EXPIRED (42):
+                The campaign is a campaign with the FIXED_CPM bidding
+                strategy with the inventory hold expired. Contributes to
+                CampaignPrimaryStatus.PAUSED.
+            BOOKING_CANCELLED (43):
+                The campaign is a campaign with the FIXED_CPM bidding
+                strategy that has been auto-cancelled. Contributes to
+                CampaignPrimaryStatus.NOT_ELIGIBLE.
         """
 
         UNSPECIFIED = 0
@@ -196,6 +216,10 @@ class CampaignPrimaryStatusReasonEnum(proto.Message):
         NO_ASSET_GROUPS = 37
         ASSET_GROUPS_PAUSED = 38
         MISSING_LOCATION_TARGETING = 39
+        CAMPAIGN_NOT_BOOKED = 40
+        BOOKING_HOLD_EXPIRING = 41
+        BOOKING_HOLD_EXPIRED = 42
+        BOOKING_CANCELLED = 43
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

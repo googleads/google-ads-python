@@ -21,7 +21,6 @@ import proto  # type: ignore
 from google.ads.googleads.v21.common.types import click_location
 from google.ads.googleads.v21.common.types import criteria
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -38,6 +37,9 @@ class ClickView(proto.Message):
     invalid interactions. Queries including ClickView must have a
     filter limiting the results to one day and can be requested for
     dates back to 90 days before the time of the request.
+
+    GCLIDs are not available in this report for App Campaigns for
+    Installs (ACi) and App Campaigns for Pre-registration (ACpre).
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

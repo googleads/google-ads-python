@@ -51,7 +51,6 @@ from google.ads.googleads.v21.enums.types import proximity_radius_units
 from google.ads.googleads.v21.enums.types import webpage_condition_operand
 from google.ads.googleads.v21.enums.types import webpage_condition_operator
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -1648,19 +1647,37 @@ class LanguageInfo(proto.Message):
 
 
 class IpBlockInfo(proto.Message):
-    r"""An IpBlock criterion used for IP exclusions. We allow:
+    r"""An IpBlock criterion used for excluding IP addresses.
 
-    - IPv4 and IPv6 addresses
-     - individual addresses (192.168.0.1)
-     - masks for individual addresses (192.168.0.1/32)
-     - masks for Class C networks (192.168.0.1/24)
+    We support excluding individual IP addresses or CIDR blocks. Create
+    one IpBlockInfo criterion for each individual IP address or CIDR
+    block you want to exclude. You can exclude up to 500 IP addresses
+    per campaign. For more details, see `Exclude IP
+    addresses <//support.google.com/google-ads/answer/2456098>`__.
+
+    IPv4 examples:
+
+    - Individual address: 192.168.0.1
+
+    - Individual address as CIDR block: 192.168.0.1/32
+
+    - CIDR block: 192.168.0.0/24
+
+    IPv6 examples:
+
+    - Individual address: 2001:db8:a0b:12f0::1
+
+    - Individual address as CIDR block: 2001:db8:a0b:12f0::1/128
+
+    - CIDR block: 2001:db8::/48
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
         ip_address (str):
-            The IP address of this IP block.
+            The IP address or the CIDR block to be
+            excluded.
 
             This field is a member of `oneof`_ ``_ip_address``.
     """

@@ -30,7 +30,6 @@ from google.ads.googleads.v21.enums.types import (
     policy_topic_evidence_destination_not_working_dns_error_type,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -84,27 +83,32 @@ class PolicyValidationParameter(proto.Message):
 
     Attributes:
         ignorable_policy_topics (MutableSequence[str]):
-            The list of policy topics that should not
-            cause a PolicyFindingError to be reported. This
-            field is currently only compatible with Enhanced
-            Text Ad. It corresponds to the
-            PolicyTopicEntry.topic field.
+            The list of policy topics that should not cause a
+            ``PolicyFindingError`` to be reported. This field is used
+            for ad policy exemptions. It corresponds to the
+            ``PolicyTopicEntry.topic`` field.
 
-            Resources violating these policies will be
-            saved, but will not be eligible to serve. They
-            may begin serving at a later time due to a
-            change in policies, re-review of the resource,
-            or a change in advertiser certificates.
+            If this field is populated, then
+            ``exempt_policy_violation_keys`` must be empty.
+
+            Resources that violate these policies will be saved, but
+            will not be eligible to serve. They may begin serving at a
+            later time due to a change in policies, re-review of the
+            resource, or a change in advertiser certificates.
         exempt_policy_violation_keys (MutableSequence[google.ads.googleads.v21.common.types.PolicyViolationKey]):
             The list of policy violation keys that should not cause a
-            PolicyViolationError to be reported. Not all policy
-            violations are exemptable, refer to the is_exemptible field
-            in the returned PolicyViolationError.
+            ``PolicyViolationError`` to be reported. Not all policy
+            violations are exemptable. Refer to the ``is_exemptible``
+            field in the returned ``PolicyViolationError``. This field
+            is used for keyword policy exemptions.
 
-            Resources violating these polices will be saved, but will
-            not be eligible to serve. They may begin serving at a later
-            time due to a change in policies, re-review of the resource,
-            or a change in advertiser certificates.
+            If this field is populated, then ``ignorable_policy_topics``
+            must be empty.
+
+            Resources that violate these policies will be saved, but
+            will not be eligible to serve. They may begin serving at a
+            later time due to a change in policies, re-review of the
+            resource, or a change in advertiser certificates.
     """
 
     ignorable_policy_topics: MutableSequence[str] = proto.RepeatedField(

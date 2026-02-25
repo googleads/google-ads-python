@@ -21,7 +21,6 @@ import proto  # type: ignore
 
 from google.ads.googleads.v20.enums.types import lead_form_field_user_input_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -68,7 +67,7 @@ class LeadFormSubmissionData(proto.Message):
             the submissed lead form.
         submission_date_time (str):
             Output only. The date and time at which the lead form was
-            submitted. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for
+            submitted. The format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for
             example, "2019-01-01 12:32:45-08:00".
     """
 

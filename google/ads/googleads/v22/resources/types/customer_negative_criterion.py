@@ -21,7 +21,6 @@ import proto  # type: ignore
 from google.ads.googleads.v22.common.types import criteria
 from google.ads.googleads.v22.enums.types import criterion_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",
@@ -83,7 +82,10 @@ class CustomerNegativeCriterion(proto.Message):
 
             This field is a member of `oneof`_ ``criterion``.
         ip_block (google.ads.googleads.v22.common.types.IpBlockInfo):
-            Immutable. IPBLock
+            Immutable. IpBlock.
+
+            You can exclude up to 500 IP addresses per
+            account.
 
             This field is a member of `oneof`_ ``criterion``.
         placement_list (google.ads.googleads.v22.common.types.PlacementListInfo):

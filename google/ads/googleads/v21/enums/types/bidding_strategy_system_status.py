@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.enums",
     marshal="google.ads.googleads.v21",
@@ -117,13 +116,13 @@ class BiddingStrategySystemStatusEnum(proto.Message):
                 This bid strategy currently does not support
                 status reporting.
             MULTIPLE_LEARNING (23):
-                There were multiple LEARNING_\* system statuses for this bid
-                strategy during the time in question.
+                There were multiple LEARNING\_\* system statuses for this
+                bid strategy during the time in question.
             MULTIPLE_LIMITED (24):
-                There were multiple LIMITED_\* system statuses for this bid
+                There were multiple LIMITED\_\* system statuses for this bid
                 strategy during the time in question.
             MULTIPLE_MISCONFIGURED (25):
-                There were multiple MISCONFIGURED_\* system statuses for
+                There were multiple MISCONFIGURED\_\* system statuses for
                 this bid strategy during the time in question.
             MULTIPLE (26):
                 There were multiple system statuses for this

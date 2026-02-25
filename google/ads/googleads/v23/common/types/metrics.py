@@ -1705,6 +1705,46 @@ class Metrics(proto.Message):
             customer.
 
             This field is a member of `oneof`_ ``_cost_converted_currency_per_platform_comparable_conversion``.
+        unique_users_two_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad two or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_two_plus``.
+        unique_users_three_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad three or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_three_plus``.
+        unique_users_four_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad four or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_four_plus``.
+        unique_users_five_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad five or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_five_plus``.
+        unique_users_ten_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad ten or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_ten_plus``.
         value_adjustment (float):
             The conversion value rule adjustment from
             biddable conversions in all conversion
@@ -2903,6 +2943,31 @@ class Metrics(proto.Message):
             number=392,
             optional=True,
         )
+    )
+    unique_users_two_plus: int = proto.Field(
+        proto.INT64,
+        number=393,
+        optional=True,
+    )
+    unique_users_three_plus: int = proto.Field(
+        proto.INT64,
+        number=394,
+        optional=True,
+    )
+    unique_users_four_plus: int = proto.Field(
+        proto.INT64,
+        number=395,
+        optional=True,
+    )
+    unique_users_five_plus: int = proto.Field(
+        proto.INT64,
+        number=396,
+        optional=True,
+    )
+    unique_users_ten_plus: int = proto.Field(
+        proto.INT64,
+        number=397,
+        optional=True,
     )
     value_adjustment: float = proto.Field(
         proto.DOUBLE,

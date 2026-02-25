@@ -22,7 +22,6 @@ from google.ads.googleads.v21.common.types import criteria
 from google.ads.googleads.v21.enums.types import campaign_criterion_status
 from google.ads.googleads.v21.enums.types import criterion_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -153,6 +152,9 @@ class CampaignCriterion(proto.Message):
             This field is a member of `oneof`_ ``criterion``.
         ip_block (google.ads.googleads.v21.common.types.IpBlockInfo):
             Immutable. IpBlock.
+
+            You can exclude up to 500 IP addresses per
+            campaign.
 
             This field is a member of `oneof`_ ``criterion``.
         content_label (google.ads.googleads.v21.common.types.ContentLabelInfo):

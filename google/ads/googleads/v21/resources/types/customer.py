@@ -28,10 +28,10 @@ from google.ads.googleads.v21.enums.types import (
     customer_pay_per_conversion_eligibility_failure_reason,
 )
 from google.ads.googleads.v21.enums.types import customer_status
+from google.ads.googleads.v21.enums.types import eu_political_advertising_status
 from google.ads.googleads.v21.enums.types import (
     local_services_verification_status,
 )
-
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
@@ -192,6 +192,14 @@ class Customer(proto.Message):
             https://support.google.com/google-ads/answer/7515513.
         video_customer (google.ads.googleads.v21.resources.types.VideoCustomer):
             Video specific information about a Customer.
+        contains_eu_political_advertising (google.ads.googleads.v21.enums.types.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus):
+            Output only. Returns the advertiser
+            self-declaration status of whether this customer
+            contains political advertising content targeted
+            towards the European Union. You can use the
+            Google Ads UI to update this account-level
+            declaration, or use the API to update the
+            self-declaration status of individual campaigns.
     """
 
     resource_name: str = proto.Field(
@@ -325,6 +333,13 @@ class Customer(proto.Message):
         proto.MESSAGE,
         number=54,
         message="VideoCustomer",
+    )
+    contains_eu_political_advertising: (
+        eu_political_advertising_status.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus
+    ) = proto.Field(
+        proto.ENUM,
+        number=55,
+        enum=eu_political_advertising_status.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus,
     )
 
 

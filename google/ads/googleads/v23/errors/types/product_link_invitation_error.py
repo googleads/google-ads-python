@@ -56,6 +56,9 @@ class ProductLinkInvitationErrorEnum(proto.Message):
             CUSTOMER_NOT_PERMITTED_TO_CREATE_INVITATION (5):
                 The customer is not permitted to create the
                 invitation.
+            INVALID_ADVERTISING_PARTNER_ALLOWED_DOMAIN (6):
+                The ``allowed_domain`` property for the advertising partner
+                is invalid.
         """
 
         UNSPECIFIED = 0
@@ -64,6 +67,7 @@ class ProductLinkInvitationErrorEnum(proto.Message):
         PERMISSION_DENIED = 3
         NO_INVITATION_REQUIRED = 4
         CUSTOMER_NOT_PERMITTED_TO_CREATE_INVITATION = 5
+        INVALID_ADVERTISING_PARTNER_ALLOWED_DOMAIN = 6
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

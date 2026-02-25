@@ -24,7 +24,6 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.enums.types import local_services_lead_status
 from google.ads.googleads.v22.enums.types import local_services_lead_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",
@@ -48,7 +47,7 @@ class LocalServicesLead(proto.Message):
 
     Attributes:
         resource_name (str):
-            Output only. The resource name of the local services lead
+            Immutable. The resource name of the local services lead
             data. Local Services Lead resource name have the form
 
             ``customers/{customer_id}/localServicesLead/{local_services_lead_id}``
@@ -168,8 +167,12 @@ class ContactDetails(proto.Message):
 
     Attributes:
         phone_number (str):
-            Output only. Consumer phone number in E164
-            format.
+            Output only. Phone number of the consumer for
+            the lead. This can be a real phone number or a
+            tracking number. The phone number is returned in
+            E164 format. See
+            https://support.google.com/google-ads/answer/16355235?hl=en
+            to learn more. Example: +16504519489.
         email (str):
             Output only. Consumer email address.
         consumer_name (str):

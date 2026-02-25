@@ -20,9 +20,8 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v21.resources.types import user_list
-from google.protobuf import field_mask_pb2  # type: ignore
-from google.rpc import status_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",

@@ -152,8 +152,9 @@ class GoogleAdsServiceGrpcAsyncIOTransport(GoogleAdsServiceTransport):
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
-            credentials_file (Optional[str]): A file with credentials that can
-                be loaded with :func:`google.auth.load_credentials_from_file`.
+            credentials_file (Optional[str]): Deprecated. A file with credentials that can
+                be loaded with :func:`google.auth.load_credentials_from_file`. This argument will be
+                removed in the next major version of this library.
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
@@ -208,9 +209,10 @@ class GoogleAdsServiceGrpcAsyncIOTransport(GoogleAdsServiceTransport):
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if a ``channel`` instance is provided.
-            credentials_file (Optional[str]): A file with credentials that can
+            credentials_file (Optional[str]): Deprecated. A file with credentials that can
                 be loaded with :func:`google.auth.load_credentials_from_file`.
                 This argument is ignored if a ``channel`` instance is provided.
+                This argument will be removed in the next major version of this library.
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
@@ -433,9 +435,9 @@ class GoogleAdsServiceGrpcAsyncIOTransport(GoogleAdsServiceTransport):
         methods. The only features it offers over calling those methods
         directly are:
 
-        -  Atomic transactions
-        -  Temp resource names (described below)
-        -  Somewhat reduced latency over making a series of mutate calls
+        - Atomic transactions
+        - Temp resource names (described below)
+        - Somewhat reduced latency over making a series of mutate calls
 
         Note: Only resources that support atomic transactions are
         included, so this method can't replace all calls to individual
@@ -465,14 +467,13 @@ class GoogleAdsServiceGrpcAsyncIOTransport(GoogleAdsServiceTransport):
 
         Note:
 
-        -  Resources must be created with a temp name before the name
-           can be reused. For example, the previous
-           CampaignBudget+Campaign example would fail if the mutate
-           order was reversed.
-        -  Temp names are not remembered across requests.
-        -  There's no limit to the number of temp names in a request.
-        -  Each temp name must use a unique negative number, even if the
-           resource types differ.
+        - Resources must be created with a temp name before the name can
+          be reused. For example, the previous CampaignBudget+Campaign
+          example would fail if the mutate order was reversed.
+        - Temp names are not remembered across requests.
+        - There's no limit to the number of temp names in a request.
+        - Each temp name must use a unique negative number, even if the
+          resource types differ.
 
         Latency
         -------

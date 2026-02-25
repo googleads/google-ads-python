@@ -164,9 +164,10 @@ class CampaignDraftServiceGrpcTransport(CampaignDraftServiceTransport):
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
                 This argument is ignored if a ``channel`` instance is provided.
-            credentials_file (Optional[str]): A file with credentials that can
+            credentials_file (Optional[str]): Deprecated. A file with credentials that can
                 be loaded with :func:`google.auth.load_credentials_from_file`.
                 This argument is ignored if a ``channel`` instance is provided.
+                This argument will be removed in the next major version of this library.
             scopes (Optional(Sequence[str])): A list of scopes. This argument is
                 ignored if a ``channel`` instance is provided.
             channel (Optional[Union[grpc.Channel, Callable[..., grpc.Channel]]]):
@@ -308,9 +309,10 @@ class CampaignDraftServiceGrpcTransport(CampaignDraftServiceTransport):
                 credentials identify this application to the service. If
                 none are specified, the client will attempt to ascertain
                 the credentials from the environment.
-            credentials_file (Optional[str]): A file with credentials that can
+            credentials_file (Optional[str]): Deprecated. A file with credentials that can
                 be loaded with :func:`google.auth.load_credentials_from_file`.
-                This argument is mutually exclusive with credentials.
+                This argument is mutually exclusive with credentials.  This argument will be
+                removed in the next major version of this library.
             scopes (Optional[Sequence[str]]): A optional list of scopes needed for this
                 service. These are only used when credentials are not specified and
                 are passed to :func:`google.auth.default`.
@@ -408,10 +410,11 @@ class CampaignDraftServiceGrpcTransport(CampaignDraftServiceTransport):
         Promotes the changes in a draft back to the base campaign.
 
         This method returns a Long Running Operation (LRO) indicating if
-        the Promote is done. Use [Operations.GetOperation] to poll the
-        LRO until it is done. Only a done status is returned in the
-        response. See the status in the Campaign Draft resource to
-        determine if the promotion was successful. If the LRO failed,
+        the Promote is done. Use
+        [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
+        to poll the LRO until it is done. Only a done status is returned
+        in the response. See the status in the Campaign Draft resource
+        to determine if the promotion was successful. If the LRO failed,
         use
         [CampaignDraftService.ListCampaignDraftAsyncErrors][google.ads.googleads.v21.services.CampaignDraftService.ListCampaignDraftAsyncErrors]
         to view the list of error reasons.

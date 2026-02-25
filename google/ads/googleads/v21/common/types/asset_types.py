@@ -52,7 +52,6 @@ from google.ads.googleads.v21.enums.types import (
 )
 from google.ads.googleads.v21.enums.types import promotion_extension_occasion
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -1781,7 +1780,7 @@ class DynamicFlightsAsset(proto.Message):
             PAR,LON.
         custom_mapping (str):
             A custom field which can be multiple key to values mapping
-            separated by delimiters (",", "|" and ":"), in the forms of
+            separated by delimiters (",", "\|" and ":"), in the forms of
             "<KEY_1>: <VALUE_1>, <VALUE_2>, ... ,<VALUE_N> \| <KEY_2>:
             <VALUE_1>, ... ,<VALUE_N> \| ... \| <KEY_N>: <VALUE_1>, ...
             ,<VALUE_N>" for example, wifi: most \| aircraft: 320, 77W \|

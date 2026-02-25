@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -36,7 +35,7 @@ except AttributeError:  # pragma: NO COVER
 from google.ads.googleads.v21.services.types import (
     keyword_plan_campaign_keyword_service,
 )
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import (
     KeywordPlanCampaignKeywordServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -132,7 +131,12 @@ class KeywordPlanCampaignKeywordServiceAsyncClient:
         Returns:
             KeywordPlanCampaignKeywordServiceAsyncClient: The constructed client.
         """
-        return KeywordPlanCampaignKeywordServiceClient.from_service_account_info.__func__(KeywordPlanCampaignKeywordServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            KeywordPlanCampaignKeywordServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            KeywordPlanCampaignKeywordServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -148,7 +152,15 @@ class KeywordPlanCampaignKeywordServiceAsyncClient:
         Returns:
             KeywordPlanCampaignKeywordServiceAsyncClient: The constructed client.
         """
-        return KeywordPlanCampaignKeywordServiceClient.from_service_account_file.__func__(KeywordPlanCampaignKeywordServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            KeywordPlanCampaignKeywordServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            KeywordPlanCampaignKeywordServiceAsyncClient,
+            filename,
+            *args,
+            **kwargs,
+        )
 
     from_service_account_json = from_service_account_file
 

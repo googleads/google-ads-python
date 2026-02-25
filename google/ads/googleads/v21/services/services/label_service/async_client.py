@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -34,7 +33,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v21.services.types import label_service
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import LabelServiceTransport, DEFAULT_CLIENT_INFO
 from .client import LabelServiceClient
 
@@ -100,7 +99,10 @@ class LabelServiceAsyncClient:
         Returns:
             LabelServiceAsyncClient: The constructed client.
         """
-        return LabelServiceClient.from_service_account_info.__func__(LabelServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            LabelServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(LabelServiceAsyncClient, info, *args, **kwargs)
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -116,7 +118,10 @@ class LabelServiceAsyncClient:
         Returns:
             LabelServiceAsyncClient: The constructed client.
         """
-        return LabelServiceClient.from_service_account_file.__func__(LabelServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            LabelServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(LabelServiceAsyncClient, filename, *args, **kwargs)
 
     from_service_account_json = from_service_account_file
 

@@ -476,6 +476,18 @@ class GoogleAdsClient:
                 channel=channel, client_info=_CLIENT_INFO
             )
 
+            if name == "YouTubeVideoUploadService":
+                # YouTubeVideoUploadService uses REST, so we cannot pass the credentials inside the gRPC
+                # channel; we need to pass them explicitly.
+                return service_client_class(
+                    transport=service_transport,
+                    credentials=self.credentials,
+                    developer_token=self.developer_token,
+                    login_customer_id=self.login_customer_id,
+                    linked_customer_id=self.linked_customer_id,
+                    use_cloud_org_for_api_access=self.use_cloud_org_for_api_access
+                )
+
             return service_client_class(transport=service_transport)
 
         channel: grpc.Channel = service_transport_class.create_channel(
@@ -503,6 +515,18 @@ class GoogleAdsClient:
         service_transport: Any = service_transport_class(
             channel=channel, client_info=_CLIENT_INFO
         )
+
+        if name == "YouTubeVideoUploadService":
+            # YouTubeVideoUploadService uses REST, so we cannot pass the credentials inside the gRPC
+            # channel; we need to pass them explicitly.
+            return service_client_class(
+                transport=service_transport,
+                credentials=self.credentials,
+                developer_token=self.developer_token,
+                login_customer_id=self.login_customer_id,
+                linked_customer_id=self.linked_customer_id,
+                use_cloud_org_for_api_access=self.use_cloud_org_for_api_access
+            )
 
         return service_client_class(transport=service_transport)
 

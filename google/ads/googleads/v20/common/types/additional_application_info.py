@@ -22,7 +22,6 @@ from google.ads.googleads.v20.enums.types import (
     application_instance as gage_application_instance,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.common",
     marshal="google.ads.googleads.v20",
@@ -34,8 +33,12 @@ __protobuf__ = proto.module(
 
 class AdditionalApplicationInfo(proto.Message):
     r"""Additional information about the application/tool issuing the
-    request. This field is only used by [ContentCreatorInsightsService],
-    [AudienceInsightsService], and [ReachPlanService] APIs.
+    request. This field is only used by
+    [ContentCreatorInsightsService][google.ads.googleads.v20.services.ContentCreatorInsightsService],
+    [AudienceInsightsService][google.ads.googleads.v20.services.AudienceInsightsService],
+    and
+    [ReachPlanService][google.ads.googleads.v20.services.ReachPlanService]
+    APIs.
 
     Attributes:
         application_id (str):

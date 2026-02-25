@@ -35,7 +35,6 @@ from google.ads.googleads.v21.enums.types import demand_gen_channel_config
 from google.ads.googleads.v21.enums.types import demand_gen_channel_strategy
 from google.ads.googleads.v21.enums.types import targeting_dimension
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -109,7 +108,12 @@ class AdGroup(proto.Message):
 
             This field is a member of `oneof`_ ``_campaign``.
         cpc_bid_micros (int):
-            The maximum CPC (cost-per-click) bid.
+            The maximum CPC (cost-per-click) bid. This
+            field is used when the ad group's effective
+            bidding strategy is Manual CPC. This field is
+            not applicable and will be ignored if the ad
+            group's campaign is using a portfolio bidding
+            strategy.
 
             This field is a member of `oneof`_ ``_cpc_bid_micros``.
         effective_cpc_bid_micros (int):
@@ -145,12 +149,24 @@ class AdGroup(proto.Message):
 
             This field is a member of `oneof`_ ``_target_cpm_micros``.
         target_roas (float):
-            The target ROAS (return-on-ad-spend) override. If the ad
-            group's campaign bidding strategy is TargetRoas or
-            MaximizeConversionValue (with its target_roas field set),
-            then this field overrides the target ROAS specified in the
-            campaign's bidding strategy. Otherwise, this value is
-            ignored.
+            The target ROAS (return-on-ad-spend) for this ad group.
+
+            This field lets you override the target ROAS specified in
+            the campaign's bidding strategy, but only if the campaign is
+            using a standard (not portfolio) ``TargetRoas`` strategy or
+            a standard ``MaximizeConversionValue`` strategy with its
+            ``target_roas`` field set.
+
+            If the campaign is using a portfolio bidding strategy, this
+            field cannot be set and attempting to do so will result in
+            an error.
+
+            For any other bidding strategies, this value is ignored.
+
+            To see the actual target ROAS being used by the ad group,
+            considering potential overrides, query the
+            ``effective_target_roas`` and
+            ``effective_target_roas_source`` fields.
 
             This field is a member of `oneof`_ ``_target_roas``.
         percent_cpc_bid_micros (int):
@@ -182,7 +198,7 @@ class AdGroup(proto.Message):
             optimized_targeting_enabled is false, this field is ignored.
             Default is false.
         display_custom_bid_dimension (google.ads.googleads.v21.enums.types.TargetingDimensionEnum.TargetingDimension):
-            Allows advertisers to specify a targeting
+            Lets advertisers specify a targeting
             dimension on which to place absolute bids. This
             is only applicable for campaigns that target
             only the display network and not search.

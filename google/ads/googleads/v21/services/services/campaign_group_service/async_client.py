@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -34,7 +33,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v21.services.types import campaign_group_service
-from google.rpc import status_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import CampaignGroupServiceTransport, DEFAULT_CLIENT_INFO
 from .client import CampaignGroupServiceClient
 
@@ -112,7 +111,12 @@ class CampaignGroupServiceAsyncClient:
         Returns:
             CampaignGroupServiceAsyncClient: The constructed client.
         """
-        return CampaignGroupServiceClient.from_service_account_info.__func__(CampaignGroupServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            CampaignGroupServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            CampaignGroupServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -128,7 +132,12 @@ class CampaignGroupServiceAsyncClient:
         Returns:
             CampaignGroupServiceAsyncClient: The constructed client.
         """
-        return CampaignGroupServiceClient.from_service_account_file.__func__(CampaignGroupServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            CampaignGroupServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            CampaignGroupServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 

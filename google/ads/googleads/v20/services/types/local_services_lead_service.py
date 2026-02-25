@@ -31,8 +31,7 @@ from google.ads.googleads.v20.enums.types import (
 from google.ads.googleads.v20.enums.types import (
     local_services_lead_survey_satisfied_reason,
 )
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",

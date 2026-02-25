@@ -3180,6 +3180,50 @@
           }
         }
       }
+    },
+    "YouTubeVideoUploadService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "YouTubeVideoUploadServiceClient",
+          "rpcs": {
+            "CreateYouTubeVideoUpload": {
+              "methods": [
+                "create_you_tube_video_upload"
+              ]
+            },
+            "RemoveYouTubeVideoUpload": {
+              "methods": [
+                "remove_you_tube_video_upload"
+              ]
+            },
+            "UpdateYouTubeVideoUpload": {
+              "methods": [
+                "update_you_tube_video_upload"
+              ]
+            }
+          }
+        },
+        "grpc-async": {
+          "libraryClient": "YouTubeVideoUploadServiceAsyncClient",
+          "rpcs": {
+            "CreateYouTubeVideoUpload": {
+              "methods": [
+                "create_you_tube_video_upload"
+              ]
+            },
+            "RemoveYouTubeVideoUpload": {
+              "methods": [
+                "remove_you_tube_video_upload"
+              ]
+            },
+            "UpdateYouTubeVideoUpload": {
+              "methods": [
+                "update_you_tube_video_upload"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

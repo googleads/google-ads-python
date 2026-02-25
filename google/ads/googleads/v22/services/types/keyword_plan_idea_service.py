@@ -28,7 +28,6 @@ from google.ads.googleads.v22.enums.types import (
     keyword_plan_network as gage_keyword_plan_network,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
     marshal="google.ads.googleads.v22",
@@ -688,7 +687,7 @@ class UnusableAdGroup(proto.Message):
 
 class GenerateKeywordForecastMetricsRequest(proto.Message):
     r"""Request message for
-    [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+    [KeywordPlanIdeaService.GenerateKeywordForecastMetrics][google.ads.googleads.v22.services.KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
@@ -1049,7 +1048,7 @@ class MaximizeConversionsBiddingStrategy(proto.Message):
 
 class GenerateKeywordForecastMetricsResponse(proto.Message):
     r"""Response message for
-    [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+    [KeywordPlanIdeaService.GenerateKeywordForecastMetrics][google.ads.googleads.v22.services.KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

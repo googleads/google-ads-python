@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
         "HotelCenterLinkInvitationIdentifier",
         "MerchantCenterLinkInvitationIdentifier",
         "AdvertisingPartnerLinkInvitationIdentifier",
+        "AdvertisingPartnerLinkInvitationProperties",
     },
 )
 
@@ -75,6 +76,13 @@ class ProductLinkInvitation(proto.Message):
             invitation.
 
             This field is a member of `oneof`_ ``invited_account``.
+        advertising_partner_properties (google.ads.googleads.v23.resources.types.AdvertisingPartnerLinkInvitationProperties):
+            Output only. Advertising Partner link
+            invitation properties. These properties are only
+            applicable when the link is for an Advertising
+            Partner.
+
+            This field is a member of `oneof`_ ``invited_account_properties``.
     """
 
     resource_name: str = proto.Field(
@@ -118,6 +126,14 @@ class ProductLinkInvitation(proto.Message):
             oneof="invited_account",
             message="AdvertisingPartnerLinkInvitationIdentifier",
         )
+    )
+    advertising_partner_properties: (
+        "AdvertisingPartnerLinkInvitationProperties"
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=8,
+        oneof="invited_account_properties",
+        message="AdvertisingPartnerLinkInvitationProperties",
     )
 
 
@@ -168,6 +184,31 @@ class AdvertisingPartnerLinkInvitationIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
+
+
+class AdvertisingPartnerLinkInvitationProperties(proto.Message):
+    r"""Properties specific to an Advertising Partner link
+    invitation.
+
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        allowed_domain (str):
+            Immutable. The allowed domain for the
+            Advertising Partner link invitation. The
+            advertising partner will only be able to
+            advertise on this domain. The field is immutable
+            after the creation of the link invitation.
+
+            This field is a member of `oneof`_ ``_allowed_domain``.
+    """
+
+    allowed_domain: str = proto.Field(
         proto.STRING,
         number=1,
         optional=True,

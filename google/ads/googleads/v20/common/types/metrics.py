@@ -22,7 +22,6 @@ import proto  # type: ignore
 from google.ads.googleads.v20.enums.types import interaction_event_type
 from google.ads.googleads.v20.enums.types import quality_score_bucket
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.common",
     marshal="google.ads.googleads.v20",
@@ -140,18 +139,18 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_all_conversions_value_per_cost``.
         all_conversions_from_click_to_call (float):
             The number of times people clicked the "Call"
-            button to call a store during or after clicking
-            an ad. This number doesn't include whether or
-            not calls were connected, or the duration of any
-            calls.
+            button to call a business during or after
+            clicking an ad. This number doesn't include
+            whether or not calls were connected, or the
+            duration of any calls.
 
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_click_to_call``.
         all_conversions_from_directions (float):
             The number of times people clicked a "Get
-            directions" button to navigate to a store after
-            clicking an ad.
+            directions" button to navigate to a business
+            after clicking an ad.
 
             This metric applies to feed items only.
 
@@ -164,34 +163,36 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_all_conversions_from_interactions_value_per_interaction``.
         all_conversions_from_menu (float):
             The number of times people clicked a link to
-            view a store's menu after clicking an ad.
+            view a business's menu after clicking an ad.
 
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_menu``.
         all_conversions_from_order (float):
             The number of times people placed an order at
-            a store after clicking an ad.
+            a business after clicking an ad.
+
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_order``.
         all_conversions_from_other_engagement (float):
             The number of other conversions (for example,
             posting a review or saving a location for a
-            store) that occurred after people clicked an ad.
+            business) that occurred after people clicked an
+            ad.
 
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_other_engagement``.
         all_conversions_from_store_visit (float):
             Estimated number of times people visited a
-            store after clicking an ad.
+            business after clicking an ad.
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_store_visit``.
         all_conversions_from_store_website (float):
             The number of times that people were taken to
-            a store's URL after clicking an ad.
+            a business's URL after clicking an ad.
 
             This metric applies to feed items only.
 
@@ -633,8 +634,8 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_gmail_secondary_clicks``.
         impressions_from_store_reach (int):
-            The number of times a store's location-based
-            ad was shown.
+            The number of times a business's
+            location-based ad was shown.
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_impressions_from_store_reach``.
@@ -1086,10 +1087,10 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_all_conversions_from_location_asset_other_engagement``.
         all_conversions_from_location_asset_store_visits (float):
-            Estimated number of visits to the store after
-            a chargeable ad event (click or impression).
-            This measure is coming from Asset based
-            location.
+            Estimated number of visits to the business
+            after a chargeable ad event (click or
+            impression). This measure is coming from Asset
+            based location.
 
             This field is a member of `oneof`_ ``_all_conversions_from_location_asset_store_visits``.
         all_conversions_from_location_asset_website (float):
@@ -1100,7 +1101,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_all_conversions_from_location_asset_website``.
         eligible_impressions_from_location_asset_store_reach (int):
-            Number of impressions in which the store
+            Number of impressions in which the business
             location was shown or the location was used for
             targeting. This measure is coming from Asset
             based location.
@@ -1138,9 +1139,9 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_view_through_conversions_from_location_asset_other_engagement``.
         view_through_conversions_from_location_asset_store_visits (float):
-            Estimated number of visits to the store after
-            an impression. This measure is coming from Asset
-            based location.
+            Estimated number of visits to the business
+            after an impression. This measure is coming from
+            Asset based location.
 
             This field is a member of `oneof`_ ``_view_through_conversions_from_location_asset_store_visits``.
         view_through_conversions_from_location_asset_website (float):
@@ -1679,8 +1680,8 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_asset_unrated_performance_cost_percentage``.
         store_visits_last_click_model_attributed_conversions (float):
-            The amount of store visits attributed by the
-            last click model.
+            The amount of business visits attributed by
+            the last click model.
 
             This field is a member of `oneof`_ ``_store_visits_last_click_model_attributed_conversions``.
         results_conversions_purchase (float):

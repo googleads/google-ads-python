@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.enums",
     marshal="google.ads.googleads.v21",
@@ -51,9 +50,15 @@ class OfflineUserDataJobStatusEnum(proto.Message):
                 being processed.
             SUCCESS (4):
                 Uploaded data has been successfully
-                processed.
+                processed. The job might have no operations,
+                which can happen if the job was run without any
+                operations added, or if all operations failed
+                validation individually when attempting to add
+                them to the job.
             FAILED (5):
                 Uploaded data has failed to be processed.
+                Some operations may have been successfully
+                processed.
         """
 
         UNSPECIFIED = 0

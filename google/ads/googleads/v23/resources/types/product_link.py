@@ -30,6 +30,7 @@ __protobuf__ = proto.module(
         "GoogleAdsIdentifier",
         "MerchantCenterIdentifier",
         "AdvertisingPartnerIdentifier",
+        "AdvertisingPartnerProperties",
     },
 )
 
@@ -74,6 +75,12 @@ class ProductLink(proto.Message):
             Output only. Advertising Partner link.
 
             This field is a member of `oneof`_ ``linked_product``.
+        advertising_partner_properties (google.ads.googleads.v23.resources.types.AdvertisingPartnerProperties):
+            Output only. Advertising Partner link
+            properties. These properties are only applicable
+            when the link is for an Advertising Partner.
+
+            This field is a member of `oneof`_ ``product_link_properties``.
     """
 
     resource_name: str = proto.Field(
@@ -115,6 +122,14 @@ class ProductLink(proto.Message):
         number=13,
         oneof="linked_product",
         message="AdvertisingPartnerIdentifier",
+    )
+    advertising_partner_properties: "AdvertisingPartnerProperties" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=15,
+            oneof="product_link_properties",
+            message="AdvertisingPartnerProperties",
+        )
     )
 
 
@@ -207,6 +222,28 @@ class AdvertisingPartnerIdentifier(proto.Message):
     """
 
     customer: str = proto.Field(
+        proto.STRING,
+        number=1,
+        optional=True,
+    )
+
+
+class AdvertisingPartnerProperties(proto.Message):
+    r"""Properties specific to an Advertising Partner link.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        allowed_domain (str):
+            Output only. The allowed domain for the
+            Advertising Partner link. The advertising
+            partner will only be able to advertise on this
+            domain. The field is immutable.
+
+            This field is a member of `oneof`_ ``_allowed_domain``.
+    """
+
+    allowed_domain: str = proto.Field(
         proto.STRING,
         number=1,
         optional=True,

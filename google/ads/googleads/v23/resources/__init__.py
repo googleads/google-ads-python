@@ -285,12 +285,16 @@ from .types.performance_max_placement_view import PerformanceMaxPlacementView
 from .types.product_category_constant import ProductCategoryConstant
 from .types.product_group_view import ProductGroupView
 from .types.product_link import AdvertisingPartnerIdentifier
+from .types.product_link import AdvertisingPartnerProperties
 from .types.product_link import DataPartnerIdentifier
 from .types.product_link import GoogleAdsIdentifier
 from .types.product_link import MerchantCenterIdentifier
 from .types.product_link import ProductLink
 from .types.product_link_invitation import (
     AdvertisingPartnerLinkInvitationIdentifier,
+)
+from .types.product_link_invitation import (
+    AdvertisingPartnerLinkInvitationProperties,
 )
 from .types.product_link_invitation import HotelCenterLinkInvitationIdentifier
 from .types.product_link_invitation import (
@@ -322,6 +326,7 @@ from .types.user_list_customer_type import UserListCustomerType
 from .types.user_location_view import UserLocationView
 from .types.video import Video
 from .types.webpage_view import WebpageView
+from .types.youtube_video_upload import YouTubeVideoUpload
 
 if hasattr(api_core, "check_python_version") and hasattr(
     api_core, "check_dependency_versions"
@@ -449,6 +454,8 @@ __all__ = (
     "AdStrengthActionItem",
     "AdvertisingPartnerIdentifier",
     "AdvertisingPartnerLinkInvitationIdentifier",
+    "AdvertisingPartnerLinkInvitationProperties",
+    "AdvertisingPartnerProperties",
     "AgeRangeView",
     "AiMaxSearchTermAdCombinationView",
     "AndroidPrivacySharedKeyGoogleAdGroup",
@@ -657,5 +664,6 @@ __all__ = (
     "Video",
     "VideoCustomer",
     "WebpageView",
+    "YouTubeVideoUpload",
     "YoutubeVideoIdentifier",
 )

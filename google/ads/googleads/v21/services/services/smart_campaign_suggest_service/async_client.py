@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -124,7 +123,12 @@ class SmartCampaignSuggestServiceAsyncClient:
         Returns:
             SmartCampaignSuggestServiceAsyncClient: The constructed client.
         """
-        return SmartCampaignSuggestServiceClient.from_service_account_info.__func__(SmartCampaignSuggestServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            SmartCampaignSuggestServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            SmartCampaignSuggestServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -140,7 +144,12 @@ class SmartCampaignSuggestServiceAsyncClient:
         Returns:
             SmartCampaignSuggestServiceAsyncClient: The constructed client.
         """
-        return SmartCampaignSuggestServiceClient.from_service_account_file.__func__(SmartCampaignSuggestServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            SmartCampaignSuggestServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            SmartCampaignSuggestServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -530,13 +539,13 @@ class SmartCampaignSuggestServiceAsyncClient:
                 Required. Information to get keyword theme suggestions.
                 Required fields:
 
-                -  suggestion_info.final_url
-                -  suggestion_info.language_code
-                -  suggestion_info.geo_target
+                - suggestion_info.final_url
+                - suggestion_info.language_code
+                - suggestion_info.geo_target
 
                 Recommended fields:
 
-                -  suggestion_info.business_setting
+                - suggestion_info.business_setting
 
                 This corresponds to the ``suggestion_info`` field
                 on the ``request`` instance; if ``request`` is provided, this

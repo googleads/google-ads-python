@@ -25,7 +25,6 @@ from google.ads.googleads.v20.resources.types import (
     product_link_invitation as gagr_product_link_invitation,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",
     marshal="google.ads.googleads.v20",
@@ -129,7 +128,7 @@ class UpdateProductLinkInvitationResponse(proto.Message):
 
 class RemoveProductLinkInvitationRequest(proto.Message):
     r"""Request message for
-    [ProductLinkinvitationService.RemoveProductLinkInvitation][].
+    [ProductLinkInvitationService.RemoveProductLinkInvitation][google.ads.googleads.v20.services.ProductLinkInvitationService.RemoveProductLinkInvitation].
 
     Attributes:
         customer_id (str):
@@ -139,7 +138,7 @@ class RemoveProductLinkInvitationRequest(proto.Message):
             Required. The resource name of the product link invitation
             being removed. expected, in this format:
 
-            ````
+            ``customers/{customer_id}/productLinkInvitations/{product_link_invitation_id}``
     """
 
     customer_id: str = proto.Field(

@@ -23,7 +23,6 @@ from google.ads.googleads.v22.enums.types import (
     bid_modifier_source as gage_bid_modifier_source,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",
@@ -63,9 +62,7 @@ class AdGroupBidModifier(proto.Message):
         bid_modifier (float):
             The modifier for the bid when the criterion
             matches. The modifier must be in the range: 0.1
-            - 10.0. The range is 1.0 - 6.0 for
-            PreferredContent. Use 0 to opt out of a Device
-            type.
+            - 10.0. Use 0 to opt out of a Device type.
 
             This field is a member of `oneof`_ ``_bid_modifier``.
         base_ad_group (str):

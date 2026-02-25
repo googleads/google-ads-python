@@ -214,6 +214,9 @@ from .benchmarks_marketing_objective import (
 from .benchmarks_source_type import (
     BenchmarksSourceTypeEnum,
 )
+from .benchmarks_time_granularity import (
+    BenchmarksTimeGranularityEnum,
+)
 from .bid_modifier_source import (
     BidModifierSourceEnum,
 )
@@ -231,6 +234,9 @@ from .bidding_strategy_type import (
 )
 from .billing_setup_status import (
     BillingSetupStatusEnum,
+)
+from .booking_status import (
+    BookingStatusEnum,
 )
 from .brand_request_rejection_reason import (
     BrandRequestRejectionReasonEnum,
@@ -724,6 +730,9 @@ from .match_type import (
 from .media_type import (
     MediaTypeEnum,
 )
+from .messaging_restriction_type import (
+    MessagingRestrictionTypeEnum,
+)
 from .mime_type import (
     MimeTypeEnum,
 )
@@ -1090,8 +1099,14 @@ from .webpage_condition_operand import (
 from .webpage_condition_operator import (
     WebpageConditionOperatorEnum,
 )
+from .youtube_video_privacy import (
+    YouTubeVideoPrivacyEnum,
+)
 from .youtube_video_property import (
     YouTubeVideoPropertyEnum,
+)
+from .youtube_video_upload_state import (
+    YouTubeVideoUploadStateEnum,
 )
 
 __all__ = (
@@ -1162,12 +1177,14 @@ __all__ = (
     "BatchJobStatusEnum",
     "BenchmarksMarketingObjectiveEnum",
     "BenchmarksSourceTypeEnum",
+    "BenchmarksTimeGranularityEnum",
     "BidModifierSourceEnum",
     "BiddingSourceEnum",
     "BiddingStrategyStatusEnum",
     "BiddingStrategySystemStatusEnum",
     "BiddingStrategyTypeEnum",
     "BillingSetupStatusEnum",
+    "BookingStatusEnum",
     "BrandRequestRejectionReasonEnum",
     "BrandSafetySuitabilityEnum",
     "BrandStateEnum",
@@ -1332,6 +1349,7 @@ __all__ = (
     "ManagerLinkStatusEnum",
     "MatchTypeEnum",
     "MediaTypeEnum",
+    "MessagingRestrictionTypeEnum",
     "MimeTypeEnum",
     "MinuteOfHourEnum",
     "MobileAppVendorEnum",
@@ -1454,5 +1472,7 @@ __all__ = (
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",
+    "YouTubeVideoPrivacyEnum",
     "YouTubeVideoPropertyEnum",
+    "YouTubeVideoUploadStateEnum",
 )

@@ -23,8 +23,7 @@ from google.ads.googleads.v20.common.types import consent as gagc_consent
 from google.ads.googleads.v20.common.types import offline_user_data
 from google.ads.googleads.v20.enums.types import conversion_customer_type
 from google.ads.googleads.v20.enums.types import conversion_environment_enum
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",
@@ -83,11 +82,11 @@ class UploadClickConversionsRequest(proto.Message):
 
             This setting only affects Enhanced conversions for leads
             uploads that use ``user_identifiers`` instead of ``GCLID``,
-            ``GBRAID``, or ``WBRAID``. When uploading enhanced
-            conversions for leads, you should upload all conversion
-            events to the API, including those that may not come from
-            Google Ads campaigns. The upload of an event that is not
-            from a Google Ads campaign will result in a
+            or the ``GBRAID`` or ``WBRAID`` URL parameters. When
+            uploading enhanced conversions for leads, you should upload
+            all conversion events to the API, including those that may
+            not come from Google Ads campaigns. The upload of an event
+            that is not from a Google Ads campaign will result in a
             ``CLICK_NOT_FOUND`` error if this field is set to ``true``.
             Since these errors are expected for such events, set this
             field to ``false`` so you can confirm your uploads are
@@ -268,13 +267,11 @@ class ClickConversion(proto.Message):
 
             This field is a member of `oneof`_ ``_gclid``.
         gbraid (str):
-            The click identifier for clicks associated
-            with app conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            app conversions.
         wbraid (str):
-            The click identifier for clicks associated
-            with web conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            web conversions.
         conversion_action (str):
             Resource name of the conversion action
             associated with this conversion. Note: Although
@@ -287,7 +284,7 @@ class ClickConversion(proto.Message):
         conversion_date_time (str):
             The date time at which the conversion occurred. Must be
             after the click time. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example,
             "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
@@ -351,7 +348,10 @@ class ClickConversion(proto.Message):
             consent where required by law or any applicable
             Google policies. See the
             https://support.google.com/google-ads/answer/2998031
-            page for more details.
+            page for more details. This field is only
+            available to allowlisted users. To include this
+            field in conversion imports, upgrade to the Data
+            Manager API.
 
             This field is a member of `oneof`_ ``_user_ip_address``.
         session_attributes_encoded (bytes):
@@ -359,12 +359,17 @@ class ClickConversion(proto.Message):
             base64-encoded JSON string. The content should be generated
             by Google-provided library. To set session attributes
             individually, use session_attributes_key_value_pairs
-            instead.
+            instead. This field is only available to allowlisted users.
+            To include this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
         session_attributes_key_value_pairs (google.ads.googleads.v20.services.types.SessionAttributesKeyValuePairs):
             The session attributes for the event,
-            represented as key-value pairs.
+            represented as key-value pairs. This field is
+            only available to allowlisted users. To include
+            this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
     """
@@ -483,7 +488,7 @@ class CallConversion(proto.Message):
             This field is a member of `oneof`_ ``_caller_id``.
         call_start_date_time (str):
             The date time at which the call occurred. The timezone must
-            be specified. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm",
+            be specified. The format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm",
             for example, "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_call_start_date_time``.
@@ -499,7 +504,7 @@ class CallConversion(proto.Message):
         conversion_date_time (str):
             The date time at which the conversion occurred. Must be
             after the call time. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example,
             "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
@@ -608,13 +613,11 @@ class ClickConversionResult(proto.Message):
 
             This field is a member of `oneof`_ ``_gclid``.
         gbraid (str):
-            The click identifier for clicks associated
-            with app conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            app conversions.
         wbraid (str):
-            The click identifier for clicks associated
-            with web conversions and originating from iOS
-            devices starting with iOS14.
+            The URL parameter for clicks associated with
+            web conversions.
         conversion_action (str):
             Resource name of the conversion action
             associated with this conversion.
@@ -622,7 +625,7 @@ class ClickConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
             The date time at which the conversion occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
@@ -681,7 +684,7 @@ class CallConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_caller_id``.
         call_start_date_time (str):
             The date time at which the call occurred. The format is
-            "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
+            "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_call_start_date_time``.
@@ -692,7 +695,7 @@ class CallConversionResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
             The date time at which the conversion occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.

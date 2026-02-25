@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -111,7 +110,12 @@ class KeywordPlanIdeaServiceAsyncClient:
         Returns:
             KeywordPlanIdeaServiceAsyncClient: The constructed client.
         """
-        return KeywordPlanIdeaServiceClient.from_service_account_info.__func__(KeywordPlanIdeaServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            KeywordPlanIdeaServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            KeywordPlanIdeaServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -127,7 +131,12 @@ class KeywordPlanIdeaServiceAsyncClient:
         Returns:
             KeywordPlanIdeaServiceAsyncClient: The constructed client.
         """
-        return KeywordPlanIdeaServiceClient.from_service_account_file.__func__(KeywordPlanIdeaServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            KeywordPlanIdeaServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            KeywordPlanIdeaServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -603,7 +612,7 @@ class KeywordPlanIdeaServiceAsyncClient:
         Args:
             request (Optional[Union[google.ads.googleads.v22.services.types.GenerateKeywordForecastMetricsRequest, dict]]):
                 The request object. Request message for
-                [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+                [KeywordPlanIdeaService.GenerateKeywordForecastMetrics][google.ads.googleads.v22.services.KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
             campaign (:class:`google.ads.googleads.v22.services.types.CampaignToForecast`):
                 Required. The campaign used in the
                 forecast.
@@ -622,7 +631,7 @@ class KeywordPlanIdeaServiceAsyncClient:
         Returns:
             google.ads.googleads.v22.services.types.GenerateKeywordForecastMetricsResponse:
                 Response message for
-                [KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
+                   [KeywordPlanIdeaService.GenerateKeywordForecastMetrics][google.ads.googleads.v22.services.KeywordPlanIdeaService.GenerateKeywordForecastMetrics].
 
         """
         # Create or coerce a protobuf request object.

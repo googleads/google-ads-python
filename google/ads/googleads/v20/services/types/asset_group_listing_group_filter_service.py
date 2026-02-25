@@ -25,8 +25,7 @@ from google.ads.googleads.v20.enums.types import (
 from google.ads.googleads.v20.resources.types import (
     asset_group_listing_group_filter as gagr_asset_group_listing_group_filter,
 )
-from google.protobuf import field_mask_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",

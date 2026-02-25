@@ -27,7 +27,6 @@ of setting campaign-specific conversion goals, see
 shopping_ads/add_performance_max_retail_campaign.py
 """
 
-
 import argparse
 from datetime import datetime, timedelta
 import sys
@@ -82,7 +81,6 @@ from google.ads.googleads.v23.services.types.google_ads_service import (
     MutateOperation,
     MutateOperationResponse,
 )
-
 
 # We specify temporary IDs that are specific to a single mutate request.
 # Temporary IDs are always negative and unique within one mutate request.
@@ -318,8 +316,24 @@ def create_performance_max_campaign_operation(
     )
 
     # Optional fields
-    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime("%Y%m%d 00:00:00")
-    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime("%Y%m%d 23:59:59")
+    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime(
+        "%Y%m%d 00:00:00"
+    )
+    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime(
+        "%Y%m%d 23:59:59"
+    )
+
+    # [START add_performance_max_text_guidelines]
+    campaign.text_guidelines.term_exclusions = ["cheap", "free"]
+    messaging_restriction = campaign.MessagingRestriction()
+    messaging_restriction.restriction_text = "Don't mention competitor names"
+    messaging_restriction.restriction_type = (
+        client.enums.MessagingRestrictionTypeEnum.RESTRICTION_BASED_EXCLUSION
+    )
+    campaign.text_guidelines.messaging_restrictions.append(
+        messaging_restriction
+    )
+    # [END add_performance_max_text_guidelines]
 
     # [START add_pmax_asset_automation_settings]
     # Configures the optional opt-in/out status for asset automation settings.
@@ -328,11 +342,17 @@ def create_performance_max_campaign_operation(
         client.enums.AssetAutomationTypeEnum.FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION,
         client.enums.AssetAutomationTypeEnum.TEXT_ASSET_AUTOMATION,
         client.enums.AssetAutomationTypeEnum.GENERATE_ENHANCED_YOUTUBE_VIDEOS,
-        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_ENHANCEMENT
+        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_ENHANCEMENT,
     ]:
-        asset_automattion_setting: Campaign.AssetAutomationSetting = client.get_type("Campaign").AssetAutomationSetting()
-        asset_automattion_setting.asset_automation_type = asset_automation_type_enum
-        asset_automattion_setting.asset_automation_status = client.enums.AssetAutomationStatusEnum.OPTED_IN
+        asset_automattion_setting: Campaign.AssetAutomationSetting = (
+            client.get_type("Campaign").AssetAutomationSetting()
+        )
+        asset_automattion_setting.asset_automation_type = (
+            asset_automation_type_enum
+        )
+        asset_automattion_setting.asset_automation_status = (
+            client.enums.AssetAutomationStatusEnum.OPTED_IN
+        )
         campaign.asset_automation_settings.append(asset_automattion_setting)
         # [END add_pmax_asset_automation_settings]
 
@@ -711,6 +731,7 @@ def create_and_link_image_asset(
     next_temp_id -= 1
     return operations
     # [END add_performance_max_campaign_8]
+
 
 # [START create_and_link_brand_assets]
 def create_and_link_brand_assets(

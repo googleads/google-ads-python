@@ -108,6 +108,10 @@ class ConversionActionCategoryEnum(proto.Message):
                 source into Google Ads, that has further
                 completed a chosen stage as defined by the lead
                 gen advertiser.
+            YOUTUBE_FOLLOW_ON_VIEWS (24):
+                User watches an ad from a channel and later
+                watches either the same video or a video from
+                the same channel as the ad.
         """
 
         UNSPECIFIED = 0
@@ -133,6 +137,7 @@ class ConversionActionCategoryEnum(proto.Message):
         STORE_SALE = 21
         QUALIFIED_LEAD = 22
         CONVERTED_LEAD = 23
+        YOUTUBE_FOLLOW_ON_VIEWS = 24
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

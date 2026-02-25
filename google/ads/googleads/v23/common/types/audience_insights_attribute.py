@@ -593,7 +593,7 @@ class KnowledgeGraphAttributeMetadata(proto.Message):
     Attributes:
         entity_capabilities (MutableSequence[google.ads.googleads.v23.enums.types.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities]):
             The capabilities of the entity used in
-            [ContentCreatorInsightsService][].
+            [ContentCreatorInsightsService][google.ads.googleads.v23.services.ContentCreatorInsightsService].
         related_categories (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttributeMetadata]):
             A list of CATEGORY attributes related to this
             entity.

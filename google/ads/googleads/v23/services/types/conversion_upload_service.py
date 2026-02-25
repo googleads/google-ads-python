@@ -322,7 +322,10 @@ class ClickConversion(proto.Message):
             consent where required by law or any applicable
             Google policies. See the
             https://support.google.com/google-ads/answer/2998031
-            page for more details.
+            page for more details. This field is only
+            available to allowlisted users. To include this
+            field in conversion imports, upgrade to the Data
+            Manager API.
 
             This field is a member of `oneof`_ ``_user_ip_address``.
         session_attributes_encoded (bytes):
@@ -330,12 +333,17 @@ class ClickConversion(proto.Message):
             base64-encoded JSON string. The content should be generated
             by Google-provided library. To set session attributes
             individually, use session_attributes_key_value_pairs
-            instead.
+            instead. This field is only available to allowlisted users.
+            To include this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
         session_attributes_key_value_pairs (google.ads.googleads.v23.services.types.SessionAttributesKeyValuePairs):
             The session attributes for the event,
-            represented as key-value pairs.
+            represented as key-value pairs. This field is
+            only available to allowlisted users. To include
+            this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``session_attributes``.
     """

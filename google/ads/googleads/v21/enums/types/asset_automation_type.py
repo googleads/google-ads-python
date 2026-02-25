@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.enums",
     marshal="google.ads.googleads.v21",
@@ -75,8 +74,9 @@ class AssetAutomationTypeEnum(proto.Message):
                 automatically creating dynamic landing pages
                 from the final URL and generating text assets
                 from the content of those landing pages. This
-                setting only applies to Search campaigns, and
-                advertisers are opted-out by default.
+                setting is turned OFF by default for Search
+                campaigns, but it is turned ON by default for
+                Performance Max campaigns.
         """
 
         UNSPECIFIED = 0

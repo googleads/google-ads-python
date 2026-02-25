@@ -28,7 +28,6 @@ from google.ads.googleads.v21.enums.types import (
     user_list_type as gage_user_list_type,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -206,7 +205,7 @@ class AudienceInsightsAttributeMetadata(proto.Message):
 class AudienceInsightsAttribute(proto.Message):
     r"""An audience attribute that can be used to request insights about the
     audience. Valid inputs for these fields are available from
-    [AudienceInsightsService.ListAudienceInsightsAttributes][].
+    [AudienceInsightsService.ListAudienceInsightsAttributes][google.ads.googleads.v21.services.AudienceInsightsService.ListAudienceInsightsAttributes].
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -612,7 +611,7 @@ class KnowledgeGraphAttributeMetadata(proto.Message):
     Attributes:
         entity_capabilities (MutableSequence[google.ads.googleads.v21.enums.types.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities]):
             The capabilities of the entity used in
-            [ContentCreatorInsightsService][].
+            [ContentCreatorInsightsService][google.ads.googleads.v21.services.ContentCreatorInsightsService].
         related_categories (MutableSequence[google.ads.googleads.v21.common.types.AudienceInsightsAttributeMetadata]):
             A list of CATEGORY attributes related to this
             entity.

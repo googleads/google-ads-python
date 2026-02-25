@@ -32,7 +32,6 @@ from google.ads.googleads.v21.enums.types import (
     third_party_viewability_integration_partner,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -54,7 +53,7 @@ __protobuf__ = proto.module(
 
 class CustomerThirdPartyIntegrationPartners(proto.Message):
     r"""Container for Customer level third party integration
-    partners. Next Id = 5
+    partners.
 
     Attributes:
         viewability_integration_partners (MutableSequence[google.ads.googleads.v21.common.types.CustomerThirdPartyViewabilityIntegrationPartner]):
@@ -103,7 +102,7 @@ class CustomerThirdPartyIntegrationPartners(proto.Message):
 
 class CustomerThirdPartyViewabilityIntegrationPartner(proto.Message):
     r"""Container for third party viewability integration data for
-    Customer. Next Id = 3
+    Customer.
 
     Attributes:
         viewability_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyViewabilityIntegrationPartnerEnum.ThirdPartyViewabilityIntegrationPartner):
@@ -129,7 +128,7 @@ class CustomerThirdPartyViewabilityIntegrationPartner(proto.Message):
 
 class CustomerThirdPartyBrandSafetyIntegrationPartner(proto.Message):
     r"""Container for third party brand safety integration data for
-    Customer. Next Id = 2
+    Customer.
 
     Attributes:
         brand_safety_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyBrandSafetyIntegrationPartnerEnum.ThirdPartyBrandSafetyIntegrationPartner):
@@ -148,7 +147,7 @@ class CustomerThirdPartyBrandSafetyIntegrationPartner(proto.Message):
 
 class CustomerThirdPartyBrandLiftIntegrationPartner(proto.Message):
     r"""Container for third party Brand Lift integration data for
-    Customer. Next Id = 3
+    Customer.
 
     Attributes:
         brand_lift_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyBrandLiftIntegrationPartnerEnum.ThirdPartyBrandLiftIntegrationPartner):
@@ -174,7 +173,7 @@ class CustomerThirdPartyBrandLiftIntegrationPartner(proto.Message):
 
 class CustomerThirdPartyReachIntegrationPartner(proto.Message):
     r"""Container for third party reach integration data for
-    Customer. Next Id = 3
+    Customer.
 
     Attributes:
         reach_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyReachIntegrationPartnerEnum.ThirdPartyReachIntegrationPartner):
@@ -200,7 +199,7 @@ class CustomerThirdPartyReachIntegrationPartner(proto.Message):
 
 class CampaignThirdPartyIntegrationPartners(proto.Message):
     r"""Container for Campaign level third party integration
-    partners. Next Id = 5
+    partners.
 
     Attributes:
         viewability_integration_partners (MutableSequence[google.ads.googleads.v21.common.types.CampaignThirdPartyViewabilityIntegrationPartner]):
@@ -249,7 +248,7 @@ class CampaignThirdPartyIntegrationPartners(proto.Message):
 
 class CampaignThirdPartyViewabilityIntegrationPartner(proto.Message):
     r"""Container for third party viewability integration data for
-    Campaign. Next Id = 4
+    Campaign.
 
     Attributes:
         viewability_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyViewabilityIntegrationPartnerEnum.ThirdPartyViewabilityIntegrationPartner):
@@ -287,7 +286,7 @@ class CampaignThirdPartyViewabilityIntegrationPartner(proto.Message):
 
 class CampaignThirdPartyBrandSafetyIntegrationPartner(proto.Message):
     r"""Container for third party brand safety integration data for
-    Campaign. Next Id = 3
+    Campaign.
 
     Attributes:
         brand_safety_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyBrandSafetyIntegrationPartnerEnum.ThirdPartyBrandSafetyIntegrationPartner):
@@ -318,7 +317,7 @@ class CampaignThirdPartyBrandSafetyIntegrationPartner(proto.Message):
 
 class CampaignThirdPartyBrandLiftIntegrationPartner(proto.Message):
     r"""Container for third party Brand Lift integration data for
-    Campaign. Next Id = 4
+    Campaign.
 
     Attributes:
         brand_lift_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyBrandLiftIntegrationPartnerEnum.ThirdPartyBrandLiftIntegrationPartner):
@@ -356,7 +355,7 @@ class CampaignThirdPartyBrandLiftIntegrationPartner(proto.Message):
 
 class CampaignThirdPartyReachIntegrationPartner(proto.Message):
     r"""Container for third party reach integration data for
-    Campaign. Next Id = 4
+    Campaign.
 
     Attributes:
         reach_integration_partner (google.ads.googleads.v21.enums.types.ThirdPartyReachIntegrationPartnerEnum.ThirdPartyReachIntegrationPartner):
@@ -394,7 +393,7 @@ class CampaignThirdPartyReachIntegrationPartner(proto.Message):
 
 class ThirdPartyIntegrationPartnerData(proto.Message):
     r"""Contains third party measurement partner related data for
-    video campaigns. Next Id = 3
+    video campaigns.
 
     Attributes:
         client_id (str):

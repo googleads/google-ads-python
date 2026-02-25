@@ -25,9 +25,8 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.resources.types import (
     recommendation_subscription as gagr_recommendation_subscription,
 )
-from google.protobuf import field_mask_pb2  # type: ignore
-from google.rpc import status_pb2  # type: ignore
-
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
@@ -43,7 +42,7 @@ __protobuf__ = proto.module(
 
 class MutateRecommendationSubscriptionRequest(proto.Message):
     r"""Request message for
-    [RecommendationSubscriptionService.MutateRecommendationSubscription]
+    [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
     Attributes:
         customer_id (str):
@@ -100,7 +99,7 @@ class MutateRecommendationSubscriptionRequest(proto.Message):
 class RecommendationSubscriptionOperation(proto.Message):
     r"""A single operation (create, update) on a recommendation
     subscription.
-    [RecommendationSubscriptionService.MutateRecommendationSubscription]
+    [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -150,7 +149,7 @@ class RecommendationSubscriptionOperation(proto.Message):
 
 class MutateRecommendationSubscriptionResponse(proto.Message):
     r"""Response message for
-    [RecommendationSubscriptionService.MutateRecommendationSubscription]
+    [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
     Attributes:
         results (MutableSequence[google.ads.googleads.v22.services.types.MutateRecommendationSubscriptionResult]):
@@ -179,7 +178,7 @@ class MutateRecommendationSubscriptionResponse(proto.Message):
 
 class MutateRecommendationSubscriptionResult(proto.Message):
     r"""Result message for
-    [RecommendationSubscriptionService.MutateRecommendationSubscription]
+    [RecommendationSubscriptionService.MutateRecommendationSubscription][google.ads.googleads.v22.services.RecommendationSubscriptionService.MutateRecommendationSubscription]
 
     Attributes:
         resource_name (str):

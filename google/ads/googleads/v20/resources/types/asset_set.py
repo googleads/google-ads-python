@@ -22,7 +22,6 @@ from google.ads.googleads.v20.common.types import asset_set_types
 from google.ads.googleads.v20.enums.types import asset_set_status
 from google.ads.googleads.v20.enums.types import asset_set_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -65,13 +64,13 @@ class AssetSet(proto.Message):
             Merchant ID and Feed Label from Google
             Merchant Center.
         location_group_parent_asset_set_id (int):
-            Immutable. Parent asset set id for the asset
+            Immutable. Parent asset set ID for the asset
             set where the elements of this asset set come
             from. For example: the sync level location
-            AssetSet id where the the elements in
-            LocationGroup AssetSet come from. This field is
-            required and only applicable for Location Group
-            typed AssetSet.
+            AssetSet id where the elements in LocationGroup
+            AssetSet come from. This field is required and
+            only applicable for Location Group typed
+            AssetSet.
         hotel_property_data (google.ads.googleads.v20.resources.types.AssetSet.HotelPropertyData):
             Output only. For Performance Max for travel
             goals campaigns with a Hotel Center account

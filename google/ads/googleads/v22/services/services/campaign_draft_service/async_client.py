@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -37,10 +36,10 @@ from google.ads.googleads.v22.services.services.campaign_draft_service import (
     pagers,
 )
 from google.ads.googleads.v22.services.types import campaign_draft_service
-from google.api_core import operation  # type: ignore
-from google.api_core import operation_async  # type: ignore
-from google.protobuf import empty_pb2  # type: ignore
-from google.rpc import status_pb2  # type: ignore
+import google.api_core.operation as operation  # type: ignore
+import google.api_core.operation_async as operation_async  # type: ignore
+import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import CampaignDraftServiceTransport, DEFAULT_CLIENT_INFO
 from .client import CampaignDraftServiceClient
 
@@ -122,7 +121,12 @@ class CampaignDraftServiceAsyncClient:
         Returns:
             CampaignDraftServiceAsyncClient: The constructed client.
         """
-        return CampaignDraftServiceClient.from_service_account_info.__func__(CampaignDraftServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            CampaignDraftServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            CampaignDraftServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -138,7 +142,12 @@ class CampaignDraftServiceAsyncClient:
         Returns:
             CampaignDraftServiceAsyncClient: The constructed client.
         """
-        return CampaignDraftServiceClient.from_service_account_file.__func__(CampaignDraftServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            CampaignDraftServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            CampaignDraftServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -433,10 +442,11 @@ class CampaignDraftServiceAsyncClient:
         r"""Promotes the changes in a draft back to the base campaign.
 
         This method returns a Long Running Operation (LRO) indicating if
-        the Promote is done. Use [Operations.GetOperation] to poll the
-        LRO until it is done. Only a done status is returned in the
-        response. See the status in the Campaign Draft resource to
-        determine if the promotion was successful. If the LRO failed,
+        the Promote is done. Use
+        [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
+        to poll the LRO until it is done. Only a done status is returned
+        in the response. See the status in the Campaign Draft resource
+        to determine if the promotion was successful. If the LRO failed,
         use
         [CampaignDraftService.ListCampaignDraftAsyncErrors][google.ads.googleads.v22.services.CampaignDraftService.ListCampaignDraftAsyncErrors]
         to view the list of error reasons.

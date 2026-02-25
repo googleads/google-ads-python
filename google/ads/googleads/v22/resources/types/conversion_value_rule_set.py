@@ -26,7 +26,6 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.enums.types import value_rule_set_attachment_type
 from google.ads.googleads.v22.enums.types import value_rule_set_dimension
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",
@@ -37,7 +36,9 @@ __protobuf__ = proto.module(
 
 
 class ConversionValueRuleSet(proto.Message):
-    r"""A conversion value rule set
+    r"""A conversion value rule set is a collection of conversion value
+    rules that lets you adjust conversion values based on the dimensions
+    specified in the ``dimensions`` field.
 
     Attributes:
         resource_name (str):

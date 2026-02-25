@@ -4063,6 +4063,26 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def you_tube_video_upload_path(
+        customer_id: str,
+        video_upload_id: str,
+    ) -> str:
+        """Returns a fully-qualified you_tube_video_upload string."""
+        return "customers/{customer_id}/youTubeVideoUploads/{video_upload_id}".format(
+            customer_id=customer_id,
+            video_upload_id=video_upload_id,
+        )
+
+    @staticmethod
+    def parse_you_tube_video_upload_path(path: str) -> Dict[str, str]:
+        """Parses a you_tube_video_upload path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/youTubeVideoUploads/(?P<video_upload_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def common_billing_account_path(
         billing_account: str,
     ) -> str:

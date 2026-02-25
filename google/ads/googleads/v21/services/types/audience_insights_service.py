@@ -28,7 +28,6 @@ from google.ads.googleads.v21.enums.types import (
     audience_insights_marketing_objective,
 )
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",
@@ -732,7 +731,7 @@ class GenerateTargetingSuggestionMetricsResponse(proto.Message):
         suggestions (MutableSequence[google.ads.googleads.v21.services.types.TargetingSuggestionMetrics]):
             Suggested targetable audiences. There will be one suggestion
             for each
-            [GenerateTargetingSuggestionMetricsRequest.audiences]
+            [GenerateTargetingSuggestionMetricsRequest.audiences][google.ads.googleads.v21.services.GenerateTargetingSuggestionMetricsRequest.audiences]
             requested, matching the order requested.
     """
 

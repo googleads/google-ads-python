@@ -34,7 +34,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -44,8 +43,8 @@ except AttributeError:  # pragma: NO COVER
 
 from google.ads.googleads.v20.services.services.google_ads_service import pagers
 from google.ads.googleads.v20.services.types import google_ads_service
-from google.protobuf import field_mask_pb2  # type: ignore
-from google.rpc import status_pb2  # type: ignore
+import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 from .transports.base import GoogleAdsServiceTransport, DEFAULT_CLIENT_INFO
 from .client import GoogleAdsServiceClient
 
@@ -1047,7 +1046,10 @@ class GoogleAdsServiceAsyncClient:
         Returns:
             GoogleAdsServiceAsyncClient: The constructed client.
         """
-        return GoogleAdsServiceClient.from_service_account_info.__func__(GoogleAdsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            GoogleAdsServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(GoogleAdsServiceAsyncClient, info, *args, **kwargs)
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -1063,7 +1065,12 @@ class GoogleAdsServiceAsyncClient:
         Returns:
             GoogleAdsServiceAsyncClient: The constructed client.
         """
-        return GoogleAdsServiceClient.from_service_account_file.__func__(GoogleAdsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            GoogleAdsServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            GoogleAdsServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -1478,9 +1485,9 @@ class GoogleAdsServiceAsyncClient:
         methods. The only features it offers over calling those methods
         directly are:
 
-        -  Atomic transactions
-        -  Temp resource names (described below)
-        -  Somewhat reduced latency over making a series of mutate calls
+        - Atomic transactions
+        - Temp resource names (described below)
+        - Somewhat reduced latency over making a series of mutate calls
 
         Note: Only resources that support atomic transactions are
         included, so this method can't replace all calls to individual
@@ -1510,14 +1517,13 @@ class GoogleAdsServiceAsyncClient:
 
         Note:
 
-        -  Resources must be created with a temp name before the name
-           can be reused. For example, the previous
-           CampaignBudget+Campaign example would fail if the mutate
-           order was reversed.
-        -  Temp names are not remembered across requests.
-        -  There's no limit to the number of temp names in a request.
-        -  Each temp name must use a unique negative number, even if the
-           resource types differ.
+        - Resources must be created with a temp name before the name can
+          be reused. For example, the previous CampaignBudget+Campaign
+          example would fail if the mutate order was reversed.
+        - Temp names are not remembered across requests.
+        - There's no limit to the number of temp names in a request.
+        - Each temp name must use a unique negative number, even if the
+          resource types differ.
 
         Latency
         -------

@@ -40,6 +40,7 @@ __protobuf__ = proto.module(
         "SearchTopics",
         "TrendInsight",
         "TrendInsightMetrics",
+        "TrendInsightDataPoint",
         "LanguageDistribution",
     },
 )
@@ -146,9 +147,10 @@ class GenerateCreatorInsightsRequest(proto.Message):
                 find insights.
             include_related_topics (bool):
                 Optional. When true, we will expand the search to beyond
-                just the entities specified in [brand_entities] to other
-                related knowledge graph entities similar to the brand. The
-                default value is ``false``.
+                just the entities specified in
+                [brand_entities][google.ads.googleads.v23.services.GenerateCreatorInsightsRequest.SearchBrand.brand_entities]
+                to other related knowledge graph entities similar to the
+                brand. The default value is ``false``.
         """
 
         brand_entities: MutableSequence[
@@ -643,6 +645,9 @@ class SearchTopics(proto.Message):
             Required. A list of knowledge graph entities to retrieve
             trend information for. Supported entities are tagged with
             [CONTENT_TRENDING_INSIGHTS][google.ads.googleads.v23.enums.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities.CONTENT_TRENDING_INSIGHTS].
+            Use
+            [AudienceInsightsService.ListAudienceInsightsAttributes][google.ads.googleads.v23.services.AudienceInsightsService.ListAudienceInsightsAttributes]
+            to get the list of supported entities.
     """
 
     entities: MutableSequence[
@@ -661,10 +666,19 @@ class TrendInsight(proto.Message):
         trend_attribute (google.ads.googleads.v23.common.types.AudienceInsightsAttributeMetadata):
             The attribute this trend is for.
         trend_metrics (google.ads.googleads.v23.services.types.TrendInsightMetrics):
-            Metrics associated with this trend.
+            Metrics associated with this trend. These
+            metrics are for the latest available month and
+            the comparison period is 3 months.
         trend (google.ads.googleads.v23.enums.types.InsightsTrendEnum.InsightsTrend):
             The direction of trend (such as RISING or
             DECLINING).
+        trend_data_points (MutableSequence[google.ads.googleads.v23.services.types.TrendInsightDataPoint]):
+            12 months of historical data for the trend, including the
+            most recent month the TrendInsight represents. Each data
+            point represents 1 month of data and the comparison period
+            is 1 month. The data points are ordered from most recent
+            month to least recent month. Only populated for trends using
+            search_topics.
         related_videos (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttributeMetadata]):
             Related videos for this topic. Only populated for trends
             using search_topics.
@@ -690,6 +704,13 @@ class TrendInsight(proto.Message):
         number=3,
         enum=insights_trend.InsightsTrendEnum.InsightsTrend,
     )
+    trend_data_points: MutableSequence["TrendInsightDataPoint"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=6,
+            message="TrendInsightDataPoint",
+        )
+    )
     related_videos: MutableSequence[
         audience_insights_attribute.AudienceInsightsAttributeMetadata
     ] = proto.RepeatedField(
@@ -712,7 +733,12 @@ class TrendInsightMetrics(proto.Message):
     Attributes:
         views_count (int):
             The number of views for this trend. This is
-            only populated for SearchTopics requests.
+            only populated for the latest month of data for
+            SearchTopics requests.
+        views_indexed_value (int):
+            Views value normalized to be in the range
+            0-100. This is only populated for SearchTopics
+            requests.
         audience_share (float):
             The fraction (from 0 to 1 inclusive) of the
             requested audience that has has searched or
@@ -721,13 +747,18 @@ class TrendInsightMetrics(proto.Message):
         trend_change_percent (float):
             The percentage of the change in the trend's
             value over the comparison period, where 1.0
-            represents 100%. If this is not set, it means
-            that the trend is emerging.
+            represents 100%. If this is 0, it means that the
+            trend is emerging (new) or sustained (existing
+            but unchanged).
     """
 
     views_count: int = proto.Field(
         proto.INT64,
         number=1,
+    )
+    views_indexed_value: int = proto.Field(
+        proto.INT64,
+        number=4,
     )
     audience_share: float = proto.Field(
         proto.DOUBLE,
@@ -736,6 +767,30 @@ class TrendInsightMetrics(proto.Message):
     trend_change_percent: float = proto.Field(
         proto.DOUBLE,
         number=3,
+    )
+
+
+class TrendInsightDataPoint(proto.Message):
+    r"""Trend data for a specific month.
+
+    Attributes:
+        month (str):
+            The month that the trend data point
+            represents in the string format "YYYY-MM".
+        trend_metrics (google.ads.googleads.v23.services.types.TrendInsightMetrics):
+            Metrics associated with this trend and month.
+            The comparison period for these metrics is 1
+            month.
+    """
+
+    month: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    trend_metrics: "TrendInsightMetrics" = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="TrendInsightMetrics",
     )
 
 

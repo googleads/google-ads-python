@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.enums",
     marshal="google.ads.googleads.v21",
@@ -74,7 +73,7 @@ class AdTypeEnum(proto.Message):
                 product type.
             DYNAMIC_HTML5_AD (22):
                 The ad is a display upload ad with one of the
-                DYNAMIC_HTML5_\* product types.
+                DYNAMIC_HTML5\_\* product types.
             APP_ENGAGEMENT_AD (23):
                 The ad is an app engagement ad.
             SHOPPING_COMPARISON_LISTING_AD (24):

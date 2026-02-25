@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.errors",
     marshal="google.ads.googleads.v21",
@@ -86,9 +85,9 @@ class ImageErrorEnum(proto.Message):
             FLASH_HAS_RANDOM_NUM (23):
                 Flash cannot have a random number.
             FLASH_SELF_TARGETS (24):
-                Ad click target cannot be '_self'.
+                Ad click target cannot be '\_self'.
             FLASH_BAD_GETURL_TARGET (25):
-                GetUrl method should only use '_blank'.
+                GetUrl method should only use '\_blank'.
             FLASH_VERSION_NOT_SUPPORTED (26):
                 Flash version is not supported.
             FLASH_WITHOUT_HARD_CODED_CLICK_URL (27):

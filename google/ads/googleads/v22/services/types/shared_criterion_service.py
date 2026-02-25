@@ -25,8 +25,7 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.resources.types import (
     shared_criterion as gagr_shared_criterion,
 )
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",

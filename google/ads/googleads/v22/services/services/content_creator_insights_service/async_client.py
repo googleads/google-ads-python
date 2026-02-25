@@ -25,7 +25,6 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
-
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -116,7 +115,12 @@ class ContentCreatorInsightsServiceAsyncClient:
         Returns:
             ContentCreatorInsightsServiceAsyncClient: The constructed client.
         """
-        return ContentCreatorInsightsServiceClient.from_service_account_info.__func__(ContentCreatorInsightsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
+        sa_info_func = (
+            ContentCreatorInsightsServiceClient.from_service_account_info.__func__  # type: ignore
+        )
+        return sa_info_func(
+            ContentCreatorInsightsServiceAsyncClient, info, *args, **kwargs
+        )
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -132,7 +136,12 @@ class ContentCreatorInsightsServiceAsyncClient:
         Returns:
             ContentCreatorInsightsServiceAsyncClient: The constructed client.
         """
-        return ContentCreatorInsightsServiceClient.from_service_account_file.__func__(ContentCreatorInsightsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
+        sa_file_func = (
+            ContentCreatorInsightsServiceClient.from_service_account_file.__func__  # type: ignore
+        )
+        return sa_file_func(
+            ContentCreatorInsightsServiceAsyncClient, filename, *args, **kwargs
+        )
 
     from_service_account_json = from_service_account_file
 
@@ -405,7 +414,7 @@ class ContentCreatorInsightsServiceAsyncClient:
         Args:
             request (Optional[Union[google.ads.googleads.v22.services.types.GenerateTrendingInsightsRequest, dict]]):
                 The request object. Request message for
-                [ContentCreatorInsightsService.GenerateTrendingInsights]
+                [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v22.services.ContentCreatorInsightsService.GenerateTrendingInsights].
             retry (google.api_core.retry_async.AsyncRetry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -417,7 +426,7 @@ class ContentCreatorInsightsServiceAsyncClient:
         Returns:
             google.ads.googleads.v22.services.types.GenerateTrendingInsightsResponse:
                 Response message for
-                [ContentCreatorInsightsService.GenerateTrendingInsights]
+                   [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v22.services.ContentCreatorInsightsService.GenerateTrendingInsights].
 
         """
         # Create or coerce a protobuf request object.

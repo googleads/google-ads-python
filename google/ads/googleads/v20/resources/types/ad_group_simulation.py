@@ -22,7 +22,6 @@ from google.ads.googleads.v20.common.types import simulation
 from google.ads.googleads.v20.enums.types import simulation_modification_method
 from google.ads.googleads.v20.enums.types import simulation_type
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.resources",
     marshal="google.ads.googleads.v20",
@@ -38,11 +37,17 @@ class AdGroupSimulation(proto.Message):
     detailed below respectively.
 
     1. SEARCH - CPC_BID - DEFAULT
+
     2. SEARCH - CPC_BID - UNIFORM
+
     3. SEARCH - TARGET_CPA - UNIFORM
+
     4. SEARCH - TARGET_ROAS - UNIFORM
+
     5. DISPLAY - CPC_BID - DEFAULT
+
     6. DISPLAY - CPC_BID - UNIFORM
+
     7. DISPLAY - TARGET_CPA - UNIFORM
 
     This message has `oneof`_ fields (mutually exclusive fields).

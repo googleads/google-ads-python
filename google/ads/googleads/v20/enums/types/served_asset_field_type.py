@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.enums",
     marshal="google.ads.googleads.v20",
@@ -64,7 +63,7 @@ class ServedAssetFieldTypeEnum(proto.Message):
             DESCRIPTION (10):
                 The asset was used in a description. Use this only if there
                 is only one description in the ad. Otherwise, use the
-                DESCRIPTION_1 or DESCRIPTION_@ enums
+                DESCRIPTION_1 or DESCRIPTION\_@ enums
             DESCRIPTION_IN_PORTRAIT (11):
                 The asset was used as description in portrait
                 image.

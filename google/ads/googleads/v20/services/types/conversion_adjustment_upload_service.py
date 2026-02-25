@@ -21,8 +21,7 @@ import proto  # type: ignore
 
 from google.ads.googleads.v20.common.types import offline_user_data
 from google.ads.googleads.v20.enums.types import conversion_adjustment_type
-from google.rpc import status_pb2  # type: ignore
-
+import google.rpc.status_pb2 as status_pb2  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",
@@ -174,7 +173,7 @@ class ConversionAdjustment(proto.Message):
         adjustment_date_time (str):
             The date time at which the adjustment occurred. Must be
             after the conversion_date_time. The timezone must be
-            specified. The format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for
+            specified. The format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for
             example, "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_adjustment_date_time``.
@@ -314,7 +313,7 @@ class GclidDateTimePair(proto.Message):
         conversion_date_time (str):
             The date time at which the original conversion for this
             adjustment occurred. The timezone must be specified. The
-            format is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            format is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example,
             "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_conversion_date_time``.
@@ -353,7 +352,7 @@ class ConversionAdjustmentResult(proto.Message):
             This field is a member of `oneof`_ ``_conversion_action``.
         adjustment_date_time (str):
             The date time at which the adjustment occurred. The format
-            is "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example, "2019-01-01
+            is "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example, "2019-01-01
             12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_adjustment_date_time``.

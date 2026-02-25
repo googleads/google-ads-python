@@ -535,6 +535,7 @@ from .product_group_view import (
 )
 from .product_link import (
     AdvertisingPartnerIdentifier,
+    AdvertisingPartnerProperties,
     DataPartnerIdentifier,
     GoogleAdsIdentifier,
     MerchantCenterIdentifier,
@@ -542,6 +543,7 @@ from .product_link import (
 )
 from .product_link_invitation import (
     AdvertisingPartnerLinkInvitationIdentifier,
+    AdvertisingPartnerLinkInvitationProperties,
     HotelCenterLinkInvitationIdentifier,
     MerchantCenterLinkInvitationIdentifier,
     ProductLinkInvitation,
@@ -614,6 +616,9 @@ from .video import (
 )
 from .webpage_view import (
     WebpageView,
+)
+from .youtube_video_upload import (
+    YouTubeVideoUpload,
 )
 
 __all__ = (
@@ -824,11 +829,13 @@ __all__ = (
     "ProductCategoryConstant",
     "ProductGroupView",
     "AdvertisingPartnerIdentifier",
+    "AdvertisingPartnerProperties",
     "DataPartnerIdentifier",
     "GoogleAdsIdentifier",
     "MerchantCenterIdentifier",
     "ProductLink",
     "AdvertisingPartnerLinkInvitationIdentifier",
+    "AdvertisingPartnerLinkInvitationProperties",
     "HotelCenterLinkInvitationIdentifier",
     "MerchantCenterLinkInvitationIdentifier",
     "ProductLinkInvitation",
@@ -855,4 +862,5 @@ __all__ = (
     "UserLocationView",
     "Video",
     "WebpageView",
+    "YouTubeVideoUpload",
 )

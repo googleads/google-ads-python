@@ -56,6 +56,9 @@ class SearchTermMatchSourceEnum(proto.Message):
             PERFORMANCE_MAX (6):
                 The match is from the search term matching
                 functionality in PMax.
+            VERTICAL_ADS_DATA_FEED (7):
+                The match is from a vertical ads data feed
+                (e.g. Travel Ads entity targeting).
         """
 
         UNSPECIFIED = 0
@@ -65,6 +68,7 @@ class SearchTermMatchSourceEnum(proto.Message):
         AI_MAX_BROAD_MATCH = 4
         DYNAMIC_SEARCH_ADS = 5
         PERFORMANCE_MAX = 6
+        VERTICAL_ADS_DATA_FEED = 7
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -373,7 +373,8 @@ class RecommendationSubscriptionServiceGrpcAsyncIOTransport(
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `DatabaseError <>`__ `FieldError <>`__
         `HeaderError <>`__ `InternalError <>`__ `MutateError <>`__
-        `QuotaError <>`__ `RecommendationError <>`__ `RequestError <>`__
+        `QuotaError <>`__ `RecommendationError <>`__
+        `RecommendationSubscriptionError <>`__ `RequestError <>`__
         `UrlFieldError <>`__
 
         Returns:

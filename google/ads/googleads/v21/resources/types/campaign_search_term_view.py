@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",
@@ -31,7 +30,8 @@ __protobuf__ = proto.module(
 class CampaignSearchTermView(proto.Message):
     r"""This report provides granular performance data, including
     cost metrics, for each individual search term that triggered
-    your ads.
+    your ads. If keyword-related segments are used, Performance Max
+    data will be excluded from the results.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

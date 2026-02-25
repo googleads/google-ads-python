@@ -21,7 +21,6 @@ import proto  # type: ignore
 
 from google.ads.googleads.v20.common.types import offline_user_data
 
-
 __protobuf__ = proto.module(
     package="google.ads.googleads.v20.services",
     marshal="google.ads.googleads.v20",
@@ -122,7 +121,7 @@ class UploadUserDataResponse(proto.Message):
     Attributes:
         upload_date_time (str):
             The date time at which the request was received by API,
-            formatted as "yyyy-mm-dd hh:mm:ss+|-hh:mm", for example,
+            formatted as "yyyy-mm-dd hh:mm:ss+\|-hh:mm", for example,
             "2019-01-01 12:32:45-08:00".
 
             This field is a member of `oneof`_ ``_upload_date_time``.

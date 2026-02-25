@@ -220,6 +220,9 @@ from .benchmarks_service import (
     BenchmarksProductMetadata,
     BenchmarksSource,
     BenchmarksSourceMetadata,
+    BreakdownDefinition,
+    BreakdownKey,
+    BreakdownMetrics,
     GenerateBenchmarksMetricsRequest,
     GenerateBenchmarksMetricsResponse,
     IndustryVerticalInfo,
@@ -365,6 +368,7 @@ from .content_creator_insights_service import (
     SearchAudience,
     SearchTopics,
     TrendInsight,
+    TrendInsightDataPoint,
     TrendInsightMetrics,
     YouTubeChannelInsights,
     YouTubeCreatorInsights,
@@ -845,6 +849,14 @@ from .user_list_service import (
     MutateUserListsResponse,
     UserListOperation,
 )
+from .youtube_video_upload_service import (
+    CreateYouTubeVideoUploadRequest,
+    CreateYouTubeVideoUploadResponse,
+    RemoveYouTubeVideoUploadRequest,
+    RemoveYouTubeVideoUploadResponse,
+    UpdateYouTubeVideoUploadRequest,
+    UpdateYouTubeVideoUploadResponse,
+)
 
 __all__ = (
     "AccountBudgetProposalOperation",
@@ -999,6 +1011,9 @@ __all__ = (
     "BenchmarksProductMetadata",
     "BenchmarksSource",
     "BenchmarksSourceMetadata",
+    "BreakdownDefinition",
+    "BreakdownKey",
+    "BreakdownMetrics",
     "GenerateBenchmarksMetricsRequest",
     "GenerateBenchmarksMetricsResponse",
     "IndustryVerticalInfo",
@@ -1104,6 +1119,7 @@ __all__ = (
     "SearchAudience",
     "SearchTopics",
     "TrendInsight",
+    "TrendInsightDataPoint",
     "TrendInsightMetrics",
     "YouTubeChannelInsights",
     "YouTubeCreatorInsights",
@@ -1461,4 +1477,10 @@ __all__ = (
     "MutateUserListsRequest",
     "MutateUserListsResponse",
     "UserListOperation",
+    "CreateYouTubeVideoUploadRequest",
+    "CreateYouTubeVideoUploadResponse",
+    "RemoveYouTubeVideoUploadRequest",
+    "RemoveYouTubeVideoUploadResponse",
+    "UpdateYouTubeVideoUploadRequest",
+    "UpdateYouTubeVideoUploadResponse",
 )

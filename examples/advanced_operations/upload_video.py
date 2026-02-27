@@ -87,7 +87,8 @@ def main(client: GoogleAdsClient, customer_id: str, video_file_path: str) -> Non
                 retry=None,
             )
         )
-        print(f"Created YouTube video upload: {response.resource_name}")
+        video_upload_resource_name = response.resource_name
+        print(f"Created YouTube video upload: {video_upload_resource_name}")
     # [END upload_video_1]
 
     # [START upload_video_3]

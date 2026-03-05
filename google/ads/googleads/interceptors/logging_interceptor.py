@@ -468,10 +468,13 @@ class _AsyncLoggingInterceptor(
         # Since this is called in on_done, it is done.
 
         try:
-            # This might raise if cancelled?
-            exception = response.exception()
-        except Exception:
-             exception = None
+            if hasattr(response, "exception"):
+                exception = response.code()
+            else:
+                await response.code()
+                exception = None
+        except Exception as ex:
+             exception = ex
 
         if exception:
             # We need to adapt exception logging for async exception?

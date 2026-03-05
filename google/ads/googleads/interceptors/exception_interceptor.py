@@ -159,8 +159,8 @@ class _AsyncUnaryUnaryCallWrapper(grpc.aio.UnaryUnaryCall):
                 return response
             else:
                 return util.convert_proto_plus_to_protobuf(response)
-        except grpc.RpcError:
-            yield from self._interceptor._handle_grpc_failure_async(self._call).__await__()
+        except grpc.RpcError as exception:
+            yield from self._interceptor._handle_grpc_failure_async(self._call, exception).__await__()
             raise
 
     def cancel(self):
@@ -209,8 +209,8 @@ class _AsyncUnaryStreamCallWrapper(grpc.aio.UnaryStreamCall):
                         yield response
                     else:
                         yield util.convert_proto_plus_to_protobuf(response)
-            except grpc.RpcError:
-                await self._interceptor._handle_grpc_failure_async(self._call)
+            except grpc.RpcError as exception:
+                await self._interceptor._handle_grpc_failure_async(self._call, exception)
                 raise
         return _wrapped_aiter()
 
@@ -252,19 +252,30 @@ class _AsyncUnaryStreamCallWrapper(grpc.aio.UnaryStreamCall):
                 return response
             else:
                 return util.convert_proto_plus_to_protobuf(response)
-        except grpc.RpcError:
-            await self._interceptor._handle_grpc_failure_async(self._call)
+        except grpc.RpcError as exception:
+            await self._interceptor._handle_grpc_failure_async(self._call, exception)
             raise
 
-class _AsyncExceptionInterceptor(
-    ExceptionInterceptor,
-):
+class _AsyncExceptionInterceptor(Interceptor, grpc.aio.UnaryUnaryClientInterceptor, grpc.aio.UnaryStreamClientInterceptor,):
     """An interceptor that wraps rpc exceptions."""
 
-    async def _handle_grpc_failure_async(self, response: grpc.aio.Call):
+    def __init__(self, api_version: str, use_proto_plus: bool = False):
+        """Initializes the ExceptionInterceptor.
+
+        Args:
+            api_version: a str of the API version of the request.
+            use_proto_plus: a boolean of whether returned messages should be
+                proto_plus or protobuf.
+        """
+        super().__init__(api_version)
+        self._api_version = api_version
+        self._use_proto_plus = use_proto_plus
+
+    async def _handle_grpc_failure_async(self, response: grpc.aio.Call, exception: grpc.RpcError):
         """Async version of _handle_grpc_failure."""
-        status_code = response.code()
-        response_exception = response.exception()
+        status_code = await response.code()
+        
+        response_exception = exception
 
         # We need to access _RETRY_STATUS_CODES from interceptor module?
         # It's imported in interceptor.py but not exposed in ExceptionInterceptor?
@@ -300,7 +311,7 @@ class _AsyncExceptionInterceptor(
             raise response_exception
 
         # If we got here, maybe no exception? But we only call this on error.
-        raise response.exception()
+        raise response_exception
 
     async def intercept_unary_unary(
         self,

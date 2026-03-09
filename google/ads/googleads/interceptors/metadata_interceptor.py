@@ -24,14 +24,18 @@ login-customer-id values.
 # request user-agent directly by the google-api-core package:
 # https://github.com/googleapis/python-api-core/issues/416
 from importlib import metadata
+import os
 from typing import List, Optional, Tuple, Union
 
 from google.protobuf.internal import api_implementation
 from google.protobuf.message import Message as ProtobufMessageType
 import grpc
 
-from google.ads.googleads.interceptors import Interceptor, MetadataType, ContinuationType
-
+from google.ads.googleads.interceptors import (
+    Interceptor,
+    MetadataType,
+    ContinuationType,
+)
 
 # Determine which version of the package is installed.
 try:
@@ -47,20 +51,22 @@ elif api_implementation.Type() == "python":
 else:
     _PB_IMPL_HEADER = ""
 
+_GAADA = os.environ.get("GOOGLE_ADS_GAADA")
+
+
 class MetadataInterceptor(
     Interceptor,
     grpc.UnaryUnaryClientInterceptor,
-    grpc.UnaryStreamClientInterceptor
+    grpc.UnaryStreamClientInterceptor,
 ):
     """An interceptor that appends custom metadata to requests."""
 
     def __init__(
         self,
         developer_token: str,
-        login_customer_id: Optional[str]= None,
+        login_customer_id: Optional[str] = None,
         linked_customer_id: Optional[str] = None,
         use_cloud_org_for_api_access: Optional[bool] = None,
-        gaada: Optional[str] = None,
     ):
         """Initialization method for this class.
 
@@ -73,7 +79,6 @@ class MetadataInterceptor(
                 of developer token to determine your Google Ads API access
                 levels. Use this flag only if you are enrolled into a limited
                 pilot that supports this configuration
-            gaada: a str specifying the Google Ads API Assistant version.
         """
         self.developer_token_meta: Tuple[str, str] = (
             "developer-token",
@@ -89,13 +94,14 @@ class MetadataInterceptor(
             if linked_customer_id
             else None
         )
-        self.gaada: Optional[str] = gaada
-        self.use_cloud_org_for_api_access: Optional[
-            bool
-        ] = use_cloud_org_for_api_access
+        self.use_cloud_org_for_api_access: Optional[bool] = (
+            use_cloud_org_for_api_access
+        )
 
     def _update_client_call_details_metadata(
-        self, client_call_details: grpc.ClientCallDetails, metadata: MetadataType
+        self,
+        client_call_details: grpc.ClientCallDetails,
+        metadata: MetadataType,
     ):
         """Updates the client call details with additional metadata.
 
@@ -107,12 +113,14 @@ class MetadataInterceptor(
             An new instance of grpc.ClientCallDetails with additional metadata
             from the GoogleAdsClient.
         """
-        client_call_details: grpc.ClientCallDetails = self.get_client_call_details_instance(
-            client_call_details.method,
-            client_call_details.timeout,
-            metadata,
-            client_call_details.credentials,
-            getattr(client_call_details, "wait_for_ready", None),
+        client_call_details: grpc.ClientCallDetails = (
+            self.get_client_call_details_instance(
+                client_call_details.method,
+                client_call_details.timeout,
+                metadata,
+                client_call_details.credentials,
+                getattr(client_call_details, "wait_for_ready", None),
+            )
         )
 
         return client_call_details
@@ -151,35 +159,12 @@ class MetadataInterceptor(
         if self.linked_customer_id_meta:
             metadata.append(self.linked_customer_id_meta)
 
-        # TODO: This logic should be updated or removed once the following is
-        # fixed: https://github.com/googleapis/python-api-core/issues/416
-        for i, metadatum_tuple in enumerate(metadata):
-            # Check if the user agent header key is in the current metadatum
-            if "x-goog-api-client" in metadatum_tuple:
-                metadatum: List[str] = list(metadatum_tuple)
+        metadata = self._append_metadata(metadata)
 
-                if self.gaada:
-                    metadatum[1] += f" gaada/{self.gaada}"
-
-                if _PROTOBUF_VERSION:
-                    # Convert the tuple to a list so it can be modified.
-                    # Check that "pb" isn't already included in the user agent.
-                    if "pb" not in metadatum[1]:
-                        # Append the protobuf version key value pair to the end of
-                        # the string.
-                        metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
-                        # Convert the metadatum back to a tuple.
-                        metadatum_tuple: Tuple[str, str] = tuple(metadatum)
-
-                # Splice the metadatum back in its original position in
-                # order to preserve the order of the metadata list.
-                metadata[i] = metadatum_tuple
-                # Exit the loop since we already found the user agent.
-                break
-
-
-        client_call_details: grpc.ClientCallDetails = self._update_client_call_details_metadata(
-            client_call_details, metadata
+        client_call_details: grpc.ClientCallDetails = (
+            self._update_client_call_details_metadata(
+                client_call_details, metadata
+            )
         )
 
         return continuation(client_call_details, request)
@@ -228,10 +213,48 @@ class MetadataInterceptor(
         """
         return self._intercept(continuation, client_call_details, request)
 
+    def _append_metadata(self, metadata: MetadataType) -> MetadataType:
+        """Appends the version of library dependencies to the user agent.
 
-class _AsyncMetadataInterceptor(
-    MetadataInterceptor
-):
+        Args:
+            metadata: a list of tuples containing request metadata.
+
+        Returns:
+            A list of tuples containing request metadata with the version of
+            library dependencies appended to the user agent.
+        """
+        # TODO: This logic should be updated or removed once the following is
+        # fixed: https://github.com/googleapis/python-api-core/issues/416
+        for i, metadatum_tuple in enumerate(metadata):
+            # Check if the user agent header key is in the current metadatum
+            if "x-goog-api-client" in metadatum_tuple:
+                # Convert the tuple to a list so it can be modified.
+                metadatum: List[str] = list(metadatum_tuple)
+
+                if _GAADA:
+                    metadatum[1] += f" gaada/{_GAADA}"
+
+                if _PROTOBUF_VERSION:
+                    # Check that "pb" isn't already included in the user agent.
+                    if "pb" not in metadatum[1]:
+                        # Append the protobuf version key value pair to the end
+                        # of the string.
+                        metadatum[
+                            1
+                        ] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
+
+                # Convert the metadatum back to a tuple.
+                metadatum_tuple: Tuple[str, str] = tuple(metadatum)
+                # Splice the metadatum back in its original position in
+                # order to preserve the order of the metadata list.
+                metadata[i] = metadatum_tuple
+                # Exit the loop since we already found the user agent.
+                break
+
+        return metadata
+
+
+class _AsyncMetadataInterceptor(MetadataInterceptor):
     """An interceptor that appends custom metadata to requests."""
 
     async def _intercept(
@@ -268,25 +291,7 @@ class _AsyncMetadataInterceptor(
         if self.linked_customer_id_meta:
             metadata.append(self.linked_customer_id_meta)
 
-        # TODO: This logic should be updated or removed once the following is
-        # fixed: https://github.com/googleapis/python-api-core/issues/416
-        for i, metadatum_tuple in enumerate(metadata):
-            # Check if the user agent header key is in the current metadatum
-            if "x-goog-api-client" in metadatum_tuple and _PROTOBUF_VERSION:
-                # Convert the tuple to a list so it can be modified.
-                metadatum: List[str] = list(metadatum_tuple)
-                # Check that "pb" isn't already included in the user agent.
-                if "pb" not in metadatum[1]:
-                    # Append the protobuf version key value pair to the end of
-                    # the string.
-                    metadatum[1] += f" pb/{_PROTOBUF_VERSION}{_PB_IMPL_HEADER}"
-                    # Convert the metadatum back to a tuple.
-                    metadatum_tuple: Tuple[str, str] = tuple(metadatum)
-                    # Splice the metadatum back in its original position in
-                    # order to preserve the order of the metadata list.
-                    metadata[i] = metadatum_tuple
-                    # Exit the loop since we already found the user agent.
-                    break
+        metadata = self._append_metadata(metadata)
 
         client_call_details: grpc.ClientCallDetails = (
             self._update_client_call_details_metadata(
@@ -340,17 +345,20 @@ class _AsyncMetadataInterceptor(
         """
         return await self._intercept(continuation, client_call_details, request)
 
+
 class AsyncUnaryUnaryMetadataInterceptor(
     _AsyncMetadataInterceptor,
     grpc.aio.UnaryUnaryClientInterceptor,
 ):
     """An interceptor that appends custom metadata to Unary-Unary requests."""
 
+
 class AsyncUnaryStreamMetadataInterceptor(
     _AsyncMetadataInterceptor,
     grpc.aio.UnaryStreamClientInterceptor,
 ):
     """An interceptor that appends custom metadata to Unary-Stream requests."""
+
 
 __all__ = [
     "MetadataInterceptor",

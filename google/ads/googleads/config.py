@@ -21,7 +21,6 @@ import re
 from typing import Any, Callable, List, Tuple, TypeVar, Union
 import yaml
 
-
 _logger = logging.getLogger(__name__)
 
 
@@ -35,7 +34,6 @@ _OPTIONAL_KEYS = (
     "http_proxy",
     "use_cloud_org_for_api_access",
     "use_application_default_credentials",
-    "gaada",
 )
 _CONFIG_FILE_PATH_KEY = ("configuration_file_path",)
 _OAUTH2_INSTALLED_APP_KEYS = ("client_id", "client_secret", "refresh_token")
@@ -96,7 +94,9 @@ def _config_parser_decorator(func: F) -> F:
         parsed_config: dict[str, Any] = convert_login_customer_id_to_str(
             config_dict
         )
-        parsed_config: dict[str, Any] = convert_linked_customer_id_to_str(parsed_config)
+        parsed_config: dict[str, Any] = convert_linked_customer_id_to_str(
+            parsed_config
+        )
 
         config_keys: List[str] = parsed_config.keys()
 
@@ -106,7 +106,9 @@ def _config_parser_decorator(func: F) -> F:
             # that needs to be returned by this method.
             if type(logging_config) is not dict:
                 try:
-                    parsed_config["logging"]: dict[str, Any] = json.loads(logging_config)
+                    parsed_config["logging"]: dict[str, Any] = json.loads(
+                        logging_config
+                    )
                     # The logger is configured here in case deprecation warnings
                     # need to be logged further down in this method. The logger
                     # is otherwise configured by the GoogleAdsClient class.
@@ -159,7 +161,9 @@ def _config_parser_decorator(func: F) -> F:
             # the string "False" is truthy and can easily be incorrectly
             # converted to the boolean True.
             value: Union[str, bool] = parsed_config.get("use_proto_plus", False)
-            parsed_config["use_proto_plus"]: bool = disambiguate_string_bool(value)
+            parsed_config["use_proto_plus"]: bool = disambiguate_string_bool(
+                value
+            )
 
         if "use_application_default_credentials" in config_keys:
             # When loaded from YAML, YAML string or a dict, this value is
@@ -168,8 +172,12 @@ def _config_parser_decorator(func: F) -> F:
             # variable we need to manually change it to the bool False because
             # the string "False" is truthy and can easily be incorrectly
             # converted to the boolean True.
-            value: Union[str, bool] = parsed_config.get("use_application_default_credentials", False)
-            parsed_config["use_application_default_credentials"]: bool = disambiguate_string_bool(value)
+            value: Union[str, bool] = parsed_config.get(
+                "use_application_default_credentials", False
+            )
+            parsed_config["use_application_default_credentials"]: bool = (
+                disambiguate_string_bool(value)
+            )
 
         return parsed_config
 
@@ -380,7 +388,7 @@ def get_oauth2_required_service_account_keys() -> tuple[str, ...]:
 
 
 def convert_login_customer_id_to_str(
-    config_data: dict[str, Any]
+    config_data: dict[str, Any],
 ) -> dict[str, Any]:
     """Parses a config dict's login_customer_id attr value to a str.
 
@@ -403,7 +411,7 @@ def convert_login_customer_id_to_str(
 
 
 def convert_linked_customer_id_to_str(
-    config_data: dict[str, Any]
+    config_data: dict[str, Any],
 ) -> dict[str, Any]:
     """Parses a config dict's linked_customer_id attr value to a str.
 

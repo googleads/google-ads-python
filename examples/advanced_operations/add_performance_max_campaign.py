@@ -978,7 +978,7 @@ if __name__ == "__main__":
         "-b",
         "--brand_guidelines_enabled",
         type=bool,
-        default=False,
+        default=True,
         help=(
             "A boolean value indicating if the created campaign is enabled "
             "for brand guidelines."

@@ -320,17 +320,6 @@ class ConfigTest(FileTestCase):
         }
         self.assertEqual(config.load_from_dict(config_data), config_data)
 
-    def test_load_from_dict_gaada(self):
-        """Should load "gaada" config from dict."""
-        config_data = {
-            **self.default_dict_config,
-            **{
-                "gaada": "1.6.0",
-            },
-        }
-        result = config.load_from_dict(config_data)
-        self.assertEqual(result["gaada"], "1.6.0")
-
     def test_load_from_dict_secondary_service_account_keys(self):
         """Should convert secondary keys to primary keys."""
         config_data = {
@@ -387,7 +376,7 @@ class ConfigTest(FileTestCase):
                     "linked_customer_id": self.linked_customer_id,
                     "json_key_file_path": self.json_key_file_path,
                     "impersonated_email": self.impersonated_email,
-                    "use_application_default_credentials": self.use_application_default_credentials
+                    "use_application_default_credentials": self.use_application_default_credentials,
                 },
             )
             config_spy.assert_called_once()
@@ -457,13 +446,16 @@ class ConfigTest(FileTestCase):
             },
         }
 
-        with mock.patch("os.environ", environ), mock.patch.object(
-            # Mock load_from_yaml_file return value so it returns
-            # a default dict config that passes validation
-            config,
-            "load_from_yaml_file",
-            return_value=self.default_dict_config,
-        ) as spy:
+        with (
+            mock.patch("os.environ", environ),
+            mock.patch.object(
+                # Mock load_from_yaml_file return value so it returns
+                # a default dict config that passes validation
+                config,
+                "load_from_yaml_file",
+                return_value=self.default_dict_config,
+            ) as spy,
+        ):
             # Assert that the config values were retrieved from the yaml
             # file and not from environment variables.
             result = config.load_from_env()
@@ -592,7 +584,7 @@ class ConfigTest(FileTestCase):
 
     def test_validate_login_customer_id_unicode(self):
         self.assertRaises(
-            ValueError, config.validate_login_customer_id, "1230\u00B2"
+            ValueError, config.validate_login_customer_id, "1230\u00b2"
         )
 
     def test_validate_login_customer_id_embedded(self):
@@ -674,35 +666,6 @@ class ConfigTest(FileTestCase):
 
     def test_disambiguate_string_bool_raises_type_error(self):
         self.assertRaises(TypeError, config.disambiguate_string_bool, {})
-
-    def test_load_from_env_gaada(self):
-        """Should load ads api assistant flag from environment when specified"""
-        environ = {
-            **self.default_env_var_config,
-            **{
-                "GOOGLE_ADS_GAADA": "1.6.0",
-            },
-        }
-
-        with mock.patch("os.environ", environ):
-            results = config.load_from_env()
-            self.assertEqual(
-                results["gaada"],
-                "1.6.0",
-            )
-
-    def test_load_from_yaml_file_gaada(self):
-        """Should load "gaada" config from a yaml."""
-        self._create_mock_yaml({"gaada": "1.6.0"})
-
-        result = config.load_from_yaml_file()
-        self.assertEqual(result["gaada"], "1.6.0")
-
-    def test_load_from_yaml_file_gaada_not_set(self):
-        """Should set "gaada" as False when not set."""
-        self._create_mock_yaml({})
-        result = config.load_from_yaml_file()
-        self.assertEqual(result.get("gaada"), None)
 
     def test_load_from_env_use_cloud_org_for_api_access(self):
         """Should load api access flag from environment when specified"""

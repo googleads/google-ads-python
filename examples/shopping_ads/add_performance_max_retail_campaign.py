@@ -34,7 +34,6 @@ Prerequisites:
   https://developers.google.com/google-ads/api/docs/conversions/overview#conversion_actions
 """
 
-
 import argparse
 from datetime import datetime, timedelta
 import sys
@@ -390,8 +389,12 @@ def create_performance_max_campaign_operation(
     )
 
     # Optional fields
-    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime("%Y%m%d 00:00:00")
-    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime("%Y%m%d 23:59:59")
+    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime(
+        "%Y%m%d 00:00:00"
+    )
+    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime(
+        "%Y%m%d 23:59:59"
+    )
 
     # Configures the optional opt-in/out status for asset automation settings.
     for asset_automation_type_enum in [
@@ -399,11 +402,17 @@ def create_performance_max_campaign_operation(
         client.enums.AssetAutomationTypeEnum.FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION,
         client.enums.AssetAutomationTypeEnum.TEXT_ASSET_AUTOMATION,
         client.enums.AssetAutomationTypeEnum.GENERATE_ENHANCED_YOUTUBE_VIDEOS,
-        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_ENHANCEMENT
+        client.enums.AssetAutomationTypeEnum.GENERATE_IMAGE_ENHANCEMENT,
     ]:
-        asset_automattion_setting: Campaign.AssetAutomationSetting = client.get_type("Campaign").AssetAutomationSetting()
-        asset_automattion_setting.asset_automation_type = asset_automation_type_enum
-        asset_automattion_setting.asset_automation_status = client.enums.AssetAutomationStatusEnum.OPTED_IN
+        asset_automattion_setting: Campaign.AssetAutomationSetting = (
+            client.get_type("Campaign").AssetAutomationSetting()
+        )
+        asset_automattion_setting.asset_automation_type = (
+            asset_automation_type_enum
+        )
+        asset_automattion_setting.asset_automation_status = (
+            client.enums.AssetAutomationStatusEnum.OPTED_IN
+        )
         campaign.asset_automation_settings.append(asset_automattion_setting)
 
     return mutate_operation
@@ -1239,7 +1248,7 @@ if __name__ == "__main__":
         "-b",
         "--brand_guidelines_enabled",
         type=bool,
-        default=False,
+        default=True,
         help=(
             "A boolean value indicating if the created campaign is enabled "
             "for brand guidelines."

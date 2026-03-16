@@ -439,6 +439,50 @@ class GoogleAdsClientTest(TestCase):
                 ads_assistant=None,
             )
 
+    def test_load_from_dict_login_customer_id_explicit_none(self):
+        config = {
+            **self.default_config,
+            **{
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "refresh_token": self.refresh_token,
+                "login_customer_id": None,
+            },
+        }
+        mock_credentials_instance = mock.Mock()
+
+        with (
+            mock.patch.object(
+                Client.GoogleAdsClient, "__init__", return_value=None
+            ) as mock_client_init,
+            mock.patch.object(
+                Client.oauth2,
+                "get_installed_app_credentials",
+                return_value=mock_credentials_instance,
+            ) as mock_credentials,
+        ):
+            try:
+                Client.GoogleAdsClient.load_from_dict(config)
+            except ValueError as ex:
+                self.fail(
+                    "GoogleAdsClient.load_from_dict raised ValueError "
+                    f"unexpectedly when login_customer_id is None: {ex}"
+                )
+
+            mock_client_init.assert_called_once_with(
+                credentials=mock_credentials_instance,
+                developer_token=self.developer_token,
+                use_proto_plus=self.use_proto_plus,
+                endpoint=None,
+                login_customer_id=None,
+                logging_config=None,
+                linked_customer_id=None,
+                version=None,
+                http_proxy=None,
+                use_cloud_org_for_api_access=None,
+                ads_assistant=None,
+            )
+
     def test_load_from_string(self):
         config = {
             **self.default_config,

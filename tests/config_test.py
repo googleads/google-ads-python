@@ -289,6 +289,17 @@ class ConfigTest(FileTestCase):
         }
         self.assertEqual(config.load_from_dict(config_data), config_data)
 
+    def test_load_from_dict_login_customer_id_explicit_none(self):
+        """Should not raise ValueError when login_customer_id is explicitly None."""
+        config_data = {
+            **self.default_dict_config,
+            "login_customer_id": None,
+        }
+        try:
+            config.load_from_dict(config_data)
+        except ValueError as ex:
+            self.fail(f"load_from_dict raised ValueError unexpectedly: {ex}")
+
     def test_load_from_dict_logging(self):
         """Should load logging config from dict."""
         config_data = {

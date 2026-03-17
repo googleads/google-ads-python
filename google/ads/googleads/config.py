@@ -214,10 +214,16 @@ def validate_dict(config_data: dict[str, Any]) -> None:
             "found. The required fields are: {}".format(str(_REQUIRED_KEYS))
         )
 
-    if "login_customer_id" in config_data:
+    if (
+        "login_customer_id" in config_data
+        and config_data["login_customer_id"] is not None
+    ):
         validate_login_customer_id(str(config_data["login_customer_id"]))
 
-    if "linked_customer_id" in config_data:
+    if (
+        "linked_customer_id" in config_data
+        and config_data["linked_customer_id"] is not None
+    ):
         validate_linked_customer_id(str(config_data["linked_customer_id"]))
 
 

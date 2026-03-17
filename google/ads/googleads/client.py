@@ -104,7 +104,9 @@ class _EnumGetter:
 
         return self._enums
 
-    def __getattr__(self, name: str) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
+    def __getattr__(
+        self, name: str
+    ) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
         """Dynamically loads the given enum class instance.
 
         Args:
@@ -162,10 +164,10 @@ class GoogleAdsClient:
 
     @classmethod
     def copy_from(
-            cls,
-            destination: Union[ProtoPlusMessageType, ProtobufMessageType],
-            origin: Union[ProtoPlusMessageType, ProtobufMessageType]
-        ) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
+        cls,
+        destination: Union[ProtoPlusMessageType, ProtobufMessageType],
+        origin: Union[ProtoPlusMessageType, ProtobufMessageType],
+    ) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
         """Copies protobuf and proto-plus messages into one-another.
 
         This method consolidates the CopyFrom logic of protobuf and proto-plus
@@ -204,7 +206,7 @@ class GoogleAdsClient:
             "use_cloud_org_for_api_access": config_data.get(
                 "use_cloud_org_for_api_access"
             ),
-            "gaada": config_data.get("gaada"),
+            "ads_assistant": config_data.get("ads_assistant"),
         }
 
     @classmethod
@@ -267,7 +269,9 @@ class GoogleAdsClient:
         Raises:
             ValueError: If the configuration lacks a required field.
         """
-        config_data: Dict[str, Any] = config.parse_yaml_document_to_dict(yaml_str)
+        config_data: Dict[str, Any] = config.parse_yaml_document_to_dict(
+            yaml_str
+        )
         kwargs: Dict[str, Any] = cls._get_client_kwargs(config_data)
         return cls(**dict(version=version, **kwargs))
 
@@ -329,7 +333,7 @@ class GoogleAdsClient:
         http_proxy: Union[str, None] = None,
         use_proto_plus: bool = False,
         use_cloud_org_for_api_access: Union[str, None] = None,
-        gaada: Union[str, None] = None,
+        ads_assistant: Union[str, None] = None,
     ):
         """Initializer for the GoogleAdsClient.
 
@@ -349,7 +353,7 @@ class GoogleAdsClient:
                 of developer token to determine your Google Ads API access
                 levels. Use this flag only if you are enrolled into a limited
                 pilot that supports this configuration.
-            gaada: a str specifying the Google Ads API Assistant version.
+            ads_assistant: a str specifying the Google Ads API Assistant version.
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
@@ -366,7 +370,7 @@ class GoogleAdsClient:
             use_cloud_org_for_api_access
         )
         self.enums: _EnumGetter = _EnumGetter(self)
-        self.gaada: Union[str, None] = gaada
+        self._ads_assistant: Union[str, None] = ads_assistant
 
         # If given, write the http_proxy channel option for GRPC to use
         if http_proxy:
@@ -403,9 +407,7 @@ class GoogleAdsClient:
         # override any version specified as an argument.
         version = self.version if self.version else version
         # api_module = self._get_api_services_by_version(version)
-        services_path: str = (
-            f"google.ads.googleads.{version}.services.services"
-        )
+        services_path: str = f"google.ads.googleads.{version}.services.services"
         snaked: str = util.convert_upper_case_to_snake_case(name)
         interceptors = interceptors or []
 
@@ -446,14 +448,14 @@ class GoogleAdsClient:
                     self.login_customer_id,
                     self.linked_customer_id,
                     self.use_cloud_org_for_api_access,
-                    gaada=self.gaada,
+                    ads_assistant=self._ads_assistant,
                 ),
                 AsyncUnaryStreamMetadataInterceptor(
                     self.developer_token,
                     self.login_customer_id,
                     self.linked_customer_id,
                     self.use_cloud_org_for_api_access,
-                    gaada=self.gaada,
+                    ads_assistant=self._ads_assistant,
                 ),
                 AsyncUnaryUnaryLoggingInterceptor(_logger, version, endpoint),
                 AsyncUnaryStreamLoggingInterceptor(_logger, version, endpoint),
@@ -485,7 +487,7 @@ class GoogleAdsClient:
                     developer_token=self.developer_token,
                     login_customer_id=self.login_customer_id,
                     linked_customer_id=self.linked_customer_id,
-                    use_cloud_org_for_api_access=self.use_cloud_org_for_api_access
+                    use_cloud_org_for_api_access=self.use_cloud_org_for_api_access,
                 )
 
             return service_client_class(transport=service_transport)
@@ -496,18 +498,21 @@ class GoogleAdsClient:
             options=_GRPC_CHANNEL_OPTIONS,
         )
 
-        interceptors: List[Union[grpc.UnaryUnaryClientInterceptor, grpc.UnaryStreamClientInterceptor]] = interceptors + [
+        interceptors: List[
+            Union[
+                grpc.UnaryUnaryClientInterceptor,
+                grpc.UnaryStreamClientInterceptor,
+            ]
+        ] = interceptors + [
             MetadataInterceptor(
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
                 self.use_cloud_org_for_api_access,
-                gaada=self.gaada,
+                ads_assistant=self._ads_assistant,
             ),
             LoggingInterceptor(_logger, version, endpoint),
-            ExceptionInterceptor(
-                version, use_proto_plus=self.use_proto_plus
-            ),
+            ExceptionInterceptor(version, use_proto_plus=self.use_proto_plus),
         ]
 
         channel: grpc.Channel = grpc.intercept_channel(channel, *interceptors)
@@ -525,12 +530,14 @@ class GoogleAdsClient:
                 developer_token=self.developer_token,
                 login_customer_id=self.login_customer_id,
                 linked_customer_id=self.linked_customer_id,
-                use_cloud_org_for_api_access=self.use_cloud_org_for_api_access
+                use_cloud_org_for_api_access=self.use_cloud_org_for_api_access,
             )
 
         return service_client_class(transport=service_transport)
 
-    def get_type(self, name: str, version: str = _DEFAULT_VERSION) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
+    def get_type(
+        self, name: str, version: str = _DEFAULT_VERSION
+    ) -> Union[ProtoPlusMessageType, ProtobufMessageType]:
         """Returns the specified common, enum, error, or resource type.
 
         Args:

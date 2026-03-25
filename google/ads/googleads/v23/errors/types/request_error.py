@@ -74,6 +74,9 @@ class RequestErrorEnum(proto.Message):
                 'update'.
             TOO_MANY_MUTATE_OPERATIONS (13):
                 Received too many entries in request.
+            TOO_MANY_ACTION_OPERATIONS (41):
+                Received too many action operations in
+                request.
             CANNOT_BE_EXECUTED_BY_MANAGER_ACCOUNT (14):
                 Request cannot be executed by a manager
                 account.
@@ -131,6 +134,7 @@ class RequestErrorEnum(proto.Message):
         REQUIRED_FIELD_MISSING = 9
         IMMUTABLE_FIELD = 11
         TOO_MANY_MUTATE_OPERATIONS = 13
+        TOO_MANY_ACTION_OPERATIONS = 41
         CANNOT_BE_EXECUTED_BY_MANAGER_ACCOUNT = 14
         CANNOT_MODIFY_FOREIGN_FIELD = 15
         INVALID_ENUM_VALUE = 18

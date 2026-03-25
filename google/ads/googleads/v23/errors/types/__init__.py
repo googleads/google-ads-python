@@ -22,6 +22,9 @@ from .account_budget_proposal_error import (
 from .account_link_error import (
     AccountLinkErrorEnum,
 )
+from .action_error import (
+    ActionErrorEnum,
+)
 from .ad_customizer_error import (
     AdCustomizerErrorEnum,
 )
@@ -166,6 +169,9 @@ from .click_view_error import (
 from .collection_size_error import (
     CollectionSizeErrorEnum,
 )
+from .content_creator_insights_error import (
+    ContentCreatorInsightsErrorEnum,
+)
 from .context_error import (
     ContextErrorEnum,
 )
@@ -266,6 +272,7 @@ from .errors import (
     PolicyFindingDetails,
     PolicyViolationDetails,
     QuotaErrorDetails,
+    ReservationErrorDetails,
     ResourceCountDetails,
 )
 from .experiment_arm_error import (
@@ -517,6 +524,9 @@ from .user_list_error import (
 from .video_campaign_error import (
     VideoCampaignErrorEnum,
 )
+from .video_reservation_error import (
+    VideoReservationErrorEnum,
+)
 from .youtube_video_registration_error import (
     YoutubeVideoRegistrationErrorEnum,
 )
@@ -525,6 +535,7 @@ __all__ = (
     "AccessInvitationErrorEnum",
     "AccountBudgetProposalErrorEnum",
     "AccountLinkErrorEnum",
+    "ActionErrorEnum",
     "AdCustomizerErrorEnum",
     "AdErrorEnum",
     "AdGroupAdErrorEnum",
@@ -573,6 +584,7 @@ __all__ = (
     "ChangeStatusErrorEnum",
     "ClickViewErrorEnum",
     "CollectionSizeErrorEnum",
+    "ContentCreatorInsightsErrorEnum",
     "ContextErrorEnum",
     "ConversionActionErrorEnum",
     "ConversionAdjustmentUploadErrorEnum",
@@ -612,6 +624,7 @@ __all__ = (
     "PolicyFindingDetails",
     "PolicyViolationDetails",
     "QuotaErrorDetails",
+    "ReservationErrorDetails",
     "ResourceCountDetails",
     "ExperimentArmErrorEnum",
     "ExperimentErrorEnum",
@@ -696,5 +709,6 @@ __all__ = (
     "UserListCustomerTypeErrorEnum",
     "UserListErrorEnum",
     "VideoCampaignErrorEnum",
+    "VideoReservationErrorEnum",
     "YoutubeVideoRegistrationErrorEnum",
 )

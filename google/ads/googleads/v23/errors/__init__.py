@@ -31,6 +31,7 @@ else:  # pragma: NO COVER
 from .types.access_invitation_error import AccessInvitationErrorEnum
 from .types.account_budget_proposal_error import AccountBudgetProposalErrorEnum
 from .types.account_link_error import AccountLinkErrorEnum
+from .types.action_error import ActionErrorEnum
 from .types.ad_customizer_error import AdCustomizerErrorEnum
 from .types.ad_error import AdErrorEnum
 from .types.ad_group_ad_error import AdGroupAdErrorEnum
@@ -89,6 +90,9 @@ from .types.change_event_error import ChangeEventErrorEnum
 from .types.change_status_error import ChangeStatusErrorEnum
 from .types.click_view_error import ClickViewErrorEnum
 from .types.collection_size_error import CollectionSizeErrorEnum
+from .types.content_creator_insights_error import (
+    ContentCreatorInsightsErrorEnum,
+)
 from .types.context_error import ContextErrorEnum
 from .types.conversion_action_error import ConversionActionErrorEnum
 from .types.conversion_adjustment_upload_error import (
@@ -138,6 +142,7 @@ from .types.errors import GoogleAdsFailure
 from .types.errors import PolicyFindingDetails
 from .types.errors import PolicyViolationDetails
 from .types.errors import QuotaErrorDetails
+from .types.errors import ReservationErrorDetails
 from .types.errors import ResourceCountDetails
 from .types.experiment_arm_error import ExperimentArmErrorEnum
 from .types.experiment_error import ExperimentErrorEnum
@@ -240,6 +245,7 @@ from .types.user_data_error import UserDataErrorEnum
 from .types.user_list_customer_type_error import UserListCustomerTypeErrorEnum
 from .types.user_list_error import UserListErrorEnum
 from .types.video_campaign_error import VideoCampaignErrorEnum
+from .types.video_reservation_error import VideoReservationErrorEnum
 from .types.youtube_video_registration_error import (
     YoutubeVideoRegistrationErrorEnum,
 )
@@ -344,6 +350,7 @@ __all__ = (
     "AccessInvitationErrorEnum",
     "AccountBudgetProposalErrorEnum",
     "AccountLinkErrorEnum",
+    "ActionErrorEnum",
     "AdCustomizerErrorEnum",
     "AdErrorEnum",
     "AdGroupAdErrorEnum",
@@ -393,6 +400,7 @@ __all__ = (
     "ChangeStatusErrorEnum",
     "ClickViewErrorEnum",
     "CollectionSizeErrorEnum",
+    "ContentCreatorInsightsErrorEnum",
     "ContextErrorEnum",
     "ConversionActionErrorEnum",
     "ConversionAdjustmentUploadErrorEnum",
@@ -495,6 +503,7 @@ __all__ = (
     "RecommendationSubscriptionErrorEnum",
     "RegionCodeErrorEnum",
     "RequestErrorEnum",
+    "ReservationErrorDetails",
     "ResourceAccessDeniedErrorEnum",
     "ResourceCountDetails",
     "ResourceCountLimitExceededErrorEnum",
@@ -515,5 +524,6 @@ __all__ = (
     "UserListCustomerTypeErrorEnum",
     "UserListErrorEnum",
     "VideoCampaignErrorEnum",
+    "VideoReservationErrorEnum",
     "YoutubeVideoRegistrationErrorEnum",
 )

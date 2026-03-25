@@ -59,6 +59,9 @@ class ReachPlanSurfaceEnum(proto.Message):
                 Shorts ad surface.
             GOOGLE_DISPLAY_NETWORK (9):
                 Google Display Network ad surface.
+            IN_STREAM_NON_SKIPPABLE_THIRTY_SECONDS (10):
+                In-Stream non-skippable (30 seconds) ad
+                surface.
         """
 
         UNSPECIFIED = 0
@@ -71,6 +74,7 @@ class ReachPlanSurfaceEnum(proto.Message):
         IN_STREAM_SKIPPABLE = 5
         SHORTS = 6
         GOOGLE_DISPLAY_NETWORK = 9
+        IN_STREAM_NON_SKIPPABLE_THIRTY_SECONDS = 10
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

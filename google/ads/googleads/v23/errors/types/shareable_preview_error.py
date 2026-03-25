@@ -48,12 +48,20 @@ class ShareablePreviewErrorEnum(proto.Message):
             ASSET_GROUP_DOES_NOT_EXIST_UNDER_THIS_CUSTOMER (3):
                 asset group does not exist under this
                 customer.
+            UNSUPPORTED_AD_TYPE (4):
+                Unsupported ad type for the given preview
+                type.
+            TOO_MANY_RESOURCES_IN_REQUEST (6):
+                The combined number of asset groups and ad
+                group ads exceeds the maximum of 10.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
         TOO_MANY_ASSET_GROUPS_IN_REQUEST = 2
         ASSET_GROUP_DOES_NOT_EXIST_UNDER_THIS_CUSTOMER = 3
+        UNSUPPORTED_AD_TYPE = 4
+        TOO_MANY_RESOURCES_IN_REQUEST = 6
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

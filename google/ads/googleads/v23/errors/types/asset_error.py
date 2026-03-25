@@ -41,15 +41,15 @@ class AssetErrorEnum(proto.Message):
                 The received error code is not known in this
                 version.
             CUSTOMER_NOT_ON_ALLOWLIST_FOR_ASSET_TYPE (13):
-                The customer is not is not on the allow-list
-                for this asset type.
+                The customer is not on the allow-list for
+                this asset type.
             DUPLICATE_ASSET (3):
                 Assets are duplicated across operations.
             DUPLICATE_ASSET_NAME (4):
                 The asset name is duplicated, either across
                 operations or with an existing asset.
             ASSET_DATA_IS_MISSING (5):
-                The Asset.asset_data oneof is empty.
+                The ``Asset.asset_data`` oneof is empty.
             CANNOT_MODIFY_ASSET_NAME (6):
                 The asset has a name which is different from
                 an existing duplicate that represents the same
@@ -85,10 +85,10 @@ class AssetErrorEnum(proto.Message):
                 specified.
             DUPLICATE_ASSETS_WITH_DIFFERENT_FIELD_VALUE (18):
                 Duplicate assets across operations, which have identical
-                Asset.asset_data oneof, cannot have different asset level
-                fields for asset types which are deduped.
+                ``Asset.asset_data`` oneof, cannot have different asset
+                level fields for asset types which are deduped.
             CALL_CARRIER_SPECIFIC_SHORT_NUMBER_NOT_ALLOWED (19):
-                Carrier specific short number is not allowed.
+                Carrier-specific short number is not allowed.
             CALL_CUSTOMER_CONSENT_FOR_CALL_RECORDING_REQUIRED (20):
                 Customer consent required for call recording
                 Terms of Service.
@@ -96,9 +96,9 @@ class AssetErrorEnum(proto.Message):
                 The type of the specified phone number is not
                 allowed.
             CALL_INVALID_CONVERSION_ACTION (22):
-                If the default call_conversion_action is not used, the
-                customer must have a ConversionAction with the same id and
-                the ConversionAction must be call conversion type.
+                If the default ``call_conversion_action`` is not used, the
+                customer must have a ``ConversionAction`` with the same id
+                and the ``ConversionAction`` must be call conversion type.
             CALL_INVALID_COUNTRY_CODE (23):
                 The country code of the phone number is
                 invalid.
@@ -108,17 +108,17 @@ class AssetErrorEnum(proto.Message):
                 The input phone number is not a valid phone
                 number.
             CALL_PHONE_NUMBER_NOT_SUPPORTED_FOR_COUNTRY (26):
-                The phone number is not supported for
+                The phone number is not supported for this
                 country.
             CALL_PREMIUM_RATE_NUMBER_NOT_ALLOWED (27):
                 Premium rate phone number is not allowed.
             CALL_VANITY_PHONE_NUMBER_NOT_ALLOWED (28):
                 Vanity phone number is not allowed.
             PRICE_HEADER_SAME_AS_DESCRIPTION (29):
-                PriceOffering cannot have the same value for
-                header and description.
+                ``PriceOffering`` cannot have the same value for header and
+                description.
             MOBILE_APP_INVALID_APP_ID (30):
-                AppId is invalid.
+                ``AppId`` is invalid.
             MOBILE_APP_INVALID_FINAL_URL_FOR_APP_DOWNLOAD_URL (31):
                 Invalid App download URL in final URLs.
             NAME_REQUIRED_FOR_ASSET_TYPE (32):
@@ -134,8 +134,7 @@ class AssetErrorEnum(proto.Message):
                 User can not modify the automatically created
                 asset.
             LEAD_FORM_LOCATION_ANSWER_TYPE_DISALLOWED (37):
-                Lead Form is disallowed to use "LOCATION"
-                answer type.
+                Lead Form is disallowed to use ``LOCATION`` answer type.
             PAGE_FEED_INVALID_LABEL_TEXT (38):
                 Page Feed label text contains invalid
                 characters.
@@ -144,7 +143,7 @@ class AssetErrorEnum(proto.Message):
                 whatsapp message asset type.
             CUSTOMER_NOT_ON_ALLOWLIST_FOR_APP_DEEP_LINK_ASSETS (40):
                 Only customers on the allowlist can create
-                AppDeepLinkAsset.
+                ``AppDeepLinkAsset``.
             PROMOTION_BARCODE_CANNOT_CONTAIN_LINKS (41):
                 Promotion barcode cannot contain links.
             PROMOTION_BARCODE_INVALID_FORMAT (42):

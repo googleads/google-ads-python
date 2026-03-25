@@ -29,7 +29,7 @@ __protobuf__ = proto.module(
 
 
 class CustomerClientLinkErrorEnum(proto.Message):
-    r"""Container for enum describing possible CustomeClientLink
+    r"""Container for enum describing possible CustomerClientLink
     errors.
 
     """
@@ -64,6 +64,12 @@ class CustomerClientLinkErrorEnum(proto.Message):
                 of linked accounts.
             CLIENT_HAS_TOO_MANY_MANAGERS (9):
                 Client has too many managers.
+            MAX_CUSTOMER_LIMIT_REACHED (10):
+                You have reached the maximum limit of
+                accounts that can be created for this account.
+            ACCOUNT_CREATION_POLICY_VIOLATION (11):
+                This account cannot create new client
+                accounts due to a Google Ads policy violation.
         """
 
         UNSPECIFIED = 0
@@ -76,6 +82,8 @@ class CustomerClientLinkErrorEnum(proto.Message):
         CANNOT_HIDE_OR_UNHIDE_MANAGER_ACCOUNTS = 7
         CUSTOMER_HAS_TOO_MANY_ACCOUNTS_AT_MANAGER = 8
         CLIENT_HAS_TOO_MANY_MANAGERS = 9
+        MAX_CUSTOMER_LIMIT_REACHED = 10
+        ACCOUNT_CREATION_POLICY_VIOLATION = 11
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

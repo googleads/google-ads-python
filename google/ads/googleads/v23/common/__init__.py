@@ -137,6 +137,7 @@ from .types.audience_insights_attribute import (
 from .types.audience_insights_attribute import AudienceInsightsCategory
 from .types.audience_insights_attribute import AudienceInsightsEntity
 from .types.audience_insights_attribute import AudienceInsightsLineup
+from .types.audience_insights_attribute import InsightsAudienceAttributeGroup
 from .types.audience_insights_attribute import KnowledgeGraphAttributeMetadata
 from .types.audience_insights_attribute import LineupAttributeMetadata
 from .types.audience_insights_attribute import LocationAttributeMetadata
@@ -179,6 +180,7 @@ from .types.bidding import TargetImpressionShare
 from .types.bidding import TargetRoas
 from .types.bidding import TargetSpend
 from .types.campaign_goal_settings import CampaignGoalSettings
+from .types.campaign_reservation_quote import CampaignReservationQuote
 from .types.click_location import ClickLocation
 from .types.consent import Consent
 from .types.criteria import ActivityCityInfo
@@ -552,6 +554,7 @@ __all__ = (
     "CalloutAsset",
     "CalloutFeedItem",
     "CampaignGoalSettings",
+    "CampaignReservationQuote",
     "CampaignThirdPartyBrandLiftIntegrationPartner",
     "CampaignThirdPartyBrandSafetyIntegrationPartner",
     "CampaignThirdPartyIntegrationPartners",
@@ -645,6 +648,7 @@ __all__ = (
     "ImageDimension",
     "InFeedVideoAdInfo",
     "IncomeRangeInfo",
+    "InsightsAudienceAttributeGroup",
     "InteractionTypeInfo",
     "IpBlockInfo",
     "ItemAttribute",

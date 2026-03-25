@@ -427,6 +427,7 @@ from .types.operating_system_version_operator_type import (
 )
 from .types.optimization_goal_type import OptimizationGoalTypeEnum
 from .types.parental_status_type import ParentalStatusTypeEnum
+from .types.partnership_opportunity import PartnershipOpportunityEnum
 from .types.payment_mode import PaymentModeEnum
 from .types.performance_max_upgrade_status import (
     PerformanceMaxUpgradeStatusEnum,
@@ -445,6 +446,7 @@ from .types.policy_topic_evidence_destination_not_working_dns_error_type import 
     PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum,
 )
 from .types.positive_geo_target_type import PositiveGeoTargetTypeEnum
+from .types.preview_type import PreviewTypeEnum
 from .types.price_extension_price_qualifier import (
     PriceExtensionPriceQualifierEnum,
 )
@@ -486,6 +488,7 @@ from .types.recommendation_subscription_status import (
 )
 from .types.recommendation_type import RecommendationTypeEnum
 from .types.regulatory_fee_type import RegulatoryFeeTypeEnum
+from .types.reservation_request_type import ReservationRequestTypeEnum
 from .types.resource_change_operation import ResourceChangeOperationEnum
 from .types.resource_limit_type import ResourceLimitTypeEnum
 from .types.response_content_type import ResponseContentTypeEnum
@@ -597,6 +600,7 @@ from .types.video_ad_sequence_interaction_type import (
 from .types.video_ad_sequence_minimum_duration import (
     VideoAdSequenceMinimumDurationEnum,
 )
+from .types.video_enhancement_source import VideoEnhancementSourceEnum
 from .types.video_thumbnail import VideoThumbnailEnum
 from .types.webpage_condition_operand import WebpageConditionOperandEnum
 from .types.webpage_condition_operator import WebpageConditionOperatorEnum
@@ -958,6 +962,7 @@ __all__ = (
     "OperatingSystemVersionOperatorTypeEnum",
     "OptimizationGoalTypeEnum",
     "ParentalStatusTypeEnum",
+    "PartnershipOpportunityEnum",
     "PaymentModeEnum",
     "PerformanceMaxUpgradeStatusEnum",
     "PlacementTypeEnum",
@@ -968,6 +973,7 @@ __all__ = (
     "PolicyTopicEvidenceDestinationNotWorkingDeviceEnum",
     "PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum",
     "PositiveGeoTargetTypeEnum",
+    "PreviewTypeEnum",
     "PriceExtensionPriceQualifierEnum",
     "PriceExtensionPriceUnitEnum",
     "PriceExtensionTypeEnum",
@@ -995,6 +1001,7 @@ __all__ = (
     "RecommendationSubscriptionStatusEnum",
     "RecommendationTypeEnum",
     "RegulatoryFeeTypeEnum",
+    "ReservationRequestTypeEnum",
     "ResourceChangeOperationEnum",
     "ResourceLimitTypeEnum",
     "ResponseContentTypeEnum",
@@ -1060,6 +1067,7 @@ __all__ = (
     "VideoAdFormatRestrictionEnum",
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
+    "VideoEnhancementSourceEnum",
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",

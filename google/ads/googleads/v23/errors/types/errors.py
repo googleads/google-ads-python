@@ -19,6 +19,7 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v23.common.types import campaign_reservation_quote
 from google.ads.googleads.v23.common.types import policy
 from google.ads.googleads.v23.common.types import value
 from google.ads.googleads.v23.enums.types import resource_limit_type
@@ -30,6 +31,9 @@ from google.ads.googleads.v23.errors.types import (
 )
 from google.ads.googleads.v23.errors.types import (
     account_link_error as gage_account_link_error,
+)
+from google.ads.googleads.v23.errors.types import (
+    action_error as gage_action_error,
 )
 from google.ads.googleads.v23.errors.types import (
     ad_customizer_error as gage_ad_customizer_error,
@@ -170,6 +174,9 @@ from google.ads.googleads.v23.errors.types import (
 )
 from google.ads.googleads.v23.errors.types import (
     collection_size_error as gage_collection_size_error,
+)
+from google.ads.googleads.v23.errors.types import (
+    content_creator_insights_error as gage_content_creator_insights_error,
 )
 from google.ads.googleads.v23.errors.types import (
     context_error as gage_context_error,
@@ -499,6 +506,9 @@ from google.ads.googleads.v23.errors.types import (
     video_campaign_error as gage_video_campaign_error,
 )
 from google.ads.googleads.v23.errors.types import (
+    video_reservation_error as gage_video_reservation_error,
+)
+from google.ads.googleads.v23.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
 from google.protobuf import duration_pb2  # type: ignore
@@ -518,6 +528,7 @@ __protobuf__ = proto.module(
         "QuotaErrorDetails",
         "ResourceCountDetails",
         "BudgetPerDayMinimumErrorDetails",
+        "ReservationErrorDetails",
     },
 )
 
@@ -666,6 +677,10 @@ class ErrorCode(proto.Message):
         authentication_error (google.ads.googleads.v23.errors.types.AuthenticationErrorEnum.AuthenticationError):
             Indicates failure to properly authenticate
             user.
+
+            This field is a member of `oneof`_ ``error_code``.
+        action_error (google.ads.googleads.v23.errors.types.ActionErrorEnum.ActionError):
+            An error with a Tangle Action.
 
             This field is a member of `oneof`_ ``error_code``.
         ad_group_criterion_customizer_error (google.ads.googleads.v23.errors.types.AdGroupCriterionCustomizerErrorEnum.AdGroupCriterionCustomizerError):
@@ -1313,6 +1328,15 @@ class ErrorCode(proto.Message):
             The reasons for the incentive error
 
             This field is a member of `oneof`_ ``error_code``.
+        content_creator_insights_error (google.ads.googleads.v23.errors.types.ContentCreatorInsightsErrorEnum.ContentCreatorInsightsError):
+            The reasons for the Content Creator Insights
+            error.
+
+            This field is a member of `oneof`_ ``error_code``.
+        video_reservation_error (google.ads.googleads.v23.errors.types.VideoReservationErrorEnum.VideoReservationError):
+            The reasons for the video reservation error.
+
+            This field is a member of `oneof`_ ``error_code``.
     """
 
     request_error: gage_request_error.RequestErrorEnum.RequestError = (
@@ -1434,6 +1458,12 @@ class ErrorCode(proto.Message):
         number=17,
         oneof="error_code",
         enum=gage_authentication_error.AuthenticationErrorEnum.AuthenticationError,
+    )
+    action_error: gage_action_error.ActionErrorEnum.ActionError = proto.Field(
+        proto.ENUM,
+        number=196,
+        oneof="error_code",
+        enum=gage_action_error.ActionErrorEnum.ActionError,
     )
     ad_group_criterion_customizer_error: (
         gage_ad_group_criterion_customizer_error.AdGroupCriterionCustomizerErrorEnum.AdGroupCriterionCustomizerError
@@ -2601,6 +2631,22 @@ class ErrorCode(proto.Message):
             enum=gage_incentive_error.IncentiveErrorEnum.IncentiveError,
         )
     )
+    content_creator_insights_error: (
+        gage_content_creator_insights_error.ContentCreatorInsightsErrorEnum.ContentCreatorInsightsError
+    ) = proto.Field(
+        proto.ENUM,
+        number=198,
+        oneof="error_code",
+        enum=gage_content_creator_insights_error.ContentCreatorInsightsErrorEnum.ContentCreatorInsightsError,
+    )
+    video_reservation_error: (
+        gage_video_reservation_error.VideoReservationErrorEnum.VideoReservationError
+    ) = proto.Field(
+        proto.ENUM,
+        number=199,
+        oneof="error_code",
+        enum=gage_video_reservation_error.VideoReservationErrorEnum.VideoReservationError,
+    )
 
 
 class ErrorLocation(proto.Message):
@@ -2670,6 +2716,8 @@ class ErrorDetails(proto.Message):
         budget_per_day_minimum_error_details (google.ads.googleads.v23.errors.types.BudgetPerDayMinimumErrorDetails):
             Details for a budget below per-day minimum
             error.
+        reservation_error_details (google.ads.googleads.v23.errors.types.ReservationErrorDetails):
+            Details for a reservation error.
     """
 
     unpublished_error_code: str = proto.Field(
@@ -2702,6 +2750,11 @@ class ErrorDetails(proto.Message):
             number=6,
             message="BudgetPerDayMinimumErrorDetails",
         )
+    )
+    reservation_error_details: "ReservationErrorDetails" = proto.Field(
+        proto.MESSAGE,
+        number=7,
+        message="ReservationErrorDetails",
     )
 
 
@@ -2918,6 +2971,43 @@ class BudgetPerDayMinimumErrorDetails(proto.Message):
     failed_budget_total_amount_micros: int = proto.Field(
         proto.INT64,
         number=6,
+    )
+
+
+class ReservationErrorDetails(proto.Message):
+    r"""Error details returned for BookCampaigns or QuoteCampaigns.
+
+    Attributes:
+        campaign (str):
+            The resource name of the campaign affected by the error, as
+            it was specified in the request. It could contain a
+            temporary ID. Format:
+            customers/{customer_id}/campaigns/{campaign_id}
+        quotes (MutableSequence[google.ads.googleads.v23.common.types.CampaignReservationQuote]):
+            A list of proposed quotes for all the
+            campaigns in the request. For the failed
+            campaign, the given quote allows booking.
+        quote_signature (str):
+            A signature of the returned quote. The
+            signature covers the entire set of campaigns in
+            the request, and can be used in subsequent
+            requests for the same set of campaigns.
+    """
+
+    campaign: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    quotes: MutableSequence[
+        campaign_reservation_quote.CampaignReservationQuote
+    ] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message=campaign_reservation_quote.CampaignReservationQuote,
+    )
+    quote_signature: str = proto.Field(
+        proto.STRING,
+        number=3,
     )
 
 

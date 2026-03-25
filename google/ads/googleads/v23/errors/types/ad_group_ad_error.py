@@ -72,6 +72,8 @@ class AdGroupAdErrorEnum(proto.Message):
                 be updated. Only removals are permitted.
             AD_SHARING_NOT_ALLOWED (13):
                 Ad sharing is not allowed.
+            DURATION_TOO_SHORT (14):
+                The duration of the AdGroupAd is too short.
         """
 
         UNSPECIFIED = 0
@@ -88,6 +90,7 @@ class AdGroupAdErrorEnum(proto.Message):
         AD_TYPE_CANNOT_BE_REMOVED = 11
         CANNOT_UPDATE_DEPRECATED_ADS = 12
         AD_SHARING_NOT_ALLOWED = 13
+        DURATION_TOO_SHORT = 14
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

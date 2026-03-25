@@ -135,6 +135,7 @@ from .audience_insights_attribute import (
     AudienceInsightsCategory,
     AudienceInsightsEntity,
     AudienceInsightsLineup,
+    InsightsAudienceAttributeGroup,
     KnowledgeGraphAttributeMetadata,
     LineupAttributeMetadata,
     LocationAttributeMetadata,
@@ -183,6 +184,9 @@ from .bidding import (
 )
 from .campaign_goal_settings import (
     CampaignGoalSettings,
+)
+from .campaign_reservation_quote import (
+    CampaignReservationQuote,
 )
 from .click_location import (
     ClickLocation,
@@ -543,6 +547,7 @@ __all__ = (
     "AudienceInsightsCategory",
     "AudienceInsightsEntity",
     "AudienceInsightsLineup",
+    "InsightsAudienceAttributeGroup",
     "KnowledgeGraphAttributeMetadata",
     "LineupAttributeMetadata",
     "LocationAttributeMetadata",
@@ -585,6 +590,7 @@ __all__ = (
     "TargetRoas",
     "TargetSpend",
     "CampaignGoalSettings",
+    "CampaignReservationQuote",
     "ClickLocation",
     "Consent",
     "ActivityCityInfo",

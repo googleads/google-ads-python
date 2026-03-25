@@ -912,6 +912,30 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def app_top_combination_view_path(
+        customer_id: str,
+        ad_group_id: str,
+        ad_id: str,
+        asset_combination_category: str,
+    ) -> str:
+        """Returns a fully-qualified app_top_combination_view string."""
+        return "customers/{customer_id}/appTopCombinationViews/{ad_group_id}~{ad_id}~{asset_combination_category}".format(
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+            ad_id=ad_id,
+            asset_combination_category=asset_combination_category,
+        )
+
+    @staticmethod
+    def parse_app_top_combination_view_path(path: str) -> Dict[str, str]:
+        """Parses a app_top_combination_view path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/appTopCombinationViews/(?P<ad_group_id>.+?)~(?P<ad_id>.+?)~(?P<asset_combination_category>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def asset_path(
         customer_id: str,
         asset_id: str,
@@ -4041,6 +4065,26 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def video_enhancement_path(
+        customer_id: str,
+        video_enhancement: str,
+    ) -> str:
+        """Returns a fully-qualified video_enhancement string."""
+        return "customers/{customer_id}/videoEnhancements/{video_enhancement}".format(
+            customer_id=customer_id,
+            video_enhancement=video_enhancement,
+        )
+
+    @staticmethod
+    def parse_video_enhancement_path(path: str) -> Dict[str, str]:
+        """Parses a video_enhancement path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/videoEnhancements/(?P<video_enhancement>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def webpage_view_path(
         customer_id: str,
         ad_group_id: str,
@@ -4824,10 +4868,12 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ) -> google_ads_service.MutateGoogleAdsResponse:
-        r"""Creates, updates, or removes resources. This method supports
-        atomic transactions with multiple types of resources. For
-        example, you can atomically create a campaign and a campaign
-        budget, or perform up to thousands of mutates atomically.
+        r"""Executes mutate and actions operations. Mutate operations
+        create, update, or remove resources. Actions perform custom
+        operations. This method supports atomic transactions with
+        multiple types of resources and actions. For example, you can
+        atomically create a campaign and a campaign budget, or perform
+        up to thousands of mutates atomically.
 
         This method is essentially a wrapper around a series of mutate
         methods. The only features it offers over calling those methods

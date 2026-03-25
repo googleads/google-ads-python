@@ -55,6 +55,16 @@ class ReachPlanAgeRangeEnum(proto.Message):
                 Between 18 and 65+ years old.
             AGE_RANGE_21_34 (8):
                 Between 21 and 34 years old.
+            AGE_RANGE_21_44 (22):
+                Between 21 and 44 years old.
+            AGE_RANGE_21_49 (23):
+                Between 21 and 49 years old.
+            AGE_RANGE_21_54 (24):
+                Between 21 and 54 years old.
+            AGE_RANGE_21_64 (25):
+                Between 21 and 64 years old.
+            AGE_RANGE_21_65_UP (26):
+                Between 21 and 65+ years old.
             AGE_RANGE_25_34 (503002):
                 Between 25 and 34 years old.
             AGE_RANGE_25_44 (9):
@@ -103,6 +113,11 @@ class ReachPlanAgeRangeEnum(proto.Message):
         AGE_RANGE_18_64 = 6
         AGE_RANGE_18_65_UP = 7
         AGE_RANGE_21_34 = 8
+        AGE_RANGE_21_44 = 22
+        AGE_RANGE_21_49 = 23
+        AGE_RANGE_21_54 = 24
+        AGE_RANGE_21_64 = 25
+        AGE_RANGE_21_65_UP = 26
         AGE_RANGE_25_34 = 503002
         AGE_RANGE_25_44 = 9
         AGE_RANGE_25_49 = 10

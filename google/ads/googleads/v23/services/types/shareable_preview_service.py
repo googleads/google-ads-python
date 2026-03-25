@@ -19,6 +19,9 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v23.enums.types import (
+    preview_type as gage_preview_type,
+)
 from google.rpc import status_pb2  # type: ignore
 
 
@@ -32,6 +35,7 @@ __protobuf__ = proto.module(
         "GenerateShareablePreviewsResponse",
         "ShareablePreviewOrError",
         "ShareablePreviewResult",
+        "YouTubeLivePreviewResult",
     },
 )
 
@@ -65,16 +69,36 @@ class GenerateShareablePreviewsRequest(proto.Message):
 class ShareablePreview(proto.Message):
     r"""A shareable preview with its identifier.
 
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         asset_group_identifier (google.ads.googleads.v23.services.types.AssetGroupIdentifier):
-            Required. Asset group of the shareable
-            preview.
+            Optional. Asset group of the shareable preview. Only
+            supported for preview type UI_PREVIEW or unset.
+        preview_type (google.ads.googleads.v23.enums.types.PreviewTypeEnum.PreviewType):
+            Optional. The type of preview to generate.
+        ad_group_ad (str):
+            Ad group ad of the shareable preview. Only supported for
+            preview type YOUTUBE_LIVE_PREVIEW. Format:
+            customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}
+
+            This field is a member of `oneof`_ ``identifier``.
     """
 
     asset_group_identifier: "AssetGroupIdentifier" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="AssetGroupIdentifier",
+    )
+    preview_type: gage_preview_type.PreviewTypeEnum.PreviewType = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum=gage_preview_type.PreviewTypeEnum.PreviewType,
+    )
+    ad_group_ad: str = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="identifier",
     )
 
 
@@ -129,6 +153,11 @@ class ShareablePreviewOrError(proto.Message):
             The shareable preview partial failure error.
 
             This field is a member of `oneof`_ ``generate_shareable_preview_response``.
+        ad_group_ad (str):
+            The ad group ad of the shareable preview. Format:
+            customers/{customer_id}/adGroupAds/{ad_group_id}~{ad_id}
+
+            This field is a member of `oneof`_ ``identifier``.
     """
 
     asset_group_identifier: "AssetGroupIdentifier" = proto.Field(
@@ -148,17 +177,30 @@ class ShareablePreviewOrError(proto.Message):
         oneof="generate_shareable_preview_response",
         message=status_pb2.Status,
     )
+    ad_group_ad: str = proto.Field(
+        proto.STRING,
+        number=4,
+        oneof="identifier",
+    )
 
 
 class ShareablePreviewResult(proto.Message):
     r"""Message to hold a shareable preview result.
 
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
     Attributes:
         shareable_preview_url (str):
-            The shareable preview URL.
+            The shareable preview URL. Only populated if preview type is
+            UI_PREVIEW or unset.
         expiration_date_time (str):
             Expiration date time using the ISO-8601
             format.
+        youtube_live_preview_result (google.ads.googleads.v23.services.types.YouTubeLivePreviewResult):
+            The result of a YouTube live preview. Only populated for
+            preview type YOUTUBE_LIVE_PREVIEW.
+
+            This field is a member of `oneof`_ ``result``.
     """
 
     shareable_preview_url: str = proto.Field(
@@ -166,6 +208,32 @@ class ShareablePreviewResult(proto.Message):
         number=1,
     )
     expiration_date_time: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    youtube_live_preview_result: "YouTubeLivePreviewResult" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        oneof="result",
+        message="YouTubeLivePreviewResult",
+    )
+
+
+class YouTubeLivePreviewResult(proto.Message):
+    r"""Message to hold a YouTube live preview result.
+
+    Attributes:
+        youtube_preview_url (str):
+            The shareable preview URL for YouTube videos.
+        youtube_tv_preview_url (str):
+            The shareable preview URL for YouTube TV.
+    """
+
+    youtube_preview_url: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    youtube_tv_preview_url: str = proto.Field(
         proto.STRING,
         number=2,
     )

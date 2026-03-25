@@ -2911,6 +2911,40 @@
         }
       }
     },
+    "ReservationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReservationServiceClient",
+          "rpcs": {
+            "BookCampaigns": {
+              "methods": [
+                "book_campaigns"
+              ]
+            },
+            "QuoteCampaigns": {
+              "methods": [
+                "quote_campaigns"
+              ]
+            }
+          }
+        },
+        "grpc-async": {
+          "libraryClient": "ReservationServiceAsyncClient",
+          "rpcs": {
+            "BookCampaigns": {
+              "methods": [
+                "book_campaigns"
+              ]
+            },
+            "QuoteCampaigns": {
+              "methods": [
+                "quote_campaigns"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ShareablePreviewService": {
       "clients": {
         "grpc": {

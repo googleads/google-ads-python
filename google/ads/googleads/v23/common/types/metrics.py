@@ -1885,6 +1885,12 @@ class Metrics(proto.Message):
             measurable for audibility.
 
             This field is a member of `oneof`_ ``_active_view_audible_quartile_p100_rate``.
+        biddable_indirect_install_first_in_app_conversion_micros (int):
+            The number of biddable first in app
+            conversions where the app install was driven by
+            interaction with a web campaign.
+
+            This field is a member of `oneof`_ ``_biddable_indirect_install_first_in_app_conversion_micros``.
     """
 
     absolute_top_impression_percentage: float = proto.Field(
@@ -3081,6 +3087,11 @@ class Metrics(proto.Message):
     active_view_audible_quartile_p100_rate: float = proto.Field(
         proto.DOUBLE,
         number=425,
+        optional=True,
+    )
+    biddable_indirect_install_first_in_app_conversion_micros: int = proto.Field(
+        proto.INT64,
+        number=426,
         optional=True,
     )
 

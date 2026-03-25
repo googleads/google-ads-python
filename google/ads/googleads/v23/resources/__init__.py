@@ -70,6 +70,8 @@ from .types.android_privacy_shared_key_google_campaign import (
 from .types.android_privacy_shared_key_google_network_type import (
     AndroidPrivacySharedKeyGoogleNetworkType,
 )
+from .types.app_top_combination_view import AdGroupCreativeAssetCombinationData
+from .types.app_top_combination_view import AppTopCombinationView
 from .types.applied_incentive import AppliedIncentive
 from .types.asset import Asset
 from .types.asset import AssetFieldTypePolicySummary
@@ -325,6 +327,7 @@ from .types.user_list import UserList
 from .types.user_list_customer_type import UserListCustomerType
 from .types.user_location_view import UserLocationView
 from .types.video import Video
+from .types.video_enhancement import VideoEnhancement
 from .types.webpage_view import WebpageView
 from .types.youtube_video_upload import YouTubeVideoUpload
 
@@ -442,6 +445,7 @@ __all__ = (
     "AdGroupAssetSet",
     "AdGroupAudienceView",
     "AdGroupBidModifier",
+    "AdGroupCreativeAssetCombinationData",
     "AdGroupCriterion",
     "AdGroupCriterionCustomizer",
     "AdGroupCriterionLabel",
@@ -461,6 +465,7 @@ __all__ = (
     "AndroidPrivacySharedKeyGoogleAdGroup",
     "AndroidPrivacySharedKeyGoogleCampaign",
     "AndroidPrivacySharedKeyGoogleNetworkType",
+    "AppTopCombinationView",
     "AppliedIncentive",
     "Asset",
     "AssetCoverage",
@@ -663,6 +668,7 @@ __all__ = (
     "UserLocationView",
     "Video",
     "VideoCustomer",
+    "VideoEnhancement",
     "WebpageView",
     "YouTubeVideoUpload",
     "YoutubeVideoIdentifier",

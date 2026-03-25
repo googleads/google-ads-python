@@ -1,3 +1,10 @@
+* 30.0.0
+- Google Ads API v23_2 release.
+- Fix config module so that login_customer_id=None doesn't raise an error.
+- Rename "gaada" configuration setting to "ads_assistant"
+- Set default for brand_guidelines_enabled to True in Pmax examples.
+- Fix a small bug in setting the video upload resource name
+
 * 29.2.0
 - Google Ads API v23_1 release.
 - Update Google Ads API v20, v21, and v22 to include EU political advertising changes.

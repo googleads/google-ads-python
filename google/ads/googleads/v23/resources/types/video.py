@@ -31,6 +31,12 @@ __protobuf__ = proto.module(
 class Video(proto.Message):
     r"""A video.
 
+    If the video has any enhancements, the stats on all of them will
+    be aggregated and displayed on this video resource. To get stats
+    for a specific enhancement, use the VideoEnhancement resource
+    instead.
+
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:

@@ -27,6 +27,7 @@ else:  # pragma: NO COVER
     # this code path once we drop support for Python 3.7
     import importlib_metadata as metadata
 
+from . import actions
 from . import common
 from . import enums
 from . import errors
@@ -131,6 +132,7 @@ else:  # pragma: NO COVER
         )
 
 __all__ = (
+    "actions",
     "common",
     "enums",
     "errors",

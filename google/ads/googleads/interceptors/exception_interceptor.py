@@ -26,7 +26,10 @@ import grpc
 
 from google.ads.googleads import util
 from google.ads.googleads.errors import GoogleAdsException
+import sys
+
 from google.ads.googleads.interceptors import Interceptor, ContinuationType
+from google.ads.googleads.interceptors.interceptor import _RETRY_STATUS_CODES
 from google.ads.googleads.interceptors.response_wrappers import _UnaryStreamWrapper, _UnaryUnaryWrapper
 
 
@@ -262,30 +265,17 @@ class _AsyncExceptionInterceptor(
     """An interceptor that wraps rpc exceptions."""
 
     async def _handle_grpc_failure_async(self, response: grpc.aio.Call):
-        """Async version of _handle_grpc_failure."""
-        status_code = response.code()
-        response_exception = response.exception()
+        """Async version of _handle_grpc_failure.
 
-        # We need to access _RETRY_STATUS_CODES from interceptor module?
-        # It's imported in interceptor.py but not exposed in ExceptionInterceptor?
-        # It is in interceptor.py as _RETRY_STATUS_CODES.
-        # We need to import it or access it.
-        # It is NOT imported in exception_interceptor.py?
-        # Let's check imports.
+        Note: grpc.aio.Call objects do not have a synchronous .exception()
+        method unlike sync grpc.Future objects. The active exception is
+        retrieved via sys.exc_info() since this method is always called from
+        within an except grpc.RpcError block in the async wrappers.
+        """
+        status_code = await response.code()
+        response_exception = sys.exc_info()[1]
 
-        # exception_interceptor.py imports:
-        # from google.ads.googleads.interceptors import Interceptor, ContinuationType
-
-        # _RETRY_STATUS_CODES is defined in interceptor.py but not exported in __all__?
-        # We can access it via Interceptor._RETRY_STATUS_CODES if we added it?
-        # interceptor.py has `_RETRY_STATUS_CODES` global.
-        # It is NOT in Interceptor class.
-
-        # We can import it if we modify imports or just redefine it.
-        # Redefining is safer/easier.
-        RETRY_STATUS_CODES = (grpc.StatusCode.INTERNAL, grpc.StatusCode.RESOURCE_EXHAUSTED)
-
-        if status_code not in RETRY_STATUS_CODES:
+        if status_code not in _RETRY_STATUS_CODES:
             trailing_metadata = await response.trailing_metadata()
             google_ads_failure = self._get_google_ads_failure(trailing_metadata)
 
@@ -298,9 +288,6 @@ class _AsyncExceptionInterceptor(
                 raise response_exception
         elif response_exception:
             raise response_exception
-
-        # If we got here, maybe no exception? But we only call this on error.
-        raise response.exception()
 
     async def intercept_unary_unary(
         self,

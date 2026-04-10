@@ -47,6 +47,7 @@ __protobuf__ = proto.module(
         "KnowledgeGraphAttributeMetadata",
         "UserListAttributeMetadata",
         "AudienceInsightsAttributeMetadataGroup",
+        "InsightsAudienceAttributeGroup",
     },
 )
 
@@ -647,6 +648,27 @@ class AudienceInsightsAttributeMetadataGroup(proto.Message):
             proto.MESSAGE,
             number=1,
             message="AudienceInsightsAttributeMetadata",
+        )
+    )
+
+
+class InsightsAudienceAttributeGroup(proto.Message):
+    r"""A list of AudienceInsightsAttributes.
+
+    Attributes:
+        attributes (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttribute]):
+            Required. A collection of audience attributes
+            combined with logical OR. Attributes need not
+            all be the same dimension. Only Knowledge Graph
+            entities, Product & Service Categories, and user
+            interests are supported in this context.
+    """
+
+    attributes: MutableSequence["AudienceInsightsAttribute"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="AudienceInsightsAttribute",
         )
     )
 

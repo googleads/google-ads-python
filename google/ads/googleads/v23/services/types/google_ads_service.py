@@ -19,6 +19,8 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v23.actions.types import book_campaigns
+from google.ads.googleads.v23.actions.types import quote_campaigns
 from google.ads.googleads.v23.common.types import metrics as gagc_metrics
 from google.ads.googleads.v23.common.types import segments as gagc_segments
 from google.ads.googleads.v23.enums.types import (
@@ -106,6 +108,9 @@ from google.ads.googleads.v23.resources.types import (
 )
 from google.ads.googleads.v23.resources.types import (
     android_privacy_shared_key_google_network_type as gagr_android_privacy_shared_key_google_network_type,
+)
+from google.ads.googleads.v23.resources.types import (
+    app_top_combination_view as gagr_app_top_combination_view,
 )
 from google.ads.googleads.v23.resources.types import (
     applied_incentive as gagr_applied_incentive,
@@ -531,6 +536,9 @@ from google.ads.googleads.v23.resources.types import (
 )
 from google.ads.googleads.v23.resources.types import video as gagr_video
 from google.ads.googleads.v23.resources.types import (
+    video_enhancement as gagr_video_enhancement,
+)
+from google.ads.googleads.v23.resources.types import (
     webpage_view as gagr_webpage_view,
 )
 from google.ads.googleads.v23.resources.types import youtube_video_upload
@@ -905,6 +913,8 @@ class GoogleAdsRow(proto.Message):
         ad_group_ad_asset_combination_view (google.ads.googleads.v23.resources.types.AdGroupAdAssetCombinationView):
             The ad group ad asset combination view in the
             query.
+        app_top_combination_view (google.ads.googleads.v23.resources.types.AppTopCombinationView):
+            The app top combination view in the query.
         ad_group_ad_asset_view (google.ads.googleads.v23.resources.types.AdGroupAdAssetView):
             The ad group ad asset view in the query.
         ad_group_ad_label (google.ads.googleads.v23.resources.types.AdGroupAdLabel):
@@ -1328,6 +1338,9 @@ class GoogleAdsRow(proto.Message):
             The topic constant referenced in the query.
         video (google.ads.googleads.v23.resources.types.Video):
             The video referenced in the query.
+        video_enhancement (google.ads.googleads.v23.resources.types.VideoEnhancement):
+            The video enhancement referenced in the
+            query.
         webpage_view (google.ads.googleads.v23.resources.types.WebpageView):
             The webpage view referenced in the query.
         lead_form_submission_data (google.ads.googleads.v23.resources.types.LeadFormSubmissionData):
@@ -1398,6 +1411,13 @@ class GoogleAdsRow(proto.Message):
         proto.MESSAGE,
         number=193,
         message=gagr_ad_group_ad_asset_combination_view.AdGroupAdAssetCombinationView,
+    )
+    app_top_combination_view: (
+        gagr_app_top_combination_view.AppTopCombinationView
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=247,
+        message=gagr_app_top_combination_view.AppTopCombinationView,
     )
     ad_group_ad_asset_view: gagr_ad_group_ad_asset_view.AdGroupAdAssetView = (
         proto.Field(
@@ -2392,6 +2412,11 @@ class GoogleAdsRow(proto.Message):
         number=39,
         message=gagr_video.Video,
     )
+    video_enhancement: gagr_video_enhancement.VideoEnhancement = proto.Field(
+        proto.MESSAGE,
+        number=250,
+        message=gagr_video_enhancement.VideoEnhancement,
+    )
     webpage_view: gagr_webpage_view.WebpageView = proto.Field(
         proto.MESSAGE,
         number=162,
@@ -2482,7 +2507,8 @@ class MutateGoogleAdsRequest(proto.Message):
             all valid. Default is false.
         validate_only (bool):
             If true, the request is validated but not
-            executed. Only errors are returned, not results.
+            executed. Mutates only return errors, not
+            results. Actions return results and errors.
         response_content_type (google.ads.googleads.v23.enums.types.ResponseContentTypeEnum.ResponseContentType):
             The response content type setting. Determines
             whether the mutable resource or just the
@@ -2548,7 +2574,8 @@ class MutateGoogleAdsResponse(proto.Message):
 
 
 class MutateOperation(proto.Message):
-    r"""A single operation (create, update, remove) on a resource.
+    r"""A single operation (create, update, remove) on a resource, or
+    execute an action.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -2651,6 +2678,10 @@ class MutateOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         bidding_strategy_operation (google.ads.googleads.v23.services.types.BiddingStrategyOperation):
             A bidding strategy mutate operation.
+
+            This field is a member of `oneof`_ ``operation``.
+        book_campaigns_operation (google.ads.googleads.v23.actions.types.BookCampaignsOperation):
+            Request message for the BookCampaigns action.
 
             This field is a member of `oneof`_ ``operation``.
         campaign_asset_operation (google.ads.googleads.v23.services.types.CampaignAssetOperation):
@@ -2786,6 +2817,11 @@ class MutateOperation(proto.Message):
             This field is a member of `oneof`_ ``operation``.
         label_operation (google.ads.googleads.v23.services.types.LabelOperation):
             A label mutate operation.
+
+            This field is a member of `oneof`_ ``operation``.
+        quote_campaigns_operation (google.ads.googleads.v23.actions.types.QuoteCampaignsOperation):
+            Request message for the QuoteCampaigns action. Requests
+            using this operation must set validate_only to true.
 
             This field is a member of `oneof`_ ``operation``.
         recommendation_subscription_operation (google.ads.googleads.v23.services.types.RecommendationSubscriptionOperation):
@@ -2986,6 +3022,14 @@ class MutateOperation(proto.Message):
         number=6,
         oneof="operation",
         message=bidding_strategy_service.BiddingStrategyOperation,
+    )
+    book_campaigns_operation: book_campaigns.BookCampaignsOperation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=89,
+            oneof="operation",
+            message=book_campaigns.BookCampaignsOperation,
+        )
     )
     campaign_asset_operation: campaign_asset_service.CampaignAssetOperation = (
         proto.Field(
@@ -3243,6 +3287,14 @@ class MutateOperation(proto.Message):
         oneof="operation",
         message=label_service.LabelOperation,
     )
+    quote_campaigns_operation: quote_campaigns.QuoteCampaignsOperation = (
+        proto.Field(
+            proto.MESSAGE,
+            number=88,
+            oneof="operation",
+            message=quote_campaigns.QuoteCampaignsOperation,
+        )
+    )
     recommendation_subscription_operation: (
         recommendation_subscription_service.RecommendationSubscriptionOperation
     ) = proto.Field(
@@ -3290,7 +3342,7 @@ class MutateOperation(proto.Message):
 
 
 class MutateOperationResponse(proto.Message):
-    r"""Response message for the resource mutate.
+    r"""Response message for the resource mutate or action.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -3397,6 +3449,10 @@ class MutateOperationResponse(proto.Message):
             This field is a member of `oneof`_ ``response``.
         bidding_strategy_result (google.ads.googleads.v23.services.types.MutateBiddingStrategyResult):
             The result for the bidding strategy mutate.
+
+            This field is a member of `oneof`_ ``response``.
+        book_campaigns_result (google.ads.googleads.v23.actions.types.BookCampaignsResult):
+            The result for the BookCampaigns action.
 
             This field is a member of `oneof`_ ``response``.
         campaign_asset_result (google.ads.googleads.v23.services.types.MutateCampaignAssetResult):
@@ -3546,6 +3602,10 @@ class MutateOperationResponse(proto.Message):
             This field is a member of `oneof`_ ``response``.
         label_result (google.ads.googleads.v23.services.types.MutateLabelResult):
             The result for the label mutate.
+
+            This field is a member of `oneof`_ ``response``.
+        quote_campaigns_result (google.ads.googleads.v23.actions.types.QuoteCampaignsResult):
+            The result for the QuoteCampaigns action.
 
             This field is a member of `oneof`_ ``response``.
         recommendation_subscription_result (google.ads.googleads.v23.services.types.MutateRecommendationSubscriptionResult):
@@ -3747,6 +3807,12 @@ class MutateOperationResponse(proto.Message):
         number=6,
         oneof="response",
         message=bidding_strategy_service.MutateBiddingStrategyResult,
+    )
+    book_campaigns_result: book_campaigns.BookCampaignsResult = proto.Field(
+        proto.MESSAGE,
+        number=89,
+        oneof="response",
+        message=book_campaigns.BookCampaignsResult,
     )
     campaign_asset_result: campaign_asset_service.MutateCampaignAssetResult = (
         proto.Field(
@@ -4003,6 +4069,12 @@ class MutateOperationResponse(proto.Message):
         number=41,
         oneof="response",
         message=label_service.MutateLabelResult,
+    )
+    quote_campaigns_result: quote_campaigns.QuoteCampaignsResult = proto.Field(
+        proto.MESSAGE,
+        number=88,
+        oneof="response",
+        message=quote_campaigns.QuoteCampaignsResult,
     )
     recommendation_subscription_result: (
         recommendation_subscription_service.MutateRecommendationSubscriptionResult

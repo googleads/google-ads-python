@@ -23,6 +23,7 @@ from google.ads.googleads.v23.common.types import additional_application_info
 from google.ads.googleads.v23.common.types import audience_insights_attribute
 from google.ads.googleads.v23.common.types import criteria
 from google.ads.googleads.v23.enums.types import insights_trend
+from google.ads.googleads.v23.enums.types import partnership_opportunity
 
 
 __protobuf__ = proto.module(
@@ -109,7 +110,28 @@ class GenerateCreatorInsightsRequest(proto.Message):
                 viewers match the input audience. Attributes age_range,
                 gender, user_interest, entity, category, device,
                 parental_status, and income_range are supported. Attribute
-                location is not supported.
+                location is not supported. Attributes user_interest, entity,
+                and category can only be set in audience_attributes when
+                audience_combinations is unused.
+            audience_combinations (MutableSequence[google.ads.googleads.v23.common.types.InsightsAudienceAttributeGroup]):
+                Optional. A list of audience attribute groups consisting of
+                one or more Knowledge Graph entities, Product & Service
+                Categories and user interests that describes an audience.
+                The groups have a logical AND-of-ORs structure:
+
+                1. Attributes within each InsightsAudienceAttributeGroup are
+                   combined with OR.
+
+                2. The groups themselves are combined together with AND.
+
+                For example, an audience (Interest A OR Interest B) AND
+                (Entity C) is represented using two groups. The first group
+                contains the two interests and the second group contains the
+                entity.
+
+                This field cannot be set if any Knowledge Graph entities,
+                Product & Service Categories, or user interests are
+                specified in audience_attributes.
             creator_attributes (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttribute]):
                 Optional. Creator attributes that describe a collection of
                 types of content. This is used to search for creators whose
@@ -128,6 +150,13 @@ class GenerateCreatorInsightsRequest(proto.Message):
             proto.MESSAGE,
             number=1,
             message=audience_insights_attribute.AudienceInsightsAttribute,
+        )
+        audience_combinations: MutableSequence[
+            audience_insights_attribute.InsightsAudienceAttributeGroup
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=3,
+            message=audience_insights_attribute.InsightsAudienceAttributeGroup,
         )
         creator_attributes: MutableSequence[
             audience_insights_attribute.AudienceInsightsAttribute
@@ -415,6 +444,9 @@ class YouTubeMetrics(proto.Message):
             See
             https://support.google.com/google-ads/answer/13828964
             for more information about BrandConnect.
+        partnership_opportunities (MutableSequence[google.ads.googleads.v23.enums.types.PartnershipOpportunityEnum.PartnershipOpportunity]):
+            Partnership opportunities available for this
+            creator.
     """
 
     subscriber_count: int = proto.Field(
@@ -480,6 +512,13 @@ class YouTubeMetrics(proto.Message):
     is_brand_connect_creator: bool = proto.Field(
         proto.BOOL,
         number=15,
+    )
+    partnership_opportunities: MutableSequence[
+        partnership_opportunity.PartnershipOpportunityEnum.PartnershipOpportunity
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=17,
+        enum=partnership_opportunity.PartnershipOpportunityEnum.PartnershipOpportunity,
     )
 
 
@@ -622,9 +661,32 @@ class SearchAudience(proto.Message):
 
     Attributes:
         audience_attributes (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttribute]):
-            Required. Audience attributes that describe
-            an audience of viewers. This is used to search
-            for topics trending for the defined audience.
+            Required. Audience attributes that describe an audience of
+            viewers. This is used to search for topics trending for the
+            defined audience. Attributes age_range, gender,
+            user_interest, entity, category, parental_status, and
+            income_range are supported. Attributes user_interest,
+            entity, and category can only be set in audience_attributes
+            when audience_combinations is unused.
+        audience_combinations (MutableSequence[google.ads.googleads.v23.common.types.InsightsAudienceAttributeGroup]):
+            Optional. A list of audience attribute groups consisting of
+            one or more Knowledge Graph entities, Product & Service
+            Categories and user interests that describes an audience.
+            The groups have a logical AND-of-ORs structure:
+
+            1. Attributes within each InsightsAudienceAttributeGroup are
+               combined with OR.
+
+            2. The groups themselves are combined together with AND.
+
+            For example, an audience (Interest A OR Interest B) AND
+            (Entity C) is represented using two groups. The first group
+            contains the two interests and the second group contains the
+            entity.
+
+            This field cannot be set if any Knowledge Graph entities,
+            Product & Service Categories, or user interests are
+            specified in audience_attributes.
     """
 
     audience_attributes: MutableSequence[
@@ -633,6 +695,13 @@ class SearchAudience(proto.Message):
         proto.MESSAGE,
         number=1,
         message=audience_insights_attribute.AudienceInsightsAttribute,
+    )
+    audience_combinations: MutableSequence[
+        audience_insights_attribute.InsightsAudienceAttributeGroup
+    ] = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message=audience_insights_attribute.InsightsAudienceAttributeGroup,
     )
 
 
@@ -670,14 +739,15 @@ class TrendInsight(proto.Message):
             metrics are for the latest available month and
             the comparison period is 3 months.
         trend (google.ads.googleads.v23.enums.types.InsightsTrendEnum.InsightsTrend):
-            The direction of trend (such as RISING or
-            DECLINING).
+            Indicate if a trend is sustained or emerging. Use
+            trend_metrics.trend_change_percent to determine the
+            direction of the trend.
         trend_data_points (MutableSequence[google.ads.googleads.v23.services.types.TrendInsightDataPoint]):
-            12 months of historical data for the trend, including the
-            most recent month the TrendInsight represents. Each data
-            point represents 1 month of data and the comparison period
-            is 1 month. The data points are ordered from most recent
-            month to least recent month. Only populated for trends using
+            3 years of historical data for the trend, including the most
+            recent month the TrendInsight represents. Each data point
+            represents 1 month of data and the comparison period is 1
+            month. The data points are ordered from most recent month to
+            least recent month. Only populated for trends using
             search_topics.
         related_videos (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttributeMetadata]):
             Related videos for this topic. Only populated for trends

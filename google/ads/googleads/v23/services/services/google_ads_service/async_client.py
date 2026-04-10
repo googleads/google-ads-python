@@ -235,6 +235,12 @@ class GoogleAdsServiceAsyncClient:
     parse_applied_incentive_path = staticmethod(
         GoogleAdsServiceClient.parse_applied_incentive_path
     )
+    app_top_combination_view_path = staticmethod(
+        GoogleAdsServiceClient.app_top_combination_view_path
+    )
+    parse_app_top_combination_view_path = staticmethod(
+        GoogleAdsServiceClient.parse_app_top_combination_view_path
+    )
     asset_path = staticmethod(GoogleAdsServiceClient.asset_path)
     parse_asset_path = staticmethod(GoogleAdsServiceClient.parse_asset_path)
     asset_field_type_view_path = staticmethod(
@@ -1063,6 +1069,12 @@ class GoogleAdsServiceAsyncClient:
     )
     video_path = staticmethod(GoogleAdsServiceClient.video_path)
     parse_video_path = staticmethod(GoogleAdsServiceClient.parse_video_path)
+    video_enhancement_path = staticmethod(
+        GoogleAdsServiceClient.video_enhancement_path
+    )
+    parse_video_enhancement_path = staticmethod(
+        GoogleAdsServiceClient.parse_video_enhancement_path
+    )
     webpage_view_path = staticmethod(GoogleAdsServiceClient.webpage_view_path)
     parse_webpage_view_path = staticmethod(
         GoogleAdsServiceClient.parse_webpage_view_path
@@ -1537,10 +1549,12 @@ class GoogleAdsServiceAsyncClient:
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ) -> google_ads_service.MutateGoogleAdsResponse:
-        r"""Creates, updates, or removes resources. This method supports
-        atomic transactions with multiple types of resources. For
-        example, you can atomically create a campaign and a campaign
-        budget, or perform up to thousands of mutates atomically.
+        r"""Executes mutate and actions operations. Mutate operations
+        create, update, or remove resources. Actions perform custom
+        operations. This method supports atomic transactions with
+        multiple types of resources and actions. For example, you can
+        atomically create a campaign and a campaign budget, or perform
+        up to thousands of mutates atomically.
 
         This method is essentially a wrapper around a series of mutate
         methods. The only features it offers over calling those methods

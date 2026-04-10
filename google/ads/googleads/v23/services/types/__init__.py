@@ -755,6 +755,7 @@ from .reach_plan_service import (
     TargetFrequencySettings,
     Targeting,
     YouTubeSelectLineUp,
+    YouTubeSelectLineUpTargeting,
     YouTubeSelectSettings,
 )
 from .recommendation_service import (
@@ -779,6 +780,12 @@ from .remarketing_action_service import (
     MutateRemarketingActionsResponse,
     RemarketingActionOperation,
 )
+from .reservation_service import (
+    BookCampaignsRequest,
+    BookCampaignsResponse,
+    QuoteCampaignsRequest,
+    QuoteCampaignsResponse,
+)
 from .shareable_preview_service import (
     AssetGroupIdentifier,
     GenerateShareablePreviewsRequest,
@@ -786,6 +793,7 @@ from .shareable_preview_service import (
     ShareablePreview,
     ShareablePreviewOrError,
     ShareablePreviewResult,
+    YouTubeLivePreviewResult,
 )
 from .shared_criterion_service import (
     MutateSharedCriteriaRequest,
@@ -1410,6 +1418,7 @@ __all__ = (
     "TargetFrequencySettings",
     "Targeting",
     "YouTubeSelectLineUp",
+    "YouTubeSelectLineUpTargeting",
     "YouTubeSelectSettings",
     "ApplyRecommendationOperation",
     "ApplyRecommendationRequest",
@@ -1427,12 +1436,17 @@ __all__ = (
     "MutateRemarketingActionsRequest",
     "MutateRemarketingActionsResponse",
     "RemarketingActionOperation",
+    "BookCampaignsRequest",
+    "BookCampaignsResponse",
+    "QuoteCampaignsRequest",
+    "QuoteCampaignsResponse",
     "AssetGroupIdentifier",
     "GenerateShareablePreviewsRequest",
     "GenerateShareablePreviewsResponse",
     "ShareablePreview",
     "ShareablePreviewOrError",
     "ShareablePreviewResult",
+    "YouTubeLivePreviewResult",
     "MutateSharedCriteriaRequest",
     "MutateSharedCriteriaResponse",
     "MutateSharedCriterionResult",

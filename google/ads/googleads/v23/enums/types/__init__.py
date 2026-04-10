@@ -784,6 +784,9 @@ from .optimization_goal_type import (
 from .parental_status_type import (
     ParentalStatusTypeEnum,
 )
+from .partnership_opportunity import (
+    PartnershipOpportunityEnum,
+)
 from .payment_mode import (
     PaymentModeEnum,
 )
@@ -813,6 +816,9 @@ from .policy_topic_evidence_destination_not_working_dns_error_type import (
 )
 from .positive_geo_target_type import (
     PositiveGeoTargetTypeEnum,
+)
+from .preview_type import (
+    PreviewTypeEnum,
 )
 from .price_extension_price_qualifier import (
     PriceExtensionPriceQualifierEnum,
@@ -894,6 +900,9 @@ from .recommendation_type import (
 )
 from .regulatory_fee_type import (
     RegulatoryFeeTypeEnum,
+)
+from .reservation_request_type import (
+    ReservationRequestTypeEnum,
 )
 from .resource_change_operation import (
     ResourceChangeOperationEnum,
@@ -1089,6 +1098,9 @@ from .video_ad_sequence_interaction_type import (
 )
 from .video_ad_sequence_minimum_duration import (
     VideoAdSequenceMinimumDurationEnum,
+)
+from .video_enhancement_source import (
+    VideoEnhancementSourceEnum,
 )
 from .video_thumbnail import (
     VideoThumbnailEnum,
@@ -1367,6 +1379,7 @@ __all__ = (
     "OperatingSystemVersionOperatorTypeEnum",
     "OptimizationGoalTypeEnum",
     "ParentalStatusTypeEnum",
+    "PartnershipOpportunityEnum",
     "PaymentModeEnum",
     "PerformanceMaxUpgradeStatusEnum",
     "PlacementTypeEnum",
@@ -1377,6 +1390,7 @@ __all__ = (
     "PolicyTopicEvidenceDestinationNotWorkingDeviceEnum",
     "PolicyTopicEvidenceDestinationNotWorkingDnsErrorTypeEnum",
     "PositiveGeoTargetTypeEnum",
+    "PreviewTypeEnum",
     "PriceExtensionPriceQualifierEnum",
     "PriceExtensionPriceUnitEnum",
     "PriceExtensionTypeEnum",
@@ -1404,6 +1418,7 @@ __all__ = (
     "RecommendationSubscriptionStatusEnum",
     "RecommendationTypeEnum",
     "RegulatoryFeeTypeEnum",
+    "ReservationRequestTypeEnum",
     "ResourceChangeOperationEnum",
     "ResourceLimitTypeEnum",
     "ResponseContentTypeEnum",
@@ -1469,6 +1484,7 @@ __all__ = (
     "VideoAdFormatRestrictionEnum",
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
+    "VideoEnhancementSourceEnum",
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",

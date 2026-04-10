@@ -68,6 +68,22 @@ class AdGroupAd(proto.Message):
             This field is a member of `oneof`_ ``_ad_group``.
         ad (google.ads.googleads.v23.resources.types.Ad):
             Immutable. The ad.
+        start_date_time (str):
+            The date and time when ad group ad starts
+            serving. This is added on top of the campaign's
+            start date and time, if present, to further
+            restrict the duration of an ad group ad. The
+            timestamp is in the customer's time zone and in
+            "yyyy-MM-dd HH:mm:ss" format. Only supported for
+            some ad types.
+        end_date_time (str):
+            The last day and time when ad group ad
+            serves. This is added on top of the campaign's
+            end date and time, if present, to further
+            restrict the duration of an ad group ad. The
+            timestamp is in the customer's time zone and in
+            "yyyy-MM-dd HH:mm:ss" format. Only supported for
+            some ad types.
         policy_summary (google.ads.googleads.v23.resources.types.AdGroupAdPolicySummary):
             Output only. Policy information for the ad.
         ad_strength (google.ads.googleads.v23.enums.types.AdStrengthEnum.AdStrength):
@@ -116,6 +132,14 @@ class AdGroupAd(proto.Message):
         proto.MESSAGE,
         number=5,
         message=gagr_ad.Ad,
+    )
+    start_date_time: str = proto.Field(
+        proto.STRING,
+        number=20,
+    )
+    end_date_time: str = proto.Field(
+        proto.STRING,
+        number=21,
     )
     policy_summary: "AdGroupAdPolicySummary" = proto.Field(
         proto.MESSAGE,

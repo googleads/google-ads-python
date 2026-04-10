@@ -82,6 +82,7 @@ __protobuf__ = proto.module(
         "AdvancedProductTargeting",
         "YouTubeSelectSettings",
         "YouTubeSelectLineUp",
+        "YouTubeSelectLineUpTargeting",
         "SurfaceTargetingCombinations",
         "SurfaceTargeting",
         "TargetFrequencySettings",
@@ -520,8 +521,14 @@ class PlannableTargeting(proto.Message):
         networks (MutableSequence[google.ads.googleads.v23.enums.types.ReachPlanNetworkEnum.ReachPlanNetwork]):
             Targetable networks for the ad product.
         youtube_select_lineups (MutableSequence[google.ads.googleads.v23.services.types.YouTubeSelectLineUp]):
-            Targetable YouTube Select Lineups for the ad
-            product.
+            Targetable YouTube Select Lineups for the ad product. This
+            field is deprecated in V23_2 and will eventually be removed.
+            Use youtube_select_lineup_targeting instead.
+        youtube_select_lineup_targeting (google.ads.googleads.v23.services.types.YouTubeSelectLineUpTargeting):
+            Targetable YouTube Select Lineups for the ad product.
+
+            This field replaces the deprecated youtube_select_lineups
+            field.
         surface_targeting (google.ads.googleads.v23.services.types.SurfaceTargetingCombinations):
             Targetable surface combinations for the ad
             product.
@@ -556,6 +563,13 @@ class PlannableTargeting(proto.Message):
             proto.MESSAGE,
             number=5,
             message="YouTubeSelectLineUp",
+        )
+    )
+    youtube_select_lineup_targeting: "YouTubeSelectLineUpTargeting" = (
+        proto.Field(
+            proto.MESSAGE,
+            number=7,
+            message="YouTubeSelectLineUpTargeting",
         )
     )
     surface_targeting: "SurfaceTargetingCombinations" = proto.Field(
@@ -1238,6 +1252,16 @@ class Forecast(proto.Message):
             for more information on TrueView Views.
 
             This field is a member of `oneof`_ ``_trueview_views``.
+        clicks (int):
+            The number of clicks, which is the main user
+            action associated with an ad format of bid type
+            CPC (Cost-Per-Click).
+
+            See
+            https://support.google.com/google-ads/answer/31799
+            for more information on clicks.
+
+            This field is a member of `oneof`_ ``_clicks``.
     """
 
     on_target_reach: int = proto.Field(
@@ -1300,6 +1324,11 @@ class Forecast(proto.Message):
     trueview_views: int = proto.Field(
         proto.INT64,
         number=17,
+        optional=True,
+    )
+    clicks: int = proto.Field(
+        proto.INT64,
+        number=18,
         optional=True,
     )
 
@@ -1429,6 +1458,16 @@ class PlannedProductForecast(proto.Message):
             for more information on TrueView Views.
 
             This field is a member of `oneof`_ ``_trueview_views``.
+        clicks (int):
+            The number of clicks, which is the main user
+            action associated with an ad format of bid type
+            CPC (Cost-Per-Click).
+
+            See
+            https://support.google.com/google-ads/answer/31799
+            for more information on clicks.
+
+            This field is a member of `oneof`_ ``_clicks``.
     """
 
     on_target_reach: int = proto.Field(
@@ -1485,6 +1524,11 @@ class PlannedProductForecast(proto.Message):
     trueview_views: int = proto.Field(
         proto.INT64,
         number=13,
+        optional=True,
+    )
+    clicks: int = proto.Field(
+        proto.INT64,
+        number=14,
         optional=True,
     )
 
@@ -1699,6 +1743,33 @@ class YouTubeSelectLineUp(proto.Message):
     lineup_name: str = proto.Field(
         proto.STRING,
         number=2,
+    )
+
+
+class YouTubeSelectLineUpTargeting(proto.Message):
+    r"""Targetable YouTube Select Lineups for the ad product and the
+    default Lineup.
+
+    Attributes:
+        youtube_select_lineups (MutableSequence[google.ads.googleads.v23.services.types.YouTubeSelectLineUp]):
+            Targetable YouTube Select Lineups for the ad
+            product.
+        default_youtube_select_lineup (google.ads.googleads.v23.services.types.YouTubeSelectLineUp):
+            The default YouTube Select Lineup for the ad
+            product if available.
+    """
+
+    youtube_select_lineups: MutableSequence["YouTubeSelectLineUp"] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=1,
+            message="YouTubeSelectLineUp",
+        )
+    )
+    default_youtube_select_lineup: "YouTubeSelectLineUp" = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="YouTubeSelectLineUp",
     )
 
 

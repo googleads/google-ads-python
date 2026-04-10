@@ -216,8 +216,7 @@ class Campaign(proto.Message):
         network_settings (google.ads.googleads.v23.resources.types.Campaign.NetworkSettings):
             The network settings for the campaign.
         hotel_setting (google.ads.googleads.v23.resources.types.Campaign.HotelSettingInfo):
-            Immutable. The hotel setting for the
-            campaign.
+            The hotel setting for the campaign.
         dynamic_search_ads_setting (google.ads.googleads.v23.resources.types.Campaign.DynamicSearchAdsSetting):
             The setting for controlling Dynamic Search
             Ads (DSA).
@@ -598,9 +597,9 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_target_google_search``.
             target_search_network (bool):
-                Whether ads will be served on partner sites in the Google
-                Search Network (requires ``target_google_search`` to also be
-                ``true``).
+                Whether ads will be served on sites in the Google Search
+                Partners Network (requires ``target_google_search`` to also
+                be ``true``).
 
                 This field is a member of `oneof`_ ``_target_search_network``.
             target_content_network (bool):
@@ -611,9 +610,12 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_target_content_network``.
             target_partner_search_network (bool):
-                Whether ads will be served on the Google
-                Partner Network. This is available only to some
-                select Google partner accounts.
+                Whether ads will be served on the partner network. This is
+                available only to some select partner accounts. Unless you
+                have been instructed to use this field, it likely does not
+                apply to your account. This does not control whether ads
+                will be served on Google Search Partners Network; use
+                ``target_search_network`` for that instead.
 
                 This field is a member of `oneof`_ ``_target_partner_search_network``.
             target_youtube (bool):
@@ -665,14 +667,25 @@ class Campaign(proto.Message):
 
         Attributes:
             hotel_center_id (int):
-                Immutable. The linked Hotel Center account.
+                The linked Hotel Center account.
 
                 This field is a member of `oneof`_ ``_hotel_center_id``.
+            disable_hotel_setting (bool):
+                Disable the optional hotel setting. This
+                field is currently supported only for Demand Gen
+                campaigns.
+
+                This field is a member of `oneof`_ ``_disable_hotel_setting``.
         """
 
         hotel_center_id: int = proto.Field(
             proto.INT64,
             number=2,
+            optional=True,
+        )
+        disable_hotel_setting: bool = proto.Field(
+            proto.BOOL,
+            number=3,
             optional=True,
         )
 

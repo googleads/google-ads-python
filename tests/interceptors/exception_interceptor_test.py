@@ -361,7 +361,7 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
         mock_error_message = _MOCK_FAILURE_VALUE
 
         class MockRpcErrorResponse(grpc.RpcError):
-            def code(self):
+            async def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             async def trailing_metadata(self):
@@ -373,13 +373,16 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
         interceptor = self._create_test_interceptor()
 
         with self.assertRaises(GoogleAdsException):
-            await interceptor._handle_grpc_failure_async(MockRpcErrorResponse())
+            error_response = MockRpcErrorResponse()
+            await interceptor._handle_grpc_failure_async(
+                error_response, error_response
+            )
 
     async def test_handle_grpc_failure_retryable(self):
         """Raises retryable exceptions as-is."""
 
         class MockRpcErrorResponse(grpc.RpcError):
-            def code(self):
+            async def code(self):
                 return grpc.StatusCode.INTERNAL
 
             def exception(self):
@@ -388,13 +391,16 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
         interceptor = self._create_test_interceptor()
 
         with self.assertRaises(MockRpcErrorResponse):
-            await interceptor._handle_grpc_failure_async(MockRpcErrorResponse())
+            error_response = MockRpcErrorResponse()
+            await interceptor._handle_grpc_failure_async(
+                error_response, error_response
+            )
 
     async def test_handle_grpc_failure_not_google_ads_failure(self):
         """Raises as-is non-retryable non-GoogleAdsFailure exceptions."""
 
         class MockRpcErrorResponse(grpc.RpcError):
-            def code(self):
+            async def code(self):
                 return grpc.StatusCode.INVALID_ARGUMENT
 
             async def trailing_metadata(self):
@@ -406,7 +412,10 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
         interceptor = self._create_test_interceptor()
 
         with self.assertRaises(MockRpcErrorResponse):
-            await interceptor._handle_grpc_failure_async(MockRpcErrorResponse())
+            error_response = MockRpcErrorResponse()
+            await interceptor._handle_grpc_failure_async(
+                error_response, error_response
+            )
 
     async def test_intercept_unary_unary_response_is_exception(self):
         """If response.exception() is not None exception is handled."""
@@ -439,7 +448,7 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
             except grpc.RpcError:
                 pass
 
-            mock_handle.assert_called_once_with(mock_call)
+            mock_handle.assert_called_once_with(mock_call, mock_exception)
 
     async def test_intercept_unary_stream_response_is_exception(self):
         """Ensure errors raised from response iteration are handled/wrapped."""
@@ -470,21 +479,15 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
                 mock_continuation, mock_client_call_details, mock_request
             )
 
-            # Ensure the returned value is a wrapped response object.
             self.assertIsInstance(response, _AsyncUnaryStreamCallWrapper)
 
-            # Initiate an iteration of the wrapped response object
             try:
                 async for _ in response:
-                    # This loop body should not be entered because the exception
-                    # is raised on the first attempt to get an item.
                     pass
             except grpc.RpcError:
                 pass
 
-            # Check that the error handler method on the interceptor instance
-            # was called as a result of the iteration.
-            mock_handle.assert_called_once_with(mock_call)
+            mock_handle.assert_called_once_with(mock_call, mock_exception)
 
     async def test_intercept_unary_unary_response_is_successful(self):
         """If response.exception() is None response is returned."""
@@ -625,7 +628,9 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
             found = True
             break  # We only need the first item
 
-        self.assertTrue(found, "Iterator should have yielded at least one message")
+        self.assertTrue(
+            found, "Iterator should have yielded at least one message"
+        )
         self.assertIsInstance(message, proto.Message)
 
     async def test_intercept_unary_stream_protobuf_proto(self):
@@ -661,5 +666,7 @@ class AsyncExceptionInterceptorTest(IsolatedAsyncioTestCase):
             found = True
             break  # We only need the first item
 
-        self.assertTrue(found, "Iterator should have yielded at least one message")
+        self.assertTrue(
+            found, "Iterator should have yielded at least one message"
+        )
         self.assertIsInstance(message, ProtobufMessageType)

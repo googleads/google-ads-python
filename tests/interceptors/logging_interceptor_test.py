@@ -13,7 +13,6 @@
 # limitations under the License.
 """Tests for the Logging gRPC Interceptor."""
 
-
 from importlib import import_module
 import json
 import logging
@@ -31,7 +30,6 @@ from google.ads.googleads.interceptors.helpers import (
 )
 import google.ads.googleads.interceptors.logging_interceptor as interceptor_module
 from google.ads.googleads import util
-
 
 default_version = Client._DEFAULT_VERSION
 module_prefix = f"google.ads.googleads.{default_version}"
@@ -58,7 +56,6 @@ local_services_lead = import_module(
 local_services_lead_conversation = import_module(
     f"{module_prefix}.resources.types.local_services_lead_conversation"
 )
-
 
 
 class AwaitableMagicMock(mock.MagicMock):
@@ -937,7 +934,9 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
         if not version:
             version = default_version
 
-        return interceptor_module._AsyncLoggingInterceptor(logger, version, endpoint)
+        return interceptor_module._AsyncLoggingInterceptor(
+            logger, version, endpoint
+        )
 
     def _get_mock_client_call_details(self):
         mock_client_call_details = mock.Mock()
@@ -970,19 +969,26 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
     def _get_mock_response(self, failed=False, streaming=False):
         mock_response = AwaitableMagicMock()
 
-        # Async trailing_metadata
         async def mock_trailing_metadata():
             return self._MOCK_TRAILING_METADATA
+
         mock_response.trailing_metadata = mock_trailing_metadata
 
-        # Sync exception
-        def mock_exception_fn():
-            if failed:
-                return self._get_mock_exception()
-            return None
-        mock_response.exception = mock_exception_fn
+        if failed:
 
-        # Async await for UnaryUnary
+            def mock_exception_fn():
+                return self._get_mock_exception()
+
+            mock_response.exception = mock_exception_fn
+            mock_response.code = lambda: self._get_mock_exception()
+        else:
+            del mock_response.exception
+
+            async def mock_code():
+                return 0
+
+            mock_response.code = mock_code
+
         async def get_result():
             if streaming:
                 return self._MOCK_STREAM
@@ -990,7 +996,6 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
 
         mock_response._await_impl = get_result
 
-        # For streaming, we might need 'read' attribute to distinguish
         if streaming:
             mock_response.read = mock.AsyncMock(return_value=self._MOCK_STREAM)
         else:
@@ -998,11 +1003,7 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
 
         del mock_response.result
 
-        # Sync add_done_callback
         def mock_add_done_callback(fn):
-            # In async interceptor, this is called to register the logging task.
-            # We want to execute it immediately or schedule it.
-            # Since fn expects a future (the call), and mock_response is the call.
             fn(mock_response)
 
         mock_response.add_done_callback = mock_add_done_callback
@@ -1013,6 +1014,7 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
         async def mock_continuation_fn(*args):
             mock_response = self._get_mock_response(fail)
             return mock_response
+
         return mock_continuation_fn
 
     async def test_intercept_unary_unary_unconfigured(self):
@@ -1058,7 +1060,9 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
         mock_request = self._get_mock_request()
 
         # We need to get the response to assert against it
-        mock_response = await mock_continuation_fn(mock_client_call_details, mock_request)
+        mock_response = await mock_continuation_fn(
+            mock_client_call_details, mock_request
+        )
         mock_trailing_metadata = await mock_response.trailing_metadata()
 
         with (
@@ -1156,7 +1160,7 @@ class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):
                     initial_metadata,
                     mock_request,
                     trailing_metadata,
-                    None, # Result is None for stream in async interceptor
+                    None,  # Result is None for stream in async interceptor
                 )
             )
 

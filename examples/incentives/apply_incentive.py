@@ -36,7 +36,7 @@ def main(
     client: GoogleAdsClient,
     customer_id: str,
     incentive_id: str,
-    country_code: str = None,
+    country_code: str,
 ) -> None:
     """Applies an incentive for the ads customer.
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         "-k",
         "--country_code",
         type=str,
-        required=False,
+        required=True,
         help="The country code of the user (e.g. 'US').",
     )
     args = parser.parse_args()

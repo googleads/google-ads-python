@@ -14,29 +14,28 @@
 # limitations under the License.
 """This example adds campaign targeting criteria."""
 
-
 import argparse
 from typing import List
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.common.types.criteria import (
+from google.ads.googleads.v24.common.types.criteria import (
     KeywordInfo,
 )
-from google.ads.googleads.v23.resources.types.campaign_criterion import (
+from google.ads.googleads.v24.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v23.services.services.campaign_service import (
+from google.ads.googleads.v24.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v23.services.services.campaign_criterion_service import (
+from google.ads.googleads.v24.services.services.campaign_criterion_service import (
     CampaignCriterionServiceClient,
 )
-from google.ads.googleads.v23.services.services.geo_target_constant_service import (
+from google.ads.googleads.v24.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v23.services.types.campaign_criterion_service import (
+from google.ads.googleads.v24.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
     MutateCampaignCriteriaResponse,
 )
@@ -205,7 +204,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

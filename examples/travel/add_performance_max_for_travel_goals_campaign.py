@@ -35,7 +35,6 @@ Notes:
   advanced_operations/add_performance_max_campaign.py.
 """
 
-
 import argparse
 import sys
 from typing import Dict, List
@@ -47,50 +46,49 @@ from examples.utils.example_helpers import (
 )
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.enums.types.asset_field_type import (
+from google.ads.googleads.v24.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v23.enums.types.hotel_asset_suggestion_status import (
+from google.ads.googleads.v24.enums.types.hotel_asset_suggestion_status import (
     HotelAssetSuggestionStatusEnum,
 )
-from google.ads.googleads.v23.resources.types import CampaignBudget
-from google.ads.googleads.v23.resources.types.campaign import Campaign
-from google.ads.googleads.v23.resources.types.asset import Asset
-from google.ads.googleads.v23.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v23.resources.types.asset_group_asset import (
+from google.ads.googleads.v24.resources.types import CampaignBudget
+from google.ads.googleads.v24.resources.types.campaign import Campaign
+from google.ads.googleads.v24.resources.types.asset import Asset
+from google.ads.googleads.v24.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v24.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v23.services.services.google_ads_service import (
+from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateOperationResponse,
 )
 
-from google.ads.googleads.v23.resources.types.asset_set import AssetSet
-from google.ads.googleads.v23.resources.types.asset_set_asset import (
+from google.ads.googleads.v24.resources.types.asset_set import AssetSet
+from google.ads.googleads.v24.resources.types.asset_set_asset import (
     AssetSetAsset,
 )
-from google.ads.googleads.v23.services.services.asset_set_service import (
+from google.ads.googleads.v24.services.services.asset_set_service import (
     AssetSetServiceClient,
 )
-from google.ads.googleads.v23.services.types.asset_set_service import (
+from google.ads.googleads.v24.services.types.asset_set_service import (
     AssetSetOperation,
     MutateAssetSetsResponse,
 )
-from google.ads.googleads.v23.services.services.travel_asset_suggestion_service import (
+from google.ads.googleads.v24.services.services.travel_asset_suggestion_service import (
     TravelAssetSuggestionServiceClient,
 )
-from google.ads.googleads.v23.services.types.travel_asset_suggestion_service import (
+from google.ads.googleads.v24.services.types.travel_asset_suggestion_service import (
     HotelAssetSuggestion,
     SuggestTravelAssetsRequest,
     SuggestTravelAssetsResponse,
 )
-
 
 MIN_REQUIRED_TEXT_ASSET_COUNTS: Dict[str, int] = {
     "HEADLINE": 3,
@@ -1110,7 +1108,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

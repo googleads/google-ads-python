@@ -14,31 +14,30 @@
 # limitations under the License.
 """Updates the audience target restriction of a given ad group to bid only."""
 
-
 import argparse
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.common.types.targeting_setting import (
+from google.ads.googleads.v24.common.types.targeting_setting import (
     TargetingSetting,
     TargetRestriction,
 )
-from google.ads.googleads.v23.enums.types.targeting_dimension import (
+from google.ads.googleads.v24.enums.types.targeting_dimension import (
     TargetingDimensionEnum,
 )
-from google.ads.googleads.v23.resources.types.ad_group import AdGroup
-from google.ads.googleads.v23.services.services.ad_group_service import (
+from google.ads.googleads.v24.resources.types.ad_group import AdGroup
+from google.ads.googleads.v24.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v23.services.types.ad_group_service import (
+from google.ads.googleads.v24.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
-from google.ads.googleads.v23.services.services.google_ads_service import (
+from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsResponse,
 )
 from google.api_core import protobuf_helpers
@@ -230,7 +229,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

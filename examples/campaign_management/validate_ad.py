@@ -19,29 +19,28 @@ type. No objects will be created in the given customer account, but exceptions
 will still be thrown.
 """
 
-
 import argparse
 import sys
 from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.types.ad_group_ad_service import (
+from google.ads.googleads.v24.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsRequest,
 )
-from google.ads.googleads.v23.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v23.services.services.ad_group_service import (
+from google.ads.googleads.v24.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v24.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v23.common.types.ad_type_infos import AdTextAsset
-from google.ads.googleads.v23.services.services.ad_group_ad_service import (
+from google.ads.googleads.v24.common.types.ad_type_infos import AdTextAsset
+from google.ads.googleads.v24.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v23.errors.types.policy_finding_error import (
+from google.ads.googleads.v24.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
-from google.ads.googleads.v23.common.types.policy import PolicyTopicEntry
+from google.ads.googleads.v24.common.types.policy import PolicyTopicEntry
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
@@ -163,7 +162,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     main(googleads_client, args.customer_id, args.ad_group_id)

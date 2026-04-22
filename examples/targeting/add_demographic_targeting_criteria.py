@@ -16,22 +16,21 @@
 positive ad group criterion and one as negative ad group criterion. To
 create ad groups, run add_ad_groups.py."""
 
-
 import argparse
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.resources.types.ad_group_criterion import (
+from google.ads.googleads.v24.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v23.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v24.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v23.services.services.ad_group_service import (
+from google.ads.googleads.v24.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v23.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
 )
@@ -109,7 +108,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

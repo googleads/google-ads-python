@@ -17,7 +17,6 @@
 The conversion adjustment contains hashed user identifiers and an order ID.
 """
 
-
 import argparse
 import hashlib
 import re
@@ -236,7 +235,7 @@ def normalize_and_hash_email_address(email_address):
         # Removes any '.' and '+' characters from the portion of the email address
         # before the domain
         chars_to_remove = ".+"
-        translation_table = str.maketrans('', '', chars_to_remove)
+        translation_table = str.maketrans("", "", chars_to_remove)
         email_parts[0] = email_parts[0].translate(translation_table)
         normalized_email = "@".join(email_parts)
 
@@ -306,7 +305,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v23")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
 
     try:
         main(

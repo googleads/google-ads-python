@@ -24,20 +24,18 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.common.types.criteria import (
+from google.ads.googleads.v24.common.types.criteria import (
     KeywordInfo,
 )
-from google.ads.googleads.v23.services.services.google_ads_service.client import (
+from google.ads.googleads.v24.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.services.keyword_plan_idea_service.client import (
+from google.ads.googleads.v24.services.services.keyword_plan_idea_service.client import (
     KeywordPlanIdeaServiceClient,
 )
-from google.ads.googleads.v23.services.types.keyword_plan_idea_service import (
+from google.ads.googleads.v24.services.types.keyword_plan_idea_service import (
     CampaignToForecast,
-    CriterionBidModifier,
     ForecastAdGroup,
-    BiddableKeyword,
     GenerateKeywordForecastMetricsRequest,
     GenerateKeywordForecastMetricsResponse,
 )
@@ -79,10 +77,6 @@ def create_campaign_to_forecast(client: GoogleAdsClient) -> CampaignToForecast:
     campaign_to_forecast: CampaignToForecast = client.get_type(
         "CampaignToForecast"
     )
-    campaign_to_forecast.keyword_plan_network = (
-        client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
-    )
-
     # Set the bidding strategy.
     campaign_to_forecast.bidding_strategy.manual_cpc_bidding_strategy.max_cpc_bid_micros = (
         1000000
@@ -90,14 +84,10 @@ def create_campaign_to_forecast(client: GoogleAdsClient) -> CampaignToForecast:
 
     # For the list of geo target IDs, see:
     # https://developers.google.com/google-ads/api/reference/data/geotargets
-    criterion_bid_modifier: CriterionBidModifier = client.get_type(
-        "CriterionBidModifier"
-    )
     # Geo target constant 2840 is for USA.
-    criterion_bid_modifier.geo_target_constant = (
+    campaign_to_forecast.geo_target_constants.append(
         googleads_service.geo_target_constant_path("2840")
     )
-    campaign_to_forecast.geo_modifiers.append(criterion_bid_modifier)
 
     # For the list of language criteria IDs, see:
     # https://developers.google.com/google-ads/api/reference/data/codes-formats#languages
@@ -110,39 +100,21 @@ def create_campaign_to_forecast(client: GoogleAdsClient) -> CampaignToForecast:
     # product category, or cost per click.
     forecast_ad_group: ForecastAdGroup = client.get_type("ForecastAdGroup")
 
-    # Create and configure three BiddableKeyword instances.
-    biddable_keyword_1: BiddableKeyword = client.get_type("BiddableKeyword")
-    biddable_keyword_1.max_cpc_bid_micros = 2500000
-    biddable_keyword_1.keyword.text = "mars cruise"
-    biddable_keyword_1.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.BROAD
-    )
+    # Create and configure three KeywordInfo instances.
+    keyword_1: KeywordInfo = client.get_type("KeywordInfo")
+    keyword_1.text = "mars cruise"
+    keyword_1.match_type = client.enums.KeywordMatchTypeEnum.BROAD
 
-    biddable_keyword_2: BiddableKeyword = client.get_type("BiddableKeyword")
-    biddable_keyword_2.max_cpc_bid_micros = 1500000
-    biddable_keyword_2.keyword.text = "cheap cruise"
-    biddable_keyword_2.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.PHRASE
-    )
+    keyword_2: KeywordInfo = client.get_type("KeywordInfo")
+    keyword_2.text = "cheap cruise"
+    keyword_2.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
 
-    biddable_keyword_3: BiddableKeyword = client.get_type("BiddableKeyword")
-    biddable_keyword_3.max_cpc_bid_micros = 1990000
-    biddable_keyword_3.keyword.text = "cheap cruise"
-    biddable_keyword_3.keyword.match_type = (
-        client.enums.KeywordMatchTypeEnum.EXACT
-    )
+    keyword_3: KeywordInfo = client.get_type("KeywordInfo")
+    keyword_3.text = "cheap cruise"
+    keyword_3.match_type = client.enums.KeywordMatchTypeEnum.EXACT
 
-    # Add the biddable keywords to the forecast ad group.
-    forecast_ad_group.biddable_keywords.extend(
-        [biddable_keyword_1, biddable_keyword_2, biddable_keyword_3]
-    )
-
-    # Create and configure a negative keyword, then add it to the forecast ad
-    # group.
-    negative_keyword: KeywordInfo = client.get_type("KeywordInfo")
-    negative_keyword.text = "moon walk"
-    negative_keyword.match_type = client.enums.KeywordMatchTypeEnum.BROAD
-    forecast_ad_group.negative_keywords.append(negative_keyword)
+    # Add the keywords to the forecast ad group.
+    forecast_ad_group.keywords.extend([keyword_1, keyword_2, keyword_3])
 
     campaign_to_forecast.ad_groups.append(forecast_ad_group)
 
@@ -186,7 +158,6 @@ def generate_forecast_metrics(
 
     metrics = response.campaign_forecast_metrics
     print(f"Estimated daily clicks: {metrics.clicks}")
-    print(f"Estimated daily impressions: {metrics.impressions}")
     print(f"Estimated daily average CPC: {metrics.average_cpc_micros}")
     # [END generate_forecast_metrics]
 
@@ -208,7 +179,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v23")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
 
     try:
         main(googleads_client, args.customer_id)

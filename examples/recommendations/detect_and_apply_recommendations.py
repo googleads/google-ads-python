@@ -28,17 +28,16 @@ types during the campaign construction process. For more details see:
 https://developers.google.com/google-ads/api/docs/recommendations#recommendations-in-campaign-construction
 """
 
-
 import argparse
 import sys
 from typing import List, Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
 )
-from google.ads.googleads.v23.services.types.recommendation_service import (
+from google.ads.googleads.v24.services.types.recommendation_service import (
     ApplyRecommendationOperation,
     ApplyRecommendationResult,
 )
@@ -190,7 +189,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

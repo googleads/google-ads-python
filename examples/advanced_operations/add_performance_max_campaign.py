@@ -37,46 +37,46 @@ from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import convert_snake_case_to_upper_case
-from google.ads.googleads.v23.enums.types.asset_field_type import (
+from google.ads.googleads.v24.enums.types.asset_field_type import (
     AssetFieldTypeEnum,
 )
-from google.ads.googleads.v23.resources.types.asset import Asset
-from google.ads.googleads.v23.resources.types.asset_group import AssetGroup
-from google.ads.googleads.v23.resources.types.asset_group_asset import (
+from google.ads.googleads.v24.resources.types.asset import Asset
+from google.ads.googleads.v24.resources.types.asset_group import AssetGroup
+from google.ads.googleads.v24.resources.types.asset_group_asset import (
     AssetGroupAsset,
 )
-from google.ads.googleads.v23.resources.types.asset_group_signal import (
+from google.ads.googleads.v24.resources.types.asset_group_signal import (
     AssetGroupSignal,
 )
-from google.ads.googleads.v23.resources.types.campaign import Campaign
-from google.ads.googleads.v23.resources.types.campaign_asset import (
+from google.ads.googleads.v24.resources.types.campaign import Campaign
+from google.ads.googleads.v24.resources.types.campaign_asset import (
     CampaignAsset,
 )
-from google.ads.googleads.v23.resources.types.campaign_budget import (
+from google.ads.googleads.v24.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v23.resources.types.campaign_criterion import (
+from google.ads.googleads.v24.resources.types.campaign_criterion import (
     CampaignCriterion,
 )
-from google.ads.googleads.v23.services.services.asset_group_service import (
+from google.ads.googleads.v24.services.services.asset_group_service import (
     AssetGroupServiceClient,
 )
-from google.ads.googleads.v23.services.services.asset_service import (
+from google.ads.googleads.v24.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v23.services.services.campaign_service import (
+from google.ads.googleads.v24.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v23.services.services.geo_target_constant_service import (
+from google.ads.googleads.v24.services.services.geo_target_constant_service import (
     GeoTargetConstantServiceClient,
 )
-from google.ads.googleads.v23.services.services.google_ads_service import (
+from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.types.campaign_budget_service import (
+from google.ads.googleads.v24.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
     MutateOperationResponse,
@@ -990,7 +990,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

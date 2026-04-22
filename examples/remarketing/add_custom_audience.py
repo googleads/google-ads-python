@@ -19,25 +19,24 @@ keywords, URLs, and apps. For more information about custom audiences, see:
 https://support.google.com/google-ads/answer/9805516
 """
 
-
 import argparse
 import sys
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.enums.types.custom_audience_member_type import (
+from google.ads.googleads.v24.enums.types.custom_audience_member_type import (
     CustomAudienceMemberTypeEnum,
 )
-from google.ads.googleads.v23.resources.types.custom_audience import (
+from google.ads.googleads.v24.resources.types.custom_audience import (
     CustomAudience,
     CustomAudienceMember,
 )
-from google.ads.googleads.v23.services.types.custom_audience_service import (
+from google.ads.googleads.v24.services.types.custom_audience_service import (
     CustomAudienceOperation,
     MutateCustomAudiencesResponse,
 )
-from google.ads.googleads.v23.services.services.custom_audience_service import (
+from google.ads.googleads.v24.services.services.custom_audience_service import (
     CustomAudienceServiceClient,
 )
 
@@ -166,7 +165,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

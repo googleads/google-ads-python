@@ -19,20 +19,19 @@ https://developers.google.com/google-ads/api/fields/latest/click_view.
 To set up a conversion action, run the add_conversion_action.py example.
 """
 
-
 import argparse
 import sys
 from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.services.conversion_action_service import (
+from google.ads.googleads.v24.services.services.conversion_action_service import (
     ConversionActionServiceClient,
 )
-from google.ads.googleads.v23.services.services.conversion_upload_service import (
+from google.ads.googleads.v24.services.services.conversion_upload_service import (
     ConversionUploadServiceClient,
 )
-from google.ads.googleads.v23.services.types.conversion_upload_service import (
+from google.ads.googleads.v24.services.types.conversion_upload_service import (
     ClickConversion,
     ClickConversionResult,
     CustomVariable,
@@ -161,7 +160,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(

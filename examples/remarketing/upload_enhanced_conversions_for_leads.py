@@ -20,7 +20,6 @@ and order ID. With this information, Google can tie the conversion to the ad
 that drove the lead.
 """
 
-
 import argparse
 import hashlib
 import re
@@ -29,16 +28,16 @@ from typing import Dict, Optional, Union
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.common.types.offline_user_data import (
+from google.ads.googleads.v24.common.types.offline_user_data import (
     UserIdentifier,
 )
-from google.ads.googleads.v23.services.services.conversion_action_service import (
+from google.ads.googleads.v24.services.services.conversion_action_service import (
     ConversionActionServiceClient,
 )
-from google.ads.googleads.v23.services.services.conversion_upload_service import (
+from google.ads.googleads.v24.services.services.conversion_upload_service import (
     ConversionUploadServiceClient,
 )
-from google.ads.googleads.v23.services.types.conversion_upload_service import (
+from google.ads.googleads.v24.services.types.conversion_upload_service import (
     ClickConversion,
     ClickConversionResult,
     SessionAttributeKeyValuePair,
@@ -259,7 +258,7 @@ def normalize_and_hash_email_address(email_address: str) -> str:
         # Removes any '.' and '+' characters from the portion of the email address
         # before the domain
         chars_to_remove = ".+"
-        translation_table = str.maketrans('', '', chars_to_remove)
+        translation_table = str.maketrans("", "", chars_to_remove)
         email_parts[0] = email_parts[0].translate(translation_table)
         normalized_email = "@".join(email_parts)
 
@@ -286,7 +285,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(

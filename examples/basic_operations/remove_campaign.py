@@ -14,17 +14,16 @@
 # limitations under the License.
 """This example removes an existing campaign."""
 
-
 import argparse
 import sys
 from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.services.campaign_service import (
+from google.ads.googleads.v24.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v23.services.types.campaign_service import (
+from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -73,7 +72,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

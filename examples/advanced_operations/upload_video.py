@@ -27,19 +27,19 @@ from google.auth import impersonated_credentials
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.services.google_ads_service import (
+from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
     GoogleAdsRow,
 )
 
-from google.ads.googleads.v23.services.services.you_tube_video_upload_service.client import (
+from google.ads.googleads.v24.services.services.you_tube_video_upload_service.client import (
     YouTubeVideoUploadServiceClient,
 )
-from google.ads.googleads.v23.services.types import youtube_video_upload_service
-from google.ads.googleads.v23.services.types.youtube_video_upload_service import (
+from google.ads.googleads.v24.services.types import youtube_video_upload_service
+from google.ads.googleads.v24.services.types.youtube_video_upload_service import (
     CreateYouTubeVideoUploadRequest,
     CreateYouTubeVideoUploadResponse,
     UpdateYouTubeVideoUploadRequest,
@@ -49,10 +49,12 @@ from google.ads.googleads.v23.services.types.youtube_video_upload_service import
 )
 
 from google.protobuf import field_mask_pb2
-from google.ads.googleads.v23.resources.types import youtube_video_upload
+from google.ads.googleads.v24.resources.types import youtube_video_upload
 
 
-def main(client: GoogleAdsClient, customer_id: str, video_file_path: str) -> None:
+def main(
+    client: GoogleAdsClient, customer_id: str, video_file_path: str
+) -> None:
     """The main method that uploads a video and retrieves its state.
 
     Args:
@@ -137,7 +139,9 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(version="v23")
+    googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
+        version="v24"
+    )
     try:
         main(
             googleads_client,

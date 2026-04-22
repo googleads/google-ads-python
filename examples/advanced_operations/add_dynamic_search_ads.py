@@ -17,7 +17,6 @@
 It also creates a webpage targeting criteria for the DSA.
 """
 
-
 import argparse
 from datetime import datetime, timedelta
 import sys
@@ -25,48 +24,48 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.common.types.criteria import WebpageConditionInfo
-from google.ads.googleads.v23.resources.types.ad_group import AdGroup
-from google.ads.googleads.v23.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v23.resources.types.ad_group_criterion import (
+from google.ads.googleads.v24.common.types.criteria import WebpageConditionInfo
+from google.ads.googleads.v24.resources.types.ad_group import AdGroup
+from google.ads.googleads.v24.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v24.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v23.resources.types.campaign import Campaign
-from google.ads.googleads.v23.resources.types.campaign_budget import (
+from google.ads.googleads.v24.resources.types.campaign import Campaign
+from google.ads.googleads.v24.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v23.services.services.ad_group_ad_service import (
+from google.ads.googleads.v24.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v23.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v24.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v23.services.services.ad_group_service import (
+from google.ads.googleads.v24.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v23.services.services.campaign_budget_service import (
+from google.ads.googleads.v24.services.services.campaign_budget_service import (
     CampaignBudgetServiceClient,
 )
-from google.ads.googleads.v23.services.services.campaign_service import (
+from google.ads.googleads.v24.services.services.campaign_service import (
     CampaignServiceClient,
 )
-from google.ads.googleads.v23.services.types.ad_group_ad_service import (
+from google.ads.googleads.v24.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
-from google.ads.googleads.v23.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
 )
-from google.ads.googleads.v23.services.types.ad_group_service import (
+from google.ads.googleads.v24.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
-from google.ads.googleads.v23.services.types.campaign_budget_service import (
+from google.ads.googleads.v24.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
     MutateCampaignBudgetsResponse,
 )
-from google.ads.googleads.v23.services.types.campaign_service import (
+from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
@@ -174,7 +173,9 @@ def create_campaign(
     campaign.start_date_time = (datetime.now() + timedelta(days=1)).strftime(
         "%Y%m%d 00:00:00"
     )
-    campaign.end_date_time = (datetime.now() + timedelta(days=30)).strftime("%Y%m%d 23:59:59")
+    campaign.end_date_time = (datetime.now() + timedelta(days=30)).strftime(
+        "%Y%m%d 23:59:59"
+    )
 
     # Retrieve the campaign service.
     campaign_service: CampaignServiceClient = client.get_service(
@@ -364,7 +365,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v23"
+        version="v24"
     )
 
     try:

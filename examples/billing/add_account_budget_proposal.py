@@ -17,7 +17,6 @@
 To get account budget proposal, run get_account_budget_proposals.py
 """
 
-
 import argparse
 import sys
 
@@ -100,7 +99,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v23")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
 
     try:
         main(googleads_client, args.customer_id, args.billing_setup_id)

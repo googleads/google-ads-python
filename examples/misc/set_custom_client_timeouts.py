@@ -22,7 +22,6 @@ For more information about the concepts, see this documentation:
 https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 """
 
-
 import argparse
 from collections.abc import Iterator
 import sys
@@ -30,10 +29,10 @@ from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v23.services.services.google_ads_service.client import (
+from google.ads.googleads.v24.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v23.services.types.google_ads_service import (
+from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
     SearchGoogleAdsRequest,
     SearchGoogleAdsStreamRequest,
@@ -41,7 +40,6 @@ from google.ads.googleads.v23.services.types.google_ads_service import (
 )
 from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry
-
 
 _CLIENT_TIMEOUT_SECONDS = 5 * 60  # 5 minutes.
 _QUERY: str = "SELECT campaign.id FROM campaign"
@@ -194,6 +192,6 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v23")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
 
     main(googleads_client, args.customer_id)

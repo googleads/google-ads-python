@@ -336,6 +336,12 @@ class Metrics(proto.Message):
             The number of clicks.
 
             This field is a member of `oneof`_ ``_clicks``.
+        control_clicks (int):
+            The number of clicks on the control arm of an experiment.
+            The treatment clicks value can be selected by using
+            ``clicks``.
+
+            This field is a member of `oneof`_ ``_control_clicks``.
         combined_clicks (int):
             The number of times your ad or your site's
             listing in the unpaid results was clicked. See
@@ -2058,6 +2064,293 @@ class Metrics(proto.Message):
             data to give more detail than conversion value alone.
 
             This field is a member of `oneof`_ ``_all_units_sold``.
+        control_cost_per_conversion (float):
+            The cost per conversion metric on the control arm of the
+            experiment. The treatment cost per conversion value can be
+            selected by using ``cost_per_conversion``.
+
+            This field is a member of `oneof`_ ``_control_cost_per_conversion``.
+        cost_per_conversion_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on cost per conversion.
+
+            Together with ``cost_per_conversion_change_point_estimate``,
+            they describe a confidence interval with a prescribed
+            confidence level for the difference being estimated. The
+            quantity being estimated is (treatment / control - 1). This
+            field specifies the radius of the confidence interval, which
+            is centered at
+            ``cost_per_conversion_change_point_estimate``.
+
+            This field is a member of `oneof`_ ``_cost_per_conversion_margin_of_error``.
+        cost_per_conversion_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on cost per conversion.
+            Ranges from 0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on cost per conversion,
+            is 3%.
+
+            This field is a member of `oneof`_ ``_cost_per_conversion_p_value``.
+        cost_per_conversion_change_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on cost per conversion change.
+
+            Together with ``cost_per_conversion_margin_of_error``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment / control - 1). This field specifies
+            the point estimate, which is the center of the confidence
+            interval:
+            ``(cost_per_conversion_change_point_estimate - cost_per_conversion_margin_of_error, cost_per_conversion_change_point_estimate + cost_per_conversion_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_cost_per_conversion_change_point_estimate``.
+        control_conversions (float):
+            The conversions metric on the control arm of the experiment.
+            The treatment conversions value can be selected by using
+            ``conversions``.
+
+            This field is a member of `oneof`_ ``_control_conversions``.
+        conversions_absolute_change_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on conversions absolute change.
+
+            Together with
+            ``conversions_absolute_change_point_estimate``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment - control). This field specifies the
+            radius of the confidence interval, which is centered at
+            ``conversions_absolute_change_point_estimate``.
+
+            This field is a member of `oneof`_ ``_conversions_absolute_change_margin_of_error``.
+        conversions_absolute_change_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on conversions absolute
+            change. Ranges from 0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on conversions absolute
+            change, is 3%.
+
+            This field is a member of `oneof`_ ``_conversions_absolute_change_p_value``.
+        conversions_absolute_change_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on conversions absolute change.
+
+            Together with
+            ``conversions_absolute_change_margin_of_error``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment - control). This field specifies the
+            point estimate, which is the center of the confidence
+            interval:
+            ``(conversions_absolute_change_point_estimate - conversions_absolute_change_margin_of_error, conversions_absolute_change_point_estimate + conversions_absolute_change_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_conversions_absolute_change_point_estimate``.
+        control_conversion_value_per_cost (float):
+            The conversion value per cost metric on the control arm of
+            the experiment. The treatment conversion value per cost
+            value can be selected by using
+            ``conversions_value_per_cost``.
+
+            This field is a member of `oneof`_ ``_control_conversion_value_per_cost``.
+        conversion_value_per_cost_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on conversion value per cost.
+
+            Together with
+            ``conversion_value_per_cost_change_point_estimate``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment / control - 1). This field specifies
+            the radius of the confidence interval, which is centered at
+            ``conversion_value_per_cost_change_point_estimate``.
+
+            This field is a member of `oneof`_ ``_conversion_value_per_cost_margin_of_error``.
+        conversion_value_per_cost_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on conversion value per
+            cost. Ranges from 0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on conversion value per
+            cost, is 3%.
+
+            This field is a member of `oneof`_ ``_conversion_value_per_cost_p_value``.
+        conversion_value_per_cost_change_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on conversion value per cost change.
+
+            Together with ``conversion_value_per_cost_margin_of_error``,
+            they describe a confidence interval with a prescribed
+            confidence level for the difference being estimated. The
+            quantity being estimated is (treatment / control - 1). This
+            field specifies the point estimate, which is the center of
+            the confidence interval:
+            ``(conversion_value_per_cost_change_point_estimate - conversion_value_per_cost_margin_of_error, conversion_value_per_cost_change_point_estimate + conversion_value_per_cost_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_conversion_value_per_cost_change_point_estimate``.
+        control_cost_micros (int):
+            The cost metric on the control arm of the experiment. The
+            treatment cost value can be selected by using
+            ``cost_micros``.
+
+            This field is a member of `oneof`_ ``_control_cost_micros``.
+        cost_micros_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on cost.
+
+            Together with ``cost_micros_change_point_estimate``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment / control - 1). This field specifies
+            the radius of the confidence interval, which is centered at
+            ``cost_micros_change_point_estimate``.
+
+            This field is a member of `oneof`_ ``_cost_micros_margin_of_error``.
+        cost_micros_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on cost. Ranges from 0
+            to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on cost, is 3%.
+
+            This field is a member of `oneof`_ ``_cost_micros_p_value``.
+        cost_micros_change_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on cost change.
+
+            Together with ``cost_micros_margin_of_error``, they describe
+            a confidence interval with a prescribed confidence level for
+            the difference being estimated. The quantity being estimated
+            is (treatment / control - 1). This field specifies the point
+            estimate, which is the center of the confidence interval:
+            ``(cost_micros_change_point_estimate - cost_micros_margin_of_error, cost_micros_change_point_estimate + cost_micros_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_cost_micros_change_point_estimate``.
+        control_impressions (int):
+            The impressions metric on the control arm of the experiment.
+            The treatment impressions value can be selected by using
+            ``impressions``.
+
+            This field is a member of `oneof`_ ``_control_impressions``.
+        impressions_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on impressions.
+
+            Together with ``impressions_point_estimate``, they describe
+            a confidence interval with a prescribed confidence level for
+            the difference being estimated. The quantity being estimated
+            is (treatment / control - 1). This field specifies the
+            radius of the confidence interval, which is centered at
+            ``impressions_point_estimate``.
+
+            This field is a member of `oneof`_ ``_impressions_margin_of_error``.
+        impressions_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on impressions. Ranges
+            from 0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on impressions, is 3%.
+
+            This field is a member of `oneof`_ ``_impressions_p_value``.
+        impressions_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on impressions.
+
+            Together with ``impressions_margin_of_error``, they describe
+            a confidence interval with a prescribed confidence level for
+            the difference being estimated. The quantity being estimated
+            is (treatment / control - 1). This field specifies the point
+            estimate, which is the center of the confidence interval:
+            ``(impressions_point_estimate - impressions_margin_of_error, impressions_point_estimate + impressions_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_impressions_point_estimate``.
+        clicks_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on clicks.
+
+            Together with ``clicks_point_estimate``, they describe a
+            confidence interval with a prescribed confidence level for
+            the difference being estimated. The quantity being estimated
+            is (treatment / control - 1). This field specifies the
+            radius of the confidence interval, which is centered at
+            ``clicks_point_estimate``.
+
+            This field is a member of `oneof`_ ``_clicks_margin_of_error``.
+        clicks_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on clicks. Ranges from
+            0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on clicks, is 3%.
+
+            This field is a member of `oneof`_ ``_clicks_p_value``.
+        clicks_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on clicks.
+
+            Together with ``clicks_margin_of_error``, they describe a
+            confidence interval with a prescribed confidence level for
+            the difference being estimated. The quantity being estimated
+            is (treatment / control - 1). This field specifies the point
+            estimate, which is the center of the confidence interval:
+            ``(clicks_point_estimate - clicks_margin_of_error, clicks_point_estimate + clicks_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_clicks_point_estimate``.
+        control_conversion_value (float):
+            The conversion value metric on the control arm of the
+            experiment. The treatment conversion value can be selected
+            by using ``conversions_value``.
+
+            This field is a member of `oneof`_ ``_control_conversion_value``.
+        conversion_value_margin_of_error (float):
+            The margin of error when estimating the experiment's effect
+            on conversion value.
+
+            Together with ``conversion_value_change_point_estimate``,
+            they describe a confidence interval with a prescribed
+            confidence level for the difference being estimated. The
+            quantity being estimated is (treatment / control - 1). This
+            field specifies the radius of the confidence interval, which
+            is centered at ``conversion_value_change_point_estimate``.
+
+            This field is a member of `oneof`_ ``_conversion_value_margin_of_error``.
+        conversion_value_p_value (float):
+            The p-value for the null hypothesis that the
+            experiment has no effect on conversion value.
+            Ranges from 0 to 1.
+
+            Say if the p-value is 0.03, that means the
+            probability of observing the data, if the
+            experiment has no effect on conversion value, is
+            3%.
+
+            This field is a member of `oneof`_ ``_conversion_value_p_value``.
+        conversion_value_change_point_estimate (float):
+            The point estimate when estimating the experiment's effect
+            on conversion value change.
+
+            Together with ``conversion_value_margin_of_error``, they
+            describe a confidence interval with a prescribed confidence
+            level for the difference being estimated. The quantity being
+            estimated is (treatment / control - 1). This field specifies
+            the point estimate, which is the center of the confidence
+            interval:
+            ``(conversion_value_change_point_estimate - conversion_value_margin_of_error, conversion_value_change_point_estimate + conversion_value_margin_of_error)``.
+
+            This field is a member of `oneof`_ ``_conversion_value_change_point_estimate``.
     """
 
     absolute_top_impression_percentage: float = proto.Field(
@@ -2277,6 +2570,11 @@ class Metrics(proto.Message):
     clicks: int = proto.Field(
         proto.INT64,
         number=131,
+        optional=True,
+    )
+    control_clicks: int = proto.Field(
+        proto.INT64,
+        number=443,
         optional=True,
     )
     combined_clicks: int = proto.Field(
@@ -3339,6 +3637,141 @@ class Metrics(proto.Message):
     all_units_sold: float = proto.Field(
         proto.DOUBLE,
         number=442,
+        optional=True,
+    )
+    control_cost_per_conversion: float = proto.Field(
+        proto.DOUBLE,
+        number=446,
+        optional=True,
+    )
+    cost_per_conversion_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=447,
+        optional=True,
+    )
+    cost_per_conversion_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=448,
+        optional=True,
+    )
+    cost_per_conversion_change_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=449,
+        optional=True,
+    )
+    control_conversions: float = proto.Field(
+        proto.DOUBLE,
+        number=450,
+        optional=True,
+    )
+    conversions_absolute_change_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=451,
+        optional=True,
+    )
+    conversions_absolute_change_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=452,
+        optional=True,
+    )
+    conversions_absolute_change_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=453,
+        optional=True,
+    )
+    control_conversion_value_per_cost: float = proto.Field(
+        proto.DOUBLE,
+        number=454,
+        optional=True,
+    )
+    conversion_value_per_cost_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=455,
+        optional=True,
+    )
+    conversion_value_per_cost_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=456,
+        optional=True,
+    )
+    conversion_value_per_cost_change_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=457,
+        optional=True,
+    )
+    control_cost_micros: int = proto.Field(
+        proto.INT64,
+        number=458,
+        optional=True,
+    )
+    cost_micros_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=459,
+        optional=True,
+    )
+    cost_micros_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=460,
+        optional=True,
+    )
+    cost_micros_change_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=461,
+        optional=True,
+    )
+    control_impressions: int = proto.Field(
+        proto.INT64,
+        number=462,
+        optional=True,
+    )
+    impressions_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=463,
+        optional=True,
+    )
+    impressions_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=464,
+        optional=True,
+    )
+    impressions_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=465,
+        optional=True,
+    )
+    clicks_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=466,
+        optional=True,
+    )
+    clicks_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=467,
+        optional=True,
+    )
+    clicks_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=468,
+        optional=True,
+    )
+    control_conversion_value: float = proto.Field(
+        proto.DOUBLE,
+        number=469,
+        optional=True,
+    )
+    conversion_value_margin_of_error: float = proto.Field(
+        proto.DOUBLE,
+        number=470,
+        optional=True,
+    )
+    conversion_value_p_value: float = proto.Field(
+        proto.DOUBLE,
+        number=471,
+        optional=True,
+    )
+    conversion_value_change_point_estimate: float = proto.Field(
+        proto.DOUBLE,
+        number=472,
         optional=True,
     )
 

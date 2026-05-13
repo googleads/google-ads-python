@@ -280,6 +280,8 @@ from .types.customizer_value import CustomizerValue
 from .types.dates import DateRange
 from .types.dates import YearMonth
 from .types.dates import YearMonthRange
+from .types.experiment_types import OptimizeAssetsExperimentInfo
+from .types.experiment_types import VideoExperimentInfo
 from .types.extensions import CallFeedItem
 from .types.extensions import CalloutFeedItem
 from .types.extensions import SitelinkFeedItem
@@ -713,6 +715,7 @@ __all__ = (
     "NegativeKeywordListInfo",
     "OfflineUserAddressInfo",
     "OperatingSystemVersionInfo",
+    "OptimizeAssetsExperimentInfo",
     "PageFeedAsset",
     "ParentalStatusDimension",
     "ParentalStatusInfo",
@@ -819,6 +822,7 @@ __all__ = (
     "VerticalAdsItemGroupRuleListInfo",
     "VideoAdInfo",
     "VideoBumperInStreamAdInfo",
+    "VideoExperimentInfo",
     "VideoLineupInfo",
     "VideoNonSkippableInStreamAdInfo",
     "VideoOutstreamAdInfo",

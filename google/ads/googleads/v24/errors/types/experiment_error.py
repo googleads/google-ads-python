@@ -133,6 +133,10 @@ class ExperimentErrorEnum(proto.Message):
                 The experiment's campaigns must self-declare
                 whether they contain political advertising that
                 targets the European Union.
+            MISSING_EXPERIMENT_ARMS (32):
+                Cannot create an experiment with no arms.
+            MISSING_VIDEO_EXPERIMENT_SUBTYPE (34):
+                The video experiment subtype is missing.
         """
 
         UNSPECIFIED = 0
@@ -167,6 +171,8 @@ class ExperimentErrorEnum(proto.Message):
         CANNOT_ENABLE_SYNC_FOR_UNSUPPORTED_EXPERIMENT_TYPE = 29
         INVALID_DURATION_FOR_AN_EXPERIMENT = 30
         MISSING_EU_POLITICAL_ADVERTISING_SELF_DECLARATION = 31
+        MISSING_EXPERIMENT_ARMS = 32
+        MISSING_VIDEO_EXPERIMENT_SUBTYPE = 34
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

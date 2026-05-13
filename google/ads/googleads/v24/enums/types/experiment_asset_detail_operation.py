@@ -23,40 +23,35 @@ __protobuf__ = proto.module(
     package="google.ads.googleads.v24.enums",
     marshal="google.ads.googleads.v24",
     manifest={
-        "ThirdPartyViewabilityIntegrationPartnerEnum",
+        "ExperimentAssetDetailOperationEnum",
     },
 )
 
 
-class ThirdPartyViewabilityIntegrationPartnerEnum(proto.Message):
-    r"""Container for enum describing available third party
-    integration partners for YouTube viewability verification.
+class ExperimentAssetDetailOperationEnum(proto.Message):
+    r"""Container for enum describing the type of experiment asset
+    detail operation.
 
     """
 
-    class ThirdPartyViewabilityIntegrationPartner(proto.Enum):
-        r"""Enum describing available third party integration partners
-        for YouTube viewability verification.
+    class ExperimentAssetDetailOperation(proto.Enum):
+        r"""The type of the experiment asset detail operation.
 
         Values:
             UNSPECIFIED (0):
                 Not specified.
             UNKNOWN (1):
-                Used for return value only. Represents value
-                unknown in this version.
-            DOUBLE_VERIFY (2):
-                DoubleVerify.
-            INTEGRAL_AD_SCIENCE (3):
-                Integral Ad Science.
-            ZEFR (4):
-                Zefr.
+                The value is unknown in this version.
+            ADD (2):
+                Asset is attached to the ad.
+            REMOVE (3):
+                Asset is removed from the ad.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
-        DOUBLE_VERIFY = 2
-        INTEGRAL_AD_SCIENCE = 3
-        ZEFR = 4
+        ADD = 2
+        REMOVE = 3
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

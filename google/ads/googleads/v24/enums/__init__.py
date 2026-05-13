@@ -255,6 +255,9 @@ from .types.distance_bucket import DistanceBucketEnum
 from .types.eu_political_advertising_status import (
     EuPoliticalAdvertisingStatusEnum,
 )
+from .types.experiment_asset_detail_operation import (
+    ExperimentAssetDetailOperationEnum,
+)
 from .types.experiment_metric import ExperimentMetricEnum
 from .types.experiment_metric_direction import ExperimentMetricDirectionEnum
 from .types.experiment_status import ExperimentStatusEnum
@@ -405,6 +408,7 @@ from .types.messaging_restriction_type import MessagingRestrictionTypeEnum
 from .types.mime_type import MimeTypeEnum
 from .types.minute_of_hour import MinuteOfHourEnum
 from .types.mobile_app_vendor import MobileAppVendorEnum
+from .types.mobile_device_platform import MobileDevicePlatformEnum
 from .types.mobile_device_type import MobileDeviceTypeEnum
 from .types.month_of_year import MonthOfYearEnum
 from .types.negative_geo_target_type import NegativeGeoTargetTypeEnum
@@ -426,6 +430,9 @@ from .types.operating_system_version_operator_type import (
     OperatingSystemVersionOperatorTypeEnum,
 )
 from .types.optimization_goal_type import OptimizationGoalTypeEnum
+from .types.optimize_assets_experiment_subtype import (
+    OptimizeAssetsExperimentSubtypeEnum,
+)
 from .types.parental_status_type import ParentalStatusTypeEnum
 from .types.partnership_opportunity import PartnershipOpportunityEnum
 from .types.payment_mode import PaymentModeEnum
@@ -606,6 +613,7 @@ from .types.video_ad_sequence_minimum_duration import (
     VideoAdSequenceMinimumDurationEnum,
 )
 from .types.video_enhancement_source import VideoEnhancementSourceEnum
+from .types.video_experiment_subtype import VideoExperimentSubtypeEnum
 from .types.video_thumbnail import VideoThumbnailEnum
 from .types.webpage_condition_operand import WebpageConditionOperandEnum
 from .types.webpage_condition_operator import WebpageConditionOperatorEnum
@@ -865,6 +873,7 @@ __all__ = (
     "DisplayUploadProductTypeEnum",
     "DistanceBucketEnum",
     "EuPoliticalAdvertisingStatusEnum",
+    "ExperimentAssetDetailOperationEnum",
     "ExperimentMetricDirectionEnum",
     "ExperimentMetricEnum",
     "ExperimentStatusEnum",
@@ -953,6 +962,7 @@ __all__ = (
     "MimeTypeEnum",
     "MinuteOfHourEnum",
     "MobileAppVendorEnum",
+    "MobileDevicePlatformEnum",
     "MobileDeviceTypeEnum",
     "MonthOfYearEnum",
     "NegativeGeoTargetTypeEnum",
@@ -966,6 +976,7 @@ __all__ = (
     "OfflineUserDataJobTypeEnum",
     "OperatingSystemVersionOperatorTypeEnum",
     "OptimizationGoalTypeEnum",
+    "OptimizeAssetsExperimentSubtypeEnum",
     "ParentalStatusTypeEnum",
     "PartnershipOpportunityEnum",
     "PaymentModeEnum",
@@ -1076,6 +1087,7 @@ __all__ = (
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
     "VideoEnhancementSourceEnum",
+    "VideoExperimentSubtypeEnum",
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",

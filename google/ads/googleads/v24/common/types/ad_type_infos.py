@@ -1554,6 +1554,11 @@ class DemandGenMultiAssetAdInfo(proto.Message):
             size is 128x128 and the aspect ratio must be 1:1
             (+-1%). At least 1 and max 5 logo images can be
             specified.
+        classic_display_images (MutableSequence[google.ads.googleads.v24.common.types.AdImageAsset]):
+            Classic display image assets to be used in
+            the ad. Valid image types are GIF, JPEG, and
+            PNG. At most 20 classic display images can be
+            specified per ad.
         headlines (MutableSequence[google.ads.googleads.v24.common.types.AdTextAsset]):
             Headline text asset of the ad. Maximum
             display width is 30. At least 1 and max 5
@@ -1605,6 +1610,13 @@ class DemandGenMultiAssetAdInfo(proto.Message):
         proto.MESSAGE,
         number=4,
         message=ad_asset.AdImageAsset,
+    )
+    classic_display_images: MutableSequence[ad_asset.AdImageAsset] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=11,
+            message=ad_asset.AdImageAsset,
+        )
     )
     headlines: MutableSequence[ad_asset.AdTextAsset] = proto.RepeatedField(
         proto.MESSAGE,

@@ -19,6 +19,7 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v24.common.types import experiment_types
 from google.ads.googleads.v24.common.types import metric_goal
 from google.ads.googleads.v24.enums.types import async_action_status
 from google.ads.googleads.v24.enums.types import experiment_status
@@ -39,6 +40,10 @@ class Experiment(proto.Message):
     multiple campaigns, compare the performance, and apply the
     effective changes.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -118,6 +123,16 @@ class Experiment(proto.Message):
             be set when the experiment is being created.
 
             This field is a member of `oneof`_ ``_sync_enabled``.
+        video_experiment (google.ads.googleads.v24.common.types.VideoExperimentInfo):
+            Immutable. Details of the video experiment. Applies for
+            experiment types: YOUTUBE_CUSTOM.
+
+            This field is a member of `oneof`_ ``experiment_info``.
+        optimize_assets_experiment (google.ads.googleads.v24.common.types.OptimizeAssetsExperimentInfo):
+            Immutable. Details of the optimize assets experiment.
+            Applies for experiment types: OPTIMIZE_ASSETS.
+
+            This field is a member of `oneof`_ ``experiment_info``.
     """
 
     resource_name: str = proto.Field(
@@ -184,6 +199,20 @@ class Experiment(proto.Message):
         proto.BOOL,
         number=20,
         optional=True,
+    )
+    video_experiment: experiment_types.VideoExperimentInfo = proto.Field(
+        proto.MESSAGE,
+        number=21,
+        oneof="experiment_info",
+        message=experiment_types.VideoExperimentInfo,
+    )
+    optimize_assets_experiment: (
+        experiment_types.OptimizeAssetsExperimentInfo
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=22,
+        oneof="experiment_info",
+        message=experiment_types.OptimizeAssetsExperimentInfo,
     )
 
 

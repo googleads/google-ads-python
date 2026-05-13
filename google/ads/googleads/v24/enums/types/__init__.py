@@ -478,6 +478,9 @@ from .distance_bucket import (
 from .eu_political_advertising_status import (
     EuPoliticalAdvertisingStatusEnum,
 )
+from .experiment_asset_detail_operation import (
+    ExperimentAssetDetailOperationEnum,
+)
 from .experiment_metric import (
     ExperimentMetricEnum,
 )
@@ -742,6 +745,9 @@ from .minute_of_hour import (
 from .mobile_app_vendor import (
     MobileAppVendorEnum,
 )
+from .mobile_device_platform import (
+    MobileDevicePlatformEnum,
+)
 from .mobile_device_type import (
     MobileDeviceTypeEnum,
 )
@@ -780,6 +786,9 @@ from .operating_system_version_operator_type import (
 )
 from .optimization_goal_type import (
     OptimizationGoalTypeEnum,
+)
+from .optimize_assets_experiment_subtype import (
+    OptimizeAssetsExperimentSubtypeEnum,
 )
 from .parental_status_type import (
     ParentalStatusTypeEnum,
@@ -1111,6 +1120,9 @@ from .video_ad_sequence_minimum_duration import (
 from .video_enhancement_source import (
     VideoEnhancementSourceEnum,
 )
+from .video_experiment_subtype import (
+    VideoExperimentSubtypeEnum,
+)
 from .video_thumbnail import (
     VideoThumbnailEnum,
 )
@@ -1286,6 +1298,7 @@ __all__ = (
     "DisplayUploadProductTypeEnum",
     "DistanceBucketEnum",
     "EuPoliticalAdvertisingStatusEnum",
+    "ExperimentAssetDetailOperationEnum",
     "ExperimentMetricEnum",
     "ExperimentMetricDirectionEnum",
     "ExperimentStatusEnum",
@@ -1374,6 +1387,7 @@ __all__ = (
     "MimeTypeEnum",
     "MinuteOfHourEnum",
     "MobileAppVendorEnum",
+    "MobileDevicePlatformEnum",
     "MobileDeviceTypeEnum",
     "MonthOfYearEnum",
     "NegativeGeoTargetTypeEnum",
@@ -1387,6 +1401,7 @@ __all__ = (
     "OfflineUserDataJobTypeEnum",
     "OperatingSystemVersionOperatorTypeEnum",
     "OptimizationGoalTypeEnum",
+    "OptimizeAssetsExperimentSubtypeEnum",
     "ParentalStatusTypeEnum",
     "PartnershipOpportunityEnum",
     "PaymentModeEnum",
@@ -1497,6 +1512,7 @@ __all__ = (
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
     "VideoEnhancementSourceEnum",
+    "VideoExperimentSubtypeEnum",
     "VideoThumbnailEnum",
     "WebpageConditionOperandEnum",
     "WebpageConditionOperatorEnum",

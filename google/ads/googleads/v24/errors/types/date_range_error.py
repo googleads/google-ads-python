@@ -52,6 +52,12 @@ class DateRangeErrorEnum(proto.Message):
             CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED (6):
                 Trying to change start date on a resource
                 that has started.
+            REQUESTED_DATE_GRANULARITY_NOT_SUPPORTED (7):
+                The requested time granularity is not
+                supported for the date range in the query.
+                Metrics with daily, hourly, or weekly
+                segmentation are only available for the last 37
+                months.
         """
 
         UNSPECIFIED = 0
@@ -61,6 +67,7 @@ class DateRangeErrorEnum(proto.Message):
         CANNOT_SET_DATE_TO_PAST = 4
         AFTER_MAXIMUM_ALLOWABLE_DATE = 5
         CANNOT_MODIFY_START_DATE_IF_ALREADY_STARTED = 6
+        REQUESTED_DATE_GRANULARITY_NOT_SUPPORTED = 7
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

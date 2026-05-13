@@ -527,6 +527,8 @@ class CriterionErrorEnum(proto.Message):
             RETAIL_FILTER_TAGS_REFERRING_TO_EXPRESSION (185):
                 A RetailFilterExpression cannot be removed as
                 it is still referenced by Tags.
+            CANNOT_EXCLUDE_ALL_TARGETS (186):
+                Cannot exclude all demographic targets.
         """
 
         UNSPECIFIED = 0
@@ -702,6 +704,7 @@ class CriterionErrorEnum(proto.Message):
         VERTICAL_ADS_ITEM_GROUP_RULE_NOT_SUPPORTED_FOR_THE_VERTICAL_TYPE = 183
         RETAIL_FILTER_EXPRESSION_DOES_NOT_EXIST = 184
         RETAIL_FILTER_TAGS_REFERRING_TO_EXPRESSION = 185
+        CANNOT_EXCLUDE_ALL_TARGETS = 186
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

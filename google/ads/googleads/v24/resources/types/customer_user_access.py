@@ -65,6 +65,11 @@ class CustomerUserAccess(proto.Message):
             user. Read only field
 
             This field is a member of `oneof`_ ``_inviter_user_email_address``.
+        passkey_enabled (bool):
+            Output only. Whether the user has passkey
+            enabled. Read only field
+
+            This field is a member of `oneof`_ ``_passkey_enabled``.
     """
 
     resource_name: str = proto.Field(
@@ -93,6 +98,11 @@ class CustomerUserAccess(proto.Message):
     inviter_user_email_address: str = proto.Field(
         proto.STRING,
         number=7,
+        optional=True,
+    )
+    passkey_enabled: bool = proto.Field(
+        proto.BOOL,
+        number=8,
         optional=True,
     )
 

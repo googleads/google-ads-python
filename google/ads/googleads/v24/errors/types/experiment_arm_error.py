@@ -82,6 +82,35 @@ class ExperimentArmErrorEnum(proto.Message):
             TRAFFIC_SPLIT_NOT_SUPPORTED_FOR_CHANNEL_TYPE (15):
                 Traffic split is not supported for some
                 channel types.
+            BUDGET_MUST_NOT_BE_SHARED (16):
+                Shared budgets are not allowed in
+                experiments.
+            ADOPT_AI_MAX_CAMPAIGN_MISSING_PERFORMANCE_SEARCH_ENABLED (17):
+                Campaign must enable performance search setting for
+                ADOPT_AI_MAX experiments.
+            TOO_MANY_CAMPAIGNS_IN_EXPERIMENT_ARM (18):
+                Number of campaigns in the experiment arm is
+                above limit.
+            CANNOT_ADD_CAMPAIGN_WITH_TARGET_ROAS_TOLERANCE_PERCENT_MILLIS (19):
+                AI Max experiments do not support campaigns with a target
+                ROAS tolerance (see
+                campaign.maximize_conversion_value.target_roas_tolerance_percent_millis).
+            CANNOT_HAVE_SAME_CAMPAIGN_CROSS_ARMS_IN_ONE_EXPERIMENT (20):
+                A campaign cannot be added to multiple arms
+                in one experiment. Use different campaigns in
+                each arm of the experiment.
+            SEARCH_PLUS_CAMPAIGN_NOT_ALLOWED (21):
+                Campaigns in the ADOPT_BROAD_MATCH_KEYWORD experiment cannot
+                target the Google Display Network.
+            DUPLICATE_ASSET_GROUP_ASSETS_BETWEEN_ARMS (22):
+                An asset group asset cannot be added to
+                multiple arms in one experiment. Use different
+                asset group assets in each arm of the
+                experiment.
+            DUPLICATE_ASSET_GROUP_ASSETS_IN_ONE_ARM (23):
+                An asset group asset cannot be used multiple
+                times in one arm. Use different asset group
+                assets in one arm of the experiment.
         """
 
         UNSPECIFIED = 0
@@ -100,6 +129,14 @@ class ExperimentArmErrorEnum(proto.Message):
         CANNOT_ADD_BASE_CAMPAIGN_WITH_DATE_RANGE = 13
         BIDDING_STRATEGY_NOT_SUPPORTED_IN_EXPERIMENTS = 14
         TRAFFIC_SPLIT_NOT_SUPPORTED_FOR_CHANNEL_TYPE = 15
+        BUDGET_MUST_NOT_BE_SHARED = 16
+        ADOPT_AI_MAX_CAMPAIGN_MISSING_PERFORMANCE_SEARCH_ENABLED = 17
+        TOO_MANY_CAMPAIGNS_IN_EXPERIMENT_ARM = 18
+        CANNOT_ADD_CAMPAIGN_WITH_TARGET_ROAS_TOLERANCE_PERCENT_MILLIS = 19
+        CANNOT_HAVE_SAME_CAMPAIGN_CROSS_ARMS_IN_ONE_EXPERIMENT = 20
+        SEARCH_PLUS_CAMPAIGN_NOT_ALLOWED = 21
+        DUPLICATE_ASSET_GROUP_ASSETS_BETWEEN_ARMS = 22
+        DUPLICATE_ASSET_GROUP_ASSETS_IN_ONE_ARM = 23
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -2404,6 +2404,23 @@ class VerticalAdsItemGroupRuleInfo(proto.Message):
             a hotel. Ranges from 1 to 5 stars.
 
             This field is a member of `oneof`_ ``dimension``.
+        user_rating (int):
+            Integer value specifying the user rating for
+            a Vertical Ad listing. Ranges from 1 to 5, where
+            5 is the best.
+
+            This field is a member of `oneof`_ ``dimension``.
+        venue (str):
+            A name for a specific location, like the
+            venue for a concert event.
+
+            This field is a member of `oneof`_ ``dimension``.
+        event_participant_display_name (str):
+            The name of an associated participant for a
+            given event. For example, headliner for a
+            concert event.
+
+            This field is a member of `oneof`_ ``dimension``.
     """
 
     item_code: str = proto.Field(
@@ -2429,6 +2446,21 @@ class VerticalAdsItemGroupRuleInfo(proto.Message):
     hotel_class: int = proto.Field(
         proto.INT64,
         number=6,
+        oneof="dimension",
+    )
+    user_rating: int = proto.Field(
+        proto.INT64,
+        number=7,
+        oneof="dimension",
+    )
+    venue: str = proto.Field(
+        proto.STRING,
+        number=8,
+        oneof="dimension",
+    )
+    event_participant_display_name: str = proto.Field(
+        proto.STRING,
+        number=9,
         oneof="dimension",
     )
 

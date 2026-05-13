@@ -23,40 +23,44 @@ __protobuf__ = proto.module(
     package="google.ads.googleads.v24.enums",
     marshal="google.ads.googleads.v24",
     manifest={
-        "ThirdPartyViewabilityIntegrationPartnerEnum",
+        "MobileDevicePlatformEnum",
     },
 )
 
 
-class ThirdPartyViewabilityIntegrationPartnerEnum(proto.Message):
-    r"""Container for enum describing available third party
-    integration partners for YouTube viewability verification.
+class MobileDevicePlatformEnum(proto.Message):
+    r"""Container for enumeration of Google Ads mobile device
+    platforms.
 
     """
 
-    class ThirdPartyViewabilityIntegrationPartner(proto.Enum):
-        r"""Enum describing available third party integration partners
-        for YouTube viewability verification.
+    class MobileDevicePlatform(proto.Enum):
+        r"""Enum describing the mobile device platform.
 
         Values:
             UNSPECIFIED (0):
                 Not specified.
             UNKNOWN (1):
                 Used for return value only. Represents value
-                unknown in this version.
-            DOUBLE_VERIFY (2):
-                DoubleVerify.
-            INTEGRAL_AD_SCIENCE (3):
-                Integral Ad Science.
-            ZEFR (4):
-                Zefr.
+                unknown in this version. Non-mobile and
+                non-desktop devices will fall into this segment.
+            ANDROID (2):
+                Android devices.
+            IOS (3):
+                iOS devices.
+            OTHER_MOBILE (4):
+                Mobile devices that are not Android or iOS
+                devices.
+            DESKTOP (5):
+                Desktop devices.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
-        DOUBLE_VERIFY = 2
-        INTEGRAL_AD_SCIENCE = 3
-        ZEFR = 4
+        ANDROID = 2
+        IOS = 3
+        OTHER_MOBILE = 4
+        DESKTOP = 5
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

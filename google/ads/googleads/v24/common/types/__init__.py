@@ -297,6 +297,10 @@ from .dates import (
     YearMonth,
     YearMonthRange,
 )
+from .experiment_types import (
+    OptimizeAssetsExperimentInfo,
+    VideoExperimentInfo,
+)
 from .extensions import (
     CallFeedItem,
     CalloutFeedItem,
@@ -690,6 +694,8 @@ __all__ = (
     "DateRange",
     "YearMonth",
     "YearMonthRange",
+    "OptimizeAssetsExperimentInfo",
+    "VideoExperimentInfo",
     "CallFeedItem",
     "CalloutFeedItem",
     "SitelinkFeedItem",

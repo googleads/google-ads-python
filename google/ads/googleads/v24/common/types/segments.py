@@ -74,6 +74,9 @@ from google.ads.googleads.v24.enums.types import (
 )
 from google.ads.googleads.v24.enums.types import match_type as gage_match_type
 from google.ads.googleads.v24.enums.types import (
+    mobile_device_platform as gage_mobile_device_platform,
+)
+from google.ads.googleads.v24.enums.types import (
     month_of_year as gage_month_of_year,
 )
 from google.ads.googleads.v24.enums.types import (
@@ -235,6 +238,9 @@ class Segments(proto.Message):
             Day of the week, for example, MONDAY.
         device (google.ads.googleads.v24.enums.types.DeviceEnum.Device):
             Device to which metrics apply.
+        mobile_device_platform (google.ads.googleads.v24.enums.types.MobileDevicePlatformEnum.MobileDevicePlatform):
+            Mobile device platform to which metrics
+            apply.
         external_conversion_source (google.ads.googleads.v24.enums.types.ExternalConversionSourceEnum.ExternalConversionSource):
             External conversion source.
         geo_target_airport (str):
@@ -608,6 +614,19 @@ class Segments(proto.Message):
             located.
 
             This field is a member of `oneof`_ ``_vertical_ads_listing_region``.
+        vertical_ads_listing_user_rating (int):
+            Integer value specifying the user rating of
+            the vertical ads listing as a number from 1 to
+            5, where 5 is the best. The value will always be
+            within this range.
+
+            This field is a member of `oneof`_ ``_vertical_ads_listing_user_rating``.
+        vertical_ads_listing_venue (str):
+            The name of the venue for the vertical ads
+            listing, for example, the venue for a concert
+            event.
+
+            This field is a member of `oneof`_ ``_vertical_ads_listing_venue``.
         vertical_ads_partner_account (int):
             A specific partner account within a Partner
             Center (for example, Hotel Center) that supplies
@@ -940,6 +959,13 @@ class Segments(proto.Message):
         proto.ENUM,
         number=1,
         enum=gage_device.DeviceEnum.Device,
+    )
+    mobile_device_platform: (
+        gage_mobile_device_platform.MobileDevicePlatformEnum.MobileDevicePlatform
+    ) = proto.Field(
+        proto.ENUM,
+        number=219,
+        enum=gage_mobile_device_platform.MobileDevicePlatformEnum.MobileDevicePlatform,
     )
     external_conversion_source: (
         gage_external_conversion_source.ExternalConversionSourceEnum.ExternalConversionSource
@@ -1409,6 +1435,16 @@ class Segments(proto.Message):
     vertical_ads_listing_region: str = proto.Field(
         proto.STRING,
         number=211,
+        optional=True,
+    )
+    vertical_ads_listing_user_rating: int = proto.Field(
+        proto.INT64,
+        number=220,
+        optional=True,
+    )
+    vertical_ads_listing_venue: str = proto.Field(
+        proto.STRING,
+        number=221,
         optional=True,
     )
     vertical_ads_partner_account: int = proto.Field(

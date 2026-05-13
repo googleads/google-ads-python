@@ -67,6 +67,19 @@ class ExperimentTypeEnum(proto.Message):
             HOTEL_CUSTOM (12):
                 A custom experiment consisting of hotel
                 campaigns.
+            OPTIMIZE_ASSETS (13):
+                A custom experiment for optimizing assets.
+            ADOPT_AI_MAX (14):
+                An experiment that tests how AI Max can help
+                you engage more customers with Google AI and
+                broad match keywords.
+            ADOPT_BROAD_MATCH_KEYWORDS (15):
+                An experiment that tests how broad match
+                keywords can impact the number of searches your
+                ads appear in.
+            PMAX_REPLACEMENT_SHOPPING (16):
+                An experiment that tests how your Shopping
+                campaigns perform compared to Performance Max.
         """
 
         UNSPECIFIED = 0
@@ -81,6 +94,10 @@ class ExperimentTypeEnum(proto.Message):
         SHOPPING_AUTOMATED_BIDDING_STRATEGY = 10
         SMART_MATCHING = 11
         HOTEL_CUSTOM = 12
+        OPTIMIZE_ASSETS = 13
+        ADOPT_AI_MAX = 14
+        ADOPT_BROAD_MATCH_KEYWORDS = 15
+        PMAX_REPLACEMENT_SHOPPING = 16
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

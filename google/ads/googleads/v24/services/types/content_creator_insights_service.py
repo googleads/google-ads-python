@@ -412,9 +412,10 @@ class YouTubeMetrics(proto.Message):
             videos of this channel.
         engagement_rate (float):
             The lifetime engagement rate of this channel.
-            The value is computed as the total number of
-            likes, shares, and comments across all videos
-            divided by the total number of video views.
+            A measurement of how often people engage with
+            the creator's content. The value, between 0 and
+            1, is calculated as total engagement divided by
+            total views.
         average_views_per_video (float):
             The average number of views per video in the
             last 28 days.

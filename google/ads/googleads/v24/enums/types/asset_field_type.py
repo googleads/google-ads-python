@@ -142,6 +142,9 @@ class AssetFieldTypeEnum(proto.Message):
             CALL_TO_ACTION (40):
                 The asset is linked for use as a
                 call-to-action.
+            CLASSIC_DISPLAY_IMAGE (47):
+                The asset is linked for use as a classic
+                display image.
         """
 
         UNSPECIFIED = 0
@@ -180,6 +183,7 @@ class AssetFieldTypeEnum(proto.Message):
         LANDING_PAGE_PREVIEW = 38
         LONG_DESCRIPTION = 39
         CALL_TO_ACTION = 40
+        CLASSIC_DISPLAY_IMAGE = 47
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

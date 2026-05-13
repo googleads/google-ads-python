@@ -62,6 +62,18 @@ class ExperimentArmServiceAsyncClient:
     )
     _DEFAULT_UNIVERSE = ExperimentArmServiceClient._DEFAULT_UNIVERSE
 
+    ad_path = staticmethod(ExperimentArmServiceClient.ad_path)
+    parse_ad_path = staticmethod(ExperimentArmServiceClient.parse_ad_path)
+    ad_group_path = staticmethod(ExperimentArmServiceClient.ad_group_path)
+    parse_ad_group_path = staticmethod(
+        ExperimentArmServiceClient.parse_ad_group_path
+    )
+    asset_path = staticmethod(ExperimentArmServiceClient.asset_path)
+    parse_asset_path = staticmethod(ExperimentArmServiceClient.parse_asset_path)
+    asset_group_path = staticmethod(ExperimentArmServiceClient.asset_group_path)
+    parse_asset_group_path = staticmethod(
+        ExperimentArmServiceClient.parse_asset_group_path
+    )
     campaign_path = staticmethod(ExperimentArmServiceClient.campaign_path)
     parse_campaign_path = staticmethod(
         ExperimentArmServiceClient.parse_campaign_path

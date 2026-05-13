@@ -141,11 +141,10 @@ class ConversionActionTypeEnum(proto.Message):
                 Conversions reported when a user submits a
                 lead form. Read only.
             SALESFORCE (30):
-                Deprecated: The Salesforce integration will
-                be going away and replaced with an improved way
-                to import your conversions from Salesforce.
-                - see
-                  https://support.google.com/google-ads/answer/14728349
+                Deprecated: The Salesforce integration ended on May 31,
+                2025. See `Legacy Salesforce integration for conversions
+                upgrade
+                FAQ <//support.google.com/google-ads/answer/14728349>`__.
             SEARCH_ADS_360 (31):
                 Conversions imported from Search Ads 360
                 Floodlight data. Read only.
@@ -174,25 +173,28 @@ class ConversionActionTypeEnum(proto.Message):
                 only.
             UNIVERSAL_ANALYTICS_GOAL (38):
                 Conversions that come from linked Universal
-                Analytics goals.
+                Analytics goals. Universal Analytics is sunset,
+                and has been replaced by Google Analytics.
             UNIVERSAL_ANALYTICS_TRANSACTION (39):
                 Conversions that come from linked Universal
-                Analytics transactions.
+                Analytics transactions. Universal Analytics is
+                sunset, and has been replaced by Google
+                Analytics.
             GOOGLE_ANALYTICS_4_CUSTOM (40):
                 Conversions that come from linked Google
-                Analytics 4 custom event conversions.
+                Analytics custom event conversions.
             GOOGLE_ANALYTICS_4_PURCHASE (41):
                 Conversions that come from linked Google
-                Analytics 4 purchase conversions.
+                Analytics purchase conversions.
             GOOGLE_ANALYTICS_4_GENERATE_LEAD (42):
                 Conversions that come from linked Google
-                Analytics 4 generate lead conversions.
+                Analytics generate lead conversions.
             GOOGLE_ANALYTICS_4_QUALIFY_LEAD (43):
                 Conversions that come from linked Google
-                Analytics 4 qualify lead conversions.
+                Analytics qualify lead conversions.
             GOOGLE_ANALYTICS_4_CLOSE_CONVERT_LEAD (44):
                 Conversions that come from linked Google
-                Analytics 4 close convert lead conversions.
+                Analytics close convert lead conversions.
             FIREBASE_ANDROID_GENERATE_LEAD (45):
                 Conversions that come from linked Firebase
                 Android generate lead conversions.

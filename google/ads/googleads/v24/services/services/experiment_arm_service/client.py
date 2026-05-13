@@ -226,6 +226,84 @@ class ExperimentArmServiceClient(metaclass=ExperimentArmServiceClientMeta):
         return self._transport
 
     @staticmethod
+    def ad_path(
+        customer_id: str,
+        ad_id: str,
+    ) -> str:
+        """Returns a fully-qualified ad string."""
+        return "customers/{customer_id}/ads/{ad_id}".format(
+            customer_id=customer_id,
+            ad_id=ad_id,
+        )
+
+    @staticmethod
+    def parse_ad_path(path: str) -> Dict[str, str]:
+        """Parses a ad path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/ads/(?P<ad_id>.+?)$", path
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def ad_group_path(
+        customer_id: str,
+        ad_group_id: str,
+    ) -> str:
+        """Returns a fully-qualified ad_group string."""
+        return "customers/{customer_id}/adGroups/{ad_group_id}".format(
+            customer_id=customer_id,
+            ad_group_id=ad_group_id,
+        )
+
+    @staticmethod
+    def parse_ad_group_path(path: str) -> Dict[str, str]:
+        """Parses a ad_group path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/adGroups/(?P<ad_group_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def asset_path(
+        customer_id: str,
+        asset_id: str,
+    ) -> str:
+        """Returns a fully-qualified asset string."""
+        return "customers/{customer_id}/assets/{asset_id}".format(
+            customer_id=customer_id,
+            asset_id=asset_id,
+        )
+
+    @staticmethod
+    def parse_asset_path(path: str) -> Dict[str, str]:
+        """Parses a asset path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/assets/(?P<asset_id>.+?)$", path
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def asset_group_path(
+        customer_id: str,
+        asset_group_id: str,
+    ) -> str:
+        """Returns a fully-qualified asset_group string."""
+        return "customers/{customer_id}/assetGroups/{asset_group_id}".format(
+            customer_id=customer_id,
+            asset_group_id=asset_group_id,
+        )
+
+    @staticmethod
+    def parse_asset_group_path(path: str) -> Dict[str, str]:
+        """Parses a asset_group path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/assetGroups/(?P<asset_group_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def campaign_path(
         customer_id: str,
         campaign_id: str,

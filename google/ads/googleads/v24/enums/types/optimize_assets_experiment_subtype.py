@@ -23,40 +23,38 @@ __protobuf__ = proto.module(
     package="google.ads.googleads.v24.enums",
     marshal="google.ads.googleads.v24",
     manifest={
-        "ThirdPartyViewabilityIntegrationPartnerEnum",
+        "OptimizeAssetsExperimentSubtypeEnum",
     },
 )
 
 
-class ThirdPartyViewabilityIntegrationPartnerEnum(proto.Message):
-    r"""Container for enum describing available third party
-    integration partners for YouTube viewability verification.
+class OptimizeAssetsExperimentSubtypeEnum(proto.Message):
+    r"""Indicates the subtype of an optimize assets experiment."""
 
-    """
-
-    class ThirdPartyViewabilityIntegrationPartner(proto.Enum):
-        r"""Enum describing available third party integration partners
-        for YouTube viewability verification.
+    class OptimizeAssetsExperimentSubtype(proto.Enum):
+        r"""The enum describing optimize assets subtype.
 
         Values:
             UNSPECIFIED (0):
                 Not specified.
             UNKNOWN (1):
-                Used for return value only. Represents value
-                unknown in this version.
-            DOUBLE_VERIFY (2):
-                DoubleVerify.
-            INTEGRAL_AD_SCIENCE (3):
-                Integral Ad Science.
-            ZEFR (4):
-                Zefr.
+                The value is unknown in this version.
+            ADD_ASSETS_TO_ASSETLESS_RETAIL (2):
+                The experiment is testing adding assets to
+                assetless retail PMax experiment.
+            ADD_VIDEO_ASSETS_TO_VIDEOLESS (3):
+                The experiment is testing adding video assets
+                to videoless PMax experiment.
+            COMPARE_ASSETS (4):
+                The experiment is testing comparing two
+                different sets of assets in a PMax experiment.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
-        DOUBLE_VERIFY = 2
-        INTEGRAL_AD_SCIENCE = 3
-        ZEFR = 4
+        ADD_ASSETS_TO_ASSETLESS_RETAIL = 2
+        ADD_VIDEO_ASSETS_TO_VIDEOLESS = 3
+        COMPARE_ASSETS = 4
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

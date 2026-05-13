@@ -25,25 +25,6 @@ from uuid import uuid4
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.types.experiment_service import (
-    ExperimentOperation,
-    MutateExperimentsResponse,
-)
-from google.ads.googleads.v24.services.types.experiment_arm_service import (
-    ExperimentArmOperation,
-    MutateExperimentArmsRequest,
-    MutateExperimentArmsResponse,
-)
-from google.ads.googleads.v24.resources.types.experiment import Experiment
-from google.ads.googleads.v24.resources.types.experiment_arm import (
-    ExperimentArm,
-)
-from google.ads.googleads.v24.services.services.experiment_service import (
-    ExperimentServiceClient,
-)
-from google.ads.googleads.v24.services.services.experiment_arm_service import (
-    ExperimentArmServiceClient,
-)
 from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateOperation,
 )
@@ -79,19 +60,19 @@ def main(
         print(f"Asset group with ID {asset_group_id} not found.")
         sys.exit(1)
 
-    # Temp IDs for asset creation
+    # Temp IDs
     ASSET_1_TEMP_ID = "-1"
-    ASSET_2_TEMP_ID = "-2"
+    EXPERIMENT_TEMP_ID = "-2"
+    ASSET_2_TEMP_ID = "-3"
 
     # [START create_asset_optimization_experiment_1]
-    # 1. Create Assets.
+    # 1. Create Assets with temporary resource names.
     # We create a text asset and an image asset to showcase different types.
-    # We execute the asset creation first to get real resource names.
     asset_operation_1 = create_text_asset_operation(
         client,
         customer_id,
         ASSET_1_TEMP_ID,
-        "Fly to Mars with Interplanetary Cruises!",
+        "Fly to Mars!",
     )
     asset_operation_2 = create_image_asset_operation(
         client,
@@ -101,22 +82,12 @@ def main(
         "Mars Landscape View",
     )
 
-    asset_response = googleads_service.mutate(
-        customer_id=customer_id,
-        mutate_operations=[asset_operation_1, asset_operation_2],
+    # 2. Create an Experiment with a temporary resource name.
+    experiment_operation = client.get_type("MutateOperation")
+    experiment = experiment_operation.experiment_operation.create
+    experiment.resource_name = googleads_service.experiment_path(
+        customer_id, EXPERIMENT_TEMP_ID
     )
-    headline_asset_resource_name = (
-        asset_response.mutate_operation_responses[0].asset_result.resource_name
-    )
-    image_asset_resource_name = (
-        asset_response.mutate_operation_responses[1].asset_result.resource_name
-    )
-
-    # 2. Create an Experiment using ExperimentService.
-    experiment_operation: ExperimentOperation = client.get_type(
-        "ExperimentOperation"
-    )
-    experiment: Experiment = experiment_operation.create
     experiment.name = f"Interstellar Asset Experiment #{uuid4()}"
     experiment.type_ = client.enums.ExperimentTypeEnum.OPTIMIZE_ASSETS
     # Set the optimize assets experiment subtype to COMPARE_ASSETS.
@@ -124,91 +95,81 @@ def main(
         client.enums.OptimizeAssetsExperimentSubtypeEnum.COMPARE_ASSETS
     )
 
-    experiment_service: ExperimentServiceClient = client.get_service(
-        "ExperimentService"
-    )
-    experiment_response: MutateExperimentsResponse = (
-        experiment_service.mutate_experiments(
-            customer_id=customer_id, operations=[experiment_operation]
-        )
-    )
-    experiment_resource_name: str = (
-        experiment_response.results[0].resource_name
-    )
-
-    # 3. Create two ExperimentArm resources using ExperimentArmService.
+    # 3. Create two ExperimentArm resources.
     treatment_assets = [
-        (headline_asset_resource_name, client.enums.AssetFieldTypeEnum.HEADLINE),
-        (image_asset_resource_name, client.enums.AssetFieldTypeEnum.MARKETING_IMAGE),
+        (ASSET_1_TEMP_ID, client.enums.AssetFieldTypeEnum.HEADLINE),
+        (ASSET_2_TEMP_ID, client.enums.AssetFieldTypeEnum.MARKETING_IMAGE),
     ]
     arm_operations = create_arms_operations(
         client,
         customer_id,
-        experiment_resource_name,
+        EXPERIMENT_TEMP_ID,
         campaign_resource_name,
         asset_group_id,
         treatment_assets,
     )
 
-    experiment_arm_service: ExperimentArmServiceClient = client.get_service(
-        "ExperimentArmService"
-    )
-    request: MutateExperimentArmsRequest = client.get_type(
-        "MutateExperimentArmsRequest"
-    )
-    request.customer_id = customer_id
-    request.operations = arm_operations
-    # We want to fetch the generated asset group IDs from the treatment arm, so the
-    # easiest way to do that is to have the response return the newly created entities.
-    request.response_content_type = (
-        client.enums.ResponseContentTypeEnum.MUTABLE_RESOURCE
-    )
-    arm_response: MutateExperimentArmsResponse = (
-        experiment_arm_service.mutate_experiment_arms(request=request)
-    )
-
-    control_arm_result = arm_response.results[0]
-    treatment_arm_result = arm_response.results[1]
-    treatment_asset_group_resource_name = (
-        treatment_arm_result.experiment_arm.asset_groups[0].asset_group
-    )
-
-    # 4. Create AssetGroupAssets linking the assets to the treatment experiment arm's asset group.
+    # 4. Create AssetGroupAssets linking the assets to the asset group.
     asset_group_asset_operation_1 = create_asset_group_asset_operation(
         client,
-        treatment_asset_group_resource_name,
-        headline_asset_resource_name,
+        customer_id,
+        asset_group_id,
+        ASSET_1_TEMP_ID,
         client.enums.AssetFieldTypeEnum.HEADLINE,
     )
     asset_group_asset_operation_2 = create_asset_group_asset_operation(
         client,
-        treatment_asset_group_resource_name,
-        image_asset_resource_name,
+        customer_id,
+        asset_group_id,
+        ASSET_2_TEMP_ID,
         client.enums.AssetFieldTypeEnum.MARKETING_IMAGE,
     )
 
-    aga_response = googleads_service.mutate(
+    # Send all operations in a single Mutate request.
+    # The operations must be in this specific order.
+    mutate_operations = [
+        asset_operation_1,
+        asset_operation_2,
+        experiment_operation,
+        *arm_operations,
+        asset_group_asset_operation_1,
+        asset_group_asset_operation_2,
+    ]
+
+    response = googleads_service.mutate(
         customer_id=customer_id,
-        mutate_operations=[
-            asset_group_asset_operation_1,
-            asset_group_asset_operation_2,
-        ],
+        mutate_operations=mutate_operations,
     )
     # [END create_asset_optimization_experiment_1]
 
     # Print the results.
-    print(f"Created headline asset: {headline_asset_resource_name}")
-    print(f"Created image asset: {image_asset_resource_name}")
-    print(f"Created experiment: {experiment_resource_name}")
-    print(f"Created control arm: {control_arm_result.resource_name}")
-    print(f"Created treatment arm: {treatment_arm_result.resource_name}")
+    print(
+        "Created headline asset:"
+        f" {response.mutate_operation_responses[0].asset_result.resource_name}"
+    )
+    print(
+        "Created image asset:"
+        f" {response.mutate_operation_responses[1].asset_result.resource_name}"
+    )
+    print(
+        "Created experiment:"
+        f" {response.mutate_operation_responses[2].experiment_result.resource_name}"
+    )
+    print(
+        "Created control arm:"
+        f" {response.mutate_operation_responses[3].experiment_arm_result.resource_name}"
+    )
+    print(
+        "Created treatment arm:"
+        f" {response.mutate_operation_responses[4].experiment_arm_result.resource_name}"
+    )
     print(
         "Created asset group asset for headline:"
-        f" {aga_response.mutate_operation_responses[0].asset_group_asset_result.resource_name}"
+        f" {response.mutate_operation_responses[5].asset_group_asset_result.resource_name}"
     )
     print(
         "Created asset group asset for image:"
-        f" {aga_response.mutate_operation_responses[1].asset_group_asset_result.resource_name}"
+        f" {response.mutate_operation_responses[6].asset_group_asset_result.resource_name}"
     )
 
 
@@ -245,22 +206,22 @@ def create_image_asset_operation(
 def create_arms_operations(
     client: GoogleAdsClient,
     customer_id: str,
-    experiment_resource_name: str,
+    experiment_temp_id: str,
     campaign_resource_name: str,
     asset_group_id: str,
     treatment_assets: List[Tuple[str, Any]],
-) -> List[ExperimentArmOperation]:
+) -> List[MutateOperation]:
     """Creates mutate operations for control and treatment arms."""
     googleads_service = client.get_service("GoogleAdsService")
     experiment_arm_type = client.get_type("ExperimentArm")
-    operations: List[ExperimentArmOperation] = []
+    operations = []
 
     # Control arm
-    control_operation: ExperimentArmOperation = client.get_type(
-        "ExperimentArmOperation"
+    control_operation = client.get_type("MutateOperation")
+    control = control_operation.experiment_arm_operation.create
+    control.experiment = googleads_service.experiment_path(
+        customer_id, experiment_temp_id
     )
-    control: ExperimentArm = control_operation.create
-    control.experiment = experiment_resource_name
     control.name = "Base Assets (Control)"
     control.control = True
     control.traffic_split = 50
@@ -274,25 +235,26 @@ def create_arms_operations(
     operations.append(control_operation)
 
     # Treatment arm
-    treatment_operation: ExperimentArmOperation = client.get_type(
-        "ExperimentArmOperation"
+    treatment_operation = client.get_type("MutateOperation")
+    treatment = treatment_operation.experiment_arm_operation.create
+    treatment.experiment = googleads_service.experiment_path(
+        customer_id, experiment_temp_id
     )
-    treatment: ExperimentArm = treatment_operation.create
-    treatment.experiment = experiment_resource_name
     treatment.name = "New Assets (Treatment)"
     treatment.control = False
     treatment.traffic_split = 50
-    # NOTE: Do not set treatment.campaigns, as the backend automatically creates
-    # the treatment campaign for Performance Max / OPTIMIZE_ASSETS experiments.
+    treatment.campaigns.append(campaign_resource_name)
 
     asset_group_info_treatment = experiment_arm_type.AssetGroupInfo()
     asset_group_info_treatment.asset_group = googleads_service.asset_group_path(
         customer_id, asset_group_id
     )
 
-    for asset_resource_name, field_type in treatment_assets:
+    for asset_temp_id, field_type in treatment_assets:
         asset_group_asset_info = experiment_arm_type.AssetGroupAssetInfo()
-        asset_group_asset_info.asset = asset_resource_name
+        asset_group_asset_info.asset = googleads_service.asset_path(
+            customer_id, asset_temp_id
+        )
         asset_group_asset_info.field_type = field_type
         asset_group_info_treatment.asset_group_assets.append(
             asset_group_asset_info
@@ -306,15 +268,19 @@ def create_arms_operations(
 
 def create_asset_group_asset_operation(
     client: GoogleAdsClient,
-    asset_group_resource_name: str,
-    asset_resource_name: str,
+    customer_id: str,
+    asset_group_id: str,
+    asset_temp_id: str,
     field_type: Any,
 ) -> MutateOperation:
     """Creates a mutate operation for an asset group asset."""
+    googleads_service = client.get_service("GoogleAdsService")
     operation = client.get_type("MutateOperation")
     aga = operation.asset_group_asset_operation.create
-    aga.asset_group = asset_group_resource_name
-    aga.asset = asset_resource_name
+    aga.asset_group = googleads_service.asset_group_path(
+        customer_id, asset_group_id
+    )
+    aga.asset = googleads_service.asset_path(customer_id, asset_temp_id)
     aga.field_type = field_type
     return operation
 

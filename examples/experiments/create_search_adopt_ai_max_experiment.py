@@ -49,7 +49,6 @@ def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
     experiment.resource_name = experiment_resource_name
     experiment.name = f"ADOPT_AI_MAX Experiment #{uuid4()}"
     experiment.type_ = client.enums.ExperimentTypeEnum.ADOPT_AI_MAX
-    experiment.status = client.enums.ExperimentStatusEnum.SETUP
 
     # Create the control arm. Both arms in an intra-campaign experiment
     # reference the same base campaign.

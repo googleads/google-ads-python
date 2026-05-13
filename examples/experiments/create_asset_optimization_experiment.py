@@ -76,7 +76,6 @@ def main(
     experiment.optimize_assets_experiment.optimize_assets_experiment_subtype = (
         client.enums.OptimizeAssetsExperimentSubtypeEnum.COMPARE_ASSETS
     )
-    experiment.status = client.enums.ExperimentStatusEnum.SETUP
 
     # 3. Create two ExperimentArm resources.
     treatment_assets = [

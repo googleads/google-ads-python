@@ -51,12 +51,9 @@ def main(
     search_response = googleads_service.search(
         customer_id=customer_id, query=query
     )
-    campaign_resource_name = None
-    for row in search_response:
-        campaign_resource_name = row.asset_group.campaign
-        break
-
-    if not campaign_resource_name:
+    if len(search_response):
+        campaign_resource_name = search_response[0].asset_group.campaign
+    else:
         print(f"Asset group with ID {asset_group_id} not found.")
         sys.exit(1)
 

@@ -42,6 +42,21 @@ def main(
     """
     googleads_service = client.get_service("GoogleAdsService")
 
+    # Query the asset group to find the associated campaign resource name.
+    query = f"""
+        SELECT asset_group.campaign
+        FROM asset_group
+        WHERE asset_group.id = {asset_group_id}
+    """
+    search_response = googleads_service.search(
+        customer_id=customer_id, query=query
+    )
+    if len(search_response):
+        campaign_resource_name = search_response[0].asset_group.campaign
+    else:
+        print(f"Asset group with ID {asset_group_id} not found.")
+        sys.exit(1)
+
     # Temp IDs
     ASSET_1_TEMP_ID = "-1"
     EXPERIMENT_TEMP_ID = "-2"
@@ -54,7 +69,7 @@ def main(
         client,
         customer_id,
         ASSET_1_TEMP_ID,
-        "Fly to Mars with Interplanetary Cruises!",
+        "Fly to Mars!",
     )
     asset_operation_2 = create_image_asset_operation(
         client,
@@ -76,7 +91,6 @@ def main(
     experiment.optimize_assets_experiment.optimize_assets_experiment_subtype = (
         client.enums.OptimizeAssetsExperimentSubtypeEnum.COMPARE_ASSETS
     )
-    experiment.status = client.enums.ExperimentStatusEnum.SETUP
 
     # 3. Create two ExperimentArm resources.
     treatment_assets = [
@@ -87,6 +101,7 @@ def main(
         client,
         customer_id,
         EXPERIMENT_TEMP_ID,
+        campaign_resource_name,
         asset_group_id,
         treatment_assets,
     )
@@ -189,6 +204,7 @@ def create_arms_operations(
     client: GoogleAdsClient,
     customer_id: str,
     experiment_temp_id: str,
+    campaign_resource_name: str,
     asset_group_id: str,
     treatment_assets: List[Tuple[str, Any]],
 ) -> List[MutateOperation]:
@@ -206,6 +222,7 @@ def create_arms_operations(
     control.name = "Base Assets (Control)"
     control.control = True
     control.traffic_split = 50
+    control.campaigns.append(campaign_resource_name)
 
     asset_group_info_control = experiment_arm_type.AssetGroupInfo()
     asset_group_info_control.asset_group = googleads_service.asset_group_path(
@@ -223,6 +240,7 @@ def create_arms_operations(
     treatment.name = "New Assets (Treatment)"
     treatment.control = False
     treatment.traffic_split = 50
+    treatment.campaigns.append(campaign_resource_name)
 
     asset_group_info_treatment = experiment_arm_type.AssetGroupInfo()
     asset_group_info_treatment.asset_group = googleads_service.asset_group_path(

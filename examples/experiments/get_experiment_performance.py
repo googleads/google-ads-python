@@ -92,14 +92,16 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
 
     results: SearchGoogleAdsResponse = ga_service.search(request=search_request)
 
+    experiment_found = False
     row: GoogleAdsRow
     # There should be at most one row.
     for row in results:
+        experiment_found = True
         print(f"Found experiment: {row.experiment.name}")
         print(f"  Resource Name: {row.experiment.resource_name}")
 
         evaluate_experiment(client, customer_id, row)
-    else:
+    if not experiment_found:
         print(f"No experiment found for experiment ID: {experiment_id}")
 
 

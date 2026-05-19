@@ -14,7 +14,7 @@
 # limitations under the License.
 """This example illustrates how to retrieve performance metrics for an experiment.
 
-It shows how to query statistical significance metrics for the experiment arms,
+It shows how to query statistical significance metrics for the experiment,
 and how to execute actions such as promoting, ending, or graduating an experiment.
 """
 
@@ -29,7 +29,8 @@ from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
 from google.ads.googleads.v24.services.types.google_ads_service import (
-    SearchGoogleAdsStreamResponse,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v24.services.services.experiment_service import (
@@ -62,15 +63,13 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
     """
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    # Query to retrieve both control and treatment arms under the parent experiment.
+    # Query to retrieve the experiment.
     # Notice that we request the statistical metrics (e.g., p-value, point estimate,
-    # margin of error) which are populated exclusively on the treatment arm row.
+    # margin of error) which are populated based on the treatment arm.
     query = f"""
         SELECT
-          experiment_arm.resource_name,
-          experiment_arm.name,
-          experiment_arm.control,
-          experiment_arm.traffic_split,
+          experiment.resource_name,
+          experiment.name,
           experiment.resource_name,
           experiment.experiment_id,
           experiment.type,
@@ -80,41 +79,37 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
           metrics.clicks_p_value,
           metrics.clicks_point_estimate,
           metrics.clicks_margin_of_error
-        FROM experiment_arm
+        FROM experiment
         WHERE experiment.experiment_id = {experiment_id}
     """
 
-    # Issues a search request using streaming.
-    stream: Iterator[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
-        customer_id=customer_id, query=query
+    # Issues a search request.
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
     )
+    search_request.customer_id = customer_id
+    search_request.query = query
 
-    has_results = False
-    for batch in stream:
-        rows: List[GoogleAdsRow] = batch.results
-        for row in rows:
-            has_results = True
-            print(f"Found experiment arm: {row.experiment_arm.name}")
-            print(f"  Resource Name: {row.experiment_arm.resource_name}")
-            print(f"  Control: {row.experiment_arm.control}")
-            print(f"  Traffic Split: {row.experiment_arm.traffic_split}%")
+    results: SearchGoogleAdsResponse = ga_service.search(request=search_request)
 
-            # Statistical evaluation is only valid on the treatment (non-control) arm
-            # because significance metrics are only populated relative to the baseline.
-            # Note: For intra-campaign/in-campaign experiments, only a single treatment row is
-            # returned (with control = False), since there is no separate control campaign.
-            if not row.experiment_arm.control:
-                evaluate_experiment(client, customer_id, row)
+    experiment_found = False
+    row: GoogleAdsRow
+    # There should be at most one row.
+    for row in results:
+        experiment_found = True
+        print(f"Found experiment: {row.experiment.name}")
+        print(f"  Resource Name: {row.experiment.resource_name}")
 
-    if not has_results:
-        print(f"No experiment arms found for experiment ID: {experiment_id}")
+        evaluate_experiment(client, customer_id, row)
+    if not experiment_found:
+        print(f"No experiment found for experiment ID: {experiment_id}")
 
 
 # [START get_experiment_performance_1]
 def evaluate_experiment(
     client: GoogleAdsClient, customer_id: str, row: GoogleAdsRow
 ) -> None:
-    """Evaluates the performance of the treatment experiment arm.
+    """Evaluates the performance of the experiment.
 
     Args:
         client: an initialized GoogleAdsClient instance.

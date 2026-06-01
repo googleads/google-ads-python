@@ -23,6 +23,7 @@ shopping_ads/add_performance_max_retail_campaign.py example.
 """
 
 import argparse
+import logging
 import sys
 from typing import Dict, List, Optional
 
@@ -45,6 +46,10 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
 from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # We specify temporary IDs that are specific to a single mutate request.
 # Temporary IDs are always negative and unique within one mutate request.

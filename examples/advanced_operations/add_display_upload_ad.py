@@ -18,9 +18,9 @@ To get ad groups, run get_ad_groups.py.
 """
 
 import argparse
-import sys
-
+import logging
 import requests
+import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -41,6 +41,10 @@ from google.ads.googleads.v24.services.types.asset_service import (
     AssetOperation,
     MutateAssetsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 BUNDLE_URL: str = "https://gaagl.page.link/ib87"
 

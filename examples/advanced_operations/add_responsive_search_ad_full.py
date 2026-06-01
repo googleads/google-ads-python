@@ -23,9 +23,10 @@ https://support.google.com/google-ads/answer/7684791
 """
 
 import argparse
+import logging
 import sys
-import uuid
 from typing import List, Optional
+import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -114,6 +115,10 @@ from google.ads.googleads.v24.services.types.customizer_attribute_service import
     CustomizerAttributeOperation,
     MutateCustomizerAttributesResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # Keywords from user.
 KEYWORD_TEXT_EXACT = "example of exact match"

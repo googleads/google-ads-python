@@ -18,6 +18,7 @@ If required and not already started, it also starts the verification process.
 """
 
 import argparse
+import logging
 import sys
 from typing import Optional
 
@@ -34,6 +35,9 @@ from google.ads.googleads.v24.services.types.identity_verification_service impor
     IdentityVerification,
     IdentityVerificationProgress,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

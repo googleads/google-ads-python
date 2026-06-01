@@ -23,6 +23,7 @@ for each accessible customer.
 """
 
 import argparse
+import logging
 import sys
 from typing import Optional, List, Dict
 
@@ -41,6 +42,10 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchPagedResponse,
     GoogleAdsRow,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # ListAccessibleCustomersResponse is not directly used for a variable type,
 # but its attribute .resource_names is used, which is List[str].

@@ -18,6 +18,7 @@ Note that the keywords will be attached to the specified campaign.
 """
 
 import argparse
+import logging
 import sys
 from typing import List
 import uuid
@@ -57,6 +58,9 @@ from google.ads.googleads.v24.services.types.shared_set_service import (
     MutateSharedSetsResponse,
     SharedSetOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

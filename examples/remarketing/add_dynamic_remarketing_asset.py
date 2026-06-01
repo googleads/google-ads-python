@@ -16,6 +16,7 @@
 
 import argparse
 from datetime import datetime
+import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -62,6 +63,9 @@ from google.ads.googleads.v24.services.types.campaign_asset_set_service import (
 from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

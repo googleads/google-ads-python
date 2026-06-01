@@ -21,6 +21,7 @@ See https://support.google.com/google-ads/answer/7620302 for more details.
 import argparse
 from datetime import datetime
 import hashlib
+import logging
 import sys
 from typing import List, Optional, Tuple
 
@@ -64,6 +65,9 @@ from google.ads.googleads.v24.services.types.offline_user_data_job_service impor
     CreateOfflineUserDataJobResponse,
     OfflineUserDataJobOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

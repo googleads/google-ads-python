@@ -18,6 +18,7 @@ These criteria will be applied to all campaigns for the given customer.
 """
 
 import argparse
+import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -32,6 +33,9 @@ from google.ads.googleads.v24.services.types.customer_negative_criterion_service
     CustomerNegativeCriterionOperation,
     MutateCustomerNegativeCriteriaResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

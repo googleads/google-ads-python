@@ -20,6 +20,7 @@ To set up a conversion action, run the add_conversion_action.py example.
 """
 
 import argparse
+import logging
 import sys
 from typing import Optional
 
@@ -38,6 +39,9 @@ from google.ads.googleads.v24.services.types.conversion_upload_service import (
     UploadClickConversionsRequest,
     UploadClickConversionsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START upload_offline_conversion]

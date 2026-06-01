@@ -19,6 +19,7 @@ all manager-owned and customer accessible bidding strategies.
 """
 
 import argparse
+import logging
 import sys
 from typing import Iterator
 from uuid import uuid4
@@ -56,6 +57,9 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
     SearchGoogleAdsStreamResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

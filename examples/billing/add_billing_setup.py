@@ -25,12 +25,16 @@ manager account and is linked to a customer account via a billing setup.
 
 import argparse
 from datetime import datetime, timedelta
+import logging
 import sys
 from typing import Any, Optional
 from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

@@ -178,30 +178,25 @@ def evaluate_experiment(
         if click_p_value <= P_VALUE_THRESHOLD and click_lower_bound > 0:
             # We have a directional winner: high confidence in more traffic,
             # but not enough data to confirm conversion impact yet.
-            print(
-                f"Click volume is significantly up (+{click_lift*100:.1f}%). "
-                "Graduating treatment for further manual analysis."
-            )
+            print(f"Click volume is significantly up (+{click_lift*100:.1f}%).")
 
-            # Graduate if it's a separate campaign test.
-            # This keeps the high-volume treatment running independently.
-            # Note that intra-campaign experiments (like ADOPT_BROAD_MATCH_KEYWORDS and
-            # ADOPT_AI_MAX) run directly within the base campaign, meaning there is only
-            # a single campaign involved and no separate treatment campaign to graduate.
-            # Therefore, graduation is not supported for intra-campaign experiments.
+            # Graduation is only supported for separate campaign experiments, not
+            # intra-campaign experiments where there is no separate treatment campaign.
             experiment_type_name = row.experiment.type_.name
             if (
                 experiment_type_name != "ADOPT_BROAD_MATCH_KEYWORDS"
                 and experiment_type_name != "ADOPT_AI_MAX"
             ):
+                print(
+                    "Graduating treatment campaign for further manual analysis."
+                )
                 graduate_experiment(
                     client, customer_id, experiment_resource_name
                 )
             else:
                 print(
-                    "Intra-campaign trial detected: Graduation is not supported"
-                    " because there is only one campaign. Continuing to run to"
-                    " gather more conversion data."
+                    "Intra-campaign trial detected: graduation is not supported. "
+                    "Continuing to run the experiment to gather more conversion data."
                 )
             return
 

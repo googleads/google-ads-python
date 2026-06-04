@@ -136,11 +136,6 @@ def evaluate_experiment(
     metrics = row.metrics
     experiment_resource_name = row.experiment.resource_name
 
-    # 1. Evaluate conversion success as a primary success signal.
-    # - Point Estimate: Represents the estimated average lift or difference in conversions.
-    # - Margin of Error: Outlines the confidence interval bounds. Note that the margin_of_error provided by the API is calculated for a preset confidence level which is set based on the experiment type.
-    # - Lower Bound: (Point Estimate - Margin of Error). If this value is above 0,
-    #   we have statistical significance that performance has improved.
     has_conv_metrics = (
         "conversions_absolute_change_p_value" in metrics
         and "conversions_absolute_change_point_estimate" in metrics
@@ -153,6 +148,10 @@ def evaluate_experiment(
     )
 
     # 1. Evaluate conversion success as a primary success signal if available.
+    # - Point Estimate: Represents the estimated average lift or difference in conversions.
+    # - Margin of Error: Outlines the confidence interval bounds. Note that the margin_of_error provided by the API is calculated for a preset confidence level which is set based on the experiment type.
+    # - Lower Bound: (Point Estimate - Margin of Error). If this value is above 0,
+    #   we have statistical significance that performance has improved.
     if has_conv_metrics:
         conv_p_value = metrics.conversions_absolute_change_p_value
         conv_lift = metrics.conversions_absolute_change_point_estimate
@@ -196,7 +195,7 @@ def evaluate_experiment(
 
             # Graduate if it's a separate campaign test.
             # This keeps the high-volume treatment running independently.
-            # Intra-campaign experiments (like ADOPT_BROAD_MATCH_KEYWORDS and
+            # Note that intra-campaign experiments (like ADOPT_BROAD_MATCH_KEYWORDS and
             # ADOPT_AI_MAX) run directly within the base campaign, meaning there is only
             # a single campaign involved and no separate treatment campaign to graduate.
             # Therefore, graduation is not supported for intra-campaign experiments.

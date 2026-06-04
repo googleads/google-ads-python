@@ -15,14 +15,13 @@
 """Retrieves performance metrics for an experiment, evaluates the performance,
 and takes action on the experiment accordingly.
 
-Queries statistical significance metrics for the experiment arms and executes
-actions such as promoting, ending, or graduating an experiment.
+It shows how to query statistical significance metrics for the experiment,
+and how to execute actions such as promoting, ending, or graduating an experiment.
 """
 
 import argparse
 import sys
 import uuid
-from typing import Iterator, List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -30,7 +29,8 @@ from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
 from google.ads.googleads.v24.services.types.google_ads_service import (
-    SearchGoogleAdsStreamResponse,
+    SearchGoogleAdsRequest,
+    SearchGoogleAdsResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v24.services.services.experiment_service import (
@@ -57,9 +57,6 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
     """Queries experiment performance, evaluates the performance metrics, and updates
     the experiment accordingly (graduates, promotes, ends, or allows to continue running).
 
-    While it retrieves metrics for all experiment arms, the evaluation logic focuses
-    on the treatment arms where statistical significance metrics are available.
-
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
@@ -67,16 +64,13 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
     """
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    # Query to retrieve all arms associated with the experiment.
-    # Note that statistical significance metrics (e.g., p-value, point estimate)
-    # are only populated on treatment arm rows, relative to the control arm.
+    # Query to retrieve the experiment.
+    # Notice that we request the statistical metrics (e.g., p-value, point estimate,
+    # margin of error) which are populated based on the treatment arm.
     query = f"""
         SELECT
-          experiment_arm.resource_name,
-          experiment_arm.name,
-          experiment_arm.control,
-          experiment_arm.traffic_split,
           experiment.resource_name,
+          experiment.name,
           experiment.experiment_id,
           experiment.type,
           metrics.conversions_absolute_change_p_value,
@@ -85,42 +79,38 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
           metrics.clicks_p_value,
           metrics.clicks_point_estimate,
           metrics.clicks_margin_of_error
-        FROM experiment_arm
+        FROM experiment
         WHERE experiment.experiment_id = {experiment_id}
     """
 
-    # Issues a search request using streaming.
-    stream: Iterator[SearchGoogleAdsStreamResponse] = ga_service.search_stream(
-        customer_id=customer_id, query=query
+    # Issues a search request.
+    search_request: SearchGoogleAdsRequest = client.get_type(
+        "SearchGoogleAdsRequest"
     )
+    search_request.customer_id = customer_id
+    search_request.query = query
 
-    has_results = False
-    for batch in stream:
-        rows: List[GoogleAdsRow] = batch.results
-        for row in rows:
-            has_results = True
-            print(f"Found experiment arm: {row.experiment_arm.name}")
-            print(f"  Resource Name: {row.experiment_arm.resource_name}")
-            print(f"  Control: {row.experiment_arm.control}")
-            print(f"  Traffic Split: {row.experiment_arm.traffic_split}%")
+    results: SearchGoogleAdsResponse = ga_service.search(request=search_request)
 
-            # Statistical evaluation is only valid on the treatment (non-control) arm
-            # because significance metrics are only populated relative to the baseline.
-            # Note: For intra-campaign/in-campaign experiments, both control and treatment arm
-            # rows are returned, but evaluation is only performed on the treatment arm row.
-            if not row.experiment_arm.control:
-                evaluate_experiment(client, customer_id, row)
+    experiment_found = False
+    row: GoogleAdsRow
+    # There should be at most one row.
+    for row in results:
+        experiment_found = True
+        print(f"Found experiment: {row.experiment.name}")
+        print(f"  Resource Name: {row.experiment.resource_name}")
 
-    if not has_results:
-        print(f"No experiment arms found for experiment ID: {experiment_id}")
+        evaluate_experiment(client, customer_id, row)
+    if not experiment_found:
+        print(f"No experiment found for experiment ID: {experiment_id}")
 
 
 # [START evaluate_and_update_experiment_1]
 def evaluate_experiment(
     client: GoogleAdsClient, customer_id: str, row: GoogleAdsRow
 ) -> None:
-    """Evaluates the performance of the treatment experiment arm and updates
-    the experiment accordingly (e.g. promotes, ends, or graduates).
+    """Evaluates the performance of the experiment and updates it accordingly
+    (e.g. promotes, ends, or graduates).
 
     Checks conversion and click metrics against statistical significance thresholds
     to determine the appropriate action to take on the experiment.
@@ -128,7 +118,7 @@ def evaluate_experiment(
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
-        row: a GoogleAdsRow containing the experiment arm and metrics.
+        row: a GoogleAdsRow containing the experiment and metrics.
     """
     # This function evaluates performance metrics and immediately takes action
     # to update the experiment's status (promote, end, or graduate) if

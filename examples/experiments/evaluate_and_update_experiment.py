@@ -222,7 +222,7 @@ def evaluate_experiment(
         )
     else:
         print(
-            "Conversions and Clicks performance metrics are not yet populated. "
+            "Conversion and click performance metrics are not yet populated. "
             "Continue running."
         )
         # [END evaluate_and_update_experiment_1]

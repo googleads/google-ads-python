@@ -65,7 +65,7 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
     # Query to retrieve the experiment.
-    # Notice that we request the statistical metrics (e.g., p-value, point estimate,
+    # Notice that we request the statistical metrics (for example, p-value, point estimate,
     # margin of error) which are populated based on the treatment arm.
     query = f"""
         SELECT
@@ -110,7 +110,7 @@ def evaluate_experiment(
     client: GoogleAdsClient, customer_id: str, row: GoogleAdsRow
 ) -> None:
     """Evaluates the performance of the experiment and updates it accordingly
-    (e.g. promotes, ends, or graduates).
+    (for example, promotes, ends, or graduates).
 
     Checks conversion and click metrics against statistical significance thresholds
     to determine the appropriate action to take on the experiment.
@@ -218,12 +218,12 @@ def evaluate_experiment(
         )
         print(
             f"Inconclusive: No significant action taken. {conv_status}, {click_status}."
-            " Continue running."
+            " Allowing the experiment to continue running."
         )
     else:
         print(
             "Conversion and click performance metrics are not yet populated. "
-            "Continue running."
+            "Allowing the experiment to continue running."
         )
         # [END evaluate_and_update_experiment_1]
 
@@ -346,7 +346,7 @@ def graduate_experiment(
         )
         return
 
-    # 3. Build the Graduation Mapping and execute the graduation request.
+    # 3. Build the budget mapping and execute the graduation request.
     experiment_service: ExperimentServiceClient = client.get_service(
         "ExperimentService"
     )
@@ -370,7 +370,8 @@ def graduate_experiment(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description=(
-            "Lists and evaluates performance metrics for a campaign experiment."
+            "Retrieves performance metrics for an experiment, evaluates the"
+            " performance and takes action on the experiment accordingly."
         )
     )
     # The following argument(s) should be provided to run the example.

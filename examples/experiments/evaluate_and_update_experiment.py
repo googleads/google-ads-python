@@ -12,10 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example illustrates how to retrieve performance metrics for an experiment.
+"""Retrieves performance metrics for an experiment, evaluates the performance,
+and takes action on the experiment accordingly.
 
-It shows how to query statistical significance metrics for the experiment arms,
-and how to execute actions such as promoting, ending, or graduating an experiment.
+Queries statistical significance metrics for the experiment arms and executes
+actions such as promoting, ending, or graduating an experiment.
 """
 
 import argparse
@@ -53,7 +54,11 @@ P_VALUE_THRESHOLD = 0.05  # 95% confidence level
 
 
 def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
-    """The main method that queries the experiment performance and evaluates it.
+    """Queries experiment performance, evaluates the performance metrics, and updates
+    the experiment accordingly (graduates, promotes, ends, or allows to continue running).
+
+    While it retrieves metrics for all experiment arms, the evaluation logic focuses
+    on the treatment arms where statistical significance metrics are available.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -62,9 +67,9 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
     """
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
 
-    # Query to retrieve both control and treatment arms under the parent experiment.
-    # Notice that we request the statistical metrics (e.g., p-value, point estimate,
-    # margin of error) which are populated exclusively on the treatment arm row.
+    # Query to retrieve all arms associated with the experiment.
+    # Note that statistical significance metrics (e.g., p-value, point estimate)
+    # are only populated on treatment arm rows, relative to the control arm.
     query = f"""
         SELECT
           experiment_arm.resource_name,
@@ -101,8 +106,8 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
 
             # Statistical evaluation is only valid on the treatment (non-control) arm
             # because significance metrics are only populated relative to the baseline.
-            # Note: For intra-campaign/in-campaign experiments, only a single treatment row is
-            # returned (with control = False), since there is no separate control campaign.
+            # Note: For intra-campaign/in-campaign experiments, both control and treatment arm
+            # rows are returned, but evaluation is only performed on the treatment arm row.
             if not row.experiment_arm.control:
                 evaluate_experiment(client, customer_id, row)
 
@@ -110,17 +115,24 @@ def main(client: GoogleAdsClient, customer_id: str, experiment_id: str) -> None:
         print(f"No experiment arms found for experiment ID: {experiment_id}")
 
 
-# [START get_experiment_performance_1]
+# [START evaluate_and_update_experiment_1]
 def evaluate_experiment(
     client: GoogleAdsClient, customer_id: str, row: GoogleAdsRow
 ) -> None:
-    """Evaluates the performance of the treatment experiment arm.
+    """Evaluates the performance of the treatment experiment arm and updates
+    the experiment accordingly (e.g. promotes, ends, or graduates).
+
+    Checks conversion and click metrics against statistical significance thresholds
+    to determine the appropriate action to take on the experiment.
 
     Args:
         client: an initialized GoogleAdsClient instance.
         customer_id: a client customer ID.
         row: a GoogleAdsRow containing the experiment arm and metrics.
     """
+    # This function evaluates performance metrics and immediately takes action
+    # to update the experiment's status (promote, end, or graduate) if
+    # statistical significance thresholds are met.
     metrics = row.metrics
     experiment_resource_name = row.experiment.resource_name
 
@@ -129,71 +141,107 @@ def evaluate_experiment(
     # - Margin of Error: Outlines the confidence interval bounds. Note that the margin_of_error provided by the API is calculated for a preset confidence level which is set based on the experiment type.
     # - Lower Bound: (Point Estimate - Margin of Error). If this value is above 0,
     #   we have statistical significance that performance has improved.
-    conv_p_value = metrics.conversions_absolute_change_p_value
-    conv_lift = metrics.conversions_absolute_change_point_estimate
-    conv_error = metrics.conversions_absolute_change_margin_of_error
-    conv_lower_bound = conv_lift - conv_error
+    has_conv_metrics = (
+        "conversions_absolute_change_p_value" in metrics
+        and "conversions_absolute_change_point_estimate" in metrics
+        and "conversions_absolute_change_margin_of_error" in metrics
+    )
+    has_click_metrics = (
+        "clicks_p_value" in metrics
+        and "clicks_point_estimate" in metrics
+        and "clicks_margin_of_error" in metrics
+    )
 
-    if conv_p_value <= P_VALUE_THRESHOLD:
-        if conv_lower_bound > 0:
+    # 1. Evaluate conversion success as a primary success signal if available.
+    if has_conv_metrics:
+        conv_p_value = metrics.conversions_absolute_change_p_value
+        conv_lift = metrics.conversions_absolute_change_point_estimate
+        conv_error = metrics.conversions_absolute_change_margin_of_error
+        conv_lower_bound = conv_lift - conv_error
+
+        if conv_p_value <= P_VALUE_THRESHOLD:
+            if conv_lower_bound > 0:
+                print(
+                    "Significant Success: Conversions increased. Even at the lower"
+                    f" bound, the lift is {conv_lower_bound:.2f}. Promoting"
+                    " changes."
+                )
+                promote_experiment(
+                    client, customer_id, experiment_resource_name
+                )
+                return
+            elif (conv_lift + conv_error) < 0:
+                print(
+                    "Significant Decline: Even the upper bound"
+                    f" ({conv_lift + conv_error:.2f}) is below zero. Ending"
+                    " experiment."
+                )
+                end_experiment(client, customer_id, experiment_resource_name)
+                return
+
+        # 2. Evaluate click volume as a secondary signal.
+        # This is helpful as an early indicator or for lower-volume accounts.
+        click_p_value = metrics.clicks_p_value
+        click_lift = metrics.clicks_point_estimate
+        click_error = metrics.clicks_margin_of_error
+        click_lower_bound = click_lift - click_error
+
+        if click_p_value <= P_VALUE_THRESHOLD and click_lower_bound > 0:
+            # We have a directional winner: high confidence in more traffic,
+            # but not enough data to confirm conversion impact yet.
             print(
-                "Significant Success: Conversions increased. Even at the lower"
-                f" bound, the lift is {conv_lower_bound:.2f}. Promoting"
-                " changes."
+                f"Click volume is significantly up (+{click_lift*100:.1f}%). "
+                "Graduating treatment for further manual analysis."
             )
-            promote_experiment(client, customer_id, experiment_resource_name)
-            return
-        elif (conv_lift + conv_error) < 0:
-            print(
-                "Significant Decline: Even the upper bound"
-                f" ({conv_lift + conv_error:.2f}) is below zero. Ending"
-                " experiment."
-            )
-            end_experiment(client, customer_id, experiment_resource_name)
+
+            # Graduate if it's a separate campaign test.
+            # This keeps the high-volume treatment running independently.
+            # Intra-campaign experiments (like ADOPT_BROAD_MATCH_KEYWORDS and
+            # ADOPT_AI_MAX) run directly within the base campaign, meaning there is only
+            # a single campaign involved and no separate treatment campaign to graduate.
+            # Therefore, graduation is not supported for intra-campaign experiments.
+            experiment_type_name = row.experiment.type_.name
+            if (
+                experiment_type_name != "ADOPT_BROAD_MATCH_KEYWORDS"
+                and experiment_type_name != "ADOPT_AI_MAX"
+            ):
+                graduate_experiment(
+                    client, customer_id, experiment_resource_name
+                )
+            else:
+                print(
+                    "Intra-campaign trial detected: Graduation is not supported"
+                    " because there is only one campaign. Continuing to run to"
+                    " gather more conversion data."
+                )
             return
 
-    # 2. Evaluate click volume as a secondary signal.
-    # This is helpful as an early indicator or for lower-volume accounts.
-    click_p_value = metrics.clicks_p_value
-    click_lift = metrics.clicks_point_estimate
-    click_error = metrics.clicks_margin_of_error
-    click_lower_bound = click_lift - click_error
-
-    if click_p_value <= P_VALUE_THRESHOLD and click_lower_bound > 0:
-        # We have a directional winner: high confidence in more traffic,
-        # but not enough data to confirm conversion impact yet.
-        print(
-            f"Click volume is significantly up (+{click_lift*100:.1f}%). "
-            "Graduating treatment for further manual analysis."
+    # 3. Print status if no action was taken.
+    if has_conv_metrics or has_click_metrics:
+        conv_status = (
+            f"Conversions (p={metrics.conversions_absolute_change_p_value:.2f}, "
+            f"lift={metrics.conversions_absolute_change_point_estimate:.2f} +/- "
+            f"{metrics.conversions_absolute_change_margin_of_error:.2f})"
+            if has_conv_metrics
+            else "Conversions (not populated)"
         )
-
-        # Graduate if it's a separate campaign test.
-        # This keeps the high-volume treatment running independently.
-        # Intra-campaign experiments (like ADOPT_BROAD_MATCH_KEYWORDS and
-        # ADOPT_AI_MAX) run directly within the base campaign, meaning there is only
-        # a single campaign involved and no separate treatment campaign to graduate.
-        # Therefore, graduation is not supported for intra-campaign experiments.
-        experiment_type_name = row.experiment.type_.name
-        if (
-            experiment_type_name != "ADOPT_BROAD_MATCH_KEYWORDS"
-            and experiment_type_name != "ADOPT_AI_MAX"
-        ):
-            graduate_experiment(client, customer_id, experiment_resource_name)
-        else:
-            print(
-                "Intra-campaign trial detected: Graduation is not supported"
-                " because there is only one campaign. Continuing to run to"
-                " gather more conversion data."
-            )
-    else:
-        # Both conversions and clicks are noisy.
+        click_status = (
+            f"Clicks (p={metrics.clicks_p_value:.2f}, "
+            f"lift={metrics.clicks_point_estimate:.2f} +/- "
+            f"{metrics.clicks_margin_of_error:.2f})"
+            if has_click_metrics
+            else "Clicks (not populated)"
+        )
         print(
-            "Inconclusive: No significant lift in Conversions"
-            f" (p={conv_p_value:.2f}) or Clicks (p={click_p_value:.2f})."
-            f" Current estimated lift: {conv_lift:.2f} +/- {conv_error:.2f}."
+            f"Inconclusive: No significant action taken. {conv_status}, {click_status}."
             " Continue running."
         )
-        # [END get_experiment_performance_1]
+    else:
+        print(
+            "Conversions and Clicks performance metrics are not yet populated. "
+            "Continue running."
+        )
+        # [END evaluate_and_update_experiment_1]
 
 
 def promote_experiment(
@@ -201,8 +249,9 @@ def promote_experiment(
 ) -> None:
     """Promotes the experiment trial campaign to the base campaign.
 
-    Promotion is an asynchronous long-running process that copies the trial campaign's
-    settings and creatives back to the base campaign and subsequently ends the experiment.
+    Promotion is an asynchronous long-running process that copies the trial
+    campaign's settings and creatives back to the base campaign and subsequently
+    ends the experiment.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -213,6 +262,12 @@ def promote_experiment(
         "ExperimentService"
     )
     # This method returns a long running operation (LRO).
+    # - To block until the operation is complete: call operation.result()
+    # - For non-blocking status checks: use operation.done()
+    # - For manual polling or persistent tracking: store operation.operation.name
+    #
+    # For more information on handling LROs, see:
+    # https://developers.google.com/google-ads/api/docs/concepts/long-running-operations
     operation = experiment_service.promote_experiment(
         resource_name=experiment_resource_name
     )
@@ -232,8 +287,7 @@ def end_experiment(
 ) -> None:
     """Immediately ends the experiment.
 
-    This sets the scheduled end date of the experiment to the current date and time,
-    terminating further traffic split serving without waiting for the end of the day.
+    Terminates the traffic split and sets the end date to the current time.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -250,7 +304,9 @@ def end_experiment(
 def graduate_experiment(
     client: GoogleAdsClient, customer_id: str, experiment_resource_name: str
 ) -> None:
-    """Graduates the experiment to a full campaign.
+    """Graduates the experiment to a full standalone campaign.
+
+    This process involves creating a new budget and mapping the treatment campaign to it.
 
     Args:
         client: an initialized GoogleAdsClient instance.
@@ -281,6 +337,7 @@ def graduate_experiment(
     # 2. Query the experiment_arm to retrieve the treatment campaign's resource name.
     # The treatment arm has control set to False.
     ga_service: GoogleAdsServiceClient = client.get_service("GoogleAdsService")
+    # Query for the campaigns associated with the treatment arm of the experiment.
     query = f"""
         SELECT
           experiment_arm.campaigns
@@ -290,12 +347,14 @@ def graduate_experiment(
     """
     search_response = ga_service.search(customer_id=customer_id, query=query)
 
+    # Find the resource name of the treatment campaign.
     treatment_campaign_resource_name = None
     for row in search_response:
         if row.experiment_arm.campaigns:
             treatment_campaign_resource_name = row.experiment_arm.campaigns[0]
             break
 
+    # Verify that a treatment campaign was found.
     if not treatment_campaign_resource_name:
         print(
             "Could not find the treatment campaign associated with this"
@@ -303,7 +362,7 @@ def graduate_experiment(
         )
         return
 
-    # 3. Build the Graduation Mapping and execute.
+    # 3. Build the Graduation Mapping and execute the graduation request.
     experiment_service: ExperimentServiceClient = client.get_service(
         "ExperimentService"
     )

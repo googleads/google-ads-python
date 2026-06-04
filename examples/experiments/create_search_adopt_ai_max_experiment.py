@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example shows how to create an ADOPT_AI_MAX intra-campaign experiment for a Search campaign.
+"""Creates an ADOPT_AI_MAX intra-campaign experiment for a Search campaign.
 
 Intra-campaign experiments split traffic *within* the campaign, based on whether
 the feature (in this case, AI Max) is enabled or not.
@@ -75,6 +75,8 @@ def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:
 
     # Create a campaign operation with an update mask to enable AI Max and
     # configure asset automation settings.
+    # Note: For intra-campaign experiments, these settings are applied to the
+    # base campaign but are only active for the treatment traffic split.
     campaign_operation = client.get_type("MutateOperation")
     campaign = campaign_operation.campaign_operation.update
     campaign.resource_name = googleads_service.campaign_path(

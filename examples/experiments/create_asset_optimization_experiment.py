@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example shows how to create an OPTIMIZE_ASSETS experiment.
+"""Creates an OPTIMIZE_ASSETS experiment.
 
 Asset optimization experiments are used to test different asset combinations
 within Performance Max campaigns.

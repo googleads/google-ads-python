@@ -13,15 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This example creates a standard, system-managed campaign experiment.
+"""Creates a standard, system-managed campaign experiment of type SEARCH_CUSTOM.
 
-It demonstrates how to create an experiment, configure its control and treatment
-arms (where the treatment arm automatically generates a draft campaign), modify
-the system-generated draft campaign, and schedule the experiment.
+Sets up the experiment, configures control and treatment arms (where the
+treatment arm automatically generates a draft campaign), modifies the
+system-generated draft campaign, and schedules the experiment.
 
-Note: This standard draft-based workflow does not apply to all experiment types
-(e.g., intra-campaign or asset optimization experiments) that do not use system-generated
-treatment campaign copies.
+Note: This standard draft-based workflow applies only to experiment types
+that use system-generated treatment campaign copies, and excludes
+intra-campaign or asset optimization experiments.
 """
 
 import argparse

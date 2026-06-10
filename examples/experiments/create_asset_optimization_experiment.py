@@ -131,9 +131,9 @@ def main(
         asset_operation_1,
         asset_operation_2,
         experiment_operation,
-        *arm_operations,
         asset_group_asset_operation_1,
         asset_group_asset_operation_2,
+        *arm_operations,
     ]
 
     response = googleads_service.mutate(
@@ -156,20 +156,20 @@ def main(
         f" {response.mutate_operation_responses[2].experiment_result.resource_name}"
     )
     print(
-        "Created control arm:"
-        f" {response.mutate_operation_responses[3].experiment_arm_result.resource_name}"
-    )
-    print(
-        "Created treatment arm:"
-        f" {response.mutate_operation_responses[4].experiment_arm_result.resource_name}"
-    )
-    print(
         "Created asset group asset for headline:"
-        f" {response.mutate_operation_responses[5].asset_group_asset_result.resource_name}"
+        f" {response.mutate_operation_responses[3].asset_group_asset_result.resource_name}"
     )
     print(
         "Created asset group asset for image:"
-        f" {response.mutate_operation_responses[6].asset_group_asset_result.resource_name}"
+        f" {response.mutate_operation_responses[4].asset_group_asset_result.resource_name}"
+    )
+    print(
+        "Created control arm:"
+        f" {response.mutate_operation_responses[5].experiment_arm_result.resource_name}"
+    )
+    print(
+        "Created treatment arm:"
+        f" {response.mutate_operation_responses[6].experiment_arm_result.resource_name}"
     )
 
 

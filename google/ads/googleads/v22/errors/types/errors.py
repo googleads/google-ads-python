@@ -366,6 +366,9 @@ from google.ads.googleads.v22.errors.types import (
     merchant_center_error as gage_merchant_center_error,
 )
 from google.ads.googleads.v22.errors.types import (
+    multi_party_auth_review_error as gage_multi_party_auth_review_error,
+)
+from google.ads.googleads.v22.errors.types import (
     multiplier_error as gage_multiplier_error,
 )
 from google.ads.googleads.v22.errors.types import (
@@ -495,7 +498,8 @@ from google.ads.googleads.v22.errors.types import (
 from google.ads.googleads.v22.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
-import google.protobuf.duration_pb2 as duration_pb2  # type: ignore
+from google.protobuf import duration_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.errors",
@@ -1296,6 +1300,11 @@ class ErrorCode(proto.Message):
         asset_generation_error (google.ads.googleads.v22.errors.types.AssetGenerationErrorEnum.AssetGenerationError):
             The reasons for the GenAI asset generation
             error.
+
+            This field is a member of `oneof`_ ``error_code``.
+        multi_party_auth_review_error (google.ads.googleads.v22.errors.types.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError):
+            The reasons for the multi party auth review
+            error
 
             This field is a member of `oneof`_ ``error_code``.
     """
@@ -2569,6 +2578,14 @@ class ErrorCode(proto.Message):
         number=194,
         oneof="error_code",
         enum=gage_asset_generation_error.AssetGenerationErrorEnum.AssetGenerationError,
+    )
+    multi_party_auth_review_error: (
+        gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError
+    ) = proto.Field(
+        proto.ENUM,
+        number=200,
+        oneof="error_code",
+        enum=gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError,
     )
 
 

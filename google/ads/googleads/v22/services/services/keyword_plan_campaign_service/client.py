@@ -62,7 +62,7 @@ _LOGGER = std_logging.getLogger(__name__)
 from google.ads.googleads.v22.services.types import (
     keyword_plan_campaign_service,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     KeywordPlanCampaignServiceTransport,
     DEFAULT_CLIENT_INFO,

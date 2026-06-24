@@ -28,6 +28,7 @@ from google.ads.googleads.v21.enums.types import (
     keyword_plan_network as gage_keyword_plan_network,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",

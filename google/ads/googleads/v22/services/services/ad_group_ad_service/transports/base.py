@@ -27,7 +27,7 @@ from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
 from google.ads.googleads.v22.services.types import ad_group_ad_service
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
     gapic_version=package_version.__version__
@@ -83,6 +83,8 @@ class AdGroupAdServiceTransport(abc.ABC):
                 be used for service account credentials.
         """
 
+        scopes_kwargs = {"scopes": scopes, "default_scopes": self.AUTH_SCOPES}
+
         # Save the scopes.
         self._scopes = scopes
         if not hasattr(self, "_ignore_credentials"):
@@ -98,15 +100,12 @@ class AdGroupAdServiceTransport(abc.ABC):
         if credentials_file is not None:
             credentials, _ = google.auth.load_credentials_from_file(
                 credentials_file,
-                scopes=scopes,
+                **scopes_kwargs,
                 quota_project_id=quota_project_id,
-                default_scopes=self.AUTH_SCOPES,
             )
         elif credentials is None and not self._ignore_credentials:
             credentials, _ = google.auth.default(
-                scopes=scopes,
-                quota_project_id=quota_project_id,
-                default_scopes=self.AUTH_SCOPES,
+                **scopes_kwargs, quota_project_id=quota_project_id
             )
             # Don't apply audience if the credentials file passed from user.
             if hasattr(credentials, "with_gdch_audience"):

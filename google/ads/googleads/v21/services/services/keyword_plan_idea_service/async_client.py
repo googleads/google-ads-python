@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -110,12 +111,7 @@ class KeywordPlanIdeaServiceAsyncClient:
         Returns:
             KeywordPlanIdeaServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            KeywordPlanIdeaServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            KeywordPlanIdeaServiceAsyncClient, info, *args, **kwargs
-        )
+        return KeywordPlanIdeaServiceClient.from_service_account_info.__func__(KeywordPlanIdeaServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -131,12 +127,7 @@ class KeywordPlanIdeaServiceAsyncClient:
         Returns:
             KeywordPlanIdeaServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            KeywordPlanIdeaServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            KeywordPlanIdeaServiceAsyncClient, filename, *args, **kwargs
-        )
+        return KeywordPlanIdeaServiceClient.from_service_account_file.__func__(KeywordPlanIdeaServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

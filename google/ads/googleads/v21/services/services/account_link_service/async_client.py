@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -36,7 +37,7 @@ from google.ads.googleads.v21.resources.types import (
     account_link as gagr_account_link,
 )
 from google.ads.googleads.v21.services.types import account_link_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import AccountLinkServiceTransport, DEFAULT_CLIENT_INFO
 from .client import AccountLinkServiceClient
 
@@ -114,12 +115,7 @@ class AccountLinkServiceAsyncClient:
         Returns:
             AccountLinkServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            AccountLinkServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            AccountLinkServiceAsyncClient, info, *args, **kwargs
-        )
+        return AccountLinkServiceClient.from_service_account_info.__func__(AccountLinkServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -135,12 +131,7 @@ class AccountLinkServiceAsyncClient:
         Returns:
             AccountLinkServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            AccountLinkServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            AccountLinkServiceAsyncClient, filename, *args, **kwargs
-        )
+        return AccountLinkServiceClient.from_service_account_file.__func__(AccountLinkServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

@@ -2599,6 +2599,30 @@
         }
       }
     },
+    "MultiPartyAuthReviewService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MultiPartyAuthReviewServiceClient",
+          "rpcs": {
+            "ResolveMultiPartyAuthReview": {
+              "methods": [
+                "resolve_multi_party_auth_review"
+              ]
+            }
+          }
+        },
+        "grpc-async": {
+          "libraryClient": "MultiPartyAuthReviewServiceAsyncClient",
+          "rpcs": {
+            "ResolveMultiPartyAuthReview": {
+              "methods": [
+                "resolve_multi_party_auth_review"
+              ]
+            }
+          }
+        }
+      }
+    },
     "OfflineUserDataJobService": {
       "clients": {
         "grpc": {

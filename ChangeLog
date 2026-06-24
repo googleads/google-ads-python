@@ -1,3 +1,9 @@
+* 31.1.0
+- Google Ads API v24_2 release.
+- Update experiments examples to support new functionality.
+- Move the ResumableUploadErrorAdapter class to the errors.py file.
+- Add examples and functionality to support Multi-party approval (MPA).
+
 * 31.0.0
 - Google Ads API v24_1 release.
 - Remove Google Ads API v20.

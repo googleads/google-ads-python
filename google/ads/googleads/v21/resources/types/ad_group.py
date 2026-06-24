@@ -35,6 +35,7 @@ from google.ads.googleads.v21.enums.types import demand_gen_channel_config
 from google.ads.googleads.v21.enums.types import demand_gen_channel_strategy
 from google.ads.googleads.v21.enums.types import targeting_dimension
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

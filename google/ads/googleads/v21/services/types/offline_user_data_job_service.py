@@ -21,7 +21,8 @@ import proto  # type: ignore
 
 from google.ads.googleads.v21.common.types import offline_user_data
 from google.ads.googleads.v21.resources.types import offline_user_data_job
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",

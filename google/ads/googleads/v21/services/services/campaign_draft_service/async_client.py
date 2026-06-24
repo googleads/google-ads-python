@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -36,10 +37,10 @@ from google.ads.googleads.v21.services.services.campaign_draft_service import (
     pagers,
 )
 from google.ads.googleads.v21.services.types import campaign_draft_service
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import CampaignDraftServiceTransport, DEFAULT_CLIENT_INFO
 from .client import CampaignDraftServiceClient
 
@@ -121,12 +122,7 @@ class CampaignDraftServiceAsyncClient:
         Returns:
             CampaignDraftServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            CampaignDraftServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            CampaignDraftServiceAsyncClient, info, *args, **kwargs
-        )
+        return CampaignDraftServiceClient.from_service_account_info.__func__(CampaignDraftServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -142,12 +138,7 @@ class CampaignDraftServiceAsyncClient:
         Returns:
             CampaignDraftServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            CampaignDraftServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            CampaignDraftServiceAsyncClient, filename, *args, **kwargs
-        )
+        return CampaignDraftServiceClient.from_service_account_file.__func__(CampaignDraftServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

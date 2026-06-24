@@ -62,8 +62,8 @@ _LOGGER = std_logging.getLogger(__name__)
 
 from google.ads.googleads.v22.services.services.google_ads_service import pagers
 from google.ads.googleads.v22.services.types import google_ads_service
-import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import GoogleAdsServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import GoogleAdsServiceGrpcTransport
 from .transports.grpc_asyncio import GoogleAdsServiceGrpcAsyncIOTransport
@@ -3269,6 +3269,26 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
     def parse_mobile_device_constant_path(path: str) -> Dict[str, str]:
         """Parses a mobile_device_constant path into its component segments."""
         m = re.match(r"^mobileDeviceConstants/(?P<criterion_id>.+?)$", path)
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def multi_party_auth_review_path(
+        customer_id: str,
+        customer_invitation_id: str,
+    ) -> str:
+        """Returns a fully-qualified multi_party_auth_review string."""
+        return "customers/{customer_id}/multiPartyAuthReviews/{customer_invitation_id}".format(
+            customer_id=customer_id,
+            customer_invitation_id=customer_invitation_id,
+        )
+
+    @staticmethod
+    def parse_multi_party_auth_review_path(path: str) -> Dict[str, str]:
+        """Parses a multi_party_auth_review path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/multiPartyAuthReviews/(?P<customer_invitation_id>.+?)$",
+            path,
+        )
         return m.groupdict() if m else {}
 
     @staticmethod

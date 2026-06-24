@@ -27,6 +27,7 @@ from google.ads.googleads.v22.enums.types import policy_approval_status
 from google.ads.googleads.v22.enums.types import policy_review_status
 from google.ads.googleads.v22.enums.types import served_asset_field_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",

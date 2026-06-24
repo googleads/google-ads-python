@@ -118,7 +118,11 @@ class _LoggingClientInterceptor(
 class CustomerLabelServiceGrpcTransport(CustomerLabelServiceTransport):
     """gRPC backend transport for CustomerLabelService.
 
-    Service to manage labels on customers.
+    Service to manage labels on Google Ads customers.
+
+    This service is commonly used by manager accounts to apply their
+    own labels to their client accounts. The label entity must exist
+    under the manager account.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

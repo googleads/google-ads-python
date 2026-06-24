@@ -25,6 +25,7 @@ from google.ads.googleads.v21.enums.types import (
 )
 from google.ads.googleads.v21.enums.types import time_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

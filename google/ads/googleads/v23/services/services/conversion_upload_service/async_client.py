@@ -340,17 +340,14 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If true, successful
-                operations will be carried out and
-                invalid operations will return errors.
-                If false, all operations will be carried
-                out in one transaction if and only if
-                they are all valid. This should always
-                be set to true.
-                See
-                https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-                for more information about partial
-                failure.
+                Required. If ``true``, successful operations will be
+                carried out and invalid operations will return errors.
+                If ``false``, all operations will be carried out in one
+                transaction if and only if they are all valid. This
+                should always be set to ``true``.
+
+                See `Best practices for partial
+                failures </google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -469,17 +466,15 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If true, successful
-                operations will be carried out and
-                invalid operations will return errors.
-                If false, all operations will be carried
-                out in one transaction if and only if
-                they are all valid. This should always
-                be set to true.
-                See
-                https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-                for more information about partial
-                failure.
+                Required. If ``true``, successful operations will be
+                carried out and invalid operations will return errors.
+                If ``false``, all operations will be carried out in one
+                transaction if and only if they are all valid.
+
+                This should always be set to ``true``.
+
+                See `Best practices for partial
+                failures </google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this

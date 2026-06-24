@@ -54,12 +54,8 @@ class UserListCustomerTypeErrorEnum(proto.Message):
                 5. Disengaged customers - Converted Leads
                 6. Disengaged customers - Qualified Leads
                 7. Disengaged customers - Cart Abandoners
-                8. Converted Leads - Loyalty Tier X Members (X =
-                    1..7)
-                9. Qualified Leads - Loyalty Tier X Members (X =
-                    1..7)
-                10. Loyalty Tier X Members - Loyalty Tier Y
-                    Members (X != Y)
+                8. Loyalty Tier X Members - Loyalty Tier Y
+                    Members
             NO_ACCESS_TO_USER_LIST (3):
                 The account does not have access to the user
                 list.

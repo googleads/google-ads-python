@@ -26,7 +26,8 @@ from google.ads.googleads.v21.enums.types import (
 from google.ads.googleads.v21.resources.types import (
     asset_group_signal as gagr_asset_group_signal,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",

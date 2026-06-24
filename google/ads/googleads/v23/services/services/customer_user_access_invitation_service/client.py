@@ -248,6 +248,26 @@ class CustomerUserAccessInvitationServiceClient(
         return m.groupdict() if m else {}
 
     @staticmethod
+    def multi_party_auth_review_path(
+        customer_id: str,
+        customer_invitation_id: str,
+    ) -> str:
+        """Returns a fully-qualified multi_party_auth_review string."""
+        return "customers/{customer_id}/multiPartyAuthReviews/{customer_invitation_id}".format(
+            customer_id=customer_id,
+            customer_invitation_id=customer_invitation_id,
+        )
+
+    @staticmethod
+    def parse_multi_party_auth_review_path(path: str) -> Dict[str, str]:
+        """Parses a multi_party_auth_review path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/multiPartyAuthReviews/(?P<customer_invitation_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def common_billing_account_path(
         billing_account: str,
     ) -> str:

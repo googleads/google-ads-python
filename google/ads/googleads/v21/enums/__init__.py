@@ -392,6 +392,13 @@ from .types.minute_of_hour import MinuteOfHourEnum
 from .types.mobile_app_vendor import MobileAppVendorEnum
 from .types.mobile_device_type import MobileDeviceTypeEnum
 from .types.month_of_year import MonthOfYearEnum
+from .types.multi_party_auth_operation_type import (
+    MultiPartyAuthOperationTypeEnum,
+)
+from .types.multi_party_auth_review_status import MultiPartyAuthReviewStatusEnum
+from .types.multi_party_auth_review_target_resource import (
+    MultiPartyAuthReviewTargetResourceEnum,
+)
 from .types.negative_geo_target_type import NegativeGeoTargetTypeEnum
 from .types.non_skippable_max_duration import NonSkippableMaxDurationEnum
 from .types.non_skippable_min_duration import NonSkippableMinDurationEnum
@@ -649,7 +656,9 @@ else:  # pragma: NO COVER
         _next_supported_version = "4.25.8"
         _next_supported_version_tuple = (4, 25, 8)
         _recommendation = " (we recommend 6.x)"
-        _version_used, _version_used_string = _get_version(_dependency_package)
+        (_version_used, _version_used_string) = _get_version(
+            _dependency_package
+        )
         if _version_used and _version_used < _next_supported_version_tuple:
             warnings.warn(
                 f"Package {_package_label} depends on "
@@ -910,6 +919,9 @@ __all__ = (
     "MobileAppVendorEnum",
     "MobileDeviceTypeEnum",
     "MonthOfYearEnum",
+    "MultiPartyAuthOperationTypeEnum",
+    "MultiPartyAuthReviewStatusEnum",
+    "MultiPartyAuthReviewTargetResourceEnum",
     "NegativeGeoTargetTypeEnum",
     "NonSkippableMaxDurationEnum",
     "NonSkippableMinDurationEnum",

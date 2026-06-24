@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -33,7 +34,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v22.services.types import conversion_upload_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     ConversionUploadServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -114,12 +115,7 @@ class ConversionUploadServiceAsyncClient:
         Returns:
             ConversionUploadServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            ConversionUploadServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            ConversionUploadServiceAsyncClient, info, *args, **kwargs
-        )
+        return ConversionUploadServiceClient.from_service_account_info.__func__(ConversionUploadServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -135,12 +131,7 @@ class ConversionUploadServiceAsyncClient:
         Returns:
             ConversionUploadServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            ConversionUploadServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            ConversionUploadServiceAsyncClient, filename, *args, **kwargs
-        )
+        return ConversionUploadServiceClient.from_service_account_file.__func__(ConversionUploadServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 
@@ -349,17 +340,14 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If true, successful
-                operations will be carried out and
-                invalid operations will return errors.
-                If false, all operations will be carried
-                out in one transaction if and only if
-                they are all valid. This should always
-                be set to true.
-                See
-                https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-                for more information about partial
-                failure.
+                Required. If ``true``, successful operations will be
+                carried out and invalid operations will return errors.
+                If ``false``, all operations will be carried out in one
+                transaction if and only if they are all valid. This
+                should always be set to ``true``.
+
+                See `Best practices for partial
+                failures </google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -478,17 +466,15 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If true, successful
-                operations will be carried out and
-                invalid operations will return errors.
-                If false, all operations will be carried
-                out in one transaction if and only if
-                they are all valid. This should always
-                be set to true.
-                See
-                https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-                for more information about partial
-                failure.
+                Required. If ``true``, successful operations will be
+                carried out and invalid operations will return errors.
+                If ``false``, all operations will be carried out in one
+                transaction if and only if they are all valid.
+
+                This should always be set to ``true``.
+
+                See `Best practices for partial
+                failures </google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this

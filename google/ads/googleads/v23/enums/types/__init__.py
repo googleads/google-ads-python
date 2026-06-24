@@ -748,6 +748,15 @@ from .mobile_device_type import (
 from .month_of_year import (
     MonthOfYearEnum,
 )
+from .multi_party_auth_operation_type import (
+    MultiPartyAuthOperationTypeEnum,
+)
+from .multi_party_auth_review_status import (
+    MultiPartyAuthReviewStatusEnum,
+)
+from .multi_party_auth_review_target_resource import (
+    MultiPartyAuthReviewTargetResourceEnum,
+)
 from .negative_geo_target_type import (
     NegativeGeoTargetTypeEnum,
 )
@@ -978,6 +987,12 @@ from .spending_limit_type import (
 )
 from .summary_row_setting import (
     SummaryRowSettingEnum,
+)
+from .synthetic_content_attestation_status import (
+    SyntheticContentAttestationStatusEnum,
+)
+from .synthetic_content_source import (
+    SyntheticContentSourceEnum,
 )
 from .system_managed_entity_source import (
     SystemManagedResourceSourceEnum,
@@ -1367,6 +1382,9 @@ __all__ = (
     "MobileAppVendorEnum",
     "MobileDeviceTypeEnum",
     "MonthOfYearEnum",
+    "MultiPartyAuthOperationTypeEnum",
+    "MultiPartyAuthReviewStatusEnum",
+    "MultiPartyAuthReviewTargetResourceEnum",
     "NegativeGeoTargetTypeEnum",
     "NonSkippableMaxDurationEnum",
     "NonSkippableMinDurationEnum",
@@ -1444,6 +1462,8 @@ __all__ = (
     "SmartCampaignStatusEnum",
     "SpendingLimitTypeEnum",
     "SummaryRowSettingEnum",
+    "SyntheticContentAttestationStatusEnum",
+    "SyntheticContentSourceEnum",
     "SystemManagedResourceSourceEnum",
     "TargetCpaOptInRecommendationGoalEnum",
     "TargetFrequencyTimeUnitEnum",

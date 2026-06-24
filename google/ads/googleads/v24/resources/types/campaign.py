@@ -427,7 +427,8 @@ class Campaign(proto.Message):
         third_party_integration_partners (google.ads.googleads.v24.common.types.CampaignThirdPartyIntegrationPartners):
             Third-Party integration partners.
         ai_max_setting (google.ads.googleads.v24.resources.types.Campaign.AiMaxSetting):
-            Settings for AI Max in search campaigns.
+            Settings for AI Max in Search and Shopping
+            campaigns.
         contains_eu_political_advertising (google.ads.googleads.v24.enums.types.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus):
             The advertiser should self-declare whether
             this campaign contains political advertising
@@ -1593,7 +1594,7 @@ class Campaign(proto.Message):
         )
 
     class AiMaxSetting(proto.Message):
-        r"""Settings for AI Max in search campaigns.
+        r"""Settings for AI Max in Search and Shopping campaigns.
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1607,14 +1608,20 @@ class Campaign(proto.Message):
                 cleared, then no AI Max features will serve for this
                 campaign, regardless of the other settings.
 
-                Search Term Matching is enabled by default when AI Max is
-                enabled, and can be disabled at the ad group level.
+                Supported in Search and Shopping campaigns.
+
+                For Search campaigns, Search Term Matching is enabled by
+                default when AI Max is enabled, and can be disabled at the
+                ad group level.
+
+                For Shopping campaigns, Text customization is always enabled
+                when AI Max is enabled.
 
                 This field is a member of `oneof`_ ``_enable_ai_max``.
             bundling_required (google.ads.googleads.v24.resources.types.Campaign.AiMaxSetting.AiMaxBundlingRequired):
-                Output only. Indicates whether a search
-                campaign has adopted AI Max before, and is
-                required to have AI Max enabled to adopt
+                Output only. Search campaigns only. Indicates
+                whether a campaign has adopted AI Max before,
+                and is required to have AI Max enabled to adopt
                 campaign-level text asset automation and brand
                 list targeting in all API versions.
 

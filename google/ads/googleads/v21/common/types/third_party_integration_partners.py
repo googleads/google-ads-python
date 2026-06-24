@@ -32,6 +32,7 @@ from google.ads.googleads.v21.enums.types import (
     third_party_viewability_integration_partner,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

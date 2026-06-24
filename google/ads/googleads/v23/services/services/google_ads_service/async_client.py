@@ -873,6 +873,12 @@ class GoogleAdsServiceAsyncClient:
     parse_mobile_device_constant_path = staticmethod(
         GoogleAdsServiceClient.parse_mobile_device_constant_path
     )
+    multi_party_auth_review_path = staticmethod(
+        GoogleAdsServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        GoogleAdsServiceClient.parse_multi_party_auth_review_path
+    )
     offline_conversion_upload_client_summary_path = staticmethod(
         GoogleAdsServiceClient.offline_conversion_upload_client_summary_path
     )

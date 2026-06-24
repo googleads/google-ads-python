@@ -19,7 +19,8 @@ from __future__ import annotations
 import proto  # type: ignore
 
 from google.ads.googleads.v21.resources.types import customer_user_access
-import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
@@ -124,11 +125,19 @@ class MutateCustomerUserAccessResult(proto.Message):
     Attributes:
         resource_name (str):
             Returned for successful operations.
+        multi_party_auth_review (str):
+            The resource name of the multi-party
+            authorization review associated with this
+            mutate.
     """
 
     resource_name: str = proto.Field(
         proto.STRING,
         number=1,
+    )
+    multi_party_auth_review: str = proto.Field(
+        proto.STRING,
+        number=2,
     )
 
 

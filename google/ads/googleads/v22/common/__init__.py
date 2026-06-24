@@ -332,6 +332,8 @@ from .types.simulation import TargetImpressionShareSimulationPoint
 from .types.simulation import TargetImpressionShareSimulationPointList
 from .types.simulation import TargetRoasSimulationPoint
 from .types.simulation import TargetRoasSimulationPointList
+from .types.synthetic_content_info import SyntheticContentAttestation
+from .types.synthetic_content_info import SyntheticContentInfo
 from .types.tag_snippet import TagSnippet
 from .types.targeting_setting import TargetingSetting
 from .types.targeting_setting import TargetRestriction
@@ -458,7 +460,9 @@ else:  # pragma: NO COVER
         _next_supported_version = "4.25.8"
         _next_supported_version_tuple = (4, 25, 8)
         _recommendation = " (we recommend 6.x)"
-        _version_used, _version_used_string = _get_version(_dependency_package)
+        (_version_used, _version_used_string) = _get_version(
+            _dependency_package
+        )
         if _version_used and _version_used < _next_supported_version_tuple:
             warnings.warn(
                 f"Package {_package_label} depends on "
@@ -751,6 +755,8 @@ __all__ = (
     "StoreSalesMetadata",
     "StoreSalesThirdPartyMetadata",
     "StructuredSnippetAsset",
+    "SyntheticContentAttestation",
+    "SyntheticContentInfo",
     "TagSnippet",
     "TargetCpa",
     "TargetCpaSimulationPoint",

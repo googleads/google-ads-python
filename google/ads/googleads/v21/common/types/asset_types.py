@@ -52,6 +52,7 @@ from google.ads.googleads.v21.enums.types import (
 )
 from google.ads.googleads.v21.enums.types import promotion_extension_occasion
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

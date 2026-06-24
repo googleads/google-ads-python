@@ -107,7 +107,7 @@ class TextAdInfo(proto.Message):
 
 
 class ExpandedTextAdInfo(proto.Message):
-    r"""An expanded text ad.
+    r"""An expanded text ad. Expanded text ads are deprecated.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 

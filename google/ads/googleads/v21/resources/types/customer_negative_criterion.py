@@ -21,6 +21,7 @@ import proto  # type: ignore
 from google.ads.googleads.v21.common.types import criteria
 from google.ads.googleads.v21.enums.types import criterion_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

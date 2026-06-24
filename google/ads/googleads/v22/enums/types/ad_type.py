@@ -44,7 +44,8 @@ class AdTypeEnum(proto.Message):
             TEXT_AD (2):
                 The ad is a text ad.
             EXPANDED_TEXT_AD (3):
-                The ad is an expanded text ad.
+                The ad is an expanded text ad. Expanded text
+                ads are deprecated.
             EXPANDED_DYNAMIC_SEARCH_AD (7):
                 The ad is an expanded dynamic search ad.
             HOTEL_AD (8):

@@ -22,6 +22,7 @@ from google.ads.googleads.v22.enums.types import (
     application_instance as gage_application_instance,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.common",
     marshal="google.ads.googleads.v22",

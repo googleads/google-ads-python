@@ -26,6 +26,7 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.enums.types import value_rule_set_attachment_type
 from google.ads.googleads.v22.enums.types import value_rule_set_dimension
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",

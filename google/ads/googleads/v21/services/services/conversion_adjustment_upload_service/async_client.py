@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -35,7 +36,7 @@ except AttributeError:  # pragma: NO COVER
 from google.ads.googleads.v21.services.types import (
     conversion_adjustment_upload_service,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     ConversionAdjustmentUploadServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -114,12 +115,7 @@ class ConversionAdjustmentUploadServiceAsyncClient:
         Returns:
             ConversionAdjustmentUploadServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            ConversionAdjustmentUploadServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            ConversionAdjustmentUploadServiceAsyncClient, info, *args, **kwargs
-        )
+        return ConversionAdjustmentUploadServiceClient.from_service_account_info.__func__(ConversionAdjustmentUploadServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -135,15 +131,7 @@ class ConversionAdjustmentUploadServiceAsyncClient:
         Returns:
             ConversionAdjustmentUploadServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            ConversionAdjustmentUploadServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            ConversionAdjustmentUploadServiceAsyncClient,
-            filename,
-            *args,
-            **kwargs,
-        )
+        return ConversionAdjustmentUploadServiceClient.from_service_account_file.__func__(ConversionAdjustmentUploadServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

@@ -455,7 +455,9 @@ else:  # pragma: NO COVER
         _next_supported_version = "4.25.8"
         _next_supported_version_tuple = (4, 25, 8)
         _recommendation = " (we recommend 6.x)"
-        _version_used, _version_used_string = _get_version(_dependency_package)
+        (_version_used, _version_used_string) = _get_version(
+            _dependency_package
+        )
         if _version_used and _version_used < _next_supported_version_tuple:
             warnings.warn(
                 f"Package {_package_label} depends on "

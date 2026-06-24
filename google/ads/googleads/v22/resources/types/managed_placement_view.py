@@ -29,7 +29,9 @@ __protobuf__ = proto.module(
 
 
 class ManagedPlacementView(proto.Message):
-    r"""A managed placement view.
+    r"""A view providing performance data for placements explicitly
+    targeted in your ad groups. This view
+    corresponds to the "Placements" section in the Google Ads UI.
 
     Attributes:
         resource_name (str):

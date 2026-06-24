@@ -31,7 +31,7 @@ import proto  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.ads.googleads.v21.services.types import ad_group_ad_service
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
 from .base import AdGroupAdServiceTransport, DEFAULT_CLIENT_INFO
 
 try:

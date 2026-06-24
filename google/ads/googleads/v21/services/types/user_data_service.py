@@ -21,6 +21,7 @@ import proto  # type: ignore
 
 from google.ads.googleads.v21.common.types import offline_user_data
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",

@@ -158,7 +158,8 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
             KNOWLEDGE_GRAPH, GEO_TARGET_COUNTRY, SUB_COUNTRY_LOCATION,
             YOUTUBE_CHANNEL, YOUTUBE_LINEUP, AFFINITY_USER_INTEREST,
             IN_MARKET_USER_INTEREST, LIFE_EVENT_USER_INTEREST,
-            PARENTAL_STATUS, INCOME_RANGE, AGE_RANGE, and GENDER.
+            PARENTAL_STATUS, INCOME_RANGE, AGE_RANGE, GENDER, and
+            USER_LIST.
         customer_insights_group (str):
             The name of the customer being planned for.
             This is a user-defined value.
@@ -405,7 +406,7 @@ class ListAudienceInsightsAttributesRequest(proto.Message):
             GEO_TARGET_COUNTRY, SUB_COUNTRY_LOCATION, YOUTUBE_LINEUP,
             AFFINITY_USER_INTEREST, IN_MARKET_USER_INTEREST,
             LIFE_EVENT_USER_INTEREST, PARENTAL_STATUS, INCOME_RANGE,
-            AGE_RANGE, and GENDER.
+            AGE_RANGE, GENDER, and USER_LIST.
         query_text (str):
             Required. A free text query. If the requested dimensions
             include Attributes CATEGORY or KNOWLEDGE_GRAPH, then the

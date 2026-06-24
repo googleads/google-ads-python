@@ -350,14 +350,17 @@ class ProductMetadata(proto.Message):
 
     Attributes:
         plannable_product_code (str):
-            The code associated with the ad product (for example:
-            BUMPER, TRUEVIEW_IN_STREAM). To list the available plannable
-            product codes use
+            The code associated with the ad product.
+
+            For example: "VIDEO_VIEW_CAMPAIGN". To list the available
+            plannable product codes use
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v23.services.ReachPlanService.ListPlannableProducts].
 
             This field is a member of `oneof`_ ``_plannable_product_code``.
         plannable_product_name (str):
             The name associated with the ad product.
+
+            For example: "Video View Campaign".
         plannable_targeting (google.ads.googleads.v23.services.types.PlannableTargeting):
             The allowed plannable targeting for this
             product.
@@ -527,8 +530,8 @@ class PlannableTargeting(proto.Message):
         youtube_select_lineup_targeting (google.ads.googleads.v23.services.types.YouTubeSelectLineUpTargeting):
             Targetable YouTube Select Lineups for the ad product.
 
-            This field replaces the deprecated youtube_select_lineups
-            field.
+            This field replaces the deprecated
+            ``youtube_select_lineups`` field.
         surface_targeting (google.ads.googleads.v23.services.types.SurfaceTargetingCombinations):
             Targetable surface combinations for the ad
             product.
@@ -730,8 +733,8 @@ class GenerateReachForecastRequest(proto.Message):
             maximum number of times an ad can be shown to the same user.
             If not specified, no cap is applied.
 
-            This field is deprecated in v4 and will eventually be
-            removed. Use cookie_frequency_cap_setting instead.
+            This field is deprecated and will eventually be removed. Use
+            cookie_frequency_cap_setting instead.
 
             This field is a member of `oneof`_ ``_cookie_frequency_cap``.
         cookie_frequency_cap_setting (google.ads.googleads.v23.services.types.FrequencyCap):
@@ -742,7 +745,7 @@ class GenerateReachForecastRequest(proto.Message):
             during a specified time interval. If not specified, a
             default of 0 (no cap) is applied.
 
-            This field replaces the deprecated cookie_frequency_cap
+            This field replaces the deprecated ``cookie_frequency_cap``
             field.
         min_effective_frequency (int):
             Chosen minimum effective frequency (the number of times a
@@ -914,8 +917,8 @@ class Targeting(proto.Message):
             Requests must set either this field or
             ``plannable_location_ids``.
 
-            This field is deprecated as of V12 and will be removed in a
-            future release. Use ``plannable_location_ids`` instead.
+            This field is deprecated and will be removed in a future
+            release. Use ``plannable_location_ids`` instead.
 
             This field is a member of `oneof`_ ``_plannable_location_id``.
         plannable_location_ids (MutableSequence[str]):

@@ -28,6 +28,7 @@ from google.ads.googleads.v22.enums.types import (
     audience_insights_marketing_objective,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
     marshal="google.ads.googleads.v22",

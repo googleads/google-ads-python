@@ -61,10 +61,10 @@ _LOGGER = std_logging.getLogger(__name__)
 
 from google.ads.googleads.v21.services.services.experiment_service import pagers
 from google.ads.googleads.v21.services.types import experiment_service
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import ExperimentServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import ExperimentServiceGrpcTransport
 from .transports.grpc_asyncio import ExperimentServiceGrpcAsyncIOTransport

@@ -25,6 +25,7 @@ from google.ads.googleads.v22.resources.types import (
     product_link_invitation as gagr_product_link_invitation,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
     marshal="google.ads.googleads.v22",

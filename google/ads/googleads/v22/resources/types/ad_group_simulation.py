@@ -22,6 +22,7 @@ from google.ads.googleads.v22.common.types import simulation
 from google.ads.googleads.v22.enums.types import simulation_modification_method
 from google.ads.googleads.v22.enums.types import simulation_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",

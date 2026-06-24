@@ -63,10 +63,10 @@ from google.ads.googleads.v22.services.services.campaign_draft_service import (
     pagers,
 )
 from google.ads.googleads.v22.services.types import campaign_draft_service
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import CampaignDraftServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import CampaignDraftServiceGrpcTransport
 from .transports.grpc_asyncio import CampaignDraftServiceGrpcAsyncIOTransport

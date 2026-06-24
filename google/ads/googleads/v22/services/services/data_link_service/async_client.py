@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -112,10 +113,7 @@ class DataLinkServiceAsyncClient:
         Returns:
             DataLinkServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            DataLinkServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(DataLinkServiceAsyncClient, info, *args, **kwargs)
+        return DataLinkServiceClient.from_service_account_info.__func__(DataLinkServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -131,12 +129,7 @@ class DataLinkServiceAsyncClient:
         Returns:
             DataLinkServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            DataLinkServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            DataLinkServiceAsyncClient, filename, *args, **kwargs
-        )
+        return DataLinkServiceClient.from_service_account_file.__func__(DataLinkServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 
@@ -319,7 +312,7 @@ class DataLinkServiceAsyncClient:
         r"""Creates a data link. The requesting Google Ads account name and
         account ID will be shared with the third party (such as YouTube
         creators for video links) to whom you are creating the link
-        with. Only customers on the allow-list can create data links.
+        with.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `DatabaseError <>`__

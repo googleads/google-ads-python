@@ -34,6 +34,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -43,8 +44,8 @@ except AttributeError:  # pragma: NO COVER
 
 from google.ads.googleads.v21.services.services.google_ads_service import pagers
 from google.ads.googleads.v21.services.types import google_ads_service
-import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import GoogleAdsServiceTransport, DEFAULT_CLIENT_INFO
 from .client import GoogleAdsServiceClient
 
@@ -846,6 +847,12 @@ class GoogleAdsServiceAsyncClient:
     parse_mobile_device_constant_path = staticmethod(
         GoogleAdsServiceClient.parse_mobile_device_constant_path
     )
+    multi_party_auth_review_path = staticmethod(
+        GoogleAdsServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        GoogleAdsServiceClient.parse_multi_party_auth_review_path
+    )
     offline_conversion_upload_client_summary_path = staticmethod(
         GoogleAdsServiceClient.offline_conversion_upload_client_summary_path
     )
@@ -1082,10 +1089,7 @@ class GoogleAdsServiceAsyncClient:
         Returns:
             GoogleAdsServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            GoogleAdsServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(GoogleAdsServiceAsyncClient, info, *args, **kwargs)
+        return GoogleAdsServiceClient.from_service_account_info.__func__(GoogleAdsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -1101,12 +1105,7 @@ class GoogleAdsServiceAsyncClient:
         Returns:
             GoogleAdsServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            GoogleAdsServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            GoogleAdsServiceAsyncClient, filename, *args, **kwargs
-        )
+        return GoogleAdsServiceClient.from_service_account_file.__func__(GoogleAdsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

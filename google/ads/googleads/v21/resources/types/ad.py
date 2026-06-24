@@ -131,7 +131,8 @@ class Ad(proto.Message):
 
             This field is a member of `oneof`_ ``ad_data``.
         expanded_text_ad (google.ads.googleads.v21.common.types.ExpandedTextAdInfo):
-            Details pertaining to an expanded text ad.
+            Details pertaining to an expanded text ad. Expanded text ads
+            are deprecated. Use ``ResponsiveSearchAd`` instead.
 
             This field is a member of `oneof`_ ``ad_data``.
         call_ad (google.ads.googleads.v21.common.types.CallAdInfo):

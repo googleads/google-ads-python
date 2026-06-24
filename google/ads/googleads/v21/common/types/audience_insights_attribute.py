@@ -28,6 +28,7 @@ from google.ads.googleads.v21.enums.types import (
     user_list_type as gage_user_list_type,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

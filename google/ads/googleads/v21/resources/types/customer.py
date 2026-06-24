@@ -33,6 +33,7 @@ from google.ads.googleads.v21.enums.types import (
     local_services_verification_status,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

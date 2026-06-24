@@ -51,6 +51,7 @@ from google.ads.googleads.v21.enums.types import proximity_radius_units
 from google.ads.googleads.v21.enums.types import webpage_condition_operand
 from google.ads.googleads.v21.enums.types import webpage_condition_operator
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

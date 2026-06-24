@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -33,7 +34,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v22.services.types import campaign_asset_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import CampaignAssetServiceTransport, DEFAULT_CLIENT_INFO
 from .client import CampaignAssetServiceClient
 
@@ -117,12 +118,7 @@ class CampaignAssetServiceAsyncClient:
         Returns:
             CampaignAssetServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            CampaignAssetServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            CampaignAssetServiceAsyncClient, info, *args, **kwargs
-        )
+        return CampaignAssetServiceClient.from_service_account_info.__func__(CampaignAssetServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -138,12 +134,7 @@ class CampaignAssetServiceAsyncClient:
         Returns:
             CampaignAssetServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            CampaignAssetServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            CampaignAssetServiceAsyncClient, filename, *args, **kwargs
-        )
+        return CampaignAssetServiceClient.from_service_account_file.__func__(CampaignAssetServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

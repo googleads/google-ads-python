@@ -60,7 +60,7 @@ except ImportError:  # pragma: NO COVER
 _LOGGER = std_logging.getLogger(__name__)
 
 from google.ads.googleads.v21.services.types import ad_group_asset_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import AdGroupAssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import AdGroupAssetServiceGrpcTransport
 from .transports.grpc_asyncio import AdGroupAssetServiceGrpcAsyncIOTransport

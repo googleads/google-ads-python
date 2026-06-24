@@ -102,6 +102,7 @@ from google.ads.googleads.v22.enums.types import (
     video_ad_sequence_minimum_duration,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",
@@ -421,7 +422,8 @@ class Campaign(proto.Message):
         third_party_integration_partners (google.ads.googleads.v22.common.types.CampaignThirdPartyIntegrationPartners):
             Third-Party integration partners.
         ai_max_setting (google.ads.googleads.v22.resources.types.Campaign.AiMaxSetting):
-            Settings for AI Max in search campaigns.
+            Settings for AI Max in Search and Shopping
+            campaigns.
         contains_eu_political_advertising (google.ads.googleads.v22.enums.types.EuPoliticalAdvertisingStatusEnum.EuPoliticalAdvertisingStatus):
             The advertiser should self-declare whether
             this campaign contains political advertising
@@ -584,9 +586,9 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_target_google_search``.
             target_search_network (bool):
-                Whether ads will be served on partner sites in the Google
-                Search Network (requires ``target_google_search`` to also be
-                ``true``).
+                Whether ads will be served on sites in the Google Search
+                Partners Network (requires ``target_google_search`` to also
+                be ``true``).
 
                 This field is a member of `oneof`_ ``_target_search_network``.
             target_content_network (bool):
@@ -597,9 +599,12 @@ class Campaign(proto.Message):
 
                 This field is a member of `oneof`_ ``_target_content_network``.
             target_partner_search_network (bool):
-                Whether ads will be served on the Google
-                Partner Network. This is available only to some
-                select Google partner accounts.
+                Whether ads will be served on the partner network. This is
+                available only to some select partner accounts. Unless you
+                have been instructed to use this field, it likely does not
+                apply to your account. This does not control whether ads
+                will be served on Google Search Partners Network; use
+                ``target_search_network`` for that instead.
 
                 This field is a member of `oneof`_ ``_target_partner_search_network``.
             target_youtube (bool):
@@ -1427,7 +1432,7 @@ class Campaign(proto.Message):
         )
 
     class AiMaxSetting(proto.Message):
-        r"""Settings for AI Max in search campaigns.
+        r"""Settings for AI Max in Search and Shopping campaigns.
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -1441,14 +1446,20 @@ class Campaign(proto.Message):
                 cleared, then no AI Max features will serve for this
                 campaign, regardless of the other settings.
 
-                Search Term Matching is enabled by default when AI Max is
-                enabled, and can be disabled at the ad group level.
+                Supported in Search and Shopping campaigns.
+
+                For Search campaigns, Search Term Matching is enabled by
+                default when AI Max is enabled, and can be disabled at the
+                ad group level.
+
+                For Shopping campaigns, Text customization is always enabled
+                when AI Max is enabled.
 
                 This field is a member of `oneof`_ ``_enable_ai_max``.
             bundling_required (google.ads.googleads.v22.resources.types.Campaign.AiMaxSetting.AiMaxBundlingRequired):
-                Output only. Indicates whether a search
-                campaign has adopted AI Max before, and is
-                required to have AI Max enabled to adopt
+                Output only. Search campaigns only. Indicates
+                whether a campaign has adopted AI Max before,
+                and is required to have AI Max enabled to adopt
                 campaign-level text asset automation and brand
                 list targeting in all API versions.
 

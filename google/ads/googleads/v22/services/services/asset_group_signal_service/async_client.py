@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -33,7 +34,7 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.AsyncRetry, object, None]  # type: ignore
 
 from google.ads.googleads.v22.services.types import asset_group_signal_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     AssetGroupSignalServiceTransport,
     DEFAULT_CLIENT_INFO,
@@ -120,12 +121,7 @@ class AssetGroupSignalServiceAsyncClient:
         Returns:
             AssetGroupSignalServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            AssetGroupSignalServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            AssetGroupSignalServiceAsyncClient, info, *args, **kwargs
-        )
+        return AssetGroupSignalServiceClient.from_service_account_info.__func__(AssetGroupSignalServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -141,12 +137,7 @@ class AssetGroupSignalServiceAsyncClient:
         Returns:
             AssetGroupSignalServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            AssetGroupSignalServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            AssetGroupSignalServiceAsyncClient, filename, *args, **kwargs
-        )
+        return AssetGroupSignalServiceClient.from_service_account_file.__func__(AssetGroupSignalServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

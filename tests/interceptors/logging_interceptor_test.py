@@ -56,6 +56,9 @@ local_services_lead = import_module(
 local_services_lead_conversation = import_module(
     f"{module_prefix}.resources.types.local_services_lead_conversation"
 )
+multi_party_auth_review = import_module(
+    f"{module_prefix}.resources.types.multi_party_auth_review"
+)
 
 
 class AwaitableMagicMock(mock.MagicMock):
@@ -903,6 +906,26 @@ class LoggingInterceptorTest(TestCase):
         copy = mask_message(message, "REDACTED")
         self.assertIsInstance(copy, message.__class__)
         self.assertEqual(copy.message_details.text, "REDACTED")
+
+    def test_mask_multi_party_auth_review(self):
+        """Copies and masks a MultiPartyAuthReview instance."""
+        invite = customer_user_access_invitation.CustomerUserAccessInvitation(
+            email_address="invitee@test.com"
+        )
+        review = multi_party_auth_review.CustomerUserAccessInvitationReview(
+            new_customer_user_access_invitation=invite
+        )
+        message = multi_party_auth_review.MultiPartyAuthReview(
+            request_user_email="sensitive@test.com",
+            customer_user_access_invitation_review=review,
+        )
+        copy = mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertEqual(copy.request_user_email, "REDACTED")
+        self.assertEqual(
+            copy.customer_user_access_invitation_review.new_customer_user_access_invitation.email_address,
+            "REDACTED",
+        )
 
 
 class AsyncLoggingInterceptorTest(IsolatedAsyncioTestCase):

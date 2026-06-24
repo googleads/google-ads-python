@@ -20,7 +20,8 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v22.resources.types import customer_label
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
@@ -37,6 +38,11 @@ __protobuf__ = proto.module(
 class MutateCustomerLabelsRequest(proto.Message):
     r"""Request message for
     [CustomerLabelService.MutateCustomerLabels][google.ads.googleads.v22.services.CustomerLabelService.MutateCustomerLabels].
+
+    A single ``MutateCustomerLabelsRequest`` can only modify labels for
+    the single customer account specified in the request. To apply a
+    label to multiple different accounts, separate
+    ``MutateCustomerLabelsRequest`` calls must be made.
 
     Attributes:
         customer_id (str):

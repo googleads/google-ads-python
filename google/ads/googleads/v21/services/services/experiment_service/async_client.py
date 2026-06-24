@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -34,10 +35,10 @@ except AttributeError:  # pragma: NO COVER
 
 from google.ads.googleads.v21.services.services.experiment_service import pagers
 from google.ads.googleads.v21.services.types import experiment_service
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import ExperimentServiceTransport, DEFAULT_CLIENT_INFO
 from .client import ExperimentServiceClient
 
@@ -123,10 +124,7 @@ class ExperimentServiceAsyncClient:
         Returns:
             ExperimentServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            ExperimentServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(ExperimentServiceAsyncClient, info, *args, **kwargs)
+        return ExperimentServiceClient.from_service_account_info.__func__(ExperimentServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -142,12 +140,7 @@ class ExperimentServiceAsyncClient:
         Returns:
             ExperimentServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            ExperimentServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            ExperimentServiceAsyncClient, filename, *args, **kwargs
-        )
+        return ExperimentServiceClient.from_service_account_file.__func__(ExperimentServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

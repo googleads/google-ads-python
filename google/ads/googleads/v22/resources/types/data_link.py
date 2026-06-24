@@ -44,7 +44,7 @@ class DataLink(proto.Message):
             Immutable. Resource name of the product data link. DataLink
             resource names have the form:
 
-            \`customers/{customer_id}/datalinks/{product_link_id}~{data_link_id}}
+            \`customers/{customer_id}/datalinks/{product_link_id}~{data_link_id}
         product_link_id (int):
             Output only. The ID of the link.
             This field is read only.

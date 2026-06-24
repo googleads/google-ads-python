@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -79,6 +80,12 @@ class CustomerUserAccessInvitationServiceAsyncClient:
     parse_customer_user_access_invitation_path = staticmethod(
         CustomerUserAccessInvitationServiceClient.parse_customer_user_access_invitation_path
     )
+    multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessInvitationServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessInvitationServiceClient.parse_multi_party_auth_review_path
+    )
     common_billing_account_path = staticmethod(
         CustomerUserAccessInvitationServiceClient.common_billing_account_path
     )
@@ -123,15 +130,7 @@ class CustomerUserAccessInvitationServiceAsyncClient:
         Returns:
             CustomerUserAccessInvitationServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            CustomerUserAccessInvitationServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            CustomerUserAccessInvitationServiceAsyncClient,
-            info,
-            *args,
-            **kwargs,
-        )
+        return CustomerUserAccessInvitationServiceClient.from_service_account_info.__func__(CustomerUserAccessInvitationServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -147,15 +146,7 @@ class CustomerUserAccessInvitationServiceAsyncClient:
         Returns:
             CustomerUserAccessInvitationServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            CustomerUserAccessInvitationServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            CustomerUserAccessInvitationServiceAsyncClient,
-            filename,
-            *args,
-            **kwargs,
-        )
+        return CustomerUserAccessInvitationServiceClient.from_service_account_file.__func__(CustomerUserAccessInvitationServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

@@ -105,7 +105,12 @@ class CustomerLabelServiceClientMeta(type):
 
 
 class CustomerLabelServiceClient(metaclass=CustomerLabelServiceClientMeta):
-    """Service to manage labels on customers."""
+    """Service to manage labels on Google Ads customers.
+
+    This service is commonly used by manager accounts to apply their
+    own labels to their client accounts. The label entity must exist
+    under the manager account.
+    """
 
     @staticmethod
     def _get_default_mtls_endpoint(api_endpoint):
@@ -825,6 +830,12 @@ class CustomerLabelServiceClient(metaclass=CustomerLabelServiceClientMeta):
             request (Union[google.ads.googleads.v23.services.types.MutateCustomerLabelsRequest, dict]):
                 The request object. Request message for
                 [CustomerLabelService.MutateCustomerLabels][google.ads.googleads.v23.services.CustomerLabelService.MutateCustomerLabels].
+
+                A single ``MutateCustomerLabelsRequest`` can only modify
+                labels for the single customer account specified in the
+                request. To apply a label to multiple different
+                accounts, separate ``MutateCustomerLabelsRequest`` calls
+                must be made.
             customer_id (str):
                 Required. ID of the customer whose
                 customer-label relationships are being

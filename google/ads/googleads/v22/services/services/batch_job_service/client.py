@@ -63,9 +63,9 @@ from google.ads.googleads.v22.resources.types import batch_job
 from google.ads.googleads.v22.services.services.batch_job_service import pagers
 from google.ads.googleads.v22.services.types import batch_job_service
 from google.ads.googleads.v22.services.types import google_ads_service
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
 from .transports.base import BatchJobServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import BatchJobServiceGrpcTransport
 from .transports.grpc_asyncio import BatchJobServiceGrpcAsyncIOTransport

@@ -260,6 +260,9 @@ from .types.media_file import MediaImage
 from .types.media_file import MediaVideo
 from .types.mobile_app_category_constant import MobileAppCategoryConstant
 from .types.mobile_device_constant import MobileDeviceConstant
+from .types.multi_party_auth_review import CustomerUserAccessInvitationReview
+from .types.multi_party_auth_review import CustomerUserAccessReview
+from .types.multi_party_auth_review import MultiPartyAuthReview
 from .types.offline_conversion_upload_client_summary import (
     OfflineConversionAlert,
 )
@@ -555,6 +558,8 @@ __all__ = (
     "CustomerSkAdNetworkConversionValueSchema",
     "CustomerUserAccess",
     "CustomerUserAccessInvitation",
+    "CustomerUserAccessInvitationReview",
+    "CustomerUserAccessReview",
     "CustomizerAttribute",
     "DataLink",
     "DataPartnerIdentifier",
@@ -624,6 +629,7 @@ __all__ = (
     "MessageDetails",
     "MobileAppCategoryConstant",
     "MobileDeviceConstant",
+    "MultiPartyAuthReview",
     "Note",
     "OfflineConversionAlert",
     "OfflineConversionError",

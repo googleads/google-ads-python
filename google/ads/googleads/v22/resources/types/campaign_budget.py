@@ -23,6 +23,7 @@ from google.ads.googleads.v22.enums.types import budget_period
 from google.ads.googleads.v22.enums.types import budget_status
 from google.ads.googleads.v22.enums.types import budget_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.resources",
     marshal="google.ads.googleads.v22",

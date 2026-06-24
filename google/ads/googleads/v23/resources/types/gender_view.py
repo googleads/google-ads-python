@@ -29,10 +29,16 @@ __protobuf__ = proto.module(
 
 
 class GenderView(proto.Message):
-    r"""A gender view. The gender_view resource reflects the effective
-    serving state, rather than what criteria were added. An ad group
-    without gender criteria by default shows to all genders, so all
-    genders appear in gender_view with stats.
+    r"""A gender view resource. Represents the view of a customer's
+    performance metrics aggregated by gender. All statistics are
+    aggregated at the ad group level.
+
+    Note: While you can segment metrics by age range using
+    ``age_range_view`` or by gender using ``gender_view``, the Google
+    Ads API does not support segmenting metrics by both age range and
+    gender simultaneously in a single query. Analyzing performance
+    across both dimensions combined is not supported in the Google Ads
+    API.
 
     Attributes:
         resource_name (str):

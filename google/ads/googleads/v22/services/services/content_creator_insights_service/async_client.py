@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -52,10 +53,12 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class ContentCreatorInsightsServiceAsyncClient:
-    """Content Creator Insights Service helps users find information
-    about YouTube Creators and their content and how these creators
-    and their audiences can be reached with Google Ads. Accessible
-    to allowlisted customers only.
+    """Content Creator Insights Service helps users find information about
+    YouTube Creators and their content and how these creators and their
+    audiences can be reached with Google Ads. Refer to the `YouTube
+    creator insights
+    guide <https://developers.google.com/google-ads/api/docs/insights/creator-insights>`__
+    for more details. Accessible to allowlisted customers only.
     """
 
     _client: ContentCreatorInsightsServiceClient
@@ -115,12 +118,7 @@ class ContentCreatorInsightsServiceAsyncClient:
         Returns:
             ContentCreatorInsightsServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            ContentCreatorInsightsServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            ContentCreatorInsightsServiceAsyncClient, info, *args, **kwargs
-        )
+        return ContentCreatorInsightsServiceClient.from_service_account_info.__func__(ContentCreatorInsightsServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -136,12 +134,7 @@ class ContentCreatorInsightsServiceAsyncClient:
         Returns:
             ContentCreatorInsightsServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            ContentCreatorInsightsServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            ContentCreatorInsightsServiceAsyncClient, filename, *args, **kwargs
-        )
+        return ContentCreatorInsightsServiceClient.from_service_account_file.__func__(ContentCreatorInsightsServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

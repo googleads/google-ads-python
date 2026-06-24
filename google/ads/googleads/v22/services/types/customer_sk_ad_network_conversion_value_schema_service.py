@@ -21,7 +21,8 @@ import proto  # type: ignore
 from google.ads.googleads.v22.resources.types import (
     customer_sk_ad_network_conversion_value_schema,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",

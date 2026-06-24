@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -107,12 +108,7 @@ class BrandSuggestionServiceAsyncClient:
         Returns:
             BrandSuggestionServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            BrandSuggestionServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            BrandSuggestionServiceAsyncClient, info, *args, **kwargs
-        )
+        return BrandSuggestionServiceClient.from_service_account_info.__func__(BrandSuggestionServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -128,12 +124,7 @@ class BrandSuggestionServiceAsyncClient:
         Returns:
             BrandSuggestionServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            BrandSuggestionServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            BrandSuggestionServiceAsyncClient, filename, *args, **kwargs
-        )
+        return BrandSuggestionServiceClient.from_service_account_file.__func__(BrandSuggestionServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

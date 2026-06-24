@@ -29,6 +29,7 @@ from google.ads.googleads.v22.enums.types import (
 )
 from google.ads.googleads.v22.enums.types import youtube_video_property
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.common",
     marshal="google.ads.googleads.v22",

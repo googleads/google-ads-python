@@ -52,7 +52,7 @@ _LOGGER = std_logging.getLogger(__name__)
 from google.ads.googleads.v22.services.types import (
     customer_sk_ad_network_conversion_value_schema_service,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     CustomerSkAdNetworkConversionValueSchemaServiceTransport,
     DEFAULT_CLIENT_INFO,

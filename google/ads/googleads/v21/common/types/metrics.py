@@ -22,6 +22,7 @@ import proto  # type: ignore
 from google.ads.googleads.v21.enums.types import interaction_event_type
 from google.ads.googleads.v21.enums.types import quality_score_bucket
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",
@@ -97,9 +98,9 @@ class Metrics(proto.Message):
         all_conversions_value_by_conversion_date (float):
             The value of all conversions. When this column is selected
             with date, the values in date column means the conversion
-            date. Details for the by_conversion_date columns are
-            available at
-            https://support.google.com/google-ads/answer/9549009.
+            date. Details for the ``by_conversion_date`` columns are
+            available at `Understand conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_all_conversions_value_by_conversion_date``.
         all_new_customer_lifetime_value (float):
@@ -110,9 +111,9 @@ class Metrics(proto.Message):
             conversions. If your campaign has adopted the customer
             acquisition goal and selected "bid higher for new
             customers", these values will be included in
-            "all_conversions_value". See
-            https://support.google.com/google-ads/answer/12080169 for
-            more details.
+            ``all_conversions_value``. See `About customer lifecycle
+            goals <https://support.google.com/google-ads/answer/12080169>`__
+            for more details.
 
             This field is a member of `oneof`_ ``_all_new_customer_lifetime_value``.
         all_conversions (float):
@@ -126,9 +127,9 @@ class Metrics(proto.Message):
             conversions regardless of the value of
             include_in_conversions_metric. When this column is selected
             with date, the values in date column means the conversion
-            date. Details for the by_conversion_date columns are
-            available at
-            https://support.google.com/google-ads/answer/9549009.
+            date. Details for the ``by_conversion_date`` columns are
+            available at `Understand conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_all_conversions_by_conversion_date``.
         all_conversions_value_per_cost (float):
@@ -336,26 +337,26 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_clicks``.
         combined_clicks (int):
-            The number of times your ad or your site's
-            listing in the unpaid results was clicked. See
-            the help page at
-            https://support.google.com/google-ads/answer/3097241
-            for details.
+            The number of times your ad or your site's listing in the
+            unpaid results was clicked. See `About measuring paid and
+            organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__.
 
             This field is a member of `oneof`_ ``_combined_clicks``.
         combined_clicks_per_query (float):
             The number of times your ad or your site's listing in the
             unpaid results was clicked (combined_clicks) divided by
-            combined_queries. See the help page at
-            https://support.google.com/google-ads/answer/3097241 for
-            details.
+            combined_queries. See `About measuring paid and organic
+            search
+            results <https://support.google.com/google-ads/answer/3097241>`__
+            for details.
 
             This field is a member of `oneof`_ ``_combined_clicks_per_query``.
         combined_queries (int):
-            The number of searches that returned pages
-            from your site in the unpaid results or showed
-            one of your text ads. See the help page at
-            https://support.google.com/google-ads/answer/3097241
+            The number of searches that returned pages from your site in
+            the unpaid results or showed one of your text ads. See
+            `About measuring paid and organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__
             for details.
 
             This field is a member of `oneof`_ ``_combined_queries``.
@@ -372,6 +373,7 @@ class Metrics(proto.Message):
             The impressions you've received on the
             Display Network divided by the estimated number
             of impressions you were eligible to receive.
+
             Note: Content impression share is reported in
             the range of 0.1 to 1. Any value below 0.1 is
             reported as 0.0999.
@@ -397,37 +399,39 @@ class Metrics(proto.Message):
         content_rank_lost_impression_share (float):
             The estimated percentage of impressions on
             the Display Network that your ads didn't receive
-            due to poor Ad Rank. Note: Content rank lost
-            impression share is reported in the range of 0
-            to 0.9. Any value above 0.9 is reported as
-            0.9001.
+            due to poor Ad Rank.
+
+            Note: Content rank lost impression share is
+            reported in the range of 0 to 0.9. Any value
+            above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_content_rank_lost_impression_share``.
         conversions_from_interactions_rate (float):
             Conversions from interactions divided by the number of ad
             interactions (such as clicks for text ads or views for video
             ads). This only includes conversion actions which
-            include_in_conversions_metric attribute is set to true. If
-            you use conversion-based bidding, your bid strategies will
-            optimize for these conversions.
+            ``include_in_conversions_metric`` attribute is set to
+            ``true``. If you use conversion-based bidding, your bid
+            strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_conversions_from_interactions_rate``.
         conversions_value (float):
             The value of conversions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions.
+            actions which ``include_in_conversions_metric`` attribute is
+            set to ``true``. If you use conversion-based bidding, your
+            bid strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_conversions_value``.
         conversions_value_by_conversion_date (float):
             The value of conversions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions. When this
-            column is selected with date, the values in date column
+            actions which ``include_in_conversions_metric`` attribute is
+            set to ``true``. If you use conversion-based bidding, your
+            bid strategies will optimize for these conversions. When
+            this column is selected with date, the values in date column
             means the conversion date. Details for the
-            by_conversion_date columns are available at
-            https://support.google.com/google-ads/answer/9549009.
+            ``by_conversion_date`` columns are available at `Understand
+            conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_conversions_value_by_conversion_date``.
         new_customer_lifetime_value (float):
@@ -438,8 +442,9 @@ class Metrics(proto.Message):
             campaign has adopted the customer acquisition goal and
             selected "bid higher for new customers", these values will
             be included in "conversions_value" for optimization. See
-            https://support.google.com/google-ads/answer/12080169 for
-            more details.
+            `About customer lifecycle
+            goals <https://support.google.com/google-ads/answer/12080169>`__
+            for more details.
 
             This field is a member of `oneof`_ ``_new_customer_lifetime_value``.
         conversions_value_per_cost (float):
@@ -453,16 +458,16 @@ class Metrics(proto.Message):
         conversions_from_interactions_value_per_interaction (float):
             The value of conversions from interactions divided by the
             number of ad interactions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions.
+            actions which ``include_in_conversions_metric`` attribute is
+            set to ``true``. If you use conversion-based bidding, your
+            bid strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_conversions_from_interactions_value_per_interaction``.
         conversions (float):
             The number of conversions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions.
+            actions which ``include_in_conversions_metric`` attribute is
+            set to ``true``. If you use conversion-based bidding, your
+            bid strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_conversions``.
         conversions_by_conversion_date (float):
@@ -472,8 +477,9 @@ class Metrics(proto.Message):
             strategies will optimize for these conversions. When this
             column is selected with date, the values in date column
             means the conversion date. Details for the
-            by_conversion_date columns are available at
-            https://support.google.com/google-ads/answer/9549009.
+            ``by_conversion_date`` columns are available at `Understand
+            conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_conversions_by_conversion_date``.
         cost_micros (int):
@@ -490,24 +496,24 @@ class Metrics(proto.Message):
         cost_per_conversion (float):
             The cost of ad interactions divided by conversions. This
             only includes conversion actions which
-            include_in_conversions_metric attribute is set to true. If
-            you use conversion-based bidding, your bid strategies will
-            optimize for these conversions.
+            ``include_in_conversions_metric`` attribute is set to
+            ``true``. If you use conversion-based bidding, your bid
+            strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_cost_per_conversion``.
         cost_per_current_model_attributed_conversion (float):
             The cost of ad interactions divided by current model
             attributed conversions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions.
+            actions which ``include_in_conversions_metric`` attribute is
+            set to ``true``. If you use conversion-based bidding, your
+            bid strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_cost_per_current_model_attributed_conversion``.
         cross_device_conversions (float):
             Conversions from when a customer clicks on a Google Ads ad
             on one device, then converts on a different device or
             browser. Cross-device conversions are already included in
-            all_conversions.
+            ``all_conversions``.
 
             This field is a member of `oneof`_ ``_cross_device_conversions``.
         cross_device_conversions_value (float):
@@ -678,31 +684,26 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_invalid_clicks``.
         general_invalid_click_rate (float):
-            The percentage of clicks that have been
-            filtered out of your total number of clicks
-            (filtered + non-filtered clicks) due to being
-            general invalid clicks. These are clicks Google
-            considers illegitimate that are detected through
-            routine means of filtration (that is, known
-            invalid data-center traffic, bots and spiders or
-            other crawlers, irregular patterns, etc). You're
-            not charged for them, and they don't affect your
-            account statistics. See the help page at
-            https://support.google.com/campaignmanager/answer/6076504
-            for details.
+            The percentage of clicks that have been filtered out of your
+            total number of clicks (filtered + non-filtered clicks) due
+            to being general invalid clicks. These are clicks Google
+            considers illegitimate that are detected through routine
+            means of filtration (that is, known invalid data-center
+            traffic, bots and spiders or other crawlers, irregular
+            patterns, etc). You're not charged for them, and they don't
+            affect your account statistics. See `Filtering invalid
+            traffic to ensure
+            quality <https://support.google.com/campaignmanager/answer/6076504>`__.
 
             This field is a member of `oneof`_ ``_general_invalid_click_rate``.
         general_invalid_clicks (int):
-            Number of general invalid clicks. These are a
-            subset of your invalid clicks that are detected
-            through routine means of filtration (such as
-            known invalid data-center traffic, bots and
-            spiders or other crawlers, irregular patterns,
-            etc.). You're not charged for them, and they
-            don't affect your account statistics. See the
-            help page at
-            https://support.google.com/campaignmanager/answer/6076504
-            for details.
+            Number of general invalid clicks. These are a subset of your
+            invalid clicks that are detected through routine means of
+            filtration (such as known invalid data-center traffic, bots
+            and spiders or other crawlers, irregular patterns, etc.).
+            You're not charged for them, and they don't affect your
+            account statistics. See `Filtering invalid traffic to ensure
+            quality <https://support.google.com/campaignmanager/answer/6076504>`__.
 
             This field is a member of `oneof`_ ``_general_invalid_clicks``.
         message_chats (int):
@@ -739,50 +740,50 @@ class Metrics(proto.Message):
             URL for the optimization score page in the Google Ads web
             interface. This metric can be selected from ``customer`` or
             ``campaign``, and can be segmented by
-            ``segments.recommendation_type``. For example,
+            ``segments.recommendation_type``.
+
+            For example,
             ``SELECT metrics.optimization_score_url, segments.recommendation_type FROM customer``
             will return a URL for each unique (customer,
             recommendation_type) combination.
 
             This field is a member of `oneof`_ ``_optimization_score_url``.
         organic_clicks (int):
-            The number of times someone clicked your
-            site's listing in the unpaid results for a
-            particular query. See the help page at
-            https://support.google.com/google-ads/answer/3097241
-            for details.
+            The number of times someone clicked your site's listing in
+            the unpaid results for a particular query. See `About
+            measuring paid and organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__.
 
             This field is a member of `oneof`_ ``_organic_clicks``.
         organic_clicks_per_query (float):
             The number of times someone clicked your site's listing in
             the unpaid results (organic_clicks) divided by the total
             number of searches that returned pages from your site
-            (organic_queries). See the help page at
-            https://support.google.com/google-ads/answer/3097241 for
-            details.
+            (organic_queries). See `About measuring paid and organic
+            search
+            results <https://support.google.com/google-ads/answer/3097241>`__.
 
             This field is a member of `oneof`_ ``_organic_clicks_per_query``.
         organic_impressions (int):
-            The number of listings for your site in the
-            unpaid search results. See the help page at
-            https://support.google.com/google-ads/answer/3097241
-            for details.
+            The number of listings for your site in the unpaid search
+            results. See `About measuring paid and organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__.
 
             This field is a member of `oneof`_ ``_organic_impressions``.
         organic_impressions_per_query (float):
             The number of times a page from your site was listed in the
-            unpaid search results (organic_impressions) divided by the
-            number of searches returning your site's listing in the
-            unpaid results (organic_queries). See the help page at
-            https://support.google.com/google-ads/answer/3097241 for
-            details.
+            unpaid search results (``organic_impressions``) divided by
+            the number of searches returning your site's listing in the
+            unpaid results (``organic_queries``). See `About measuring
+            paid and organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__.
 
             This field is a member of `oneof`_ ``_organic_impressions_per_query``.
         organic_queries (int):
-            The total number of searches that returned
-            your site's listing in the unpaid results. See
-            the help page at
-            https://support.google.com/google-ads/answer/3097241
+            The total number of searches that returned your site's
+            listing in the unpaid results. See `About measuring paid and
+            organic search
+            results <https://support.google.com/google-ads/answer/3097241>`__
             for details.
 
             This field is a member of `oneof`_ ``_organic_queries``.
@@ -801,9 +802,9 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_phone_impressions``.
         phone_through_rate (float):
-            Number of phone calls received (phone_calls) divided by the
-            number of times your phone number is shown
-            (phone_impressions).
+            Number of phone calls received (``phone_calls``) divided by
+            the number of times your phone number is shown
+            (``phone_impressions``).
 
             This field is a member of `oneof`_ ``_phone_through_rate``.
         relative_ctr (float):
@@ -815,48 +816,53 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_relative_ctr``.
         search_absolute_top_impression_share (float):
-            The percentage of the customer's Shopping or
-            Search ad impressions that are shown in the most
-            prominent Shopping position. See
-            https://support.google.com/google-ads/answer/7501826
-            for details. Any value below 0.1 is reported as
-            0.0999.
+            The percentage of the customer's Shopping or Search ad
+            impressions that are shown in the most prominent Shopping
+            position. See `About top and absolute top
+            metrics <https://support.google.com/google-ads/answer/7501826>`__
+
+            for details. Any value below 0.1 is reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_absolute_top_impression_share``.
         search_budget_lost_absolute_top_impression_share (float):
             The number estimating how often your ad
             wasn't the very first ad among the top ads in
-            the search results due to a low budget. Note:
-            Search budget lost absolute top impression share
-            is reported in the range of 0 to 0.9. Any value
-            above 0.9 is reported as 0.9001.
+            the search results due to a low budget.
+
+            Note: Search budget lost absolute top impression
+            share is reported in the range of 0 to 0.9. Any
+            value above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_budget_lost_absolute_top_impression_share``.
         search_budget_lost_impression_share (float):
             The estimated percent of times that your ad
             was eligible to show on the Search Network but
-            didn't because your budget was too low. Note:
-            Search budget lost impression share is reported
-            in the range of 0 to 0.9. Any value above 0.9 is
+            didn't because your budget was too low.
+
+            Note: Search
+            budget lost impression share is reported in the
+            range of 0 to 0.9. Any value above 0.9 is
             reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_budget_lost_impression_share``.
         search_budget_lost_top_impression_share (float):
-            The number estimating how often your ad
+            The estimated percent of times that your ad
             didn't show adjacent to the top organic search
-            results due to a low budget. Note: Search budget
-            lost top impression share is reported in the
-            range of 0 to 0.9. Any value above 0.9 is
-            reported as 0.9001.
+            results due to a low budget.
+
+            Note: Search budget lost top impression share is
+            reported in the range of 0 to 0.9. Any value
+            above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_budget_lost_top_impression_share``.
         search_click_share (float):
             The number of clicks you've received on the
             Search Network divided by the estimated number
-            of clicks you were eligible to receive. Note:
-            Search click share is reported in the range of
-            0.1 to 1. Any value below 0.1 is reported as
-            0.0999.
+            of clicks you were eligible to receive.
+
+            Note: Search click share is reported in the
+            range of 0.1 to 1. Any value below 0.1 is
+            reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_click_share``.
         search_exact_match_impression_share (float):
@@ -865,28 +871,31 @@ class Metrics(proto.Message):
             eligible to receive on the Search Network for
             search terms that matched your keywords exactly
             (or were close variants of your keyword),
-            regardless of your keyword match types. Note:
-            Search exact match impression share is reported
-            in the range of 0.1 to 1. Any value below 0.1 is
-            reported as 0.0999.
+            regardless of your keyword match types.
+
+            Note: Search exact match impression share is
+            reported in the range of 0.1 to 1. Any value
+            below 0.1 is reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_exact_match_impression_share``.
         search_impression_share (float):
             The impressions you've received on the Search
             Network divided by the estimated number of
-            impressions you were eligible to receive. Note:
-            Search impression share is reported in the range
-            of 0.1 to 1. Any value below 0.1 is reported as
-            0.0999.
+            impressions you were eligible to receive.
+
+            Note: Search impression share is reported in the
+            range of 0.1 to 1. Any value below 0.1 is
+            reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_impression_share``.
         search_rank_lost_absolute_top_impression_share (float):
             The number estimating how often your ad
             wasn't the very first ad among the top ads in
-            the search results due to poor Ad Rank. Note:
-            Search rank lost absolute top impression share
-            is reported in the range of 0 to 0.9. Any value
-            above 0.9 is reported as 0.9001.
+            the search results due to poor Ad Rank.
+
+            Note: Search rank lost absolute top impression
+            share is reported in the range of 0 to 0.9. Any
+            value above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_rank_lost_absolute_top_impression_share``.
         search_rank_lost_impression_share (float):
@@ -901,10 +910,11 @@ class Metrics(proto.Message):
         search_rank_lost_top_impression_share (float):
             The number estimating how often your ad
             didn't show adjacent to the top organic search
-            results due to poor Ad Rank. Note: Search rank
-            lost top impression share is reported in the
-            range of 0 to 0.9. Any value above 0.9 is
-            reported as 0.9001.
+            results due to poor Ad Rank.
+
+            Note: Search rank lost top impression share is
+            reported in the range of 0 to 0.9. Any value
+            above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_search_rank_lost_top_impression_share``.
         search_top_impression_share (float):
@@ -966,36 +976,39 @@ class Metrics(proto.Message):
             The value of all conversions divided by the number of all
             conversions. When this column is selected with date, the
             values in date column means the conversion date. Details for
-            the by_conversion_date columns are available at
-            https://support.google.com/google-ads/answer/9549009.
+            the ``by_conversion_date`` columns are available at
+            `Understand conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_value_per_all_conversions_by_conversion_date``.
         value_per_conversion (float):
             The value of conversions divided by the number of
-            conversions. This only includes conversion actions which
-            include_in_conversions_metric attribute is set to true. If
-            you use conversion-based bidding, your bid strategies will
-            optimize for these conversions.
+            conversions. This only includes conversion actions for which
+            the ``include_in_conversions_metric`` attribute is set to
+            ``true``. If you use conversion-based bidding, your bid
+            strategies will optimize for these conversions.
 
             This field is a member of `oneof`_ ``_value_per_conversion``.
         value_per_conversions_by_conversion_date (float):
             The value of conversions divided by the number of
-            conversions. This only includes conversion actions which
-            include_in_conversions_metric attribute is set to true. If
-            you use conversion-based bidding, your bid strategies will
-            optimize for these conversions. When this column is selected
-            with date, the values in date column means the conversion
-            date. Details for the by_conversion_date columns are
-            available at
-            https://support.google.com/google-ads/answer/9549009.
+            conversions. This only includes conversion actions for which
+            the ``include_in_conversions_metric`` attribute is set to
+            ``true``. If you use conversion-based bidding, your bid
+            strategies will optimize for these conversions. When this
+            column is selected with date, the values in date column
+            means the conversion date. Details for the
+            ``by_conversion_date`` columns are available at `Understand
+            conversions by time with new
+            columns <https://support.google.com/google-ads/answer/9549009>`__.
 
             This field is a member of `oneof`_ ``_value_per_conversions_by_conversion_date``.
         value_per_current_model_attributed_conversion (float):
             The value of current model attributed conversions divided by
             the number of the conversions. This only includes conversion
-            actions which include_in_conversions_metric attribute is set
-            to true. If you use conversion-based bidding, your bid
-            strategies will optimize for these conversions.
+            actions for which the ``include_in_conversions_metric``
+            attribute is set to ``true``. If you use conversion-based
+            bidding, your bid strategies will optimize for these
+            conversions.
 
             This field is a member of `oneof`_ ``_value_per_current_model_attributed_conversion``.
         video_quartile_p100_rate (float):
@@ -1158,16 +1171,19 @@ class Metrics(proto.Message):
         orders (float):
             Orders is the total number of purchase
             conversions you received attributed to your ads.
+
             How it works: You report conversions with cart
             data for completed purchases on your website. If
             a conversion is attributed to previous
             interactions with your ads (clicks for text or
             Shopping ads, views for video ads etc.) it's
-            counted as an order. Example: Someone clicked on
-            a Shopping ad for a hat then bought the same hat
-            and a shirt in an order on your website. Even
-            though they bought 2 products, this would count
-            as 1 order.
+            counted as an order.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat and a shirt in an
+            order on your website. Even though they bought 2
+            products, this would count as 1 order.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1175,48 +1191,59 @@ class Metrics(proto.Message):
         average_order_value_micros (int):
             Average order value is the average revenue
             you made per order attributed to your ads.
+
             How it works: You report conversions with cart
             data for completed purchases on your website.
             Average order value is the total revenue from
             your orders divided by the total number of
             orders.
+
             Example: You received 3 orders which made $10,
             $15 and $20 worth of revenue. The average order
-            value is $15 = ($10 + $15 + $20)/3. This metric
-            is only available if you report conversions with
-            cart data.
+            value is $15 = ($10 + $15 + $20)/3.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_average_order_value_micros``.
         average_cart_size (float):
             Average cart size is the average number of
             products in each order attributed to your ads.
+
             How it works: You report conversions with cart
             data for completed purchases on your website.
             Average cart size is the total number of
             products sold divided by the total number of
-            orders you received. Example: You received 2
-            orders, the first included 3 products and the
-            second included 2. The average cart size is 2.5
-            products = (3+2)/2. This metric is only
-            available if you report conversions with cart
-            data.
+            orders you received.
+
+            Example: You received 2 orders, the first
+            included 3 products and the second included 2.
+            The average cart size is 2.5 products = (3+2)/2.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_average_cart_size``.
         cost_of_goods_sold_micros (int):
             Cost of goods sold (COGS) is the total cost
             of the products you sold in orders attributed to
-            your ads. How it works: You can add a cost of
-            goods sold value to every product in Merchant
-            Center. If you report conversions with cart
-            data, the products you sold are matched with
-            their cost of goods sold value and this can be
-            used to calculate the gross profit you made on
-            each order. Example: Someone clicked on a
-            Shopping ad for a hat then bought the same hat
-            and a shirt. The hat has a cost of goods sold
-            value of $3, the shirt has a cost of goods sold
-            value of $5. The cost of goods sold for this
-            order is $8 = $3 + $5.
+            your ads.
+
+            How it works: You can add a cost of goods sold
+            value to every product in Merchant Center. If
+            you report conversions with cart data, the
+            products you sold are matched with their cost of
+            goods sold value and this can be used to
+            calculate the gross profit you made on each
+            order.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat and a shirt. The
+            hat has a cost of goods sold value of $3, the
+            shirt has a cost of goods sold value of $5. The
+            cost of goods sold for this order is $8 = $3 +
+            $5.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1224,11 +1251,14 @@ class Metrics(proto.Message):
         gross_profit_micros (int):
             Gross profit is the profit you made from
             orders attributed to your ads minus the cost of
-            goods sold (COGS). How it works: Gross profit is
-            the revenue you made from sales attributed to
-            your ads minus cost of goods sold. Gross profit
-            calculations only include products that have a
-            cost of goods sold value in Merchant Center.
+            goods sold (COGS).
+
+            How it works: Gross profit is the revenue you
+            made from sales attributed to your ads minus
+            cost of goods sold. Gross profit calculations
+            only include products that have a cost of goods
+            sold value in Merchant Center.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat and a shirt in an
             order from your website. The hat is priced $10
@@ -1236,22 +1266,26 @@ class Metrics(proto.Message):
             of goods sold value of $3, but the shirt has no
             cost of goods sold value. Gross profit for this
             order will only take into account the hat, so
-            it's $7 = $10 - $3. This metric is only
-            available if you report conversions with cart
-            data.
+            it's $7 = $10 - $3.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_gross_profit_micros``.
         gross_profit_margin (float):
             Gross profit margin is the percentage gross
             profit you made from orders attributed to your
             ads, after taking out the cost of goods sold
-            (COGS). How it works: You report conversions
-            with cart data for completed purchases on your
-            website. Gross profit margin is the gross profit
-            you made divided by your total revenue and
-            multiplied by 100%. Gross profit margin
-            calculations only include products that have a
-            cost of goods sold value in Merchant Center.
+            (COGS).
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website.
+            Gross profit margin is the gross profit you made
+            divided by your total revenue and multiplied by
+            100%. Gross profit margin calculations only
+            include products that have a cost of goods sold
+            value in Merchant Center.
+
             Example: Someone bought a hat and a shirt in an
             order on your website. The hat is priced $10 and
             has a cost of goods sold value of $3. The shirt
@@ -1259,23 +1293,28 @@ class Metrics(proto.Message):
             value. Gross profit margin for this order will
             only take into account the hat because it has a
             cost of goods sold value, so it's 70% = ($10 -
-            $3)/$10 x 100%. This metric is only available if
-            you report conversions with cart data.
+            $3)/$10 x 100%.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_gross_profit_margin``.
         revenue_micros (int):
             Revenue is the total amount you made from
-            orders attributed to your ads. How it works: You
-            report conversions with cart data for completed
-            purchases on your website. Revenue is the total
-            value of all the orders you received attributed
-            to your ads, minus any discount.
+            orders attributed to your ads.
+            How it works: You report conversions with cart
+            data for completed purchases on your website.
+            Revenue is the total value of all the orders you
+            received attributed to your ads, minus any
+            discount.
+
             Example: Someone clicked on a Shopping ad  for a
             hat then bought the same hat and a shirt in an
             order from your website. The hat is priced $10
             and the shirt is priced $20. The entire order
             has a $5 discount. The revenue from this order
             is $25 = ($10 + $20) - $5.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1283,38 +1322,44 @@ class Metrics(proto.Message):
         units_sold (float):
             Units sold is the total number of products
             sold from orders attributed to your ads.
+
             How it works: You report conversions with cart
             data for completed purchases on your website.
             Units sold is the total number of products sold
             from all orders attributed to your ads.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat, a shirt and a
-            jacket. The units sold in this order is 3. This
-            metric is only available if you report
+            jacket. The units sold in this order is 3.
+
+            This metric is only available if you report
             conversions with cart data.
 
             This field is a member of `oneof`_ ``_units_sold``.
         cross_sell_cost_of_goods_sold_micros (int):
             Cross-sell cost of goods sold (COGS) is the
             total cost of products sold as a result of
-            advertising a different product. How it works:
-            You report conversions with cart data for
-            completed purchases on your website. If the ad
-            that was interacted with before the purchase has
-            an associated product (see Shopping Ads) then
-            this product is considered the advertised
-            product. Any product included in the order the
-            customer places is a sold product. If these
-            products don't match then this is considered
-            cross-sell. Cross-sell cost of goods sold is the
-            total cost of the products sold that weren't
-            advertised.
+            advertising a different product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            order the customer places is a sold product. If
+            these products don't match then this is
+            considered cross-sell. Cross-sell cost of goods
+            sold is the total cost of the products sold that
+            weren't advertised.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat and a shirt. The
             hat has a cost of goods sold value of $3, the
             shirt has a cost of goods sold value of $5. The
             cross-sell cost of goods sold for this order is
             $5.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1323,22 +1368,26 @@ class Metrics(proto.Message):
             Cross-sell gross profit is the profit you
             made from products sold as a result of
             advertising a different product, minus cost of
-            goods sold (COGS). How it works: You report
-            conversions with cart data for completed
-            purchases on your website. If the ad that was
-            interacted with before the purchase has an
-            associated product (see Shopping Ads) then this
-            product is considered the advertised product.
-            Any product included in the purchase is a sold
-            product. If these products don't match then this
-            is considered cross-sell. Cross-sell gross
-            profit is the revenue you made from cross-sell
-            attributed to your ads minus the cost of the
-            goods sold. Example: Someone clicked on a
-            Shopping ad for a hat then bought the same hat
-            and a shirt. The shirt is priced $20 and has a
-            cost of goods sold value of $5. The cross-sell
-            gross profit of this order is $15 = $20 - $5.
+            goods sold (COGS).
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            purchase is a sold product. If these products
+            don't match then this is considered cross-sell.
+            Cross-sell gross profit is the revenue you made
+            from cross-sell attributed to your ads minus the
+            cost of the goods sold.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat and a shirt. The
+            shirt is priced $20 and has a cost of goods sold
+            value of $5. The cross-sell gross profit of this
+            order is $15 = $20 - $5.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1346,22 +1395,25 @@ class Metrics(proto.Message):
         cross_sell_revenue_micros (int):
             Cross-sell revenue is the total amount you
             made from products sold as a result of
-            advertising a different product. How it works:
-            You report conversions with cart data for
-            completed purchases on your website. If the ad
-            that was interacted with before the purchase has
-            an associated product (see Shopping Ads) then
-            this product is considered the advertised
-            product. Any product included in the order the
-            customer places is a sold product. If these
-            products don't match then this is considered
-            cross-sell. Cross-sell revenue is the total
-            value you made from cross-sell attributed to
-            your ads.
+            advertising a different product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            order the customer places is a sold product. If
+            these products don't match then this is
+            considered cross-sell. Cross-sell revenue is the
+            total value you made from cross-sell attributed
+            to your ads.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat and a shirt. The
             hat is priced $10 and the shirt is priced $20.
             The cross-sell revenue of this order is $20.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1369,43 +1421,50 @@ class Metrics(proto.Message):
         cross_sell_units_sold (float):
             Cross-sell units sold is the total number of
             products sold as a result of advertising a
-            different product. How it works: You report
-            conversions with cart data for completed
-            purchases on your website. If the ad that was
-            interacted with before the purchase has an
-            associated product (see Shopping Ads) then this
-            product is considered the advertised product.
-            Any product included in the order the customer
-            places is a sold product. If these products
-            don't match then this is considered cross-sell.
-            Cross-sell units sold is the total number of
-            cross-sold products from all orders attributed
-            to your ads. Example: Someone clicked on a
-            Shopping ad for a hat then bought the same hat,
-            a shirt and a jacket. The cross-sell units sold
-            in this order is 2. This metric is only
-            available if you report conversions with cart
-            data.
+            different product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            order the customer places is a sold product. If
+            these products don't match then this is
+            considered cross-sell. Cross-sell units sold is
+            the total number of cross-sold products from all
+            orders attributed to your ads.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat, a shirt and a
+            jacket. The cross-sell units sold in this order
+            is 2.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_cross_sell_units_sold``.
         lead_cost_of_goods_sold_micros (int):
             Lead cost of goods sold (COGS) is the total
             cost of products sold as a result of advertising
-            the same product. How it works: You report
-            conversions with cart data for completed
-            purchases on your website. If the ad that was
-            interacted with has an associated product (see
-            Shopping Ads) then this product is considered
-            the advertised product. Any product included in
-            the order the customer places is a sold product.
-            If the advertised and sold products match, then
-            the cost of these goods is counted under lead
-            cost of goods sold. Example: Someone clicked on
-            a Shopping ad for a hat then bought the same hat
-            and a shirt. The hat has a cost of goods sold
-            value of $3, the shirt has a cost of goods sold
-            value of $5. The lead cost of goods sold for
-            this order is $3.
+            the same product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with has an
+            associated product (see Shopping Ads) then this
+            product is considered the advertised product.
+            Any product included in the order the customer
+            places is a sold product. If the advertised and
+            sold products match, then the cost of these
+            goods is counted under lead cost of goods sold.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat and a shirt. The
+            hat has a cost of goods sold value of $3, the
+            shirt has a cost of goods sold value of $5. The
+            lead cost of goods sold for this order is $3.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1414,6 +1473,7 @@ class Metrics(proto.Message):
             Lead gross profit is the profit you made from
             products sold as a result of advertising the
             same product, minus cost of goods sold (COGS).
+
             How it works: You report conversions with cart
             data for completed purchases on your website. If
             the ad that was interacted with before the
@@ -1424,32 +1484,38 @@ class Metrics(proto.Message):
             the advertised and sold products match, then the
             revenue you made from these sales minus the cost
             of goods sold is your lead gross profit.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat and a shirt. The
             hat is priced $10 and has a cost of goods sold
             value of $3. The lead gross profit of this order
-            is $7 = $10 - $3. This metric is only available
-            if you report conversions with cart data.
+            is $7 = $10 - $3.
+
+            This metric is only available if you report
+            conversions with cart data.
 
             This field is a member of `oneof`_ ``_lead_gross_profit_micros``.
         lead_revenue_micros (int):
             Lead revenue is the total amount you made
             from products sold as a result of advertising
-            the same product. How it works: You report
-            conversions with cart data for completed
-            purchases on your website. If the ad that was
-            interacted with before the purchase has an
-            associated product (see Shopping Ads) then this
-            product is considered the advertised product.
-            Any product included in the order the customer
-            places is a sold product. If the advertised and
-            sold products match, then the total value you
-            made from the sales of these products is shown
-            under lead revenue.
+            the same product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            order the customer places is a sold product. If
+            the advertised and sold products match, then the
+            total value you made from the sales of these
+            products is shown under lead revenue.
+
             Example: Someone clicked on a Shopping ad for a
             hat then bought the same hat and a shirt. The
             hat is priced $10 and the shirt is priced $20.
             The lead revenue of this order is $10.
+
             This metric is only available if you report
             conversions with cart data.
 
@@ -1457,20 +1523,24 @@ class Metrics(proto.Message):
         lead_units_sold (float):
             Lead units sold is the total number of
             products sold as a result of advertising the
-            same product. How it works: You report
-            conversions with cart data for completed
-            purchases on your website. If the ad that was
-            interacted with before the purchase has an
-            associated product (see Shopping Ads) then this
-            product is considered the advertised product.
-            Any product included in the order the customer
-            places is a sold product. If the advertised and
-            sold products match, then the total number of
-            these products sold is shown under lead units
-            sold. Example: Someone clicked on a Shopping ad
-            for a hat then bought the same hat, a shirt and
-            a jacket. The lead units sold in this order is
-            1. This metric is only available if you report
+            same product.
+
+            How it works: You report conversions with cart
+            data for completed purchases on your website. If
+            the ad that was interacted with before the
+            purchase has an associated product (see Shopping
+            Ads) then this product is considered the
+            advertised product. Any product included in the
+            order the customer places is a sold product. If
+            the advertised and sold products match, then the
+            total number of these products sold is shown
+            under lead units sold.
+
+            Example: Someone clicked on a Shopping ad for a
+            hat then bought the same hat, a shirt and a
+            jacket. The lead units sold in this order is 1.
+
+            This metric is only available if you report
             conversions with cart data.
 
             This field is a member of `oneof`_ ``_lead_units_sold``.
@@ -1493,195 +1563,206 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_average_impression_frequency_per_user``.
         linked_entities_count (int):
-            Number of linked resources in which the asset
-            is used. This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            Number of linked resources in which the asset is used. This
+            metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
 
             This field is a member of `oneof`_ ``_linked_entities_count``.
         linked_sample_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources in
-            which the asset is used. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            A list of up to 20 sample linked resources in which the
+            asset is used. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         sample_best_performance_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources
-            with impressions in the last 30 days where the
-            asset had the AssetPerformanceLabel.BEST
-            performance label. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            A list of up to 20 sample linked resources with impressions
+            in the last 30 days where the asset had the
+            ``AssetPerformanceLabel.BEST`` performance label.
+
+            This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         sample_good_performance_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources
-            with impressions in the last 30 days where the
-            asset had the AssetPerformanceLabel.GOOD
-            performance label. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            A list of up to 20 sample linked resources with impressions
+            in the last 30 days where the asset had the
+            ``AssetPerformanceLabel.GOOD`` performance label.
+
+            This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         sample_low_performance_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources
-            with impressions in the last 30 days where the
-            asset had the AssetPerformanceLabel.LOW
-            performance label. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            A list of up to 20 sample linked resources with impressions
+            in the last 30 days where the asset had the
+            ``AssetPerformanceLabel.LOW`` performance label.
+
+            This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         sample_learning_performance_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources
-            with impressions in the last 30 days where the
-            asset had the AssetPerformanceLabel.LEARNING
-            performance label.
+            A list of up to 20 sample linked resources with impressions
+            in the last 30 days where the asset had the
+            ``AssetPerformanceLabel.LEARNING`` performance label.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         sample_unrated_performance_entities (MutableSequence[str]):
-            A list of up to 20 sample linked resources
-            with impressions in the last 30 days where the
-            assets had AssetPerformanceLabel performance
-            label other than BEST, GOOD, LOW, and LEARNING.
+            A list of up to 20 sample linked resources with impressions
+            in the last 30 days where the assets had
+            ``AssetPerformanceLabel`` performance label other than
+            ``BEST``, ``GOOD``, ``LOW``, and ``LEARNING``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``.
         asset_pinned_total_count (int):
-            Number of total usages in which the asset is
-            pinned. This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of total usages in which the asset is pinned. This
+            metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_total_count``.
         asset_pinned_as_headline_position_one_count (int):
-            Number of entities in which the asset is
-            pinned to headline 1. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of entities in which the asset is pinned to headline
+            1. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_as_headline_position_one_count``.
         asset_pinned_as_headline_position_two_count (int):
-            Number of entities in which the asset is
-            pinned to headline 2. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of entities in which the asset is pinned to headline
+            2. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_as_headline_position_two_count``.
         asset_pinned_as_headline_position_three_count (int):
-            Number of entities in which the asset is
-            pinned to headline 3. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of entities in which the asset is pinned to headline
+            3. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_as_headline_position_three_count``.
         asset_pinned_as_description_position_one_count (int):
-            Number of entities in which the asset is
-            pinned to description 1. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of entities in which the asset is pinned to
+            description 1. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_as_description_position_one_count``.
         asset_pinned_as_description_position_two_count (int):
-            Number of entities in which the asset is
-            pinned to description 2. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Number of entities in which the asset is pinned to
+            description 2. This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_pinned_as_description_position_two_count``.
         asset_best_performance_impression_percentage (float):
-            Percentage of impressions the asset received
-            in ads with AssetPerformanceLabel.BEST.
+            Percentage of impressions the asset received in ads with
+            ``AssetPerformanceLabel.BEST``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_best_performance_impression_percentage``.
         asset_good_performance_impression_percentage (float):
-            Percentage of impressions the asset received
-            in ads with AssetPerformanceLabel.GOOD.
+            Percentage of impressions the asset received in ads with
+            ``AssetPerformanceLabel.GOOD``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_good_performance_impression_percentage``.
         asset_low_performance_impression_percentage (float):
-            Percentage of impressions the asset received
-            in ads with AssetPerformanceLabel.LOW.
+            Percentage of impressions the asset received in ads with
+            ``AssetPerformanceLabel.LOW``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_low_performance_impression_percentage``.
         asset_learning_performance_impression_percentage (float):
-            Percentage of impressions the asset received
-            in ads with AssetPerformanceLabel.LEARNING.
+            Percentage of impressions the asset received in ads with
+            ``AssetPerformanceLabel.LEARNING``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_learning_performance_impression_percentage``.
         asset_unrated_performance_impression_percentage (float):
-            Percentage of impressions the asset received
-            in ads with AssetPerformanceLabel other than
-            BEST, GOOD, LOW, and LEARNING. This metric can
-            only be selected with ChannelAggregateAssetView
-            and CampaignAggregateAssetView.
-            This metric is only supported in Search channel.
+            Percentage of impressions the asset received in ads with
+            ``AssetPerformanceLabel`` other than ``BEST``, ``GOOD``,
+            ``LOW``, and ``LEARNING``.
+
+            This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Search channel.
 
             This field is a member of `oneof`_ ``_asset_unrated_performance_impression_percentage``.
         asset_best_performance_cost_percentage (float):
-            Percentage of cost the asset received in ads
-            with AssetPerformanceLabel.BEST.
+            Percentage of cost the asset received in ads with
+            ``AssetPerformanceLabel.BEST``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Performance Max
-            channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Performance Max channel.
 
             This field is a member of `oneof`_ ``_asset_best_performance_cost_percentage``.
         asset_good_performance_cost_percentage (float):
-            Percentage of cost the asset received in ads
-            with AssetPerformanceLabel.GOOD.
+            Percentage of cost the asset received in ads with
+            ``AssetPerformanceLabel.GOOD``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Performance Max
-            channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Performance Max channel.
 
             This field is a member of `oneof`_ ``_asset_good_performance_cost_percentage``.
         asset_low_performance_cost_percentage (float):
-            Percentage of cost the asset received in ads
-            with AssetPerformanceLabel.LOW.
+            Percentage of cost the asset received in ads with
+            ``AssetPerformanceLabel.LOW``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Performance Max
-            channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Performance Max channel.
 
             This field is a member of `oneof`_ ``_asset_low_performance_cost_percentage``.
         asset_learning_performance_cost_percentage (float):
-            Percentage of cost the asset received in ads
-            with AssetPerformanceLabel.LEARNING.
+            Percentage of cost the asset received in ads with
+            ``AssetPerformanceLabel.LEARNING``.
+
             This metric can only be selected with
-            ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Performance Max
-            channel.
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Performance Max channel.
 
             This field is a member of `oneof`_ ``_asset_learning_performance_cost_percentage``.
         asset_unrated_performance_cost_percentage (float):
-            Percentage of cost the asset received in ads
-            with AssetPerformanceLabel other than BEST,
-            GOOD, LOW, and LEARNING. This metric can only be
-            selected with ChannelAggregateAssetView and
-            CampaignAggregateAssetView.
-            This metric is only supported in Performance Max
-            channel.
+            Percentage of cost the asset received in ads with
+            ``AssetPerformanceLabel`` other than ``BEST``, ``GOOD``,
+            ``LOW``, and ``LEARNING``.
+
+            This metric can only be selected with
+            ``ChannelAggregateAssetView`` and
+            ``CampaignAggregateAssetView``. This metric is only
+            supported in Performance Max channel.
 
             This field is a member of `oneof`_ ``_asset_unrated_performance_cost_percentage``.
         store_visits_last_click_model_attributed_conversions (float):

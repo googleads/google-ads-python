@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -110,12 +111,7 @@ class CustomAudienceServiceAsyncClient:
         Returns:
             CustomAudienceServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            CustomAudienceServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            CustomAudienceServiceAsyncClient, info, *args, **kwargs
-        )
+        return CustomAudienceServiceClient.from_service_account_info.__func__(CustomAudienceServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -131,12 +127,7 @@ class CustomAudienceServiceAsyncClient:
         Returns:
             CustomAudienceServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            CustomAudienceServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            CustomAudienceServiceAsyncClient, filename, *args, **kwargs
-        )
+        return CustomAudienceServiceClient.from_service_account_file.__func__(CustomAudienceServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

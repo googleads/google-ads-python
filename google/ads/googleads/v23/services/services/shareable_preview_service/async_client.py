@@ -51,7 +51,16 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class ShareablePreviewServiceAsyncClient:
-    """Service to generate Shareable Previews."""
+    """Service to generate Shareable Previews.
+
+    Only Performance Max asset groups and certain YouTube video/audio ad
+    formats are supported. Other ad types, such as Responsive Search Ads
+    or Responsive Display Ads, are not supported and return an
+    ``UNSUPPORTED_AD_TYPE`` error.
+
+    The generated preview URLs cannot be embedded in an iframe because
+    the response headers include ``X-Frame-Options: deny``.
+    """
 
     _client: ShareablePreviewServiceClient
 

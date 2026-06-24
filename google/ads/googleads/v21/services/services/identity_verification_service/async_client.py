@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -112,12 +113,7 @@ class IdentityVerificationServiceAsyncClient:
         Returns:
             IdentityVerificationServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            IdentityVerificationServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            IdentityVerificationServiceAsyncClient, info, *args, **kwargs
-        )
+        return IdentityVerificationServiceClient.from_service_account_info.__func__(IdentityVerificationServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -133,12 +129,7 @@ class IdentityVerificationServiceAsyncClient:
         Returns:
             IdentityVerificationServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            IdentityVerificationServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            IdentityVerificationServiceAsyncClient, filename, *args, **kwargs
-        )
+        return IdentityVerificationServiceClient.from_service_account_file.__func__(IdentityVerificationServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

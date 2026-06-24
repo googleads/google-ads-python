@@ -359,6 +359,9 @@ from google.ads.googleads.v21.errors.types import (
     merchant_center_error as gage_merchant_center_error,
 )
 from google.ads.googleads.v21.errors.types import (
+    multi_party_auth_review_error as gage_multi_party_auth_review_error,
+)
+from google.ads.googleads.v21.errors.types import (
     multiplier_error as gage_multiplier_error,
 )
 from google.ads.googleads.v21.errors.types import (
@@ -488,7 +491,8 @@ from google.ads.googleads.v21.errors.types import (
 from google.ads.googleads.v21.errors.types import (
     youtube_video_registration_error as gage_youtube_video_registration_error,
 )
-import google.protobuf.duration_pb2 as duration_pb2  # type: ignore
+from google.protobuf import duration_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.errors",
@@ -1275,6 +1279,11 @@ class ErrorCode(proto.Message):
         brand_guidelines_migration_error (google.ads.googleads.v21.errors.types.BrandGuidelinesMigrationErrorEnum.BrandGuidelinesMigrationError):
             The reasons for the brand guidelines
             migration error.
+
+            This field is a member of `oneof`_ ``error_code``.
+        multi_party_auth_review_error (google.ads.googleads.v21.errors.types.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError):
+            The reasons for the multi party auth review
+            error
 
             This field is a member of `oneof`_ ``error_code``.
     """
@@ -2526,6 +2535,14 @@ class ErrorCode(proto.Message):
         number=191,
         oneof="error_code",
         enum=gage_brand_guidelines_migration_error.BrandGuidelinesMigrationErrorEnum.BrandGuidelinesMigrationError,
+    )
+    multi_party_auth_review_error: (
+        gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError
+    ) = proto.Field(
+        proto.ENUM,
+        number=200,
+        oneof="error_code",
+        enum=gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError,
     )
 
 

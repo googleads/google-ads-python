@@ -24,6 +24,7 @@ from google.ads.googleads.v22.enums.types import (
     identity_verification_program_status,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
     marshal="google.ads.googleads.v22",

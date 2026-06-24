@@ -30,6 +30,7 @@ from google.ads.googleads.v21.enums.types import (
     policy_topic_evidence_destination_not_working_dns_error_type,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

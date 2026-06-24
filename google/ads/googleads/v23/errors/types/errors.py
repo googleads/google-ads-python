@@ -379,6 +379,9 @@ from google.ads.googleads.v23.errors.types import (
     merchant_center_error as gage_merchant_center_error,
 )
 from google.ads.googleads.v23.errors.types import (
+    multi_party_auth_review_error as gage_multi_party_auth_review_error,
+)
+from google.ads.googleads.v23.errors.types import (
     multiplier_error as gage_multiplier_error,
 )
 from google.ads.googleads.v23.errors.types import (
@@ -1335,6 +1338,11 @@ class ErrorCode(proto.Message):
             This field is a member of `oneof`_ ``error_code``.
         video_reservation_error (google.ads.googleads.v23.errors.types.VideoReservationErrorEnum.VideoReservationError):
             The reasons for the video reservation error.
+
+            This field is a member of `oneof`_ ``error_code``.
+        multi_party_auth_review_error (google.ads.googleads.v23.errors.types.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError):
+            The reasons for the multi party auth review
+            error
 
             This field is a member of `oneof`_ ``error_code``.
     """
@@ -2646,6 +2654,14 @@ class ErrorCode(proto.Message):
         number=199,
         oneof="error_code",
         enum=gage_video_reservation_error.VideoReservationErrorEnum.VideoReservationError,
+    )
+    multi_party_auth_review_error: (
+        gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError
+    ) = proto.Field(
+        proto.ENUM,
+        number=200,
+        oneof="error_code",
+        enum=gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError,
     )
 
 

@@ -70,13 +70,26 @@ def main(
             customer_id=customer_id, operation=invitation_operation
         )
     )
-    print(
-        "Customer user access invitation was sent for "
-        f"customer ID: '{customer_id}', "
-        f"email address {email_address}, and "
-        f"access role {access_role}. The invitation resource name is: "
-        f"{response.result.resource_name}"
-    )
+    if response.result.multi_party_auth_review:
+        # A multi-party auth review was triggered. See
+        # FetchAndApprovePendingMultiPartyAuthReviews.cs for an example on how
+        # to fetch and approve an MPA auth review.
+        print(
+            "A multi-party auth review was triggered. The MPA review resource "
+            f"name is {response.result.multi_party_auth_review}. Ask a second "
+            "administrator to approve this request to send user access invitation. "
+            "See advanced_operations/fetch_and_approve_pending_multi_party_auth_reviews.py "
+            "for an example on how to approve an MPA auth review using the API."
+        )
+    else:
+        # A multi-party auth review was not triggered.
+        print(
+            "Customer user access invitation was sent for "
+            f"customer ID: '{customer_id}', "
+            f"email address {email_address}, and "
+            f"access role {access_role}. The invitation resource name is: "
+            f"{response.result.resource_name}"
+        )
     # [END invite_user_with_access_role]
 
 

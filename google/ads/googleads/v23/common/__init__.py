@@ -338,6 +338,8 @@ from .types.simulation import TargetImpressionShareSimulationPoint
 from .types.simulation import TargetImpressionShareSimulationPointList
 from .types.simulation import TargetRoasSimulationPoint
 from .types.simulation import TargetRoasSimulationPointList
+from .types.synthetic_content_info import SyntheticContentAttestation
+from .types.synthetic_content_info import SyntheticContentInfo
 from .types.tag_snippet import TagSnippet
 from .types.targeting_setting import TargetingSetting
 from .types.targeting_setting import TargetRestriction
@@ -762,6 +764,8 @@ __all__ = (
     "StoreSalesMetadata",
     "StoreSalesThirdPartyMetadata",
     "StructuredSnippetAsset",
+    "SyntheticContentAttestation",
+    "SyntheticContentInfo",
     "TagSnippet",
     "TargetCpa",
     "TargetCpaSimulationPoint",

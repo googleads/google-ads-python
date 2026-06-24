@@ -194,6 +194,7 @@ from .types.media_bundle_error import MediaBundleErrorEnum
 from .types.media_file_error import MediaFileErrorEnum
 from .types.media_upload_error import MediaUploadErrorEnum
 from .types.merchant_center_error import MerchantCenterErrorEnum
+from .types.multi_party_auth_review_error import MultiPartyAuthReviewErrorEnum
 from .types.multiplier_error import MultiplierErrorEnum
 from .types.mutate_error import MutateErrorEnum
 from .types.new_resource_creation_error import NewResourceCreationErrorEnum
@@ -476,6 +477,7 @@ __all__ = (
     "MediaFileErrorEnum",
     "MediaUploadErrorEnum",
     "MerchantCenterErrorEnum",
+    "MultiPartyAuthReviewErrorEnum",
     "MultiplierErrorEnum",
     "MutateErrorEnum",
     "NewResourceCreationErrorEnum",

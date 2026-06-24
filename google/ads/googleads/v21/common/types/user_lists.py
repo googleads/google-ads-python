@@ -38,6 +38,7 @@ from google.ads.googleads.v21.enums.types import (
     user_list_string_rule_item_operator,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.common",
     marshal="google.ads.googleads.v21",

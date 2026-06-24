@@ -101,7 +101,10 @@ class GenerateCreatorInsightsRequest(proto.Message):
     class SearchAttributes(proto.Message):
         r"""The audience attributes (such as Age, Gender, Affinity, and
         In-Market) and creator attributes (such as creator's content
-        topics) used to search for top creators.
+        topics) used to search for top creators. The returned creators
+        are sorted based on likelihood that your audience watches the
+        creator, relative to the general population (most likely is
+        returned first).
 
         Attributes:
             audience_attributes (MutableSequence[google.ads.googleads.v23.common.types.AudienceInsightsAttribute]):
@@ -409,9 +412,10 @@ class YouTubeMetrics(proto.Message):
             videos of this channel.
         engagement_rate (float):
             The lifetime engagement rate of this channel.
-            The value is computed as the total number of
-            likes, shares, and comments across all videos
-            divided by the total number of video views.
+            A measurement of how often people engage with
+            the creator's content. The value, between 0 and
+            1, is calculated as total engagement divided by
+            total views.
         average_views_per_video (float):
             The average number of views per video in the
             last 28 days.

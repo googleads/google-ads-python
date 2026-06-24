@@ -70,6 +70,12 @@ class CustomerUserAccess(proto.Message):
             enabled. Read only field
 
             This field is a member of `oneof`_ ``_passkey_enabled``.
+        pending_multi_party_auth_review (str):
+            Output only. The resource name of the pending
+            Multi-Party Authorization review. Read only
+            field
+
+            This field is a member of `oneof`_ ``_pending_multi_party_auth_review``.
     """
 
     resource_name: str = proto.Field(
@@ -103,6 +109,11 @@ class CustomerUserAccess(proto.Message):
     passkey_enabled: bool = proto.Field(
         proto.BOOL,
         number=8,
+        optional=True,
+    )
+    pending_multi_party_auth_review: str = proto.Field(
+        proto.STRING,
+        number=9,
         optional=True,
     )
 

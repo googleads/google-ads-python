@@ -24,7 +24,8 @@ from google.ads.googleads.v22.enums.types import (
     response_content_type as gage_response_content_type,
 )
 from google.ads.googleads.v22.resources.types import customer as gagr_customer
-import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
+from google.protobuf import field_mask_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",

@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

@@ -25,7 +25,8 @@ from google.ads.googleads.v22.enums.types import (
 from google.ads.googleads.v22.resources.types import (
     customer_negative_criterion as gagr_customer_negative_criterion,
 )
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",

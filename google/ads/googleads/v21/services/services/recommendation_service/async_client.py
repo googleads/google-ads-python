@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -37,7 +38,7 @@ from google.ads.googleads.v21.enums.types import (
 )
 from google.ads.googleads.v21.enums.types import recommendation_type
 from google.ads.googleads.v21.services.types import recommendation_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import RecommendationServiceTransport, DEFAULT_CLIENT_INFO
 from .client import RecommendationServiceClient
 
@@ -141,12 +142,7 @@ class RecommendationServiceAsyncClient:
         Returns:
             RecommendationServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            RecommendationServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            RecommendationServiceAsyncClient, info, *args, **kwargs
-        )
+        return RecommendationServiceClient.from_service_account_info.__func__(RecommendationServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -162,12 +158,7 @@ class RecommendationServiceAsyncClient:
         Returns:
             RecommendationServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            RecommendationServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            RecommendationServiceAsyncClient, filename, *args, **kwargs
-        )
+        return RecommendationServiceClient.from_service_account_file.__func__(RecommendationServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

@@ -59,6 +59,14 @@ class GenerateShareablePreviewsOperation(proto.Message):
 class ShareablePreview(proto.Message):
     r"""A shareable preview with its identifier.
 
+    Only Performance Max asset groups and certain YouTube video/audio ad
+    formats are supported. Other ad types, such as Responsive Search Ads
+    or Responsive Display Ads, are not supported and return an
+    ``UNSUPPORTED_AD_TYPE`` error.
+
+    The generated preview URLs cannot be embedded in an iframe because
+    the response headers include ``X-Frame-Options: deny``.
+
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
     Setting any member of the oneof automatically clears all other

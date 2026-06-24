@@ -74,6 +74,10 @@ class ExperimentArm(proto.Message):
             Details of assets under experiment.
         asset_groups (MutableSequence[google.ads.googleads.v24.resources.types.ExperimentArm.AssetGroupInfo]):
             List of asset groups in the experiment arm.
+            The max length is one. In the Optimize Assets
+            experiment construction, the control arm and
+            treatment arm should both contain the same asset
+            group ID.
         performance_max_experiment_arm_info (google.ads.googleads.v24.resources.types.ExperimentArm.PerformanceMaxExperimentArmInfo):
             Immutable. Information specific to the control or treatment
             campaign of a Performance Max experiment.

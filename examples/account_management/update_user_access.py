@@ -180,10 +180,24 @@ def modify_user_access(
         )
     )
 
-    print(
-        "Successfully modified customer user access with resource name: "
-        f"{response.result.resource_name}."
-    )
+    if response.result.multi_party_auth_review:
+        # A multi-party auth review was triggered. See
+        # FetchAndApprovePendingMultiPartyAuthReviews.cs for an example on how
+        # to fetch and approve an MPA auth review.
+        print(
+            "A multi-party auth review was triggered. The MPA review resource "
+            f"name is {response.result.multi_party_auth_review}. Ask a second "
+            "administrator to approve this request to make the requested user "
+            "access changes. See "
+            "advanced_operations/fetch_and_approve_pending_multi_party_auth_reviews.py "
+            "for an example on how to approve an MPA auth review using the API."
+        )
+    else:
+        # A multi-party auth review was not triggered.
+        print(
+            "Successfully modified customer user access with resource name: "
+            f"{response.result.resource_name}."
+        )
 
 
 if __name__ == "__main__":

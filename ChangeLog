@@ -1,3 +1,8 @@
+* 31.2.0
+- Google Ads API v25_0 release.
+- Remove `LocalServicesLead.contact_details.email` from the masking logic in
+  the logging interceptor, as it was removed from the API.
+
 * 31.1.0
 - Google Ads API v24_2 release.
 - Update experiments examples to support new functionality.

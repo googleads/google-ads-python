@@ -877,11 +877,30 @@ class LoggingInterceptorTest(TestCase):
         self.assertIsInstance(copy, message.__class__)
         self.assertEqual(copy.email_address, "REDACTED")
 
-    def test_mask_local_services_lead(self):
-        """Copies and masks a LocalServicesLead instance."""
-        contact_details = local_services_lead.ContactDetails(
+    def test_mask_local_services_lead_pre_v25(self):
+        """Copies and masks a LocalServicesLead instance in v24."""
+        local_services_lead_v24 = import_module(
+            "google.ads.googleads.v24.resources.types.local_services_lead"
+        )
+        contact_details = local_services_lead_v24.ContactDetails(
             phone_number="800-555-0100",
             email="dana@test.com",
+            consumer_name="Dana Test",
+        )
+        message = local_services_lead_v24.LocalServicesLead(
+            contact_details=contact_details
+        )
+        copy = mask_message(message, "REDACTED")
+        self.assertIsInstance(copy, message.__class__)
+        self.assertEqual(copy.contact_details.email, "REDACTED")
+        self.assertEqual(copy.contact_details.phone_number, "REDACTED")
+        self.assertEqual(copy.contact_details.consumer_name, "REDACTED")
+
+    def test_mask_local_services_lead(self):
+        """Copies and masks a LocalServicesLead instance in v25."""
+        contact_details = local_services_lead.ContactDetails(
+            phone_number="800-555-0100",
+            phone_number_extension="222",
             consumer_name="Dana Test",
         )
         message = local_services_lead.LocalServicesLead(
@@ -889,8 +908,10 @@ class LoggingInterceptorTest(TestCase):
         )
         copy = mask_message(message, "REDACTED")
         self.assertIsInstance(copy, message.__class__)
-        self.assertEqual(copy.contact_details.email, "REDACTED")
         self.assertEqual(copy.contact_details.phone_number, "REDACTED")
+        self.assertEqual(
+            copy.contact_details.phone_number_extension, "REDACTED"
+        )
         self.assertEqual(copy.contact_details.consumer_name, "REDACTED")
 
     def test_mask_local_services_lead_conversation(self):

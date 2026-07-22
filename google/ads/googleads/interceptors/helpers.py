@@ -47,7 +47,8 @@ _MESSAGES_WITH_SENSITIVE_FIELDS: Dict[str, List[str]] = {
     "Feed": ["places_location_feed_data.email_address"],
     "LocalServicesLead": [
         "contact_details.phone_number",
-        "contact_details.email",
+        "contact_details.phone_number_extension",
+        "contact_details.email",  # TODO: remove this after v24 is sunset.
         "contact_details.consumer_name",
     ],
     "LocalServicesLeadConversation": ["message_details.text"],
@@ -114,7 +115,7 @@ def _mask_message_fields(
             # AttributeError is raised when the field is not defined on the
             # message. In this case there's nothing to mask and the field
             # should be skipped.
-            break
+            pass
 
     return copy
 

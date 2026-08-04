@@ -177,10 +177,7 @@ def create_text_asset_operation(
     client: GoogleAdsClient, customer_id: str, temp_id: str, text: str
 ) -> MutateOperation:
     """Creates a mutate operation for a text asset."""
-    googleads_service = client.get_service("GoogleAdsService")
-    operation = client.get_type("MutateOperation")
-    asset = operation.asset_operation.create
-    asset.resource_name = googleads_service.asset_path(customer_id, temp_id)
+    operation, asset = _create_base_asset_operation(client, customer_id, temp_id)
     asset.text_asset.text = text
     return operation
 
@@ -193,10 +190,7 @@ def create_image_asset_operation(
     name: str,
 ) -> MutateOperation:
     """Creates a mutate operation for an image asset."""
-    googleads_service = client.get_service("GoogleAdsService")
-    operation = client.get_type("MutateOperation")
-    asset = operation.asset_operation.create
-    asset.resource_name = googleads_service.asset_path(customer_id, temp_id)
+    operation, asset = _create_base_asset_operation(client, customer_id, temp_id)
     asset.name = name
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = get_image_bytes_from_url(url)
@@ -283,6 +277,17 @@ def create_asset_group_asset_operation(
     aga.asset = googleads_service.asset_path(customer_id, asset_temp_id)
     aga.field_type = field_type
     return operation
+
+
+def _create_base_asset_operation(
+    client: GoogleAdsClient, customer_id: str, temp_id: str
+) -> Tuple[Any, Any]:
+    """Helper to create a base asset mutate operation with a temp ID."""
+    googleads_service = client.get_service("GoogleAdsService")
+    operation = client.get_type("MutateOperation")
+    asset = operation.asset_operation.create
+    asset.resource_name = googleads_service.asset_path(customer_id, temp_id)
+    return operation, asset
 
 
 if __name__ == "__main__":

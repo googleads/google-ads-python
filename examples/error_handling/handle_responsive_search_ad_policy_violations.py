@@ -19,9 +19,10 @@ errors, the example will stop instead of trying sending an exemption request.
 """
 
 import argparse
+import logging
 import sys
-import uuid
 from typing import List
+import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -45,6 +46,9 @@ from google.ads.googleads.v24.common.types.ad_asset import (
 from google.ads.googleads.v24.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

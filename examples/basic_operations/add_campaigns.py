@@ -19,6 +19,7 @@ To get campaigns, run get_campaigns.py.
 
 import argparse
 import datetime
+import logging
 import sys
 from typing import List
 import uuid
@@ -43,6 +44,10 @@ from google.ads.googleads.v24.resources.types.campaign_budget import (
     CampaignBudget,
 )
 from google.ads.googleads.v24.resources.types.campaign import Campaign
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 _START_DATE_FORMAT: str = "%Y%m%d 00:00:00"
 _END_DATE_FORMAT: str = "%Y%m%d 23:59:59"

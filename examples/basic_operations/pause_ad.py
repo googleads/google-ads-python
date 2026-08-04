@@ -15,6 +15,7 @@
 """This example pauses an ad."""
 
 import argparse
+import logging
 import sys
 from typing import List
 
@@ -30,6 +31,9 @@ from google.ads.googleads.v24.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

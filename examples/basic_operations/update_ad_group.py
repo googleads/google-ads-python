@@ -18,6 +18,7 @@ To get ad groups, run get_ad_groups.py.
 """
 
 import argparse
+import logging
 import sys
 from typing import List
 
@@ -36,6 +37,9 @@ from google.ads.googleads.v24.services.types.ad_group_service import (
     AdGroupOperation,
     MutateAdGroupsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START update_ad_group]

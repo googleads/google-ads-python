@@ -19,6 +19,7 @@ targets a user list for remarketing purposes.
 """
 
 import argparse
+import logging
 import requests
 import sys
 from uuid import uuid4
@@ -74,6 +75,9 @@ from google.ads.googleads.v24.common.types.ad_asset import (
 from google.ads.googleads.v24.common.types.ad_type_infos import (
     ResponsiveDisplayAdInfo,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

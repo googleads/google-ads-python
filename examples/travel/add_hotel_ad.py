@@ -21,6 +21,7 @@ https://support.google.com/hotelprices/answer/6101897.
 """
 
 import argparse
+import logging
 import sys
 import uuid
 
@@ -60,6 +61,9 @@ from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

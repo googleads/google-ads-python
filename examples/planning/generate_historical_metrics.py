@@ -18,9 +18,10 @@ For more details see this guide:
 https://developers.google.com/google-ads/api/docs/keyword-planning/generate-historical-metrics
 """
 
-from typing import Iterable
 import argparse
+import logging
 import sys
+from typing import Iterable
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -39,6 +40,9 @@ from google.ads.googleads.v24.services.types.keyword_plan_idea_service import (
     GenerateKeywordHistoricalMetricsResponse,
     GenerateKeywordHistoricalMetricsResult,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START generate_historical_metrics]

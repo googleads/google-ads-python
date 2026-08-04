@@ -16,11 +16,16 @@
 
 
 import argparse
+import logging
 import sys
 from typing import Optional, Dict, List, Any
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 _DEFAULT_LOG_SPACE_LENGTH = 4
 

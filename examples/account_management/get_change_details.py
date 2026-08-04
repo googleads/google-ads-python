@@ -20,6 +20,7 @@ values.
 
 import argparse
 from datetime import datetime, timedelta
+import logging
 import sys
 from typing import Any
 
@@ -37,6 +38,9 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
 )
 from google.ads.googleads.v24.resources.types.change_event import ChangeEvent
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START get_change_details]

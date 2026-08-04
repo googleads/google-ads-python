@@ -15,6 +15,7 @@
 """This example illustrates adding a conversion action."""
 
 import argparse
+import logging
 import sys
 import uuid
 
@@ -30,6 +31,9 @@ from google.ads.googleads.v24.services.types.conversion_action_service import (
     ConversionActionOperation,
     MutateConversionActionsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_conversion_action]

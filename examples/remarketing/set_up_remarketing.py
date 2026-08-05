@@ -25,6 +25,7 @@ purposes.
 """
 
 import argparse
+import logging
 import sys
 from typing import List
 from uuid import uuid4
@@ -75,6 +76,9 @@ from google.ads.googleads.v24.services.types.user_list_service import (
     MutateUserListsResponse,
     UserListOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

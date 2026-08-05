@@ -25,6 +25,7 @@ from google.ads.googleads.v21.resources.types import (
     keyword_theme_constant as gagr_keyword_theme_constant,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",

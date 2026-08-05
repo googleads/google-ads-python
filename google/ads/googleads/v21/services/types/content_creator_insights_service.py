@@ -24,6 +24,7 @@ from google.ads.googleads.v21.common.types import audience_insights_attribute
 from google.ads.googleads.v21.common.types import criteria
 from google.ads.googleads.v21.enums.types import insights_trend
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.services",
     marshal="google.ads.googleads.v21",
@@ -97,7 +98,10 @@ class GenerateCreatorInsightsRequest(proto.Message):
     class SearchAttributes(proto.Message):
         r"""The audience attributes (such as Age, Gender, Affinity, and
         In-Market) and creator attributes (such as creator's content
-        topics) used to search for top creators.
+        topics) used to search for top creators. The returned creators
+        are sorted based on likelihood that your audience watches the
+        creator, relative to the general population (most likely is
+        returned first).
 
         Attributes:
             audience_attributes (MutableSequence[google.ads.googleads.v21.common.types.AudienceInsightsAttribute]):
@@ -377,9 +381,10 @@ class YouTubeMetrics(proto.Message):
             videos of this channel.
         engagement_rate (float):
             The lifetime engagement rate of this channel.
-            The value is computed as the total number of
-            likes, shares, and comments across all videos
-            divided by the total number of video views.
+            A measurement of how often people engage with
+            the creator's content. The value, between 0 and
+            1, is calculated as total engagement divided by
+            total views.
         average_views_per_video (float):
             The average number of views per video in the
             last 28 days.
@@ -593,9 +598,11 @@ class SearchAudience(proto.Message):
 
     Attributes:
         audience_attributes (MutableSequence[google.ads.googleads.v21.common.types.AudienceInsightsAttribute]):
-            Required. Audience attributes that describe
-            an audience of viewers. This is used to search
-            for topics trending for the defined audience.
+            Required. Audience attributes that describe an audience of
+            viewers. This is used to search for topics trending for the
+            defined audience. Attributes age_range, gender,
+            user_interest, entity, category, parental_status, and
+            income_range are supported.
     """
 
     audience_attributes: MutableSequence[

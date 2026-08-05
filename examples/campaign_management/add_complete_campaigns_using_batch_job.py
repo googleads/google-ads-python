@@ -18,10 +18,10 @@ Complete campaigns include campaign budgets, campaigns, ad groups and keywords.
 """
 
 import argparse
-import asyncio
+import logging
 import sys
-from uuid import uuid4
 from typing import Any, List, Coroutine
+from uuid import uuid4
 
 from google.api_core.operation import Operation
 
@@ -61,6 +61,10 @@ from google.ads.googleads.v24.services.types.ad_group_ad_service import (
 from google.ads.googleads.v24.services.types.batch_job_service import (
     BatchJobOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 NUMBER_OF_CAMPAIGNS_TO_ADD: int = 2
 NUMBER_OF_AD_GROUPS_TO_ADD: int = 2

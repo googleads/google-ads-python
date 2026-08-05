@@ -15,6 +15,7 @@
 """Adds a page feed with URLs for a Dynamic Search Ads campaign."""
 
 import argparse
+import logging
 import sys
 from typing import List, Optional
 
@@ -74,6 +75,10 @@ from google.ads.googleads.v24.services.types.campaign_asset_set_service import (
     CampaignAssetSetOperation,
     MutateCampaignAssetSetsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # The label for the DSA page URLs.
 DSA_PAGE_URL_LABEL = "discounts"

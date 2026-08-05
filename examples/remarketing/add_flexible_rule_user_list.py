@@ -19,6 +19,7 @@ two different pages of a website.
 """
 
 import argparse
+import logging
 import sys
 from uuid import uuid4
 
@@ -40,6 +41,9 @@ from google.ads.googleads.v24.services.types.user_list_service import (
     UserListOperation,
     MutateUserListsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_combined_rule_user_list]

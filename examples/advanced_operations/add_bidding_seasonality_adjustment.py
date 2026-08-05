@@ -22,6 +22,7 @@ https://developers.google.com/google-ads/api/docs/campaigns/bidding/seasonality-
 """
 
 import argparse
+import logging
 import sys
 from uuid import uuid4
 
@@ -37,6 +38,9 @@ from google.ads.googleads.v24.services.types.bidding_seasonality_adjustment_serv
     BiddingSeasonalityAdjustmentOperation,
     MutateBiddingSeasonalityAdjustmentsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

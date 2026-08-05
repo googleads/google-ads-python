@@ -18,6 +18,7 @@ To get ad groups, run get_ad_groups.py.
 """
 
 import argparse
+import logging
 import sys
 from typing import List
 import uuid
@@ -35,6 +36,9 @@ from google.ads.googleads.v24.services.services.campaign_service import (
     CampaignServiceClient,
 )
 from google.ads.googleads.v24.resources.types.ad_group import AdGroup
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

@@ -74,6 +74,12 @@ class CustomerUserAccessServiceAsyncClient:
     parse_customer_user_access_path = staticmethod(
         CustomerUserAccessServiceClient.parse_customer_user_access_path
     )
+    multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessServiceClient.parse_multi_party_auth_review_path
+    )
     common_billing_account_path = staticmethod(
         CustomerUserAccessServiceClient.common_billing_account_path
     )

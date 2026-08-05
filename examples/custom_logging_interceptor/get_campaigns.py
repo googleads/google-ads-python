@@ -18,6 +18,7 @@ Google Cloud Logging using a custom logging interceptor.
 """
 
 import argparse
+import logging
 import sys
 from typing import Any, Iterable
 
@@ -34,6 +35,9 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
 )
 
 from cloud_logging_interceptor import CloudLoggingInterceptor
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

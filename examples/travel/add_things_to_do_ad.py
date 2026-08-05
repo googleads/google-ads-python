@@ -20,6 +20,7 @@ https://support.google.com/google-ads/answer/13387362
 """
 
 import argparse
+import logging
 import sys
 
 from examples.utils.example_helpers import get_printable_datetime
@@ -59,6 +60,9 @@ from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

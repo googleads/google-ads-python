@@ -21,7 +21,9 @@ account_management/list_accessible_customers.py examples.
 
 import argparse
 from itertools import product
+import logging
 import multiprocessing
+import sys
 import time
 from typing import Any, Dict, Iterable, List, Tuple
 
@@ -38,6 +40,10 @@ from google.ads.googleads.v24.services.types import (
     GoogleAdsRow,
     SearchGoogleAdsStreamResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # Maximum number of processes to spawn.
 MAX_PROCESSES: int = multiprocessing.cpu_count()

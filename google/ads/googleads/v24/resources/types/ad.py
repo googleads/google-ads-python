@@ -22,6 +22,9 @@ import proto  # type: ignore
 from google.ads.googleads.v24.common.types import ad_type_infos
 from google.ads.googleads.v24.common.types import custom_parameter
 from google.ads.googleads.v24.common.types import final_app_url
+from google.ads.googleads.v24.common.types import (
+    synthetic_content_info as gagc_synthetic_content_info,
+)
 from google.ads.googleads.v24.common.types import url_collection
 from google.ads.googleads.v24.enums.types import ad_type
 from google.ads.googleads.v24.enums.types import device
@@ -126,6 +129,8 @@ class Ad(proto.Message):
             Output only. If this ad is system managed,
             then this field will indicate the source. This
             field is read-only.
+        synthetic_content_info (google.ads.googleads.v24.common.types.SyntheticContentInfo):
+            Synthetic content info for the ad.
         text_ad (google.ads.googleads.v24.common.types.TextAdInfo):
             Immutable. Details pertaining to a text ad.
 
@@ -321,6 +326,13 @@ class Ad(proto.Message):
         proto.ENUM,
         number=27,
         enum=system_managed_entity_source.SystemManagedResourceSourceEnum.SystemManagedResourceSource,
+    )
+    synthetic_content_info: gagc_synthetic_content_info.SyntheticContentInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=65,
+            message=gagc_synthetic_content_info.SyntheticContentInfo,
+        )
     )
     text_ad: ad_type_infos.TextAdInfo = proto.Field(
         proto.MESSAGE,

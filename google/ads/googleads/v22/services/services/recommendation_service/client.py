@@ -64,7 +64,7 @@ from google.ads.googleads.v22.enums.types import (
 )
 from google.ads.googleads.v22.enums.types import recommendation_type
 from google.ads.googleads.v22.services.types import recommendation_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import RecommendationServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import RecommendationServiceGrpcTransport
 from .transports.grpc_asyncio import RecommendationServiceGrpcAsyncIOTransport

@@ -30,7 +30,7 @@ from typing import (
 
 import google.api_core.retry
 import requests
-from .resumable_upload_error_adapter import raise_formatted_for_status
+from google.ads.googleads.errors import raise_formatted_for_status
 
 _LOGGER = logging.getLogger(__name__)
 

@@ -42,6 +42,9 @@ class BiddingDataExclusion(proto.Message):
     See "About data exclusions" at
     https://support.google.com/google-ads/answer/10370710.
 
+    Note: A customer account can have a maximum of 500 active
+    bidding data exclusions.
+
     Attributes:
         resource_name (str):
             Immutable. The resource name of the data exclusion. Data

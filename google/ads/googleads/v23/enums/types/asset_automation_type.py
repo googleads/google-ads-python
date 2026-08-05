@@ -41,10 +41,18 @@ class AssetAutomationTypeEnum(proto.Message):
                 Used as a return value only. Represents value
                 unknown in this version.
             TEXT_ASSET_AUTOMATION (2):
-                Text asset automation includes headlines and
-                descriptions. By default, advertisers are
-                opted-in for Performance Max and opted-out for
-                Search.
+                Text asset automation (text customization) includes
+                headlines and descriptions, allowing Google to create
+                customized text assets using your existing ads, landing page
+                copy, and generative AI across your campaign's ads. By
+                default, advertisers are opted-in for Performance Max and
+                opted-out for Search.
+
+                Contrast this with
+                ``FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION``, which
+                dynamically generates text assets to match the content of
+                dynamically selected landing pages when final URL expansion
+                is active.
             GENERATE_VERTICAL_YOUTUBE_VIDEOS (3):
                 Converts horizontal video assets to vertical
                 orientation using content-aware technology. By
@@ -82,14 +90,20 @@ class AssetAutomationTypeEnum(proto.Message):
                 different aspect ratios. By default, advertisers
                 are opted in for DemandGenMultiAssetAd.
             FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION (11):
-                Controls automation for text assets related
-                to Final URL expansion. This includes
-                automatically creating dynamic landing pages
-                from the final URL and generating text assets
-                from the content of those landing pages. This
-                setting is turned OFF by default for Search
-                campaigns, but it is turned ON by default for
-                Performance Max campaigns.
+                Controls automation for text assets related to Final URL
+                expansion. This includes automatically creating dynamic
+                landing pages from the final URL and generating text assets
+                from the content of those landing pages. This setting is
+                turned OFF by default for Search campaigns, but it is turned
+                ON by default for Performance Max campaigns.
+
+                Enabling final URL expansion also enables text asset
+                automation. There is no way to opt out of text asset
+                automation and still use final URL expansion.
+
+                Contrast this with standard ``TEXT_ASSET_AUTOMATION`` (text
+                customization), which customizes copy across all ads in the
+                campaign even when final URL expansion does not occur.
             GENERATE_VIDEOS_FROM_OTHER_ASSETS (12):
                 Generates videos using other Assets as input,
                 such as images and text. By default, advertisers

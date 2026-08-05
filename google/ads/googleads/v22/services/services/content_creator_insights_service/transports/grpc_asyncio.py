@@ -125,10 +125,12 @@ class ContentCreatorInsightsServiceGrpcAsyncIOTransport(
 ):
     """gRPC AsyncIO backend transport for ContentCreatorInsightsService.
 
-    Content Creator Insights Service helps users find information
-    about YouTube Creators and their content and how these creators
-    and their audiences can be reached with Google Ads. Accessible
-    to allowlisted customers only.
+    Content Creator Insights Service helps users find information about
+    YouTube Creators and their content and how these creators and their
+    audiences can be reached with Google Ads. Refer to the `YouTube
+    creator insights
+    guide <https://developers.google.com/google-ads/api/docs/insights/creator-insights>`__
+    for more details. Accessible to allowlisted customers only.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

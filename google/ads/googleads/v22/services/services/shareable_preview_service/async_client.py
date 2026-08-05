@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -50,7 +51,15 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class ShareablePreviewServiceAsyncClient:
-    """Service to generate Shareable Previews."""
+    """Service to generate Shareable Previews.
+
+    Only Performance Max asset groups are supported. Other ad types,
+    such as Responsive Search Ads or Responsive Display Ads, are not
+    supported and return an ``UNSUPPORTED_AD_TYPE`` error.
+
+    The generated preview URLs cannot be embedded in an iframe because
+    the response headers include ``X-Frame-Options: deny``.
+    """
 
     _client: ShareablePreviewServiceClient
 
@@ -107,12 +116,7 @@ class ShareablePreviewServiceAsyncClient:
         Returns:
             ShareablePreviewServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            ShareablePreviewServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            ShareablePreviewServiceAsyncClient, info, *args, **kwargs
-        )
+        return ShareablePreviewServiceClient.from_service_account_info.__func__(ShareablePreviewServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -128,12 +132,7 @@ class ShareablePreviewServiceAsyncClient:
         Returns:
             ShareablePreviewServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            ShareablePreviewServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            ShareablePreviewServiceAsyncClient, filename, *args, **kwargs
-        )
+        return ShareablePreviewServiceClient.from_service_account_file.__func__(ShareablePreviewServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

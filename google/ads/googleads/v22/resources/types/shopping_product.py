@@ -48,33 +48,43 @@ class ShoppingProduct(proto.Message):
     a specified feed label. Standard Shopping campaigns can also limit
     the inclusion through a ``campaign_criterion.listing_scope``.
 
-    Queries to this resource specify a scope: Account:
+    Queries to this resource specify a scope:
 
-    - Filters on campaigns or ad groups are not specified.
-    - All products from the linked Google Merchant Center accounts are
-      returned.
-    - Metrics and some fields (see the per-field documentation) are
-      aggregated across all Shopping and Performance Max campaigns that
-      include a product. Campaign:
-    - An equality filter on ``campaign`` is specified. Supported
-      campaign types are Shopping, Performance Max, Demand Gen, Video.
-    - Only products that are included by the specified campaign are
-      returned.
-    - Metrics and some fields (see the per-field documentation) are
-      restricted to the specified campaign.
-    - Only the following metrics are supported for Demand Gen and Video
-      campaigns: impressions, clicks, ctr. Ad group:
-    - An equality filter on ``ad group`` and ``campaign`` is specified.
-      Supported campaign types are Shopping, Demand Gen, Video.
-    - Only products that are included by the specified campaign are
-      returned.
-    - Metrics and some fields (see the per-field documentation) are
-      restricted to the specified ad group.
-    - Only the following metrics are supported for Demand Gen and Video
-      campaigns: impressions, clicks, ctr. Note that segmentation by
-      date segments is not permitted and will return
-      UNSUPPORTED_DATE_SEGMENTATION error. On the other hand, filtering
-      on date segments is allowed.
+    - Account:
+
+      - Filters on campaigns or ad groups are not specified.
+      - All products from the linked Google Merchant Center accounts are
+        returned.
+      - Metrics and some fields (see the per-field documentation) are
+        aggregated across all Shopping and Performance Max campaigns
+        that include a product.
+
+    - Campaign:
+
+      - An equality filter on ``campaign`` is specified. Supported
+        campaign types are Shopping, Performance Max, Demand Gen, Video.
+      - Only products that are included by the specified campaign are
+        returned.
+      - Metrics and some fields (see the per-field documentation) are
+        restricted to the specified campaign.
+      - Only the following metrics are supported for Demand Gen, Video
+        campaigns: impressions, clicks, ctr.
+
+    - Ad group:
+
+      - An equality filter on ``ad_group`` and ``campaign`` is
+        specified. Supported campaign types are Shopping, Demand Gen,
+        Video.
+      - Only products that are included by the specified campaign are
+        returned.
+      - Metrics and some fields (see the per-field documentation) are
+        restricted to the specified ad group.
+      - Only the following metrics are supported for Demand Gen, Video
+        campaigns: impressions, clicks, ctr.
+
+    Note that segmentation by date segments is not permitted and will
+    return UNSUPPORTED_DATE_SEGMENTATION error. On the other hand,
+    filtering on date segments is allowed.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

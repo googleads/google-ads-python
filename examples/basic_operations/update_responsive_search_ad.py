@@ -18,6 +18,7 @@ To get responsive search ads, run get_responsive_search_ads.py.
 """
 
 import argparse
+import logging
 import sys
 from typing import List
 from uuid import uuid4
@@ -35,6 +36,9 @@ from google.ads.googleads.v24.services.types.ad_service import (
     AdOperation,
     MutateAdsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START update_responsive_search_ad]

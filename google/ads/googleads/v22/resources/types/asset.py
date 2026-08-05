@@ -22,6 +22,9 @@ import proto  # type: ignore
 from google.ads.googleads.v22.common.types import asset_types
 from google.ads.googleads.v22.common.types import custom_parameter
 from google.ads.googleads.v22.common.types import policy
+from google.ads.googleads.v22.common.types import (
+    synthetic_content_info as gagc_synthetic_content_info,
+)
 from google.ads.googleads.v22.enums.types import (
     asset_field_type as gage_asset_field_type,
 )
@@ -101,6 +104,8 @@ class Asset(proto.Message):
         field_type_policy_summaries (MutableSequence[google.ads.googleads.v22.resources.types.AssetFieldTypePolicySummary]):
             Output only. Policy information for the asset
             for each FieldType.
+        synthetic_content_info (google.ads.googleads.v22.common.types.SyntheticContentInfo):
+            Synthetic content info for the asset.
         youtube_video_asset (google.ads.googleads.v22.common.types.YoutubeVideoAsset):
             Immutable. A YouTube video asset.
 
@@ -283,6 +288,13 @@ class Asset(proto.Message):
         proto.MESSAGE,
         number=40,
         message="AssetFieldTypePolicySummary",
+    )
+    synthetic_content_info: gagc_synthetic_content_info.SyntheticContentInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=55,
+            message=gagc_synthetic_content_info.SyntheticContentInfo,
+        )
     )
     youtube_video_asset: asset_types.YoutubeVideoAsset = proto.Field(
         proto.MESSAGE,

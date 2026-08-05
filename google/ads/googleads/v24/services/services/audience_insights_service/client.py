@@ -932,7 +932,8 @@ class AudienceInsightsServiceClient(
                 DEVICE, GEO_TARGET_COUNTRY, SUB_COUNTRY_LOCATION,
                 YOUTUBE_LINEUP, AFFINITY_USER_INTEREST,
                 IN_MARKET_USER_INTEREST, LIFE_EVENT_USER_INTEREST,
-                PARENTAL_STATUS, INCOME_RANGE, AGE_RANGE, and GENDER.
+                PARENTAL_STATUS, INCOME_RANGE, AGE_RANGE, GENDER, and
+                USER_LIST.
 
                 This corresponds to the ``dimensions`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -1145,7 +1146,7 @@ class AudienceInsightsServiceClient(
                 SUB_COUNTRY_LOCATION, YOUTUBE_CHANNEL, YOUTUBE_LINEUP,
                 AFFINITY_USER_INTEREST, IN_MARKET_USER_INTEREST,
                 LIFE_EVENT_USER_INTEREST, PARENTAL_STATUS, INCOME_RANGE,
-                AGE_RANGE, and GENDER.
+                AGE_RANGE, GENDER, and USER_LIST.
 
                 This corresponds to the ``dimensions`` field
                 on the ``request`` instance; if ``request`` is provided, this

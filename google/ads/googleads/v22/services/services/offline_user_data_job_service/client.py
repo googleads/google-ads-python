@@ -63,10 +63,10 @@ from google.ads.googleads.v22.resources.types import offline_user_data_job
 from google.ads.googleads.v22.services.types import (
     offline_user_data_job_service,
 )
-import google.api_core.operation as operation  # type: ignore
-import google.api_core.operation_async as operation_async  # type: ignore
-import google.protobuf.empty_pb2 as empty_pb2  # type: ignore
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     OfflineUserDataJobServiceTransport,
     DEFAULT_CLIENT_INFO,

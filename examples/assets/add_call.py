@@ -15,8 +15,9 @@
 """This example adds a call asset to a specific account."""
 
 import argparse
-from typing import Optional
+import logging
 import sys
+from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -29,6 +30,10 @@ from google.ads.googleads.v24.services.types.customer_asset_service import (
 from google.ads.googleads.v24.resources.types.customer_asset import (
     CustomerAsset,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # Country code is a two-letter ISO-3166 code, for a list of all codes see:
 # https://developers.google.com/google-ads/api/reference/data/codes-formats#expandable-17

@@ -22,6 +22,7 @@ from google.ads.googleads.v21.common.types import asset_set_types
 from google.ads.googleads.v21.enums.types import asset_set_status
 from google.ads.googleads.v21.enums.types import asset_set_type
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

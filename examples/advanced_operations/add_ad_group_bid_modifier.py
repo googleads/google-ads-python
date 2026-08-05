@@ -18,6 +18,7 @@ To get ad group bid modifiers, run get_ad_group_bid_modifiers.py
 """
 
 import argparse
+import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -36,6 +37,9 @@ from google.ads.googleads.v24.services.types.ad_group_bid_modifier_service impor
     AdGroupBidModifierOperation,
     MutateAdGroupBidModifiersResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_ad_group_bid_modifier]

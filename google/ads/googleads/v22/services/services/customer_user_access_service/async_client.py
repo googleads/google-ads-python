@@ -25,6 +25,7 @@ from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 import google.protobuf
 
+
 try:
     OptionalRetry = Union[
         retries.AsyncRetry, gapic_v1.method._MethodDefault, None
@@ -73,6 +74,12 @@ class CustomerUserAccessServiceAsyncClient:
     parse_customer_user_access_path = staticmethod(
         CustomerUserAccessServiceClient.parse_customer_user_access_path
     )
+    multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessServiceClient.parse_multi_party_auth_review_path
+    )
     common_billing_account_path = staticmethod(
         CustomerUserAccessServiceClient.common_billing_account_path
     )
@@ -117,12 +124,7 @@ class CustomerUserAccessServiceAsyncClient:
         Returns:
             CustomerUserAccessServiceAsyncClient: The constructed client.
         """
-        sa_info_func = (
-            CustomerUserAccessServiceClient.from_service_account_info.__func__  # type: ignore
-        )
-        return sa_info_func(
-            CustomerUserAccessServiceAsyncClient, info, *args, **kwargs
-        )
+        return CustomerUserAccessServiceClient.from_service_account_info.__func__(CustomerUserAccessServiceAsyncClient, info, *args, **kwargs)  # type: ignore
 
     @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
@@ -138,12 +140,7 @@ class CustomerUserAccessServiceAsyncClient:
         Returns:
             CustomerUserAccessServiceAsyncClient: The constructed client.
         """
-        sa_file_func = (
-            CustomerUserAccessServiceClient.from_service_account_file.__func__  # type: ignore
-        )
-        return sa_file_func(
-            CustomerUserAccessServiceAsyncClient, filename, *args, **kwargs
-        )
+        return CustomerUserAccessServiceClient.from_service_account_file.__func__(CustomerUserAccessServiceAsyncClient, filename, *args, **kwargs)  # type: ignore
 
     from_service_account_json = from_service_account_file
 

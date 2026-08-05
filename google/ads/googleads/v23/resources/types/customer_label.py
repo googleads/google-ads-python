@@ -43,17 +43,18 @@ class CustomerLabel(proto.Message):
             names have the form:
             ``customers/{customer_id}/customerLabels/{label_id}``
         customer (str):
-            Output only. The resource name of the
-            customer to which the label is attached. Read
-            only.
+            Output only. The resource name of the customer to which the
+            label is attached. This field should not be set when
+            creating a new ``CustomerLabel``.
 
             This field is a member of `oneof`_ ``_customer``.
         label (str):
-            Output only. The resource name of the label
-            assigned to the customer.
-            Note: the Customer ID portion of the label
-            resource name is not validated when creating a
-            new CustomerLabel.
+            Output only. The resource name of the label assigned to the
+            customer. This field should not be set when creating a new
+            ``CustomerLabel``.
+
+            Note: the Customer ID portion of the label resource name is
+            not validated when creating a new ``CustomerLabel``.
 
             This field is a member of `oneof`_ ``_label``.
     """

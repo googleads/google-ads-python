@@ -441,6 +441,9 @@ from google.ads.googleads.v24.resources.types import (
     mobile_device_constant as gagr_mobile_device_constant,
 )
 from google.ads.googleads.v24.resources.types import (
+    multi_party_auth_review as gagr_multi_party_auth_review,
+)
+from google.ads.googleads.v24.resources.types import (
     offline_conversion_upload_client_summary as gagr_offline_conversion_upload_client_summary,
 )
 from google.ads.googleads.v24.resources.types import (
@@ -1249,6 +1252,9 @@ class GoogleAdsRow(proto.Message):
             in the query.
         mobile_device_constant (google.ads.googleads.v24.resources.types.MobileDeviceConstant):
             The mobile device constant referenced in the
+            query.
+        multi_party_auth_review (google.ads.googleads.v24.resources.types.MultiPartyAuthReview):
+            The multi party auth review referenced in the
             query.
         offline_conversion_upload_client_summary (google.ads.googleads.v24.resources.types.OfflineConversionUploadClientSummary):
             Offline conversion upload summary at customer
@@ -2199,6 +2205,13 @@ class GoogleAdsRow(proto.Message):
             number=98,
             message=gagr_mobile_device_constant.MobileDeviceConstant,
         )
+    )
+    multi_party_auth_review: (
+        gagr_multi_party_auth_review.MultiPartyAuthReview
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=265,
+        message=gagr_multi_party_auth_review.MultiPartyAuthReview,
     )
     offline_conversion_upload_client_summary: (
         gagr_offline_conversion_upload_client_summary.OfflineConversionUploadClientSummary

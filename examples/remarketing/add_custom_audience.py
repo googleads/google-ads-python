@@ -20,6 +20,7 @@ https://support.google.com/google-ads/answer/9805516
 """
 
 import argparse
+import logging
 import sys
 from uuid import uuid4
 
@@ -39,6 +40,9 @@ from google.ads.googleads.v24.services.types.custom_audience_service import (
 from google.ads.googleads.v24.services.services.custom_audience_service import (
     CustomAudienceServiceClient,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

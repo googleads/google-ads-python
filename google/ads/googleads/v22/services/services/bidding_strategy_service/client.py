@@ -60,7 +60,7 @@ except ImportError:  # pragma: NO COVER
 _LOGGER = std_logging.getLogger(__name__)
 
 from google.ads.googleads.v22.services.types import bidding_strategy_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import (
     BiddingStrategyServiceTransport,
     DEFAULT_CLIENT_INFO,

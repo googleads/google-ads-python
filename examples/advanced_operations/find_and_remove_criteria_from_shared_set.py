@@ -15,6 +15,7 @@
 """Demonstrates how to find and remove shared sets, and shared set criteria."""
 
 import argparse
+import logging
 import sys
 from typing import List
 
@@ -45,6 +46,9 @@ from google.ads.googleads.v24.services.types.shared_criterion_service import (
     MutateSharedCriterionResult,
     SharedCriterionOperation,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

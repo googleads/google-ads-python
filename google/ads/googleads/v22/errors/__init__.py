@@ -187,6 +187,7 @@ from .types.media_bundle_error import MediaBundleErrorEnum
 from .types.media_file_error import MediaFileErrorEnum
 from .types.media_upload_error import MediaUploadErrorEnum
 from .types.merchant_center_error import MerchantCenterErrorEnum
+from .types.multi_party_auth_review_error import MultiPartyAuthReviewErrorEnum
 from .types.multiplier_error import MultiplierErrorEnum
 from .types.mutate_error import MutateErrorEnum
 from .types.new_resource_creation_error import NewResourceCreationErrorEnum
@@ -310,7 +311,9 @@ else:  # pragma: NO COVER
         _next_supported_version = "4.25.8"
         _next_supported_version_tuple = (4, 25, 8)
         _recommendation = " (we recommend 6.x)"
-        _version_used, _version_used_string = _get_version(_dependency_package)
+        (_version_used, _version_used_string) = _get_version(
+            _dependency_package
+        )
         if _version_used and _version_used < _next_supported_version_tuple:
             warnings.warn(
                 f"Package {_package_label} depends on "
@@ -462,6 +465,7 @@ __all__ = (
     "MediaFileErrorEnum",
     "MediaUploadErrorEnum",
     "MerchantCenterErrorEnum",
+    "MultiPartyAuthReviewErrorEnum",
     "MultiplierErrorEnum",
     "MutateErrorEnum",
     "NewResourceCreationErrorEnum",

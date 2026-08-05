@@ -18,6 +18,7 @@ To get image assets, run get_all_image_assets.py.
 """
 
 import argparse
+import logging
 import sys
 
 from examples.utils.example_helpers import get_image_bytes_from_url
@@ -32,6 +33,9 @@ from google.ads.googleads.v24.services.types.asset_service import (
     MutateAssetResult,
     MutateAssetsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START upload_image_asset]

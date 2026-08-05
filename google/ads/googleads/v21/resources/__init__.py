@@ -253,6 +253,9 @@ from .types.media_file import MediaImage
 from .types.media_file import MediaVideo
 from .types.mobile_app_category_constant import MobileAppCategoryConstant
 from .types.mobile_device_constant import MobileDeviceConstant
+from .types.multi_party_auth_review import CustomerUserAccessInvitationReview
+from .types.multi_party_auth_review import CustomerUserAccessReview
+from .types.multi_party_auth_review import MultiPartyAuthReview
 from .types.offline_conversion_upload_client_summary import (
     OfflineConversionAlert,
 )
@@ -386,7 +389,9 @@ else:  # pragma: NO COVER
         _next_supported_version = "4.25.8"
         _next_supported_version_tuple = (4, 25, 8)
         _recommendation = " (we recommend 6.x)"
-        _version_used, _version_used_string = _get_version(_dependency_package)
+        (_version_used, _version_used_string) = _get_version(
+            _dependency_package
+        )
         if _version_used and _version_used < _next_supported_version_tuple:
             warnings.warn(
                 f"Package {_package_label} depends on "
@@ -532,6 +537,8 @@ __all__ = (
     "CustomerSkAdNetworkConversionValueSchema",
     "CustomerUserAccess",
     "CustomerUserAccessInvitation",
+    "CustomerUserAccessInvitationReview",
+    "CustomerUserAccessReview",
     "CustomizerAttribute",
     "DataLink",
     "DataPartnerIdentifier",
@@ -599,6 +606,7 @@ __all__ = (
     "MessageDetails",
     "MobileAppCategoryConstant",
     "MobileDeviceConstant",
+    "MultiPartyAuthReview",
     "Note",
     "OfflineConversionAlert",
     "OfflineConversionError",

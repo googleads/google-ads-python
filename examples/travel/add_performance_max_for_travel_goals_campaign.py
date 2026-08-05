@@ -36,6 +36,7 @@ Notes:
 """
 
 import argparse
+import logging
 import sys
 from typing import Dict, List
 
@@ -89,6 +90,10 @@ from google.ads.googleads.v24.services.types.travel_asset_suggestion_service imp
     SuggestTravelAssetsRequest,
     SuggestTravelAssetsResponse,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 MIN_REQUIRED_TEXT_ASSET_COUNTS: Dict[str, int] = {
     "HEADLINE": 3,

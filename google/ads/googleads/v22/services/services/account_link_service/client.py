@@ -53,7 +53,7 @@ from google.ads.googleads.v22.resources.types import (
     account_link as gagr_account_link,
 )
 from google.ads.googleads.v22.services.types import account_link_service
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
 from .transports.base import AccountLinkServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import AccountLinkServiceGrpcTransport
 from .transports.grpc_asyncio import AccountLinkServiceGrpcAsyncIOTransport

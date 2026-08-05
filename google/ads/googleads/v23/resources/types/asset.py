@@ -22,6 +22,9 @@ import proto  # type: ignore
 from google.ads.googleads.v23.common.types import asset_types
 from google.ads.googleads.v23.common.types import custom_parameter
 from google.ads.googleads.v23.common.types import policy
+from google.ads.googleads.v23.common.types import (
+    synthetic_content_info as gagc_synthetic_content_info,
+)
 from google.ads.googleads.v23.enums.types import (
     asset_field_type as gage_asset_field_type,
 )
@@ -107,6 +110,8 @@ class Asset(proto.Message):
             is only supported for image and video assets.
 
             This field is a member of `oneof`_ ``_orientation``.
+        synthetic_content_info (google.ads.googleads.v23.common.types.SyntheticContentInfo):
+            Synthetic content info for the asset.
         youtube_video_asset (google.ads.googleads.v23.common.types.YoutubeVideoAsset):
             Immutable. A YouTube video asset.
 
@@ -296,6 +301,13 @@ class Asset(proto.Message):
             number=54,
             optional=True,
             enum=asset_orientation.AssetOrientationEnum.AssetOrientation,
+        )
+    )
+    synthetic_content_info: gagc_synthetic_content_info.SyntheticContentInfo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=55,
+            message=gagc_synthetic_content_info.SyntheticContentInfo,
         )
     )
     youtube_video_asset: asset_types.YoutubeVideoAsset = proto.Field(

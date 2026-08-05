@@ -395,6 +395,9 @@ from .media_upload_error import (
 from .merchant_center_error import (
     MerchantCenterErrorEnum,
 )
+from .multi_party_auth_review_error import (
+    MultiPartyAuthReviewErrorEnum,
+)
 from .multiplier_error import (
     MultiplierErrorEnum,
 )
@@ -666,6 +669,7 @@ __all__ = (
     "MediaFileErrorEnum",
     "MediaUploadErrorEnum",
     "MerchantCenterErrorEnum",
+    "MultiPartyAuthReviewErrorEnum",
     "MultiplierErrorEnum",
     "MutateErrorEnum",
     "NewResourceCreationErrorEnum",

@@ -35,12 +35,20 @@ __protobuf__ = proto.module(
 class DetailPlacementView(proto.Message):
     r"""A view with metrics aggregated by ad group and URL or YouTube video.
 
+    Provides granular performance data about specific URLs, YouTube
+    videos, and apps where your ads showed. This offers a more detailed
+    breakdown compared to the group_placement_view.
+
     This view primarily surfaces placement data from the Google Display
     Network. While you can select segments like
     ``segments.ad_network_type``, this view generally does not include
     placement data from other networks, such as the Search Partners
     network. To understand performance on Search Partners, consider
     other reports and segmentations.
+
+    Data for low-traffic placements may be aggregated. This view
+    corresponds to drilling into details from the "Where ads showed"
+    section in the Google Ads UI.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields

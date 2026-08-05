@@ -80,6 +80,12 @@ class CustomerUserAccessInvitationServiceAsyncClient:
     parse_customer_user_access_invitation_path = staticmethod(
         CustomerUserAccessInvitationServiceClient.parse_customer_user_access_invitation_path
     )
+    multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessInvitationServiceClient.multi_party_auth_review_path
+    )
+    parse_multi_party_auth_review_path = staticmethod(
+        CustomerUserAccessInvitationServiceClient.parse_multi_party_auth_review_path
+    )
     common_billing_account_path = staticmethod(
         CustomerUserAccessInvitationServiceClient.common_billing_account_path
     )

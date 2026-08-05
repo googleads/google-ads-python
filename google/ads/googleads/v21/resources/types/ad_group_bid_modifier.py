@@ -23,6 +23,7 @@ from google.ads.googleads.v21.enums.types import (
     bid_modifier_source as gage_bid_modifier_source,
 )
 
+
 __protobuf__ = proto.module(
     package="google.ads.googleads.v21.resources",
     marshal="google.ads.googleads.v21",

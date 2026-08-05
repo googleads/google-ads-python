@@ -20,6 +20,7 @@ and how to execute actions such as promoting, ending, or graduating an experimen
 """
 
 import argparse
+import logging
 import sys
 import uuid
 
@@ -42,6 +43,10 @@ from google.ads.googleads.v24.services.services.campaign_budget_service import (
 from google.ads.googleads.v24.services.types.experiment_service import (
     CampaignBudgetMapping,
 )
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # Constants for decision making
 # Choose a confidence level based on your specific needs.

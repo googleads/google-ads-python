@@ -23,7 +23,8 @@ from google.ads.googleads.v22.common.types import consent as gagc_consent
 from google.ads.googleads.v22.common.types import offline_user_data
 from google.ads.googleads.v22.enums.types import conversion_customer_type
 from google.ads.googleads.v22.enums.types import conversion_environment_enum
-import google.rpc.status_pb2 as status_pb2  # type: ignore
+from google.rpc import status_pb2  # type: ignore
+
 
 __protobuf__ = proto.module(
     package="google.ads.googleads.v22.services",
@@ -61,18 +62,17 @@ class UploadClickConversionsRequest(proto.Message):
             Required. The conversions that are being
             uploaded.
         partial_failure (bool):
-            Required. If true, successful operations will
-            be carried out and invalid operations will
-            return errors. If false, all operations will be
-            carried out in one transaction if and only if
-            they are all valid. This should always be set to
-            true.
-            See
-            https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-            for more information about partial failure.
+            Required. If ``true``, successful operations will be carried
+            out and invalid operations will return errors. If ``false``,
+            all operations will be carried out in one transaction if and
+            only if they are all valid. This should always be set to
+            ``true``.
+
+            See `Best practices for partial
+            failures </google-ads/api/docs/best-practices/partial-failures>`__.
         validate_only (bool):
-            If true, the request is validated but not
-            executed. Only errors are returned, not results.
+            If ``true``, the request is validated but not executed. Only
+            errors are returned, not results.
         job_id (int):
             Optional. Optional input to set job ID. Must be a
             non-negative number that is less than 2^31 if provided. If
@@ -114,18 +114,17 @@ class UploadClickConversionsResponse(proto.Message):
 
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
-            Errors that pertain to conversion failures in
-            the partial failure mode. Returned when all
-            errors occur inside the conversions. If any
-            errors occur outside the conversions (for
-            example, auth errors), we return an RPC level
-            error. See
-            https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-            for more information about partial failure.
+            Errors that pertain to conversion failures in the partial
+            failure mode. Returned when all errors occur inside the
+            conversions. If any errors occur outside the conversions
+            (for example, auth errors), we return an RPC level error.
+
+            See `Best practices for partial
+            failures </google-ads/api/docs/best-practices/partial-failures>`__.
         results (MutableSequence[google.ads.googleads.v22.services.types.ClickConversionResult]):
             Returned for successfully processed conversions. Proto will
             be empty for rows that received an error. Results are not
-            returned when validate_only is true.
+            returned when ``validate_only`` is ``true``.
         job_id (int):
             Job ID for the upload batch.
     """
@@ -158,15 +157,15 @@ class UploadCallConversionsRequest(proto.Message):
             Required. The conversions that are being
             uploaded.
         partial_failure (bool):
-            Required. If true, successful operations will
-            be carried out and invalid operations will
-            return errors. If false, all operations will be
-            carried out in one transaction if and only if
-            they are all valid. This should always be set to
-            true.
-            See
-            https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-            for more information about partial failure.
+            Required. If ``true``, successful operations will be carried
+            out and invalid operations will return errors. If ``false``,
+            all operations will be carried out in one transaction if and
+            only if they are all valid.
+
+            This should always be set to ``true``.
+
+            See `Best practices for partial
+            failures </google-ads/api/docs/best-practices/partial-failures>`__.
         validate_only (bool):
             If true, the request is validated but not
             executed. Only errors are returned, not results.
@@ -197,18 +196,17 @@ class UploadCallConversionsResponse(proto.Message):
 
     Attributes:
         partial_failure_error (google.rpc.status_pb2.Status):
-            Errors that pertain to conversion failures in
-            the partial failure mode. Returned when all
-            errors occur inside the conversions. If any
-            errors occur outside the conversions (for
-            example, auth errors), we return an RPC level
-            error. See
-            https://developers.google.com/google-ads/api/docs/best-practices/partial-failures
-            for more information about partial failure.
+            Errors that pertain to conversion failures in the partial
+            failure mode. Returned when all errors occur inside the
+            conversions. If any errors occur outside the conversions
+            (for example, auth errors), we return an RPC level error.
+
+            See `Best practices for partial
+            failures </google-ads/api/docs/best-practices/partial-failures>`__.
         results (MutableSequence[google.ads.googleads.v22.services.types.CallConversionResult]):
             Returned for successfully processed conversions. Proto will
             be empty for rows that received an error. Results are not
-            returned when validate_only is true.
+            returned when ``validate_only`` is ``true``.
     """
 
     partial_failure_error: status_pb2.Status = proto.Field(
@@ -247,11 +245,12 @@ class ClickConversion(proto.Message):
             web conversions.
         conversion_action (str):
             Resource name of the conversion action
-            associated with this conversion. Note: Although
-            this resource name consists of a customer id and
-            a conversion action id, validation will ignore
-            the customer id and use the conversion action id
-            as the sole identifier of the conversion action.
+            associated with this conversion.
+            Note: Although this resource name consists of a
+            customer id and a conversion action id,
+            validation will ignore the customer id and use
+            the conversion action id as the sole identifier
+            of the conversion action.
 
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
@@ -302,29 +301,26 @@ class ClickConversion(proto.Message):
             The consent setting for the event.
         customer_type (google.ads.googleads.v22.enums.types.ConversionCustomerTypeEnum.ConversionCustomerType):
             Type of the customer associated with the
-            conversion (new or returning). Accessible only
-            to customers on the allow-list.
+            conversion (new or returning).
         user_ip_address (str):
-            The IP address of the customer when they
-            arrived on the landing page after an ad click
-            but before a conversion event. This is the IP
-            address of the customer's device, not the
-            advertiser's server. Google Ads does not support
-            IP address matching for end users in the
-            European Economic Area (EEA), United Kingdom
-            (UK), or Switzerland (CH). Add logic to
-            conditionally exclude sharing IP addresses from
-            users from these regions and ensure that you
-            provide users with clear and comprehensive
-            information about the data you collect on your
-            sites, apps, and other properties and get
-            consent where required by law or any applicable
-            Google policies. See the
-            https://support.google.com/google-ads/answer/2998031
-            page for more details. This field is only
-            available to allowlisted users. To include this
-            field in conversion imports, upgrade to the Data
-            Manager API.
+            The IP address of the customer when they arrived on the
+            landing page after an ad click but before a conversion
+            event. This is the IP address of the customer's device, not
+            the advertiser's server. Google Ads does not support IP
+            address matching for end users in the European Economic Area
+            (EEA), United Kingdom (UK), or Switzerland (CH). Add logic
+            to conditionally exclude sharing IP addresses from users
+            from these regions and ensure that you provide users with
+            clear and comprehensive information about the data you
+            collect on your sites, apps, and other properties and get
+            consent where required by law or any applicable Google
+            policies. See `About offline conversion
+            imports <//support.google.com/google-ads/answer/2998031>`__
+            page for more details.
+
+            This field is only available to allowlisted users. To
+            include this field in conversion imports, upgrade to the
+            Data Manager API.
 
             This field is a member of `oneof`_ ``_user_ip_address``.
         session_attributes_encoded (bytes):
@@ -467,11 +463,12 @@ class CallConversion(proto.Message):
             This field is a member of `oneof`_ ``_call_start_date_time``.
         conversion_action (str):
             Resource name of the conversion action
-            associated with this conversion. Note: Although
-            this resource name consists of a customer id and
-            a conversion action id, validation will ignore
-            the customer id and use the conversion action id
-            as the sole identifier of the conversion action.
+            associated with this conversion.
+            Note: Although this resource name consists of a
+            customer id and a conversion action id,
+            validation will ignore the customer id and use
+            the conversion action id as the sole identifier
+            of the conversion action.
 
             This field is a member of `oneof`_ ``_conversion_action``.
         conversion_date_time (str):
@@ -574,7 +571,7 @@ class ExternalAttributionData(proto.Message):
 
 class ClickConversionResult(proto.Message):
     r"""Identifying information for a successfully processed
-    ClickConversion.
+    ``ClickConversion``.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
@@ -702,12 +699,12 @@ class CustomVariable(proto.Message):
     Attributes:
         conversion_custom_variable (str):
             Resource name of the custom variable
-            associated with this conversion. Note: Although
-            this resource name consists of a customer id and
-            a conversion custom variable id, validation will
-            ignore the customer id and use the conversion
-            custom variable id as the sole identifier of the
-            conversion custom variable.
+            associated with this conversion.
+            Note: Although this resource name consists of a
+            customer id and a conversion custom variable id,
+            validation will ignore the customer id and use
+            the conversion custom variable id as the sole
+            identifier of the conversion custom variable.
         value (str):
             The value string of this custom variable.
             The value of the custom variable should not
@@ -739,10 +736,10 @@ class CartData(proto.Message):
             The language code associated with the feed
             where the items are uploaded.
         local_transaction_cost (float):
-            Sum of all transaction level discounts, such
-            as free shipping and coupon discounts for the
-            whole cart. The currency code is the same as
-            that in the ClickConversion message.
+            Sum of all transaction level discounts, such as free
+            shipping and coupon discounts for the whole cart. The
+            currency code is the same as that in the ``ClickConversion``
+            message.
         items (MutableSequence[google.ads.googleads.v22.services.types.CartData.Item]):
             Data of the items purchased.
     """
@@ -757,10 +754,9 @@ class CartData(proto.Message):
             quantity (int):
                 Number of items sold.
             unit_price (float):
-                Unit price excluding tax, shipping, and any
-                transaction level discounts. The currency code
-                is the same as that in the ClickConversion
-                message.
+                Unit price excluding tax, shipping, and any transaction
+                level discounts. The currency code is the same as that in
+                the ``ClickConversion`` message.
         """
 
         product_id: str = proto.Field(

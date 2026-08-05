@@ -19,6 +19,7 @@ https://support.google.com/google-ads/answer/7652860
 """
 
 import argparse
+import logging
 import sys
 from typing import List, Optional
 from uuid import uuid4
@@ -101,6 +102,10 @@ from google.ads.googleads.v24.services.types.smart_campaign_setting_service impo
     SmartCampaignSettingOperation,
 )
 from google.api_core import protobuf_helpers
+
+logger = logging.getLogger("google.ads.googleads.client")
+logger.addHandler(logging.StreamHandler(sys.stdout))
+
 
 # Geo target constant for New York City.
 _GEO_TARGET_CONSTANT = "1023191"

@@ -285,7 +285,7 @@ def create_asset_group_asset_operation(
 
 def _create_base_asset_operation(
     client: GoogleAdsClient, customer_id: str, temp_id: str
-) -> Tuple[Any, Any]:
+) -> Tuple[MutateOperation, Any]:
     """Helper to create a base asset mutate operation with a temp ID."""
     googleads_service = client.get_service("GoogleAdsService")
     operation = client.get_type("MutateOperation")

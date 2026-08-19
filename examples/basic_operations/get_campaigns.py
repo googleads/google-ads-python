@@ -18,7 +18,6 @@ To add campaigns, run add_campaigns.py.
 """
 
 import argparse
-import logging
 import sys
 from typing import Iterator, List
 
@@ -31,9 +30,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
     GoogleAdsRow,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START get_campaigns]

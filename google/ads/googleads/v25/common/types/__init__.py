@@ -214,6 +214,7 @@ from .criteria import (
     CustomAudienceInfo,
     CustomIntentInfo,
     DeviceInfo,
+    EntityBid,
     ExtendedDemographicInfo,
     GenderInfo,
     GeoPointInfo,
@@ -296,6 +297,9 @@ from .dates import (
     DateRange,
     YearMonth,
     YearMonthRange,
+)
+from .effective_automatic_goal import (
+    EffectiveAutomaticGoal,
 )
 from .experiment_types import (
     OptimizeAssetsExperimentInfo,
@@ -624,6 +628,7 @@ __all__ = (
     "CustomAudienceInfo",
     "CustomIntentInfo",
     "DeviceInfo",
+    "EntityBid",
     "ExtendedDemographicInfo",
     "GenderInfo",
     "GeoPointInfo",
@@ -698,6 +703,7 @@ __all__ = (
     "DateRange",
     "YearMonth",
     "YearMonthRange",
+    "EffectiveAutomaticGoal",
     "OptimizeAssetsExperimentInfo",
     "VideoExperimentInfo",
     "CallFeedItem",

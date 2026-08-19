@@ -133,6 +133,8 @@ class CriterionTypeEnum(proto.Message):
                 Ads.
             VERTICAL_ADS_ITEM_GROUP_RULE (46):
                 A rule for an item group in Vertical Ads.
+            VERTICAL_ADS_ITEM_BID (47):
+                A bid for a Vertical Ads item.
             RETAIL_FILTER_BUNDLE (180):
                 Retail Filter Bundle for linking a retail
                 filter shared set to an ad group.
@@ -188,6 +190,7 @@ class CriterionTypeEnum(proto.Message):
         PLACEMENT_LIST = 44
         VERTICAL_ADS_ITEM_GROUP_RULE_LIST = 45
         VERTICAL_ADS_ITEM_GROUP_RULE = 46
+        VERTICAL_ADS_ITEM_BID = 47
         RETAIL_FILTER_BUNDLE = 180
         RETAIL_FILTER = 181
 

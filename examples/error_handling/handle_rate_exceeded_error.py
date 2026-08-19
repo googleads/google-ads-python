@@ -23,8 +23,6 @@ application.
 """
 
 import argparse
-import logging
-import sys
 from time import sleep
 from typing import List, Any
 
@@ -42,10 +40,6 @@ from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     MutateAdGroupCriteriaRequest,
     MutateAdGroupCriteriaResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # Number of requests to be run.
 NUM_REQUESTS: int = 5

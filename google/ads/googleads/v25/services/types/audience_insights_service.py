@@ -163,6 +163,16 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
             IN_MARKET_USER_INTEREST, LIFE_EVENT_USER_INTEREST,
             PARENTAL_STATUS, INCOME_RANGE, AGE_RANGE, GENDER, and
             USER_LIST.
+
+            Note that when an
+            [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
+            is requested:
+
+            - Only the following dimensions are supported:
+              AFFINITY_USER_INTEREST, AGE_RANGE, GENDER,
+              IN_MARKET_USER_INTEREST
+            - The score field is omitted from AudienceCompositionMetrics
+              of the GenerateAudienceCompositionInsightsResponse.
         customer_insights_group (str):
             The name of the customer being planned for.
             This is a user-defined value.
@@ -215,12 +225,16 @@ class GenerateAudienceCompositionInsightsResponse(proto.Message):
 
     Attributes:
         sections (MutableSequence[google.ads.googleads.v25.services.types.AudienceCompositionSection]):
-            The contents of the insights report,
-            organized into sections. Each section is
-            associated with one of the
-            AudienceInsightsDimension values in the request.
-            There may be more than one section per
-            dimension.
+            The contents of the insights report, organized into
+            sections. Each section is associated with one of the
+            AudienceInsightsDimension values in the request. There may
+            be more than one section per dimension.
+
+            Note: When an
+            [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
+            is requested in GenerateAudienceCompositionInsightsRequest,
+            score is omitted from AudienceCompositionMetrics of the
+            GenerateAudienceCompositionInsightsResponse.
     """
 
     sections: MutableSequence["AudienceCompositionSection"] = (
@@ -1212,6 +1226,11 @@ class AudienceCompositionMetrics(proto.Message):
             zero if this ratio is undefined or is not meaningful.
         score (float):
             A relevance score from 0 to 1 inclusive.
+
+            Note: When an
+            [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
+            is requested in GenerateAudienceCompositionInsightsRequest,
+            score is omitted.
     """
 
     baseline_audience_share: float = proto.Field(

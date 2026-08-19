@@ -92,6 +92,12 @@ class RecommendationServiceAsyncClient:
     parse_conversion_action_path = staticmethod(
         RecommendationServiceClient.parse_conversion_action_path
     )
+    custom_conversion_goal_path = staticmethod(
+        RecommendationServiceClient.custom_conversion_goal_path
+    )
+    parse_custom_conversion_goal_path = staticmethod(
+        RecommendationServiceClient.parse_custom_conversion_goal_path
+    )
     recommendation_path = staticmethod(
         RecommendationServiceClient.recommendation_path
     )

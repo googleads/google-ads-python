@@ -171,9 +171,11 @@ class ContactDetails(proto.Message):
             Output only. Phone number of the consumer for
             the lead. This can be a real phone number or a
             tracking number. The phone number is returned in
-            E164 format. See
-            https://support.google.com/google-ads/answer/16355235?hl=en
-            to learn more. Example: +16504519489.
+            E.164 format. See
+            https://support.google.com/google-ads/answer/16355235
+            to learn more.
+
+            Example: "+16504519489".
         consumer_name (str):
             Output only. Consumer name if consumer
             provided name from Message or Booking form on

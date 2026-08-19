@@ -36,6 +36,9 @@ from google.ads.googleads.v25.enums.types import (
 )
 from google.ads.googleads.v25.enums.types import age_range_type
 from google.ads.googleads.v25.enums.types import (
+    brand_lift_measurement_type as gage_brand_lift_measurement_type,
+)
+from google.ads.googleads.v25.enums.types import (
     budget_campaign_association_status as gage_budget_campaign_association_status,
 )
 from google.ads.googleads.v25.enums.types import click_type as gage_click_type
@@ -47,6 +50,9 @@ from google.ads.googleads.v25.enums.types import (
 )
 from google.ads.googleads.v25.enums.types import (
     conversion_lag_bucket as gage_conversion_lag_bucket,
+)
+from google.ads.googleads.v25.enums.types import (
+    conversion_lift_included_conversion_action_types as gage_conversion_lift_included_conversion_action_types,
 )
 from google.ads.googleads.v25.enums.types import (
     conversion_or_adjustment_lag_bucket as gage_conversion_or_adjustment_lag_bucket,
@@ -74,6 +80,9 @@ from google.ads.googleads.v25.enums.types import (
 )
 from google.ads.googleads.v25.enums.types import (
     landing_page_source as gage_landing_page_source,
+)
+from google.ads.googleads.v25.enums.types import (
+    loyalty_membership as gage_loyalty_membership,
 )
 from google.ads.googleads.v25.enums.types import match_type as gage_match_type
 from google.ads.googleads.v25.enums.types import (
@@ -189,6 +198,8 @@ class Segments(proto.Message):
             Ad sub network type. Currently only available for ads
             running as part of DemandGen campaigns on YouTube and has to
             always be selected together with ad_network_type.
+        age_range (google.ads.googleads.v25.enums.types.AgeRangeTypeEnum.AgeRangeType):
+            Age range
         asset_group (str):
             Resource name of the asset group.
 
@@ -200,6 +211,8 @@ class Segments(proto.Message):
             This field is a member of `oneof`_ ``_auction_insight_domain``.
         budget_campaign_association_status (google.ads.googleads.v25.common.types.BudgetCampaignAssociationStatus):
             Budget campaign association status.
+        brand_lift_measurement_type (google.ads.googleads.v25.enums.types.BrandLiftMeasurementTypeEnum.BrandLiftMeasurementType):
+            The brand lift measurement type.
         campaign (str):
             Resource name of the campaign.
 
@@ -231,11 +244,33 @@ class Segments(proto.Message):
         conversion_lag_bucket (google.ads.googleads.v25.enums.types.ConversionLagBucketEnum.ConversionLagBucket):
             An enum value representing the number of days
             between the impression and the conversion.
+        conversion_lift_conversion_category (google.ads.googleads.v25.enums.types.ConversionActionCategoryEnum.ConversionActionCategory):
+            Conversion Category for Conversion Lift.
+        conversion_lift_end_date (int):
+            The end date of the period for which these
+            Conversion Lift results are calculated. This can
+            differ from the overall Study End Time.
+        conversion_lift_included_conversion_action_types (google.ads.googleads.v25.enums.types.ConversionLiftIncludedConversionActionTypesEnum.ConversionLiftIncludedConversionActionTypes):
+            The specific conversion types that were
+            included in the Conversion Lift measurement for
+            this reporting period.
+        conversion_lift_start_date (int):
+            The start date of the period for which these
+            Conversion Lift results are calculated. This can
+            differ from the overall Study Start Time.
         conversion_or_adjustment_lag_bucket (google.ads.googleads.v25.enums.types.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket):
             An enum value representing the number of days
             between the impression and the conversion or
             between the impression and adjustments to the
             conversion.
+        country (str):
+            Resource name of the country
+
+            This field is a member of `oneof`_ ``_country``.
+        country_localized_name (str):
+            Localized name of the country.
+
+            This field is a member of `oneof`_ ``_country_localized_name``.
         date (str):
             Date to which metrics apply.
             yyyy-MM-dd format, for example, 2018-04-17.
@@ -248,8 +283,14 @@ class Segments(proto.Message):
         mobile_device_platform (google.ads.googleads.v25.enums.types.MobileDevicePlatformEnum.MobileDevicePlatform):
             Mobile device platform to which metrics
             apply.
+        experiment_arm (str):
+            Experiment arm.
+
+            This field is a member of `oneof`_ ``_experiment_arm``.
         external_conversion_source (google.ads.googleads.v25.enums.types.ExternalConversionSourceEnum.ExternalConversionSource):
             External conversion source.
+        gender (google.ads.googleads.v25.enums.types.GenderTypeEnum.GenderType):
+            Gender
         geo_target_airport (str):
             Resource name of the geo target constant that
             represents an airport.
@@ -371,6 +412,9 @@ class Segments(proto.Message):
         landing_page_source (google.ads.googleads.v25.enums.types.LandingPageSourceEnum.LandingPageSource):
             The source of a landing page in the landing
             page report.
+        loyalty_membership (google.ads.googleads.v25.enums.types.LoyaltyMembershipEnum.LoyaltyMembership):
+            The user loyalty membership tier, based on
+            the user belonging to a loyalty program.
         month (str):
             Month as represented by the date of the first
             day of a month. Formatted as yyyy-MM-dd.
@@ -889,6 +933,11 @@ class Segments(proto.Message):
         number=204,
         enum=gage_ad_sub_network_type.AdSubNetworkTypeEnum.AdSubNetworkType,
     )
+    age_range: age_range_type.AgeRangeTypeEnum.AgeRangeType = proto.Field(
+        proto.ENUM,
+        number=225,
+        enum=age_range_type.AgeRangeTypeEnum.AgeRangeType,
+    )
     asset_group: str = proto.Field(
         proto.STRING,
         number=159,
@@ -905,6 +954,13 @@ class Segments(proto.Message):
             number=134,
             message="BudgetCampaignAssociationStatus",
         )
+    )
+    brand_lift_measurement_type: (
+        gage_brand_lift_measurement_type.BrandLiftMeasurementTypeEnum.BrandLiftMeasurementType
+    ) = proto.Field(
+        proto.ENUM,
+        number=230,
+        enum=gage_brand_lift_measurement_type.BrandLiftMeasurementTypeEnum.BrandLiftMeasurementType,
     )
     campaign: str = proto.Field(
         proto.STRING,
@@ -952,12 +1008,44 @@ class Segments(proto.Message):
         number=50,
         enum=gage_conversion_lag_bucket.ConversionLagBucketEnum.ConversionLagBucket,
     )
+    conversion_lift_conversion_category: (
+        gage_conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory
+    ) = proto.Field(
+        proto.ENUM,
+        number=229,
+        enum=gage_conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
+    )
+    conversion_lift_end_date: int = proto.Field(
+        proto.INT64,
+        number=223,
+    )
+    conversion_lift_included_conversion_action_types: (
+        gage_conversion_lift_included_conversion_action_types.ConversionLiftIncludedConversionActionTypesEnum.ConversionLiftIncludedConversionActionTypes
+    ) = proto.Field(
+        proto.ENUM,
+        number=224,
+        enum=gage_conversion_lift_included_conversion_action_types.ConversionLiftIncludedConversionActionTypesEnum.ConversionLiftIncludedConversionActionTypes,
+    )
+    conversion_lift_start_date: int = proto.Field(
+        proto.INT64,
+        number=222,
+    )
     conversion_or_adjustment_lag_bucket: (
         gage_conversion_or_adjustment_lag_bucket.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket
     ) = proto.Field(
         proto.ENUM,
         number=51,
         enum=gage_conversion_or_adjustment_lag_bucket.ConversionOrAdjustmentLagBucketEnum.ConversionOrAdjustmentLagBucket,
+    )
+    country: str = proto.Field(
+        proto.STRING,
+        number=227,
+        optional=True,
+    )
+    country_localized_name: str = proto.Field(
+        proto.STRING,
+        number=228,
+        optional=True,
     )
     date: str = proto.Field(
         proto.STRING,
@@ -981,12 +1069,22 @@ class Segments(proto.Message):
         number=219,
         enum=gage_mobile_device_platform.MobileDevicePlatformEnum.MobileDevicePlatform,
     )
+    experiment_arm: str = proto.Field(
+        proto.STRING,
+        number=231,
+        optional=True,
+    )
     external_conversion_source: (
         gage_external_conversion_source.ExternalConversionSourceEnum.ExternalConversionSource
     ) = proto.Field(
         proto.ENUM,
         number=55,
         enum=gage_external_conversion_source.ExternalConversionSourceEnum.ExternalConversionSource,
+    )
+    gender: gender_type.GenderTypeEnum.GenderType = proto.Field(
+        proto.ENUM,
+        number=226,
+        enum=gender_type.GenderTypeEnum.GenderType,
     )
     geo_target_airport: str = proto.Field(
         proto.STRING,
@@ -1142,6 +1240,13 @@ class Segments(proto.Message):
         proto.ENUM,
         number=200,
         enum=gage_landing_page_source.LandingPageSourceEnum.LandingPageSource,
+    )
+    loyalty_membership: (
+        gage_loyalty_membership.LoyaltyMembershipEnum.LoyaltyMembership
+    ) = proto.Field(
+        proto.ENUM,
+        number=233,
+        enum=gage_loyalty_membership.LoyaltyMembershipEnum.LoyaltyMembership,
     )
     month: str = proto.Field(
         proto.STRING,

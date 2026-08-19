@@ -222,6 +222,9 @@ class RecommendationTypeEnum(proto.Message):
             IMPROVE_DEMAND_GEN_AD_STRENGTH (58):
                 Recommendation to improve the strength of ads
                 in Demand Gen campaigns.
+            CAMPAIGN_SPECIFIC_APP_GOAL (59):
+                Recommendation to add a campaign-specific app
+                conversion goal.
         """
 
         UNSPECIFIED = 0
@@ -282,6 +285,7 @@ class RecommendationTypeEnum(proto.Message):
         CUSTOM_AUDIENCE_OPT_IN = 56
         LEAD_FORM_ASSET = 57
         IMPROVE_DEMAND_GEN_AD_STRENGTH = 58
+        CAMPAIGN_SPECIFIC_APP_GOAL = 59
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -15,7 +15,6 @@
 """This code example generates a video ads reach forecast."""
 
 import argparse
-import logging
 import math
 import sys
 
@@ -44,10 +43,6 @@ from google.ads.googleads.v24.services.types.reach_plan_service import (
     PlannedProductReachForecast,
     PlannedProduct,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 ONE_MILLION = 1.0e6
 

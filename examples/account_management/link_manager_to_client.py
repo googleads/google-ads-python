@@ -15,7 +15,6 @@
 """This example shows how to link a manager customer to a client customer."""
 
 import argparse
-import logging
 import sys
 
 from google.api_core import protobuf_helpers
@@ -50,10 +49,6 @@ from google.ads.googleads.v24.services.types.customer_manager_link_service impor
 from google.ads.googleads.v24.resources.types.customer_manager_link import (
     CustomerManagerLink,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # ManagerLinkStatusEnum is used via client.enums
 

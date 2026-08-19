@@ -18,7 +18,6 @@ The bid modifiers will be based on hotel check-in day and length of stay.
 """
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -38,9 +37,6 @@ from google.ads.googleads.v24.services.types.ad_group_bid_modifier_service impor
     MutateAdGroupBidModifierResult,
     MutateAdGroupBidModifiersResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_hotel_ad_group_bid_modifiers]

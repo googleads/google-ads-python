@@ -28,10 +28,9 @@ at: https://support.google.com/adspolicy/answer/6299717.
 
 import argparse
 import hashlib
-import logging
 import sys
-from typing import List, Dict, Optional, Union, Iterable
 import uuid
+from typing import List, Dict, Optional, Union, Iterable
 
 from google.protobuf.any_pb2 import Any
 from google.rpc import status_pb2
@@ -75,9 +74,6 @@ from google.ads.googleads.v24.errors.types.errors import (
     GoogleAdsFailure,
     GoogleAdsError,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

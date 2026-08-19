@@ -18,7 +18,6 @@ The invitation is to manage a customer account with a desired access role.
 """
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -33,10 +32,6 @@ from google.ads.googleads.v24.services.types.customer_user_access_invitation_ser
 from google.ads.googleads.v24.resources.types.customer_user_access_invitation import (
     CustomerUserAccessInvitation,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # AccessRoleEnum is part of google.ads.googleads.v24.enums.types.access_role
 # but it's accessed via client.enums.AccessRoleEnum, so direct import for type hint might not be strictly needed for the parameter.

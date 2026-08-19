@@ -604,6 +604,9 @@ class PlannableTargeting(proto.Message):
             products.
         networks (MutableSequence[google.ads.googleads.v25.enums.types.ReachPlanNetworkEnum.ReachPlanNetwork]):
             Targetable networks for the ad product.
+        parental_statuses (MutableSequence[google.ads.googleads.v25.common.types.ParentalStatusInfo]):
+            Targetable parental statuses for the ad
+            product.
         youtube_select_lineup_targeting (google.ads.googleads.v25.services.types.YouTubeSelectLineUpTargeting):
             Targetable YouTube Select Lineups for the ad product.
 
@@ -637,6 +640,13 @@ class PlannableTargeting(proto.Message):
         proto.ENUM,
         number=4,
         enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+    )
+    parental_statuses: MutableSequence[criteria.ParentalStatusInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=8,
+            message=criteria.ParentalStatusInfo,
+        )
     )
     youtube_select_lineup_targeting: "YouTubeSelectLineUpTargeting" = (
         proto.Field(
@@ -988,6 +998,9 @@ class Targeting(proto.Message):
             targets all applicable networks. Applicable networks vary by
             product and region and can be obtained from
             [ReachPlanService.ListPlannableProducts][google.ads.googleads.v25.services.ReachPlanService.ListPlannableProducts].
+        parental_statuses (MutableSequence[google.ads.googleads.v25.common.types.ParentalStatusInfo]):
+            Targeted parental statuses. If not specified, targets all
+            parental statuses (PARENT, NOT_A_PARENT, and UNDETERMINED).
         audience_targeting (google.ads.googleads.v25.services.types.AudienceTargeting):
             Targeted audiences.
             If not specified, does not target any specific
@@ -1020,6 +1033,13 @@ class Targeting(proto.Message):
             proto.ENUM,
             number=5,
             enum=reach_plan_network.ReachPlanNetworkEnum.ReachPlanNetwork,
+        )
+    )
+    parental_statuses: MutableSequence[criteria.ParentalStatusInfo] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=9,
+            message=criteria.ParentalStatusInfo,
         )
     )
     audience_targeting: "AudienceTargeting" = proto.Field(

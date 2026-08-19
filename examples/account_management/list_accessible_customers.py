@@ -20,7 +20,6 @@ the login-customer-id configuration. For more information see this
 documentation: https://developers.google.com/google-ads/api/docs/concepts/call-structure#cid
 """
 
-import logging
 import sys
 from typing import List
 
@@ -32,9 +31,6 @@ from google.ads.googleads.v24.services.services.customer_service.client import (
 from google.ads.googleads.v24.services.types.customer_service import (
     ListAccessibleCustomersResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START list_accessible_customers]

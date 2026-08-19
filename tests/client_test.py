@@ -569,9 +569,6 @@ class GoogleAdsClientTest(TestCase):
                 name
                 for name in os.listdir(services_filepath)
                 if name.endswith("_service")
-                and os.path.isfile(
-                    os.path.join(services_filepath, name, "client.py")
-                )
             ]
 
             client = self._create_test_client(version=ver)
@@ -599,9 +596,6 @@ class GoogleAdsClientTest(TestCase):
                 name
                 for name in os.listdir(services_filepath)
                 if name.endswith("_service")
-                and os.path.isfile(
-                    os.path.join(services_filepath, name, "async_client.py")
-                )
             ]
 
             client = self._create_test_client(version=ver)

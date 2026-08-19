@@ -20,7 +20,6 @@ will still be thrown.
 """
 
 import argparse
-import logging
 import sys
 from typing import List
 
@@ -42,9 +41,6 @@ from google.ads.googleads.v24.errors.types.policy_finding_error import (
     PolicyFindingErrorEnum,
 )
 from google.ads.googleads.v24.common.types.policy import PolicyTopicEntry
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

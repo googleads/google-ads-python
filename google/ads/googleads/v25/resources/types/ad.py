@@ -130,7 +130,15 @@ class Ad(proto.Message):
             then this field will indicate the source. This
             field is read-only.
         synthetic_content_info (google.ads.googleads.v25.common.types.SyntheticContentInfo):
-            Synthetic content info for the ad.
+            Synthetic content info for the ad. Only ads with specific ad
+            types are eligible for updates using the
+            ``synthetic_content_info`` field.
+
+            Allowed ``AdType`` values:
+
+            - ``HTML5_UPLOAD_AD``
+            - ``DYNAMIC_HTML5_AD``
+            - ``IMAGE_AD``
         text_ad (google.ads.googleads.v25.common.types.TextAdInfo):
             Immutable. Details pertaining to a text ad.
 

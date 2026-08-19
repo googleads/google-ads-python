@@ -18,9 +18,8 @@ Run basic_operations/add_campaigns.py to create a campaign.
 """
 
 import argparse
-import logging
-import sys
 from typing import List
+import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -32,9 +31,6 @@ from google.ads.googleads.v24.services.types.campaign_asset_service import (
 from google.ads.googleads.v24.resources.types.campaign_asset import (
     CampaignAsset,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

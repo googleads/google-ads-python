@@ -448,6 +448,29 @@ from .lead_form_submission_data import (
 from .life_event import (
     LifeEvent,
 )
+from .lift_measurement_age_range import (
+    LiftMeasurementAgeRange,
+)
+from .lift_measurement_campaign import (
+    LiftMeasurementCampaign,
+)
+from .lift_measurement_config import (
+    LiftMeasurementConfig,
+)
+from .lift_measurement_device import (
+    LiftMeasurementDevice,
+)
+from .lift_measurement_flight import (
+    LiftMeasurementFlight,
+    LiftMeasurementFlightSurveyLiftInfo,
+    LiftMeasurementFlightSurveyLiftMeasurement,
+)
+from .lift_measurement_gender import (
+    LiftMeasurementGender,
+)
+from .lift_measurement_video import (
+    LiftMeasurementVideo,
+)
 from .local_services_employee import (
     Fellowship,
     LocalServicesEmployee,
@@ -798,6 +821,15 @@ __all__ = (
     "LeadFormSubmissionData",
     "LeadFormSubmissionField",
     "LifeEvent",
+    "LiftMeasurementAgeRange",
+    "LiftMeasurementCampaign",
+    "LiftMeasurementConfig",
+    "LiftMeasurementDevice",
+    "LiftMeasurementFlight",
+    "LiftMeasurementFlightSurveyLiftInfo",
+    "LiftMeasurementFlightSurveyLiftMeasurement",
+    "LiftMeasurementGender",
+    "LiftMeasurementVideo",
     "Fellowship",
     "LocalServicesEmployee",
     "Residency",

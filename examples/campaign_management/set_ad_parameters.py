@@ -15,7 +15,6 @@
 """This example sets ad parameters for an ad group criterion."""
 
 import argparse
-import logging
 import sys
 from typing import List
 
@@ -32,9 +31,6 @@ from google.ads.googleads.v24.services.types.ad_parameter_service import (
     MutateAdParametersResponse,
 )
 from google.ads.googleads.v24.resources.types.ad_parameter import AdParameter
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

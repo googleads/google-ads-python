@@ -421,6 +421,12 @@ class BatchJobServiceAsyncClient:
     parse_life_event_path = staticmethod(
         BatchJobServiceClient.parse_life_event_path
     )
+    lift_measurement_config_path = staticmethod(
+        BatchJobServiceClient.lift_measurement_config_path
+    )
+    parse_lift_measurement_config_path = staticmethod(
+        BatchJobServiceClient.parse_lift_measurement_config_path
+    )
     mobile_app_category_constant_path = staticmethod(
         BatchJobServiceClient.mobile_app_category_constant_path
     )

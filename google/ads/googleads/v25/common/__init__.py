@@ -48,6 +48,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.custom_parameter",
     "google.ads.googleads.v25.types.customizer_value",
     "google.ads.googleads.v25.types.dates",
+    "google.ads.googleads.v25.types.effective_automatic_goal",
     "google.ads.googleads.v25.types.experiment_types",
     "google.ads.googleads.v25.types.extensions",
     "google.ads.googleads.v25.types.feed_common",
@@ -250,6 +251,7 @@ from .types.criteria import CustomAffinityInfo
 from .types.criteria import CustomAudienceInfo
 from .types.criteria import CustomIntentInfo
 from .types.criteria import DeviceInfo
+from .types.criteria import EntityBid
 from .types.criteria import ExtendedDemographicInfo
 from .types.criteria import GenderInfo
 from .types.criteria import GeoPointInfo
@@ -328,6 +330,7 @@ from .types.customizer_value import CustomizerValue
 from .types.dates import DateRange
 from .types.dates import YearMonth
 from .types.dates import YearMonthRange
+from .types.effective_automatic_goal import EffectiveAutomaticGoal
 from .types.experiment_types import OptimizeAssetsExperimentInfo
 from .types.experiment_types import VideoExperimentInfo
 from .types.extensions import CallFeedItem
@@ -662,7 +665,9 @@ __all__ = (
     "DynamicLocalAsset",
     "DynamicRealEstateAsset",
     "DynamicTravelAsset",
+    "EffectiveAutomaticGoal",
     "EnhancedCpc",
+    "EntityBid",
     "EventAttribute",
     "EventItemAttribute",
     "ExclusionSegment",

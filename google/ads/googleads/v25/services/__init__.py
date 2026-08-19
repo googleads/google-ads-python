@@ -216,6 +216,7 @@ from .types.batch_job_service import (
     RunBatchJobRequest,
 )
 from .types.benchmarks_service import (
+    AggregateMetrics,
     BenchmarksLocation,
     BenchmarksProductMetadata,
     BenchmarksSource,
@@ -223,6 +224,8 @@ from .types.benchmarks_service import (
     BreakdownDefinition,
     BreakdownKey,
     BreakdownMetrics,
+    CategoryFilter,
+    CategoryInfo,
     CustomerMetrics,
     GenerateBenchmarksMetricsRequest,
     GenerateBenchmarksMetricsResponse,
@@ -238,6 +241,7 @@ from .types.benchmarks_service import (
     Metrics,
     ProductFilter,
     RateMetrics,
+    ShareMetrics,
 )
 from .types.bidding_data_exclusion_service import (
     BiddingDataExclusionOperation,
@@ -355,6 +359,7 @@ from .types.campaign_shared_set_service import (
     MutateCampaignSharedSetsResponse,
 )
 from .types.content_creator_insights_service import (
+    BrandSentimentInsight,
     GenerateCreatorInsightsRequest,
     GenerateCreatorInsightsResponse,
     GenerateTrendingInsightsRequest,
@@ -362,6 +367,8 @@ from .types.content_creator_insights_service import (
     LanguageDistribution,
     SearchAudience,
     SearchTopics,
+    SentimentInsightDistribution,
+    SentimentInsightSummary,
     TrendInsight,
     TrendInsightDataPoint,
     TrendInsightMetrics,
@@ -1005,6 +1012,7 @@ __all__ = (
     "MutateBatchJobResponse",
     "MutateBatchJobResult",
     "RunBatchJobRequest",
+    "AggregateMetrics",
     "BenchmarksLocation",
     "BenchmarksProductMetadata",
     "BenchmarksSource",
@@ -1012,6 +1020,8 @@ __all__ = (
     "BreakdownDefinition",
     "BreakdownKey",
     "BreakdownMetrics",
+    "CategoryFilter",
+    "CategoryInfo",
     "CustomerMetrics",
     "GenerateBenchmarksMetricsRequest",
     "GenerateBenchmarksMetricsResponse",
@@ -1027,6 +1037,7 @@ __all__ = (
     "Metrics",
     "ProductFilter",
     "RateMetrics",
+    "ShareMetrics",
     "BiddingDataExclusionOperation",
     "MutateBiddingDataExclusionsRequest",
     "MutateBiddingDataExclusionsResponse",
@@ -1106,6 +1117,7 @@ __all__ = (
     "MutateCampaignSharedSetResult",
     "MutateCampaignSharedSetsRequest",
     "MutateCampaignSharedSetsResponse",
+    "BrandSentimentInsight",
     "GenerateCreatorInsightsRequest",
     "GenerateCreatorInsightsResponse",
     "GenerateTrendingInsightsRequest",
@@ -1113,6 +1125,8 @@ __all__ = (
     "LanguageDistribution",
     "SearchAudience",
     "SearchTopics",
+    "SentimentInsightDistribution",
+    "SentimentInsightSummary",
     "TrendInsight",
     "TrendInsightDataPoint",
     "TrendInsightMetrics",

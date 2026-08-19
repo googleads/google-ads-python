@@ -17,10 +17,9 @@
 To get ad groups, run get_ad_groups.py.
 """
 
-import argparse
-import logging
-import sys
 from typing import Iterable
+import argparse
+import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -37,9 +36,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
     GoogleAdsRow,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START get_ad_group_criterion_cpc_bid_simulations]

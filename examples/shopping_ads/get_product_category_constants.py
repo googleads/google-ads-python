@@ -15,7 +15,7 @@
 """This example fetches the set of all ProductCategoryConstants."""
 
 import argparse
-import logging
+import collections
 import sys
 from typing import DefaultDict, List, Optional
 
@@ -31,9 +31,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsStreamRequest,
     SearchGoogleAdsStreamResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 class Category:

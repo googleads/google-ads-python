@@ -15,7 +15,6 @@
 """This example constructs a campaign with a Portfolio Bidding Strategy."""
 
 import argparse
-import logging
 import sys
 import uuid
 
@@ -50,9 +49,6 @@ from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
     MutateCampaignsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

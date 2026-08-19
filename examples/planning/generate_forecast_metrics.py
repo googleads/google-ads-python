@@ -20,7 +20,6 @@ https://developers.google.com/google-ads/api/docs/keyword-planning/generate-fore
 
 import argparse
 from datetime import datetime, timedelta
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -40,9 +39,6 @@ from google.ads.googleads.v24.services.types.keyword_plan_idea_service import (
     GenerateKeywordForecastMetricsRequest,
     GenerateKeywordForecastMetricsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START generate_forecast_metrics]

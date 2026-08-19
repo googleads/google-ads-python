@@ -50,6 +50,10 @@ class InsightsKnowledgeGraphEntityCapabilitiesEnum(proto.Message):
                 [ContentCreatorInsightsService.GenerateCreatorInsights][google.ads.googleads.v25.services.ContentCreatorInsightsService.GenerateCreatorInsights]
                 in field
                 [GenerateCreatorInsightsRequest.search_attributes.creator_attributes][google.ads.googleads.v25.services.GenerateCreatorInsightsRequest.SearchAttributes.creator_attributes].
+            BRAND (4):
+                An entity that represents a brand. This
+                entity supports brand capabilities, such as
+                brand sentiment.
             CREATOR_TOPIC_INSIGHTS (5):
                 An entity that is supported to use as a topic in
                 [ContentCreatorInsightsService.GenerateCreatorInsights]
@@ -62,6 +66,7 @@ class InsightsKnowledgeGraphEntityCapabilitiesEnum(proto.Message):
         UNKNOWN = 1
         CONTENT_TRENDING_INSIGHTS = 2
         CREATOR_ATTRIBUTE = 3
+        BRAND = 4
         CREATOR_TOPIC_INSIGHTS = 5
 
 

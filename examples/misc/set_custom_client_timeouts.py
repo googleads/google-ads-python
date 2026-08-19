@@ -23,7 +23,7 @@ https://grpc.io/docs/what-is-grpc/core-concepts/#rpc-life-cycle
 """
 
 import argparse
-import logging
+from collections.abc import Iterator
 import sys
 from typing import List
 
@@ -40,10 +40,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
 )
 from google.api_core.exceptions import DeadlineExceeded
 from google.api_core.retry import Retry
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 _CLIENT_TIMEOUT_SECONDS = 5 * 60  # 5 minutes.
 _QUERY: str = "SELECT campaign.id FROM campaign"

@@ -402,6 +402,27 @@ from google.ads.googleads.v25.resources.types import (
     life_event as gagr_life_event,
 )
 from google.ads.googleads.v25.resources.types import (
+    lift_measurement_age_range as gagr_lift_measurement_age_range,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_campaign as gagr_lift_measurement_campaign,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_config as gagr_lift_measurement_config,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_device as gagr_lift_measurement_device,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_flight as gagr_lift_measurement_flight,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_gender as gagr_lift_measurement_gender,
+)
+from google.ads.googleads.v25.resources.types import (
+    lift_measurement_video as gagr_lift_measurement_video,
+)
+from google.ads.googleads.v25.resources.types import (
     local_services_employee as gagr_local_services_employee,
 )
 from google.ads.googleads.v25.resources.types import (
@@ -1350,6 +1371,27 @@ class GoogleAdsRow(proto.Message):
         local_services_lead_conversation (google.ads.googleads.v25.resources.types.LocalServicesLeadConversation):
             The local services lead
             conversationreferenced in the query.
+        lift_measurement_config (google.ads.googleads.v25.resources.types.LiftMeasurementConfig):
+            The lift measurement config referenced in the
+            query.
+        lift_measurement_age_range (google.ads.googleads.v25.resources.types.LiftMeasurementAgeRange):
+            The brand lift measurement by age range
+            referenced in the query.
+        lift_measurement_gender (google.ads.googleads.v25.resources.types.LiftMeasurementGender):
+            The brand lift measurement by gender
+            referenced in the query.
+        lift_measurement_device (google.ads.googleads.v25.resources.types.LiftMeasurementDevice):
+            The brand lift measurement by device
+            referenced in the query.
+        lift_measurement_campaign (google.ads.googleads.v25.resources.types.LiftMeasurementCampaign):
+            The brand lift measurement by campaign
+            referenced in the query.
+        lift_measurement_video (google.ads.googleads.v25.resources.types.LiftMeasurementVideo):
+            The brand lift measurement by video
+            referenced in the query.
+        lift_measurement_flight (google.ads.googleads.v25.resources.types.LiftMeasurementFlight):
+            The lift measurement flight referenced in the
+            query.
         android_privacy_shared_key_google_ad_group (google.ads.googleads.v25.resources.types.AndroidPrivacySharedKeyGoogleAdGroup):
             The android privacy shared key google ad
             group referenced in the query.
@@ -2440,6 +2482,55 @@ class GoogleAdsRow(proto.Message):
         proto.MESSAGE,
         number=214,
         message=gagr_local_services_lead_conversation.LocalServicesLeadConversation,
+    )
+    lift_measurement_config: (
+        gagr_lift_measurement_config.LiftMeasurementConfig
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=251,
+        message=gagr_lift_measurement_config.LiftMeasurementConfig,
+    )
+    lift_measurement_age_range: (
+        gagr_lift_measurement_age_range.LiftMeasurementAgeRange
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=260,
+        message=gagr_lift_measurement_age_range.LiftMeasurementAgeRange,
+    )
+    lift_measurement_gender: (
+        gagr_lift_measurement_gender.LiftMeasurementGender
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=261,
+        message=gagr_lift_measurement_gender.LiftMeasurementGender,
+    )
+    lift_measurement_device: (
+        gagr_lift_measurement_device.LiftMeasurementDevice
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=262,
+        message=gagr_lift_measurement_device.LiftMeasurementDevice,
+    )
+    lift_measurement_campaign: (
+        gagr_lift_measurement_campaign.LiftMeasurementCampaign
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=263,
+        message=gagr_lift_measurement_campaign.LiftMeasurementCampaign,
+    )
+    lift_measurement_video: gagr_lift_measurement_video.LiftMeasurementVideo = (
+        proto.Field(
+            proto.MESSAGE,
+            number=264,
+            message=gagr_lift_measurement_video.LiftMeasurementVideo,
+        )
+    )
+    lift_measurement_flight: (
+        gagr_lift_measurement_flight.LiftMeasurementFlight
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=266,
+        message=gagr_lift_measurement_flight.LiftMeasurementFlight,
     )
     android_privacy_shared_key_google_ad_group: (
         gagr_android_privacy_shared_key_google_ad_group.AndroidPrivacySharedKeyGoogleAdGroup

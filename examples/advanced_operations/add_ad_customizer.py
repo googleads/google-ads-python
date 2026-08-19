@@ -19,7 +19,6 @@ customizer attributes to populate dynamic data.
 """
 
 import argparse
-import logging
 import sys
 from uuid import uuid4
 
@@ -51,9 +50,6 @@ from google.ads.googleads.v24.services.types import (
     MutateAdGroupCustomizersResponse,
     MutateCustomizerAttributesResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

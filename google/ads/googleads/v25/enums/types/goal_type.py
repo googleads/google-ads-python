@@ -43,7 +43,9 @@ class GoalTypeEnum(proto.Message):
             CUSTOMER_RETENTION (3):
                 Retention goal, which allows advertisers to
                 optimize campaigns to win back lapsed customers.
-                (https://support.google.com/google-ads/answer/14792043?hl=en)
+                See
+                https://support.google.com/google-ads/answer/14792043
+                to learn more.
             NEW_CUSTOMER_ACQUISITION (4):
                 New customer acquisition goal, which allows
                 advertisers to optimize campaigns to acquire new

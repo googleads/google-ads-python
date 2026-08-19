@@ -74,6 +74,11 @@ class AuthorizationErrorEnum(proto.Message):
                 The developer token is only approved for use
                 with test accounts. To access non-test accounts,
                 apply for Basic or Standard access.
+            CLOUD_PROJECT_NOT_APPROVED_FOR_PRODUCTION (32):
+                The Google Cloud project is only approved for
+                use with test accounts. To access non-test
+                accounts, apply for Explorer, Basic or Standard
+                access.
             INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION (11):
                 The login customer specified does not have
                 access to the account specified, so the request
@@ -108,6 +113,7 @@ class AuthorizationErrorEnum(proto.Message):
         CUSTOMER_NOT_ENABLED = 24
         MISSING_TOS = 9
         DEVELOPER_TOKEN_NOT_APPROVED = 10
+        CLOUD_PROJECT_NOT_APPROVED_FOR_PRODUCTION = 32
         INVALID_LOGIN_CUSTOMER_ID_SERVING_CUSTOMER_ID_COMBINATION = 11
         SERVICE_ACCESS_DENIED = 12
         ACCESS_DENIED_FOR_ACCOUNT_TYPE = 25

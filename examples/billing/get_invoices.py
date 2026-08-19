@@ -16,15 +16,11 @@
 
 import argparse
 from datetime import date, timedelta
-import logging
 import sys
 from typing import Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, billing_setup_id: str):

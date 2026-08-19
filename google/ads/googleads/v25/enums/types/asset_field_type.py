@@ -145,6 +145,9 @@ class AssetFieldTypeEnum(proto.Message):
             CLASSIC_DISPLAY_IMAGE (47):
                 The asset is linked for use as a classic
                 display image.
+            TEXT_DISCLAIMER (48):
+                The asset is linked for use as a text
+                disclaimer.
         """
 
         UNSPECIFIED = 0
@@ -184,6 +187,7 @@ class AssetFieldTypeEnum(proto.Message):
         LONG_DESCRIPTION = 39
         CALL_TO_ACTION = 40
         CLASSIC_DISPLAY_IMAGE = 47
+        TEXT_DISCLAIMER = 48
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

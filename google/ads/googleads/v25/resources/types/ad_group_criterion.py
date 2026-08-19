@@ -327,6 +327,10 @@ class AdGroupCriterion(proto.Message):
             Immutable. Retail Filter Bundle.
 
             This field is a member of `oneof`_ ``criterion``.
+        entity_bid (google.ads.googleads.v25.common.types.EntityBid):
+            Immutable. Entity bid criterion.
+
+            This field is a member of `oneof`_ ``criterion``.
     """
 
     class QualityInfo(proto.Message):
@@ -801,6 +805,12 @@ class AdGroupCriterion(proto.Message):
         number=180,
         oneof="criterion",
         message=criteria.RetailFilterBundle,
+    )
+    entity_bid: criteria.EntityBid = proto.Field(
+        proto.MESSAGE,
+        number=92,
+        oneof="criterion",
+        message=criteria.EntityBid,
     )
 
 

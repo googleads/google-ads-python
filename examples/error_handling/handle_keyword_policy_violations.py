@@ -26,7 +26,6 @@ non-violating keyword.
 """
 
 import argparse
-import logging
 import sys
 from typing import Any, List, Optional, Tuple
 
@@ -39,9 +38,6 @@ from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
 )
 from google.ads.googleads.v24.common.types.policy import PolicyViolationKey
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

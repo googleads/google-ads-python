@@ -23,7 +23,6 @@ To upload image assets for this campaign, run misc/upload_image_asset.py.
 
 import argparse
 from datetime import datetime, timedelta
-import logging
 import sys
 from typing import List
 from uuid import uuid4
@@ -60,9 +59,6 @@ from google.ads.googleads.v24.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
 from google.ads.googleads.v24.services.types import *
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

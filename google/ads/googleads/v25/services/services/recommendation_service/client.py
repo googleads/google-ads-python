@@ -352,6 +352,26 @@ class RecommendationServiceClient(metaclass=RecommendationServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def custom_conversion_goal_path(
+        customer_id: str,
+        goal_id: str,
+    ) -> str:
+        """Returns a fully-qualified custom_conversion_goal string."""
+        return "customers/{customer_id}/customConversionGoals/{goal_id}".format(
+            customer_id=customer_id,
+            goal_id=goal_id,
+        )
+
+    @staticmethod
+    def parse_custom_conversion_goal_path(path: str) -> Dict[str, str]:
+        """Parses a custom_conversion_goal path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/customConversionGoals/(?P<goal_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def recommendation_path(
         customer_id: str,
         recommendation_id: str,

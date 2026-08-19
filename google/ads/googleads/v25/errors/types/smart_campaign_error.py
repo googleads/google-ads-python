@@ -60,6 +60,18 @@ class SmartCampaignErrorEnum(proto.Message):
                 The final URL could not be crawled.
             CREATION_FAILED (9):
                 New Smart campaigns cannot be created.
+            VALIDATE_ONLY_GENERATE_PMAX_NOT_SUPPORTED (10):
+                The validate_only generate PMax feature is not supported
+                yet.
+            GBP_ENABLED_GENERATE_PMAX_NOT_SUPPORTED (11):
+                The GBP enabled generate PMax feature is not
+                supported yet.
+            IMAGE_ENABLED_GENERATE_PMAX_NOT_SUPPORTED (12):
+                The image enabled generate PMax feature is
+                not supported yet.
+            GENERATE_PMAX_CONVERTERS_FAIL (13):
+                The Smart Campaign to PMax conversion failed
+                validation.
         """
 
         UNSPECIFIED = 0
@@ -72,6 +84,10 @@ class SmartCampaignErrorEnum(proto.Message):
         CANNOT_DETERMINE_SUGGESTION_LOCALE = 7
         FINAL_URL_NOT_CRAWLABLE = 8
         CREATION_FAILED = 9
+        VALIDATE_ONLY_GENERATE_PMAX_NOT_SUPPORTED = 10
+        GBP_ENABLED_GENERATE_PMAX_NOT_SUPPORTED = 11
+        IMAGE_ENABLED_GENERATE_PMAX_NOT_SUPPORTED = 12
+        GENERATE_PMAX_CONVERTERS_FAIL = 13
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

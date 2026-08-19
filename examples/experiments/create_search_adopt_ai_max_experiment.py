@@ -18,7 +18,6 @@ the feature (in this case, AI Max) is enabled or not.
 """
 
 import argparse
-import logging
 import sys
 from uuid import uuid4
 
@@ -26,9 +25,6 @@ from google.api_core import protobuf_helpers
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, campaign_id: str) -> None:

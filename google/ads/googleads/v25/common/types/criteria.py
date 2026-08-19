@@ -141,6 +141,7 @@ __protobuf__ = proto.module(
         "RetailFilter",
         "RetailFilterExpression",
         "RetailTag",
+        "EntityBid",
     },
 )
 
@@ -2581,6 +2582,26 @@ class RetailTag(proto.Message):
     expression_name: str = proto.Field(
         proto.STRING,
         number=2,
+        optional=True,
+    )
+
+
+class EntityBid(proto.Message):
+    r"""Represents an entity bid criterion.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        item_code (str):
+            The ID specifying a particular travel entity,
+            such as a hotel, a thing to do, or an event.
+
+            This field is a member of `oneof`_ ``_item_code``.
+    """
+
+    item_code: str = proto.Field(
+        proto.STRING,
+        number=1,
         optional=True,
     )
 

@@ -241,6 +241,9 @@ from .billing_setup_status import (
 from .booking_status import (
     BookingStatusEnum,
 )
+from .brand_lift_measurement_type import (
+    BrandLiftMeasurementTypeEnum,
+)
 from .brand_request_rejection_reason import (
     BrandRequestRejectionReasonEnum,
 )
@@ -372,6 +375,9 @@ from .conversion_environment_enum import (
 )
 from .conversion_lag_bucket import (
     ConversionLagBucketEnum,
+)
+from .conversion_lift_included_conversion_action_types import (
+    ConversionLiftIncludedConversionActionTypesEnum,
 )
 from .conversion_or_adjustment_lag_bucket import (
     ConversionOrAdjustmentLagBucketEnum,
@@ -637,6 +643,12 @@ from .lead_form_post_submit_call_to_action_type import (
 from .legacy_app_install_ad_app_store import (
     LegacyAppInstallAdAppStoreEnum,
 )
+from .lift_measurement_flight_status import (
+    LiftMeasurementFlightStatusEnum,
+)
+from .lift_metric_type import (
+    LiftMetricTypeEnum,
+)
 from .linked_account_type import (
     LinkedAccountTypeEnum,
 )
@@ -738,6 +750,9 @@ from .location_string_filter_type import (
 )
 from .lookalike_expansion_level import (
     LookalikeExpansionLevelEnum,
+)
+from .loyalty_membership import (
+    LoyaltyMembershipEnum,
 )
 from .manager_link_status import (
     ManagerLinkStatusEnum,
@@ -973,6 +988,9 @@ from .seasonality_event_scope import (
 from .seasonality_event_status import (
     SeasonalityEventStatusEnum,
 )
+from .sentiment import (
+    SentimentEnum,
+)
 from .served_asset_field_type import (
     ServedAssetFieldTypeEnum,
 )
@@ -1020,6 +1038,15 @@ from .spending_limit_type import (
 )
 from .summary_row_setting import (
     SummaryRowSettingEnum,
+)
+from .survey_intended_action import (
+    SurveyIntendedActionEnum,
+)
+from .survey_lift_flight_target_response_mode import (
+    SurveyLiftFlightTargetResponseModeEnum,
+)
+from .survey_subject_type import (
+    SurveySubjectTypeEnum,
 )
 from .synthetic_content_attestation_status import (
     SyntheticContentAttestationStatusEnum,
@@ -1252,6 +1279,7 @@ __all__ = (
     "BiddingStrategyTypeEnum",
     "BillingSetupStatusEnum",
     "BookingStatusEnum",
+    "BrandLiftMeasurementTypeEnum",
     "BrandRequestRejectionReasonEnum",
     "BrandSafetySuitabilityEnum",
     "BrandStateEnum",
@@ -1296,6 +1324,7 @@ __all__ = (
     "ConversionCustomerTypeEnum",
     "ConversionEnvironmentEnum",
     "ConversionLagBucketEnum",
+    "ConversionLiftIncludedConversionActionTypesEnum",
     "ConversionOrAdjustmentLagBucketEnum",
     "ConversionOriginEnum",
     "ConversionTrackingStatusEnum",
@@ -1384,6 +1413,8 @@ __all__ = (
     "LeadFormFieldUserInputTypeEnum",
     "LeadFormPostSubmitCallToActionTypeEnum",
     "LegacyAppInstallAdAppStoreEnum",
+    "LiftMeasurementFlightStatusEnum",
+    "LiftMetricTypeEnum",
     "LinkedAccountTypeEnum",
     "LinkedProductTypeEnum",
     "ListingGroupFilterCustomAttributeIndexEnum",
@@ -1418,6 +1449,7 @@ __all__ = (
     "LocationSourceTypeEnum",
     "LocationStringFilterTypeEnum",
     "LookalikeExpansionLevelEnum",
+    "LoyaltyMembershipEnum",
     "ManagerLinkStatusEnum",
     "MatchTypeEnum",
     "MediaTypeEnum",
@@ -1496,6 +1528,7 @@ __all__ = (
     "SearchTermTargetingStatusEnum",
     "SeasonalityEventScopeEnum",
     "SeasonalityEventStatusEnum",
+    "SentimentEnum",
     "ServedAssetFieldTypeEnum",
     "SharedSetStatusEnum",
     "SharedSetTypeEnum",
@@ -1512,6 +1545,9 @@ __all__ = (
     "SmartCampaignStatusEnum",
     "SpendingLimitTypeEnum",
     "SummaryRowSettingEnum",
+    "SurveyIntendedActionEnum",
+    "SurveyLiftFlightTargetResponseModeEnum",
+    "SurveySubjectTypeEnum",
     "SyntheticContentAttestationStatusEnum",
     "SyntheticContentSourceEnum",
     "SystemManagedResourceSourceEnum",

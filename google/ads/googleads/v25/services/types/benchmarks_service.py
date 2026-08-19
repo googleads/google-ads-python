@@ -45,8 +45,10 @@ __protobuf__ = proto.module(
         "ListBenchmarksSourcesResponse",
         "BenchmarksSourceMetadata",
         "IndustryVerticalInfo",
+        "CategoryInfo",
         "GenerateBenchmarksMetricsRequest",
         "BenchmarksSource",
+        "CategoryFilter",
         "ProductFilter",
         "BreakdownDefinition",
         "GenerateBenchmarksMetricsResponse",
@@ -55,6 +57,8 @@ __protobuf__ = proto.module(
         "Metrics",
         "CustomerMetrics",
         "RateMetrics",
+        "ShareMetrics",
+        "AggregateMetrics",
     },
 )
 
@@ -242,8 +246,10 @@ class ListBenchmarksSourcesRequest(proto.Message):
 
     Attributes:
         benchmarks_sources (MutableSequence[google.ads.googleads.v25.enums.types.BenchmarksSourceTypeEnum.BenchmarksSourceType]):
-            Required. The types of benchmarks sources to
-            be returned
+            Required. The types of benchmarks sources to be returned.
+            Supported sources include INDUSTRY_VERTICAL and CATEGORY.
+            Categories are used as filters for scoping the benchmarks
+            analysis when benchmarking against all advertisers.
         application_info (google.ads.googleads.v25.common.types.AdditionalApplicationInfo):
             Additional information on the application
             issuing the request.
@@ -287,6 +293,11 @@ class ListBenchmarksSourcesResponse(proto.Message):
 class BenchmarksSourceMetadata(proto.Message):
     r"""The metadata associated with a benchmarks source.
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
     Attributes:
@@ -294,6 +305,11 @@ class BenchmarksSourceMetadata(proto.Message):
             The type of benchmarks source.
         industry_vertical_info (google.ads.googleads.v25.services.types.IndustryVerticalInfo):
             Information on the Industry Vertical.
+
+            This field is a member of `oneof`_ ``benchmarks_source_info``.
+        category_info (google.ads.googleads.v25.services.types.CategoryInfo):
+            Information on the Product & Service
+            Category.
 
             This field is a member of `oneof`_ ``benchmarks_source_info``.
     """
@@ -310,6 +326,12 @@ class BenchmarksSourceMetadata(proto.Message):
         number=2,
         oneof="benchmarks_source_info",
         message="IndustryVerticalInfo",
+    )
+    category_info: "CategoryInfo" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        oneof="benchmarks_source_info",
+        message="CategoryInfo",
     )
 
 
@@ -341,6 +363,34 @@ class IndustryVerticalInfo(proto.Message):
     )
 
 
+class CategoryInfo(proto.Message):
+    r"""The information associated with a Product & Service Category.
+
+    Attributes:
+        category_name (str):
+            The name of the Product & Service Category.
+        category_id (int):
+            The unique identifier of the Product &
+            Service Category.
+        category_path (str):
+            The full path of the Product & Service
+            Category.
+    """
+
+    category_name: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    category_id: int = proto.Field(
+        proto.INT64,
+        number=2,
+    )
+    category_path: str = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+
+
 class GenerateBenchmarksMetricsRequest(proto.Message):
     r"""Request message for
     [BenchmarksService.GenerateBenchmarksMetrics][google.ads.googleads.v25.services.BenchmarksService.GenerateBenchmarksMetrics].
@@ -363,6 +413,17 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
         benchmarks_source (google.ads.googleads.v25.services.types.BenchmarksSource):
             Required. The source used to generate
             benchmarks metrics for.
+        category_filter (google.ads.googleads.v25.services.types.CategoryFilter):
+            A list of Product & Service Categories for scoping a YouTube
+            benchmarks analysis. For example, when category
+            "/Apparel/Clothing" is selected, customer metrics represent
+            Ad performance for "/Apparel/Clothing" Ads only and the
+            customer is benchmarking against all advertisers’ Ads in the
+            "/Apparel/Clothing" category.
+
+            This filter can only be used when ``all_advertisers`` is
+            used as the
+            [benchmarks_source][google.ads.googleads.v25.services.GenerateBenchmarksMetricsRequest.benchmarks_source].
         product_filter (google.ads.googleads.v25.services.types.ProductFilter):
             Required. The products to aggregate metrics
             over. Product filter settings support a list of
@@ -402,6 +463,11 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
         number=4,
         message="BenchmarksSource",
     )
+    category_filter: "CategoryFilter" = proto.Field(
+        proto.MESSAGE,
+        number=10,
+        message="CategoryFilter",
+    )
     product_filter: "ProductFilter" = proto.Field(
         proto.MESSAGE,
         number=5,
@@ -434,6 +500,10 @@ class BenchmarksSource(proto.Message):
     source can be obtained from
     [BenchmarksService.ListBenchmarksSources][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksSources].
 
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -442,12 +512,44 @@ class BenchmarksSource(proto.Message):
             The ID of the Industry Vertical.
 
             This field is a member of `oneof`_ ``benchmarks_source_id``.
+        all_advertisers (bool):
+            Comparison against all advertisers running Ads. This
+            benchmarking option must utilize additional filters. Setting
+            the ``category_filter`` is required. One or more categories
+            will scope the metrics of both the customer and all
+            advertisers to those selected categories.
+
+            This field is a member of `oneof`_ ``benchmarks_source_id``.
     """
 
     industry_vertical_id: int = proto.Field(
         proto.INT64,
         number=1,
         oneof="benchmarks_source_id",
+    )
+    all_advertisers: bool = proto.Field(
+        proto.BOOL,
+        number=2,
+        oneof="benchmarks_source_id",
+    )
+
+
+class CategoryFilter(proto.Message):
+    r"""A list of Product & Service Categories for scoping
+    benchmarks.
+
+    Attributes:
+        category_ids (MutableSequence[str]):
+            Required. Product & Service Category IDs. The supported list
+            of IDs can be retrieved using
+            [BenchmarksService.ListBenchmarksSources][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksSources].
+            The scope of benchmarks analysis will be the union (ORs) of
+            all categories supplied.
+    """
+
+    category_ids: MutableSequence[str] = proto.RepeatedField(
+        proto.STRING,
+        number=1,
     )
 
 
@@ -653,12 +755,33 @@ class CustomerMetrics(proto.Message):
         average_rate_metrics (google.ads.googleads.v25.services.types.RateMetrics):
             Average rate metrics calculated by dividing
             one metric by another.
+        share_metrics (google.ads.googleads.v25.services.types.ShareMetrics):
+            Metrics calculated by dividing the metric of the customer by
+            that of the selected benchmarks source. These metrics are
+            only returned when:
+
+            1. ``all_advertisers`` is used as the ``benchmarks_source``.
+               Note that the request ``category_filter`` must be set
+               when using ``all_advertisers``.
+        aggregate_metrics (google.ads.googleads.v25.services.types.AggregateMetrics):
+            Metrics calculated by aggregating values of a
+            single metric for the customer.
     """
 
     average_rate_metrics: "RateMetrics" = proto.Field(
         proto.MESSAGE,
         number=1,
         message="RateMetrics",
+    )
+    share_metrics: "ShareMetrics" = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="ShareMetrics",
+    )
+    aggregate_metrics: "AggregateMetrics" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="AggregateMetrics",
     )
 
 
@@ -783,6 +906,114 @@ class RateMetrics(proto.Message):
     video_completion_p100_rate: float = proto.Field(
         proto.DOUBLE,
         number=15,
+    )
+
+
+class ShareMetrics(proto.Message):
+    r"""Metrics calculated by dividing the metric of the customer by
+    that of the selected benchmarks source.
+
+    Attributes:
+        share_of_voice (float):
+            Relative impressions. Share of voice is
+            defined by the customer’s total number of
+            impressions divided by the aggregated number of
+            impressions of all advertisers in the selected
+            benchmarks source including your own. Share of
+            voice is represented on a scale of 0 to 1
+            precise to 4 decimal places. For example, 0.0123
+            which corresponds to 1.23%.
+        share_of_spend (float):
+            Relative spend. Share of spend is defined by
+            the customer’s total cost divided by the total
+            aggregated cost of all advertisers in the
+            selected benchmarks source including your own.
+            Share of spend is represented on a scale of 0 to
+            1 precise to 4 decimal places. For example,
+            0.0123 which corresponds to 1.23%.
+    """
+
+    share_of_voice: float = proto.Field(
+        proto.DOUBLE,
+        number=1,
+    )
+    share_of_spend: float = proto.Field(
+        proto.DOUBLE,
+        number=2,
+    )
+
+
+class AggregateMetrics(proto.Message):
+    r"""Metrics calculated by aggregating values of a single metric.
+
+    Attributes:
+        cost (float):
+            The total cost paid by the customer. Cost is
+            represented in USD by default, if unspecified in
+            the request.
+        video_trueview_views (float):
+            The number of video TrueView views.
+
+            See
+            https://support.google.com/google-ads/answer/2375431
+            for more information on TrueView Views.
+        impressions (float):
+            The number of times the Ad was shown to
+            users.
+        viewable_impressions (float):
+            The number of impressions that are considered
+            viewable according to the Active View criteria.
+
+            See
+            https://support.google.com/google-ads/answer/7029393
+            for more information on Active View.
+        clicks (float):
+            The number of clicks received.
+        interactions (float):
+            The number of interactions. Interactions
+            include physical clicks, engagements, and video
+            views that are logged as clicks.
+
+            See
+            https://support.google.com/google-ads/answer/2375431
+            for more information on interactions.
+        engagements (float):
+            The number of engagements. Engagements are ad
+            interactions such as expanding a lightbox Ad or
+            clicking on a video teaser.
+
+            See
+            https://support.google.com/google-ads/answer/2375431
+            for more information on engagements.
+    """
+
+    cost: float = proto.Field(
+        proto.DOUBLE,
+        number=1,
+    )
+    video_trueview_views: float = proto.Field(
+        proto.DOUBLE,
+        number=2,
+    )
+    impressions: float = proto.Field(
+        proto.DOUBLE,
+        number=3,
+    )
+    viewable_impressions: float = proto.Field(
+        proto.DOUBLE,
+        number=4,
+    )
+    clicks: float = proto.Field(
+        proto.DOUBLE,
+        number=5,
+    )
+    interactions: float = proto.Field(
+        proto.DOUBLE,
+        number=6,
+    )
+    engagements: float = proto.Field(
+        proto.DOUBLE,
+        number=7,
     )
 
 

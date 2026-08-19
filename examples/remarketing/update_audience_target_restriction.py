@@ -15,7 +15,6 @@
 """Updates the audience target restriction of a given ad group to bid only."""
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -42,9 +41,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsResponse,
 )
 from google.api_core import protobuf_helpers
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

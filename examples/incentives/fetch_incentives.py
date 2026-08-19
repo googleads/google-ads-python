@@ -18,7 +18,6 @@ To apply an incentive, use apply_incentive.py.
 """
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -30,9 +29,6 @@ from google.ads.googleads.v24.services import (
 from google.ads.googleads.v24.services.services.incentive_service.client import (
     IncentiveServiceClient,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

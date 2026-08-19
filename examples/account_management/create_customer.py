@@ -21,9 +21,8 @@ account.
 """
 
 import argparse
-from datetime import datetime
-import logging
 import sys
+from datetime import datetime
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -34,9 +33,6 @@ from google.ads.googleads.v24.services.services.customer_service.client import (
 from google.ads.googleads.v24.services.types.customer_service import (
     CreateCustomerClientResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START create_customer]

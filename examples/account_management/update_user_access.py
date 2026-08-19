@@ -22,13 +22,32 @@ account access levels.
 """
 
 import argparse
-import logging
 import sys
+
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
+from google.ads.googleads.v24.services.services.google_ads_service.client import (
+    GoogleAdsServiceClient,
+)
+from google.ads.googleads.v24.services.types.google_ads_service import (
+    SearchGoogleAdsRequest,
+    SearchPagedResponse,
+)
+from google.ads.googleads.v24.resources.types.customer_user_access import (
+    CustomerUserAccess,
+)
+from google.ads.googleads.v24.services.services.customer_user_access_service.client import (
+    CustomerUserAccessServiceClient,
+)
+from google.ads.googleads.v24.services.types.customer_user_access_service import (
+    CustomerUserAccessOperation,
+    MutateCustomerUserAccessResponse,
+)
+
+from google.api_core import protobuf_helpers
+from google.protobuf.field_mask_pb2 import FieldMask
+
 from typing import Optional
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 _ACCESS_ROLES = ["ADMIN", "STANDARD", "READ_ONLY", "EMAIL_ONLY"]
 

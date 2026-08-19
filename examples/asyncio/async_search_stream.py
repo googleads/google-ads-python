@@ -15,7 +15,7 @@
 """This example illustrates how to get all campaigns using asyncio."""
 
 import argparse
-import logging
+import asyncio
 import sys
 from typing import List
 
@@ -27,9 +27,6 @@ from google.ads.googleads.v24.services.services.google_ads_service import (
 from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 async def main(client: GoogleAdsClient, customer_id: str) -> None:

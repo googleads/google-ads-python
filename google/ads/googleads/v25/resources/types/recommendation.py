@@ -20,10 +20,12 @@ from typing import MutableSequence
 import proto  # type: ignore
 
 from google.ads.googleads.v25.common.types import criteria
+from google.ads.googleads.v25.common.types import effective_automatic_goal
 from google.ads.googleads.v25.enums.types import ad_strength as gage_ad_strength
 from google.ads.googleads.v25.enums.types import (
     app_bidding_goal as gage_app_bidding_goal,
 )
+from google.ads.googleads.v25.enums.types import conversion_action_category
 from google.ads.googleads.v25.enums.types import keyword_match_type
 from google.ads.googleads.v25.enums.types import recommendation_type
 from google.ads.googleads.v25.enums.types import (
@@ -397,6 +399,11 @@ class Recommendation(proto.Message):
         improve_demand_gen_ad_strength_recommendation (google.ads.googleads.v25.resources.types.Recommendation.ImproveDemandGenAdStrengthRecommendation):
             Output only. The improve Demand Gen ad
             strength recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        campaign_specific_app_goal_recommendation (google.ads.googleads.v25.resources.types.Recommendation.CampaignSpecificAppGoalRecommendation):
+            Output only. The campaign-specific app goal
+            recommendation.
 
             This field is a member of `oneof`_ ``recommendation``.
     """
@@ -1642,6 +1649,107 @@ class Recommendation(proto.Message):
             )
         )
 
+    class CampaignSpecificAppGoalRecommendation(proto.Message):
+        r"""The campaign-specific app goal recommendation. Recommendation to add
+        app conversion goals to a campaign. LINT: LEGACY_NAMES
+
+        Attributes:
+            campaign_cost_micros_last_fifteen_days (int):
+                Output only. Campaign cost in micros for the
+                last 15 days.
+            campaign_conversions_last_fifteen_days (float):
+                Output only. Campaign conversion count for
+                the last 15 days.
+            campaign_conversion_value_last_fifteen_days (float):
+                Output only. Campaign conversion value for
+                the last 15 days.
+            projected_conversions_last_fifteen_days (float):
+                Output only. Projected conversions over the
+                last 15 days if the recommendation is applied.
+            projected_conversion_value_last_fifteen_days (float):
+                Output only. Projected conversion value over
+                the last 15 days if the recommendation is
+                applied.
+            app_conversion_goals (MutableSequence[google.ads.googleads.v25.enums.types.ConversionActionCategoryEnum.ConversionActionCategory]):
+                Output only. Deprecated: Use suggested_conversion_goals
+                instead. Suggested auto conversion goals for the campaign.
+            current_auto_goals (MutableSequence[google.ads.googleads.v25.common.types.EffectiveAutomaticGoal]):
+                Output only. Deprecated: Use current_conversion_goals
+                instead. Current automatic conversion goals for the
+                campaign.
+            current_custom_goal (str):
+                Output only. Deprecated: Use current_custom_conversion_goal
+                instead. Current custom goal for the campaign.
+            suggested_conversion_goals (MutableSequence[google.ads.googleads.v25.enums.types.ConversionActionCategoryEnum.ConversionActionCategory]):
+                Output only. Suggested conversion goals for
+                the campaign which optimize towards app
+                conversions.
+            current_conversion_goals (MutableSequence[google.ads.googleads.v25.common.types.EffectiveAutomaticGoal]):
+                Output only. Current conversion goals for the
+                campaign.
+            current_custom_conversion_goal (str):
+                Output only. Current custom conversion goal
+                for the campaign. This is the resource name of
+                the CustomConversionGoal.
+        """
+
+        campaign_cost_micros_last_fifteen_days: int = proto.Field(
+            proto.INT64,
+            number=1,
+        )
+        campaign_conversions_last_fifteen_days: float = proto.Field(
+            proto.DOUBLE,
+            number=2,
+        )
+        campaign_conversion_value_last_fifteen_days: float = proto.Field(
+            proto.DOUBLE,
+            number=3,
+        )
+        projected_conversions_last_fifteen_days: float = proto.Field(
+            proto.DOUBLE,
+            number=4,
+        )
+        projected_conversion_value_last_fifteen_days: float = proto.Field(
+            proto.DOUBLE,
+            number=5,
+        )
+        app_conversion_goals: MutableSequence[
+            conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory
+        ] = proto.RepeatedField(
+            proto.ENUM,
+            number=6,
+            enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
+        )
+        current_auto_goals: MutableSequence[
+            effective_automatic_goal.EffectiveAutomaticGoal
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=7,
+            message=effective_automatic_goal.EffectiveAutomaticGoal,
+        )
+        current_custom_goal: str = proto.Field(
+            proto.STRING,
+            number=8,
+        )
+        suggested_conversion_goals: MutableSequence[
+            conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory
+        ] = proto.RepeatedField(
+            proto.ENUM,
+            number=9,
+            enum=conversion_action_category.ConversionActionCategoryEnum.ConversionActionCategory,
+        )
+        current_conversion_goals: MutableSequence[
+            effective_automatic_goal.EffectiveAutomaticGoal
+        ] = proto.RepeatedField(
+            proto.MESSAGE,
+            number=10,
+            message=effective_automatic_goal.EffectiveAutomaticGoal,
+        )
+        current_custom_conversion_goal: str = proto.Field(
+            proto.STRING,
+            number=11,
+        )
+
     resource_name: str = proto.Field(
         proto.STRING,
         number=1,
@@ -2095,6 +2203,14 @@ class Recommendation(proto.Message):
         number=69,
         oneof="recommendation",
         message=ImproveDemandGenAdStrengthRecommendation,
+    )
+    campaign_specific_app_goal_recommendation: (
+        CampaignSpecificAppGoalRecommendation
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=70,
+        oneof="recommendation",
+        message=CampaignSpecificAppGoalRecommendation,
     )
 
 

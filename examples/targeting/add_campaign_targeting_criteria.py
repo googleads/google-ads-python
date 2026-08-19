@@ -15,9 +15,8 @@
 """This example adds campaign targeting criteria."""
 
 import argparse
-import logging
-import sys
 from typing import List
+import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -40,9 +39,6 @@ from google.ads.googleads.v24.services.types.campaign_criterion_service import (
     CampaignCriterionOperation,
     MutateCampaignCriteriaResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

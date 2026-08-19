@@ -42,6 +42,16 @@ class ContentCreatorInsightsSupplementalDataEnum(proto.Message):
                 Not specified.
             UNKNOWN (1):
                 The value is unknown in this version.
+            BRAND_SENTIMENT_DATA (2):
+                Populate brand sentiment data in
+                [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v25.services.ContentCreatorInsightsService.GenerateTrendingInsights].
+                This is only available when requesting trending insights for
+                a brand topic. A brand topic is a Knowledge Graph entity
+                that is tagged with
+                [BRAND][google.ads.googleads.v25.enums.InsightsKnowledgeGraphEntityCapabilitiesEnum.InsightsKnowledgeGraphEntityCapabilities.BRAND].
+                Use
+                [AudienceInsightsService.ListAudienceInsightsAttributes][]
+                to get the list of supported Knowledge Graph entities.
             LOCAL_CREATOR_DATA (3):
                 Populate local creator data in
                 [ContentCreatorInsightsService.GenerateTrendingInsights][google.ads.googleads.v25.services.ContentCreatorInsightsService.GenerateTrendingInsights]
@@ -64,6 +74,7 @@ class ContentCreatorInsightsSupplementalDataEnum(proto.Message):
 
         UNSPECIFIED = 0
         UNKNOWN = 1
+        BRAND_SENTIMENT_DATA = 2
         LOCAL_CREATOR_DATA = 3
 
 

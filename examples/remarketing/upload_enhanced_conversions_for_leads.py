@@ -22,7 +22,6 @@ that drove the lead.
 
 import argparse
 import hashlib
-import logging
 import re
 import sys
 from typing import Dict, Optional, Union
@@ -44,9 +43,6 @@ from google.ads.googleads.v24.services.types.conversion_upload_service import (
     SessionAttributeKeyValuePair,
     UploadClickConversionsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

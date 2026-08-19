@@ -1153,6 +1153,17 @@ class AudienceInsightsServiceClient(
                 LIFE_EVENT_USER_INTEREST, PARENTAL_STATUS, INCOME_RANGE,
                 AGE_RANGE, GENDER, and USER_LIST.
 
+                Note that when an
+                [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
+                is requested:
+
+                - Only the following dimensions are supported:
+                  AFFINITY_USER_INTEREST, AGE_RANGE, GENDER,
+                  IN_MARKET_USER_INTEREST
+                - The score field is omitted from
+                  AudienceCompositionMetrics of the
+                  GenerateAudienceCompositionInsightsResponse.
+
                 This corresponds to the ``dimensions`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.

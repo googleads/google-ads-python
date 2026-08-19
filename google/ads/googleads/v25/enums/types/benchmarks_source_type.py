@@ -43,11 +43,14 @@ class BenchmarksSourceTypeEnum(proto.Message):
                 The classification of ad categories for
                 benchmarking. (for example, "Technology" or
                 "Finance").
+            CATEGORY (3):
+                A Product & Service Category.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
         INDUSTRY_VERTICAL = 2
+        CATEGORY = 3
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

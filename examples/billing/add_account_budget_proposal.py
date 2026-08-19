@@ -18,15 +18,11 @@ To get account budget proposal, run get_account_budget_proposals.py
 """
 
 import argparse
-import logging
 import sys
 
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_account_budget_proposal]

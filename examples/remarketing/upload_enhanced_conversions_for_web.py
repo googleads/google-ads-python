@@ -19,15 +19,11 @@ The conversion adjustment contains hashed user identifiers and an order ID.
 
 import argparse
 import hashlib
-import logging
 import re
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

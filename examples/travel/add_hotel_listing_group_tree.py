@@ -29,7 +29,6 @@ listing group tree to an ad group that already has one will fail.
 """
 
 import argparse
-import logging
 import sys
 from typing import List, Optional
 
@@ -53,10 +52,6 @@ from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     MutateAdGroupCriteriaResponse,
     MutateAdGroupCriterionResult,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # The next temporary criterion ID to be used, which is a negative integer.
 #

@@ -15,7 +15,6 @@
 """This example generates keyword ideas from a list of seed keywords."""
 
 import argparse
-import logging
 import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
@@ -38,10 +37,6 @@ from google.ads.googleads.v24.services.types.keyword_plan_idea_service import (
     GenerateKeywordIdeasRequest,
     GenerateKeywordIdeaResult,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # Location IDs are listed here:
 # https://developers.google.com/google-ads/api/reference/data/geotargets

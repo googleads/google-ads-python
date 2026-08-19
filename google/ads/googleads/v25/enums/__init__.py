@@ -105,6 +105,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.bidding_strategy_type",
     "google.ads.googleads.v25.types.billing_setup_status",
     "google.ads.googleads.v25.types.booking_status",
+    "google.ads.googleads.v25.types.brand_lift_measurement_type",
     "google.ads.googleads.v25.types.brand_request_rejection_reason",
     "google.ads.googleads.v25.types.brand_safety_suitability",
     "google.ads.googleads.v25.types.brand_state",
@@ -149,6 +150,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.conversion_customer_type",
     "google.ads.googleads.v25.types.conversion_environment_enum",
     "google.ads.googleads.v25.types.conversion_lag_bucket",
+    "google.ads.googleads.v25.types.conversion_lift_included_conversion_action_types",
     "google.ads.googleads.v25.types.conversion_or_adjustment_lag_bucket",
     "google.ads.googleads.v25.types.conversion_origin",
     "google.ads.googleads.v25.types.conversion_tracking_status_enum",
@@ -237,6 +239,8 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.lead_form_field_user_input_type",
     "google.ads.googleads.v25.types.lead_form_post_submit_call_to_action_type",
     "google.ads.googleads.v25.types.legacy_app_install_ad_app_store",
+    "google.ads.googleads.v25.types.lift_measurement_flight_status",
+    "google.ads.googleads.v25.types.lift_metric_type",
     "google.ads.googleads.v25.types.linked_account_type",
     "google.ads.googleads.v25.types.linked_product_type",
     "google.ads.googleads.v25.types.listing_group_filter_custom_attribute_index",
@@ -271,6 +275,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.location_source_type",
     "google.ads.googleads.v25.types.location_string_filter_type",
     "google.ads.googleads.v25.types.lookalike_expansion_level",
+    "google.ads.googleads.v25.types.loyalty_membership",
     "google.ads.googleads.v25.types.manager_link_status",
     "google.ads.googleads.v25.types.match_type",
     "google.ads.googleads.v25.types.media_type",
@@ -349,6 +354,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.search_term_targeting_status",
     "google.ads.googleads.v25.types.seasonality_event_scope",
     "google.ads.googleads.v25.types.seasonality_event_status",
+    "google.ads.googleads.v25.types.sentiment",
     "google.ads.googleads.v25.types.served_asset_field_type",
     "google.ads.googleads.v25.types.shared_set_status",
     "google.ads.googleads.v25.types.shared_set_type",
@@ -365,6 +371,9 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.smart_campaign_status",
     "google.ads.googleads.v25.types.spending_limit_type",
     "google.ads.googleads.v25.types.summary_row_setting",
+    "google.ads.googleads.v25.types.survey_intended_action",
+    "google.ads.googleads.v25.types.survey_lift_flight_target_response_mode",
+    "google.ads.googleads.v25.types.survey_subject_type",
     "google.ads.googleads.v25.types.synthetic_content_attestation_status",
     "google.ads.googleads.v25.types.synthetic_content_source",
     "google.ads.googleads.v25.types.system_managed_entity_source",
@@ -527,6 +536,7 @@ from .types.bidding_strategy_system_status import (
 from .types.bidding_strategy_type import BiddingStrategyTypeEnum
 from .types.billing_setup_status import BillingSetupStatusEnum
 from .types.booking_status import BookingStatusEnum
+from .types.brand_lift_measurement_type import BrandLiftMeasurementTypeEnum
 from .types.brand_request_rejection_reason import (
     BrandRequestRejectionReasonEnum,
 )
@@ -591,6 +601,9 @@ from .types.conversion_custom_variable_status import (
 from .types.conversion_customer_type import ConversionCustomerTypeEnum
 from .types.conversion_environment_enum import ConversionEnvironmentEnum
 from .types.conversion_lag_bucket import ConversionLagBucketEnum
+from .types.conversion_lift_included_conversion_action_types import (
+    ConversionLiftIncludedConversionActionTypesEnum,
+)
 from .types.conversion_or_adjustment_lag_bucket import (
     ConversionOrAdjustmentLagBucketEnum,
 )
@@ -725,6 +738,10 @@ from .types.lead_form_post_submit_call_to_action_type import (
 from .types.legacy_app_install_ad_app_store import (
     LegacyAppInstallAdAppStoreEnum,
 )
+from .types.lift_measurement_flight_status import (
+    LiftMeasurementFlightStatusEnum,
+)
+from .types.lift_metric_type import LiftMetricTypeEnum
 from .types.linked_account_type import LinkedAccountTypeEnum
 from .types.linked_product_type import LinkedProductTypeEnum
 from .types.listing_group_filter_custom_attribute_index import (
@@ -799,6 +816,7 @@ from .types.location_ownership_type import LocationOwnershipTypeEnum
 from .types.location_source_type import LocationSourceTypeEnum
 from .types.location_string_filter_type import LocationStringFilterTypeEnum
 from .types.lookalike_expansion_level import LookalikeExpansionLevelEnum
+from .types.loyalty_membership import LoyaltyMembershipEnum
 from .types.manager_link_status import ManagerLinkStatusEnum
 from .types.match_type import MatchTypeEnum
 from .types.media_type import MediaTypeEnum
@@ -917,6 +935,7 @@ from .types.search_term_match_type import SearchTermMatchTypeEnum
 from .types.search_term_targeting_status import SearchTermTargetingStatusEnum
 from .types.seasonality_event_scope import SeasonalityEventScopeEnum
 from .types.seasonality_event_status import SeasonalityEventStatusEnum
+from .types.sentiment import SentimentEnum
 from .types.served_asset_field_type import ServedAssetFieldTypeEnum
 from .types.shared_set_status import SharedSetStatusEnum
 from .types.shared_set_type import SharedSetTypeEnum
@@ -943,6 +962,11 @@ from .types.smart_campaign_not_eligible_reason import (
 from .types.smart_campaign_status import SmartCampaignStatusEnum
 from .types.spending_limit_type import SpendingLimitTypeEnum
 from .types.summary_row_setting import SummaryRowSettingEnum
+from .types.survey_intended_action import SurveyIntendedActionEnum
+from .types.survey_lift_flight_target_response_mode import (
+    SurveyLiftFlightTargetResponseModeEnum,
+)
+from .types.survey_subject_type import SurveySubjectTypeEnum
 from .types.synthetic_content_attestation_status import (
     SyntheticContentAttestationStatusEnum,
 )
@@ -1195,6 +1219,7 @@ __all__ = (
     "BiddingStrategyTypeEnum",
     "BillingSetupStatusEnum",
     "BookingStatusEnum",
+    "BrandLiftMeasurementTypeEnum",
     "BrandRequestRejectionReasonEnum",
     "BrandSafetySuitabilityEnum",
     "BrandStateEnum",
@@ -1239,6 +1264,7 @@ __all__ = (
     "ConversionCustomerTypeEnum",
     "ConversionEnvironmentEnum",
     "ConversionLagBucketEnum",
+    "ConversionLiftIncludedConversionActionTypesEnum",
     "ConversionOrAdjustmentLagBucketEnum",
     "ConversionOriginEnum",
     "ConversionTrackingStatusEnum",
@@ -1327,6 +1353,8 @@ __all__ = (
     "LeadFormFieldUserInputTypeEnum",
     "LeadFormPostSubmitCallToActionTypeEnum",
     "LegacyAppInstallAdAppStoreEnum",
+    "LiftMeasurementFlightStatusEnum",
+    "LiftMetricTypeEnum",
     "LinkedAccountTypeEnum",
     "LinkedProductTypeEnum",
     "ListingGroupFilterCustomAttributeIndexEnum",
@@ -1361,6 +1389,7 @@ __all__ = (
     "LocationSourceTypeEnum",
     "LocationStringFilterTypeEnum",
     "LookalikeExpansionLevelEnum",
+    "LoyaltyMembershipEnum",
     "ManagerLinkStatusEnum",
     "MatchTypeEnum",
     "MediaTypeEnum",
@@ -1439,6 +1468,7 @@ __all__ = (
     "SearchTermTargetingStatusEnum",
     "SeasonalityEventScopeEnum",
     "SeasonalityEventStatusEnum",
+    "SentimentEnum",
     "ServedAssetFieldTypeEnum",
     "SharedSetStatusEnum",
     "SharedSetTypeEnum",
@@ -1455,6 +1485,9 @@ __all__ = (
     "SmartCampaignStatusEnum",
     "SpendingLimitTypeEnum",
     "SummaryRowSettingEnum",
+    "SurveyIntendedActionEnum",
+    "SurveyLiftFlightTargetResponseModeEnum",
+    "SurveySubjectTypeEnum",
     "SyntheticContentAttestationStatusEnum",
     "SyntheticContentSourceEnum",
     "SystemManagedResourceSourceEnum",

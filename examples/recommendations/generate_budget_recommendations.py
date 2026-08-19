@@ -25,7 +25,6 @@ To get impact metrics for a custom budget, run get_recommendation_impact_metrics
 """
 
 import argparse
-import logging
 import sys
 from typing import List, Dict, Any
 
@@ -41,9 +40,6 @@ from google.ads.googleads.v24.services.types.recommendation_service import (
 from google.ads.googleads.v24.resources.types.recommendation import (
     Recommendation,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

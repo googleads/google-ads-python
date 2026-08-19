@@ -17,7 +17,6 @@ positive ad group criterion and one as negative ad group criterion. To
 create ad groups, run add_ad_groups.py."""
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -35,9 +34,6 @@ from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
     MutateAdGroupCriteriaResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:

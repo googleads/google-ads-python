@@ -164,6 +164,13 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.language_constant",
     "google.ads.googleads.v25.types.lead_form_submission_data",
     "google.ads.googleads.v25.types.life_event",
+    "google.ads.googleads.v25.types.lift_measurement_age_range",
+    "google.ads.googleads.v25.types.lift_measurement_campaign",
+    "google.ads.googleads.v25.types.lift_measurement_config",
+    "google.ads.googleads.v25.types.lift_measurement_device",
+    "google.ads.googleads.v25.types.lift_measurement_flight",
+    "google.ads.googleads.v25.types.lift_measurement_gender",
+    "google.ads.googleads.v25.types.lift_measurement_video",
     "google.ads.googleads.v25.types.local_services_employee",
     "google.ads.googleads.v25.types.local_services_lead",
     "google.ads.googleads.v25.types.local_services_lead_conversation",
@@ -404,6 +411,17 @@ from .types.lead_form_submission_data import CustomLeadFormSubmissionField
 from .types.lead_form_submission_data import LeadFormSubmissionData
 from .types.lead_form_submission_data import LeadFormSubmissionField
 from .types.life_event import LifeEvent
+from .types.lift_measurement_age_range import LiftMeasurementAgeRange
+from .types.lift_measurement_campaign import LiftMeasurementCampaign
+from .types.lift_measurement_config import LiftMeasurementConfig
+from .types.lift_measurement_device import LiftMeasurementDevice
+from .types.lift_measurement_flight import LiftMeasurementFlight
+from .types.lift_measurement_flight import LiftMeasurementFlightSurveyLiftInfo
+from .types.lift_measurement_flight import (
+    LiftMeasurementFlightSurveyLiftMeasurement,
+)
+from .types.lift_measurement_gender import LiftMeasurementGender
+from .types.lift_measurement_video import LiftMeasurementVideo
 from .types.local_services_employee import Fellowship
 from .types.local_services_employee import LocalServicesEmployee
 from .types.local_services_employee import Residency
@@ -784,6 +802,15 @@ __all__ = (
     "LeadFormSubmissionField",
     "LicenseVerificationArtifact",
     "LifeEvent",
+    "LiftMeasurementAgeRange",
+    "LiftMeasurementCampaign",
+    "LiftMeasurementConfig",
+    "LiftMeasurementDevice",
+    "LiftMeasurementFlight",
+    "LiftMeasurementFlightSurveyLiftInfo",
+    "LiftMeasurementFlightSurveyLiftMeasurement",
+    "LiftMeasurementGender",
+    "LiftMeasurementVideo",
     "ListingGroupFilterDimension",
     "ListingGroupFilterDimensionPath",
     "LocalServicesCallout",

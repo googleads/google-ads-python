@@ -453,6 +453,20 @@ class Campaign(proto.Message):
             declaration.
 
             This field is read-only.
+        aca_migration_date_time (str):
+            Output only. The timestamp when the ACA
+            campaign was migrated to AI Max. The timestamp
+            is in the customer's timezone and in "yyyy-MM-dd
+            HH:mm:ss" format.
+
+            This field is a member of `oneof`_ ``_aca_migration_date_time``.
+        broad_match_migration_date_time (str):
+            Output only. The timestamp when the Broad
+            Match campaign was migrated to AI Max. The
+            timestamp is in the customer's timezone and in
+            "yyyy-MM-dd HH:mm:ss" format.
+
+            This field is a member of `oneof`_ ``_broad_match_migration_date_time``.
         bidding_strategy (str):
             The resource name of the portfolio bidding
             strategy used by the campaign.
@@ -2101,6 +2115,16 @@ class Campaign(proto.Message):
     missing_eu_political_advertising_declaration: bool = proto.Field(
         proto.BOOL,
         number=108,
+    )
+    aca_migration_date_time: str = proto.Field(
+        proto.STRING,
+        number=112,
+        optional=True,
+    )
+    broad_match_migration_date_time: str = proto.Field(
+        proto.STRING,
+        number=113,
+        optional=True,
     )
     bidding_strategy: str = proto.Field(
         proto.STRING,

@@ -123,6 +123,11 @@ class Experiment(proto.Message):
             be set when the experiment is being created.
 
             This field is a member of `oneof`_ ``_sync_enabled``.
+        lift_measurement_config (str):
+            Output only. The lift measurement
+            configuration.
+
+            This field is a member of `oneof`_ ``_lift_measurement_config``.
         video_experiment (google.ads.googleads.v25.common.types.VideoExperimentInfo):
             Immutable. Details of the video experiment. Applies for
             experiment types: YOUTUBE_CUSTOM.
@@ -198,6 +203,11 @@ class Experiment(proto.Message):
     sync_enabled: bool = proto.Field(
         proto.BOOL,
         number=20,
+        optional=True,
+    )
+    lift_measurement_config: str = proto.Field(
+        proto.STRING,
+        number=23,
         optional=True,
     )
     video_experiment: experiment_types.VideoExperimentInfo = proto.Field(

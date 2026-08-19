@@ -3095,6 +3095,166 @@ class GoogleAdsServiceClient(metaclass=GoogleAdsServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def lift_measurement_age_range_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        campaign_id: str,
+        criterion_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_age_range string."""
+        return "customers/{customer_id}/liftMeasurementAgeRanges/{lift_measurement_configuration_id}~{campaign_id}~{criterion_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_age_range_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_age_range path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementAgeRanges/(?P<lift_measurement_configuration_id>.+?)~(?P<campaign_id>.+?)~(?P<criterion_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_campaign_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        campaign_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_campaign string."""
+        return "customers/{customer_id}/liftMeasurementCampaigns/{lift_measurement_configuration_id}~{campaign_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            campaign_id=campaign_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_campaign_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_campaign path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementCampaigns/(?P<lift_measurement_configuration_id>.+?)~(?P<campaign_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_config_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_config string."""
+        return "customers/{customer_id}/liftMeasurementConfigs/{lift_measurement_configuration_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_config_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_config path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementConfigs/(?P<lift_measurement_configuration_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_device_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        campaign_id: str,
+        criterion_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_device string."""
+        return "customers/{customer_id}/liftMeasurementDevices/{lift_measurement_configuration_id}~{campaign_id}~{criterion_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_device_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_device path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementDevices/(?P<lift_measurement_configuration_id>.+?)~(?P<campaign_id>.+?)~(?P<criterion_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_flight_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        lift_measurement_flight_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_flight string."""
+        return "customers/{customer_id}/liftMeasurementFlights/{lift_measurement_configuration_id}~{lift_measurement_flight_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            lift_measurement_flight_id=lift_measurement_flight_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_flight_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_flight path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementFlights/(?P<lift_measurement_configuration_id>.+?)~(?P<lift_measurement_flight_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_gender_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        campaign_id: str,
+        criterion_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_gender string."""
+        return "customers/{customer_id}/liftMeasurementGenders/{lift_measurement_configuration_id}~{campaign_id}~{criterion_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            campaign_id=campaign_id,
+            criterion_id=criterion_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_gender_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_gender path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementGenders/(?P<lift_measurement_configuration_id>.+?)~(?P<campaign_id>.+?)~(?P<criterion_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
+    def lift_measurement_video_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+        campaign_id: str,
+        external_video_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_video string."""
+        return "customers/{customer_id}/liftMeasurementVideos/{lift_measurement_configuration_id}~{campaign_id}~{external_video_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+            campaign_id=campaign_id,
+            external_video_id=external_video_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_video_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_video path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementVideos/(?P<lift_measurement_configuration_id>.+?)~(?P<campaign_id>.+?)~(?P<external_video_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def local_services_employee_path(
         customer_id: str,
         gls_employee_id: str,

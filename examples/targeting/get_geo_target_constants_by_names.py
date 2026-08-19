@@ -14,7 +14,6 @@
 # limitations under the License.
 """This example illustrates getting GeoTargetConstants by given location names."""
 
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -30,10 +29,6 @@ from google.ads.googleads.v24.services.types.geo_target_constant_service import 
     SuggestGeoTargetConstantsRequest,
     SuggestGeoTargetConstantsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 # Locale is using ISO 639-1 format. If an invalid locale is given,
 # 'en' is used by default.

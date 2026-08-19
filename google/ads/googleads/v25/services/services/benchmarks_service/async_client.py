@@ -518,8 +518,11 @@ class BenchmarksServiceAsyncClient:
                 The request object. Request message for
                 [BenchmarksService.ListBenchmarksSources][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksSources].
             benchmarks_sources (:class:`MutableSequence[google.ads.googleads.v25.enums.types.BenchmarksSourceTypeEnum.BenchmarksSourceType]`):
-                Required. The types of benchmarks
-                sources to be returned
+                Required. The types of benchmarks sources to be
+                returned. Supported sources include INDUSTRY_VERTICAL
+                and CATEGORY. Categories are used as filters for scoping
+                the benchmarks analysis when benchmarking against all
+                advertisers.
 
                 This corresponds to the ``benchmarks_sources`` field
                 on the ``request`` instance; if ``request`` is provided, this

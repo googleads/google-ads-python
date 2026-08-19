@@ -26,7 +26,6 @@ ProductCanonicalCondition null (everything else)
 """
 
 import argparse
-import logging
 import sys
 from typing import List, Optional
 
@@ -58,10 +57,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     SearchGoogleAdsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 last_criterion_id: int = 0
 

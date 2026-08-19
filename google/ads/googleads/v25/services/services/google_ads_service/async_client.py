@@ -805,6 +805,48 @@ class GoogleAdsServiceAsyncClient:
     parse_life_event_path = staticmethod(
         GoogleAdsServiceClient.parse_life_event_path
     )
+    lift_measurement_age_range_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_age_range_path
+    )
+    parse_lift_measurement_age_range_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_age_range_path
+    )
+    lift_measurement_campaign_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_campaign_path
+    )
+    parse_lift_measurement_campaign_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_campaign_path
+    )
+    lift_measurement_config_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_config_path
+    )
+    parse_lift_measurement_config_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_config_path
+    )
+    lift_measurement_device_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_device_path
+    )
+    parse_lift_measurement_device_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_device_path
+    )
+    lift_measurement_flight_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_flight_path
+    )
+    parse_lift_measurement_flight_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_flight_path
+    )
+    lift_measurement_gender_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_gender_path
+    )
+    parse_lift_measurement_gender_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_gender_path
+    )
+    lift_measurement_video_path = staticmethod(
+        GoogleAdsServiceClient.lift_measurement_video_path
+    )
+    parse_lift_measurement_video_path = staticmethod(
+        GoogleAdsServiceClient.parse_lift_measurement_video_path
+    )
     local_services_employee_path = staticmethod(
         GoogleAdsServiceClient.local_services_employee_path
     )

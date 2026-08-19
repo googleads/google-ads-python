@@ -25,7 +25,6 @@ This account must be linked to your Google Ads account.
 """
 
 import argparse
-import logging
 import sys
 import uuid
 
@@ -70,9 +69,6 @@ from google.ads.googleads.v24.services.types.campaign_budget_service import (
 from google.ads.googleads.v24.services.types.campaign_service import (
     CampaignOperation,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

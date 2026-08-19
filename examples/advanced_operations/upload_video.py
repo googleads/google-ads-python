@@ -16,9 +16,9 @@
 
 import argparse
 import itertools
-import logging
 import os
 import sys
+import logging
 from typing import Iterator, Iterable, List, MutableSequence
 
 import google.auth
@@ -50,9 +50,6 @@ from google.ads.googleads.v24.services.types.youtube_video_upload_service import
 
 from google.protobuf import field_mask_pb2
 from google.ads.googleads.v24.resources.types import youtube_video_upload
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(

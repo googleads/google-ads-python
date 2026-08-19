@@ -21,7 +21,6 @@ campaign) or a field (such as metrics.impressions, campaign.id).
 """
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -36,9 +35,6 @@ from google.ads.googleads.v24.services.types.google_ads_field_service import (
     SearchGoogleAdsFieldsRequest,
     SearchGoogleAdsFieldsResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, name_prefix: str) -> None:

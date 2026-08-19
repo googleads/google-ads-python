@@ -18,7 +18,6 @@ This example assumes that a label has already been prepared.
 """
 
 import argparse
-import logging
 import sys
 from typing import List, Any
 
@@ -39,9 +38,6 @@ from google.ads.googleads.v24.services.types.campaign_label_service import (
 from google.ads.googleads.v24.resources.types.campaign_label import (
     CampaignLabel,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START add_campaign_labels]

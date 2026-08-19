@@ -17,7 +17,6 @@
 """This example gets a list of which resources have been changed in an account."""
 
 import argparse
-import logging
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -31,9 +30,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     GoogleAdsRow,
 )
 from google.ads.googleads.v24.resources.types.change_status import ChangeStatus
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 # [START get_change_summary]

@@ -29,7 +29,7 @@ Examples:
 
 import argparse
 import csv
-import logging
+from collections.abc import Iterator
 import os
 import sys
 
@@ -43,10 +43,6 @@ from google.ads.googleads.v24.services.types.google_ads_service import (
     SearchGoogleAdsStreamRequest,
     SearchGoogleAdsStreamResponse,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
 _DEFAULT_FILE_NAME = "campaign_report_to_csv_results.csv"
 _QUERY: str = """

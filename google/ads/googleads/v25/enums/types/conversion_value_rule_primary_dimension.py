@@ -67,6 +67,9 @@ class ConversionValueRulePrimaryDimensionEnum(proto.Message):
             ITINERARY (9):
                 When a query-time itinerary condition is
                 satisfied.
+            LOYALTY_MEMBERSHIP (10):
+                When a loyalty membership condition is
+                satisfied.
         """
 
         UNSPECIFIED = 0
@@ -79,6 +82,7 @@ class ConversionValueRulePrimaryDimensionEnum(proto.Message):
         AUDIENCE = 7
         MULTIPLE = 8
         ITINERARY = 9
+        LOYALTY_MEMBERSHIP = 10
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

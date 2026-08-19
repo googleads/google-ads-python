@@ -15,7 +15,6 @@
 """This example illustrates how to generate audience insights."""
 
 import argparse
-import logging
 import sys
 from typing import Any
 
@@ -43,9 +42,6 @@ from google.ads.googleads.v24.common.types import (
     AudienceInsightsAttribute,
     LocationInfo,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, custom_name: str) -> None:

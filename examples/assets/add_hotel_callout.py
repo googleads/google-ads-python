@@ -15,9 +15,8 @@
 """This example adds a hotel callout extension asset to a specific account."""
 
 import argparse
-import logging
-import sys
 from typing import List
+import sys
 
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -30,9 +29,6 @@ from google.ads.googleads.v24.services.types.customer_asset_service import (
 from google.ads.googleads.v24.resources.types.customer_asset import (
     CustomerAsset,
 )
-
-logger = logging.getLogger("google.ads.googleads.client")
-logger.addHandler(logging.StreamHandler(sys.stdout))
 
 
 def main(client: GoogleAdsClient, customer_id: str, language_code: str) -> None:

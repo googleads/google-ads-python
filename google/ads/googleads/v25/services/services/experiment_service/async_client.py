@@ -80,6 +80,12 @@ class ExperimentServiceAsyncClient:
     parse_experiment_path = staticmethod(
         ExperimentServiceClient.parse_experiment_path
     )
+    lift_measurement_config_path = staticmethod(
+        ExperimentServiceClient.lift_measurement_config_path
+    )
+    parse_lift_measurement_config_path = staticmethod(
+        ExperimentServiceClient.parse_lift_measurement_config_path
+    )
     common_billing_account_path = staticmethod(
         ExperimentServiceClient.common_billing_account_path
     )

@@ -292,6 +292,26 @@ class ExperimentServiceClient(metaclass=ExperimentServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def lift_measurement_config_path(
+        customer_id: str,
+        lift_measurement_configuration_id: str,
+    ) -> str:
+        """Returns a fully-qualified lift_measurement_config string."""
+        return "customers/{customer_id}/liftMeasurementConfigs/{lift_measurement_configuration_id}".format(
+            customer_id=customer_id,
+            lift_measurement_configuration_id=lift_measurement_configuration_id,
+        )
+
+    @staticmethod
+    def parse_lift_measurement_config_path(path: str) -> Dict[str, str]:
+        """Parses a lift_measurement_config path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/liftMeasurementConfigs/(?P<lift_measurement_configuration_id>.+?)$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def common_billing_account_path(
         billing_account: str,
     ) -> str:

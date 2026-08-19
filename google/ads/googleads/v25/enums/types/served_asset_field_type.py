@@ -126,6 +126,8 @@ class ServedAssetFieldTypeEnum(proto.Message):
             DESCRIPTION_LINE_HEADLINE_AS_SITELINK_POSITION_TWO (42):
                 A description line asset used as a sitelink
                 in position 2.
+            TEXT_DISCLAIMER (43):
+                The asset is used as a text disclaimer.
         """
 
         UNSPECIFIED = 0
@@ -165,6 +167,7 @@ class ServedAssetFieldTypeEnum(proto.Message):
         HEADLINE_AS_SITELINK_POSITION_TWO = 40
         DESCRIPTION_LINE_HEADLINE_AS_SITELINK_POSITION_ONE = 41
         DESCRIPTION_LINE_HEADLINE_AS_SITELINK_POSITION_TWO = 42
+        TEXT_DISCLAIMER = 43
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -33,7 +33,6 @@ class MetadataInterceptorTest(TestCase):
         self.mock_developer_token = "1234567890"
         self.mock_login_customer_id = "0987654321"
         self.mock_linked_customer_id = "5555555555"
-        self.use_cloud_org_for_api_access = True
         self.python_version = python_version
         super(MetadataInterceptorTest, self).setUp()
 
@@ -46,6 +45,16 @@ class MetadataInterceptorTest(TestCase):
             interceptor.developer_token_meta,
             ("developer-token", self.mock_developer_token),
         )
+
+        self.assertEqual(
+            interceptor.login_customer_id_meta,
+            ("login-customer-id", self.mock_login_customer_id),
+        )
+
+    def test_init_no_developer_token(self):
+        interceptor = MetadataInterceptor(None, self.mock_login_customer_id)
+
+        self.assertIsNone(interceptor.developer_token_meta)
 
         self.assertEqual(
             interceptor.login_customer_id_meta,
@@ -121,6 +130,40 @@ class MetadataInterceptorTest(TestCase):
 
             mock_continuation.assert_called_once()
 
+    def test_intercept_unary_unary_no_developer_token(self):
+        interceptor = MetadataInterceptor(
+            None,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_continuation = mock.Mock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [("apples", "oranges")]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            interceptor.intercept_unary_unary(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            mock_updater.assert_called_once_with(
+                mock_client_call_details,
+                [
+                    mock_client_call_details.metadata[0],
+                    interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
+                ],
+            )
+
+            mock_continuation.assert_called_once()
+
     def test_intercept_unary_stream(self):
         interceptor = MetadataInterceptor(
             self.mock_developer_token,
@@ -180,6 +223,7 @@ class MetadataInterceptorTest(TestCase):
                 f"gl-python/{self.python_version} grpc/1.45.0 gax/2.2.2",
             ),
         ]
+
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept
         # method.
@@ -222,6 +266,7 @@ class MetadataInterceptorTest(TestCase):
                 f"gl-python/{self.python_version} grpc/1.45.0 pb/3.21.0",
             ),
         ]
+
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept
         # method.
@@ -288,49 +333,12 @@ class MetadataInterceptorTest(TestCase):
             # value pair because it was already present when passed in.
             self.assertEqual(user_agent.count("pb"), 0)
 
-    def test_intercept_unary_stream_use_cloud_org_for_api_access(self):
-        interceptor = MetadataInterceptor(
-            self.mock_developer_token,
-            self.mock_login_customer_id,
-            self.mock_linked_customer_id,
-            self.use_cloud_org_for_api_access,
-        )
-
-        mock_continuation = mock.Mock(return_value=None)
-        mock_client_call_details = mock.Mock()
-        mock_client_call_details.method = "test/method"
-        mock_client_call_details.timeout = 5
-        mock_client_call_details.metadata = [("apples", "oranges")]
-        mock_request = mock.Mock()
-
-        with mock.patch.object(
-            interceptor,
-            "_update_client_call_details_metadata",
-            wraps=interceptor._update_client_call_details_metadata,
-        ) as mock_updater:
-            interceptor.intercept_unary_stream(
-                mock_continuation, mock_client_call_details, mock_request
-            )
-            # Assets that if "use_cloud_org_for_api_access" is passed into
-            # MetadataInterceptor as True, then
-            mock_updater.assert_called_once_with(
-                mock_client_call_details,
-                [
-                    mock_client_call_details.metadata[0],
-                    interceptor.login_customer_id_meta,
-                    interceptor.linked_customer_id_meta,
-                ],
-            )
-
-            mock_continuation.assert_called_once()
-
 
 class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
     def setUp(self):
         self.mock_developer_token = "1234567890"
         self.mock_login_customer_id = "0987654321"
         self.mock_linked_customer_id = "5555555555"
-        self.use_cloud_org_for_api_access = True
         self.python_version = python_version
 
     def test_init(self):
@@ -348,6 +356,18 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
             ("login-customer-id", self.mock_login_customer_id),
         )
 
+    def test_init_no_developer_token(self):
+        interceptor = AsyncMetadataInterceptor(
+            None, self.mock_login_customer_id
+        )
+
+        self.assertIsNone(interceptor.developer_token_meta)
+
+        self.assertEqual(
+            interceptor.login_customer_id_meta,
+            ("login-customer-id", self.mock_login_customer_id),
+        )
+
     def test_init_no_login_customer_id(self):
         interceptor = AsyncMetadataInterceptor(self.mock_developer_token, None)
 
@@ -359,7 +379,9 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
         self.assertEqual(interceptor.login_customer_id_meta, None)
 
     def test_init_no_linked_customer_id(self):
-        interceptor = AsyncMetadataInterceptor(self.mock_developer_token, None, None)
+        interceptor = AsyncMetadataInterceptor(
+            self.mock_developer_token, None, None
+        )
 
         self.assertEqual(
             interceptor.developer_token_meta,
@@ -410,6 +432,40 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
                 [
                     mock_client_call_details.metadata[0],
                     interceptor.developer_token_meta,
+                    interceptor.login_customer_id_meta,
+                    interceptor.linked_customer_id_meta,
+                ],
+            )
+
+            mock_continuation.assert_called_once()
+
+    async def test_intercept_unary_unary_no_developer_token(self):
+        interceptor = AsyncMetadataInterceptor(
+            None,
+            self.mock_login_customer_id,
+            self.mock_linked_customer_id,
+        )
+
+        mock_continuation = mock.AsyncMock(return_value=None)
+        mock_client_call_details = mock.Mock()
+        mock_client_call_details.method = "test/method"
+        mock_client_call_details.timeout = 5
+        mock_client_call_details.metadata = [("apples", "oranges")]
+        mock_request = mock.Mock()
+
+        with mock.patch.object(
+            interceptor,
+            "_update_client_call_details_metadata",
+            wraps=interceptor._update_client_call_details_metadata,
+        ) as mock_updater:
+            await interceptor.intercept_unary_unary(
+                mock_continuation, mock_client_call_details, mock_request
+            )
+
+            mock_updater.assert_called_once_with(
+                mock_client_call_details,
+                [
+                    mock_client_call_details.metadata[0],
                     interceptor.login_customer_id_meta,
                     interceptor.linked_customer_id_meta,
                 ],
@@ -476,6 +532,7 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
                 f"gl-python/{self.python_version} grpc/1.45.0 gax/2.2.2",
             ),
         ]
+
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept
         # method.
@@ -518,6 +575,7 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
                 f"gl-python/{self.python_version} grpc/1.45.0 pb/3.21.0",
             ),
         ]
+
         # Create a simple function that just returns the client_call_details
         # so we can make assertions about what was modified in the _intercept
         # method.
@@ -583,39 +641,3 @@ class AsyncMetadataInterceptorTest(IsolatedAsyncioTestCase):
             # We assert that the _intercept method did not add the "pb" key
             # value pair because it was already present when passed in.
             self.assertEqual(user_agent.count("pb"), 0)
-
-    async def test_intercept_unary_stream_use_cloud_org_for_api_access(self):
-        interceptor = AsyncMetadataInterceptor(
-            self.mock_developer_token,
-            self.mock_login_customer_id,
-            self.mock_linked_customer_id,
-            self.use_cloud_org_for_api_access,
-        )
-
-        mock_continuation = mock.AsyncMock(return_value=None)
-        mock_client_call_details = mock.Mock()
-        mock_client_call_details.method = "test/method"
-        mock_client_call_details.timeout = 5
-        mock_client_call_details.metadata = [("apples", "oranges")]
-        mock_request = mock.Mock()
-
-        with mock.patch.object(
-            interceptor,
-            "_update_client_call_details_metadata",
-            wraps=interceptor._update_client_call_details_metadata,
-        ) as mock_updater:
-            await interceptor.intercept_unary_stream(
-                mock_continuation, mock_client_call_details, mock_request
-            )
-            # Assets that if "use_cloud_org_for_api_access" is passed into
-            # MetadataInterceptor as True, then
-            mock_updater.assert_called_once_with(
-                mock_client_call_details,
-                [
-                    mock_client_call_details.metadata[0],
-                    interceptor.login_customer_id_meta,
-                    interceptor.linked_customer_id_meta,
-                ],
-            )
-
-            mock_continuation.assert_called_once()

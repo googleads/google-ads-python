@@ -113,7 +113,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "linked_customer_id": self.linked_customer_id,
                     "http_proxy": None,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -147,7 +146,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "linked_customer_id": None,
                     "http_proxy": None,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -181,7 +179,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "linked_customer_id": self.linked_customer_id,
                     "http_proxy": None,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -215,7 +212,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "login_customer_id": None,
                     "http_proxy": None,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -249,7 +245,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "linked_customer_id": None,
                     "http_proxy": self.http_proxy,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -284,7 +279,6 @@ class GoogleAdsClientTest(TestCase):
                     "logging_config": None,
                     "linked_customer_id": None,
                     "http_proxy": None,
-                    "use_cloud_org_for_api_access": None,
                     "ads_assistant": None,
                 },
             )
@@ -323,7 +317,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -361,7 +354,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version="v4",
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -398,7 +390,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -435,7 +426,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version="v4",
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -479,7 +469,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -516,7 +505,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -555,7 +543,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version="v4",
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -963,7 +950,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=self.http_proxy,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1001,7 +987,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=self.http_proxy,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1039,7 +1024,6 @@ class GoogleAdsClientTest(TestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=self.http_proxy,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1114,7 +1098,6 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=self.http_proxy,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1159,7 +1142,6 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1204,7 +1186,6 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version="v4",
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1251,7 +1232,6 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1290,7 +1270,6 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version=None,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )
 
@@ -1356,6 +1335,5 @@ class GoogleAdsClientTestFs(FileTestCase):
                 linked_customer_id=None,
                 version=latest_version,
                 http_proxy=None,
-                use_cloud_org_for_api_access=None,
                 ads_assistant=None,
             )

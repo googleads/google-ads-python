@@ -60,10 +60,9 @@ class MetadataInterceptor(
 
     def __init__(
         self,
-        developer_token: str,
+        developer_token: Optional[str] = None,
         login_customer_id: Optional[str] = None,
         linked_customer_id: Optional[str] = None,
-        use_cloud_org_for_api_access: Optional[bool] = None,
         ads_assistant: Optional[str] = None,
     ):
         """Initialization method for this class.
@@ -72,16 +71,10 @@ class MetadataInterceptor(
             developer_token: a str developer token.
             login_customer_id: a str specifying a login customer ID.
             linked_customer_id: a str specifying a linked customer ID.
-            use_cloud_org_for_api_access: a str specifying whether to use the
-                Google Cloud Organization of your Google Cloud project instead
-                of developer token to determine your Google Ads API access
-                levels. Use this flag only if you are enrolled into a limited
-                pilot that supports this configuration
             ads_assistant: a str specifying the Google Ads API Assistant version.
         """
-        self.developer_token_meta: Tuple[str, str] = (
-            "developer-token",
-            developer_token,
+        self.developer_token_meta: Optional[Tuple[str, str]] = (
+            ("developer-token", developer_token) if developer_token else None
         )
         self.login_customer_id_meta: Optional[Tuple[str, str]] = (
             ("login-customer-id", login_customer_id)
@@ -94,9 +87,6 @@ class MetadataInterceptor(
             else None
         )
         self.ads_assistant: Optional[str] = ads_assistant
-        self.use_cloud_org_for_api_access: Optional[bool] = (
-            use_cloud_org_for_api_access
-        )
 
     def _update_client_call_details_metadata(
         self,
@@ -148,9 +138,7 @@ class MetadataInterceptor(
         else:
             metadata: MetadataType = list(client_call_details.metadata)
 
-        # If self.use_cloud_org_for_api_access is not True, add the developer
-        # token to the request's metadata
-        if not self.use_cloud_org_for_api_access:
+        if self.developer_token_meta:
             metadata.append(self.developer_token_meta)
 
         if self.login_customer_id_meta:
@@ -266,9 +254,7 @@ class _AsyncMetadataInterceptor(MetadataInterceptor):
         else:
             metadata: MetadataType = list(client_call_details.metadata)
 
-        # If self.use_cloud_org_for_api_access is not True, add the developer
-        # token to the request's metadata
-        if not self.use_cloud_org_for_api_access:
+        if self.developer_token_meta:
             metadata.append(self.developer_token_meta)
 
         if self.login_customer_id_meta:

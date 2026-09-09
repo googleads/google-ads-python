@@ -25,14 +25,14 @@ _logger = logging.getLogger(__name__)
 
 
 _ENV_PREFIX = "GOOGLE_ADS_"
-_REQUIRED_KEYS = ("developer_token", "use_proto_plus")
+_REQUIRED_KEYS = ("use_proto_plus",)
 _OPTIONAL_KEYS = (
+    "developer_token",
     "login_customer_id",
     "endpoint",
     "logging",
     "linked_customer_id",
     "http_proxy",
-    "use_cloud_org_for_api_access",
     "use_application_default_credentials",
     "ads_assistant",
 )

@@ -203,9 +203,6 @@ class GoogleAdsClient:
             "linked_customer_id": config_data.get("linked_customer_id"),
             "http_proxy": config_data.get("http_proxy"),
             "use_proto_plus": config_data.get("use_proto_plus"),
-            "use_cloud_org_for_api_access": config_data.get(
-                "use_cloud_org_for_api_access"
-            ),
             "ads_assistant": config_data.get("ads_assistant"),
         }
 
@@ -324,7 +321,7 @@ class GoogleAdsClient:
     def __init__(
         self,
         credentials: Dict[str, Any],
-        developer_token: str,
+        developer_token: Union[str, None] = None,
         endpoint: Union[str, None] = None,
         login_customer_id: Union[str, None] = None,
         logging_config: Union[Dict[str, Any], None] = None,
@@ -332,14 +329,13 @@ class GoogleAdsClient:
         version: Union[str, None] = None,
         http_proxy: Union[str, None] = None,
         use_proto_plus: bool = False,
-        use_cloud_org_for_api_access: Union[str, None] = None,
         ads_assistant: Union[str, None] = None,
     ):
         """Initializer for the GoogleAdsClient.
 
         Args:
             credentials: a google.oauth2.credentials.Credentials instance.
-            developer_token: a str developer token.
+            developer_token: an optional str developer token.
             endpoint: a str specifying an optional alternative API endpoint.
             login_customer_id: a str specifying a login customer ID.
             logging_config: a dict specifying logging config options.
@@ -348,27 +344,19 @@ class GoogleAdsClient:
             http_proxy: a str specifying the proxy URI through which to connect.
             use_proto_plus: a bool specifying whether or not to use proto-plus
                 for protobuf message interfaces.
-            use_cloud_org_for_api_access: a str specifying whether to use the
-                Google Cloud Organization of your Google Cloud project instead
-                of developer token to determine your Google Ads API access
-                levels. Use this flag only if you are enrolled into a limited
-                pilot that supports this configuration.
             ads_assistant: a str specifying the Google Ads API Assistant version.
         """
         if logging_config:
             logging.config.dictConfig(logging_config)
 
         self.credentials: Credentials = credentials
-        self.developer_token: str = developer_token
+        self.developer_token: Union[str, None] = developer_token
         self.endpoint: Union[str, None] = endpoint
         self.login_customer_id: Union[str, None] = login_customer_id
         self.linked_customer_id: Union[str, None] = linked_customer_id
         self.version: Union[str, None] = version
         self.http_proxy: Union[str, None] = http_proxy
         self.use_proto_plus: bool = use_proto_plus
-        self.use_cloud_org_for_api_access: Union[str, None] = (
-            use_cloud_org_for_api_access
-        )
         self.enums: _EnumGetter = _EnumGetter(self)
         self._ads_assistant: Union[str, None] = ads_assistant
 
@@ -447,14 +435,12 @@ class GoogleAdsClient:
                     self.developer_token,
                     self.login_customer_id,
                     self.linked_customer_id,
-                    self.use_cloud_org_for_api_access,
                     ads_assistant=self._ads_assistant,
                 ),
                 AsyncUnaryStreamMetadataInterceptor(
                     self.developer_token,
                     self.login_customer_id,
                     self.linked_customer_id,
-                    self.use_cloud_org_for_api_access,
                     ads_assistant=self._ads_assistant,
                 ),
                 AsyncUnaryUnaryLoggingInterceptor(_logger, version, endpoint),
@@ -487,7 +473,6 @@ class GoogleAdsClient:
                     developer_token=self.developer_token,
                     login_customer_id=self.login_customer_id,
                     linked_customer_id=self.linked_customer_id,
-                    use_cloud_org_for_api_access=self.use_cloud_org_for_api_access,
                 )
 
             return service_client_class(transport=service_transport)
@@ -508,7 +493,6 @@ class GoogleAdsClient:
                 self.developer_token,
                 self.login_customer_id,
                 self.linked_customer_id,
-                self.use_cloud_org_for_api_access,
                 ads_assistant=self._ads_assistant,
             ),
             LoggingInterceptor(_logger, version, endpoint),
@@ -530,7 +514,6 @@ class GoogleAdsClient:
                 developer_token=self.developer_token,
                 login_customer_id=self.login_customer_id,
                 linked_customer_id=self.linked_customer_id,
-                use_cloud_org_for_api_access=self.use_cloud_org_for_api_access,
             )
 
         return service_client_class(transport=service_transport)

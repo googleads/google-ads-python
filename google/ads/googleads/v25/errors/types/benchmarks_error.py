@@ -49,11 +49,17 @@ class BenchmarksErrorEnum(proto.Message):
                 try selecting a more granular benchmarks source,
                 a smaller date range, or a smaller set of
                 products.
+            NO_METRICS_FOUND (3):
+                No metrics were found for the given
+                combination of inputs (vertical or categories
+                supplied, location, date range, and products).
+                Try selecting a different combination of inputs.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
         MAX_QUERY_COMPLEXITY_EXCEEDED = 2
+        NO_METRICS_FOUND = 3
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

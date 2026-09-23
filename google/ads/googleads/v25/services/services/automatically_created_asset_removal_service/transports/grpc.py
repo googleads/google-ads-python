@@ -125,7 +125,8 @@ class AutomaticallyCreatedAssetRemovalServiceGrpcTransport(
 ):
     """gRPC backend transport for AutomaticallyCreatedAssetRemovalService.
 
-    Service to remove automatically created assets.
+    Service to remove text customization (formerly automatically
+    created assets).
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation
@@ -364,7 +365,8 @@ class AutomaticallyCreatedAssetRemovalServiceGrpcTransport(
         r"""Return a callable for the remove campaign automatically
         created asset method over gRPC.
 
-        Removes automatically created assets from a campaign.
+        Removes text customization (formerly automatically created
+        assets) from a campaign.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ContextError <>`__ `FieldError <>`__

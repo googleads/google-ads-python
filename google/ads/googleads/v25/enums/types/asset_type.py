@@ -61,7 +61,7 @@ class AssetTypeEnum(proto.Message):
             SITELINK (11):
                 Sitelink asset.
             PAGE_FEED (12):
-                Page Feed asset.
+                Page URL inclusion.
             DYNAMIC_EDUCATION (13):
                 Dynamic Education asset.
             MOBILE_APP (14):

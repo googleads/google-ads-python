@@ -983,7 +983,8 @@ class AdGroupAdServiceClient(metaclass=AdGroupAdServiceClientMeta):
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ) -> None:
-        r"""Remove automatically created assets from an ad.
+        r"""Remove text customization (formerly automatically created
+        assets) from an ad.
 
         List of thrown errors: `AdError <>`__ `AuthenticationError <>`__
         `AuthorizationError <>`__

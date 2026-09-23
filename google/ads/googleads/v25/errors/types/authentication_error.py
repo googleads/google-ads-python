@@ -101,11 +101,13 @@ class AuthenticationErrorEnum(proto.Message):
                 The Cloud organization associated with the
                 project is not approved for prod access.
             ORGANIZATION_NOT_ASSOCIATED_WITH_DEVELOPER_TOKEN (28):
-                The Cloud organization associated with the
-                project is not associated with the developer
+                Deprecated: Developer tokens have been
+                sunset. The Cloud organization associated with
+                the project is not associated with the developer
                 token.
             DEVELOPER_TOKEN_INVALID (29):
-                The developer token is not valid.
+                Deprecated: Developer tokens have been
+                sunset. The developer token is not valid.
         """
 
         UNSPECIFIED = 0

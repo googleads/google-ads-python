@@ -57,7 +57,8 @@ class ExperimentMetricEnum(proto.Message):
             AVERAGE_CPC (8):
                 The goal of the experiment is avg cpc.
             CTR (9):
-                The goal of the experiment is ctr.
+                The goal of the experiment is clickthrough
+                rate (CTR).
             INCREMENTAL_CONVERSIONS (10):
                 The goal of the experiment is incremental
                 conversions.

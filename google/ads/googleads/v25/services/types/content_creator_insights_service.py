@@ -97,8 +97,9 @@ class GenerateCreatorInsightsRequest(proto.Message):
 
             This field is a member of `oneof`_ ``criteria``.
         search_channels (google.ads.googleads.v25.services.types.GenerateCreatorInsightsRequest.YouTubeChannels):
-            YouTube Channel IDs for Creator Insights. Data fetched for
-            channels is based on the list of countries specified in
+            YouTube Channel IDs and YouTube Channel handles for Creator
+            Insights. Data fetched for channels is based on the list of
+            countries specified in
             [country_locations][google.ads.googleads.v25.services.GenerateCreatorInsightsRequest.country_locations].
 
             This field is a member of `oneof`_ ``criteria``.
@@ -184,12 +185,18 @@ class GenerateCreatorInsightsRequest(proto.Message):
         )
 
     class YouTubeChannels(proto.Message):
-        r"""A collection of YouTube Channels.
+        r"""A collection of YouTube Channels. The YouTube Channels can be
+        listed using either YouTube Channel IDs, YouTube Channel
+        handles, or a combination of both.
 
         Attributes:
             youtube_channels (MutableSequence[google.ads.googleads.v25.common.types.YouTubeChannelInfo]):
                 Optional. The YouTube Channel IDs to fetch
                 creator insights for.
+            youtube_channel_handles (MutableSequence[str]):
+                Optional. The YouTube Channel handles to
+                fetch creator insights for. Valid channel
+                handles start with @.
         """
 
         youtube_channels: MutableSequence[criteria.YouTubeChannelInfo] = (
@@ -198,6 +205,10 @@ class GenerateCreatorInsightsRequest(proto.Message):
                 number=1,
                 message=criteria.YouTubeChannelInfo,
             )
+        )
+        youtube_channel_handles: MutableSequence[str] = proto.RepeatedField(
+            proto.STRING,
+            number=2,
         )
 
     customer_id: str = proto.Field(

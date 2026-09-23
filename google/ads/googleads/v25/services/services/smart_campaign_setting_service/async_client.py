@@ -530,6 +530,109 @@ class SmartCampaignSettingServiceAsyncClient:
         # Done; return the response.
         return response
 
+    async def generate_p_max_draft_campaign(
+        self,
+        request: Optional[
+            Union[
+                smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest,
+                dict,
+            ]
+        ] = None,
+        *,
+        resource_name: Optional[str] = None,
+        retry: OptionalRetry = gapic_v1.method.DEFAULT,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
+        metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
+    ) -> smart_campaign_setting_service.GeneratePMaxDraftCampaignResponse:
+        r"""Generates a Performance Max (PMax) draft campaign from an
+        existing Smart campaign, initialized with a status of
+        [CampaignStatus.PAUSED] and a creation status of
+        [CampaignCreationStatus.INCOMPLETE]. Returns the draft PMax
+        campaign ID and related entity IDs.
+
+        Args:
+            request (Optional[Union[google.ads.googleads.v25.services.types.GeneratePMaxDraftCampaignRequest, dict]]):
+                The request object. Request message for
+                [SmartCampaignSettingService.GeneratePMaxDraftCampaign][google.ads.googleads.v25.services.SmartCampaignSettingService.GeneratePMaxDraftCampaign].
+            resource_name (:class:`str`):
+                Required. The resource name of the
+                Smart campaign setting to regenerate.
+
+                This corresponds to the ``resource_name`` field
+                on the ``request`` instance; if ``request`` is provided, this
+                should not be set.
+            retry (google.api_core.retry_async.AsyncRetry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, Union[str, bytes]]]): Key/value pairs which should be
+                sent along with the request as metadata. Normally, each value must be of type `str`,
+                but for metadata keys ending with the suffix `-bin`, the corresponding values must
+                be of type `bytes`.
+
+        Returns:
+            google.ads.googleads.v25.services.types.GeneratePMaxDraftCampaignResponse:
+                Response message for
+                   [SmartCampaignSettingService.GeneratePMaxDraftCampaign][google.ads.googleads.v25.services.SmartCampaignSettingService.GeneratePMaxDraftCampaign].
+
+        """
+        # Create or coerce a protobuf request object.
+        # - Quick check: If we got a request object, we should *not* have
+        #   gotten any keyword arguments that map to the request.
+        flattened_params = [resource_name]
+        has_flattened_params = (
+            len([param for param in flattened_params if param is not None]) > 0
+        )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # - Use the request object if provided (there's no risk of modifying the input as
+        #   there are no flattened fields), or create one.
+        if not isinstance(
+            request,
+            smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest,
+        ):
+            request = (
+                smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest(
+                    request
+                )
+            )
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+        if resource_name is not None:
+            request.resource_name = resource_name
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._client._transport._wrapped_methods[
+            self._client._transport.generate_p_max_draft_campaign
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("resource_name", request.resource_name),)
+            ),
+        )
+
+        # Validate the universe domain.
+        self._client._validate_universe_domain()
+
+        # Send the request.
+        response = await rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
+
+        # Done; return the response.
+        return response
+
     async def __aenter__(self) -> "SmartCampaignSettingServiceAsyncClient":
         return self
 

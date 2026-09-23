@@ -69,7 +69,7 @@ class ShoppingProduct(proto.Message):
       - Metrics and some fields (see the per-field documentation) are
         restricted to the specified campaign.
       - Only the following metrics are supported for Demand Gen, Video,
-        App campaigns: impressions, clicks, ctr.
+        App campaigns: ``impressions``, ``clicks``, ``ctr``.
 
     - Ad group:
 
@@ -81,7 +81,7 @@ class ShoppingProduct(proto.Message):
       - Metrics and some fields (see the per-field documentation) are
         restricted to the specified ad group.
       - Only the following metrics are supported for Demand Gen, Video,
-        App campaigns: impressions, clicks, ctr.
+        App campaigns: ``impressions``, ``clicks``, ``ctr``.
 
     Note that segmentation by date segments is not permitted and will
     return UNSUPPORTED_DATE_SEGMENTATION error. On the other hand,

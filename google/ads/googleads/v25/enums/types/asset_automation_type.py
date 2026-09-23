@@ -118,6 +118,8 @@ class AssetAutomationTypeEnum(proto.Message):
                 as input, such as images and text. By default,
                 advertisers are opted in for
                 DemandGenMultiAssetAd.
+            AUTOMATED_VIDEO_CRAWL (15):
+                Automated video crawl.
         """
 
         UNSPECIFIED = 0
@@ -134,6 +136,7 @@ class AssetAutomationTypeEnum(proto.Message):
         FINAL_URL_EXPANSION_TEXT_ASSET_AUTOMATION = 11
         GENERATE_VIDEOS_FROM_OTHER_ASSETS = 12
         GENERATE_ANIMATED_IMAGES_FROM_OTHER_ASSETS = 13
+        AUTOMATED_VIDEO_CRAWL = 15
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

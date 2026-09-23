@@ -118,7 +118,9 @@ class AutomaticallyCreatedAssetRemovalServiceClientMeta(type):
 class AutomaticallyCreatedAssetRemovalServiceClient(
     metaclass=AutomaticallyCreatedAssetRemovalServiceClientMeta
 ):
-    """Service to remove automatically created assets."""
+    """Service to remove text customization (formerly automatically
+    created assets).
+    """
 
     @staticmethod
     def _get_default_mtls_endpoint(api_endpoint) -> Optional[str]:
@@ -797,7 +799,8 @@ class AutomaticallyCreatedAssetRemovalServiceClient(
     ) -> (
         automatically_created_asset_removal_service.RemoveCampaignAutomaticallyCreatedAssetResponse
     ):
-        r"""Removes automatically created assets from a campaign.
+        r"""Removes text customization (formerly automatically created
+        assets) from a campaign.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ContextError <>`__ `FieldError <>`__

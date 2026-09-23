@@ -70,8 +70,8 @@ class RemoveCampaignAutomaticallyCreatedAssetRequest(proto.Message):
 
 
 class RemoveCampaignAutomaticallyCreatedAssetOperation(proto.Message):
-    r"""A single operation to remove an automatically created asset
-    from a campaign.
+    r"""A single operation to remove a text customization (formerly
+    automatically created asset) from a campaign.
 
     Attributes:
         campaign (str):

@@ -158,8 +158,8 @@ class MessageDetails(proto.Message):
         attachment_urls (MutableSequence[str]):
             Output only. URL to the SMS or email
             attachments. These URLs can be used to download
-            the contents of the attachment by using the
-            developer token.
+            the contents of the attachment using authorized
+            Google Cloud project credentials.
     """
 
     text: str = proto.Field(

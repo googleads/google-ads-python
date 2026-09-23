@@ -134,6 +134,9 @@ from google.ads.googleads.v25.errors.types import (
     brand_guidelines_migration_error as gage_brand_guidelines_migration_error,
 )
 from google.ads.googleads.v25.errors.types import (
+    business_profile_location_sync_error as gage_business_profile_location_sync_error,
+)
+from google.ads.googleads.v25.errors.types import (
     campaign_budget_error as gage_campaign_budget_error,
 )
 from google.ads.googleads.v25.errors.types import (
@@ -744,6 +747,11 @@ class ErrorCode(proto.Message):
             The reasons for the asset set error
 
             This field is a member of `oneof`_ ``error_code``.
+        business_profile_location_sync_error (google.ads.googleads.v25.errors.types.BusinessProfileLocationSyncErrorEnum.BusinessProfileLocationSyncError):
+            The reasons for the business profile sync
+            error
+
+            This field is a member of `oneof`_ ``error_code``.
         bidding_error (google.ads.googleads.v25.errors.types.BiddingErrorEnum.BiddingError):
             The reasons for the bidding errors
 
@@ -1284,8 +1292,8 @@ class ErrorCode(proto.Message):
 
             This field is a member of `oneof`_ ``error_code``.
         automatically_created_asset_removal_error (google.ads.googleads.v25.errors.types.AutomaticallyCreatedAssetRemovalErrorEnum.AutomaticallyCreatedAssetRemovalError):
-            The reasons for error in automatically
-            created asset removal action.
+            The reasons for error in text customization
+            removal action.
 
             This field is a member of `oneof`_ ``error_code``.
         shareable_preview_error (google.ads.googleads.v25.errors.types.ShareablePreviewErrorEnum.ShareablePreviewError):
@@ -1568,6 +1576,14 @@ class ErrorCode(proto.Message):
             oneof="error_code",
             enum=gage_asset_set_error.AssetSetErrorEnum.AssetSetError,
         )
+    )
+    business_profile_location_sync_error: (
+        gage_business_profile_location_sync_error.BusinessProfileLocationSyncErrorEnum.BusinessProfileLocationSyncError
+    ) = proto.Field(
+        proto.ENUM,
+        number=168,
+        oneof="error_code",
+        enum=gage_business_profile_location_sync_error.BusinessProfileLocationSyncErrorEnum.BusinessProfileLocationSyncError,
     )
     bidding_error: gage_bidding_error.BiddingErrorEnum.BiddingError = (
         proto.Field(
@@ -2844,7 +2860,8 @@ class QuotaErrorDetails(proto.Message):
             ACCOUNT (2):
                 Per customer account quota
             DEVELOPER (3):
-                Per project or DevToken quota
+                Per project quota (formerly developer token
+                quota).
         """
 
         UNSPECIFIED = 0

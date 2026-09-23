@@ -211,11 +211,17 @@ from .audience_status import (
 from .batch_job_status import (
     BatchJobStatusEnum,
 )
+from .benchmarks_customer_percentile_tier import (
+    BenchmarksCustomerPercentileTierEnum,
+)
 from .benchmarks_marketing_objective import (
     BenchmarksMarketingObjectiveEnum,
 )
 from .benchmarks_source_type import (
     BenchmarksSourceTypeEnum,
+)
+from .benchmarks_supplemental_data import (
+    BenchmarksSupplementalDataEnum,
 )
 from .benchmarks_time_granularity import (
     BenchmarksTimeGranularityEnum,
@@ -1177,6 +1183,9 @@ from .video_ad_sequence_interaction_type import (
 from .video_ad_sequence_minimum_duration import (
     VideoAdSequenceMinimumDurationEnum,
 )
+from .video_crawl_source_platform import (
+    VideoCrawlSourcePlatformEnum,
+)
 from .video_enhancement_source import (
     VideoEnhancementSourceEnum,
 )
@@ -1269,8 +1278,10 @@ __all__ = (
     "AudienceScopeEnum",
     "AudienceStatusEnum",
     "BatchJobStatusEnum",
+    "BenchmarksCustomerPercentileTierEnum",
     "BenchmarksMarketingObjectiveEnum",
     "BenchmarksSourceTypeEnum",
+    "BenchmarksSupplementalDataEnum",
     "BenchmarksTimeGranularityEnum",
     "BidModifierSourceEnum",
     "BiddingSourceEnum",
@@ -1591,6 +1602,7 @@ __all__ = (
     "VideoAdFormatRestrictionEnum",
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
+    "VideoCrawlSourcePlatformEnum",
     "VideoEnhancementSourceEnum",
     "VideoExperimentSubtypeEnum",
     "VideoThumbnailEnum",

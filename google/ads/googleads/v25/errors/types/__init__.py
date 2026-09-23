@@ -124,6 +124,9 @@ from .billing_setup_error import (
 from .brand_guidelines_migration_error import (
     BrandGuidelinesMigrationErrorEnum,
 )
+from .business_profile_location_sync_error import (
+    BusinessProfileLocationSyncErrorEnum,
+)
 from .campaign_budget_error import (
     CampaignBudgetErrorEnum,
 )
@@ -567,6 +570,7 @@ __all__ = (
     "BiddingStrategyErrorEnum",
     "BillingSetupErrorEnum",
     "BrandGuidelinesMigrationErrorEnum",
+    "BusinessProfileLocationSyncErrorEnum",
     "CampaignBudgetErrorEnum",
     "CampaignConversionGoalErrorEnum",
     "CampaignCriterionErrorEnum",

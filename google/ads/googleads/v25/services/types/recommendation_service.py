@@ -234,6 +234,16 @@ class ApplyRecommendationOperation(proto.Message):
             asset recommendation.
 
             This field is a member of `oneof`_ ``apply_parameters``.
+        raise_target_cpa_performance_bid_too_low (google.ads.googleads.v25.services.types.ApplyRecommendationOperation.RaiseTargetCpaPerformanceBidTooLowParameters):
+            Parameters to use when applying Raise Target
+            CPA Performance Bid Too Low recommendation.
+
+            This field is a member of `oneof`_ ``apply_parameters``.
+        lower_target_roas_performance_bid_too_low (google.ads.googleads.v25.services.types.ApplyRecommendationOperation.LowerTargetRoasPerformanceBidTooLowParameters):
+            Parameters to use when applying Lower Target
+            ROAS Performance Bid Too Low recommendation.
+
+            This field is a member of `oneof`_ ``apply_parameters``.
     """
 
     class CampaignBudgetParameters(proto.Message):
@@ -535,6 +545,38 @@ class ApplyRecommendationOperation(proto.Message):
         Attributes:
             target_roas_multiplier (float):
                 Required. Target to set ROAS multiplier to.
+                This is a required field.
+        """
+
+        target_roas_multiplier: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+        )
+
+    class RaiseTargetCpaPerformanceBidTooLowParameters(proto.Message):
+        r"""Parameters to use when applying Raise Target CPA Performance
+        Bid Too Low recommendations.
+
+        Attributes:
+            target_cpa_multiplier (float):
+                Required. A number greater than 1.0
+                indicating the factor by which to increase the
+                target CPA. This is a required field.
+        """
+
+        target_cpa_multiplier: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+        )
+
+    class LowerTargetRoasPerformanceBidTooLowParameters(proto.Message):
+        r"""Parameters to use when applying Lower Target ROAS Performance
+        Bid Too Low recommendations.
+
+        Attributes:
+            target_roas_multiplier (float):
+                Required. A number less than 1.0 indicating
+                the factor by which to decrease the target ROAS.
                 This is a required field.
         """
 
@@ -927,6 +969,22 @@ class ApplyRecommendationOperation(proto.Message):
         number=25,
         oneof="apply_parameters",
         message=LeadFormAssetParameters,
+    )
+    raise_target_cpa_performance_bid_too_low: (
+        RaiseTargetCpaPerformanceBidTooLowParameters
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=26,
+        oneof="apply_parameters",
+        message=RaiseTargetCpaPerformanceBidTooLowParameters,
+    )
+    lower_target_roas_performance_bid_too_low: (
+        LowerTargetRoasPerformanceBidTooLowParameters
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=27,
+        oneof="apply_parameters",
+        message=LowerTargetRoasPerformanceBidTooLowParameters,
     )
 
 

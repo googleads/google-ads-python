@@ -198,6 +198,11 @@ class Segments(proto.Message):
             Ad sub network type. Currently only available for ads
             running as part of DemandGen campaigns on YouTube and has to
             always be selected together with ad_network_type.
+        advance_booking_window (int):
+            Advance booking window for the itinerary in
+            days.
+
+            This field is a member of `oneof`_ ``_advance_booking_window``.
         age_range (google.ads.googleads.v25.enums.types.AgeRangeTypeEnum.AgeRangeType):
             Age range
         asset_group (str):
@@ -412,6 +417,10 @@ class Segments(proto.Message):
         landing_page_source (google.ads.googleads.v25.enums.types.LandingPageSourceEnum.LandingPageSource):
             The source of a landing page in the landing
             page report.
+        length_of_booking (int):
+            Length of booking for the itinerary in days.
+
+            This field is a member of `oneof`_ ``_length_of_booking``.
         loyalty_membership (google.ads.googleads.v25.enums.types.LoyaltyMembershipEnum.LoyaltyMembership):
             The user loyalty membership tier, based on
             the user belonging to a loyalty program.
@@ -627,6 +636,9 @@ class Segments(proto.Message):
             time.
 
             This field is a member of `oneof`_ ``_travel_destination_region``.
+        user_set_dates (google.ads.googleads.v25.enums.types.HotelDateSelectionTypeEnum.HotelDateSelectionType):
+            Indicates whether user-specified dates were
+            selected.
         vertical_ads_event_participant_display_names (str):
             The display names of participants in an event
             listing, like performers, speakers, or teams.
@@ -684,6 +696,18 @@ class Segments(proto.Message):
             inventory feed data for Vertical Ads.
 
             This field is a member of `oneof`_ ``_vertical_ads_partner_account``.
+        vertical_ads_price_tier (google.ads.googleads.v25.enums.types.HotelPriceBucketEnum.HotelPriceBucket):
+            Relative price competitiveness bucket hotel
+            listing (only relevant to hotel campaigns).
+        vertical_ads_rate_rule_id (str):
+            String identifier corresponding to private or
+            conditional rate rules applied to the
+            bid/impression.
+
+            This field is a member of `oneof`_ ``_vertical_ads_rate_rule_id``.
+        vertical_ads_rate_type (google.ads.googleads.v25.enums.types.HotelRateTypeEnum.HotelRateType):
+            Categorization of the public, private, or
+            conditional rate type.
         vertical_ads_vertical (google.ads.googleads.v25.enums.types.VerticalAdsItemVerticalTypeEnum.VerticalAdsItemVerticalType):
             Type of vertical ad, such as Vacation
             Rentals, Car Rentals, or Events, used to
@@ -719,6 +743,13 @@ class Segments(proto.Message):
             includes variants like Near Exact, Near Phrase.
         slot (google.ads.googleads.v25.enums.types.SlotEnum.Slot):
             Position of the ad.
+        start_date (str):
+            Start date of the booking. Formatted as
+            yyyy-MM-dd.
+
+            This field is a member of `oneof`_ ``_start_date``.
+        start_day_of_week (google.ads.googleads.v25.enums.types.DayOfWeekEnum.DayOfWeek):
+            Start day of week of the booking.
         conversion_value_rule_primary_dimension (google.ads.googleads.v25.enums.types.ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension):
             Primary dimension of applied conversion value rules.
             NO_RULE_APPLIED shows the total recorded value of
@@ -932,6 +963,11 @@ class Segments(proto.Message):
         proto.ENUM,
         number=204,
         enum=gage_ad_sub_network_type.AdSubNetworkTypeEnum.AdSubNetworkType,
+    )
+    advance_booking_window: int = proto.Field(
+        proto.INT64,
+        number=238,
+        optional=True,
     )
     age_range: age_range_type.AgeRangeTypeEnum.AgeRangeType = proto.Field(
         proto.ENUM,
@@ -1241,6 +1277,11 @@ class Segments(proto.Message):
         number=200,
         enum=gage_landing_page_source.LandingPageSourceEnum.LandingPageSource,
     )
+    length_of_booking: int = proto.Field(
+        proto.INT64,
+        number=237,
+        optional=True,
+    )
     loyalty_membership: (
         gage_loyalty_membership.LoyaltyMembershipEnum.LoyaltyMembership
     ) = proto.Field(
@@ -1521,6 +1562,13 @@ class Segments(proto.Message):
         number=195,
         optional=True,
     )
+    user_set_dates: (
+        gage_hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType
+    ) = proto.Field(
+        proto.ENUM,
+        number=236,
+        enum=gage_hotel_date_selection_type.HotelDateSelectionTypeEnum.HotelDateSelectionType,
+    )
     vertical_ads_event_participant_display_names: str = proto.Field(
         proto.STRING,
         number=205,
@@ -1571,6 +1619,25 @@ class Segments(proto.Message):
         number=212,
         optional=True,
     )
+    vertical_ads_price_tier: (
+        gage_hotel_price_bucket.HotelPriceBucketEnum.HotelPriceBucket
+    ) = proto.Field(
+        proto.ENUM,
+        number=239,
+        enum=gage_hotel_price_bucket.HotelPriceBucketEnum.HotelPriceBucket,
+    )
+    vertical_ads_rate_rule_id: str = proto.Field(
+        proto.STRING,
+        number=240,
+        optional=True,
+    )
+    vertical_ads_rate_type: (
+        gage_hotel_rate_type.HotelRateTypeEnum.HotelRateType
+    ) = proto.Field(
+        proto.ENUM,
+        number=241,
+        enum=gage_hotel_rate_type.HotelRateTypeEnum.HotelRateType,
+    )
     vertical_ads_vertical: (
         vertical_ads_item_vertical_type.VerticalAdsItemVerticalTypeEnum.VerticalAdsItemVerticalType
     ) = proto.Field(
@@ -1619,6 +1686,16 @@ class Segments(proto.Message):
         proto.ENUM,
         number=23,
         enum=gage_slot.SlotEnum.Slot,
+    )
+    start_date: str = proto.Field(
+        proto.STRING,
+        number=234,
+        optional=True,
+    )
+    start_day_of_week: gage_day_of_week.DayOfWeekEnum.DayOfWeek = proto.Field(
+        proto.ENUM,
+        number=235,
+        enum=gage_day_of_week.DayOfWeekEnum.DayOfWeek,
     )
     conversion_value_rule_primary_dimension: (
         gage_conversion_value_rule_primary_dimension.ConversionValueRulePrimaryDimensionEnum.ConversionValueRulePrimaryDimension

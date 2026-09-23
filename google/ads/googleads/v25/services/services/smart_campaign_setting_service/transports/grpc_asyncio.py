@@ -421,6 +421,43 @@ class SmartCampaignSettingServiceGrpcAsyncIOTransport(
             )
         return self._stubs["mutate_smart_campaign_settings"]
 
+    @property
+    def generate_p_max_draft_campaign(
+        self,
+    ) -> Callable[
+        [smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest],
+        Awaitable[
+            smart_campaign_setting_service.GeneratePMaxDraftCampaignResponse
+        ],
+    ]:
+        r"""Return a callable for the generate p max draft campaign method over gRPC.
+
+        Generates a Performance Max (PMax) draft campaign from an
+        existing Smart campaign, initialized with a status of
+        [CampaignStatus.PAUSED] and a creation status of
+        [CampaignCreationStatus.INCOMPLETE]. Returns the draft PMax
+        campaign ID and related entity IDs.
+
+        Returns:
+            Callable[[~.GeneratePMaxDraftCampaignRequest],
+                    Awaitable[~.GeneratePMaxDraftCampaignResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "generate_p_max_draft_campaign" not in self._stubs:
+            self._stubs["generate_p_max_draft_campaign"] = (
+                self._logged_channel.unary_unary(
+                    "/google.ads.googleads.v25.services.SmartCampaignSettingService/GeneratePMaxDraftCampaign",
+                    request_serializer=smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest.serialize,
+                    response_deserializer=smart_campaign_setting_service.GeneratePMaxDraftCampaignResponse.deserialize,
+                )
+            )
+        return self._stubs["generate_p_max_draft_campaign"]
+
     def _prep_wrapped_messages(self, client_info):
         """Precompute the wrapped methods, overriding the base class method to use async wrappers."""
         self._wrapped_methods = {
@@ -431,6 +468,11 @@ class SmartCampaignSettingServiceGrpcAsyncIOTransport(
             ),
             self.mutate_smart_campaign_settings: self._wrap_method(
                 self.mutate_smart_campaign_settings,
+                default_timeout=None,
+                client_info=client_info,
+            ),
+            self.generate_p_max_draft_campaign: self._wrap_method(
+                self.generate_p_max_draft_campaign,
                 default_timeout=None,
                 client_info=client_info,
             ),

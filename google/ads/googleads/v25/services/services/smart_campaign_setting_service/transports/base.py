@@ -154,6 +154,11 @@ class SmartCampaignSettingServiceTransport(abc.ABC):
                 default_timeout=None,
                 client_info=client_info,
             ),
+            self.generate_p_max_draft_campaign: gapic_v1.method.wrap_method(
+                self.generate_p_max_draft_campaign,
+                default_timeout=None,
+                client_info=client_info,
+            ),
         }
 
     def close(self):
@@ -188,6 +193,20 @@ class SmartCampaignSettingServiceTransport(abc.ABC):
             smart_campaign_setting_service.MutateSmartCampaignSettingsResponse,
             Awaitable[
                 smart_campaign_setting_service.MutateSmartCampaignSettingsResponse
+            ],
+        ],
+    ]:
+        raise NotImplementedError()
+
+    @property
+    def generate_p_max_draft_campaign(
+        self,
+    ) -> Callable[
+        [smart_campaign_setting_service.GeneratePMaxDraftCampaignRequest],
+        Union[
+            smart_campaign_setting_service.GeneratePMaxDraftCampaignResponse,
+            Awaitable[
+                smart_campaign_setting_service.GeneratePMaxDraftCampaignResponse
             ],
         ],
     ]:

@@ -161,7 +161,7 @@ class Asset(proto.Message):
 
             This field is a member of `oneof`_ ``asset_data``.
         page_feed_asset (google.ads.googleads.v25.common.types.PageFeedAsset):
-            A page feed asset.
+            A page URL inclusion.
 
             This field is a member of `oneof`_ ``asset_data``.
         dynamic_education_asset (google.ads.googleads.v25.common.types.DynamicEducationAsset):

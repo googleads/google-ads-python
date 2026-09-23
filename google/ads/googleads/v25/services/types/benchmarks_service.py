@@ -22,10 +22,14 @@ import proto  # type: ignore
 from google.ads.googleads.v25.common.types import additional_application_info
 from google.ads.googleads.v25.common.types import criteria
 from google.ads.googleads.v25.common.types import dates as gagc_dates
+from google.ads.googleads.v25.enums.types import (
+    benchmarks_customer_percentile_tier,
+)
 from google.ads.googleads.v25.enums.types import benchmarks_marketing_objective
 from google.ads.googleads.v25.enums.types import (
     benchmarks_source_type as gage_benchmarks_source_type,
 )
+from google.ads.googleads.v25.enums.types import benchmarks_supplemental_data
 from google.ads.googleads.v25.enums.types import benchmarks_time_granularity
 
 
@@ -59,6 +63,7 @@ __protobuf__ = proto.module(
         "RateMetrics",
         "ShareMetrics",
         "AggregateMetrics",
+        "PercentileMetrics",
     },
 )
 
@@ -88,14 +93,35 @@ class ListBenchmarksAvailableDatesResponse(proto.Message):
 
     Attributes:
         supported_dates (google.ads.googleads.v25.common.types.DateRange):
-            The dates that support benchmarks metrics.
-            Data is supported for any dates within this date
-            range inclusive.
+            The dates that support benchmarks metrics. Data is supported
+            for any dates within this date range inclusive. This is a
+            general date range where benchmarks data is available. Some
+            metrics are only returned within more restricted dates
+            ``supported_dates_for_all_metrics``.
+        supported_dates_for_all_metrics (google.ads.googleads.v25.common.types.DateRange):
+            The subset of ``supported_dates`` that support all metrics.
+            Some metrics are only supported within this specific date
+            range due to limited availability. This applies to the
+            following metrics:
+
+            1. Average rate metrics of the selected benchmarks source.
+               For example, the ``average_cpm`` of category
+               "/Apparel/Clothing."
+            2. Customer share metrics. For example, the customer's
+               ``share_of_voice``.
+
+            These metrics are omitted from the response if the request
+            ``date_range`` does not fall within this smaller date range.
     """
 
     supported_dates: gagc_dates.DateRange = proto.Field(
         proto.MESSAGE,
         number=1,
+        message=gagc_dates.DateRange,
+    )
+    supported_dates_for_all_metrics: gagc_dates.DateRange = proto.Field(
+        proto.MESSAGE,
+        number=2,
         message=gagc_dates.DateRange,
     )
 
@@ -439,6 +465,12 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
         customer_benchmarks_group (str):
             The name of the customer being planned for.
             This is a user-defined value.
+        supplemental_data (MutableSequence[google.ads.googleads.v25.enums.types.BenchmarksSupplementalDataEnum.BenchmarksSupplementalData]):
+            Optional. Optional features to include in the
+            response. By default, only core data is
+            returned. Including supplemental data here will
+            populate additional metrics in the response such
+            as percentile metrics.
         application_info (google.ads.googleads.v25.common.types.AdditionalApplicationInfo):
             Additional information on the application
             issuing the request.
@@ -485,6 +517,13 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
     customer_benchmarks_group: str = proto.Field(
         proto.STRING,
         number=7,
+    )
+    supplemental_data: MutableSequence[
+        benchmarks_supplemental_data.BenchmarksSupplementalDataEnum.BenchmarksSupplementalData
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=11,
+        enum=benchmarks_supplemental_data.BenchmarksSupplementalDataEnum.BenchmarksSupplementalData,
     )
     application_info: additional_application_info.AdditionalApplicationInfo = (
         proto.Field(
@@ -660,7 +699,12 @@ class GenerateBenchmarksMetricsResponse(proto.Message):
             Metrics representing the customer's Ad
             performance.
         average_benchmarks_metrics (google.ads.googleads.v25.services.types.Metrics):
-            Metrics for the selected benchmarks source.
+            Metrics for the selected benchmarks source. Rate metrics for
+            the benchmarks source are only returned when the request
+            ``date_range`` is a subset of
+            ``supported_dates_for_all_metrics`` returned by
+            [BenchmarksService.ListBenchmarksAvailableDates][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksAvailableDates]
+            due to limited availability.
         breakdown_metrics (MutableSequence[google.ads.googleads.v25.services.types.BreakdownMetrics]):
             Breakdown metrics grouped by dimensions.
     """
@@ -695,7 +739,12 @@ class BreakdownMetrics(proto.Message):
             Metrics representing the customer's Ad
             performance.
         average_benchmarks_metrics (google.ads.googleads.v25.services.types.Metrics):
-            Metrics for the selected benchmarks source.
+            Metrics for the selected benchmarks source. Rate metrics for
+            the benchmarks source are only returned when the request
+            ``date_range`` is a subset of
+            ``supported_dates_for_all_metrics`` returned by
+            [BenchmarksService.ListBenchmarksAvailableDates][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksAvailableDates]
+            due to limited availability.
     """
 
     breakdown_key: "BreakdownKey" = proto.Field(
@@ -763,9 +812,22 @@ class CustomerMetrics(proto.Message):
             1. ``all_advertisers`` is used as the ``benchmarks_source``.
                Note that the request ``category_filter`` must be set
                when using ``all_advertisers``.
+            2. The request ``date_range`` is a subset of
+               ``supported_dates_for_all_metrics`` returned by
+               [BenchmarksService.ListBenchmarksAvailableDates][google.ads.googleads.v25.services.BenchmarksService.ListBenchmarksAvailableDates].
         aggregate_metrics (google.ads.googleads.v25.services.types.AggregateMetrics):
             Metrics calculated by aggregating values of a
             single metric for the customer.
+        percentile_metrics (google.ads.googleads.v25.services.types.PercentileMetrics):
+            Metrics representing the customer’s competitive standing
+            among advertisers scoped by the analysis. Percentile metrics
+            are only returned when:
+
+            1. ``all_advertisers`` is used as the ``benchmarks_source``.
+               Note that the request ``category_filter`` must be set
+               when using ``all_advertisers``.
+            2. ``PERCENTILE_DATA`` is requested as
+               ``supplemental_data``.
     """
 
     average_rate_metrics: "RateMetrics" = proto.Field(
@@ -782,6 +844,11 @@ class CustomerMetrics(proto.Message):
         proto.MESSAGE,
         number=3,
         message="AggregateMetrics",
+    )
+    percentile_metrics: "PercentileMetrics" = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message="PercentileMetrics",
     )
 
 
@@ -1014,6 +1081,86 @@ class AggregateMetrics(proto.Message):
     engagements: float = proto.Field(
         proto.DOUBLE,
         number=7,
+    )
+
+
+class PercentileMetrics(proto.Message):
+    r"""Metrics representing the customer’s competitive standing among
+    advertisers scoped by the analysis.
+
+    Percentile tier values classify the customer's percentile rank among
+    other advertisers scoped by the analysis. For example,
+    EMERGING_PLAYER indicates the customer ranks between the 25th and
+    50th percentiles, while MARKET_LEADER indicates they rank in the top
+    10%.
+
+    Attributes:
+        cost_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's cost percentile tier.
+        video_trueview_views_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's video TrueView views
+            percentile tier.
+        impressions_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's impressions percentile tier.
+        viewable_impressions_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's viewable impressions
+            percentile tier.
+        clicks_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's clicks percentile tier.
+        interactions_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's interactions percentile tier.
+        engagements_percentile_tier (google.ads.googleads.v25.enums.types.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier):
+            The customer's engagements percentile tier.
+    """
+
+    cost_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    video_trueview_views_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=2,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    impressions_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    viewable_impressions_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=4,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    clicks_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=5,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    interactions_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=6,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
+    )
+    engagements_percentile_tier: (
+        benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier
+    ) = proto.Field(
+        proto.ENUM,
+        number=7,
+        enum=benchmarks_customer_percentile_tier.BenchmarksCustomerPercentileTierEnum.BenchmarksCustomerPercentileTier,
     )
 
 

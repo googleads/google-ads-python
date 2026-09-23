@@ -239,6 +239,7 @@ from .types.benchmarks_service import (
     ListBenchmarksSourcesRequest,
     ListBenchmarksSourcesResponse,
     Metrics,
+    PercentileMetrics,
     ProductFilter,
     RateMetrics,
     ShareMetrics,
@@ -805,6 +806,8 @@ from .types.shared_set_service import (
     SharedSetOperation,
 )
 from .types.smart_campaign_setting_service import (
+    GeneratePMaxDraftCampaignRequest,
+    GeneratePMaxDraftCampaignResponse,
     GetSmartCampaignStatusRequest,
     GetSmartCampaignStatusResponse,
     MutateSmartCampaignSettingResult,
@@ -1035,6 +1038,7 @@ __all__ = (
     "ListBenchmarksSourcesRequest",
     "ListBenchmarksSourcesResponse",
     "Metrics",
+    "PercentileMetrics",
     "ProductFilter",
     "RateMetrics",
     "ShareMetrics",
@@ -1451,6 +1455,8 @@ __all__ = (
     "MutateSharedSetsRequest",
     "MutateSharedSetsResponse",
     "SharedSetOperation",
+    "GeneratePMaxDraftCampaignRequest",
+    "GeneratePMaxDraftCampaignResponse",
     "GetSmartCampaignStatusRequest",
     "GetSmartCampaignStatusResponse",
     "MutateSmartCampaignSettingResult",

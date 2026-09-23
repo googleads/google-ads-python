@@ -50,6 +50,8 @@ __protobuf__ = proto.module(
         "SmartCampaignSettingOperation",
         "MutateSmartCampaignSettingsResponse",
         "MutateSmartCampaignSettingResult",
+        "GeneratePMaxDraftCampaignRequest",
+        "GeneratePMaxDraftCampaignResponse",
     },
 )
 
@@ -402,6 +404,90 @@ class MutateSmartCampaignSettingResult(proto.Message):
             number=2,
             message=gagr_smart_campaign_setting.SmartCampaignSetting,
         )
+    )
+
+
+class GeneratePMaxDraftCampaignRequest(proto.Message):
+    r"""Request message for
+    [SmartCampaignSettingService.GeneratePMaxDraftCampaign][google.ads.googleads.v25.services.SmartCampaignSettingService.GeneratePMaxDraftCampaign].
+
+    Attributes:
+        resource_name (str):
+            Required. The resource name of the Smart
+            campaign setting to regenerate.
+        validate_only (bool):
+            Optional. If true, the request will be
+            validated but not executed. Only validation
+            errors/warnings will be returned.
+        gbp_enabled (bool):
+            Optional. Whether to enable to convert GBP
+            (Google Business Profile) location linked with
+            the PMax campaign.
+        image_enabled (bool):
+            Optional. Whether to generate PMax campaign
+            required images, like Horizontal, Square, logo
+            types.
+    """
+
+    resource_name: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    validate_only: bool = proto.Field(
+        proto.BOOL,
+        number=2,
+    )
+    gbp_enabled: bool = proto.Field(
+        proto.BOOL,
+        number=3,
+    )
+    image_enabled: bool = proto.Field(
+        proto.BOOL,
+        number=4,
+    )
+
+
+class GeneratePMaxDraftCampaignResponse(proto.Message):
+    r"""Response message for
+    [SmartCampaignSettingService.GeneratePMaxDraftCampaign][google.ads.googleads.v25.services.SmartCampaignSettingService.GeneratePMaxDraftCampaign].
+
+    Attributes:
+        pmax_campaign (str):
+            The Campaign resource name of the generated
+            draft PMax campaign.
+        campaign_budget (str):
+            The CampaignBudget resource name linking with
+            the PMax campaign.
+        asset_group (str):
+            The AssetGroup resource name linking with the
+            PMax campaign.
+        assets (MutableSequence[str]):
+            The resource names of all assets linking with
+            the PMax campaign.
+        validated_info (str):
+            Validation info or possible convert issues returned when
+            validate_only is true.
+    """
+
+    pmax_campaign: str = proto.Field(
+        proto.STRING,
+        number=1,
+    )
+    campaign_budget: str = proto.Field(
+        proto.STRING,
+        number=2,
+    )
+    asset_group: str = proto.Field(
+        proto.STRING,
+        number=3,
+    )
+    assets: MutableSequence[str] = proto.RepeatedField(
+        proto.STRING,
+        number=4,
+    )
+    validated_info: str = proto.Field(
+        proto.STRING,
+        number=5,
     )
 
 

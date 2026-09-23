@@ -354,8 +354,8 @@ class AdGroupCriterion(proto.Message):
                 Output only. The quality score of the landing
                 page.
             search_predicted_ctr (google.ads.googleads.v25.enums.types.QualityScoreBucketEnum.QualityScoreBucket):
-                Output only. The click-through rate compared
-                to that of other advertisers.
+                Output only. The clickthrough rate (CTR)
+                compared to that of other advertisers.
         """
 
         quality_score: int = proto.Field(

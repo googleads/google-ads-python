@@ -1,3 +1,8 @@
+* 33.0.0
+- Google Ads API v25_2 release.
+- Remove Google Ads API v22.
+- Remove Google Ads API v21.
+
 * 32.0.0
 - Remove validation checking if developer token is present in configuration.
 - Remove `use_cloud_org_for_api_access` configuration option.

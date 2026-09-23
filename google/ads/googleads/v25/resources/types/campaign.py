@@ -103,6 +103,7 @@ from google.ads.googleads.v25.enums.types import (
 from google.ads.googleads.v25.enums.types import (
     video_ad_sequence_minimum_duration,
 )
+from google.ads.googleads.v25.enums.types import video_crawl_source_platform
 
 
 __protobuf__ = proto.module(
@@ -1588,7 +1589,71 @@ class Campaign(proto.Message):
                 type.
 
                 This field is a member of `oneof`_ ``_asset_automation_status``.
+            automated_video_crawl_setting (google.ads.googleads.v25.resources.types.Campaign.AssetAutomationSetting.AutomatedVideoCrawlSetting):
+                Settings for automated video crawling.
+
+                This field is a member of `oneof`_ ``setting``.
         """
+
+        class AutomatedVideoCrawlInfo(proto.Message):
+            r"""Represents the info for a single URL source for automated
+            video crawling.
+
+
+            .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+            Attributes:
+                url (str):
+                    The URL to be included for crawling.
+
+                    This field is a member of `oneof`_ ``_url``.
+                source_platform (google.ads.googleads.v25.enums.types.VideoCrawlSourcePlatformEnum.VideoCrawlSourcePlatform):
+                    The type of source this info block
+                    represents.
+
+                    This field is a member of `oneof`_ ``_source_platform``.
+                enabled (bool):
+                    Whether the user has checked this source and
+                    opted in for automated video crawling.
+
+                    This field is a member of `oneof`_ ``_enabled``.
+            """
+
+            url: str = proto.Field(
+                proto.STRING,
+                number=1,
+                optional=True,
+            )
+            source_platform: (
+                video_crawl_source_platform.VideoCrawlSourcePlatformEnum.VideoCrawlSourcePlatform
+            ) = proto.Field(
+                proto.ENUM,
+                number=2,
+                optional=True,
+                enum=video_crawl_source_platform.VideoCrawlSourcePlatformEnum.VideoCrawlSourcePlatform,
+            )
+            enabled: bool = proto.Field(
+                proto.BOOL,
+                number=3,
+                optional=True,
+            )
+
+        class AutomatedVideoCrawlSetting(proto.Message):
+            r"""Represents the settings for automated video crawling for a
+            campaign.
+
+            Attributes:
+                automated_video_crawl_infos (MutableSequence[google.ads.googleads.v25.resources.types.Campaign.AssetAutomationSetting.AutomatedVideoCrawlInfo]):
+                    The list of info to be included for crawling.
+            """
+
+            automated_video_crawl_infos: MutableSequence[
+                "Campaign.AssetAutomationSetting.AutomatedVideoCrawlInfo"
+            ] = proto.RepeatedField(
+                proto.MESSAGE,
+                number=1,
+                message="Campaign.AssetAutomationSetting.AutomatedVideoCrawlInfo",
+            )
 
         asset_automation_type: (
             gage_asset_automation_type.AssetAutomationTypeEnum.AssetAutomationType
@@ -1605,6 +1670,14 @@ class Campaign(proto.Message):
             number=2,
             optional=True,
             enum=gage_asset_automation_status.AssetAutomationStatusEnum.AssetAutomationStatus,
+        )
+        automated_video_crawl_setting: (
+            "Campaign.AssetAutomationSetting.AutomatedVideoCrawlSetting"
+        ) = proto.Field(
+            proto.MESSAGE,
+            number=3,
+            oneof="setting",
+            message="Campaign.AssetAutomationSetting.AutomatedVideoCrawlSetting",
         )
 
     class BrandGuidelines(proto.Message):

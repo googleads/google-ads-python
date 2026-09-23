@@ -270,16 +270,15 @@ class CampaignErrorEnum(proto.Message):
                 to a Comparison Shopping Service account cannot
                 target this network.
             CANNOT_MODIFY_TEXT_ASSET_AUTOMATION_WITH_ENABLED_TRIAL (88):
-                Text asset automation settings can not be
+                Text asset automation settings cannot be
                 modified when there is an active Performance Max
-                optimization automatically created assets
-                experiment. End the experiment to modify these
-                settings.
+                optimization text customization experiment. End
+                the experiment to modify these settings.
             DYNAMIC_TEXT_ASSET_CANNOT_OPT_OUT_WITH_FINAL_URL_EXPANSION_OPT_IN (89):
                 Dynamic text asset cannot be opted out when
                 final URL expansion is opted in.
             CANNOT_SET_CAMPAIGN_KEYWORD_MATCH_TYPE (90):
-                Can not set a campaign level match type.
+                Cannot set a campaign level match type.
             CANNOT_DISABLE_BROAD_MATCH_WHEN_KEYWORD_CONVERSION_IN_PROCESS (91):
                 The campaign level keyword match type cannot
                 be switched to non-broad when keyword conversion

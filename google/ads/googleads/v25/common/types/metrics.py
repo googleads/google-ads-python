@@ -42,7 +42,7 @@ class Metrics(proto.Message):
         absolute_top_impression_percentage (float):
             Search absolute top impression share is the
             percentage of your Search ad impressions that
-            are shown in the most prominent Search position.
+            are shown in the absolute top Search position.
 
             This field is a member of `oneof`_ ``_absolute_top_impression_percentage``.
         active_view_cpm (float):
@@ -58,13 +58,13 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_active_view_ctr``.
         active_view_impressions (int):
-            A measurement of how often your ad has become
-            viewable on a Display Network site.
+            A measurement of the number of times your ad
+            has become viewable on a Display Network site.
 
             This field is a member of `oneof`_ ``_active_view_impressions``.
         active_view_measurability (float):
-            The ratio of impressions that could be
-            measured by Active View over the number of
+            The ratio of impressions that were eligible
+            to be measured by Active View over the number of
             served impressions.
 
             This field is a member of `oneof`_ ``_active_view_measurability``.
@@ -79,7 +79,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_active_view_measurable_impressions``.
         active_view_viewability (float):
-            The percentage of time when your ad appeared
+            The percentage of times when your ad appeared
             on an Active View enabled site (measurable
             impressions) and was viewable (viewable
             impressions).
@@ -192,19 +192,19 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_all_conversions_from_store_visit``.
         all_conversions_from_store_website (float):
-            The number of times that people were taken to
-            a business's URL after clicking an ad.
+            The number of times people were taken to a
+            business's URL after clicking an ad.
 
             This metric applies to feed items only.
 
             This field is a member of `oneof`_ ``_all_conversions_from_store_website``.
         auction_insight_search_absolute_top_impression_percentage (float):
             This metric is part of the Auction Insights
-            report, and tells how often the ads of another
-            participant showed in the most prominent
-            position on the search results page.
-            This percentage is computed only over the
-            auctions that you appeared in the page.
+            report, and tells the percentage of times the
+            ads of another participant showed in the
+            absolute top position (Position 1) on the search
+            results page. This percentage is computed only
+            over the auctions that you appeared in the page.
 
             This metric is not publicly available.
 
@@ -234,29 +234,30 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_auction_insight_search_outranking_share``.
         auction_insight_search_overlap_rate (float):
             This metric is part of the Auction Insights
-            report, and tells how often another
-            participant's ad received an impression when
-            your ad also received an impression.
+            report, and tells the percentage of times
+            another participant's ad received an impression
+            when your ad also received an impression.
 
             This metric is not publicly available.
 
             This field is a member of `oneof`_ ``_auction_insight_search_overlap_rate``.
         auction_insight_search_position_above_rate (float):
             This metric is part of the Auction Insights
-            report, and tells how often another
-            participant's ad was shown in a higher position
-            than yours, when both of your ads were shown at
-            the same page.
+            report, and tells the percentage of times
+            another participant's ad was shown in a higher
+            position than yours, when both of your ads were
+            shown at the same page.
 
             This metric is not publicly available.
 
             This field is a member of `oneof`_ ``_auction_insight_search_position_above_rate``.
         auction_insight_search_top_impression_percentage (float):
             This metric is part of the Auction Insights
-            report, and tells how often the ads of another
-            participant showed adjacent to the top organic
-            search results. This percentage is computed only
-            over the auctions that you appeared in the page.
+            report, and tells the percentage of times the
+            ads of another participant showed adjacent to
+            the top organic search results. This percentage
+            is computed only over the auctions that you
+            appeared in the page.
 
             This metric is not publicly available.
 
@@ -322,8 +323,8 @@ class Metrics(proto.Message):
         benchmark_ctr (float):
             An indication on how other advertisers'
             Shopping ads for similar products are performing
-            based on how often people who see their ad click
-            on it.
+            based on the frequency with which people who see
+            their ad click on it.
 
             This field is a member of `oneof`_ ``_benchmark_ctr``.
         bounce_rate (float):
@@ -367,12 +368,12 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_combined_queries``.
         content_budget_lost_impression_share (float):
-            The estimated percent of times that your ad
-            was eligible to show on the Display Network but
-            didn't because your budget was too low. Note:
-            Content budget lost impression share is reported
-            in the range of 0 to 0.9. Any value above 0.9 is
-            reported as 0.9001.
+            The estimated percentage of times that your
+            ad was eligible to show on the Display Network
+            but didn't because your budget was too low.
+            Note: Content budget lost impression share is
+            reported in the range of 0 to 0.9. Any value
+            above 0.9 is reported as 0.9001.
 
             This field is a member of `oneof`_ ``_content_budget_lost_impression_share``.
         content_impression_share (float):
@@ -597,10 +598,10 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_current_model_attributed_conversions_value_per_cost``.
         engagement_rate (float):
-            How often people engage with your ad after
-            it's shown to them. This is the number of ad
-            expansions divided by the number of times your
-            ad is shown.
+            The frequency with which people engage with
+            your ad after it's shown to them. This is the
+            number of ad expansions divided by the number of
+            times your ad is shown.
 
             This field is a member of `oneof`_ ``_engagement_rate``.
         engagements (int):
@@ -647,7 +648,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_historical_quality_score``.
         historical_search_predicted_ctr (google.ads.googleads.v25.enums.types.QualityScoreBucketEnum.QualityScoreBucket):
-            The historical search predicted click through
+            The historical search predicted clickthrough
             rate (CTR).
         gmail_forwards (int):
             The number of times the ad was forwarded to
@@ -671,16 +672,16 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_impressions_from_store_reach``.
         impressions (int):
-            Count of how often your ad has appeared on a
+            The number of times your ad has appeared on a
             search results page or website on the Google
             Network.
 
             This field is a member of `oneof`_ ``_impressions``.
         interaction_rate (float):
-            How often people interact with your ad after
-            it is shown to them. This is the number of
-            interactions divided by the number of times your
-            ad is shown.
+            The frequency with which people interact with
+            your ad after it is shown to them. This is the
+            number of interactions divided by the number of
+            times your ad is shown.
 
             This field is a member of `oneof`_ ``_interaction_rate``.
         interactions (int):
@@ -828,7 +829,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_phone_through_rate``.
         relative_ctr (float):
-            Your clickthrough rate (Ctr) divided by the
+            Your clickthrough rate (CTR) divided by the
             average clickthrough rate of all advertisers on
             the websites that show your ads. Measures how
             your ads perform on Display Network sites
@@ -837,15 +838,15 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_relative_ctr``.
         search_absolute_top_impression_share (float):
             The percentage of the customer's Shopping or Search ad
-            impressions that are shown in the most prominent Shopping
-            position. See `About top and absolute top
+            impressions that are shown in the absolute top position
+            (Position 1). See `About top and absolute top
             metrics <https://support.google.com/google-ads/answer/7501826>`__
 
             for details. Any value below 0.1 is reported as 0.0999.
 
             This field is a member of `oneof`_ ``_search_absolute_top_impression_share``.
         search_budget_lost_absolute_top_impression_share (float):
-            The number estimating how often your ad
+            The estimated percentage of times your ad
             wasn't the very first ad among the top ads in
             the search results due to a low budget.
 
@@ -855,9 +856,9 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_search_budget_lost_absolute_top_impression_share``.
         search_budget_lost_impression_share (float):
-            The estimated percent of times that your ad
-            was eligible to show on the Search Network but
-            didn't because your budget was too low.
+            The estimated percentage of times that your
+            ad was eligible to show on the Search Network
+            but didn't because your budget was too low.
 
             Note: Search
             budget lost impression share is reported in the
@@ -866,9 +867,9 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_search_budget_lost_impression_share``.
         search_budget_lost_top_impression_share (float):
-            The estimated percent of times that your ad
-            didn't show adjacent to the top organic search
-            results due to a low budget.
+            The estimated percentage of times that your
+            ad didn't show adjacent to the top organic
+            search results due to a low budget.
 
             Note: Search budget lost top impression share is
             reported in the range of 0 to 0.9. Any value
@@ -909,7 +910,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_search_impression_share``.
         search_rank_lost_absolute_top_impression_share (float):
-            The number estimating how often your ad
+            The estimated percentage of times your ad
             wasn't the very first ad among the top ads in
             the search results due to poor Ad Rank.
 
@@ -928,7 +929,7 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_search_rank_lost_impression_share``.
         search_rank_lost_top_impression_share (float):
-            The number estimating how often your ad
+            The estimated percentage of times your ad
             didn't show adjacent to the top organic search
             results due to poor Ad Rank.
 
@@ -945,7 +946,7 @@ class Metrics(proto.Message):
             is reported in the range of 0.1 to 1. Any value
             below 0.1 is reported as 0.0999.
 
-            Top ads are generally above the top organic
+            Top ads are typically above the top organic
             results, although they may show below the top
             organic results on certain queries.
 
@@ -976,8 +977,8 @@ class Metrics(proto.Message):
 
             This field is a member of `oneof`_ ``_average_target_roas``.
         top_impression_percentage (float):
-            The percent of your ad impressions that are
-            shown adjacent to the top organic search
+            The percentage of your ad impressions that
+            are shown adjacent to the top organic search
             results.
 
             This field is a member of `oneof`_ ``_top_impression_percentage``.
@@ -2460,8 +2461,8 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_conversion_lift_baseline_conversion_value``.
         conversion_lift_exposed_conversions (float):
             Represents the total conversions from users
-            who were exposed to the ads. Often referred to
-            as "Treatment" conversions.
+            who were exposed to the ads. Also referred to as
+            "Treatment" conversions.
 
             This field is a member of `oneof`_ ``_conversion_lift_exposed_conversions``.
         conversion_lift_exposed_conversion_value (float):
@@ -2638,7 +2639,7 @@ class Metrics(proto.Message):
             Represents the rate of positive responses
             that would have occurred naturally without ad
             exposure, based on the behavior of the control
-            group. Often referred to as "Control" responses.
+            group. Also referred to as "Control" responses.
             Provides the baseline level of brand perception
             that occurred naturally.
 
@@ -2685,7 +2686,7 @@ class Metrics(proto.Message):
             This field is a member of `oneof`_ ``_brand_lift_exposed_positive_responder_fractional_cookies_p90_upper_bound``.
         brand_lift_exposed_positive_response_rate (float):
             Represents the rate of positive responses
-            from users who were exposed to the ads. Often
+            from users who were exposed to the ads. Also
             referred to as "Treatment" responses. Shows
             total positive response rate when users were
             exposed to your ads.
@@ -2759,15 +2760,15 @@ class Metrics(proto.Message):
         cost_per_lifted_cookie_p90_lower_bound (float):
             Lower bound of the 90% confidence interval
             for the cost per lifted cookie. Represents the
-            most optimistic (lowest cost) estimate for
-            moving a user to a positive brand state.
+            optimistic (lowest cost) estimate for moving a
+            user to a positive brand state.
 
             This field is a member of `oneof`_ ``_cost_per_lifted_cookie_p90_lower_bound``.
         cost_per_lifted_cookie_p90_upper_bound (float):
             Upper bound of the 90% confidence interval
             for the cost per lifted cookie. Represents the
-            most conservative (highest cost) estimate for
-            moving a user to a positive brand state.
+            conservative (highest cost) estimate for moving
+            a user to a positive brand state.
 
             This field is a member of `oneof`_ ``_cost_per_lifted_cookie_p90_upper_bound``.
         fractional_lifted_cookies (float):
@@ -2858,6 +2859,24 @@ class Metrics(proto.Message):
             goals adjustments are applied.
 
             This field is a member of `oneof`_ ``_original_conversion_value``.
+        vertical_ads_potential_impressions (int):
+            Potential impressions representing the total
+            view-capped eligible impressions available
+            across the query context.
+
+            This field is a member of `oneof`_ ``_vertical_ads_potential_impressions``.
+        vertical_ads_average_booking_value_micros (int):
+            Click-weighted average daily rate in micros,
+            including taxes and fees, over the total length
+            of stay.
+
+            This field is a member of `oneof`_ ``_vertical_ads_average_booking_value_micros``.
+        vertical_ads_price_difference_percentage (float):
+            Percentage delta comparing the advertiser's
+            offered price against the lowest competing price
+            for the same property.
+
+            This field is a member of `oneof`_ ``_vertical_ads_price_difference_percentage``.
     """
 
     absolute_top_impression_percentage: float = proto.Field(
@@ -4614,6 +4633,21 @@ class Metrics(proto.Message):
     original_conversion_value: float = proto.Field(
         proto.DOUBLE,
         number=531,
+        optional=True,
+    )
+    vertical_ads_potential_impressions: int = proto.Field(
+        proto.INT64,
+        number=532,
+        optional=True,
+    )
+    vertical_ads_average_booking_value_micros: int = proto.Field(
+        proto.INT64,
+        number=533,
+        optional=True,
+    )
+    vertical_ads_price_difference_percentage: float = proto.Field(
+        proto.DOUBLE,
+        number=534,
         optional=True,
     )
 

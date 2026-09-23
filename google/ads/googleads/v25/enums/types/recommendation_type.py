@@ -225,6 +225,12 @@ class RecommendationTypeEnum(proto.Message):
             CAMPAIGN_SPECIFIC_APP_GOAL (59):
                 Recommendation to add a campaign-specific app
                 conversion goal.
+            RAISE_TARGET_CPA_PERFORMANCE_BID_TOO_LOW (61):
+                Recommendation to raise target CPA when it is
+                too low for Search campaigns.
+            LOWER_TARGET_ROAS_PERFORMANCE_BID_TOO_LOW (62):
+                Recommendation to lower target ROAS when it
+                is too low for Search campaigns.
         """
 
         UNSPECIFIED = 0
@@ -286,6 +292,8 @@ class RecommendationTypeEnum(proto.Message):
         LEAD_FORM_ASSET = 57
         IMPROVE_DEMAND_GEN_AD_STRENGTH = 58
         CAMPAIGN_SPECIFIC_APP_GOAL = 59
+        RAISE_TARGET_CPA_PERFORMANCE_BID_TOO_LOW = 61
+        LOWER_TARGET_ROAS_PERFORMANCE_BID_TOO_LOW = 62
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

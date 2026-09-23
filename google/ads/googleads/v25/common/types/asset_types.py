@@ -939,7 +939,7 @@ class SitelinkAsset(proto.Message):
 
 
 class PageFeedAsset(proto.Message):
-    r"""A Page Feed asset.
+    r"""A Page URL inclusion asset.
 
     Attributes:
         page_url (str):
@@ -1858,15 +1858,21 @@ class DemandGenCarouselCardAsset(proto.Message):
     Attributes:
         marketing_image_asset (str):
             Asset resource name of the associated 1.91:1
-            marketing image. This and/or square marketing
-            image asset is required.
+            marketing image. Either this image, or the
+            square marketing image, or both, is required.
+            Temporary IDs are not supported. Only existing
+            image assets can be referenced.
         square_marketing_image_asset (str):
             Asset resource name of the associated square
-            marketing image. This and/or a marketing image
-            asset is required.
+            marketing image. Either this image, or the
+            1.91:1 marketing image, or both, is required.
+            Temporary IDs are not supported. Only existing
+            image assets can be referenced.
         portrait_marketing_image_asset (str):
             Asset resource name of the associated 4:5
-            portrait marketing image.
+            portrait marketing image. Temporary IDs are not
+            supported. Only existing image assets can be
+            referenced.
         headline (str):
             Required. Headline of the carousel card.
         call_to_action_text (str):

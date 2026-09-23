@@ -76,6 +76,21 @@ class CampaignGoalConfigErrorEnum(proto.Message):
                 At least one mode (either enabling bid
                 adjustments or showing benefits in PLA) must be
                 enabled for loyalty retention goal.
+            HIGH_LIFETIME_VALUE_MULTIPLIER_PRESENT_BUT_VALUE_MULTIPLIER_ABSENT (17):
+                When using the customer lifecycle
+                optimization goal, the value multiplier must be
+                present if the high lifetime value multiplier is
+                present.
+            HIGH_LIFETIME_VALUE_MULTIPLIER_LESS_THAN_OR_EQUAL_TO_VALUE_MULTIPLIER (18):
+                When using the customer lifecycle
+                optimization goal, the high lifetime value
+                multiplier must be strictly greater than the
+                value multiplier.
+            CAMPAIGN_OVERRIDE_HIGH_LIFETIME_VALUE_MULTIPLIER_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE (19):
+                The high lifetime value multiplier for
+                campaign-level overrides in customer lifecycle
+                optimization (new customer acquisition) is only
+                supported for certain campaign types.
         """
 
         UNSPECIFIED = 0
@@ -94,6 +109,13 @@ class CampaignGoalConfigErrorEnum(proto.Message):
         )
         CANNOT_USE_INCOMPATIBLE_CLO_GOALS = 15
         LOYALTY_RETENTION_GOAL_INVALID_MODE = 16
+        HIGH_LIFETIME_VALUE_MULTIPLIER_PRESENT_BUT_VALUE_MULTIPLIER_ABSENT = 17
+        HIGH_LIFETIME_VALUE_MULTIPLIER_LESS_THAN_OR_EQUAL_TO_VALUE_MULTIPLIER = (
+            18
+        )
+        CAMPAIGN_OVERRIDE_HIGH_LIFETIME_VALUE_MULTIPLIER_NOT_SUPPORTED_FOR_CAMPAIGN_TYPE = (
+            19
+        )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

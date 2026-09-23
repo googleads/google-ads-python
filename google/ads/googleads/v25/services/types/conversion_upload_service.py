@@ -303,24 +303,15 @@ class ClickConversion(proto.Message):
             Type of the customer associated with the
             conversion (new or returning).
         user_ip_address (str):
-            The IP address of the customer when they arrived on the
-            landing page after an ad click but before a conversion
-            event. This is the IP address of the customer's device, not
-            the advertiser's server. Google Ads does not support IP
-            address matching for end users in the European Economic Area
-            (EEA), United Kingdom (UK), or Switzerland (CH). Add logic
-            to conditionally exclude sharing IP addresses from users
-            from these regions and ensure that you provide users with
-            clear and comprehensive information about the data you
-            collect on your sites, apps, and other properties and get
-            consent where required by law or any applicable Google
-            policies. See `About offline conversion
-            imports <//support.google.com/google-ads/answer/2998031>`__
-            page for more details.
+            The IP address of the customer when they
+            arrived on the landing page after an ad click
+            but before a conversion event. This is the IP
+            address of the customer's device, not the
+            advertiser's server.
 
-            This field is only available to allowlisted users. To
-            include this field in conversion imports, upgrade to the
-            Data Manager API.
+            This field is only available to allowlisted
+            users. To include this field in conversion
+            imports, upgrade to the Data Manager API.
 
             This field is a member of `oneof`_ ``_user_ip_address``.
         session_attributes_encoded (bytes):

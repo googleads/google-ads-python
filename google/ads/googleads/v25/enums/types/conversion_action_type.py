@@ -218,6 +218,12 @@ class ConversionActionTypeEnum(proto.Message):
                 local services ads unit and reaches out to
                 advertiser through phone call, message, or
                 booking options on the ad.
+            FIREBASE_ANDROID_APP_AD_IMPRESSION (52):
+                Conversions that come from linked Firebase
+                Android app ad impression conversions.
+            FIREBASE_IOS_APP_AD_IMPRESSION (53):
+                Conversions that come from linked Firebase
+                iOS app ad impression conversions.
         """
 
         UNSPECIFIED = 0
@@ -272,6 +278,8 @@ class ConversionActionTypeEnum(proto.Message):
         FIREBASE_IOS_QUALIFY_LEAD = 49
         FIREBASE_IOS_CLOSE_CONVERT_LEAD = 50
         LOCAL_SERVICES_ADS = 51
+        FIREBASE_ANDROID_APP_AD_IMPRESSION = 52
+        FIREBASE_IOS_APP_AD_IMPRESSION = 53
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

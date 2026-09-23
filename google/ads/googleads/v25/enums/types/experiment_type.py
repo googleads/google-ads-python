@@ -85,10 +85,10 @@ class ExperimentTypeEnum(proto.Message):
                 variables across one or more campaigns, tests a
                 mix of campaign types, and more.
             PMAX_TEXT_CUSTOMIZATION_FINAL_URL_EXPANSION (18):
-                An experiment that tests automatically
-                created assets and lets Google AI send traffic
-                to relevant landing pages and generate text
-                assets to better match search queries.
+                An experiment that tests text customization
+                and lets Google AI send traffic to relevant
+                landing pages and generate text assets to better
+                match search queries.
         """
 
         UNSPECIFIED = 0

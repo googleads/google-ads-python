@@ -54,7 +54,9 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class AutomaticallyCreatedAssetRemovalServiceAsyncClient:
-    """Service to remove automatically created assets."""
+    """Service to remove text customization (formerly automatically
+    created assets).
+    """
 
     _client: AutomaticallyCreatedAssetRemovalServiceClient
 
@@ -341,7 +343,8 @@ class AutomaticallyCreatedAssetRemovalServiceAsyncClient:
     ) -> (
         automatically_created_asset_removal_service.RemoveCampaignAutomaticallyCreatedAssetResponse
     ):
-        r"""Removes automatically created assets from a campaign.
+        r"""Removes text customization (formerly automatically created
+        assets) from a campaign.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ContextError <>`__ `FieldError <>`__

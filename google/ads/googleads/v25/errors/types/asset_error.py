@@ -131,13 +131,13 @@ class AssetErrorEnum(proto.Message):
             CANNOT_MODIFY_ASSET_SOURCE (35):
                 Cannot modify asset source.
             CANNOT_MODIFY_AUTOMATICALLY_CREATED_ASSET (36):
-                User can not modify the automatically created
-                asset.
+                User cannot modify text customization
+                (formerly automatically created asset).
             LEAD_FORM_LOCATION_ANSWER_TYPE_DISALLOWED (37):
                 Lead Form is disallowed to use ``LOCATION`` answer type.
             PAGE_FEED_INVALID_LABEL_TEXT (38):
-                Page Feed label text contains invalid
-                characters.
+                Page URL inclusion label text contains
+                invalid characters.
             CUSTOMER_NOT_ON_ALLOWLIST_FOR_WHATSAPP_MESSAGE_ASSETS (39):
                 The customer is not in the allow-list for
                 whatsapp message asset type.

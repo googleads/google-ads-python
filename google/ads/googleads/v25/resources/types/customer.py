@@ -426,10 +426,10 @@ class ConversionTrackingSetting(proto.Message):
             value returned will differ based on the
             ``login-customer-id`` of the request.
         enhanced_conversions_for_leads_enabled (bool):
-            Output only. Whether the customer is opted-in
-            for enhanced conversions for leads. If using
-            cross-account conversion tracking, this value is
-            inherited from the manager. This field is
+            Output only. Deprecated: Use enablement_setting instead.
+            Whether the customer is opted-in for enhanced conversions
+            for leads. If using cross-account conversion tracking, this
+            value is inherited from the manager. This field is
             read-only.
         google_ads_conversion_customer (str):
             The resource name of the customer where

@@ -47,10 +47,14 @@ class AuthorizationErrorEnum(proto.Message):
                 more at
                 https://developers.google.com/google-ads/api/docs/concepts/call-structure#cid
             DEVELOPER_TOKEN_NOT_ON_ALLOWLIST (13):
-                The developer token is not on the allow-list.
+                Deprecated: Developer tokens have been
+                sunset. Use Google Cloud project permissions
+                instead. The developer token is not on the
+                allow-list.
             DEVELOPER_TOKEN_PROHIBITED (4):
-                The developer token is not allowed with the
-                project sent in the request.
+                Deprecated: Developer tokens have been
+                sunset. The developer token is not allowed with
+                the project sent in the request.
             PROJECT_DISABLED (5):
                 The Google Cloud project sent in the request
                 does not have permission to access the api.
@@ -69,11 +73,12 @@ class AuthorizationErrorEnum(proto.Message):
             MISSING_TOS (9):
                 The developer must sign the terms of service.
                 They can be found here:
-                ads.google.com/aw/apicenter
+                console.cloud.google.com/google/ads-apis/overview
             DEVELOPER_TOKEN_NOT_APPROVED (10):
-                The developer token is only approved for use
-                with test accounts. To access non-test accounts,
-                apply for Basic or Standard access.
+                Deprecated: Developer tokens have been sunset. Superseded by
+                CLOUD_PROJECT_NOT_APPROVED_FOR_PRODUCTION. The developer
+                token is only approved for use with test accounts. To access
+                non-test accounts, apply for Basic or Standard access.
             CLOUD_PROJECT_NOT_APPROVED_FOR_PRODUCTION (32):
                 The Google Cloud project is only approved for
                 use with test accounts. To access non-test

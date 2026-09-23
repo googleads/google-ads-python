@@ -2998,6 +2998,11 @@
         "grpc": {
           "libraryClient": "SmartCampaignSettingServiceClient",
           "rpcs": {
+            "GeneratePMaxDraftCampaign": {
+              "methods": [
+                "generate_p_max_draft_campaign"
+              ]
+            },
             "GetSmartCampaignStatus": {
               "methods": [
                 "get_smart_campaign_status"
@@ -3013,6 +3018,11 @@
         "grpc-async": {
           "libraryClient": "SmartCampaignSettingServiceAsyncClient",
           "rpcs": {
+            "GeneratePMaxDraftCampaign": {
+              "methods": [
+                "generate_p_max_draft_campaign"
+              ]
+            },
             "GetSmartCampaignStatus": {
               "methods": [
                 "get_smart_campaign_status"

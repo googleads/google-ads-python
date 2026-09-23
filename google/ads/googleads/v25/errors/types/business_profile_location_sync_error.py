@@ -23,19 +23,20 @@ __protobuf__ = proto.module(
     package="google.ads.googleads.v25.errors",
     marshal="google.ads.googleads.v25",
     manifest={
-        "AutomaticallyCreatedAssetRemovalErrorEnum",
+        "BusinessProfileLocationSyncErrorEnum",
     },
 )
 
 
-class AutomaticallyCreatedAssetRemovalErrorEnum(proto.Message):
-    r"""Container for enum describing possible text customization
-    removal errors.
+class BusinessProfileLocationSyncErrorEnum(proto.Message):
+    r"""Container for enum describing possible Business Profile
+    location sync errors.
 
     """
 
-    class AutomaticallyCreatedAssetRemovalError(proto.Enum):
-        r"""Enum describing possible text customization removal errors.
+    class BusinessProfileLocationSyncError(proto.Enum):
+        r"""Enum describing possible Business Profile location sync
+        errors.
 
         Values:
             UNSPECIFIED (0):
@@ -43,27 +44,26 @@ class AutomaticallyCreatedAssetRemovalErrorEnum(proto.Message):
             UNKNOWN (1):
                 The received error code is not known in this
                 version.
-            AD_DOES_NOT_EXIST (2):
-                The ad does not exist.
-            INVALID_AD_TYPE (3):
-                Ad type is not supported. Only Responsive
-                Search Ad type is supported.
-            ASSET_DOES_NOT_EXIST (4):
-                The asset does not exist.
-            ASSET_FIELD_TYPE_DOES_NOT_MATCH (5):
-                The asset field type does not match.
-            NOT_AN_AUTOMATICALLY_CREATED_ASSET (6):
-                Not a text customization (formerly
-                automatically created asset).
+            EMAIL_INVALID (2):
+                The email provided in the LocationSync typed
+                AssetSet is invalid.
+            OAUTH_TOKEN_INVALID (3):
+                The OAuth token in the LocationSync typed
+                AssetSet is invalid.
+            ACCOUNT_REMOVED (4):
+                The email provided in the LocationSync typed
+                AssetSet is removed.
+            NO_PERMISSION_TO_ACCESS_LOCATION_ACCOUNT (5):
+                The LocationSync typed AssetSet doesn't have
+                access to location account.
         """
 
         UNSPECIFIED = 0
         UNKNOWN = 1
-        AD_DOES_NOT_EXIST = 2
-        INVALID_AD_TYPE = 3
-        ASSET_DOES_NOT_EXIST = 4
-        ASSET_FIELD_TYPE_DOES_NOT_MATCH = 5
-        NOT_AN_AUTOMATICALLY_CREATED_ASSET = 6
+        EMAIL_INVALID = 2
+        OAUTH_TOKEN_INVALID = 3
+        ACCOUNT_REMOVED = 4
+        NO_PERMISSION_TO_ACCESS_LOCATION_ACCOUNT = 5
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

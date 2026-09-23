@@ -19,6 +19,7 @@ from typing import MutableSequence
 
 import proto  # type: ignore
 
+from google.ads.googleads.v25.common.types import custom_parameter
 from google.ads.googleads.v25.enums.types import ad_strength as gage_ad_strength
 from google.ads.googleads.v25.enums.types import ad_strength_action_item_type
 from google.ads.googleads.v25.enums.types import (
@@ -106,6 +107,15 @@ class AssetGroup(proto.Message):
             group.
         google_local_services_info (google.ads.googleads.v25.resources.types.GoogleLocalServicesInfo):
             Local services info of the asset group.
+        tracking_url_template (str):
+            URL template for constructing a tracking URL.
+        url_custom_parameters (MutableSequence[google.ads.googleads.v25.common.types.CustomParameter]):
+            A list of mappings to be used for substituting URL custom
+            parameter tags in the ``tracking_url_template``,
+            ``final_urls``, and/or ``final_mobile_urls``.
+        final_url_suffix (str):
+            URL template for appending params to landing
+            page URLs served with parallel tracking.
     """
 
     resource_name: str = proto.Field(
@@ -175,6 +185,21 @@ class AssetGroup(proto.Message):
         proto.MESSAGE,
         number=14,
         message="GoogleLocalServicesInfo",
+    )
+    tracking_url_template: str = proto.Field(
+        proto.STRING,
+        number=15,
+    )
+    url_custom_parameters: MutableSequence[custom_parameter.CustomParameter] = (
+        proto.RepeatedField(
+            proto.MESSAGE,
+            number=16,
+            message=custom_parameter.CustomParameter,
+        )
+    )
+    final_url_suffix: str = proto.Field(
+        proto.STRING,
+        number=17,
     )
 
 

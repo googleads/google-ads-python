@@ -88,8 +88,9 @@ class RequestErrorEnum(proto.Message):
             INVALID_ENUM_VALUE (18):
                 Enum value is not permitted.
             DEVELOPER_TOKEN_PARAMETER_MISSING (19):
-                The developer-token parameter is required for
-                all requests.
+                Deprecated: Developer tokens have been
+                sunset. The developer-token parameter is
+                required for all requests.
             LOGIN_CUSTOMER_ID_PARAMETER_MISSING (20):
                 The login-customer-id parameter is required
                 for this request.

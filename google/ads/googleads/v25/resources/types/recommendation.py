@@ -406,6 +406,16 @@ class Recommendation(proto.Message):
             recommendation.
 
             This field is a member of `oneof`_ ``recommendation``.
+        raise_target_cpa_performance_bid_too_low_recommendation (google.ads.googleads.v25.resources.types.Recommendation.RaiseTargetCpaPerformanceBidTooLowRecommendation):
+            Output only. The raise Target CPA for
+            Performance Bid Too Low recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
+        lower_target_roas_performance_bid_too_low_recommendation (google.ads.googleads.v25.resources.types.Recommendation.LowerTargetRoasPerformanceBidTooLowRecommendation):
+            Output only. The lower Target ROAS for
+            Performance Bid Too Low recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
     """
 
     class MerchantInfo(proto.Message):
@@ -1413,6 +1423,71 @@ class Recommendation(proto.Message):
             message="Recommendation.TargetAdjustmentInfo",
         )
 
+    class RaiseTargetCpaPerformanceBidTooLowRecommendation(proto.Message):
+        r"""Recommendation to raise Target CPA when it is too low for
+        Search campaigns.
+
+
+        .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+        Attributes:
+            recommended_target_multiplier (float):
+                Output only. A number greater than 1.0
+                indicating the factor by which we recommend the
+                target CPA should be increased.
+
+                This field is a member of `oneof`_ ``_recommended_target_multiplier``.
+            current_average_target_cpa_micros (int):
+                Output only. The current average target CPA
+                of the campaign, in micros of customer local
+                currency.
+
+                This field is a member of `oneof`_ ``_current_average_target_cpa_micros``.
+        """
+
+        recommended_target_multiplier: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+            optional=True,
+        )
+        current_average_target_cpa_micros: int = proto.Field(
+            proto.INT64,
+            number=2,
+            optional=True,
+        )
+
+    class LowerTargetRoasPerformanceBidTooLowRecommendation(proto.Message):
+        r"""Recommendation to lower Target ROAS when it is too low for
+        Search campaigns.
+
+
+        .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+        Attributes:
+            recommended_target_multiplier (float):
+                Output only. A number less than 1.0
+                indicating the factor by which we recommend the
+                target ROAS should be decreased.
+
+                This field is a member of `oneof`_ ``_recommended_target_multiplier``.
+            current_average_target_roas (float):
+                Output only. The current average target ROAS
+                of the campaign.
+
+                This field is a member of `oneof`_ ``_current_average_target_roas``.
+        """
+
+        recommended_target_multiplier: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+            optional=True,
+        )
+        current_average_target_roas: float = proto.Field(
+            proto.DOUBLE,
+            number=2,
+            optional=True,
+        )
+
     class DynamicImageExtensionOptInRecommendation(proto.Message):
         r"""Recommendation to enable dynamic image extensions on the
         account, allowing Google to find the best images from ad landing
@@ -2211,6 +2286,22 @@ class Recommendation(proto.Message):
         number=70,
         oneof="recommendation",
         message=CampaignSpecificAppGoalRecommendation,
+    )
+    raise_target_cpa_performance_bid_too_low_recommendation: (
+        RaiseTargetCpaPerformanceBidTooLowRecommendation
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=72,
+        oneof="recommendation",
+        message=RaiseTargetCpaPerformanceBidTooLowRecommendation,
+    )
+    lower_target_roas_performance_bid_too_low_recommendation: (
+        LowerTargetRoasPerformanceBidTooLowRecommendation
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=73,
+        oneof="recommendation",
+        message=LowerTargetRoasPerformanceBidTooLowRecommendation,
     )
 
 

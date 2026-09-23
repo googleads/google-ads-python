@@ -414,7 +414,8 @@ class AdGroupAdServiceGrpcAsyncIOTransport(AdGroupAdServiceTransport):
         r"""Return a callable for the remove automatically created
         assets method over gRPC.
 
-        Remove automatically created assets from an ad.
+        Remove text customization (formerly automatically created
+        assets) from an ad.
 
         List of thrown errors: `AdError <>`__ `AuthenticationError <>`__
         `AuthorizationError <>`__

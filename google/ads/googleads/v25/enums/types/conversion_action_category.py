@@ -112,6 +112,8 @@ class ConversionActionCategoryEnum(proto.Message):
                 User watches an ad from a channel and later
                 watches either the same video or a video from
                 the same channel as the ad.
+            IN_APP_AD_REVENUE (26):
+                An in-app ad revenue conversion.
         """
 
         UNSPECIFIED = 0
@@ -138,6 +140,7 @@ class ConversionActionCategoryEnum(proto.Message):
         QUALIFIED_LEAD = 22
         CONVERTED_LEAD = 23
         YOUTUBE_FOLLOW_ON_VIEWS = 24
+        IN_APP_AD_REVENUE = 26
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

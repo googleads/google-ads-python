@@ -95,8 +95,10 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.audience_scope",
     "google.ads.googleads.v25.types.audience_status",
     "google.ads.googleads.v25.types.batch_job_status",
+    "google.ads.googleads.v25.types.benchmarks_customer_percentile_tier",
     "google.ads.googleads.v25.types.benchmarks_marketing_objective",
     "google.ads.googleads.v25.types.benchmarks_source_type",
+    "google.ads.googleads.v25.types.benchmarks_supplemental_data",
     "google.ads.googleads.v25.types.benchmarks_time_granularity",
     "google.ads.googleads.v25.types.bid_modifier_source",
     "google.ads.googleads.v25.types.bidding_source",
@@ -417,6 +419,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.video_ad_format_restriction",
     "google.ads.googleads.v25.types.video_ad_sequence_interaction_type",
     "google.ads.googleads.v25.types.video_ad_sequence_minimum_duration",
+    "google.ads.googleads.v25.types.video_crawl_source_platform",
     "google.ads.googleads.v25.types.video_enhancement_source",
     "google.ads.googleads.v25.types.video_experiment_subtype",
     "google.ads.googleads.v25.types.video_thumbnail",
@@ -522,10 +525,14 @@ from .types.audience_insights_marketing_objective import (
 from .types.audience_scope import AudienceScopeEnum
 from .types.audience_status import AudienceStatusEnum
 from .types.batch_job_status import BatchJobStatusEnum
+from .types.benchmarks_customer_percentile_tier import (
+    BenchmarksCustomerPercentileTierEnum,
+)
 from .types.benchmarks_marketing_objective import (
     BenchmarksMarketingObjectiveEnum,
 )
 from .types.benchmarks_source_type import BenchmarksSourceTypeEnum
+from .types.benchmarks_supplemental_data import BenchmarksSupplementalDataEnum
 from .types.benchmarks_time_granularity import BenchmarksTimeGranularityEnum
 from .types.bid_modifier_source import BidModifierSourceEnum
 from .types.bidding_source import BiddingSourceEnum
@@ -1048,6 +1055,7 @@ from .types.video_ad_sequence_interaction_type import (
 from .types.video_ad_sequence_minimum_duration import (
     VideoAdSequenceMinimumDurationEnum,
 )
+from .types.video_crawl_source_platform import VideoCrawlSourcePlatformEnum
 from .types.video_enhancement_source import VideoEnhancementSourceEnum
 from .types.video_experiment_subtype import VideoExperimentSubtypeEnum
 from .types.video_thumbnail import VideoThumbnailEnum
@@ -1209,8 +1217,10 @@ __all__ = (
     "AudienceScopeEnum",
     "AudienceStatusEnum",
     "BatchJobStatusEnum",
+    "BenchmarksCustomerPercentileTierEnum",
     "BenchmarksMarketingObjectiveEnum",
     "BenchmarksSourceTypeEnum",
+    "BenchmarksSupplementalDataEnum",
     "BenchmarksTimeGranularityEnum",
     "BidModifierSourceEnum",
     "BiddingSourceEnum",
@@ -1531,6 +1541,7 @@ __all__ = (
     "VideoAdFormatRestrictionEnum",
     "VideoAdSequenceInteractionTypeEnum",
     "VideoAdSequenceMinimumDurationEnum",
+    "VideoCrawlSourcePlatformEnum",
     "VideoEnhancementSourceEnum",
     "VideoExperimentSubtypeEnum",
     "VideoThumbnailEnum",

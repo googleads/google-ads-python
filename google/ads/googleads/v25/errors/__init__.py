@@ -66,6 +66,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v25.types.bidding_strategy_error",
     "google.ads.googleads.v25.types.billing_setup_error",
     "google.ads.googleads.v25.types.brand_guidelines_migration_error",
+    "google.ads.googleads.v25.types.business_profile_location_sync_error",
     "google.ads.googleads.v25.types.campaign_budget_error",
     "google.ads.googleads.v25.types.campaign_conversion_goal_error",
     "google.ads.googleads.v25.types.campaign_criterion_error",
@@ -244,6 +245,9 @@ from .types.bidding_strategy_error import BiddingStrategyErrorEnum
 from .types.billing_setup_error import BillingSetupErrorEnum
 from .types.brand_guidelines_migration_error import (
     BrandGuidelinesMigrationErrorEnum,
+)
+from .types.business_profile_location_sync_error import (
+    BusinessProfileLocationSyncErrorEnum,
 )
 from .types.campaign_budget_error import CampaignBudgetErrorEnum
 from .types.campaign_conversion_goal_error import (
@@ -546,6 +550,7 @@ __all__ = (
     "BillingSetupErrorEnum",
     "BrandGuidelinesMigrationErrorEnum",
     "BudgetPerDayMinimumErrorDetails",
+    "BusinessProfileLocationSyncErrorEnum",
     "CampaignBudgetErrorEnum",
     "CampaignConversionGoalErrorEnum",
     "CampaignCriterionErrorEnum",

@@ -295,14 +295,14 @@ class ResourceLimitTypeEnum(proto.Message):
                 Number of ENABLED ad image AdGroupAssets per
                 ad group.
             PAGE_FEED_ASSET_SETS_PER_CUSTOMER (157):
-                Number of ENABLED page feed asset sets per
+                Number of ENABLED page URL inclusion sets per
                 customer.
             DYNAMIC_EDUCATION_FEED_ASSET_SETS_PER_CUSTOMER (158):
                 Number of ENABLED dynamic education feed
                 asset sets per customer.
             ASSETS_PER_PAGE_FEED_ASSET_SET (159):
-                Number of ENABLED assets per page feed asset
-                set.
+                Number of ENABLED assets per page URL
+                inclusion set (formerly page feed asset set).
             ASSETS_PER_DYNAMIC_EDUCATION_FEED_ASSET_SET (160):
                 Number of ENABLED assets per dynamic
                 education asset set.

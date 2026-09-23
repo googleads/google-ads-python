@@ -57,6 +57,16 @@ class GoalErrorEnum(proto.Message):
                 New customer acquisition goal already exists.
             LOYALTY_RETENTION_GOAL_ALREADY_EXISTS (9):
                 Loyalty retention goal already exists.
+            HIGH_LIFETIME_VALUE_MULTIPLIER_PRESENT_BUT_VALUE_MULTIPLIER_ABSENT (10):
+                When using the customer lifecycle
+                optimization goal, the value multiplier must be
+                present if the high lifetime value multiplier is
+                present.
+            HIGH_LIFETIME_VALUE_MULTIPLIER_LESS_THAN_OR_EQUAL_TO_VALUE_MULTIPLIER (11):
+                When using the customer lifecycle
+                optimization goal, the high lifetime value
+                multiplier must be strictly greater than the
+                value multiplier.
         """
 
         UNSPECIFIED = 0
@@ -67,6 +77,10 @@ class GoalErrorEnum(proto.Message):
         CUSTOMER_LIFECYCLE_OPTIMIZATION_ACCOUNT_TYPE_NOT_ALLOWED = 7
         NEW_CUSTOMER_ACQUISITION_GOAL_ALREADY_EXISTS = 8
         LOYALTY_RETENTION_GOAL_ALREADY_EXISTS = 9
+        HIGH_LIFETIME_VALUE_MULTIPLIER_PRESENT_BUT_VALUE_MULTIPLIER_ABSENT = 10
+        HIGH_LIFETIME_VALUE_MULTIPLIER_LESS_THAN_OR_EQUAL_TO_VALUE_MULTIPLIER = (
+            11
+        )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

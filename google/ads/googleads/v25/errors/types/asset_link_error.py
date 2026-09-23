@@ -109,8 +109,9 @@ class AssetLinkErrorEnum(proto.Message):
                 User cannot create automatically created
                 links.
             CANNOT_LINK_TO_AUTOMATICALLY_CREATED_ASSET (20):
-                Advertiser links cannot link to automatically
-                created asset.
+                Advertiser links cannot link to text
+                customization (formerly automatically created
+                asset).
             CANNOT_MODIFY_ASSET_LINK_SOURCE (21):
                 Automatically created links cannot be changed
                 into advertiser links or the reverse.

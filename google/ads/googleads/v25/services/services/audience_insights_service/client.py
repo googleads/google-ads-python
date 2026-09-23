@@ -1164,6 +1164,9 @@ class AudienceInsightsServiceClient(
                   AudienceCompositionMetrics of the
                   GenerateAudienceCompositionInsightsResponse.
 
+                Note: The USER_LIST dimension does not support the score
+                metric in AudienceCompositionMetrics.
+
                 This corresponds to the ``dimensions`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1622,8 +1625,16 @@ class AudienceInsightsServiceClient(
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             audiences (MutableSequence[google.ads.googleads.v25.services.types.InsightsAudience]):
-                Required. Audiences to request
-                metrics for.
+                Required. Audiences to request metrics for.
+                [InsightsAudience.country_locations][google.ads.googleads.v25.services.InsightsAudience.country_locations],
+                [InsightsAudience.gender][google.ads.googleads.v25.services.InsightsAudience.gender],
+                [InsightsAudience.age_ranges][google.ads.googleads.v25.services.InsightsAudience.age_ranges]
+                and
+                [InsightsAudience.topic_audience_combinations][google.ads.googleads.v25.services.InsightsAudience.topic_audience_combinations]
+                are the only supported fields for these audiences. Only
+                [AudienceInsightsAttribute.user_interest][google.ads.googleads.v25.common.AudienceInsightsAttribute.user_interest]
+                attributes are supported for
+                topic_audience_combinations.
 
                 This corresponds to the ``audiences`` field
                 on the ``request`` instance; if ``request`` is provided, this

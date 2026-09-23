@@ -173,6 +173,9 @@ class GenerateAudienceCompositionInsightsRequest(proto.Message):
               IN_MARKET_USER_INTEREST
             - The score field is omitted from AudienceCompositionMetrics
               of the GenerateAudienceCompositionInsightsResponse.
+
+            Note: The USER_LIST dimension does not support the score
+            metric in AudienceCompositionMetrics.
         customer_insights_group (str):
             The name of the customer being planned for.
             This is a user-defined value.
@@ -232,9 +235,9 @@ class GenerateAudienceCompositionInsightsResponse(proto.Message):
 
             Note: When an
             [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
-            is requested in GenerateAudienceCompositionInsightsRequest,
-            score is omitted from AudienceCompositionMetrics of the
-            GenerateAudienceCompositionInsightsResponse.
+            is requested or when the request contains the USER_LIST
+            dimension, score is omitted from AudienceCompositionMetrics
+            of the GenerateAudienceCompositionInsightsResponse.
     """
 
     sections: MutableSequence["AudienceCompositionSection"] = (
@@ -786,6 +789,14 @@ class GenerateTargetingSuggestionMetricsRequest(proto.Message):
             Required. The ID of the customer.
         audiences (MutableSequence[google.ads.googleads.v25.services.types.InsightsAudience]):
             Required. Audiences to request metrics for.
+            [InsightsAudience.country_locations][google.ads.googleads.v25.services.InsightsAudience.country_locations],
+            [InsightsAudience.gender][google.ads.googleads.v25.services.InsightsAudience.gender],
+            [InsightsAudience.age_ranges][google.ads.googleads.v25.services.InsightsAudience.age_ranges]
+            and
+            [InsightsAudience.topic_audience_combinations][google.ads.googleads.v25.services.InsightsAudience.topic_audience_combinations]
+            are the only supported fields for these audiences. Only
+            [AudienceInsightsAttribute.user_interest][google.ads.googleads.v25.common.AudienceInsightsAttribute.user_interest]
+            attributes are supported for topic_audience_combinations.
         customer_insights_group (str):
             Optional. The name of the customer being
             planned for.  This is a user-defined value.
@@ -1229,8 +1240,8 @@ class AudienceCompositionMetrics(proto.Message):
 
             Note: When an
             [InsightsAudience.user_list][google.ads.googleads.v25.services.InsightsAudience.user_list]
-            is requested in GenerateAudienceCompositionInsightsRequest,
-            score is omitted.
+            is requested or when the request contains the USER_LIST
+            dimension, score is omitted.
     """
 
     baseline_audience_share: float = proto.Field(

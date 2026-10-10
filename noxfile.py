@@ -17,7 +17,7 @@ import os
 import pathlib
 
 
-PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+PYTHON_VERSIONS = ["3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
 PROTOBUF_IMPLEMENTATIONS = ["python", "upb"]
 
 TEST_COMMAND = [
@@ -40,7 +40,7 @@ COVERAGE_COMMAND = [
 ]
 TEST_DEPENDENCIES = [
     "pyfakefs>=5.0.0,<6.0",
-    "coverage==6.5.0",
+    "coverage>=7.15.4,<8.0",
 ]
 CURRENT_DIR = pathlib.Path(__file__).parent.absolute()
 CONSTRAINTS_DIR = os.path.join(CURRENT_DIR, "tests", "constraints")
@@ -67,7 +67,10 @@ def tests(session, protobuf_implementation):
 @nox.session(python=PYTHON_VERSIONS)
 @nox.parametrize("protobuf_implementation", PROTOBUF_IMPLEMENTATIONS)
 def tests_minimum_dependency_versions(session, protobuf_implementation):
-    if session.python == "3.14":
+    if session.python == "3.15":
+        # If running Python 3.15 use the constraints file intended for it.
+        filename = "constraints-3.15.txt"
+    elif session.python == "3.14":
         # If running Python 3.14 use the constraints file intended for it.
         filename = "constraints-3.14.txt"
     elif session.python == "3.13":
@@ -81,7 +84,7 @@ def tests_minimum_dependency_versions(session, protobuf_implementation):
 
     constraints_file = os.path.join(CONSTRAINTS_DIR, "minimums", filename)
 
-    session.install("-e", ".")
+    session.install("-e", ".", "-c", constraints_file)
     session.install(*TEST_DEPENDENCIES, "-c", constraints_file)
     session.run(
         *TEST_COMMAND,

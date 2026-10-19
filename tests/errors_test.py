@@ -78,11 +78,33 @@ class ErrorsTest(unittest.TestCase):
             e_code = exception.failure.errors[0].error_code
             self.assertIsNotNone(e_code.request_error)
 
+    def test_raise_formatted_ads_exception_default_version(self):
+        with mock.patch(
+            "google.api_core.exceptions.from_http_response"
+        ) as mock_from_http:
+            mock_core_error = mock.Mock()
+            mock_core_error.grpc_status_code = grpc.StatusCode.NOT_FOUND
+            mock_core_error.message = "Core exception message"
+            mock_from_http.return_value = mock_core_error
+
+            with self.assertRaises(errors.GoogleAdsException) as cm:
+                errors.raise_formatted_ads_exception(self.response)
+
+            exception = cm.exception
+            self.assertEqual(exception.error.version, self.version)
+
     def test_raise_formatted_for_status_when_not_ok(self):
         with mock.patch(
             "google.ads.googleads.errors.raise_formatted_ads_exception"
         ) as mock_raise:
             errors.raise_formatted_for_status(self.response, self.version)
+            mock_raise.assert_called_once_with(self.response, self.version)
+
+    def test_raise_formatted_for_status_default_version(self):
+        with mock.patch(
+            "google.ads.googleads.errors.raise_formatted_ads_exception"
+        ) as mock_raise:
+            errors.raise_formatted_for_status(self.response)
             mock_raise.assert_called_once_with(self.response, self.version)
 
     def test_raise_formatted_for_status_when_ok(self):

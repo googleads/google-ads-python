@@ -21,6 +21,8 @@ import requests
 from google.api_core import exceptions as core_exceptions
 from proto import Message as ProtobufMessageType
 
+from google.ads.googleads.client import _DEFAULT_VERSION
+
 
 class GoogleAdsException(Exception):
     """Exception thrown in response to an API error from GoogleAds servers."""
@@ -100,7 +102,9 @@ class ResumableUploadErrorAdapter(grpc.RpcError, grpc.Call):
         pass
 
 
-def raise_formatted_ads_exception(response: requests.Response, version: str):
+def raise_formatted_ads_exception(
+    response: requests.Response, version: str = _DEFAULT_VERSION
+):
     """Converts a RUP HTTP response into a rich GoogleAdsException.
 
     Args:
@@ -137,7 +141,9 @@ def raise_formatted_ads_exception(response: requests.Response, version: str):
     )
 
 
-def raise_formatted_for_status(response: requests.Response, version: str):
+def raise_formatted_for_status(
+    response: requests.Response, version: str = _DEFAULT_VERSION
+):
     """Replacement for response.raise_for_status() that raises GoogleAdsException.
 
     Args:

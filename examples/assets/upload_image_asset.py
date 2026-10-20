@@ -23,8 +23,8 @@ import sys
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.types.asset_service import AssetOperation
-from google.ads.googleads.v24.resources.types.asset import Asset
+from google.ads.googleads.v26.services.types.asset_service import AssetOperation
+from google.ads.googleads.v26.resources.types.asset import Asset
 
 
 # [START upload_image_asset]
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

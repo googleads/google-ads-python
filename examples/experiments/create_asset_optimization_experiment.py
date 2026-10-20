@@ -25,7 +25,7 @@ from uuid import uuid4
 from examples.utils.example_helpers import get_image_bytes_from_url
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.types.google_ads_service import (
+from google.ads.googleads.v26.services.types.google_ads_service import (
     MutateOperation,
 )
 
@@ -305,7 +305,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
 
     try:
         main(googleads_client, args.customer_id, args.asset_group_id)

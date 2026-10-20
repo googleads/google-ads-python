@@ -22,17 +22,17 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.enums.types.device import DeviceEnum
-from google.ads.googleads.v24.resources.types.ad_group_bid_modifier import (
+from google.ads.googleads.v26.enums.types.device import DeviceEnum
+from google.ads.googleads.v26.resources.types.ad_group_bid_modifier import (
     AdGroupBidModifier,
 )
-from google.ads.googleads.v24.services.services.ad_group_bid_modifier_service import (
+from google.ads.googleads.v26.services.services.ad_group_bid_modifier_service import (
     AdGroupBidModifierServiceClient,
 )
-from google.ads.googleads.v24.services.services.ad_group_service import (
+from google.ads.googleads.v26.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v24.services.types.ad_group_bid_modifier_service import (
+from google.ads.googleads.v26.services.types.ad_group_bid_modifier_service import (
     AdGroupBidModifierOperation,
     MutateAdGroupBidModifiersResponse,
 )
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

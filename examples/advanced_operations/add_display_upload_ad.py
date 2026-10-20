@@ -24,20 +24,20 @@ import requests
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.resources.types.ad import Ad
-from google.ads.googleads.v24.resources.types.ad_group_ad import AdGroupAd
-from google.ads.googleads.v24.resources.types.asset import Asset
-from google.ads.googleads.v24.services.services.ad_group_ad_service import (
+from google.ads.googleads.v26.resources.types.ad import Ad
+from google.ads.googleads.v26.resources.types.ad_group_ad import AdGroupAd
+from google.ads.googleads.v26.resources.types.asset import Asset
+from google.ads.googleads.v26.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v24.services.services.asset_service import (
+from google.ads.googleads.v26.services.services.asset_service import (
     AssetServiceClient,
 )
-from google.ads.googleads.v24.services.types.ad_group_ad_service import (
+from google.ads.googleads.v26.services.types.ad_group_ad_service import (
     AdGroupAdOperation,
     MutateAdGroupAdsResponse,
 )
-from google.ads.googleads.v24.services.types.asset_service import (
+from google.ads.googleads.v26.services.types.asset_service import (
     AssetOperation,
     MutateAssetsResponse,
 )
@@ -195,7 +195,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

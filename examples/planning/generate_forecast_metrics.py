@@ -24,16 +24,16 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.common.types.criteria import (
+from google.ads.googleads.v26.common.types.criteria import (
     KeywordInfo,
 )
-from google.ads.googleads.v24.services.services.google_ads_service.client import (
+from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.services.keyword_plan_idea_service.client import (
+from google.ads.googleads.v26.services.services.keyword_plan_idea_service.client import (
     KeywordPlanIdeaServiceClient,
 )
-from google.ads.googleads.v24.services.types.keyword_plan_idea_service import (
+from google.ads.googleads.v26.services.types.keyword_plan_idea_service import (
     CampaignToForecast,
     ForecastAdGroup,
     GenerateKeywordForecastMetricsRequest,
@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
 
     try:
         main(googleads_client, args.customer_id)

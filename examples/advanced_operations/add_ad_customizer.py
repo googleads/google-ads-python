@@ -24,25 +24,25 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.common.types import AdTextAsset
-from google.ads.googleads.v24.resources.types import (
+from google.ads.googleads.v26.common.types import AdTextAsset
+from google.ads.googleads.v26.resources.types import (
     AdGroupAd,
     AdGroupCustomizer,
     CustomizerAttribute,
 )
-from google.ads.googleads.v24.services.services.ad_group_ad_service import (
+from google.ads.googleads.v26.services.services.ad_group_ad_service import (
     AdGroupAdServiceClient,
 )
-from google.ads.googleads.v24.services.services.ad_group_customizer_service import (
+from google.ads.googleads.v26.services.services.ad_group_customizer_service import (
     AdGroupCustomizerServiceClient,
 )
-from google.ads.googleads.v24.services.services.customizer_attribute_service import (
+from google.ads.googleads.v26.services.services.customizer_attribute_service import (
     CustomizerAttributeServiceClient,
 )
-from google.ads.googleads.v24.services.services.google_ads_service import (
+from google.ads.googleads.v26.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types import (
+from google.ads.googleads.v26.services.types import (
     AdGroupAdOperation,
     AdGroupCustomizerOperation,
     CustomizerAttributeOperation,
@@ -341,7 +341,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

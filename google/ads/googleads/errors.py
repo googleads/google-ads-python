@@ -14,6 +14,8 @@
 """Errors used by the Google Ads API library."""
 
 import importlib
+import inspect
+import re
 from typing import Any, Optional
 
 import grpc
@@ -22,6 +24,31 @@ from google.api_core import exceptions as core_exceptions
 from proto import Message as ProtobufMessageType
 
 from google.ads.googleads.client import _DEFAULT_VERSION
+
+_VERSION_REGEX = re.compile(r"^google\.ads\.googleads\.(v\d+)\.")
+
+
+def _get_caller_version() -> str:
+    """Determines the Google Ads API version from the call stack.
+
+    Walks the call stack looking for a frame originating from a versioned
+    ``google.ads.googleads.<version>`` module. Falls back to
+    ``_DEFAULT_VERSION`` if no versioned module is found.
+
+    Returns:
+        The detected API version string (e.g., "v25") or ``_DEFAULT_VERSION``.
+    """
+    frame = inspect.currentframe()
+    try:
+        while frame is not None:
+            module_name = frame.f_globals.get("__name__", "")
+            match = _VERSION_REGEX.match(module_name)
+            if match:
+                return match.group(1)
+            frame = frame.f_back
+    finally:
+        del frame
+    return _DEFAULT_VERSION
 
 
 class GoogleAdsException(Exception):
@@ -103,21 +130,26 @@ class ResumableUploadErrorAdapter(grpc.RpcError, grpc.Call):
 
 
 def raise_formatted_ads_exception(
-    response: requests.Response, version: str = _DEFAULT_VERSION
+    response: requests.Response, version: Optional[str] = None
 ):
     """Converts a RUP HTTP response into a rich GoogleAdsException.
 
     Args:
         response (requests.Response):
             The HTTP response containing error details.
-        version (str):
-            The API version (e.g., "v23") used to import error classes.
+        version (Optional[str]):
+            The API version (e.g., "v23") used to import error classes. If not
+            provided, it is inferred from the calling service module or falls
+            back to the default API version.
 
     Raises:
         GoogleAdsException:
             A rich exception containing the mapped gRPC status, failure details,
             and request ID.
     """
+    if version is None:
+        version = _get_caller_version()
+
     # 1. Map HTTP status (e.g., 400) to gRPC status (e.g., INVALID_ARGUMENT)
     core_error = core_exceptions.from_http_response(response)
     grpc_code = core_error.grpc_status_code or grpc.StatusCode.INTERNAL
@@ -142,19 +174,22 @@ def raise_formatted_ads_exception(
 
 
 def raise_formatted_for_status(
-    response: requests.Response, version: str = _DEFAULT_VERSION
+    response: requests.Response, version: Optional[str] = None
 ):
     """Replacement for response.raise_for_status() that raises GoogleAdsException.
 
     Args:
         response (requests.Response):
             The HTTP response to check for errors.
-        version (str):
-            The API version (e.g., "v23").
+        version (Optional[str]):
+            The API version (e.g., "v23"). If not provided, it is inferred from
+            the calling service module or falls back to the default API version.
 
     Raises:
         GoogleAdsException:
             If the response status code indicates an error.
     """
     if not response.ok:
+        if version is None:
+            version = _get_caller_version()
         raise_formatted_ads_exception(response, version)

@@ -93,6 +93,50 @@ class ErrorsTest(unittest.TestCase):
             exception = cm.exception
             self.assertEqual(exception.error.version, self.version)
 
+    def test_raise_formatted_ads_exception_empty_version(self):
+        with mock.patch(
+            "google.api_core.exceptions.from_http_response"
+        ) as mock_from_http:
+            mock_core_error = mock.Mock()
+            mock_core_error.grpc_status_code = grpc.StatusCode.NOT_FOUND
+            mock_core_error.message = "Core exception message"
+            mock_from_http.return_value = mock_core_error
+
+            with self.assertRaises(errors.GoogleAdsException) as cm:
+                errors.raise_formatted_ads_exception(self.response, "")
+
+            exception = cm.exception
+            self.assertEqual(exception.error.version, self.version)
+
+    def test_raise_formatted_ads_exception_infers_caller_version(self):
+        older_version = Client._VALID_API_VERSIONS[1]
+        caller_globals = {
+            "__name__": f"google.ads.googleads.{older_version}.services.test",
+            "errors": errors,
+        }
+        exec(
+            "def call(r): errors.raise_formatted_ads_exception(r)",
+            caller_globals,
+        )
+
+        with mock.patch(
+            "google.api_core.exceptions.from_http_response"
+        ) as mock_from_http:
+            mock_core_error = mock.Mock()
+            mock_core_error.grpc_status_code = grpc.StatusCode.INVALID_ARGUMENT
+            mock_core_error.message = "Error from older version service"
+            mock_from_http.return_value = mock_core_error
+
+            with self.assertRaises(errors.GoogleAdsException) as cm:
+                caller_globals["call"](self.response)
+
+            exception = cm.exception
+            self.assertEqual(exception.error.version, older_version)
+            self.assertIn(
+                f"google.ads.googleads.{older_version}.errors",
+                type(exception.failure).__module__,
+            )
+
     def test_raise_formatted_for_status_when_not_ok(self):
         with mock.patch(
             "google.ads.googleads.errors.raise_formatted_ads_exception"
@@ -105,16 +149,17 @@ class ErrorsTest(unittest.TestCase):
             "google.ads.googleads.errors.raise_formatted_ads_exception"
         ) as mock_raise:
             errors.raise_formatted_for_status(self.response)
-            mock_raise.assert_called_once_with(self.response, self.version)
+            mock_raise.assert_called_once_with(self.response, None)
 
     def test_raise_formatted_for_status_infers_caller_version(self):
         older_version = Client._VALID_API_VERSIONS[1]
-        resumable_upload_module = Client.import_module(
-            f"google.ads.googleads.{older_version}.services.services."
-            "you_tube_video_upload_service.transports.resumable_upload"
-        )
-        upload = resumable_upload_module.ResumableUpload(
-            upload_url="https://example.com", stream=mock.Mock()
+        caller_globals = {
+            "__name__": f"google.ads.googleads.{older_version}.services.test",
+            "errors": errors,
+        }
+        exec(
+            "def call(r): errors.raise_formatted_for_status(r)",
+            caller_globals,
         )
 
         with mock.patch(
@@ -126,7 +171,7 @@ class ErrorsTest(unittest.TestCase):
             mock_from_http.return_value = mock_core_error
 
             with self.assertRaises(errors.GoogleAdsException) as cm:
-                upload._process_initiate_response(self.response)
+                caller_globals["call"](self.response)
 
             exception = cm.exception
             self.assertEqual(exception.error.version, older_version)
@@ -134,6 +179,25 @@ class ErrorsTest(unittest.TestCase):
                 f"google.ads.googleads.{older_version}.errors",
                 type(exception.failure).__module__,
             )
+
+    def test_get_caller_version_when_currentframe_is_none(self):
+        with mock.patch("inspect.currentframe", return_value=None):
+            self.assertEqual(errors._get_caller_version(), self.version)
+
+    def test_get_caller_version_point_release_and_root_module(self):
+        for module_name, expected_version in [
+            ("google.ads.googleads.v26_1.services.test", "v26_1"),
+            ("google.ads.googleads.v25", "v25"),
+        ]:
+            caller_globals = {
+                "__name__": module_name,
+                "errors": errors,
+            }
+            exec(
+                "def call(): return errors._get_caller_version()",
+                caller_globals,
+            )
+            self.assertEqual(caller_globals["call"](), expected_version)
 
     def test_raise_formatted_for_status_when_ok(self):
         self.response.ok = True

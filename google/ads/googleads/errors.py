@@ -23,9 +23,8 @@ import requests
 from google.api_core import exceptions as core_exceptions
 from proto import Message as ProtobufMessageType
 
-from google.ads.googleads.client import _DEFAULT_VERSION
-
-_VERSION_REGEX = re.compile(r"^google\.ads\.googleads\.(v\d+)\.")
+_VERSION_PREFIX = "google.ads.googleads.v"
+_VERSION_REGEX = re.compile(r"^google\.ads\.googleads\.(v\d+(?:_\d+)?)(?:\.|$)")
 
 
 def _get_caller_version() -> str:
@@ -40,14 +39,19 @@ def _get_caller_version() -> str:
     """
     frame = inspect.currentframe()
     try:
+        if frame is not None:
+            frame = frame.f_back
         while frame is not None:
             module_name = frame.f_globals.get("__name__", "")
-            match = _VERSION_REGEX.match(module_name)
-            if match:
-                return match.group(1)
+            if module_name.startswith(_VERSION_PREFIX):
+                match = _VERSION_REGEX.match(module_name)
+                if match:
+                    return match.group(1)
             frame = frame.f_back
     finally:
         del frame
+    from google.ads.googleads.client import _DEFAULT_VERSION
+
     return _DEFAULT_VERSION
 
 
@@ -147,7 +151,7 @@ def raise_formatted_ads_exception(
             A rich exception containing the mapped gRPC status, failure details,
             and request ID.
     """
-    if version is None:
+    if not version:
         version = _get_caller_version()
 
     # 1. Map HTTP status (e.g., 400) to gRPC status (e.g., INVALID_ARGUMENT)
@@ -190,6 +194,4 @@ def raise_formatted_for_status(
             If the response status code indicates an error.
     """
     if not response.ok:
-        if version is None:
-            version = _get_caller_version()
         raise_formatted_ads_exception(response, version)

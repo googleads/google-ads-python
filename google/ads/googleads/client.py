@@ -24,18 +24,6 @@ from google.auth.credentials import Credentials
 from google.protobuf.message import Message as ProtobufMessageType
 from proto import Message as ProtoPlusMessageType
 
-from types import ModuleType
-from typing import Any, Dict, List, Tuple, Union
-
-_logger = logging.getLogger(__name__)
-
-_SERVICE_CLIENT_TEMPLATE = "{}Client"
-_ASYNC_SERVICE_CLIENT_TEMPLATE = "{}AsyncClient"
-
-_VALID_API_VERSIONS = ["v26", "v25", "v24", "v23"]
-_MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
-_DEFAULT_VERSION = _VALID_API_VERSIONS[0]
-
 from google.ads.googleads import config, oauth2, util
 from google.ads.googleads.interceptors import (
     MetadataInterceptor,
@@ -48,6 +36,18 @@ from google.ads.googleads.interceptors import (
     AsyncUnaryUnaryLoggingInterceptor,
     AsyncUnaryStreamLoggingInterceptor,
 )
+
+from types import ModuleType
+from typing import Any, Dict, List, Tuple, Union
+
+_logger = logging.getLogger(__name__)
+
+_SERVICE_CLIENT_TEMPLATE = "{}Client"
+_ASYNC_SERVICE_CLIENT_TEMPLATE = "{}AsyncClient"
+
+_VALID_API_VERSIONS = ["v26", "v25", "v24", "v23"]
+_MESSAGE_TYPES = ["common", "enums", "errors", "resources", "services"]
+_DEFAULT_VERSION = _VALID_API_VERSIONS[0]
 
 # Retrieve the version of this client library to be sent in the user-agent
 # information of API calls.

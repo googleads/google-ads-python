@@ -27,13 +27,13 @@ from uuid import uuid4
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.resources.types.bidding_data_exclusion import (
+from google.ads.googleads.v26.resources.types.bidding_data_exclusion import (
     BiddingDataExclusion,
 )
-from google.ads.googleads.v24.services.services.bidding_data_exclusion_service import (
+from google.ads.googleads.v26.services.services.bidding_data_exclusion_service import (
     BiddingDataExclusionServiceClient,
 )
-from google.ads.googleads.v24.services.types.bidding_data_exclusion_service import (
+from google.ads.googleads.v26.services.types.bidding_data_exclusion_service import (
     BiddingDataExclusionOperation,
     MutateBiddingDataExclusionsResponse,
 )
@@ -130,7 +130,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

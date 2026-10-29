@@ -13,13 +13,14 @@
 # limitations under the License.
 """Tests for the Google Ads API client library."""
 
+import asyncio
 from importlib import import_module
 from inspect import getmembers
-from unittest import mock
+import json
+from unittest import IsolatedAsyncioTestCase, TestCase, mock
 import os
 import pickle
 from pyfakefs.fake_filesystem_unittest import TestCase as FileTestCase
-from unittest import TestCase
 import yaml
 
 from google.protobuf.message import Message as ProtobufMessageType
@@ -1040,6 +1041,167 @@ class GoogleAdsClientTest(TestCase):
 
         reload(Client)
 
+    def test_youtube_video_upload_service_sync_resumable_session(self):
+        rest_mod = import_module(
+            f"google.ads.googleads.{latest_version}.services.services."
+            "you_tube_video_upload_service.transports.rest"
+        )
+        test_proxy = "http://localhost:8000"
+        client = Client.GoogleAdsClient(
+            credentials=mock.Mock(),
+            developer_token=self.developer_token,
+            login_customer_id=self.login_customer_id,
+            linked_customer_id=self.linked_customer_id,
+            endpoint="custom.ads.googleapis.com",
+            http_proxy=test_proxy,
+            use_proto_plus=True,
+            ads_assistant="1.2.3",
+            version=latest_version,
+        )
+        self.addCleanup(
+            Client._GRPC_CHANNEL_OPTIONS.remove,
+            ("grpc.http_proxy", test_proxy),
+        )
+
+        svc = client.get_service("YouTubeVideoUploadService")
+        self.assertIsNone(svc.transport._rest_transport._transport)
+
+        request = client.get_type("CreateYouTubeVideoUploadRequest")
+        request.customer_id = "9998887777"
+        request.you_tube_video_upload.video_title = "My Video"
+        request.you_tube_video_upload.video_privacy = (
+            client.enums.YouTubeVideoPrivacyEnum.UNLISTED
+        )
+
+        with mock.patch.object(
+            rest_mod.resumable_transfer,
+            "ResumableUploadSession",
+            wraps=rest_mod.resumable_transfer.ResumableUploadSession,
+        ) as mock_session_cls:
+            session = svc.create_you_tube_video_upload(request=request)
+
+        self.assertIsInstance(
+            session, rest_mod.resumable_transfer.ResumableUploadSession
+        )
+        call_kwargs = mock_session_cls.call_args.kwargs
+        self.assertEqual(
+            call_kwargs["upload_url"],
+            f"https://custom.ads.googleapis.com/resumable/upload/"
+            f"{latest_version}/customers/9998887777/youTubeVideoUploads:create",
+        )
+        headers = call_kwargs["config"].headers
+        self.assertEqual(headers["developer-token"], self.developer_token)
+        self.assertEqual(headers["login-customer-id"], self.login_customer_id)
+        self.assertEqual(headers["linked-customer-id"], self.linked_customer_id)
+        self.assertEqual(
+            headers["x-goog-request-params"], "customer_id=9998887777"
+        )
+        self.assertIn("gaada/1.2.3", headers["x-goog-api-client"])
+        self.assertEqual(headers["Content-Type"], "application/json")
+        self.assertEqual(
+            call_kwargs["transport"].proxies,
+            {"http": test_proxy, "https": test_proxy},
+        )
+        body_dict = json.loads(call_kwargs["request_body"])
+        self.assertEqual(
+            body_dict["youTubeVideoUpload"]["videoTitle"], "My Video"
+        )
+        self.assertEqual(
+            body_dict["youTubeVideoUpload"]["videoPrivacy"], "UNLISTED"
+        )
+        svc.transport.close()
+
+    def test_youtube_video_upload_service_sync_protobuf_request(self):
+        rest_mod = import_module(
+            f"google.ads.googleads.{latest_version}.services.services."
+            "you_tube_video_upload_service.transports.rest"
+        )
+        client = Client.GoogleAdsClient(
+            credentials=mock.Mock(),
+            developer_token=self.developer_token,
+            use_proto_plus=False,
+            version=latest_version,
+        )
+        svc = client.get_service("YouTubeVideoUploadService")
+        request = client.get_type("CreateYouTubeVideoUploadRequest")
+        request.customer_id = "9998887777"
+        request.you_tube_video_upload.video_title = "Protobuf Video"
+
+        with mock.patch.object(
+            rest_mod.resumable_transfer,
+            "ResumableUploadSession",
+            wraps=rest_mod.resumable_transfer.ResumableUploadSession,
+        ) as mock_session_cls:
+            svc.create_you_tube_video_upload(request=request)
+
+        body_dict = json.loads(
+            mock_session_cls.call_args.kwargs["request_body"]
+        )
+        self.assertEqual(
+            body_dict["youTubeVideoUpload"]["videoTitle"], "Protobuf Video"
+        )
+        svc.transport.close()
+
+    def test_youtube_video_upload_service_legacy_signature(self):
+        class FakeLegacyClient:
+            DEFAULT_ENDPOINT = "googleads.googleapis.com"
+
+            def __init__(
+                self,
+                *,
+                transport=None,
+                credentials=None,
+                developer_token=None,
+                login_customer_id=None,
+                linked_customer_id=None,
+            ):
+                self.transport = transport
+                self.credentials = credentials
+                self.developer_token = developer_token
+                self.login_customer_id = login_customer_id
+                self.linked_customer_id = linked_customer_id
+
+            @classmethod
+            def get_transport_class(cls, label=None):
+                transport_cls = mock.MagicMock()
+                transport_cls.create_channel.return_value = mock.MagicMock()
+                return transport_cls
+
+        fake_module = mock.MagicMock()
+        fake_module.YouTubeVideoUploadServiceClient = FakeLegacyClient
+
+        creds = mock.Mock()
+        client = Client.GoogleAdsClient(
+            credentials=creds,
+            developer_token=self.developer_token,
+            login_customer_id=self.login_customer_id,
+            linked_customer_id=self.linked_customer_id,
+            version=latest_version,
+        )
+
+        orig_import = Client.import_module
+
+        def _fake_import(mod_name, *args, **kwargs):
+            if mod_name.endswith(".services.you_tube_video_upload_service"):
+                return fake_module
+            return orig_import(mod_name, *args, **kwargs)
+
+        with (
+            mock.patch.object(
+                Client, "import_module", side_effect=_fake_import
+            ),
+            mock.patch.object(
+                Client.grpc, "intercept_channel", return_value=mock.MagicMock()
+            ),
+        ):
+            svc = client.get_service("YouTubeVideoUploadService")
+
+        self.assertIsInstance(svc, FakeLegacyClient)
+        self.assertIs(svc.credentials, creds)
+        self.assertEqual(svc.developer_token, self.developer_token)
+        self.assertEqual(svc.login_customer_id, self.login_customer_id)
+        self.assertEqual(svc.linked_customer_id, self.linked_customer_id)
+
 
 class GoogleAdsClientTestFs(FileTestCase):
     """Tests for the GoogleAdsClient class that require a fake filesystem."""
@@ -1337,3 +1499,136 @@ class GoogleAdsClientTestFs(FileTestCase):
                 http_proxy=None,
                 ads_assistant=None,
             )
+
+
+class GoogleAdsClientTestAsync(IsolatedAsyncioTestCase):
+    """Async tests for google.ads.googleads.client.GoogleAdsClient."""
+
+    def setUp(self):
+        self.developer_token = DEFAULT_CONFIG["developer_token"]
+        self.login_customer_id = "1234567890"
+        self.linked_customer_id = "0987654321"
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        # Restore a default event loop so subsequent synchronous TestCases that
+        # initialize grpc.aio channels continue to find an event loop.
+        asyncio.set_event_loop(asyncio.new_event_loop())
+
+    async def test_youtube_video_upload_service_async_without_extra(self):
+        grpc_asyncio_mod = import_module(
+            f"google.ads.googleads.{latest_version}.services.services."
+            "you_tube_video_upload_service.transports.grpc_asyncio"
+        )
+        client = Client.GoogleAdsClient(
+            credentials=mock.Mock(),
+            developer_token=self.developer_token,
+            version=latest_version,
+        )
+
+        with mock.patch.object(grpc_asyncio_mod, "HAS_ASYNC_REST", False):
+            svc_async = client.get_service(
+                "YouTubeVideoUploadService", is_async=True
+            )
+            request = client.get_type("CreateYouTubeVideoUploadRequest")
+            request.customer_id = "9998887777"
+
+            with self.assertRaisesRegex(
+                NotImplementedError, r"google-ads\[async_rest\]"
+            ):
+                await svc_async.create_you_tube_video_upload(request=request)
+            await svc_async.transport.close()
+
+    async def test_youtube_video_upload_service_async_with_extra(self):
+        grpc_asyncio_mod = import_module(
+            f"google.ads.googleads.{latest_version}.services.services."
+            "you_tube_video_upload_service.transports.grpc_asyncio"
+        )
+        fake_rest_asyncio = mock.MagicMock()
+
+        class FakeBaseInterceptor:
+            async def pre_create_you_tube_video_upload(self, request, metadata):
+                return request, metadata
+
+        captured = {}
+
+        class FakeAsyncRestTransport:
+            def __init__(self, *, host, credentials, client_info, interceptor):
+                captured["host"] = host
+                captured["credentials"] = credentials
+                captured["interceptor"] = interceptor
+                captured["closed"] = False
+
+            async def create_you_tube_video_upload(self, request, **kwargs):
+                _, metadata = (
+                    await captured[
+                        "interceptor"
+                    ].pre_create_you_tube_video_upload(
+                        request, [("x-goog-api-client", "gapic/1.0")]
+                    )
+                )
+                captured["metadata"] = dict(metadata)
+                return "fake-async-session"
+
+            async def close(self):
+                captured["closed"] = True
+
+        fake_rest_asyncio.AsyncYouTubeVideoUploadServiceRestInterceptor = (
+            FakeBaseInterceptor
+        )
+        fake_rest_asyncio.AsyncYouTubeVideoUploadServiceRestTransport = (
+            FakeAsyncRestTransport
+        )
+
+        creds = mock.Mock()
+        client = Client.GoogleAdsClient(
+            credentials=creds,
+            developer_token=self.developer_token,
+            login_customer_id=self.login_customer_id,
+            linked_customer_id=self.linked_customer_id,
+            endpoint="async.ads.googleapis.com",
+            ads_assistant="2.0.0",
+            version=latest_version,
+        )
+
+        orig_import = Client.import_module
+
+        def _fake_import(mod_name, *args, **kwargs):
+            if mod_name.endswith(".transports.rest_asyncio"):
+                return fake_rest_asyncio
+            return orig_import(mod_name, *args, **kwargs)
+
+        with (
+            mock.patch.object(grpc_asyncio_mod, "HAS_ASYNC_REST", True),
+            mock.patch.object(
+                Client, "import_module", side_effect=_fake_import
+            ),
+        ):
+            svc_async = client.get_service(
+                "YouTubeVideoUploadService", is_async=True
+            )
+            self.assertEqual(captured, {})
+
+            request = client.get_type("CreateYouTubeVideoUploadRequest")
+            request.customer_id = "8887776666"
+
+            result = await svc_async.create_you_tube_video_upload(
+                request=request
+            )
+            self.assertEqual(result, "fake-async-session")
+            await svc_async.transport.close()
+
+        self.assertEqual(captured["host"], "async.ads.googleapis.com")
+        self.assertIs(captured["credentials"], creds)
+        self.assertEqual(
+            captured["metadata"]["developer-token"], self.developer_token
+        )
+        self.assertEqual(
+            captured["metadata"]["login-customer-id"], self.login_customer_id
+        )
+        self.assertEqual(
+            captured["metadata"]["linked-customer-id"], self.linked_customer_id
+        )
+        self.assertIn("gaada/2.0.0", captured["metadata"]["x-goog-api-client"])
+        self.assertTrue(captured["closed"])

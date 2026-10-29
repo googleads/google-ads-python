@@ -60,7 +60,24 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class GoogleAdsServiceAsyncClient:
-    """Service to fetch data and metrics across resources."""
+    """Service to fetch data and metrics across resources. Use the
+    interactive `Google Ads Query
+    Builder </google-ads/api/fields/latest/overview_query_builder>`__ to
+    construct and validate Google Ads Query Language (GAQL) queries.
+
+    Search versus SearchStream:
+
+    - ``Search``: Paginated using ``next_page_token`` with up to 10,000
+      rows per page. Caches pages across requests. Best for small result
+      sets (< 10,000 rows) or user-driven paginated interfaces.
+    - ``SearchStream``: Delivers a single stream of response batches
+      with up to 10,000 rows per batch. Lower overhead without request
+      caching. Best for large result sets (> 10,000 rows) or batch
+      reporting workloads.
+
+    For more details, see `Streaming versus
+    paging </google-ads/api/docs/reporting/streaming>`__.
+    """
 
     _client: GoogleAdsServiceClient
 
@@ -550,6 +567,12 @@ class GoogleAdsServiceAsyncClient:
     )
     parse_customer_asset_set_path = staticmethod(
         GoogleAdsServiceClient.parse_customer_asset_set_path
+    )
+    customer_budget_network_setting_path = staticmethod(
+        GoogleAdsServiceClient.customer_budget_network_setting_path
+    )
+    parse_customer_budget_network_setting_path = staticmethod(
+        GoogleAdsServiceClient.parse_customer_budget_network_setting_path
     )
     customer_client_path = staticmethod(
         GoogleAdsServiceClient.customer_client_path
@@ -1379,7 +1402,12 @@ class GoogleAdsServiceAsyncClient:
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
     ) -> pagers.SearchAsyncPager:
-        r"""Returns all rows that match the search query.
+        r"""Returns all rows that match the search query. Uses pagination
+        (``next_page_token``) with up to 10,000 rows per page. For
+        result sets larger than 10,000 rows, prefer
+        [GoogleAdsService.SearchStream][google.ads.googleads.v26.services.GoogleAdsService.SearchStream].
+        To build and validate queries, use the `Google Ads Query
+        Builder </google-ads/api/fields/latest/overview_query_builder>`__.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ChangeEventError <>`__
@@ -1498,7 +1526,13 @@ class GoogleAdsServiceAsyncClient:
     ) -> Awaitable[
         AsyncIterable[google_ads_service.SearchGoogleAdsStreamResponse]
     ]:
-        r"""Returns all rows that match the search stream query.
+        r"""Returns all rows that match the search stream query. Streams
+        batches of rows over a single connection without pagination
+        overhead, making it preferred over
+        [GoogleAdsService.Search][google.ads.googleads.v26.services.GoogleAdsService.Search]
+        for large result sets (> 10,000 rows). To build and validate
+        queries, use the `Google Ads Query
+        Builder </google-ads/api/fields/latest/overview_query_builder>`__.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ChangeEventError <>`__

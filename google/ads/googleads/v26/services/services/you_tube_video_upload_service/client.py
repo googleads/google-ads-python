@@ -19,17 +19,7 @@ import json
 import logging as std_logging
 import os
 import re
-from typing import (
-    Dict,
-    Callable,
-    Optional,
-    BinaryIO,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-    cast,
-)
+from typing import Dict, Callable, Optional, Sequence, Tuple, Type, Union, cast
 import warnings
 
 from google.ads.googleads.v26 import gapic_version as package_version
@@ -37,6 +27,14 @@ from google.ads.googleads.v26 import gapic_version as package_version
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
 from google.api_core import gapic_v1
+from google.api_core.resumable_transfer import ResumableUploadConfig
+from google.ads.googleads.v26._compat import (
+    get_universe_domain,
+    get_api_endpoint,
+    get_default_mtls_endpoint,
+    should_use_client_cert,
+    read_environment_variables,
+)
 from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
@@ -61,13 +59,11 @@ _LOGGER = std_logging.getLogger(__name__)
 
 from google.ads.googleads.v26.resources.types import youtube_video_upload
 from google.ads.googleads.v26.services.types import youtube_video_upload_service
+from google.api_core import resumable_transfer
 import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 from .transports.base import (
     YouTubeVideoUploadServiceTransport,
     DEFAULT_CLIENT_INFO,
-)
-from .transports.rest_resumable import (
-    YouTubeVideoUploadServiceRestResumableTransport,
 )
 from .transports.grpc import YouTubeVideoUploadServiceGrpcTransport
 from .transports.grpc_asyncio import (
@@ -118,76 +114,12 @@ class YouTubeVideoUploadServiceClient(
 ):
     """Service to manage YouTube video uploads."""
 
-    @staticmethod
-    def _get_default_mtls_endpoint(api_endpoint) -> Optional[str]:
-        """Converts api endpoint to mTLS endpoint.
-
-        Convert "*.sandbox.googleapis.com" and "*.googleapis.com" to
-        "*.mtls.sandbox.googleapis.com" and "*.mtls.googleapis.com" respectively.
-        Args:
-            api_endpoint (Optional[str]): the api endpoint to convert.
-        Returns:
-            Optional[str]: converted mTLS api endpoint.
-        """
-        if not api_endpoint:
-            return api_endpoint
-
-        mtls_endpoint_re = re.compile(
-            r"(?P<name>[^.]+)(?P<mtls>\.mtls)?(?P<sandbox>\.sandbox)?(?P<googledomain>\.googleapis\.com)?"
-        )
-
-        m = mtls_endpoint_re.match(api_endpoint)
-        if m is None:
-            # Could not parse api_endpoint; return as-is.
-            return api_endpoint
-
-        name, mtls, sandbox, googledomain = m.groups()
-        if mtls or not googledomain:
-            return api_endpoint
-
-        if sandbox:
-            return api_endpoint.replace(
-                "sandbox.googleapis.com", "mtls.sandbox.googleapis.com"
-            )
-
-        return api_endpoint.replace(".googleapis.com", ".mtls.googleapis.com")
-
     # Note: DEFAULT_ENDPOINT is deprecated. Use _DEFAULT_ENDPOINT_TEMPLATE instead.
     DEFAULT_ENDPOINT = "googleads.googleapis.com"
-    DEFAULT_MTLS_ENDPOINT = _get_default_mtls_endpoint.__func__(  # type: ignore
-        DEFAULT_ENDPOINT
-    )
+    DEFAULT_MTLS_ENDPOINT = get_default_mtls_endpoint(DEFAULT_ENDPOINT)
 
     _DEFAULT_ENDPOINT_TEMPLATE = "googleads.{UNIVERSE_DOMAIN}"
     _DEFAULT_UNIVERSE = "googleapis.com"
-
-    @staticmethod
-    def _use_client_cert_effective():
-        """Returns whether client certificate should be used for mTLS if the
-        google-auth version supports should_use_client_cert automatic mTLS enablement.
-
-        Alternatively, read from the GOOGLE_API_USE_CLIENT_CERTIFICATE env var.
-
-        Returns:
-            bool: whether client certificate should be used for mTLS
-        Raises:
-            ValueError: (If using a version of google-auth without should_use_client_cert and
-            GOOGLE_API_USE_CLIENT_CERTIFICATE is set to an unexpected value.)
-        """
-        # check if google-auth version supports should_use_client_cert for automatic mTLS enablement
-        if hasattr(mtls, "should_use_client_cert"):  # pragma: NO COVER
-            return mtls.should_use_client_cert()
-        else:  # pragma: NO COVER
-            # if unsupported, fallback to reading from env var
-            use_client_cert_str = os.getenv(
-                "GOOGLE_API_USE_CLIENT_CERTIFICATE", "false"
-            ).lower()
-            if use_client_cert_str not in ("true", "false"):
-                raise ValueError(
-                    "Environment variable `GOOGLE_API_USE_CLIENT_CERTIFICATE` must be"
-                    " either `true` or `false`"
-                )
-            return use_client_cert_str == "true"
 
     @classmethod
     def from_service_account_info(cls, info: dict, *args, **kwargs):
@@ -380,9 +312,7 @@ class YouTubeVideoUploadServiceClient(
         )
         if client_options is None:
             client_options = client_options_lib.ClientOptions()
-        use_client_cert = (
-            YouTubeVideoUploadServiceClient._use_client_cert_effective()
-        )
+        use_client_cert = should_use_client_cert()
         use_mtls_endpoint = os.getenv("GOOGLE_API_USE_MTLS_ENDPOINT", "auto")
         if use_mtls_endpoint not in ("auto", "never", "always"):
             raise MutualTLSChannelError(
@@ -403,38 +333,11 @@ class YouTubeVideoUploadServiceClient(
         elif use_mtls_endpoint == "always" or (
             use_mtls_endpoint == "auto" and client_cert_source
         ):
-            api_endpoint = cls.DEFAULT_MTLS_ENDPOINT
+            api_endpoint = cls.DEFAULT_MTLS_ENDPOINT  # type: ignore
         else:
             api_endpoint = cls.DEFAULT_ENDPOINT
 
         return api_endpoint, client_cert_source
-
-    @staticmethod
-    def _read_environment_variables():
-        """Returns the environment variables used by the client.
-
-        Returns:
-            Tuple[bool, str, str]: returns the GOOGLE_API_USE_CLIENT_CERTIFICATE,
-            GOOGLE_API_USE_MTLS_ENDPOINT, and GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variables.
-
-        Raises:
-            ValueError: If GOOGLE_API_USE_CLIENT_CERTIFICATE is not
-                any of ["true", "false"].
-            google.auth.exceptions.MutualTLSChannelError: If GOOGLE_API_USE_MTLS_ENDPOINT
-                is not any of ["auto", "never", "always"].
-        """
-        use_client_cert = (
-            YouTubeVideoUploadServiceClient._use_client_cert_effective()
-        )
-        use_mtls_endpoint = os.getenv(
-            "GOOGLE_API_USE_MTLS_ENDPOINT", "auto"
-        ).lower()
-        universe_domain_env = os.getenv("GOOGLE_CLOUD_UNIVERSE_DOMAIN")
-        if use_mtls_endpoint not in ("auto", "never", "always"):
-            raise MutualTLSChannelError(
-                "Environment variable `GOOGLE_API_USE_MTLS_ENDPOINT` must be `never`, `auto` or `always`"
-            )
-        return use_client_cert, use_mtls_endpoint, universe_domain_env
 
     @staticmethod
     def _get_client_cert_source(provided_cert_source, use_cert_flag):
@@ -454,68 +357,6 @@ class YouTubeVideoUploadServiceClient(
             elif mtls.has_default_client_cert_source():
                 client_cert_source = mtls.default_client_cert_source()
         return client_cert_source
-
-    @staticmethod
-    def _get_api_endpoint(
-        api_override, client_cert_source, universe_domain, use_mtls_endpoint
-    ) -> str:
-        """Return the API endpoint used by the client.
-
-        Args:
-            api_override (str): The API endpoint override. If specified, this is always
-                the return value of this function and the other arguments are not used.
-            client_cert_source (bytes): The client certificate source used by the client.
-            universe_domain (str): The universe domain used by the client.
-            use_mtls_endpoint (str): How to use the mTLS endpoint, which depends also on the other parameters.
-                Possible values are "always", "auto", or "never".
-
-        Returns:
-            str: The API endpoint to be used by the client.
-        """
-        if api_override is not None:
-            api_endpoint = api_override
-        elif use_mtls_endpoint == "always" or (
-            use_mtls_endpoint == "auto" and client_cert_source
-        ):
-            _default_universe = (
-                YouTubeVideoUploadServiceClient._DEFAULT_UNIVERSE
-            )
-            if universe_domain != _default_universe:
-                raise MutualTLSChannelError(
-                    f"mTLS is not supported in any universe other than {_default_universe}."
-                )
-            api_endpoint = YouTubeVideoUploadServiceClient.DEFAULT_MTLS_ENDPOINT
-        else:
-            api_endpoint = YouTubeVideoUploadServiceClient._DEFAULT_ENDPOINT_TEMPLATE.format(
-                UNIVERSE_DOMAIN=universe_domain
-            )
-        return api_endpoint
-
-    @staticmethod
-    def _get_universe_domain(
-        client_universe_domain: Optional[str],
-        universe_domain_env: Optional[str],
-    ) -> str:
-        """Return the universe domain used by the client.
-
-        Args:
-            client_universe_domain (Optional[str]): The universe domain configured via the client options.
-            universe_domain_env (Optional[str]): The universe domain configured via the "GOOGLE_CLOUD_UNIVERSE_DOMAIN" environment variable.
-
-        Returns:
-            str: The universe domain to be used by the client.
-
-        Raises:
-            ValueError: If the universe domain is an empty string.
-        """
-        universe_domain = YouTubeVideoUploadServiceClient._DEFAULT_UNIVERSE
-        if client_universe_domain is not None:
-            universe_domain = client_universe_domain
-        elif universe_domain_env is not None:
-            universe_domain = universe_domain_env
-        if len(universe_domain.strip()) == 0:
-            raise ValueError("Universe Domain cannot be an empty string.")
-        return universe_domain
 
     def _validate_universe_domain(self):
         """Validates client's and credentials' universe domains are consistent.
@@ -579,10 +420,6 @@ class YouTubeVideoUploadServiceClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        developer_token: Optional[str] = None,
-        login_customer_id: Optional[str] = None,
-        linked_customer_id: Optional[str] = None,
-        use_cloud_org_for_api_access: bool = False,
         transport: Optional[
             Union[
                 str,
@@ -603,18 +440,6 @@ class YouTubeVideoUploadServiceClient(
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            developer_token (Optional[str]): The developer token to use for the
-                resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            login_customer_id (Optional[str]): The login customer ID to use for
-                the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            linked_customer_id (Optional[str]): The linked customer ID to use for
-                the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            use_cloud_org_for_api_access (bool): Whether to use the cloud org for
-                API access for the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
             transport (Optional[Union[str,YouTubeVideoUploadServiceTransport,Callable[..., YouTubeVideoUploadServiceTransport]]]):
                 The transport to use, or a Callable that constructs and returns a new transport.
                 If a Callable is given, it will be called with the same set of initialization
@@ -675,16 +500,16 @@ class YouTubeVideoUploadServiceClient(
             self._use_client_cert,
             self._use_mtls_endpoint,
             self._universe_domain_env,
-        ) = YouTubeVideoUploadServiceClient._read_environment_variables()
+        ) = read_environment_variables()
         self._client_cert_source = (
             YouTubeVideoUploadServiceClient._get_client_cert_source(
                 self._client_options.client_cert_source, self._use_client_cert
             )
         )
-        self._universe_domain = (
-            YouTubeVideoUploadServiceClient._get_universe_domain(
-                universe_domain_opt, self._universe_domain_env
-            )
+        self._universe_domain = get_universe_domain(
+            universe_domain_opt,
+            self._universe_domain_env,
+            default_universe=YouTubeVideoUploadServiceClient._DEFAULT_UNIVERSE,
         )
         self._api_endpoint: str = ""  # updated below, depending on `transport`
 
@@ -709,7 +534,11 @@ class YouTubeVideoUploadServiceClient(
         )
         if transport_provided:
             # transport is a YouTubeVideoUploadServiceTransport instance.
-            if self._client_options.credentials_file or api_key_value:
+            if (
+                credentials
+                or self._client_options.credentials_file
+                or api_key_value
+            ):
                 raise ValueError(
                     "When providing a transport instance, "
                     "provide its credentials directly."
@@ -723,36 +552,15 @@ class YouTubeVideoUploadServiceClient(
                 YouTubeVideoUploadServiceTransport, transport
             )
             self._api_endpoint = self._transport.host
-            resumable_creds = credentials or getattr(
-                self._transport, "_credentials", None
-            )
 
-            if resumable_creds is None:
-                raise ValueError(
-                    "For the correct REST resumable transport initialization, either the credentials should be explicitly provided as a `credentials` parameter, or the transport passed should contain readable `_credentials` property. E.g. passing a GRPC channel as a transport does not satisfy this since the credentials cannot be extracted from it. This requirement is unique to the YouTubeVideoUploadService."
-                )
-
-            self._rest_resumable_transport = (
-                YouTubeVideoUploadServiceRestResumableTransport(
-                    credentials=resumable_creds,
-                    credentials_file=None,
-                    host=self._transport.host,
-                    scopes=self._transport._scopes,
-                    developer_token=developer_token,
-                    login_customer_id=login_customer_id,
-                    linked_customer_id=linked_customer_id,
-                    use_cloud_org_for_api_access=use_cloud_org_for_api_access,
-                )
-            )
-
-        self._api_endpoint = (
-            self._api_endpoint
-            or YouTubeVideoUploadServiceClient._get_api_endpoint(
-                self._client_options.api_endpoint,
-                self._client_cert_source,
-                self._universe_domain,
-                self._use_mtls_endpoint,
-            )
+        self._api_endpoint = self._api_endpoint or get_api_endpoint(
+            api_override=self._client_options.api_endpoint,
+            universe_domain=self._universe_domain,
+            default_universe=YouTubeVideoUploadServiceClient._DEFAULT_UNIVERSE,
+            default_mtls_endpoint=YouTubeVideoUploadServiceClient.DEFAULT_MTLS_ENDPOINT,
+            default_endpoint_template=YouTubeVideoUploadServiceClient._DEFAULT_ENDPOINT_TEMPLATE,
+            use_mtls=self._use_mtls_endpoint == "always"
+            or (self._use_mtls_endpoint == "auto" and self._client_cert_source),
         )
 
         if not transport_provided:
@@ -786,25 +594,6 @@ class YouTubeVideoUploadServiceClient(
                 client_info=client_info,
                 always_use_jwt_access=True,
                 api_audience=self._client_options.api_audience,
-            )
-
-            # Initialize a separate transport for the rest resumable uploads
-            self._rest_resumable_transport = (
-                YouTubeVideoUploadServiceRestResumableTransport(
-                    credentials=credentials,
-                    credentials_file=self._client_options.credentials_file,
-                    host=self._api_endpoint,
-                    scopes=self._client_options.scopes,
-                    client_cert_source_for_mtls=self._client_cert_source,
-                    quota_project_id=self._client_options.quota_project_id,
-                    client_info=client_info,
-                    always_use_jwt_access=True,
-                    api_audience=self._client_options.api_audience,
-                    developer_token=developer_token,
-                    login_customer_id=login_customer_id,
-                    linked_customer_id=linked_customer_id,
-                    use_cloud_org_for_api_access=use_cloud_org_for_api_access,
-                )
             )
 
         if "async" not in str(self._transport):
@@ -849,11 +638,11 @@ class YouTubeVideoUploadServiceClient(
         you_tube_video_upload: Optional[
             youtube_video_upload.YouTubeVideoUpload
         ] = None,
-        stream: BinaryIO,
+        config: Optional[ResumableUploadConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
-    ) -> youtube_video_upload_service.CreateYouTubeVideoUploadResponse:
+    ) -> resumable_transfer.ResumableUploadSession:
         r"""Uploads a video to Google-managed or advertiser owned
         (brand) YouTube channel.
 
@@ -875,8 +664,8 @@ class YouTubeVideoUploadServiceClient(
                 This corresponds to the ``you_tube_video_upload`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            stream (BinaryIO):
-                The stream to upload.
+            config (Optional[google.api_core.resumable_transfer.ResumableUploadConfig]):
+                Optional configuration for the resumable upload session.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -886,9 +675,9 @@ class YouTubeVideoUploadServiceClient(
                 be of type `bytes`.
 
         Returns:
-            google.ads.googleads.v26.services.types.CreateYouTubeVideoUploadResponse:
-                Response message for
-                   [YouTubeVideoUploadService.CreateYouTubeVideoUpload][google.ads.googleads.v26.services.YouTubeVideoUploadService.CreateYouTubeVideoUpload].
+            google.api_core.resumable_transfer.ResumableUploadSession:
+                An object representing a resumable
+                upload session.
 
         """
         # Create or coerce a protobuf request object.
@@ -922,8 +711,11 @@ class YouTubeVideoUploadServiceClient(
             if you_tube_video_upload is not None:
                 request.you_tube_video_upload = you_tube_video_upload
 
-        if stream is None:
-            raise ValueError("stream is required for resumable upload methods")
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[
+            self._transport.create_you_tube_video_upload
+        ]
 
         # Certain fields should be provided within the metadata header;
         # add these here.
@@ -937,12 +729,13 @@ class YouTubeVideoUploadServiceClient(
         self._validate_universe_domain()
 
         # Send the request.
-        response = self._rest_resumable_transport.create_you_tube_video_upload_resumable(
-            request=request,
-            stream=stream,
+        response = rpc(
+            request,
             retry=retry,
             timeout=timeout,
             metadata=metadata,
+            config=config,
+            start_retry=retry,
         )
 
         # Done; return the response.

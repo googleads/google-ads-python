@@ -273,6 +273,9 @@ from google.ads.googleads.v26.resources.types import (
     customer_asset_set as gagr_customer_asset_set,
 )
 from google.ads.googleads.v26.resources.types import (
+    customer_budget_network_setting as gagr_customer_budget_network_setting,
+)
+from google.ads.googleads.v26.resources.types import (
     customer_client as gagr_customer_client,
 )
 from google.ads.googleads.v26.resources.types import (
@@ -634,6 +637,9 @@ from google.ads.googleads.v26.services.types import (
     custom_conversion_goal_service,
 )
 from google.ads.googleads.v26.services.types import customer_asset_service
+from google.ads.googleads.v26.services.types import (
+    customer_budget_network_setting_service,
+)
 from google.ads.googleads.v26.services.types import (
     customer_conversion_goal_service,
 )
@@ -1125,6 +1131,9 @@ class GoogleAdsRow(proto.Message):
         customer_asset_set (google.ads.googleads.v26.resources.types.CustomerAssetSet):
             The customer asset set referenced in the
             query.
+        customer_budget_network_setting (google.ads.googleads.v26.resources.types.CustomerBudgetNetworkSetting):
+            The customer budget network setting
+            referenced in the query.
         accessible_bidding_strategy (google.ads.googleads.v26.resources.types.AccessibleBiddingStrategy):
             The accessible bidding strategy referenced in
             the query.
@@ -1902,6 +1911,13 @@ class GoogleAdsRow(proto.Message):
         proto.MESSAGE,
         number=195,
         message=gagr_customer_asset_set.CustomerAssetSet,
+    )
+    customer_budget_network_setting: (
+        gagr_customer_budget_network_setting.CustomerBudgetNetworkSetting
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=268,
+        message=gagr_customer_budget_network_setting.CustomerBudgetNetworkSetting,
     )
     accessible_bidding_strategy: (
         gagr_accessible_bidding_strategy.AccessibleBiddingStrategy
@@ -2864,6 +2880,11 @@ class MutateOperation(proto.Message):
             A customer asset mutate operation.
 
             This field is a member of `oneof`_ ``operation``.
+        customer_budget_network_setting_operation (google.ads.googleads.v26.services.types.CustomerBudgetNetworkSettingOperation):
+            A customer budget network setting mutate
+            operation.
+
+            This field is a member of `oneof`_ ``operation``.
         customer_conversion_goal_operation (google.ads.googleads.v26.services.types.CustomerConversionGoalOperation):
             A customer conversion goal mutate operation.
 
@@ -3283,6 +3304,14 @@ class MutateOperation(proto.Message):
             message=customer_asset_service.CustomerAssetOperation,
         )
     )
+    customer_budget_network_setting_operation: (
+        customer_budget_network_setting_service.CustomerBudgetNetworkSettingOperation
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=92,
+        oneof="operation",
+        message=customer_budget_network_setting_service.CustomerBudgetNetworkSettingOperation,
+    )
     customer_conversion_goal_operation: (
         customer_conversion_goal_service.CustomerConversionGoalOperation
     ) = proto.Field(
@@ -3640,6 +3669,11 @@ class MutateOperationResponse(proto.Message):
             This field is a member of `oneof`_ ``response``.
         customer_asset_result (google.ads.googleads.v26.services.types.MutateCustomerAssetResult):
             The result for the customer asset mutate.
+
+            This field is a member of `oneof`_ ``response``.
+        customer_budget_network_setting_result (google.ads.googleads.v26.services.types.MutateCustomerBudgetNetworkSettingResult):
+            The result for the customer budget network
+            setting mutate.
 
             This field is a member of `oneof`_ ``response``.
         customer_conversion_goal_result (google.ads.googleads.v26.services.types.MutateCustomerConversionGoalResult):
@@ -4065,6 +4099,14 @@ class MutateOperationResponse(proto.Message):
             oneof="response",
             message=customer_asset_service.MutateCustomerAssetResult,
         )
+    )
+    customer_budget_network_setting_result: (
+        customer_budget_network_setting_service.MutateCustomerBudgetNetworkSettingResult
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=92,
+        oneof="response",
+        message=customer_budget_network_setting_service.MutateCustomerBudgetNetworkSettingResult,
     )
     customer_conversion_goal_result: (
         customer_conversion_goal_service.MutateCustomerConversionGoalResult

@@ -125,7 +125,14 @@ class OfflineUserDataJobServiceClientMeta(type):
 class OfflineUserDataJobServiceClient(
     metaclass=OfflineUserDataJobServiceClientMeta
 ):
-    """Service to manage offline user data jobs."""
+    """Service to manage offline user data jobs. For help diagnosing and
+    resolving conversion or user data upload issues, see the conversion
+    upload `troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+    the ``troubleshoot-conversions`` workflow in the `Google Ads API
+    Developer
+    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+    """
 
     # Note: DEFAULT_ENDPOINT is deprecated. Use _DEFAULT_ENDPOINT_TEMPLATE instead.
     DEFAULT_ENDPOINT = "googleads.googleapis.com"

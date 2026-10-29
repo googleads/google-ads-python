@@ -59,7 +59,8 @@ class AdGroupTypeEnum(proto.Message):
                 campaigns.
             SHOPPING_SMART_ADS (7):
                 The type for ad groups in Smart Shopping
-                campaigns.
+                campaigns. New Smart Shopping campaigns cannot
+                be created.
             VIDEO_BUMPER (8):
                 Short unskippable in-stream video ads.
             VIDEO_TRUE_VIEW_IN_STREAM (9):

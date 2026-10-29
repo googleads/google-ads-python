@@ -29,13 +29,26 @@ __protobuf__ = proto.module(
 
 
 class ConversionUploadErrorEnum(proto.Message):
-    r"""Container for enum describing possible conversion upload
-    errors.
+    r"""Container for enum describing possible conversion upload errors.
+
+    For help diagnosing and resolving these errors, see the `Conversion
+    upload troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+    the ``troubleshoot-conversions`` workflow in the `Google Ads API
+    Developer
+    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     """
 
     class ConversionUploadError(proto.Enum):
         r"""Enum describing possible conversion upload errors.
+
+        For step-by-step resolution guidance, see the `Conversion upload
+        troubleshooting
+        guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+        the ``troubleshoot-conversions`` workflow in the `Google Ads API
+        Developer
+        Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
         Values:
             UNSPECIFIED (0):

@@ -36,6 +36,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.audience_insights_attribute",
     "google.ads.googleads.v26.types.audiences",
     "google.ads.googleads.v26.types.bidding",
+    "google.ads.googleads.v26.types.budget_network_common",
     "google.ads.googleads.v26.types.campaign_goal_settings",
     "google.ads.googleads.v26.types.campaign_reservation_quote",
     "google.ads.googleads.v26.types.click_location",
@@ -147,6 +148,8 @@ from .types.asset_types import DynamicJobsAsset
 from .types.asset_types import DynamicLocalAsset
 from .types.asset_types import DynamicRealEstateAsset
 from .types.asset_types import DynamicTravelAsset
+from .types.asset_types import ExternalPartnerId
+from .types.asset_types import ExternalRedeemInfo
 from .types.asset_types import FacebookMessengerBusinessMessageInfo
 from .types.asset_types import HotelCalloutAsset
 from .types.asset_types import HotelPropertyAsset
@@ -227,6 +230,11 @@ from .types.bidding import TargetCpv
 from .types.bidding import TargetImpressionShare
 from .types.bidding import TargetRoas
 from .types.bidding import TargetSpend
+from .types.budget_network_common import BudgetCapConfig
+from .types.budget_network_common import BudgetNetworkEligibility
+from .types.budget_network_common import BudgetNetworkSetting
+from .types.budget_network_common import BudgetNetworkSettings
+from .types.budget_network_common import ChannelPriorityConfig
 from .types.campaign_goal_settings import CampaignGoalSettings
 from .types.campaign_reservation_quote import CampaignReservationQuote
 from .types.click_location import ClickLocation
@@ -354,6 +362,7 @@ from .types.local_services import LocalServicesDocumentReadOnly
 from .types.local_services import LocalServicesPhoneNumber
 from .types.metric_goal import MetricGoal
 from .types.metrics import Metrics
+from .types.metrics import ReachMetricInfo
 from .types.metrics import SearchVolumeRange
 from .types.offline_user_data import CustomerMatchUserListMetadata
 from .types.offline_user_data import EventAttribute
@@ -509,6 +518,10 @@ __all__ = (
     "BrandInfo",
     "BrandListInfo",
     "BudgetCampaignAssociationStatus",
+    "BudgetCapConfig",
+    "BudgetNetworkEligibility",
+    "BudgetNetworkSetting",
+    "BudgetNetworkSettings",
     "BudgetSimulationPoint",
     "BudgetSimulationPointList",
     "BusinessMessageAsset",
@@ -534,6 +547,7 @@ __all__ = (
     "ChainFilter",
     "ChainLocationGroup",
     "ChainSet",
+    "ChannelPriorityConfig",
     "ClickLocation",
     "CombinedAudienceInfo",
     "Commission",
@@ -589,6 +603,8 @@ __all__ = (
     "ExpandedDynamicSearchAdInfo",
     "ExpandedTextAdInfo",
     "ExtendedDemographicInfo",
+    "ExternalPartnerId",
+    "ExternalRedeemInfo",
     "FacebookMessengerBusinessMessageInfo",
     "FinalAppUrl",
     "FixedCpm",
@@ -712,6 +728,7 @@ __all__ = (
     "PromotionBarcodeInfo",
     "PromotionQrCodeInfo",
     "ProximityInfo",
+    "ReachMetricInfo",
     "RealTimeBiddingSetting",
     "ResponsiveDisplayAdControlSpec",
     "ResponsiveDisplayAdInfo",

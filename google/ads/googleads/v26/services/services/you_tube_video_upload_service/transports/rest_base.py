@@ -14,24 +14,27 @@
 # limitations under the License.
 #
 import json  # type: ignore
+from google.api_core import gapic_v1
+
+from .base import YouTubeVideoUploadServiceTransport, DEFAULT_CLIENT_INFO
+
 import re
 from typing import Any, Dict, List, Optional
 
-from google.api_core import gapic_v1, path_template
-from google.protobuf import empty_pb2  # type: ignore
 
-from google.ads.googleads.v26.services.types import youtube_video_upload_service
-
-from .base import DEFAULT_CLIENT_INFO, YouTubeVideoUploadServiceTransport
-
-
-class _BaseYouTubeVideoUploadServiceRestResumableTransport(
+class _BaseYouTubeVideoUploadServiceRestTransport(
     YouTubeVideoUploadServiceTransport
 ):
-    """Base REST Resumable backend transport for YouTubeVideoUploadService.
+    """Base REST backend transport for YouTubeVideoUploadService.
 
-    Note: This class is not meant to be used directly. Only services that has RPCs
-    that should be invoked as resumable upload should instantiate it and use it.
+    Note: This class is not meant to be used directly. Use its sync and
+    async sub-classes instead.
+
+    This class defines the same methods as the primary client, so the
+    primary client can load the underlying transport implementation
+    and call it.
+
+    It sends JSON representations of protocol buffers over HTTP/1.1
     """
 
     def __init__(
@@ -87,32 +90,56 @@ class _BaseYouTubeVideoUploadServiceRestResumableTransport(
             api_audience=api_audience,
         )
 
-    class _BaseCreateYouTubeVideoUploadRequest:
+    class _BaseCreateYouTubeVideoUpload:
         def __hash__(self):  # pragma: NO COVER
             return NotImplementedError("__hash__ must be implemented.")
+
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @staticmethod
         def _get_http_options():
             http_options: List[Dict[str, str]] = [
                 {
                     "method": "post",
-                    "uri": "/v26/customers/{customer_id=*}/youTubeVideoUploads:create",
+                    "uri": "/resumable/upload/v26/customers/{customer_id=*}/youTubeVideoUploads:create",
                     "body": "*",
                 },
             ]
             return http_options
 
+    class _BaseRemoveYouTubeVideoUpload:
+        def __hash__(self):  # pragma: NO COVER
+            return NotImplementedError("__hash__ must be implemented.")
+
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
+
         @staticmethod
-        def _get_transcoded_request(http_options, request):
-            pb_request = (
-                youtube_video_upload_service.CreateYouTubeVideoUploadRequest.pb(
-                    request
-                )
-            )
-            transcoded_request = path_template.transcode(
-                http_options, pb_request
-            )
-            return transcoded_request
+        def _get_http_options():
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v26/customers/{customer_id=*}/youTubeVideoUploads:remove",
+                    "body": "*",
+                },
+            ]
+            return http_options
+
+    class _BaseUpdateYouTubeVideoUpload:
+        def __hash__(self):  # pragma: NO COVER
+            return NotImplementedError("__hash__ must be implemented.")
+
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
+
+        @staticmethod
+        def _get_http_options():
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v26/customers/{customer_id=*}/youTubeVideoUploads:update",
+                    "body": "*",
+                },
+            ]
+            return http_options
 
 
-__all__ = ("_BaseYouTubeVideoUploadServiceRestResumableTransport",)
+__all__ = ("_BaseYouTubeVideoUploadServiceRestTransport",)

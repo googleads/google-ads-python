@@ -17,10 +17,21 @@ import inspect
 import pickle
 import logging as std_logging
 import warnings
-from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple, Union
+from typing import (
+    Any,
+    Awaitable,
+    Callable,
+    Dict,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+)
 
 from google.api_core import gapic_v1
 from google.api_core import grpc_helpers_async
+from google.api_core import exceptions as core_exceptions
+from google.api_core import resumable_transfer
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.protobuf.json_format import MessageToJson
@@ -32,6 +43,13 @@ from grpc.experimental import aio  # type: ignore
 
 from google.ads.googleads.v26.services.types import youtube_video_upload_service
 from .base import YouTubeVideoUploadServiceTransport, DEFAULT_CLIENT_INFO
+
+try:
+    from .rest_asyncio import AsyncYouTubeVideoUploadServiceRestTransport
+
+    HAS_ASYNC_REST = True  # pragma: NO COVER
+except ImportError:  # pragma: NO COVER
+    HAS_ASYNC_REST = False
 
 try:
     from google.api_core import client_logging  # type: ignore
@@ -260,6 +278,13 @@ class YouTubeVideoUploadServiceGrpcAsyncIOTransport(
         self._grpc_channel = None
         self._ssl_channel_credentials = ssl_channel_credentials
         self._stubs: Dict[str, Callable] = {}
+        # Resumable upload RPCs operate over HTTP/REST rather than gRPC.
+        # Since gRPC is the default transport for GAPIC clients and services
+        # mix standard gRPC RPCs with resumable upload RPCs on the same client,
+        # gRPC transports delegate resumable upload calls to an internal REST
+        # transport instance.
+        self._rest_transport: Optional[Any] = None
+        self._client_cert_source_for_mtls = client_cert_source_for_mtls
 
         if api_mtls_endpoint:
             warnings.warn("api_mtls_endpoint is deprecated", DeprecationWarning)
@@ -358,9 +383,7 @@ class YouTubeVideoUploadServiceGrpcAsyncIOTransport(
         self,
     ) -> Callable[
         [youtube_video_upload_service.CreateYouTubeVideoUploadRequest],
-        Awaitable[
-            youtube_video_upload_service.CreateYouTubeVideoUploadResponse
-        ],
+        Awaitable[resumable_transfer.AsyncResumableUploadSession],
     ]:
         r"""Return a callable for the create you tube video upload method over gRPC.
 
@@ -369,7 +392,7 @@ class YouTubeVideoUploadServiceGrpcAsyncIOTransport(
 
         Returns:
             Callable[[~.CreateYouTubeVideoUploadRequest],
-                    Awaitable[~.CreateYouTubeVideoUploadResponse]]:
+                    Awaitable[~.AsyncResumableUploadSession]]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -378,13 +401,55 @@ class YouTubeVideoUploadServiceGrpcAsyncIOTransport(
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
         if "create_you_tube_video_upload" not in self._stubs:
-            self._stubs["create_you_tube_video_upload"] = (
-                self._logged_channel.unary_unary(
-                    "/google.ads.googleads.v26.services.YouTubeVideoUploadService/CreateYouTubeVideoUpload",
-                    request_serializer=youtube_video_upload_service.CreateYouTubeVideoUploadRequest.serialize,
-                    response_deserializer=youtube_video_upload_service.CreateYouTubeVideoUploadResponse.deserialize,
+
+            class _ErrorStub:
+                def __init__(self, error: Exception):
+                    self._error = error
+
+                def __call__(self, *args, **kwargs):
+                    async def _raise():
+                        raise self._error
+
+                    return _raise()
+
+            if not self._credentials:
+                self._stubs["create_you_tube_video_upload"] = _ErrorStub(
+                    core_exceptions.GoogleAPICallError(
+                        "Resumable upload methods operate over REST and cannot be invoked when the transport is initialized with a pre-constructed gRPC channel. Please supply credentials directly instead of a gRPC channel to use resumable upload functionality."
+                    )
                 )
-            )
+            elif self._client_cert_source_for_mtls:
+                self._stubs["create_you_tube_video_upload"] = _ErrorStub(
+                    core_exceptions.AsyncRestUnsupportedParameterError(
+                        "Mutual TLS (client_cert_source_for_mtls) is not currently supported for async resumable upload methods."
+                    )
+                )
+            elif HAS_ASYNC_REST:
+                transport = self
+
+                class _AsyncRestStub:
+                    def __call__(self, *args, **kwargs):
+                        if transport._rest_transport is None:
+                            transport._rest_transport = (
+                                AsyncYouTubeVideoUploadServiceRestTransport(
+                                    host=transport._host,
+                                    credentials=transport._credentials,
+                                    client_info=transport._client_info,
+                                )
+                            )
+                        return transport._rest_transport.create_you_tube_video_upload(
+                            *args, **kwargs
+                        )
+
+                self._stubs["create_you_tube_video_upload"] = _AsyncRestStub()
+            else:
+                self._stubs["create_you_tube_video_upload"] = _ErrorStub(
+                    NotImplementedError(
+                        "Async REST transport is required for async resumable upload methods. "
+                        "Install the library with the `async_rest` extra using "
+                        "`pip install google-ads[async_rest]`."
+                    )
+                )
         return self._stubs["create_you_tube_video_upload"]
 
     @property
@@ -479,8 +544,10 @@ class YouTubeVideoUploadServiceGrpcAsyncIOTransport(
             kwargs["kind"] = self.kind
         return gapic_v1.method_async.wrap_method(func, *args, **kwargs)
 
-    def close(self):
-        return self._logged_channel.close()
+    async def close(self):
+        await self._logged_channel.close()
+        if self._rest_transport is not None:
+            await self._rest_transport.close()
 
     @property
     def kind(self) -> str:

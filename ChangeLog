@@ -1,3 +1,12 @@
+* 35.0.0
+- Google Ads API v26_1 release.
+- Remove support for Python 3.9.
+- Update `YouTubeVideoUploadService` in v26 to use `ResumableUploadSession`,
+  add `async_rest` optional extra for async resumable uploads, and update the
+  `upload_video` example.
+- Update minimum version requirements for `google-api-core`, `protobuf`,
+  `proto-plus`, and `googleapis-common-protos`.
+
 * 34.0.0
 - Google Ads API v26 release.
 

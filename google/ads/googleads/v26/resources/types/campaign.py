@@ -780,8 +780,6 @@ class Campaign(proto.Message):
                 over those with lower priorities. This field is
                 required for Shopping campaigns, with values
                 between 0 and 2, inclusive.
-                This field is optional for Smart Shopping
-                campaigns, but must be equal to 3 if set.
 
                 This field is a member of `oneof`_ ``_campaign_priority``.
             enable_local (bool):
@@ -790,9 +788,9 @@ class Campaign(proto.Message):
                 This field is a member of `oneof`_ ``_enable_local``.
             use_vehicle_inventory (bool):
                 Immutable. Whether to target Vehicle Listing inventory. This
-                field is supported only in Smart Shopping Campaigns. For
-                setting Vehicle Listing inventory in Performance Max
-                campaigns, use ``listing_type`` instead.
+                field is no longer supported. Use Performance Max or
+                Shopping campaigns with ``listing_type`` to target Vehicle
+                Listing inventory.
             advertising_partner_ids (MutableSequence[int]):
                 The list of Google Ads accounts IDs of
                 advertising partners cooperating within the

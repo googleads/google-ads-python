@@ -97,6 +97,8 @@ from .asset_types import (
     DynamicLocalAsset,
     DynamicRealEstateAsset,
     DynamicTravelAsset,
+    ExternalPartnerId,
+    ExternalRedeemInfo,
     FacebookMessengerBusinessMessageInfo,
     HotelCalloutAsset,
     HotelPropertyAsset,
@@ -183,6 +185,13 @@ from .bidding import (
     TargetImpressionShare,
     TargetRoas,
     TargetSpend,
+)
+from .budget_network_common import (
+    BudgetCapConfig,
+    BudgetNetworkEligibility,
+    BudgetNetworkSetting,
+    BudgetNetworkSettings,
+    ChannelPriorityConfig,
 )
 from .campaign_goal_settings import (
     CampaignGoalSettings,
@@ -348,6 +357,7 @@ from .metric_goal import (
 )
 from .metrics import (
     Metrics,
+    ReachMetricInfo,
     SearchVolumeRange,
 )
 from .offline_user_data import (
@@ -531,6 +541,8 @@ __all__ = (
     "DynamicLocalAsset",
     "DynamicRealEstateAsset",
     "DynamicTravelAsset",
+    "ExternalPartnerId",
+    "ExternalRedeemInfo",
     "FacebookMessengerBusinessMessageInfo",
     "HotelCalloutAsset",
     "HotelPropertyAsset",
@@ -609,6 +621,11 @@ __all__ = (
     "TargetImpressionShare",
     "TargetRoas",
     "TargetSpend",
+    "BudgetCapConfig",
+    "BudgetNetworkEligibility",
+    "BudgetNetworkSetting",
+    "BudgetNetworkSettings",
+    "ChannelPriorityConfig",
     "CampaignGoalSettings",
     "CampaignReservationQuote",
     "ClickLocation",
@@ -732,6 +749,7 @@ __all__ = (
     "LocalServicesPhoneNumber",
     "MetricGoal",
     "Metrics",
+    "ReachMetricInfo",
     "SearchVolumeRange",
     "CustomerMatchUserListMetadata",
     "EventAttribute",

@@ -134,6 +134,9 @@ from google.ads.googleads.v26.errors.types import (
     brand_guidelines_migration_error as gage_brand_guidelines_migration_error,
 )
 from google.ads.googleads.v26.errors.types import (
+    budget_network_setting_error as gage_budget_network_setting_error,
+)
+from google.ads.googleads.v26.errors.types import (
     business_profile_location_sync_error as gage_business_profile_location_sync_error,
 )
 from google.ads.googleads.v26.errors.types import (
@@ -259,6 +262,9 @@ from google.ads.googleads.v26.errors.types import (
 from google.ads.googleads.v26.errors.types import date_error as gage_date_error
 from google.ads.googleads.v26.errors.types import (
     date_range_error as gage_date_range_error,
+)
+from google.ads.googleads.v26.errors.types import (
+    demand_gen_campaign_error as gage_demand_gen_campaign_error,
 )
 from google.ads.googleads.v26.errors.types import (
     distinct_error as gage_distinct_error,
@@ -1339,6 +1345,16 @@ class ErrorCode(proto.Message):
         multi_party_auth_review_error (google.ads.googleads.v26.errors.types.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError):
             The reasons for the multi party auth review
             error
+
+            This field is a member of `oneof`_ ``error_code``.
+        budget_network_setting_error (google.ads.googleads.v26.errors.types.BudgetNetworkSettingErrorEnum.BudgetNetworkSettingError):
+            The reasons for the budget network setting
+            error.
+
+            This field is a member of `oneof`_ ``error_code``.
+        demand_gen_campaign_error (google.ads.googleads.v26.errors.types.DemandGenCampaignErrorEnum.DemandGenCampaignError):
+            The reasons for the Demand Gen campaign
+            error.
 
             This field is a member of `oneof`_ ``error_code``.
     """
@@ -2650,6 +2666,22 @@ class ErrorCode(proto.Message):
         number=200,
         oneof="error_code",
         enum=gage_multi_party_auth_review_error.MultiPartyAuthReviewErrorEnum.MultiPartyAuthReviewError,
+    )
+    budget_network_setting_error: (
+        gage_budget_network_setting_error.BudgetNetworkSettingErrorEnum.BudgetNetworkSettingError
+    ) = proto.Field(
+        proto.ENUM,
+        number=201,
+        oneof="error_code",
+        enum=gage_budget_network_setting_error.BudgetNetworkSettingErrorEnum.BudgetNetworkSettingError,
+    )
+    demand_gen_campaign_error: (
+        gage_demand_gen_campaign_error.DemandGenCampaignErrorEnum.DemandGenCampaignError
+    ) = proto.Field(
+        proto.ENUM,
+        number=202,
+        oneof="error_code",
+        enum=gage_demand_gen_campaign_error.DemandGenCampaignErrorEnum.DemandGenCampaignError,
     )
 
 

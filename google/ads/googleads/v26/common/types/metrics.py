@@ -21,6 +21,7 @@ import proto  # type: ignore
 
 from google.ads.googleads.v26.enums.types import interaction_event_type
 from google.ads.googleads.v26.enums.types import quality_score_bucket
+from google.ads.googleads.v26.enums.types import reach_metric_state
 
 
 __protobuf__ = proto.module(
@@ -29,6 +30,7 @@ __protobuf__ = proto.module(
     manifest={
         "Metrics",
         "SearchVolumeRange",
+        "ReachMetricInfo",
     },
 )
 
@@ -1814,6 +1816,38 @@ class Metrics(proto.Message):
             for date ranges of 31 days or less.
 
             This field is a member of `oneof`_ ``_unique_users_five_plus``.
+        unique_users_six_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad six or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_six_plus``.
+        unique_users_seven_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad seven or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_seven_plus``.
+        unique_users_eight_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad eight or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_eight_plus``.
+        unique_users_nine_plus (int):
+            This metric counts the unique individuals who
+            were shown your video ad nine or more times
+            within the selected date range. This metric
+            cannot be aggregated, and can only be requested
+            for date ranges of 31 days or less.
+
+            This field is a member of `oneof`_ ``_unique_users_nine_plus``.
         unique_users_ten_plus (int):
             This metric counts the unique individuals who
             were shown your video ad ten or more times
@@ -2986,6 +3020,82 @@ class Metrics(proto.Message):
             impression.
 
             This field is a member of `oneof`_ ``_normalized_incremental_searches_per_impression_p90_upper_bound``.
+        unique_users_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad at
+            least once within the selected date range.
+
+            This field is a member of `oneof`_ ``_unique_users_info``.
+        unique_users_two_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad two
+            or more times within the selected date range.
+
+            This field is a member of `oneof`_ ``_unique_users_two_plus_info``.
+        unique_users_three_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            three or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_three_plus_info``.
+        unique_users_four_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            four or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_four_plus_info``.
+        unique_users_five_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            five or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_five_plus_info``.
+        unique_users_six_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad six
+            or more times within the selected date range.
+
+            This field is a member of `oneof`_ ``_unique_users_six_plus_info``.
+        unique_users_seven_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            seven or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_seven_plus_info``.
+        unique_users_eight_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            eight or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_eight_plus_info``.
+        unique_users_nine_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad
+            nine or more times within the selected date
+            range.
+
+            This field is a member of `oneof`_ ``_unique_users_nine_plus_info``.
+        unique_users_ten_plus_info (google.ads.googleads.v26.common.types.ReachMetricInfo):
+            Additional information (e.g. quality of reach
+            data) about the metric representing the number
+            of unique individuals who were shown your ad ten
+            or more times within the selected date range.
+
+            This field is a member of `oneof`_ ``_unique_users_ten_plus_info``.
     """
 
     absolute_top_impression_percentage: float = proto.Field(
@@ -4070,6 +4180,26 @@ class Metrics(proto.Message):
         number=396,
         optional=True,
     )
+    unique_users_six_plus: int = proto.Field(
+        proto.INT64,
+        number=556,
+        optional=True,
+    )
+    unique_users_seven_plus: int = proto.Field(
+        proto.INT64,
+        number=557,
+        optional=True,
+    )
+    unique_users_eight_plus: int = proto.Field(
+        proto.INT64,
+        number=558,
+        optional=True,
+    )
+    unique_users_nine_plus: int = proto.Field(
+        proto.INT64,
+        number=559,
+        optional=True,
+    )
     unique_users_ten_plus: int = proto.Field(
         proto.INT64,
         number=397,
@@ -4842,6 +4972,66 @@ class Metrics(proto.Message):
             optional=True,
         )
     )
+    unique_users_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=550,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_two_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=551,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_three_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=552,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_four_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=553,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_five_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=554,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_six_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=560,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_seven_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=561,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_eight_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=562,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_nine_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=563,
+        optional=True,
+        message="ReachMetricInfo",
+    )
+    unique_users_ten_plus_info: "ReachMetricInfo" = proto.Field(
+        proto.MESSAGE,
+        number=555,
+        optional=True,
+        message="ReachMetricInfo",
+    )
 
 
 class SearchVolumeRange(proto.Message):
@@ -4871,6 +5061,25 @@ class SearchVolumeRange(proto.Message):
         proto.INT64,
         number=2,
         optional=True,
+    )
+
+
+class ReachMetricInfo(proto.Message):
+    r"""Container for storing the additional information about ad
+    reach.
+
+    Attributes:
+        reach_metric_states (MutableSequence[google.ads.googleads.v26.enums.types.ReachMetricStateEnum.ReachMetricState]):
+            The state of the reach metric, providing
+            additional information on reach metrics.
+    """
+
+    reach_metric_states: MutableSequence[
+        reach_metric_state.ReachMetricStateEnum.ReachMetricState
+    ] = proto.RepeatedField(
+        proto.ENUM,
+        number=1,
+        enum=reach_metric_state.ReachMetricStateEnum.ReachMetricState,
     )
 
 

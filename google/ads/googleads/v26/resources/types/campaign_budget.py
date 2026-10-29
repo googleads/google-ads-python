@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import proto  # type: ignore
 
+from google.ads.googleads.v26.common.types import budget_network_common
 from google.ads.googleads.v26.enums.types import budget_delivery_method
 from google.ads.googleads.v26.enums.types import budget_period
 from google.ads.googleads.v26.enums.types import budget_status
@@ -198,6 +199,15 @@ class CampaignBudget(proto.Message):
             with a bidding strategy, campaigns that are
             added to the campaign budget must also use the
             aligned bidding strategy.
+        budget_network_settings (google.ads.googleads.v26.common.types.BudgetNetworkSettings):
+            Waterfall channel priorities and budget caps for this
+            budget, at most one entry per advertising channel type. When
+            unset, the customer-level defaults in
+            ``CustomerBudgetNetworkSetting`` apply.
+        budget_network_eligibility (google.ads.googleads.v26.common.types.BudgetNetworkEligibility):
+            Output only. Whether this budget is eligible
+            for waterfall channel prioritization and budget
+            caps, and if not, why.
     """
 
     resource_name: str = proto.Field(
@@ -289,6 +299,20 @@ class CampaignBudget(proto.Message):
     aligned_bidding_strategy_id: int = proto.Field(
         proto.INT64,
         number=31,
+    )
+    budget_network_settings: budget_network_common.BudgetNetworkSettings = (
+        proto.Field(
+            proto.MESSAGE,
+            number=32,
+            message=budget_network_common.BudgetNetworkSettings,
+        )
+    )
+    budget_network_eligibility: (
+        budget_network_common.BudgetNetworkEligibility
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=33,
+        message=budget_network_common.BudgetNetworkEligibility,
     )
 
 

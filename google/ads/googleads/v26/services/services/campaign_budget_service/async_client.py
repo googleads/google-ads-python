@@ -336,6 +336,13 @@ class CampaignBudgetServiceAsyncClient:
             request (Optional[Union[google.ads.googleads.v26.services.types.MutateCampaignBudgetsRequest, dict]]):
                 The request object. Request message for
                 [CampaignBudgetService.MutateCampaignBudgets][google.ads.googleads.v26.services.CampaignBudgetService.MutateCampaignBudgets].
+
+                Update operations in ``operations`` require an
+                ``update_mask`` specifying the fields to modify. Note
+                that ``explicitly_shared`` defaults to ``true`` if
+                unspecified. A non-shared budget can be updated to
+                explicitly shared, but an explicitly shared budget
+                cannot become non-shared.
             customer_id (:class:`str`):
                 Required. The ID of the customer
                 whose campaign budgets are being

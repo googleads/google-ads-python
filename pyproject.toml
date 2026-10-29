@@ -18,10 +18,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "google-ads"
-version = "34.0.0"
+version = "35.0.0"
 description = "Client library for the Google Ads API"
 readme = "./README.rst"
-requires-python = ">=3.9, <3.15"
+requires-python = ">=3.10, <3.15"
 license = { file = "LICENSE" }
 authors = [
     {name = "Google LLC", email = "googleapis-packages@google.com"}
@@ -30,7 +30,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -39,10 +38,8 @@ classifiers = [
 ]
 dependencies = [
     "google-auth-oauthlib >= 1.0.0, < 2.0.0",
-    "google-api-core >= 2.13.0, <= 3.0.0",
-    "google-api-core >= 2.22.0, <= 3.0.0; python_version >= '3.13'",
-    "googleapis-common-protos >= 1.56.3, < 2.0.0",
-    "googleapis-common-protos >= 1.63.2, < 2.0.0; python_version >= '3.13'",
+    "google-api-core >= 2.41.0, <= 3.0.0",
+    "googleapis-common-protos >= 1.69.2, < 2.0.0",
     # NOTE: Source code for grpcio and grpcio-status exist in the same
     # grpc/grpc monorepo and thus these two dependencies should always
     # have the same version range.
@@ -52,16 +49,17 @@ dependencies = [
     "grpcio-status >= 1.59.0, < 2.0.0",
     "grpcio-status >= 1.66.2, < 2.0.0; python_version >= '3.13'",
     "grpcio-status >= 1.75.1, < 2.0.0; python_version >= '3.14'",
-    "proto-plus >= 1.22.3, < 2.0.0",
-    "proto-plus >= 1.25.0, < 2.0.0; python_version >= '3.13'",
+    "proto-plus >= 1.26.1, < 2.0.0",
     "PyYAML >= 5.1, < 7.0",
-    "protobuf >= 4.25.0, < 7.0.0; python_version < '3.10'",
-    "protobuf >= 4.25.0, < 8.0.0; python_version >= '3.10'",
-    "protobuf >= 5.26.1; python_version >= '3.13'",
+    "protobuf >= 6.33.5, < 8.0.0",
 ]
 
 [project.optional-dependencies]
 tests = ["nox >= 2025.02.09"]
+async_rest = [
+    "google-api-core[async_rest] >= 2.41.0, <= 3.0.0",
+    "google-auth[aiohttp] >= 2.60.0, < 3.0.0",
+]
 
 [project.urls]
 Repository = "https://github.com/googleads/google-ads-python"

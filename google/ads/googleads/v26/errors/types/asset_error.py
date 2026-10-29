@@ -159,6 +159,10 @@ class AssetErrorEnum(proto.Message):
             CUSTOMER_NOT_ON_ALLOWLIST_FOR_MESSAGE_ASSETS (46):
                 The customer is not in the allow-list for
                 Business message asset type.
+            PARTNER_PROMOTION_ID_TYPE_INCOMPATIBLE (47):
+                The partner promotion ID is set as the oneof variant
+                (int_value or string_value) that this account's promotion
+                integration does not accept.
         """
 
         UNSPECIFIED = 0
@@ -207,6 +211,7 @@ class AssetErrorEnum(proto.Message):
         PROMOTION_QR_CODE_CANNOT_CONTAIN_LINKS = 44
         PROMOTION_QR_CODE_INVALID_FORMAT = 45
         CUSTOMER_NOT_ON_ALLOWLIST_FOR_MESSAGE_ASSETS = 46
+        PARTNER_PROMOTION_ID_TYPE_INCOMPATIBLE = 47
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

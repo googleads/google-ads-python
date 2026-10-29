@@ -124,6 +124,9 @@ from .billing_setup_error import (
 from .brand_guidelines_migration_error import (
     BrandGuidelinesMigrationErrorEnum,
 )
+from .budget_network_setting_error import (
+    BudgetNetworkSettingErrorEnum,
+)
 from .business_profile_location_sync_error import (
     BusinessProfileLocationSyncErrorEnum,
 )
@@ -252,6 +255,9 @@ from .date_error import (
 )
 from .date_range_error import (
     DateRangeErrorEnum,
+)
+from .demand_gen_campaign_error import (
+    DemandGenCampaignErrorEnum,
 )
 from .distinct_error import (
     DistinctErrorEnum,
@@ -570,6 +576,7 @@ __all__ = (
     "BiddingStrategyErrorEnum",
     "BillingSetupErrorEnum",
     "BrandGuidelinesMigrationErrorEnum",
+    "BudgetNetworkSettingErrorEnum",
     "BusinessProfileLocationSyncErrorEnum",
     "CampaignBudgetErrorEnum",
     "CampaignConversionGoalErrorEnum",
@@ -613,6 +620,7 @@ __all__ = (
     "DatabaseErrorEnum",
     "DateErrorEnum",
     "DateRangeErrorEnum",
+    "DemandGenCampaignErrorEnum",
     "DistinctErrorEnum",
     "EnumErrorEnum",
     "BudgetPerDayMinimumErrorDetails",

@@ -58,7 +58,14 @@ _LOGGER = std_logging.getLogger(__name__)
 
 
 class OfflineUserDataJobServiceAsyncClient:
-    """Service to manage offline user data jobs."""
+    """Service to manage offline user data jobs. For help diagnosing and
+    resolving conversion or user data upload issues, see the conversion
+    upload `troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+    the ``troubleshoot-conversions`` workflow in the `Google Ads API
+    Developer
+    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+    """
 
     _client: OfflineUserDataJobServiceClient
 

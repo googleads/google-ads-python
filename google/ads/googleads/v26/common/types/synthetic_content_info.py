@@ -40,8 +40,9 @@ class SyntheticContentAttestation(proto.Message):
 
     Attributes:
         status (google.ads.googleads.v26.enums.types.SyntheticContentAttestationStatusEnum.SyntheticContentAttestationStatus):
-            Indicates whether the content is considered
-            synthetic by this source.
+            Indicates the attestation status for whether
+            the content should be labeled as created or
+            edited with AI by this source.
         source (google.ads.googleads.v26.enums.types.SyntheticContentSourceEnum.SyntheticContentSource):
             The source of the synthetic content
             attestation.

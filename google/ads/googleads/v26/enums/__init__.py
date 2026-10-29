@@ -110,6 +110,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.brand_state",
     "google.ads.googleads.v26.types.budget_campaign_association_status",
     "google.ads.googleads.v26.types.budget_delivery_method",
+    "google.ads.googleads.v26.types.budget_network_ineligible_reason",
     "google.ads.googleads.v26.types.budget_period",
     "google.ads.googleads.v26.types.budget_status",
     "google.ads.googleads.v26.types.budget_type",
@@ -134,6 +135,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.change_event_resource_type",
     "google.ads.googleads.v26.types.change_status_operation",
     "google.ads.googleads.v26.types.change_status_resource_type",
+    "google.ads.googleads.v26.types.channel_priority_tier",
     "google.ads.googleads.v26.types.click_type",
     "google.ads.googleads.v26.types.combined_audience_status",
     "google.ads.googleads.v26.types.consent_status",
@@ -291,10 +293,13 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.multi_party_auth_review_status",
     "google.ads.googleads.v26.types.multi_party_auth_review_target_resource",
     "google.ads.googleads.v26.types.negative_geo_target_type",
+    "google.ads.googleads.v26.types.network_channel_type",
     "google.ads.googleads.v26.types.non_skippable_max_duration",
     "google.ads.googleads.v26.types.non_skippable_min_duration",
     "google.ads.googleads.v26.types.offline_conversion_diagnostic_status_enum",
     "google.ads.googleads.v26.types.offline_event_upload_client_enum",
+    "google.ads.googleads.v26.types.offline_promotion_code_source",
+    "google.ads.googleads.v26.types.offline_promotion_code_type",
     "google.ads.googleads.v26.types.offline_user_data_job_failure_reason",
     "google.ads.googleads.v26.types.offline_user_data_job_match_rate_range",
     "google.ads.googleads.v26.types.offline_user_data_job_status",
@@ -334,6 +339,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.promotion_extension_occasion",
     "google.ads.googleads.v26.types.proximity_radius_units",
     "google.ads.googleads.v26.types.quality_score_bucket",
+    "google.ads.googleads.v26.types.reach_metric_state",
     "google.ads.googleads.v26.types.reach_plan_age_range",
     "google.ads.googleads.v26.types.reach_plan_buying_method",
     "google.ads.googleads.v26.types.reach_plan_conversion_rate_model",
@@ -556,6 +562,9 @@ from .types.budget_campaign_association_status import (
     BudgetCampaignAssociationStatusEnum,
 )
 from .types.budget_delivery_method import BudgetDeliveryMethodEnum
+from .types.budget_network_ineligible_reason import (
+    BudgetNetworkIneligibleReasonEnum,
+)
 from .types.budget_period import BudgetPeriodEnum
 from .types.budget_status import BudgetStatusEnum
 from .types.budget_type import BudgetTypeEnum
@@ -588,6 +597,7 @@ from .types.change_client_type import ChangeClientTypeEnum
 from .types.change_event_resource_type import ChangeEventResourceTypeEnum
 from .types.change_status_operation import ChangeStatusOperationEnum
 from .types.change_status_resource_type import ChangeStatusResourceTypeEnum
+from .types.channel_priority_tier import ChannelPriorityTierEnum
 from .types.click_type import ClickTypeEnum
 from .types.combined_audience_status import CombinedAudienceStatusEnum
 from .types.consent_status import ConsentStatusEnum
@@ -847,12 +857,15 @@ from .types.multi_party_auth_review_target_resource import (
     MultiPartyAuthReviewTargetResourceEnum,
 )
 from .types.negative_geo_target_type import NegativeGeoTargetTypeEnum
+from .types.network_channel_type import NetworkChannelTypeEnum
 from .types.non_skippable_max_duration import NonSkippableMaxDurationEnum
 from .types.non_skippable_min_duration import NonSkippableMinDurationEnum
 from .types.offline_conversion_diagnostic_status_enum import (
     OfflineConversionDiagnosticStatusEnum,
 )
 from .types.offline_event_upload_client_enum import OfflineEventUploadClientEnum
+from .types.offline_promotion_code_source import OfflinePromotionCodeSourceEnum
+from .types.offline_promotion_code_type import OfflinePromotionCodeTypeEnum
 from .types.offline_user_data_job_failure_reason import (
     OfflineUserDataJobFailureReasonEnum,
 )
@@ -916,6 +929,7 @@ from .types.promotion_extension_discount_modifier import (
 from .types.promotion_extension_occasion import PromotionExtensionOccasionEnum
 from .types.proximity_radius_units import ProximityRadiusUnitsEnum
 from .types.quality_score_bucket import QualityScoreBucketEnum
+from .types.reach_metric_state import ReachMetricStateEnum
 from .types.reach_plan_age_range import ReachPlanAgeRangeEnum
 from .types.reach_plan_buying_method import ReachPlanBuyingMethodEnum
 from .types.reach_plan_conversion_rate_model import (
@@ -1165,6 +1179,7 @@ __all__ = (
     "BrandStateEnum",
     "BudgetCampaignAssociationStatusEnum",
     "BudgetDeliveryMethodEnum",
+    "BudgetNetworkIneligibleReasonEnum",
     "BudgetPeriodEnum",
     "BudgetStatusEnum",
     "BudgetTypeEnum",
@@ -1189,6 +1204,7 @@ __all__ = (
     "ChangeEventResourceTypeEnum",
     "ChangeStatusOperationEnum",
     "ChangeStatusResourceTypeEnum",
+    "ChannelPriorityTierEnum",
     "ClickTypeEnum",
     "CombinedAudienceStatusEnum",
     "ConsentStatusEnum",
@@ -1346,10 +1362,13 @@ __all__ = (
     "MultiPartyAuthReviewStatusEnum",
     "MultiPartyAuthReviewTargetResourceEnum",
     "NegativeGeoTargetTypeEnum",
+    "NetworkChannelTypeEnum",
     "NonSkippableMaxDurationEnum",
     "NonSkippableMinDurationEnum",
     "OfflineConversionDiagnosticStatusEnum",
     "OfflineEventUploadClientEnum",
+    "OfflinePromotionCodeSourceEnum",
+    "OfflinePromotionCodeTypeEnum",
     "OfflineUserDataJobFailureReasonEnum",
     "OfflineUserDataJobMatchRateRangeEnum",
     "OfflineUserDataJobStatusEnum",
@@ -1389,6 +1408,7 @@ __all__ = (
     "PromotionExtensionOccasionEnum",
     "ProximityRadiusUnitsEnum",
     "QualityScoreBucketEnum",
+    "ReachMetricStateEnum",
     "ReachPlanAgeRangeEnum",
     "ReachPlanBuyingMethodEnum",
     "ReachPlanConversionRateModelEnum",

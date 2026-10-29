@@ -127,7 +127,13 @@ class OfflineUserDataJobServiceGrpcAsyncIOTransport(
 ):
     """gRPC AsyncIO backend transport for OfflineUserDataJobService.
 
-    Service to manage offline user data jobs.
+    Service to manage offline user data jobs. For help diagnosing and
+    resolving conversion or user data upload issues, see the conversion
+    upload `troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+    the ``troubleshoot-conversions`` workflow in the `Google Ads API
+    Developer
+    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

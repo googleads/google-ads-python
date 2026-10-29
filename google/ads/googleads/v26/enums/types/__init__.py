@@ -265,6 +265,9 @@ from .budget_campaign_association_status import (
 from .budget_delivery_method import (
     BudgetDeliveryMethodEnum,
 )
+from .budget_network_ineligible_reason import (
+    BudgetNetworkIneligibleReasonEnum,
+)
 from .budget_period import (
     BudgetPeriodEnum,
 )
@@ -336,6 +339,9 @@ from .change_status_operation import (
 )
 from .change_status_resource_type import (
     ChangeStatusResourceTypeEnum,
+)
+from .channel_priority_tier import (
+    ChannelPriorityTierEnum,
 )
 from .click_type import (
     ClickTypeEnum,
@@ -808,6 +814,9 @@ from .multi_party_auth_review_target_resource import (
 from .negative_geo_target_type import (
     NegativeGeoTargetTypeEnum,
 )
+from .network_channel_type import (
+    NetworkChannelTypeEnum,
+)
 from .non_skippable_max_duration import (
     NonSkippableMaxDurationEnum,
 )
@@ -819,6 +828,12 @@ from .offline_conversion_diagnostic_status_enum import (
 )
 from .offline_event_upload_client_enum import (
     OfflineEventUploadClientEnum,
+)
+from .offline_promotion_code_source import (
+    OfflinePromotionCodeSourceEnum,
+)
+from .offline_promotion_code_type import (
+    OfflinePromotionCodeTypeEnum,
 )
 from .offline_user_data_job_failure_reason import (
     OfflineUserDataJobFailureReasonEnum,
@@ -936,6 +951,9 @@ from .proximity_radius_units import (
 )
 from .quality_score_bucket import (
     QualityScoreBucketEnum,
+)
+from .reach_metric_state import (
+    ReachMetricStateEnum,
 )
 from .reach_plan_age_range import (
     ReachPlanAgeRangeEnum,
@@ -1314,6 +1332,7 @@ __all__ = (
     "BrandStateEnum",
     "BudgetCampaignAssociationStatusEnum",
     "BudgetDeliveryMethodEnum",
+    "BudgetNetworkIneligibleReasonEnum",
     "BudgetPeriodEnum",
     "BudgetStatusEnum",
     "BudgetTypeEnum",
@@ -1338,6 +1357,7 @@ __all__ = (
     "ChangeEventResourceTypeEnum",
     "ChangeStatusOperationEnum",
     "ChangeStatusResourceTypeEnum",
+    "ChannelPriorityTierEnum",
     "ClickTypeEnum",
     "CombinedAudienceStatusEnum",
     "ConsentStatusEnum",
@@ -1495,10 +1515,13 @@ __all__ = (
     "MultiPartyAuthReviewStatusEnum",
     "MultiPartyAuthReviewTargetResourceEnum",
     "NegativeGeoTargetTypeEnum",
+    "NetworkChannelTypeEnum",
     "NonSkippableMaxDurationEnum",
     "NonSkippableMinDurationEnum",
     "OfflineConversionDiagnosticStatusEnum",
     "OfflineEventUploadClientEnum",
+    "OfflinePromotionCodeSourceEnum",
+    "OfflinePromotionCodeTypeEnum",
     "OfflineUserDataJobFailureReasonEnum",
     "OfflineUserDataJobMatchRateRangeEnum",
     "OfflineUserDataJobStatusEnum",
@@ -1538,6 +1561,7 @@ __all__ = (
     "PromotionExtensionOccasionEnum",
     "ProximityRadiusUnitsEnum",
     "QualityScoreBucketEnum",
+    "ReachMetricStateEnum",
     "ReachPlanAgeRangeEnum",
     "ReachPlanBuyingMethodEnum",
     "ReachPlanConversionRateModelEnum",

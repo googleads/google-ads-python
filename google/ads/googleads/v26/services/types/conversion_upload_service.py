@@ -51,6 +51,26 @@ class UploadClickConversionsRequest(proto.Message):
     r"""Request message for
     [ConversionUploadService.UploadClickConversions][google.ads.googleads.v26.services.ConversionUploadService.UploadClickConversions].
 
+    Important: Always set ``partial_failure = true``. Partial failure
+    mode is required for conversion uploads. When enabled, valid
+    conversions are processed and any invalid conversions return
+    individual errors in
+    ``UploadClickConversionsResponse.partial_failure_error``. Setting
+    ``partial_failure = false`` or omitting the field is not supported
+    and causes the entire request to fail.
+
+    When uploading enhanced conversions for leads with
+    ``user_identifiers``, normalize raw identifier strings before
+    hashing with SHA-256 (trim leading and trailing whitespace, convert
+    email addresses to lowercase, and format phone numbers in E.164
+    format), and populate only one identifier field per
+    ``UserIdentifier`` object (``oneof identifier`` is mutually
+    exclusive).
+
+    For help diagnosing conversion upload issues, see the conversion
+    upload `troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__.
+
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
@@ -62,11 +82,11 @@ class UploadClickConversionsRequest(proto.Message):
             Required. The conversions that are being
             uploaded.
         partial_failure (bool):
-            Required. If ``true``, successful operations will be carried
-            out and invalid operations will return errors. If ``false``,
-            all operations will be carried out in one transaction if and
-            only if they are all valid. This should always be set to
-            ``true``.
+            Required. Must be set to ``true``. Enables partial failure
+            mode so that valid conversions are processed and any invalid
+            conversions return individual errors in
+            ``partial_failure_error``. Setting this field to ``false``
+            is not supported and causes the entire request to fail.
 
             See `Best practices for partial
             failures </google-ads/api/docs/best-practices/partial-failures>`__.
@@ -157,12 +177,11 @@ class UploadCallConversionsRequest(proto.Message):
             Required. The conversions that are being
             uploaded.
         partial_failure (bool):
-            Required. If ``true``, successful operations will be carried
-            out and invalid operations will return errors. If ``false``,
-            all operations will be carried out in one transaction if and
-            only if they are all valid.
-
-            This should always be set to ``true``.
+            Required. Must be set to ``true``. Enables partial failure
+            mode so that valid conversions are processed and any invalid
+            conversions return individual errors in
+            ``partial_failure_error``. Setting this field to ``false``
+            is not supported and causes the entire request to fail.
 
             See `Best practices for partial
             failures </google-ads/api/docs/best-practices/partial-failures>`__.
@@ -223,6 +242,13 @@ class UploadCallConversionsResponse(proto.Message):
 
 class ClickConversion(proto.Message):
     r"""A click conversion.
+
+    For help diagnosing and resolving conversion upload issues, see the
+    conversion upload `troubleshooting
+    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
+    the ``troubleshoot-conversions`` workflow in the `Google Ads API
+    Developer
+    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -293,7 +319,12 @@ class ClickConversion(proto.Message):
             The user identifiers associated with this conversion. Only
             hashed_email and hashed_phone_number are supported for
             conversion uploads. The maximum number of user identifiers
-            for each conversion is 5.
+            for each conversion is 5. Each ``UserIdentifier`` in the
+            list must have only one identifier field set
+            (``oneof identifier`` is mutually exclusive), and raw values
+            must be normalized before SHA-256 hashing (for email
+            addresses, trim leading and trailing whitespace and convert
+            to lowercase; for phone numbers, format in E.164 format).
         conversion_environment (google.ads.googleads.v26.enums.types.ConversionEnvironmentEnum.ConversionEnvironment):
             The environment this conversion was recorded
             on, for example, App or Web.

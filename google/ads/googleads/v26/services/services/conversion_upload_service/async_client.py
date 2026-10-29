@@ -335,6 +335,27 @@ class ConversionUploadServiceAsyncClient:
             request (Optional[Union[google.ads.googleads.v26.services.types.UploadClickConversionsRequest, dict]]):
                 The request object. Request message for
                 [ConversionUploadService.UploadClickConversions][google.ads.googleads.v26.services.ConversionUploadService.UploadClickConversions].
+
+                Important: Always set ``partial_failure = true``.
+                Partial failure mode is required for conversion uploads.
+                When enabled, valid conversions are processed and any
+                invalid conversions return individual errors in
+                ``UploadClickConversionsResponse.partial_failure_error``.
+                Setting ``partial_failure = false`` or omitting the
+                field is not supported and causes the entire request to
+                fail.
+
+                When uploading enhanced conversions for leads with
+                ``user_identifiers``, normalize raw identifier strings
+                before hashing with SHA-256 (trim leading and trailing
+                whitespace, convert email addresses to lowercase, and
+                format phone numbers in E.164 format), and populate only
+                one identifier field per ``UserIdentifier`` object
+                (``oneof identifier`` is mutually exclusive).
+
+                For help diagnosing conversion upload issues, see the
+                conversion upload `troubleshooting
+                guide </google-ads/api/docs/conversions/troubleshooting>`__.
             customer_id (:class:`str`):
                 Required. The ID of the customer
                 performing the upload.
@@ -350,11 +371,12 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If ``true``, successful operations will be
-                carried out and invalid operations will return errors.
-                If ``false``, all operations will be carried out in one
-                transaction if and only if they are all valid. This
-                should always be set to ``true``.
+                Required. Must be set to ``true``. Enables partial
+                failure mode so that valid conversions are processed and
+                any invalid conversions return individual errors in
+                ``partial_failure_error``. Setting this field to
+                ``false`` is not supported and causes the entire request
+                to fail.
 
                 See `Best practices for partial
                 failures </google-ads/api/docs/best-practices/partial-failures>`__.
@@ -476,12 +498,12 @@ class ConversionUploadServiceAsyncClient:
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
             partial_failure (:class:`bool`):
-                Required. If ``true``, successful operations will be
-                carried out and invalid operations will return errors.
-                If ``false``, all operations will be carried out in one
-                transaction if and only if they are all valid.
-
-                This should always be set to ``true``.
+                Required. Must be set to ``true``. Enables partial
+                failure mode so that valid conversions are processed and
+                any invalid conversions return individual errors in
+                ``partial_failure_error``. Setting this field to
+                ``false`` is not supported and causes the entire request
+                to fail.
 
                 See `Best practices for partial
                 failures </google-ads/api/docs/best-practices/partial-failures>`__.

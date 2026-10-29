@@ -45,6 +45,12 @@ class MutateCampaignBudgetsRequest(proto.Message):
     r"""Request message for
     [CampaignBudgetService.MutateCampaignBudgets][google.ads.googleads.v26.services.CampaignBudgetService.MutateCampaignBudgets].
 
+    Update operations in ``operations`` require an ``update_mask``
+    specifying the fields to modify. Note that ``explicitly_shared``
+    defaults to ``true`` if unspecified. A non-shared budget can be
+    updated to explicitly shared, but an explicitly shared budget cannot
+    become non-shared.
+
     Attributes:
         customer_id (str):
             Required. The ID of the customer whose
@@ -96,8 +102,12 @@ class MutateCampaignBudgetsRequest(proto.Message):
 
 
 class CampaignBudgetOperation(proto.Message):
-    r"""A single operation (create, update, remove) on a campaign
-    budget.
+    r"""A single operation (create, update, remove) on a campaign budget.
+
+    Update operations require an ``update_mask`` specifying which fields
+    to modify. Note that ``explicitly_shared`` defaults to ``true`` if
+    unspecified. A non-shared budget can be updated to explicitly
+    shared, but an explicitly shared budget cannot become non-shared.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -108,16 +118,23 @@ class CampaignBudgetOperation(proto.Message):
 
     Attributes:
         update_mask (google.protobuf.field_mask_pb2.FieldMask):
-            FieldMask that determines which resource
-            fields are modified in an update.
+            FieldMask that determines which resource fields are modified
+            in an update. Required for ``update`` operations.
         create (google.ads.googleads.v26.resources.types.CampaignBudget):
-            Create operation: No resource name is
-            expected for the new budget.
+            Create operation: No resource name is expected for the new
+            budget. Note that ``explicitly_shared`` defaults to ``true``
+            if unspecified. A non-shared budget can be updated to
+            explicitly shared, but an explicitly shared budget cannot
+            become non-shared.
 
             This field is a member of `oneof`_ ``operation``.
         update (google.ads.googleads.v26.resources.types.CampaignBudget):
-            Update operation: The campaign budget is
-            expected to have a valid resource name.
+            Update operation: The campaign budget is expected to have a
+            valid resource name, and ``update_mask`` must be populated
+            with the fields to modify. Note that ``explicitly_shared``
+            defaults to ``true`` if unspecified. A non-shared budget can
+            be updated to explicitly shared, but an explicitly shared
+            budget cannot become non-shared.
 
             This field is a member of `oneof`_ ``operation``.
         remove (str):

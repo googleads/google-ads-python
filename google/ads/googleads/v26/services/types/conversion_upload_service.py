@@ -69,7 +69,7 @@ class UploadClickConversionsRequest(proto.Message):
 
     For help diagnosing conversion upload issues, see the conversion
     upload `troubleshooting
-    guide </google-ads/api/docs/conversions/troubleshooting>`__.
+    guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__.
 
 
     .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
@@ -89,7 +89,7 @@ class UploadClickConversionsRequest(proto.Message):
             is not supported and causes the entire request to fail.
 
             See `Best practices for partial
-            failures </google-ads/api/docs/best-practices/partial-failures>`__.
+            failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
         validate_only (bool):
             If ``true``, the request is validated but not executed. Only
             errors are returned, not results.
@@ -140,7 +140,7 @@ class UploadClickConversionsResponse(proto.Message):
             (for example, auth errors), we return an RPC level error.
 
             See `Best practices for partial
-            failures </google-ads/api/docs/best-practices/partial-failures>`__.
+            failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
         results (MutableSequence[google.ads.googleads.v26.services.types.ClickConversionResult]):
             Returned for successfully processed conversions. Proto will
             be empty for rows that received an error. Results are not
@@ -184,7 +184,7 @@ class UploadCallConversionsRequest(proto.Message):
             is not supported and causes the entire request to fail.
 
             See `Best practices for partial
-            failures </google-ads/api/docs/best-practices/partial-failures>`__.
+            failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
         validate_only (bool):
             If true, the request is validated but not
             executed. Only errors are returned, not results.
@@ -221,7 +221,7 @@ class UploadCallConversionsResponse(proto.Message):
             (for example, auth errors), we return an RPC level error.
 
             See `Best practices for partial
-            failures </google-ads/api/docs/best-practices/partial-failures>`__.
+            failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
         results (MutableSequence[google.ads.googleads.v26.services.types.CallConversionResult]):
             Returned for successfully processed conversions. Proto will
             be empty for rows that received an error. Results are not
@@ -244,11 +244,11 @@ class ClickConversion(proto.Message):
     r"""A click conversion.
 
     For help diagnosing and resolving conversion upload issues, see the
-    conversion upload `troubleshooting
-    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
-    the ``troubleshoot-conversions`` workflow in the `Google Ads API
-    Developer
-    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+    `conversion upload troubleshooting
+    guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__
+    (or use the ``troubleshoot-conversions`` workflow in the `Google Ads
+    API Developer
+    Assistant <https://developers.google.com/google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.

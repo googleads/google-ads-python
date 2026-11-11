@@ -144,7 +144,7 @@ class ConversionActionTypeEnum(proto.Message):
                 Deprecated: The Salesforce integration ended on May 31,
                 2025. See `Legacy Salesforce integration for conversions
                 upgrade
-                FAQ <//support.google.com/google-ads/answer/14728349>`__.
+                FAQ <https://support.google.com/google-ads/answer/14728349>`__.
             SEARCH_ADS_360 (31):
                 Conversions imported from Search Ads 360
                 Floodlight data. Read only.

@@ -128,11 +128,11 @@ class UserDataServiceGrpcAsyncIOTransport(UserDataServiceTransport):
     uploads made through this service will not be visible under the
     'Segment members' section for the Customer Match List in the Google
     Ads UI. For help diagnosing and resolving conversion or user data
-    upload issues, see the conversion upload `troubleshooting
-    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
-    the ``troubleshoot-conversions`` workflow in the `Google Ads API
-    Developer
-    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+    upload issues, see the `conversion upload troubleshooting
+    guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__
+    (or use the ``troubleshoot-conversions`` workflow in the `Google Ads
+    API Developer
+    Assistant <https://developers.google.com/google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

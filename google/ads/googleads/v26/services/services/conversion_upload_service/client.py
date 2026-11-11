@@ -674,7 +674,7 @@ class ConversionUploadServiceClient(
 
                 For help diagnosing conversion upload issues, see the
                 conversion upload `troubleshooting
-                guide </google-ads/api/docs/conversions/troubleshooting>`__.
+                guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__.
             customer_id (str):
                 Required. The ID of the customer
                 performing the upload.
@@ -698,7 +698,7 @@ class ConversionUploadServiceClient(
                 to fail.
 
                 See `Best practices for partial
-                failures </google-ads/api/docs/best-practices/partial-failures>`__.
+                failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -824,7 +824,7 @@ class ConversionUploadServiceClient(
                 to fail.
 
                 See `Best practices for partial
-                failures </google-ads/api/docs/best-practices/partial-failures>`__.
+                failures <https://developers.google.com/google-ads/api/docs/best-practices/partial-failures>`__.
 
                 This corresponds to the ``partial_failure`` field
                 on the ``request`` instance; if ``request`` is provided, this

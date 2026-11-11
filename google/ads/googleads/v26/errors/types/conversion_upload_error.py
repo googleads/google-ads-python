@@ -33,10 +33,10 @@ class ConversionUploadErrorEnum(proto.Message):
 
     For help diagnosing and resolving these errors, see the `Conversion
     upload troubleshooting
-    guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
-    the ``troubleshoot-conversions`` workflow in the `Google Ads API
-    Developer
-    Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+    guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__
+    (or use the ``troubleshoot-conversions`` workflow in the `Google Ads
+    API Developer
+    Assistant <https://developers.google.com/google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
     """
 
@@ -45,10 +45,10 @@ class ConversionUploadErrorEnum(proto.Message):
 
         For step-by-step resolution guidance, see the `Conversion upload
         troubleshooting
-        guide </google-ads/api/docs/conversions/troubleshooting>`__ (or use
-        the ``troubleshoot-conversions`` workflow in the `Google Ads API
-        Developer
-        Assistant </google-ads/api/docs/developer-toolkit/ai-assistant>`__).
+        guide <https://developers.google.com/google-ads/api/docs/conversions/troubleshooting>`__
+        (or use the ``troubleshoot-conversions`` workflow in the `Google Ads
+        API Developer
+        Assistant <https://developers.google.com/google-ads/api/docs/developer-toolkit/ai-assistant>`__).
 
         Values:
             UNSPECIFIED (0):

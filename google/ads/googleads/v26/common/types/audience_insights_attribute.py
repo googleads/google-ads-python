@@ -583,7 +583,7 @@ class LocationAttributeMetadata(proto.Message):
 
     Attributes:
         country_location (google.ads.googleads.v26.common.types.LocationInfo):
-            The country location that this attribute’s
+            The country location that this attribute's
             sub country location is located in.
     """
 

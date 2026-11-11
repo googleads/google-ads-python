@@ -63,12 +63,12 @@ class BudgetNetworkSettings(proto.Message):
 
 class BudgetNetworkSetting(proto.Message):
     r"""Budget allocation setting for a specific advertising channel type
-    (e.g., SEARCH, SHOPPING, PERFORMANCE_MAX).
+    (e.g., SEARCH, SHOPPING, PERFORMANCE_MAX, or DEMAND_GEN).
 
     Attributes:
         advertising_channel_type (google.ads.googleads.v26.enums.types.AdvertisingChannelTypeEnum.AdvertisingChannelType):
             The advertising channel type this setting applies to (e.g.,
-            SEARCH, SHOPPING, or PERFORMANCE_MAX).
+            SEARCH, SHOPPING, PERFORMANCE_MAX, or DEMAND_GEN).
         budget_caps (MutableSequence[google.ads.googleads.v26.common.types.BudgetCapConfig]):
             Budget caps restricting spend per secondary
             network channel. Caps can only be applied to

@@ -53,6 +53,10 @@ class MultiPartyAuthReviewErrorEnum(proto.Message):
             PERMISSION_DENIED (5):
                 The user does not have permission to perform
                 this action.
+            STALE_MULTI_PARTY_AUTH_REQUEST (6):
+                The Multi-Party Authorization review is stale
+                because the target resource was modified or
+                deleted after the review was created.
         """
 
         UNSPECIFIED = 0
@@ -61,6 +65,7 @@ class MultiPartyAuthReviewErrorEnum(proto.Message):
         ACCESS_INVITATION_INVALID_STATUS = 3
         INVALID_STATUS_TRANSITION = 4
         PERMISSION_DENIED = 5
+        STALE_MULTI_PARTY_AUTH_REQUEST = 6
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

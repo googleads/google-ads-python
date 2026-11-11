@@ -62,8 +62,8 @@ _LOGGER = std_logging.getLogger(__name__)
 class GoogleAdsServiceAsyncClient:
     """Service to fetch data and metrics across resources. Use the
     interactive `Google Ads Query
-    Builder </google-ads/api/fields/latest/overview_query_builder>`__ to
-    construct and validate Google Ads Query Language (GAQL) queries.
+    Builder <https://developers.google.com/google-ads/api/fields/latest/overview_query_builder>`__
+    to construct and validate Google Ads Query Language (GAQL) queries.
 
     Search versus SearchStream:
 
@@ -76,7 +76,7 @@ class GoogleAdsServiceAsyncClient:
       reporting workloads.
 
     For more details, see `Streaming versus
-    paging </google-ads/api/docs/reporting/streaming>`__.
+    paging <https://developers.google.com/google-ads/api/docs/reporting/streaming>`__.
     """
 
     _client: GoogleAdsServiceClient
@@ -1407,7 +1407,7 @@ class GoogleAdsServiceAsyncClient:
         result sets larger than 10,000 rows, prefer
         [GoogleAdsService.SearchStream][google.ads.googleads.v26.services.GoogleAdsService.SearchStream].
         To build and validate queries, use the `Google Ads Query
-        Builder </google-ads/api/fields/latest/overview_query_builder>`__.
+        Builder <https://developers.google.com/google-ads/api/fields/latest/overview_query_builder>`__.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ChangeEventError <>`__
@@ -1532,7 +1532,7 @@ class GoogleAdsServiceAsyncClient:
         [GoogleAdsService.Search][google.ads.googleads.v26.services.GoogleAdsService.Search]
         for large result sets (> 10,000 rows). To build and validate
         queries, use the `Google Ads Query
-        Builder </google-ads/api/fields/latest/overview_query_builder>`__.
+        Builder <https://developers.google.com/google-ads/api/fields/latest/overview_query_builder>`__.
 
         List of thrown errors: `AuthenticationError <>`__
         `AuthorizationError <>`__ `ChangeEventError <>`__

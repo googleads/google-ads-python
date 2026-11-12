@@ -63,13 +63,24 @@ class UserInterest(proto.Message):
 
             This field is a member of `oneof`_ ``_user_interest_parent``.
         launched_to_all (bool):
-            Output only. True if the user interest is
-            launched to all channels and locales.
+            Output only. True if the user interest is launched to all
+            channels and locales. When true, ``availabilities`` is
+            empty. When false, ``availabilities`` is populated for user
+            interests that are launched only to specific channels or
+            locales, and is empty if the user interest is not generally
+            available for targeting (for example, deprecated or
+            restricted user interests).
 
             This field is a member of `oneof`_ ``_launched_to_all``.
         availabilities (MutableSequence[google.ads.googleads.v26.common.types.CriterionCategoryAvailability]):
-            Output only. Availability information of the
-            user interest.
+            Output only. Availability information of the user interest.
+            This field is empty when ``launched_to_all`` is true, or
+            when ``launched_to_all`` is false and the user interest is
+            not generally available for targeting (for example,
+            deprecated or restricted user interests). When
+            ``launched_to_all`` is false and the user interest is
+            launched only to specific channels or locales, this field
+            lists those availabilities.
     """
 
     resource_name: str = proto.Field(

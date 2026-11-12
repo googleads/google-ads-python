@@ -772,7 +772,7 @@ class Campaign(proto.Message):
                 two-letter country code (``XX``) format, the ``feed_label``
                 field should be used instead. For more information see the
                 `feed
-                label <//support.google.com/merchants/answer/12453549>`__
+                label <https://support.google.com/merchants/answer/12453549>`__
                 support article.
             campaign_priority (int):
                 Priority of the campaign. Campaigns with

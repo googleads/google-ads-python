@@ -1662,7 +1662,7 @@ class IpBlockInfo(proto.Message):
     one IpBlockInfo criterion for each individual IP address or CIDR
     block you want to exclude. You can exclude up to 500 IP addresses
     per campaign. For more details, see `Exclude IP
-    addresses <//support.google.com/google-ads/answer/2456098>`__.
+    addresses <https://support.google.com/google-ads/answer/2456098>`__.
 
     IPv4 examples:
 

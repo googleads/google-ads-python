@@ -120,6 +120,11 @@ class AssetAutomationTypeEnum(proto.Message):
                 DemandGenMultiAssetAd.
             AUTOMATED_VIDEO_CRAWL (15):
                 Automated video crawl.
+            OVERLAY_TEXT_ON_VIDEOS (16):
+                Overlays text taken from associated text
+                Assets (such as headlines) on top of video
+                Assets. By default, advertisers are opted in for
+                DemandGenVideoResponsiveAd.
         """
 
         UNSPECIFIED = 0
@@ -137,6 +142,7 @@ class AssetAutomationTypeEnum(proto.Message):
         GENERATE_VIDEOS_FROM_OTHER_ASSETS = 12
         GENERATE_ANIMATED_IMAGES_FROM_OTHER_ASSETS = 13
         AUTOMATED_VIDEO_CRAWL = 15
+        OVERLAY_TEXT_ON_VIDEOS = 16
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

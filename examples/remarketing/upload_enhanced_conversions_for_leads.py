@@ -99,11 +99,11 @@ def main(
     # a UserIdentifier with ONLY a hashed_phone_number:
     #
     # incorrectly_populated_user_identifier = client.get_type("UserIdentifier")
-    # incorrectly_populated_user_identifier.hashed_email = "...""
-    # incorrectly_populated_user_identifier.hashed_phone_number = "...""
+    # incorrectly_populated_user_identifier.hashed_email = "..."
+    # incorrectly_populated_user_identifier.hashed_phone_number = "..."
 
     raw_record: Dict[str, Union[str, float]] = {
-        # Email address that includes a period (.) before the Gmail domain.
+        # Email address that includes a period (.) before the email domain.
         "email": "alex.2@example.com",
         # Phone number to be converted to E.164 format, with a leading '+' as
         # required.
@@ -143,7 +143,7 @@ def main(
         phone_identifier.hashed_phone_number = normalize_and_hash(
             raw_record["phone"]
         )
-        # Adds the phone identifier to the conversion adjustment.
+        # Adds the phone identifier to the conversion.
         click_conversion.user_identifiers.append(phone_identifier)
         # [END add_user_identifiers]
 
@@ -242,25 +242,28 @@ def normalize_and_hash_email_address(email_address: str) -> str:
     """Returns the result of normalizing and hashing an email address.
 
     For this use case, Google Ads requires removal of any '.' characters
-    preceding "gmail.com" or "googlemail.com"
+    and '+' suffixes preceding "gmail.com" or "googlemail.com".
 
     Args:
         email_address: An email address to normalize.
 
     Returns:
-        A normalized (lowercase, removed whitespace) and SHA-265 hashed string.
+        A normalized (lowercase, removed whitespace) and SHA-256 hashed string.
     """
     normalized_email: str = email_address.strip().lower()
     email_parts: list[str] = normalized_email.split("@")
 
     # Check that there are at least two segments
     if len(email_parts) > 1:
-        # Removes any '.' and '+' characters from the portion of the email address
-        # before the domain
-        chars_to_remove = ".+"
-        translation_table = str.maketrans("", "", chars_to_remove)
-        email_parts[0] = email_parts[0].translate(translation_table)
-        normalized_email = "@".join(email_parts)
+        # Checks whether the domain of the email address is either "gmail.com"
+        # or "googlemail.com". If this regex does not match then this statement
+        # will evaluate to None.
+        if re.match(r"^(gmail|googlemail)\.com$", email_parts[1]):
+            # Removes any '.' characters and any '+' suffix from the portion of
+            # the email address before the domain.
+            email_parts[0] = email_parts[0].replace(".", "")
+            email_parts[0] = re.sub(r"\+.*$", "", email_parts[0])
+            normalized_email = "@".join(email_parts)
 
     return normalize_and_hash(normalized_email)
 
@@ -277,7 +280,7 @@ def normalize_and_hash(s: str) -> str:
     Returns:
         A normalized (lowercase, removed whitespace) and SHA-256 hashed string.
     """
-    return hashlib.sha256(s.strip().lower().encode()).hexdigest()
+    return hashlib.sha256(re.sub(r"\s+", "", s).lower().encode()).hexdigest()
     # [END normalize_and_hash]
 
 
@@ -289,8 +292,8 @@ if __name__ == "__main__":
     )
 
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
-        description="Imports offline call conversion values for calls related "
-        "to your ads."
+        description="Uploads an enhanced conversion for leads by uploading a "
+        "ClickConversion."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -398,7 +401,7 @@ if __name__ == "__main__":
         )
     except GoogleAdsException as ex:
         print(
-            f"Request with ID '{ex.request_id}'' failed with status "
+            f"Request with ID '{ex.request_id}' failed with status "
             f"'{ex.error.code().name}' and includes the following errors:"
         )
         for error in ex.failure.errors:

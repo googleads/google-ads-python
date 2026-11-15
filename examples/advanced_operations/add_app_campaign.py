@@ -184,10 +184,10 @@ def create_campaign(
 
     # Optional fields
     campaign.start_date_time = (datetime.now() + timedelta(1)).strftime(
-        "%Y%m%d 00:00:00"
+        "%Y-%m-%d 00:00:00"
     )
     campaign.end_date_time = (datetime.now() + timedelta(365)).strftime(
-        "%Y%m%d 23:59:59"
+        "%Y-%m-%d 23:59:59"
     )
     # Optional: If you select the
     # OPTIMIZE_IN_APP_CONVERSIONS_TARGET_INSTALL_COST goal type, then also
@@ -299,7 +299,7 @@ def create_ad_group(
     # Note that the ad group type must not be set.
     # Since the advertising_channel_sub_type is APP_CAMPAIGN,
     #   1- you cannot override bid settings at the ad group level.
-    #   2- you cannot add ad group criteria.
+    #   2- you cannot add ad group criteria other than audience signals.
     ad_group_operation: AdGroupOperation = client.get_type("AdGroupOperation")
     ad_group: AdGroup = ad_group_operation.create
     ad_group.name = f"Earth to Mars cruises {uuid4()}"
@@ -378,9 +378,7 @@ def create_ad_text_asset(client: GoogleAdsClient, text: str) -> AdTextAsset:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=(
-            "Adds a App Ad campaign under the specified " "customer ID."
-        )
+        description="Adds an App campaign under the specified customer ID."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(

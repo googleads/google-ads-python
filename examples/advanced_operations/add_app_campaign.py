@@ -183,10 +183,11 @@ def create_campaign(
     )
 
     # Optional fields
-    campaign.start_date_time = (datetime.now() + timedelta(1)).strftime(
+    now = datetime.now()
+    campaign.start_date_time = (now + timedelta(days=1)).strftime(
         "%Y-%m-%d 00:00:00"
     )
-    campaign.end_date_time = (datetime.now() + timedelta(365)).strftime(
+    campaign.end_date_time = (now + timedelta(days=365)).strftime(
         "%Y-%m-%d 23:59:59"
     )
     # Optional: If you select the
@@ -353,8 +354,9 @@ def create_app_ad(
         ]
     )
     # Optional: You can set up to 20 image assets for your campaign.
-    # ad_group_ad.ad.app_ad.images.extend(
-    #     [INSERT_AD_IMAGE_RESOURCE_NAME(s)_HERE])
+    # ad_image_asset = client.get_type("AdImageAsset")
+    # ad_image_asset.asset = "INSERT_AD_IMAGE_ASSET_RESOURCE_NAME_HERE"
+    # ad_group_ad.ad.app_ad.images.append(ad_image_asset)
 
     ad_group_ad_response: MutateAdGroupAdsResponse = (
         ad_group_ad_service.mutate_ad_group_ads(

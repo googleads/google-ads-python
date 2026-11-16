@@ -29,8 +29,6 @@ class TestAddAppCampaign(unittest.TestCase):
         super().setUp()
         self.client = GoogleAdsClient(
             credentials=mock.MagicMock(),
-            developer_token="test_token",
-            version="v24",
             use_proto_plus=True,
         )
         self.mock_services = {
@@ -177,6 +175,29 @@ class TestAddAppCampaign(unittest.TestCase):
             "CampaignCriterionService"
         ].mutate_campaign_criteria.call_args.kwargs["operations"]
         self.assertEqual(len(criteria_ops), 4)
+        self.assertEqual(
+            [
+                op.create.location.geo_target_constant
+                for op in criteria_ops[:2]
+            ],
+            ["geoTargetConstants/21137", "geoTargetConstants/2484"],
+        )
+        self.assertEqual(
+            [op.create.language.language_constant for op in criteria_ops[2:]],
+            ["languageConstants/1000", "languageConstants/1003"],
+        )
+
+        ad_group_ops = self.mock_services[
+            "AdGroupService"
+        ].mutate_ad_groups.call_args.kwargs["operations"]
+        self.assertEqual(len(ad_group_ops), 1)
+        self.assertEqual(
+            ad_group_ops[0].create.campaign, "customers/123/campaigns/22"
+        )
+        self.assertEqual(
+            ad_group_ops[0].create.status,
+            self.client.enums.AdGroupStatusEnum.ENABLED,
+        )
 
 
 if __name__ == "__main__":

@@ -64,8 +64,6 @@ class TestUploadEnhancedConversionsForLeads(unittest.TestCase):
     ):
         client = GoogleAdsClient(
             credentials=mock.MagicMock(),
-            developer_token="test_token",
-            version="v24",
             use_proto_plus=True,
         )
 

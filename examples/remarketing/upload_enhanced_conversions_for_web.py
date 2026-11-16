@@ -19,7 +19,6 @@ The conversion adjustment contains hashed user identifiers and an order ID.
 
 import argparse
 import hashlib
-import re
 import sys
 
 from google.ads.googleads.client import GoogleAdsClient
@@ -65,8 +64,9 @@ def main(
     # incorrectly_populated_user_identifier.hashed_phone_number = "..."
 
     raw_record = {
-        # Email address that includes a period (.) before the email domain.
-        "email": "alex.2@example.com",
+        # Email address that includes a period (.) and '+' suffix before the
+        # Gmail domain, both of which will be removed during normalization.
+        "email": "alex.2+myalias@gmail.com",
         # Address that includes all four required elements: first name, last
         # name, country code, and postal code.
         "first_name": "Alex",
@@ -111,7 +111,7 @@ def main(
     if raw_record.get("phone") is not None:
         phone_identifier = client.get_type("UserIdentifier")
         phone_identifier.hashed_phone_number = normalize_and_hash(
-            raw_record["phone"]
+            raw_record["phone"], remove_all_whitespace=True
         )
         # Adds the phone identifier to the conversion adjustment.
         conversion_adjustment.user_identifiers.append(phone_identifier)
@@ -227,25 +227,21 @@ def normalize_and_hash_email_address(email_address):
     Returns:
         A normalized (lowercase, removed whitespace) and SHA-256 hashed string.
     """
-    normalized_email = email_address.strip().lower()
+    normalized_email = "".join(email_address.split()).lower()
     email_parts = normalized_email.split("@")
 
-    # Check that there are at least two segments
-    if len(email_parts) > 1:
-        # Checks whether the domain of the email address is either "gmail.com"
-        # or "googlemail.com". If this regex does not match then this statement
-        # will evaluate to None.
-        if re.match(r"^(gmail|googlemail)\.com$", email_parts[1]):
-            # Removes any '.' characters and any '+' suffix from the portion of
-            # the email address before the domain.
-            email_parts[0] = email_parts[0].replace(".", "")
-            email_parts[0] = re.sub(r"\+.*$", "", email_parts[0])
-            normalized_email = "@".join(email_parts)
+    # Checks that the email has exactly two segments (local and domain).
+    if len(email_parts) == 2:
+        local_part, domain = email_parts
+        if domain in ("gmail.com", "googlemail.com"):
+            # Removes any '+' suffix and '.' characters from the local part.
+            local_part = local_part.partition("+")[0].replace(".", "")
+            normalized_email = f"{local_part}@{domain}"
 
-    return normalize_and_hash(normalized_email)
+    return normalize_and_hash(normalized_email, remove_all_whitespace=True)
 
 
-def normalize_and_hash(s):
+def normalize_and_hash(s, remove_all_whitespace=False):
     """Normalizes and hashes a string with SHA-256.
 
     Private customer data must be hashed during upload, as described at:
@@ -253,11 +249,17 @@ def normalize_and_hash(s):
 
     Args:
         s: The string to perform this operation on.
+        remove_all_whitespace: If True, removes leading, trailing, and
+            intermediate whitespace before hashing (use for email and phone).
+            If False, removes only leading and trailing whitespace (use for
+            first_name, last_name, and street_address).
 
     Returns:
-        A normalized (lowercase, removed whitespace) and SHA-256 hashed string.
+        A normalized (lowercase, trimmed whitespace) and SHA-256 hashed
+        string.
     """
-    return hashlib.sha256(re.sub(r"\s+", "", s).lower().encode()).hexdigest()
+    normalized = "".join(s.split()) if remove_all_whitespace else s.strip()
+    return hashlib.sha256(normalized.lower().encode()).hexdigest()
     # [END normalize_and_hash]
 
 

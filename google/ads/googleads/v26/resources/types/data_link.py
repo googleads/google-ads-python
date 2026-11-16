@@ -116,7 +116,7 @@ class YoutubeVideoIdentifier(proto.Message):
     Attributes:
         channel_id (str):
             Immutable. The ID of the hosting channel of
-            the video. This is a string value with “UC”
+            the video. This is a string value with "UC"
             prefix. For example, "UCK8sQmJBp8GCxrOtXWBpyEA".
 
             This field is a member of `oneof`_ ``_channel_id``.
@@ -153,7 +153,7 @@ class YoutubeLinkMetadata(proto.Message):
             Immutable. The ID of a YouTube brand channel
             to help creators understand your brand. The
             channel must be linked to this account. This is
-            a string value with “UC” prefix. For example,
+            a string value with "UC" prefix. For example,
             "UCK8sQmJBp8GCxrOtXWBpyEA".
 
             This field is a member of `oneof`_ ``_brand_channel_id``.

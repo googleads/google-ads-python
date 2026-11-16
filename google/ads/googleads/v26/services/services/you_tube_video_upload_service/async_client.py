@@ -14,12 +14,13 @@
 # limitations under the License.
 #
 import logging as std_logging
-from typing import Callable, Optional, BinaryIO, Sequence, Tuple, Union
+from typing import Callable, Optional, Sequence, Tuple, Union
 
 from google.ads.googleads.v26 import gapic_version as package_version
 
 from google.api_core.client_options import ClientOptions
 from google.api_core import gapic_v1
+from google.api_core.resumable_transfer import ResumableUploadConfig
 from google.api_core import retry_async as retries
 from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
@@ -35,6 +36,7 @@ except AttributeError:  # pragma: NO COVER
 
 from google.ads.googleads.v26.resources.types import youtube_video_upload
 from google.ads.googleads.v26.services.types import youtube_video_upload_service
+from google.api_core import resumable_transfer
 import google.protobuf.field_mask_pb2 as field_mask_pb2  # type: ignore
 from .transports.base import (
     YouTubeVideoUploadServiceTransport,
@@ -218,10 +220,6 @@ class YouTubeVideoUploadServiceAsyncClient:
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        developer_token: Optional[str] = None,
-        login_customer_id: Optional[str] = None,
-        linked_customer_id: Optional[str] = None,
-        use_cloud_org_for_api_access: bool = False,
         transport: Optional[
             Union[
                 str,
@@ -240,18 +238,6 @@ class YouTubeVideoUploadServiceAsyncClient:
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            developer_token (Optional[str]): The developer token to use for the
-                resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            login_customer_id (Optional[str]): The login customer ID to use for
-                the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            linked_customer_id (Optional[str]): The linked customer ID to use for
-                the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
-            use_cloud_org_for_api_access (bool): Whether to use the cloud org for
-                API access for the resumable upload transport. This will be used by the resumable upload methods
-                (create_you_tube_video_upload) ONLY!
             transport (Optional[Union[str,YouTubeVideoUploadServiceTransport,Callable[..., YouTubeVideoUploadServiceTransport]]]):
                 The transport to use, or a Callable that constructs and returns a new transport to use.
                 If a Callable is given, it will be called with the same set of initialization
@@ -295,10 +281,6 @@ class YouTubeVideoUploadServiceAsyncClient:
         """
         self._client = YouTubeVideoUploadServiceClient(
             credentials=credentials,
-            developer_token=developer_token,
-            login_customer_id=login_customer_id,
-            linked_customer_id=linked_customer_id,
-            use_cloud_org_for_api_access=use_cloud_org_for_api_access,
             transport=transport,
             client_options=client_options,
             client_info=client_info,
@@ -345,11 +327,11 @@ class YouTubeVideoUploadServiceAsyncClient:
         you_tube_video_upload: Optional[
             youtube_video_upload.YouTubeVideoUpload
         ] = None,
-        stream: BinaryIO,
+        config: Optional[ResumableUploadConfig] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
         timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, Union[str, bytes]]] = (),
-    ) -> youtube_video_upload_service.CreateYouTubeVideoUploadResponse:
+    ) -> resumable_transfer.AsyncResumableUploadSession:
         r"""Uploads a video to Google-managed or advertiser owned
         (brand) YouTube channel.
 
@@ -371,8 +353,8 @@ class YouTubeVideoUploadServiceAsyncClient:
                 This corresponds to the ``you_tube_video_upload`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            stream (BinaryIO):
-                The stream to upload.
+            config (Optional[google.api_core.resumable_transfer.ResumableUploadConfig]):
+                Optional configuration for the resumable upload session.
             retry (google.api_core.retry_async.AsyncRetry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -382,14 +364,72 @@ class YouTubeVideoUploadServiceAsyncClient:
                 be of type `bytes`.
 
         Returns:
-            google.ads.googleads.v26.services.types.CreateYouTubeVideoUploadResponse:
-                Response message for
-                   [YouTubeVideoUploadService.CreateYouTubeVideoUpload][google.ads.googleads.v26.services.YouTubeVideoUploadService.CreateYouTubeVideoUpload].
+            google.api_core.resumable_transfer.AsyncResumableUploadSession:
+                An object representing a resumable
+                upload session.
 
         """
-        raise NotImplementedError(
-            "Resumable upload is not yet supported in the async client."
+        # Create or coerce a protobuf request object.
+        # - Quick check: If we got a request object, we should *not* have
+        #   gotten any keyword arguments that map to the request.
+        flattened_params = [customer_id, you_tube_video_upload]
+        has_flattened_params = (
+            len([param for param in flattened_params if param is not None]) > 0
         )
+        if request is not None and has_flattened_params:
+            raise ValueError(
+                "If the `request` argument is set, then none of "
+                "the individual field arguments should be set."
+            )
+
+        # - Use the request object if provided (there's no risk of modifying the input as
+        #   there are no flattened fields), or create one.
+        if not isinstance(
+            request,
+            youtube_video_upload_service.CreateYouTubeVideoUploadRequest,
+        ):
+            request = (
+                youtube_video_upload_service.CreateYouTubeVideoUploadRequest(
+                    request
+                )
+            )
+
+        # If we have keyword arguments corresponding to fields on the
+        # request, apply these.
+        if customer_id is not None:
+            request.customer_id = customer_id
+        if you_tube_video_upload is not None:
+            request.you_tube_video_upload = you_tube_video_upload
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._client._transport._wrapped_methods[
+            self._client._transport.create_you_tube_video_upload
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("customer_id", request.customer_id),)
+            ),
+        )
+
+        # Validate the universe domain.
+        self._client._validate_universe_domain()
+
+        # Send the request.
+        response = await rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+            config=config,
+            start_retry=retry,
+        )
+
+        # Done; return the response.
+        return response
 
     async def update_you_tube_video_upload(
         self,

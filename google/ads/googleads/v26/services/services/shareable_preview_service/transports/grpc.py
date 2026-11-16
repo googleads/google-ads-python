@@ -125,8 +125,11 @@ class ShareablePreviewServiceGrpcTransport(ShareablePreviewServiceTransport):
     or Responsive Display Ads, are not supported and return an
     ``UNSUPPORTED_AD_TYPE`` error.
 
-    The generated preview URLs cannot be embedded in an iframe because
-    the response headers include ``X-Frame-Options: deny``.
+    By default, the generated preview URLs cannot be embedded in an
+    iframe because the response headers include
+    ``X-Frame-Options: deny``. Embedding in an iframe is only supported
+    for allowlisted domains when the ``origin`` query parameter is
+    appended to the preview URL.
 
     This class defines the same methods as the primary client, so the
     primary client can load the underlying transport implementation

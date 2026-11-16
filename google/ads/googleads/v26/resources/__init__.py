@@ -113,6 +113,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.customer",
     "google.ads.googleads.v26.types.customer_asset",
     "google.ads.googleads.v26.types.customer_asset_set",
+    "google.ads.googleads.v26.types.customer_budget_network_setting",
     "google.ads.googleads.v26.types.customer_client",
     "google.ads.googleads.v26.types.customer_client_link",
     "google.ads.googleads.v26.types.customer_conversion_goal",
@@ -340,13 +341,16 @@ from .types.customer import CallReportingSetting
 from .types.customer import ConversionTrackingSetting
 from .types.customer import Customer
 from .types.customer import CustomerAgreementSetting
+from .types.customer import ExternalPartnerMerchantId
 from .types.customer import GranularInsuranceStatus
 from .types.customer import GranularLicenseStatus
 from .types.customer import LocalServicesSettings
+from .types.customer import RedemptionProviderInfo
 from .types.customer import RemarketingSetting
 from .types.customer import VideoCustomer
 from .types.customer_asset import CustomerAsset
 from .types.customer_asset_set import CustomerAssetSet
+from .types.customer_budget_network_setting import CustomerBudgetNetworkSetting
 from .types.customer_client import CustomerClient
 from .types.customer_client_link import CustomerClientLink
 from .types.customer_conversion_goal import CustomerConversionGoal
@@ -655,6 +659,7 @@ __all__ = (
     "CustomerAgreementSetting",
     "CustomerAsset",
     "CustomerAssetSet",
+    "CustomerBudgetNetworkSetting",
     "CustomerClient",
     "CustomerClientLink",
     "CustomerConversionGoal",
@@ -681,6 +686,7 @@ __all__ = (
     "ExpandedLandingPageView",
     "Experiment",
     "ExperimentArm",
+    "ExternalPartnerMerchantId",
     "Fellowship",
     "FinalUrlExpansionAssetView",
     "GenderView",
@@ -771,6 +777,7 @@ __all__ = (
     "QualifyingQuestion",
     "Recommendation",
     "RecommendationSubscription",
+    "RedemptionProviderInfo",
     "RemarketingAction",
     "RemarketingSetting",
     "Residency",

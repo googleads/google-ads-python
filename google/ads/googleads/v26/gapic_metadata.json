@@ -1641,6 +1641,30 @@
         }
       }
     },
+    "CustomerBudgetNetworkSettingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CustomerBudgetNetworkSettingServiceClient",
+          "rpcs": {
+            "MutateCustomerBudgetNetworkSetting": {
+              "methods": [
+                "mutate_customer_budget_network_setting"
+              ]
+            }
+          }
+        },
+        "grpc-async": {
+          "libraryClient": "CustomerBudgetNetworkSettingServiceAsyncClient",
+          "rpcs": {
+            "MutateCustomerBudgetNetworkSetting": {
+              "methods": [
+                "mutate_customer_budget_network_setting"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CustomerClientLinkService": {
       "clients": {
         "grpc": {
@@ -2511,6 +2535,30 @@
             "MutateLabels": {
               "methods": [
                 "mutate_labels"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LocalServicesEligibilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LocalServicesEligibilityServiceClient",
+          "rpcs": {
+            "CheckLocalServicesEligibility": {
+              "methods": [
+                "check_local_services_eligibility"
+              ]
+            }
+          }
+        },
+        "grpc-async": {
+          "libraryClient": "LocalServicesEligibilityServiceAsyncClient",
+          "rpcs": {
+            "CheckLocalServicesEligibility": {
+              "methods": [
+                "check_local_services_eligibility"
               ]
             }
           }

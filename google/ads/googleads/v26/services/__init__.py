@@ -460,6 +460,12 @@ from .types.customer_asset_set_service import (
     MutateCustomerAssetSetsRequest,
     MutateCustomerAssetSetsResponse,
 )
+from .types.customer_budget_network_setting_service import (
+    CustomerBudgetNetworkSettingOperation,
+    MutateCustomerBudgetNetworkSettingRequest,
+    MutateCustomerBudgetNetworkSettingResponse,
+    MutateCustomerBudgetNetworkSettingResult,
+)
 from .types.customer_client_link_service import (
     CustomerClientLinkOperation,
     MutateCustomerClientLinkRequest,
@@ -674,6 +680,13 @@ from .types.label_service import (
     MutateLabelResult,
     MutateLabelsRequest,
     MutateLabelsResponse,
+)
+from .types.local_services_eligibility_service import (
+    CheckLocalServicesEligibilityRequest,
+    CheckLocalServicesEligibilityResponse,
+    EligibleCategory,
+    EligibleGoal,
+    SuggestionReason,
 )
 from .types.local_services_lead_service import (
     AppendLeadConversationRequest,
@@ -1196,6 +1209,10 @@ __all__ = (
     "MutateCustomerAssetSetResult",
     "MutateCustomerAssetSetsRequest",
     "MutateCustomerAssetSetsResponse",
+    "CustomerBudgetNetworkSettingOperation",
+    "MutateCustomerBudgetNetworkSettingRequest",
+    "MutateCustomerBudgetNetworkSettingResponse",
+    "MutateCustomerBudgetNetworkSettingResult",
     "CustomerClientLinkOperation",
     "MutateCustomerClientLinkRequest",
     "MutateCustomerClientLinkResponse",
@@ -1353,6 +1370,11 @@ __all__ = (
     "MutateLabelResult",
     "MutateLabelsRequest",
     "MutateLabelsResponse",
+    "CheckLocalServicesEligibilityRequest",
+    "CheckLocalServicesEligibilityResponse",
+    "EligibleCategory",
+    "EligibleGoal",
+    "SuggestionReason",
     "AppendLeadConversationRequest",
     "AppendLeadConversationResponse",
     "Conversation",

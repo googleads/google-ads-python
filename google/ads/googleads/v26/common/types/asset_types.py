@@ -43,6 +43,8 @@ from google.ads.googleads.v26.enums.types import (
 )
 from google.ads.googleads.v26.enums.types import mime_type as gage_mime_type
 from google.ads.googleads.v26.enums.types import mobile_app_vendor
+from google.ads.googleads.v26.enums.types import offline_promotion_code_source
+from google.ads.googleads.v26.enums.types import offline_promotion_code_type
 from google.ads.googleads.v26.enums.types import price_extension_price_qualifier
 from google.ads.googleads.v26.enums.types import price_extension_price_unit
 from google.ads.googleads.v26.enums.types import price_extension_type
@@ -70,6 +72,8 @@ __protobuf__ = proto.module(
         "WebhookDelivery",
         "BookOnGoogleAsset",
         "PromotionAsset",
+        "ExternalRedeemInfo",
+        "ExternalPartnerId",
         "PromotionBarcodeInfo",
         "PromotionQrCodeInfo",
         "CalloutAsset",
@@ -649,6 +653,10 @@ class PromotionAsset(proto.Message):
         terms_and_conditions_uri (str):
             URI to the terms and conditions of the
             promotion.
+        external_redeem_info (google.ads.googleads.v26.common.types.ExternalRedeemInfo):
+            Immutable. Info related to external promotion
+            redemption. This is only set for promotions with
+            external redemption tracking ability.
         percent_off (int):
             Percentage off discount in the promotion. 1,000,000 = 100%.
             Either this or money_amount_off is required.
@@ -735,6 +743,11 @@ class PromotionAsset(proto.Message):
         proto.STRING,
         number=15,
     )
+    external_redeem_info: "ExternalRedeemInfo" = proto.Field(
+        proto.MESSAGE,
+        number=18,
+        message="ExternalRedeemInfo",
+    )
     percent_off: int = proto.Field(
         proto.INT64,
         number=3,
@@ -768,6 +781,84 @@ class PromotionAsset(proto.Message):
         number=17,
         oneof="promotion_trigger",
         message="PromotionQrCodeInfo",
+    )
+
+
+class ExternalRedeemInfo(proto.Message):
+    r"""Info related to external promotion redemption.
+
+    Attributes:
+        partner_promotion_id (google.ads.googleads.v26.common.types.ExternalPartnerId):
+            Immutable. ID of this promotion in the partner's system that
+            the account is integrated with for redemption tracking.
+            Exactly one of ``int_value`` or ``string_value`` must be
+            set; which one is accepted depends on the account's
+            promotion integration. Required when ``code_source`` is
+            ``GOOGLE_GENERATED``.
+        code_type (google.ads.googleads.v26.enums.types.OfflinePromotionCodeTypeEnum.OfflinePromotionCodeType):
+            Required. Immutable. Code type of the offline
+            promotion.
+        code_source (google.ads.googleads.v26.enums.types.OfflinePromotionCodeSourceEnum.OfflinePromotionCodeSource):
+            Required. Immutable. Code source of the
+            offline promotion.
+    """
+
+    partner_promotion_id: "ExternalPartnerId" = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="ExternalPartnerId",
+    )
+    code_type: (
+        offline_promotion_code_type.OfflinePromotionCodeTypeEnum.OfflinePromotionCodeType
+    ) = proto.Field(
+        proto.ENUM,
+        number=2,
+        enum=offline_promotion_code_type.OfflinePromotionCodeTypeEnum.OfflinePromotionCodeType,
+    )
+    code_source: (
+        offline_promotion_code_source.OfflinePromotionCodeSourceEnum.OfflinePromotionCodeSource
+    ) = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum=offline_promotion_code_source.OfflinePromotionCodeSourceEnum.OfflinePromotionCodeSource,
+    )
+
+
+class ExternalPartnerId(proto.Message):
+    r"""The ID of an entity in a partner's system. Partners key their
+    records by different primitive types, so the ID is carried in a
+    oneof rather than in a per-partner message.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        int_value (int):
+            The ID when the partner's system keys the
+            entity by an integer.
+
+            This field is a member of `oneof`_ ``value``.
+        string_value (str):
+            The ID when the partner's system keys the
+            entity by a string. The length of this string
+            should be between 1 and 50, inclusive.
+
+            This field is a member of `oneof`_ ``value``.
+    """
+
+    int_value: int = proto.Field(
+        proto.INT64,
+        number=1,
+        oneof="value",
+    )
+    string_value: str = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="value",
     )
 
 

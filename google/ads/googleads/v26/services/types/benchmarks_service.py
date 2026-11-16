@@ -444,7 +444,7 @@ class GenerateBenchmarksMetricsRequest(proto.Message):
             benchmarks analysis. For example, when category
             "/Apparel/Clothing" is selected, customer metrics represent
             Ad performance for "/Apparel/Clothing" Ads only and the
-            customer is benchmarking against all advertisers’ Ads in the
+            customer is benchmarking against all advertisers' Ads in the
             "/Apparel/Clothing" category.
 
             This filter can only be used when ``all_advertisers`` is
@@ -798,7 +798,7 @@ class Metrics(proto.Message):
 
 
 class CustomerMetrics(proto.Message):
-    r"""Metrics representing the customer’s Ad performance.
+    r"""Metrics representing the customer's Ad performance.
 
     Attributes:
         average_rate_metrics (google.ads.googleads.v26.services.types.RateMetrics):
@@ -819,7 +819,7 @@ class CustomerMetrics(proto.Message):
             Metrics calculated by aggregating values of a
             single metric for the customer.
         percentile_metrics (google.ads.googleads.v26.services.types.PercentileMetrics):
-            Metrics representing the customer’s competitive standing
+            Metrics representing the customer's competitive standing
             among advertisers scoped by the analysis. Percentile metrics
             are only returned when:
 
@@ -983,7 +983,7 @@ class ShareMetrics(proto.Message):
     Attributes:
         share_of_voice (float):
             Relative impressions. Share of voice is
-            defined by the customer’s total number of
+            defined by the customer's total number of
             impressions divided by the aggregated number of
             impressions of all advertisers in the selected
             benchmarks source including your own. Share of
@@ -992,7 +992,7 @@ class ShareMetrics(proto.Message):
             which corresponds to 1.23%.
         share_of_spend (float):
             Relative spend. Share of spend is defined by
-            the customer’s total cost divided by the total
+            the customer's total cost divided by the total
             aggregated cost of all advertisers in the
             selected benchmarks source including your own.
             Share of spend is represented on a scale of 0 to
@@ -1085,7 +1085,7 @@ class AggregateMetrics(proto.Message):
 
 
 class PercentileMetrics(proto.Message):
-    r"""Metrics representing the customer’s competitive standing among
+    r"""Metrics representing the customer's competitive standing among
     advertisers scoped by the analysis.
 
     Percentile tier values classify the customer's percentile rank among

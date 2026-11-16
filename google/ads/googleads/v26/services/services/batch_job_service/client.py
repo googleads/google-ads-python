@@ -1174,6 +1174,24 @@ class BatchJobServiceClient(metaclass=BatchJobServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
+    def customer_budget_network_setting_path(
+        customer_id: str,
+    ) -> str:
+        """Returns a fully-qualified customer_budget_network_setting string."""
+        return "customers/{customer_id}/customerBudgetNetworkSettings".format(
+            customer_id=customer_id,
+        )
+
+    @staticmethod
+    def parse_customer_budget_network_setting_path(path: str) -> Dict[str, str]:
+        """Parses a customer_budget_network_setting path into its component segments."""
+        m = re.match(
+            r"^customers/(?P<customer_id>.+?)/customerBudgetNetworkSettings$",
+            path,
+        )
+        return m.groupdict() if m else {}
+
+    @staticmethod
     def customer_conversion_goal_path(
         customer_id: str,
         category: str,

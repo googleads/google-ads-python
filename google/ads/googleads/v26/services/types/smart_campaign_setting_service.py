@@ -109,14 +109,14 @@ class SmartCampaignEligibleDetails(proto.Message):
         last_impression_date_time (str):
             The timestamp of the last impression observed
             in the last 48 hours for this campaign.
-            The timestamp is in the customer’s timezone and
-            in “yyyy-MM-dd HH:mm:ss” format.
+            The timestamp is in the customer's timezone and
+            in "yyyy-MM-dd HH:mm:ss" format.
 
             This field is a member of `oneof`_ ``_last_impression_date_time``.
         end_date_time (str):
             The timestamp of when the campaign will end,
             if applicable. The timestamp is in the
-            customer’s timezone and in “yyyy-MM-dd HH:mm:ss”
+            customer's timezone and in "yyyy-MM-dd HH:mm:ss"
             format.
 
             This field is a member of `oneof`_ ``_end_date_time``.
@@ -142,8 +142,8 @@ class SmartCampaignPausedDetails(proto.Message):
     Attributes:
         paused_date_time (str):
             The timestamp of when the campaign was last
-            paused. The timestamp is in the customer’s
-            timezone and in “yyyy-MM-dd HH:mm:ss” format.
+            paused. The timestamp is in the customer's
+            timezone and in "yyyy-MM-dd HH:mm:ss" format.
 
             This field is a member of `oneof`_ ``_paused_date_time``.
     """
@@ -163,8 +163,8 @@ class SmartCampaignRemovedDetails(proto.Message):
     Attributes:
         removed_date_time (str):
             The timestamp of when the campaign was
-            removed. The timestamp is in the customer’s
-            timezone and in “yyyy-MM-dd HH:mm:ss” format.
+            removed. The timestamp is in the customer's
+            timezone and in "yyyy-MM-dd HH:mm:ss" format.
 
             This field is a member of `oneof`_ ``_removed_date_time``.
     """
@@ -184,8 +184,8 @@ class SmartCampaignEndedDetails(proto.Message):
     Attributes:
         end_date_time (str):
             The timestamp of when the campaign ended.
-            The timestamp is in the customer’s timezone and
-            in “yyyy-MM-dd HH:mm:ss” format.
+            The timestamp is in the customer's timezone and
+            in "yyyy-MM-dd HH:mm:ss" format.
 
             This field is a member of `oneof`_ ``_end_date_time``.
     """

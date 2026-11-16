@@ -14,6 +14,7 @@
 """A client and common configurations for the Google Ads API."""
 
 from importlib import import_module, metadata
+import inspect
 import logging.config
 
 from google.api_core.gapic_v1.client_info import ClientInfo
@@ -26,6 +27,7 @@ from proto import Message as ProtoPlusMessageType
 
 from google.ads.googleads import config, oauth2, util
 from google.ads.googleads.interceptors import (
+    metadata_interceptor,
     MetadataInterceptor,
     AsyncUnaryUnaryMetadataInterceptor,
     AsyncUnaryStreamMetadataInterceptor,
@@ -38,7 +40,7 @@ from google.ads.googleads.interceptors import (
 )
 
 from types import ModuleType
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Callable, Dict, List, Sequence, Tuple, Union
 
 _logger = logging.getLogger(__name__)
 
@@ -70,6 +72,81 @@ unary_stream_single_threading_option = util.get_nested_attr(
 
 if unary_stream_single_threading_option:
     _GRPC_CHANNEL_OPTIONS.append((unary_stream_single_threading_option, 1))
+
+
+def _augment_rest_metadata(
+    client: "GoogleAdsClient",
+    metadata_items: Sequence[Tuple[str, Union[str, bytes]]],
+) -> Sequence[Tuple[str, Union[str, bytes]]]:
+    """Appends Google Ads headers to outgoing REST request metadata."""
+    updated = list(metadata_items) if metadata_items else []
+    if client.developer_token:
+        updated.append(("developer-token", client.developer_token))
+    if client.login_customer_id:
+        updated.append(("login-customer-id", client.login_customer_id))
+    if client.linked_customer_id:
+        updated.append(("linked-customer-id", client.linked_customer_id))
+
+    for i, (key, value) in enumerate(updated):
+        if key == "x-goog-api-client" and isinstance(value, str):
+            if client._ads_assistant:
+                value += f" gaada/{client._ads_assistant}"
+            if (
+                metadata_interceptor._PROTOBUF_VERSION
+                and "pb" not in value
+            ):
+                value += (
+                    f" pb/{metadata_interceptor._PROTOBUF_VERSION}"
+                    f"{metadata_interceptor._PB_IMPL_HEADER}"
+                )
+            updated[i] = (key, value)
+            break
+
+    return tuple(updated)
+
+
+class _LazyRestTransport:
+    """Lazily initializes a synchronous REST transport on first access."""
+
+    def __init__(self, factory: Callable[[], Any]) -> None:
+        self._factory = factory
+        self._transport: Any = None
+
+    def _get(self) -> Any:
+        if self._transport is None:
+            self._transport = self._factory()
+        return self._transport
+
+    def __getattr__(self, name: str) -> Any:
+        if name.startswith("__") and name.endswith("__"):
+            raise AttributeError(name)
+        return getattr(self._get(), name)
+
+    def close(self) -> None:
+        if self._transport is not None:
+            self._transport.close()
+
+
+class _AsyncLazyRestTransport:
+    """Lazily initializes an asynchronous REST transport on first access."""
+
+    def __init__(self, factory: Callable[[], Any]) -> None:
+        self._factory = factory
+        self._transport: Any = None
+
+    def _get(self) -> Any:
+        if self._transport is None:
+            self._transport = self._factory()
+        return self._transport
+
+    def __getattr__(self, name: str) -> Any:
+        if name.startswith("__") and name.endswith("__"):
+            raise AttributeError(name)
+        return getattr(self._get(), name)
+
+    async def close(self) -> None:
+        if self._transport is not None:
+            await self._transport.close()
 
 
 class _EnumGetter:
@@ -426,6 +503,15 @@ class GoogleAdsClient:
             else service_client_class.DEFAULT_ENDPOINT
         )
 
+        is_legacy_resumable: bool = (
+            name == "YouTubeVideoUploadService"
+            and "developer_token"
+            in inspect.signature(service_client_class.__init__).parameters
+        )
+        is_resumable: bool = (
+            name == "YouTubeVideoUploadService" and not is_legacy_resumable
+        )
+
         if is_async:
             # In async requests, separate UnaryUnary and UnaryStream
             # interceptors need to be added to the channel.
@@ -460,13 +546,26 @@ class GoogleAdsClient:
                 interceptors=interceptors,
             )
 
+            if is_resumable:
+                service_transport = (
+                    self._configure_async_resumable_upload_transport(
+                        name=name,
+                        services_path=services_path,
+                        snaked=snaked,
+                        endpoint=endpoint,
+                        service_transport_class=service_transport_class,
+                        channel=channel,
+                    )
+                )
+                return service_client_class(transport=service_transport)
+
             service_transport: Any = service_transport_class(
                 channel=channel, client_info=_CLIENT_INFO
             )
 
-            if name == "YouTubeVideoUploadService":
-                # YouTubeVideoUploadService uses REST, so we cannot pass the credentials inside the gRPC
-                # channel; we need to pass them explicitly.
+            if is_legacy_resumable:
+                # Legacy YouTubeVideoUploadService uses a prototype REST
+                # transport that accepts credentials and Ads headers directly.
                 return service_client_class(
                     transport=service_transport,
                     credentials=self.credentials,
@@ -501,13 +600,24 @@ class GoogleAdsClient:
 
         channel: grpc.Channel = grpc.intercept_channel(channel, *interceptors)
 
+        if is_resumable:
+            service_transport = self._configure_resumable_upload_transport(
+                name=name,
+                services_path=services_path,
+                snaked=snaked,
+                endpoint=endpoint,
+                service_transport_class=service_transport_class,
+                channel=channel,
+            )
+            return service_client_class(transport=service_transport)
+
         service_transport: Any = service_transport_class(
             channel=channel, client_info=_CLIENT_INFO
         )
 
-        if name == "YouTubeVideoUploadService":
-            # YouTubeVideoUploadService uses REST, so we cannot pass the credentials inside the gRPC
-            # channel; we need to pass them explicitly.
+        if is_legacy_resumable:
+            # Legacy YouTubeVideoUploadService uses a prototype REST
+            # transport that accepts credentials and Ads headers directly.
             return service_client_class(
                 transport=service_transport,
                 credentials=self.credentials,
@@ -517,6 +627,110 @@ class GoogleAdsClient:
             )
 
         return service_client_class(transport=service_transport)
+
+    def _configure_resumable_upload_transport(
+        self,
+        name: str,
+        services_path: str,
+        snaked: str,
+        endpoint: str,
+        service_transport_class: Any,
+        channel: grpc.Channel,
+    ) -> Any:
+        """Configures a hybrid gRPC/REST transport for resumable uploads."""
+        service_transport = service_transport_class(
+            channel=lambda *args, **kwargs: channel,
+            credentials=self.credentials,
+            host=endpoint,
+            client_info=_CLIENT_INFO,
+        )
+        ads_client = self
+
+        def _make_rest_transport() -> Any:
+            rest_mod = import_module(
+                f"{services_path}.{snaked}.transports.rest"
+            )
+            base_interceptor = getattr(rest_mod, f"{name}RestInterceptor")
+            rest_transport_cls = getattr(rest_mod, f"{name}RestTransport")
+
+            class _AdsRestInterceptor(base_interceptor):
+                def pre_create_you_tube_video_upload(
+                    self, request: Any, metadata: Any
+                ) -> Any:
+                    return request, _augment_rest_metadata(
+                        ads_client, metadata
+                    )
+
+            rest_transport = rest_transport_cls(
+                host=endpoint,
+                credentials=ads_client.credentials,
+                client_info=_CLIENT_INFO,
+                interceptor=_AdsRestInterceptor(),
+            )
+            if ads_client.http_proxy:
+                rest_transport._session.proxies = {
+                    "http": ads_client.http_proxy,
+                    "https": ads_client.http_proxy,
+                }
+            return rest_transport
+
+        service_transport._rest_transport = _LazyRestTransport(
+            _make_rest_transport
+        )
+        return service_transport
+
+    def _configure_async_resumable_upload_transport(
+        self,
+        name: str,
+        services_path: str,
+        snaked: str,
+        endpoint: str,
+        service_transport_class: Any,
+        channel: grpc.aio.Channel,
+    ) -> Any:
+        """Configures an async hybrid gRPC/REST resumable upload transport."""
+        service_transport = service_transport_class(
+            channel=lambda *args, **kwargs: channel,
+            credentials=self.credentials,
+            host=endpoint,
+            client_info=_CLIENT_INFO,
+        )
+        grpc_asyncio_mod = import_module(
+            f"{services_path}.{snaked}.transports.grpc_asyncio"
+        )
+        if getattr(grpc_asyncio_mod, "HAS_ASYNC_REST", False):
+            ads_client = self
+
+            def _make_async_rest_transport() -> Any:
+                rest_asyncio_mod = import_module(
+                    f"{services_path}.{snaked}.transports.rest_asyncio"
+                )
+                base_interceptor = getattr(
+                    rest_asyncio_mod, f"Async{name}RestInterceptor"
+                )
+                rest_transport_cls = getattr(
+                    rest_asyncio_mod, f"Async{name}RestTransport"
+                )
+
+                class _AdsAsyncRestInterceptor(base_interceptor):
+                    async def pre_create_you_tube_video_upload(
+                        self, request: Any, metadata: Any
+                    ) -> Any:
+                        return request, _augment_rest_metadata(
+                            ads_client, metadata
+                        )
+
+                return rest_transport_cls(
+                    host=endpoint,
+                    credentials=ads_client.credentials,
+                    client_info=_CLIENT_INFO,
+                    interceptor=_AdsAsyncRestInterceptor(),
+                )
+
+            service_transport._rest_transport = _AsyncLazyRestTransport(
+                _make_async_rest_transport
+            )
+        return service_transport
 
     def get_type(
         self, name: str, version: str = _DEFAULT_VERSION

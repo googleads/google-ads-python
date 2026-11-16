@@ -49,7 +49,8 @@ class AdvertisingChannelSubTypeEnum(proto.Message):
             DISPLAY_EXPRESS (5):
                 AdWords Express campaigns for display.
             SHOPPING_SMART_ADS (6):
-                Smart Shopping campaigns.
+                Smart Shopping campaigns. New Smart Shopping
+                campaigns cannot be created.
             DISPLAY_GMAIL_AD (7):
                 Gmail Ad campaigns.
             DISPLAY_SMART_CAMPAIGN (8):

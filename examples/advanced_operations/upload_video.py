@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2026s Google LLC
+# Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,40 +16,27 @@
 
 import argparse
 import itertools
-import os
 import sys
-import logging
-from typing import Iterator, Iterable, List, MutableSequence
+from typing import Iterator
 
-import google.auth
-from google.auth.credentials import Credentials
-from google.auth import impersonated_credentials
+from google.api_core.exceptions import GoogleAPICallError
+from google.api_core.resumable_transfer import ResumableUploadSession
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.services.google_ads_service import (
+from google.ads.googleads.v26.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
+from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsStreamResponse,
-    GoogleAdsRow,
 )
-
-from google.ads.googleads.v24.services.services.you_tube_video_upload_service.client import (
+from google.ads.googleads.v26.services.services.you_tube_video_upload_service.client import (
     YouTubeVideoUploadServiceClient,
 )
-from google.ads.googleads.v24.services.types import youtube_video_upload_service
-from google.ads.googleads.v24.services.types.youtube_video_upload_service import (
+from google.ads.googleads.v26.services.types.youtube_video_upload_service import (
     CreateYouTubeVideoUploadRequest,
     CreateYouTubeVideoUploadResponse,
-    UpdateYouTubeVideoUploadRequest,
-    UpdateYouTubeVideoUploadResponse,
-    RemoveYouTubeVideoUploadRequest,
-    RemoveYouTubeVideoUploadResponse,
 )
-
-from google.protobuf import field_mask_pb2
-from google.ads.googleads.v24.resources.types import youtube_video_upload
 
 
 def main(
@@ -68,8 +55,8 @@ def main(
         "YouTubeVideoUploadService"
     )
 
-    create_upload_request: CreateYouTubeVideoUploadRequest = (
-        youtube_video_upload_service.CreateYouTubeVideoUploadRequest()
+    create_upload_request: CreateYouTubeVideoUploadRequest = client.get_type(
+        "CreateYouTubeVideoUploadRequest"
     )
     create_upload_request.customer_id = customer_id
     create_upload_request.you_tube_video_upload.video_title = "Test Video"
@@ -80,14 +67,13 @@ def main(
         client.enums.YouTubeVideoPrivacyEnum.UNLISTED
     )
 
+    upload_session: ResumableUploadSession = (
+        yt_service.create_you_tube_video_upload(request=create_upload_request)
+    )
     video_upload_resource_name: str
     with open(video_file_path, "rb") as stream:
-        response: CreateYouTubeVideoUploadResponse = (
-            yt_service.create_you_tube_video_upload(
-                stream=stream,
-                request=create_upload_request,
-                retry=None,
-            )
+        response: CreateYouTubeVideoUploadResponse = upload_session.upload(
+            stream
         )
         video_upload_resource_name = response.resource_name
         print(f"Created YouTube video upload: {video_upload_resource_name}")
@@ -108,17 +94,19 @@ def main(
         customer_id=customer_id, query=query
     )
 
-    for row in itertools.chain.from_iterable(batch.results for batch in stream):
-        video = row.you_tube_video_upload
+    for row in itertools.chain.from_iterable(
+        batch.results for batch in stream
+    ):
         print(
-            f"Video with ID {row.you_tube_video_upload.video_id} was found in state {row.you_tube_video_upload.state}."
+            f"Video with ID {row.you_tube_video_upload.video_id} was found in "
+            f"state {row.you_tube_video_upload.state}."
         )
     # [END upload_video_3]
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Lists all campaigns for specified customer."
+        description="Uploads a video to YouTube using Google Ads API."
     )
     # The following argument(s) should be provided to run the example.
     parser.add_argument(
@@ -140,7 +128,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
     try:
         main(
@@ -153,17 +141,14 @@ if __name__ == "__main__":
             f'Request with ID "{ex.request_id}" failed with status '
             f'"{ex.error.code().name}" and includes the following errors:'
         )
-        if hasattr(ex.error, "_response"):
-            raw_res = getattr(ex.error, "_response")
-            print(f"\n--- Full Response (Reflected from Proxy) ---")
-            print(f"Status Code: {raw_res.status_code}")
-            print(f"Headers: {raw_res.headers}")
-            print(f"Body: {raw_res.text}")
-            print(f"-------------------------------------------\n")
-
         for error in ex.failure.errors:
             print(f'\tError with message "{error.message}".')
             if hasattr(error, "location") and error.location:
                 for field_path_element in error.location.field_path_elements:
                     print(f"\t\tOn field: {field_path_element.field_name}")
+        sys.exit(1)
+    except GoogleAPICallError as ex:
+        print(f"Resumable upload failed: {ex}")
+        if getattr(ex, "upload_url", None):
+            print(f"\tResumable upload URL: {ex.upload_url}")
         sys.exit(1)

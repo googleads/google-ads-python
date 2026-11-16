@@ -234,6 +234,8 @@ class RecommendationTypeEnum(proto.Message):
             RAISE_BUDGET_PERFORMANCE_TOO_LOW (63):
                 Recommendation to raise budget when it is too
                 low for Search campaigns.
+            OPTIMIZE_FOR_NEW_CUSTOMERS (64):
+                Recommendation to optimize for new customers.
         """
 
         UNSPECIFIED = 0
@@ -298,6 +300,7 @@ class RecommendationTypeEnum(proto.Message):
         RAISE_TARGET_CPA_PERFORMANCE_BID_TOO_LOW = 61
         LOWER_TARGET_ROAS_PERFORMANCE_BID_TOO_LOW = 62
         RAISE_BUDGET_PERFORMANCE_TOO_LOW = 63
+        OPTIMIZE_FOR_NEW_CUSTOMERS = 64
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

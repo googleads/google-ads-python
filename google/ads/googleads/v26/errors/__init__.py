@@ -63,6 +63,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.bidding_strategy_error",
     "google.ads.googleads.v26.types.billing_setup_error",
     "google.ads.googleads.v26.types.brand_guidelines_migration_error",
+    "google.ads.googleads.v26.types.budget_network_setting_error",
     "google.ads.googleads.v26.types.business_profile_location_sync_error",
     "google.ads.googleads.v26.types.campaign_budget_error",
     "google.ads.googleads.v26.types.campaign_conversion_goal_error",
@@ -106,6 +107,7 @@ __lazy_modules__ = {
     "google.ads.googleads.v26.types.database_error",
     "google.ads.googleads.v26.types.date_error",
     "google.ads.googleads.v26.types.date_range_error",
+    "google.ads.googleads.v26.types.demand_gen_campaign_error",
     "google.ads.googleads.v26.types.distinct_error",
     "google.ads.googleads.v26.types.enum_error",
     "google.ads.googleads.v26.types.errors",
@@ -243,6 +245,7 @@ from .types.billing_setup_error import BillingSetupErrorEnum
 from .types.brand_guidelines_migration_error import (
     BrandGuidelinesMigrationErrorEnum,
 )
+from .types.budget_network_setting_error import BudgetNetworkSettingErrorEnum
 from .types.business_profile_location_sync_error import (
     BusinessProfileLocationSyncErrorEnum,
 )
@@ -302,6 +305,7 @@ from .types.data_link_error import DataLinkErrorEnum
 from .types.database_error import DatabaseErrorEnum
 from .types.date_error import DateErrorEnum
 from .types.date_range_error import DateRangeErrorEnum
+from .types.demand_gen_campaign_error import DemandGenCampaignErrorEnum
 from .types.distinct_error import DistinctErrorEnum
 from .types.enum_error import EnumErrorEnum
 from .types.errors import BudgetPerDayMinimumErrorDetails
@@ -461,6 +465,7 @@ __all__ = (
     "BiddingStrategyErrorEnum",
     "BillingSetupErrorEnum",
     "BrandGuidelinesMigrationErrorEnum",
+    "BudgetNetworkSettingErrorEnum",
     "BudgetPerDayMinimumErrorDetails",
     "BusinessProfileLocationSyncErrorEnum",
     "CampaignBudgetErrorEnum",
@@ -505,6 +510,7 @@ __all__ = (
     "DatabaseErrorEnum",
     "DateErrorEnum",
     "DateRangeErrorEnum",
+    "DemandGenCampaignErrorEnum",
     "DistinctErrorEnum",
     "EnumErrorEnum",
     "ErrorCode",

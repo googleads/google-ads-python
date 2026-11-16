@@ -55,7 +55,7 @@ class AssetGroupSignalApprovalStatusEnum(proto.Message):
                 there's an issue with one or more of our
                 advertising policies.
             UNDER_REVIEW (5):
-                Search Theme is under review. It won’t be
+                Search Theme is under review. It won't be
                 able to trigger ads until it's been reviewed.
         """
 

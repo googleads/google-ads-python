@@ -66,6 +66,9 @@ class MutateErrorEnum(proto.Message):
                 Mutates are generally not allowed if the
                 customer contains non-exempt campaigns without
                 the EU political advertising declaration.
+            MULTI_PARTY_APPROVAL_UNSUPPORTED_RESOURCE_COMBINATION (18):
+                The combination of resources in this mutate
+                is not supported for multi-party approval.
         """
 
         UNSPECIFIED = 0
@@ -80,6 +83,7 @@ class MutateErrorEnum(proto.Message):
         OPERATION_DOES_NOT_SUPPORT_PARTIAL_FAILURE = 16
         RESOURCE_READ_ONLY = 13
         EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED = 17
+        MULTI_PARTY_APPROVAL_UNSUPPORTED_RESOURCE_COMBINATION = 18
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

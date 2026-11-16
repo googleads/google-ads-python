@@ -286,9 +286,11 @@ from .customer import (
     ConversionTrackingSetting,
     Customer,
     CustomerAgreementSetting,
+    ExternalPartnerMerchantId,
     GranularInsuranceStatus,
     GranularLicenseStatus,
     LocalServicesSettings,
+    RedemptionProviderInfo,
     RemarketingSetting,
     VideoCustomer,
 )
@@ -297,6 +299,9 @@ from .customer_asset import (
 )
 from .customer_asset_set import (
     CustomerAssetSet,
+)
+from .customer_budget_network_setting import (
+    CustomerBudgetNetworkSetting,
 )
 from .customer_client import (
     CustomerClient,
@@ -764,13 +769,16 @@ __all__ = (
     "ConversionTrackingSetting",
     "Customer",
     "CustomerAgreementSetting",
+    "ExternalPartnerMerchantId",
     "GranularInsuranceStatus",
     "GranularLicenseStatus",
     "LocalServicesSettings",
+    "RedemptionProviderInfo",
     "RemarketingSetting",
     "VideoCustomer",
     "CustomerAsset",
     "CustomerAssetSet",
+    "CustomerBudgetNetworkSetting",
     "CustomerClient",
     "CustomerClientLink",
     "CustomerConversionGoal",

@@ -323,6 +323,12 @@ class BatchJobServiceAsyncClient:
     parse_customer_asset_path = staticmethod(
         BatchJobServiceClient.parse_customer_asset_path
     )
+    customer_budget_network_setting_path = staticmethod(
+        BatchJobServiceClient.customer_budget_network_setting_path
+    )
+    parse_customer_budget_network_setting_path = staticmethod(
+        BatchJobServiceClient.parse_customer_budget_network_setting_path
+    )
     customer_conversion_goal_path = staticmethod(
         BatchJobServiceClient.customer_conversion_goal_path
     )

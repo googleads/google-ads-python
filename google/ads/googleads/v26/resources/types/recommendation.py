@@ -421,6 +421,11 @@ class Recommendation(proto.Message):
             Too Low recommendation.
 
             This field is a member of `oneof`_ ``recommendation``.
+        optimize_for_new_customers_recommendation (google.ads.googleads.v26.resources.types.Recommendation.OptimizeForNewCustomersRecommendation):
+            Output only. The optimize for new customers
+            recommendation.
+
+            This field is a member of `oneof`_ ``recommendation``.
     """
 
     class MerchantInfo(proto.Message):
@@ -1861,6 +1866,33 @@ class Recommendation(proto.Message):
             number=11,
         )
 
+    class OptimizeForNewCustomersRecommendation(proto.Message):
+        r"""Recommendation to optimize for new customers.
+
+        .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+        Attributes:
+            recommended_incremental_conversion_value (float):
+                Output only. The recommended incremental conversion value,
+                in the account's local currency, to be added to conversion
+                values for new customers. This is a standard floating-point
+                value expressed in units of the account's local currency,
+                not in micros.
+
+                When applying this recommendation, this value can be
+                supplied to ``account_default_incremental_conversion_value``
+                or ``campaign_override_incremental_conversion_value`` in
+                [OptimizeForNewCustomersParameters][google.ads.googleads.v26.services.ApplyRecommendationOperation.OptimizeForNewCustomersParameters].
+
+                This field is a member of `oneof`_ ``_recommended_incremental_conversion_value``.
+        """
+
+        recommended_incremental_conversion_value: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+            optional=True,
+        )
+
     resource_name: str = proto.Field(
         proto.STRING,
         number=1,
@@ -2346,6 +2378,14 @@ class Recommendation(proto.Message):
         number=74,
         oneof="recommendation",
         message=RaiseBudgetPerformanceTooLowRecommendation,
+    )
+    optimize_for_new_customers_recommendation: (
+        OptimizeForNewCustomersRecommendation
+    ) = proto.Field(
+        proto.MESSAGE,
+        number=75,
+        oneof="recommendation",
+        message=OptimizeForNewCustomersRecommendation,
     )
 
 

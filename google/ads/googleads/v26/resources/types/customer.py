@@ -45,6 +45,8 @@ __protobuf__ = proto.module(
         "RemarketingSetting",
         "CustomerAgreementSetting",
         "LocalServicesSettings",
+        "RedemptionProviderInfo",
+        "ExternalPartnerMerchantId",
         "GranularLicenseStatus",
         "GranularInsuranceStatus",
         "VideoCustomer",
@@ -184,8 +186,7 @@ class Customer(proto.Message):
             Output only. Customer Agreement Setting for a
             customer.
         local_services_settings (google.ads.googleads.v26.resources.types.LocalServicesSettings):
-            Output only. Settings for Local Services
-            customer.
+            Settings for Local Services customer.
         video_brand_safety_suitability (google.ads.googleads.v26.enums.types.BrandSafetySuitabilityEnum.BrandSafetySuitability):
             Brand Safety setting at the account level.
             Allows for selecting an inventory type to show
@@ -533,6 +534,9 @@ class LocalServicesSettings(proto.Message):
         granular_insurance_statuses (MutableSequence[google.ads.googleads.v26.resources.types.GranularInsuranceStatus]):
             Output only. A read-only list of geo vertical
             level insurance statuses.
+        redemption_provider_info (google.ads.googleads.v26.resources.types.RedemptionProviderInfo):
+            Settings for external redemption provider
+            integration.
     """
 
     granular_license_statuses: MutableSequence["GranularLicenseStatus"] = (
@@ -548,6 +552,65 @@ class LocalServicesSettings(proto.Message):
             number=2,
             message="GranularInsuranceStatus",
         )
+    )
+    redemption_provider_info: "RedemptionProviderInfo" = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="RedemptionProviderInfo",
+    )
+
+
+class RedemptionProviderInfo(proto.Message):
+    r"""Information about the external redemption provider for a
+    Local Services customer.
+
+    Attributes:
+        external_merchant_id (google.ads.googleads.v26.resources.types.ExternalPartnerMerchantId):
+            Required. Identifier for a merchant in an
+            external partner's point-of-sale system.
+    """
+
+    external_merchant_id: "ExternalPartnerMerchantId" = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="ExternalPartnerMerchantId",
+    )
+
+
+class ExternalPartnerMerchantId(proto.Message):
+    r"""Identifier for a merchant in an external partner's
+    point-of-sale system.
+
+    This message has `oneof`_ fields (mutually exclusive fields).
+    For each oneof, at most one member field can be set at the same time.
+    Setting any member of the oneof automatically clears all other
+    members.
+
+    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+    Attributes:
+        numeric_id (int):
+            Numeric merchant identifier in the external
+            partner's system.
+
+            This field is a member of `oneof`_ ``id``.
+        alphanumeric_id (str):
+            Alphanumeric or string merchant identifier in
+            the external partner's system. The length of
+            this string must be between 1 and 50, inclusive.
+
+            This field is a member of `oneof`_ ``id``.
+    """
+
+    numeric_id: int = proto.Field(
+        proto.INT64,
+        number=1,
+        oneof="id",
+    )
+    alphanumeric_id: str = proto.Field(
+        proto.STRING,
+        number=2,
+        oneof="id",
     )
 
 

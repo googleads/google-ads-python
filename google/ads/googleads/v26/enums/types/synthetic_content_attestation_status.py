@@ -44,9 +44,11 @@ class SyntheticContentAttestationStatusEnum(proto.Message):
                 Used for return values only. Represents value
                 unknown in this version.
             NOT_SYNTHETIC (2):
-                The content is attested as not synthetic.
+                The content is attested as not needing to be
+                labeled as created or edited with AI.
             IS_SYNTHETIC (3):
-                The content is attested as synthetic.
+                The content is attested as needing to be
+                labeled as created or edited with AI.
         """
 
         UNSPECIFIED = 0

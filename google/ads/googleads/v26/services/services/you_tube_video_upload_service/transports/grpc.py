@@ -18,6 +18,8 @@ import pickle
 import warnings
 from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 
+from google.api_core import exceptions as core_exceptions
+from google.api_core import resumable_transfer
 from google.api_core import grpc_helpers
 from google.api_core import gapic_v1
 import google.auth  # type: ignore
@@ -31,6 +33,7 @@ import proto  # type: ignore
 
 from google.ads.googleads.v26.services.types import youtube_video_upload_service
 from .base import YouTubeVideoUploadServiceTransport, DEFAULT_CLIENT_INFO
+from .rest import YouTubeVideoUploadServiceRestTransport
 
 try:
     from google.api_core import client_logging  # type: ignore
@@ -212,6 +215,15 @@ class YouTubeVideoUploadServiceGrpcTransport(
         self._grpc_channel = None
         self._ssl_channel_credentials = ssl_channel_credentials
         self._stubs: Dict[str, Callable] = {}
+        # Resumable upload RPCs operate over HTTP/REST rather than gRPC.
+        # Since gRPC is the default transport for GAPIC clients and services
+        # mix standard gRPC RPCs with resumable upload RPCs on the same client,
+        # gRPC transports delegate resumable upload calls to an internal REST
+        # transport instance.
+        self._rest_transport: Optional[
+            YouTubeVideoUploadServiceRestTransport
+        ] = None
+        self._client_cert_source_for_mtls = client_cert_source_for_mtls
 
         if api_mtls_endpoint:
             warnings.warn("api_mtls_endpoint is deprecated", DeprecationWarning)
@@ -352,7 +364,7 @@ class YouTubeVideoUploadServiceGrpcTransport(
         self,
     ) -> Callable[
         [youtube_video_upload_service.CreateYouTubeVideoUploadRequest],
-        youtube_video_upload_service.CreateYouTubeVideoUploadResponse,
+        resumable_transfer.ResumableUploadSession,
     ]:
         r"""Return a callable for the create you tube video upload method over gRPC.
 
@@ -361,7 +373,7 @@ class YouTubeVideoUploadServiceGrpcTransport(
 
         Returns:
             Callable[[~.CreateYouTubeVideoUploadRequest],
-                    ~.CreateYouTubeVideoUploadResponse]:
+                    ~.ResumableUploadSession]:
                 A function that, when called, will call the underlying RPC
                 on the server.
         """
@@ -370,13 +382,37 @@ class YouTubeVideoUploadServiceGrpcTransport(
         # gRPC handles serialization and deserialization, so we just need
         # to pass in the functions for each.
         if "create_you_tube_video_upload" not in self._stubs:
-            self._stubs["create_you_tube_video_upload"] = (
-                self._logged_channel.unary_unary(
-                    "/google.ads.googleads.v26.services.YouTubeVideoUploadService/CreateYouTubeVideoUpload",
-                    request_serializer=youtube_video_upload_service.CreateYouTubeVideoUploadRequest.serialize,
-                    response_deserializer=youtube_video_upload_service.CreateYouTubeVideoUploadResponse.deserialize,
+            if not self._credentials:
+
+                class _ErrorStub:
+                    def __init__(self, error: Exception):
+                        self._error = error
+
+                    def __call__(self, *args, **kwargs):
+                        raise self._error
+
+                self._stubs["create_you_tube_video_upload"] = _ErrorStub(
+                    core_exceptions.GoogleAPICallError(
+                        "Resumable upload methods operate over REST and cannot be invoked when the transport is initialized with a pre-constructed gRPC channel. Please supply credentials directly instead of a gRPC channel to use resumable upload functionality."
+                    )
                 )
-            )
+            else:
+                transport = self
+
+                class _RestStub:
+                    def __call__(self, *args, **kwargs):
+                        if transport._rest_transport is None:
+                            transport._rest_transport = YouTubeVideoUploadServiceRestTransport(
+                                host=transport._host,
+                                credentials=transport._credentials,
+                                client_info=transport._client_info,
+                                client_cert_source_for_mtls=transport._client_cert_source_for_mtls,
+                            )
+                        return transport._rest_transport.create_you_tube_video_upload(
+                            *args, **kwargs
+                        )
+
+                self._stubs["create_you_tube_video_upload"] = _RestStub()
         return self._stubs["create_you_tube_video_upload"]
 
     @property
@@ -444,6 +480,8 @@ class YouTubeVideoUploadServiceGrpcTransport(
 
     def close(self):
         self._logged_channel.close()
+        if self._rest_transport is not None:
+            self._rest_transport.close()
 
     @property
     def kind(self) -> str:

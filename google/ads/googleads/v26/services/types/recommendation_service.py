@@ -249,6 +249,11 @@ class ApplyRecommendationOperation(proto.Message):
             Performance Too Low recommendation.
 
             This field is a member of `oneof`_ ``apply_parameters``.
+        optimize_for_new_customers (google.ads.googleads.v26.services.types.ApplyRecommendationOperation.OptimizeForNewCustomersParameters):
+            Parameters to use when applying Optimize For
+            New Customers recommendation.
+
+            This field is a member of `oneof`_ ``apply_parameters``.
     """
 
     class CampaignBudgetParameters(proto.Message):
@@ -604,6 +609,44 @@ class ApplyRecommendationOperation(proto.Message):
         new_budget_amount_micros: int = proto.Field(
             proto.INT64,
             number=1,
+        )
+
+    class OptimizeForNewCustomersParameters(proto.Message):
+        r"""Parameters to use when applying Optimize For New Customers
+        recommendations.
+
+
+        .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
+
+        Attributes:
+            account_default_incremental_conversion_value (float):
+                Optional. Incremental conversion value set at
+                the account level for each new customer
+                acquired. This is a standard floating-point
+                value expressed in units of the account's local
+                currency, not in micros.
+
+                This field is a member of `oneof`_ ``_account_default_incremental_conversion_value``.
+            campaign_override_incremental_conversion_value (float):
+                Optional. Incremental conversion value set at
+                the campaign level for each new customer
+                acquired, overriding the account default value.
+                This is a standard floating-point value
+                expressed in units of the account's local
+                currency, not in micros.
+
+                This field is a member of `oneof`_ ``_campaign_override_incremental_conversion_value``.
+        """
+
+        account_default_incremental_conversion_value: float = proto.Field(
+            proto.DOUBLE,
+            number=1,
+            optional=True,
+        )
+        campaign_override_incremental_conversion_value: float = proto.Field(
+            proto.DOUBLE,
+            number=2,
+            optional=True,
         )
 
     class AdAssetApplyParameters(proto.Message):
@@ -1014,6 +1057,12 @@ class ApplyRecommendationOperation(proto.Message):
             oneof="apply_parameters",
             message=RaiseBudgetPerformanceTooLowParameters,
         )
+    )
+    optimize_for_new_customers: OptimizeForNewCustomersParameters = proto.Field(
+        proto.MESSAGE,
+        number=29,
+        oneof="apply_parameters",
+        message=OptimizeForNewCustomersParameters,
     )
 
 

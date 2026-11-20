@@ -32,8 +32,9 @@ Google Ads API version:
 <!--
 To enable logging see this page: https://developers.google.com/google-ads/api/docs/client-libs/python/logging
 
-NOTE: Make sure to include a Request ID when possible, and to redact personally
-identifiable information, including GCP client IDs, customer IDs, etc.
+NOTE: Make sure to include a Request ID when possible, and to redact sensitive
+or personally identifiable information, including Google Cloud project IDs,
+OAuth credentials (client IDs, secrets, and tokens), and customer IDs.
 -->
 
  

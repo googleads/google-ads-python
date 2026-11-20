@@ -13,7 +13,7 @@ Requirements
 
 Installation
 ------------
-.. code-block::
+.. code-block:: bash
 
   pip install google-ads
 
@@ -25,7 +25,7 @@ Features
 
 Documentation
 -------------
-Please refer to our `Developer Site`_ for documentation on how to install,
+See the `Developer Site`_ for documentation on how to install,
 configure, and use this client library.
 
 Miscellaneous
@@ -38,11 +38,7 @@ Miscellaneous
 Authors
 -------
 
-* `Mark Saniscalchi`_
-* `David Wihl`_
 * `Ben Karl`_
-* `Andrew Burke`_
-* `Laura Chevalier`_
 * `Bob Hancock`_
 
 .. |build-status| image:: https://storage.googleapis.com/gaa-clientlibs/badges/google-ads-python/buildstatus_ubuntu.svg
@@ -50,9 +46,5 @@ Authors
 .. _Issue tracker: https://github.com/googleads/google-ads-python/issues
 .. _API documentation: https://developers.google.com/google-ads/api/
 .. _API Support: https://developers.google.com/google-ads/api/support
-.. _Mark Saniscalchi: https://github.com/msaniscalchi
-.. _David Wihl: https://github.com/wihl
 .. _Ben Karl: https://github.com/BenRKarl
-.. _Andrew Burke: https://github.com/AndrewMBurke
-.. _Laura Chevalier: https://github.com/laurachevalier4
 .. _Bob Hancock: https://github.com/bobhancock

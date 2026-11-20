@@ -24,8 +24,8 @@ refresh_token: INSERT_REFRESH_TOKEN_HERE
 # configuration parameters and remove the three OAuth2 credentials above. The            #
 # "json_key_file_path" value should be a path to your local private key json file, and   #
 # "impersonated_email" should be the email address that is being used to impersonate the #
-# credentials making requests. for more information on service accounts, see:            #
-# https://developers.google.com/google-ads/api/docs/oauth/service-accounts.              #
+# credentials making requests. For more information on service accounts, see:            #
+# https://developers.google.com/google-ads/api/docs/oauth/service-accounts               #
 # If you're authorizing with direct account access, then the "impersonated_email"        #
 # configuration is optional.                                                             #
 ##########################################################################################
@@ -77,6 +77,6 @@ login_customer_id: INSERT_LOGIN_CUSTOMER_ID_HERE
 ##########################################################################################
 # Below you can specify whether to initialize the library using Application Default      #
 # Credentials (ADC). To understand how ADC discovers credentials in a given environment, #
-# see: https://developers.google.com/identity/protocols/application-default-credentials  #
+# see: https://cloud.google.com/docs/authentication/application-default-credentials      #
 # ########################################################################################
 # use_application_default_credentials: True

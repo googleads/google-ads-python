@@ -1,12 +1,3 @@
-# Developer token
-##########################################################################################
-# A developer token is required when making requests to the Google Ads API regardless of #
-# whether you're using the OAuth2 or Service Account configurations. To obtain a         #
-# developer token see:                                                                   #
-# https://developers.google.com/google-ads/api/docs/first-call/dev-token                 #
-##########################################################################################
-developer_token: INSERT_DEVELOPER_TOKEN_HERE
-
 # Use proto plus
 ##########################################################################################
 # This parameter specifies whether the client library should return proto-plus messages  #

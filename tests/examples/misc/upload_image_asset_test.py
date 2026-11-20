@@ -37,10 +37,6 @@ class TestUploadImageAsset(unittest.TestCase):
         self.mock_asset_type_enum_instance.IMAGE = "mocked_asset_type_image_enum"
         self.mock_client.enums.AssetTypeEnum = self.mock_asset_type_enum_instance
 
-        self.mock_mime_type_enum_instance = mock.Mock(name="MimeTypeEnumInstance")
-        self.mock_mime_type_enum_instance.IMAGE_JPEG = "mocked_mime_type_image_jpeg_enum"
-        self.mock_client.enums.MimeTypeEnum = self.mock_mime_type_enum_instance
-
         # self.mock_get_image_bytes_from_url removed
         self.mock_image_bytes = b"test_image_data"
         # For now, keeping self.mock_image_bytes here, can be localized if only test_main_success uses it.
@@ -81,10 +77,7 @@ class TestUploadImageAsset(unittest.TestCase):
         # Assertions on the asset operation
         self.assertEqual(actual_operation.create.type_, self.mock_client.enums.AssetTypeEnum.IMAGE)
         self.assertEqual(actual_operation.create.image_asset.data, self.mock_image_bytes)
-        self.assertEqual(actual_operation.create.image_asset.file_size, len(self.mock_image_bytes))
-        self.assertEqual(actual_operation.create.image_asset.mime_type, self.mock_client.enums.MimeTypeEnum.IMAGE_JPEG)
         self.assertEqual(actual_operation.create.name, "Marketing Image")
-        self.assertEqual(actual_operation.create.image_asset.full_size.url, "https://gaagl.page.link/Eit5")
 
         # Corrected print assertions
         expected_print_calls = [

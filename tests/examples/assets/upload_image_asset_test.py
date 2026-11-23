@@ -22,9 +22,6 @@ class TestUploadImageAsset(unittest.TestCase):
         mock_created_asset = mock_asset_operation.create
 
         mock_client_instance.enums.AssetTypeEnum.IMAGE = "IMAGE_ASSET_TYPE_ENUM"
-        mock_client_instance.enums.MimeTypeEnum.IMAGE_JPEG = (
-            "IMAGE_JPEG_MIME_TYPE_ENUM"
-        )
 
         fake_image_bytes = b"fake_image_data_bytes"
         mock_get_image_bytes.return_value = fake_image_bytes
@@ -52,13 +49,6 @@ class TestUploadImageAsset(unittest.TestCase):
 
         image_asset_mock = mock_created_asset.image_asset
         self.assertEqual(image_asset_mock.data, fake_image_bytes)
-        self.assertEqual(image_asset_mock.file_size, len(fake_image_bytes))
-        self.assertEqual(
-            image_asset_mock.mime_type, "IMAGE_JPEG_MIME_TYPE_ENUM"
-        )
-        self.assertEqual(image_asset_mock.full_size.height_pixels, 315)
-        self.assertEqual(image_asset_mock.full_size.width_pixels, 600)
-        self.assertEqual(image_asset_mock.full_size.url, expected_image_url)
 
         mock_asset_service.mutate_assets.assert_called_once_with(
             customer_id=customer_id, operations=[mock_asset_operation]

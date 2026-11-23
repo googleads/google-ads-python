@@ -40,12 +40,6 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     asset: Asset = asset_operation.create
     asset.type_ = client.enums.AssetTypeEnum.IMAGE
     asset.image_asset.data = image_content
-    asset.image_asset.file_size = len(image_content)
-    asset.image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_JPEG
-    # Use your favorite image library to determine dimensions
-    asset.image_asset.full_size.height_pixels = 315
-    asset.image_asset.full_size.width_pixels = 600
-    asset.image_asset.full_size.url = url
     # Provide a unique friendly name to identify your asset.
     # When there is an existing image asset with the same content but a different
     # name, the new name will be dropped silently.

@@ -31,30 +31,30 @@ from typing import List, Optional
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.common.types.criteria import (
+from google.ads.googleads.v26.common.types.criteria import (
     ListingDimensionInfo,
     ListingGroupInfo,
 )
-from google.ads.googleads.v24.enums.types.product_condition import (
+from google.ads.googleads.v26.enums.types.product_condition import (
     ProductConditionEnum,
 )
-from google.ads.googleads.v24.resources.types.ad_group_criterion import (
+from google.ads.googleads.v26.resources.types.ad_group_criterion import (
     AdGroupCriterion,
 )
-from google.ads.googleads.v24.services.services.ad_group_criterion_service import (
+from google.ads.googleads.v26.services.services.ad_group_criterion_service import (
     AdGroupCriterionServiceClient,
 )
-from google.ads.googleads.v24.services.services.ad_group_service import (
+from google.ads.googleads.v26.services.services.ad_group_service import (
     AdGroupServiceClient,
 )
-from google.ads.googleads.v24.services.services.google_ads_service import (
+from google.ads.googleads.v26.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types.ad_group_criterion_service import (
+from google.ads.googleads.v26.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
-    MutateGoogleAdsResponse,
+from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsResponse,
 )
 
@@ -240,7 +240,7 @@ def main(
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response: MutateGoogleAdsResponse = (
+    mutate_ad_group_criteria_response: MutateAdGroupCriteriaResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id, operations=operations
         )
@@ -312,7 +312,7 @@ def remove_listing_group_tree(
         ad_group_criterion_service: AdGroupCriterionServiceClient = (
             client.get_service("AdGroupCriterionService")
         )
-        response: MutateGoogleAdsResponse = (
+        response: MutateAdGroupCriteriaResponse = (
             ad_group_criterion_service.mutate_ad_group_criteria(
                 customer_id=customer_id,
                 operations=ad_group_criterion_operations,
@@ -485,7 +485,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

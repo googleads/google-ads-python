@@ -21,15 +21,17 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.services.google_ads_service.client import (
+from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
+from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
     GoogleAdsRow,
 )
-from google.ads.googleads.v24.resources.types.change_status import ChangeStatus
+from google.ads.googleads.v26.resources.types.change_status import ChangeStatus
 
 
 # [START get_change_summary]
@@ -60,7 +62,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     search_request.customer_id = customer_id
     search_request.query = query
 
-    response: SearchPagedResponse = ads_service.search(request=search_request)
+    response: SearchPager = ads_service.search(request=search_request)
 
     row: GoogleAdsRow
     for row in response:
@@ -109,7 +111,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
 
     try:
         main(googleads_client, args.customer_id)

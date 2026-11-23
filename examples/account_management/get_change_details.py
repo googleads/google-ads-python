@@ -28,15 +28,17 @@ from proto.enums import ProtoEnumMeta
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.util import get_nested_attr
-from google.ads.googleads.v24.services.services.google_ads_service.client import (
+from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
+from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
     GoogleAdsRow,
 )
-from google.ads.googleads.v24.resources.types.change_event import ChangeEvent
+from google.ads.googleads.v26.resources.types.change_event import ChangeEvent
 
 
 # [START get_change_details]
@@ -84,7 +86,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     search_request.customer_id = customer_id
     search_request.query = query
 
-    results: SearchPagedResponse = googleads_service.search(
+    results: SearchPager = googleads_service.search(
         request=search_request
     )
 
@@ -218,7 +220,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
     try:
         main(googleads_client, args.customer_id)
     except GoogleAdsException as ex:

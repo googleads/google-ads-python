@@ -28,17 +28,19 @@ from typing import Optional, List, Dict
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.services.google_ads_service.client import (
+from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.services.customer_service.client import (
+from google.ads.googleads.v26.services.services.customer_service.client import (
     CustomerServiceClient,
 )
-from google.ads.googleads.v24.resources.types.customer_client import (
+from google.ads.googleads.v26.resources.types.customer_client import (
     CustomerClient,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
-    SearchPagedResponse,
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
+from google.ads.googleads.v26.services.types.google_ads_service import (
     GoogleAdsRow,
 )
 
@@ -121,7 +123,7 @@ def main(
                 0
             )  # customer_id_loop is an int
             # The search method expects customer_id to be a string.
-            response: SearchPagedResponse = googleads_service.search(
+            response: SearchPager = googleads_service.search(
                 customer_id=str(customer_id_loop), query=query
             )
 
@@ -238,7 +240,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
     try:
         main(googleads_client, args.login_customer_id)
     except GoogleAdsException as ex:

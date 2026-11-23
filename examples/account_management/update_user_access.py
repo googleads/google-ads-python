@@ -26,20 +26,22 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.services.services.google_ads_service.client import (
+from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
-    SearchGoogleAdsRequest,
-    SearchPagedResponse,
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
 )
-from google.ads.googleads.v24.resources.types.customer_user_access import (
+from google.ads.googleads.v26.services.types.google_ads_service import (
+    SearchGoogleAdsRequest,
+)
+from google.ads.googleads.v26.resources.types.customer_user_access import (
     CustomerUserAccess,
 )
-from google.ads.googleads.v24.services.services.customer_user_access_service.client import (
+from google.ads.googleads.v26.services.services.customer_user_access_service.client import (
     CustomerUserAccessServiceClient,
 )
-from google.ads.googleads.v24.services.types.customer_user_access_service import (
+from google.ads.googleads.v26.services.types.customer_user_access_service import (
     CustomerUserAccessOperation,
     MutateCustomerUserAccessResponse,
 )
@@ -110,7 +112,7 @@ def get_user_access(
     search_request.customer_id = customer_id
     search_request.query = query
 
-    response: SearchPagedResponse = googleads_service.search(
+    response: SearchPager = googleads_service.search(
         request=search_request
     )
 
@@ -233,7 +235,7 @@ if __name__ == "__main__":
 
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(version="v24")
+    googleads_client = GoogleAdsClient.load_from_storage(version="v26")
     try:
         main(
             googleads_client,

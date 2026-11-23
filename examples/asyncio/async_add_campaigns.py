@@ -23,17 +23,17 @@ import uuid
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v24.resources.types.campaign import Campaign
-from google.ads.googleads.v24.resources.types.campaign_budget import (
+from google.ads.googleads.v26.resources.types.campaign import Campaign
+from google.ads.googleads.v26.resources.types.campaign_budget import (
     CampaignBudget,
 )
-from google.ads.googleads.v24.services.types.campaign_budget_service import (
+from google.ads.googleads.v26.services.types.campaign_budget_service import (
     CampaignBudgetOperation,
 )
-from google.ads.googleads.v24.services.types.campaign_service import (
+from google.ads.googleads.v26.services.types.campaign_service import (
     CampaignOperation,
 )
-from google.ads.googleads.v24.services.types.google_ads_service import (
+from google.ads.googleads.v26.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
 )
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
     googleads_client: GoogleAdsClient = GoogleAdsClient.load_from_storage(
-        version="v24"
+        version="v26"
     )
 
     try:

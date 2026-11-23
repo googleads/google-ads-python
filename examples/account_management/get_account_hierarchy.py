@@ -37,8 +37,10 @@ from google.ads.googleads.v26.services.services.customer_service.client import (
 from google.ads.googleads.v26.resources.types.customer_client import (
     CustomerClient,
 )
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
 from google.ads.googleads.v26.services.types.google_ads_service import (
-    SearchPagedResponse,
     GoogleAdsRow,
 )
 
@@ -121,7 +123,7 @@ def main(
                 0
             )  # customer_id_loop is an int
             # The search method expects customer_id to be a string.
-            response: SearchPagedResponse = googleads_service.search(
+            response: SearchPager = googleads_service.search(
                 customer_id=str(customer_id_loop), query=query
             )
 

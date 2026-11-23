@@ -34,12 +34,12 @@ from google.ads.googleads.v26.services.types.audience_insights_service import (
     GenerateAudienceCompositionInsightsResponse,
     GenerateSuggestedTargetingInsightsRequest,
     GenerateSuggestedTargetingInsightsResponse,
-    InsightsAudienceAttributeGroup,
     ListAudienceInsightsAttributesRequest,
     ListAudienceInsightsAttributesResponse,
 )
 from google.ads.googleads.v26.common.types import (
     AudienceInsightsAttribute,
+    InsightsAudienceAttributeGroup,
     LocationInfo,
 )
 

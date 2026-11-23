@@ -35,8 +35,10 @@ from google.ads.googleads.v26.resources.types.customer_client_link import (
 from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
 from google.ads.googleads.v26.services.types.google_ads_service import (
-    SearchPagedResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v26.services.services.customer_manager_link_service.client import (
@@ -83,7 +85,7 @@ def main(
             customer_id=manager_customer_id, operation=client_link_operation
         )
     )
-    resource_name: str = response.results[0].resource_name
+    resource_name: str = response.result.resource_name
 
     print(
         f'Extended an invitation from customer "{manager_customer_id}" to '
@@ -107,7 +109,7 @@ def main(
     manager_link_id: int = -1  # Initialize with a default value
 
     try:
-        search_response: SearchPagedResponse = ga_service.search(
+        search_response: SearchPager = ga_service.search(
             customer_id=manager_customer_id, query=query
         )
         # Since the googleads_service.search method returns an iterator we need

@@ -45,14 +45,14 @@ def main(
           ad_group_bid_modifier.criterion_id,
           ad_group_bid_modifier.bid_modifier,
           ad_group_bid_modifier.device.type,
-          ad_group_bid_modifier.hotel_date_selection_type.type,
-          ad_group_bid_modifier.hotel_advance_booking_window.min_days,
-          ad_group_bid_modifier.hotel_advance_booking_window.max_days,
-          ad_group_bid_modifier.hotel_length_of_stay.min_nights,
-          ad_group_bid_modifier.hotel_length_of_stay.max_nights,
-          ad_group_bid_modifier.hotel_check_in_day.day_of_week,
-          ad_group_bid_modifier.hotel_check_in_date_range.start_date,
-          ad_group_bid_modifier.hotel_check_in_date_range.end_date
+          ad_group_bid_modifier.user_set_dates.type,
+          ad_group_bid_modifier.advance_booking_window.min_days,
+          ad_group_bid_modifier.advance_booking_window.max_days,
+          ad_group_bid_modifier.length_of_booking.min_days,
+          ad_group_bid_modifier.length_of_booking.max_days,
+          ad_group_bid_modifier.start_day_of_week.day_of_week,
+          ad_group_bid_modifier.start_date_range.start_date,
+          ad_group_bid_modifier.start_date_range.end_date
         FROM ad_group_bid_modifier"""
 
     if ad_group_id:
@@ -87,21 +87,28 @@ def main(
 
         if criterion_field == "device":
             criterion_details += f"Type: {modifier.device.type_}"
-        elif criterion_field == "hotel_advance_booking_window":
+        elif criterion_field == "advance_booking_window":
             criterion_details += (
-                f"Min Days: {modifier.hotel_advance_booking_window.min_days}, "
-                f"Max Days: {modifier.hotel_advance_booking_window.max_days}"
+                f"Min Days: {modifier.advance_booking_window.min_days}, "
+                f"Max Days: {modifier.advance_booking_window.max_days}"
             )
-        elif criterion_field == "hotel_check_in_day":
+        elif criterion_field == "start_day_of_week":
             criterion_details += (
-                f"Day of the week: {modifier.hotel_check_in_day.day_of_week}"
+                f"Day of the week: {modifier.start_day_of_week.day_of_week}"
             )
-        elif criterion_field == "hotel_date_selection_type":
-            criterion_details += f"Date selection type: {modifier.hotel_date_selection_type.type_}"
-        elif criterion_field == "hotel_length_of_stay":
+        elif criterion_field == "user_set_dates":
             criterion_details += (
-                f"Min Nights: {modifier.hotel_length_of_stay.min_nights}, "
-                f"Max Nights: {modifier.hotel_length_of_stay.max_nights}"
+                f"Date selection type: {modifier.user_set_dates.type_}"
+            )
+        elif criterion_field == "length_of_booking":
+            criterion_details += (
+                f"Min Days: {modifier.length_of_booking.min_days}, "
+                f"Max Days: {modifier.length_of_booking.max_days}"
+            )
+        elif criterion_field == "start_date_range":
+            criterion_details += (
+                f"Start Date: {modifier.start_date_range.start_date}, "
+                f"End Date: {modifier.start_date_range.end_date}"
             )
         else:
             criterion_details = "  - No Criterion type found."

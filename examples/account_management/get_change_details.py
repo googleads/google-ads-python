@@ -31,9 +31,11 @@ from google.ads.googleads.util import get_nested_attr
 from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
 from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
     GoogleAdsRow,
 )
 from google.ads.googleads.v26.resources.types.change_event import ChangeEvent
@@ -84,7 +86,7 @@ def main(client: GoogleAdsClient, customer_id: str) -> None:
     search_request.customer_id = customer_id
     search_request.query = query
 
-    results: SearchPagedResponse = googleads_service.search(
+    results: SearchPager = googleads_service.search(
         request=search_request
     )
 

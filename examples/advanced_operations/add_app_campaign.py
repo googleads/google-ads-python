@@ -58,7 +58,26 @@ from google.ads.googleads.v26.services.services.geo_target_constant_service impo
 from google.ads.googleads.v26.services.services.google_ads_service import (
     GoogleAdsServiceClient,
 )
-from google.ads.googleads.v26.services.types import *
+from google.ads.googleads.v26.services.types.ad_group_ad_service import (
+    AdGroupAdOperation,
+    MutateAdGroupAdsResponse,
+)
+from google.ads.googleads.v26.services.types.ad_group_service import (
+    AdGroupOperation,
+    MutateAdGroupsResponse,
+)
+from google.ads.googleads.v26.services.types.campaign_budget_service import (
+    CampaignBudgetOperation,
+    MutateCampaignBudgetsResponse,
+)
+from google.ads.googleads.v26.services.types.campaign_criterion_service import (
+    CampaignCriterionOperation,
+    MutateCampaignCriteriaResponse,
+)
+from google.ads.googleads.v26.services.types.campaign_service import (
+    CampaignOperation,
+    MutateCampaignsResponse,
+)
 
 
 def main(client: GoogleAdsClient, customer_id: str) -> None:

@@ -79,7 +79,6 @@ from google.ads.googleads.v26.services.types.campaign_budget_service import (
 from google.ads.googleads.v26.services.types.google_ads_service import (
     MutateGoogleAdsResponse,
     MutateOperation,
-    MutateOperationResponse,
 )
 
 # We specify temporary IDs that are specific to a single mutate request.

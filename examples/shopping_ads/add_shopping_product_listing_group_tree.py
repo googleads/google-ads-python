@@ -52,9 +52,9 @@ from google.ads.googleads.v26.services.services.google_ads_service import (
 )
 from google.ads.googleads.v26.services.types.ad_group_criterion_service import (
     AdGroupCriterionOperation,
+    MutateAdGroupCriteriaResponse,
 )
 from google.ads.googleads.v26.services.types.google_ads_service import (
-    MutateGoogleAdsResponse,
     SearchGoogleAdsResponse,
 )
 
@@ -240,7 +240,7 @@ def main(
     )
 
     # Add the ad group criteria.
-    mutate_ad_group_criteria_response: MutateGoogleAdsResponse = (
+    mutate_ad_group_criteria_response: MutateAdGroupCriteriaResponse = (
         ad_group_criterion_service.mutate_ad_group_criteria(
             customer_id=customer_id, operations=operations
         )
@@ -312,7 +312,7 @@ def remove_listing_group_tree(
         ad_group_criterion_service: AdGroupCriterionServiceClient = (
             client.get_service("AdGroupCriterionService")
         )
-        response: MutateGoogleAdsResponse = (
+        response: MutateAdGroupCriteriaResponse = (
             ad_group_criterion_service.mutate_ad_group_criteria(
                 customer_id=customer_id,
                 operations=ad_group_criterion_operations,

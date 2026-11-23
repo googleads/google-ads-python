@@ -39,7 +39,7 @@ from google.ads.googleads.v26.services.types.google_ads_service import (
 )
 from google.ads.googleads.v26.services.types.recommendation_service import (
     ApplyRecommendationOperation,
-    ApplyRecommendationResult,
+    ApplyRecommendationResponse,
 )
 
 
@@ -155,7 +155,7 @@ def apply_recommendations(
     """
     # Issues a mutate request to apply the recommendations.
     recommendation_service = client.get_service("RecommendationService")
-    response: ApplyRecommendationResult = (
+    response: ApplyRecommendationResponse = (
         recommendation_service.apply_recommendation(
             customer_id=customer_id, operations=operations
         )

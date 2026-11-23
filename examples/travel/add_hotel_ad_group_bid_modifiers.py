@@ -22,7 +22,7 @@ import sys
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
-from google.ads.googleads.v26.common.types.criteria import HotelLengthOfStayInfo
+from google.ads.googleads.v26.common.types.criteria import LengthOfBookingInfo
 from google.ads.googleads.v26.resources.types.ad_group_bid_modifier import (
     AdGroupBidModifier,
 )
@@ -55,7 +55,7 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     check_in_ag_bid_modifier: AdGroupBidModifier = (
         check_in_ag_bm_operation.create
     )
-    check_in_ag_bid_modifier.hotel_check_in_day.day_of_week = (
+    check_in_ag_bid_modifier.start_day_of_week.day_of_week = (
         client.enums.DayOfWeekEnum.MONDAY
     )
     check_in_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
@@ -64,7 +64,7 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     # Sets the bid modifier value to 150%.
     check_in_ag_bid_modifier.bid_modifier = 1.5
 
-    # Create ad group bid modifier based on hotel length of stay info.
+    # Create ad group bid modifier based on length of booking info.
     los_ag_bm_operation: AdGroupBidModifierOperation = client.get_type(
         "AdGroupBidModifierOperation"
     )
@@ -72,12 +72,12 @@ def main(client: GoogleAdsClient, customer_id: str, ad_group_id: str) -> None:
     los_ag_bid_modifier.ad_group = ad_group_service.ad_group_path(
         customer_id, ad_group_id
     )
-    # Creates the hotel length of stay info.
-    hotel_length_of_stay_info: HotelLengthOfStayInfo = (
-        los_ag_bid_modifier.hotel_length_of_stay
+    # Creates the length of booking info.
+    length_of_booking_info: LengthOfBookingInfo = (
+        los_ag_bid_modifier.length_of_booking
     )
-    hotel_length_of_stay_info.min_nights = 3
-    hotel_length_of_stay_info.max_nights = 7
+    length_of_booking_info.min_days = 3
+    length_of_booking_info.max_days = 7
     # Sets the bid modifier value to 170%.
     los_ag_bid_modifier.bid_modifier = 1.7
 

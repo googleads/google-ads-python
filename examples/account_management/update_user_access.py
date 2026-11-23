@@ -29,9 +29,11 @@ from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v26.services.services.google_ads_service.client import (
     GoogleAdsServiceClient,
 )
+from google.ads.googleads.v26.services.services.google_ads_service.pagers import (
+    SearchPager,
+)
 from google.ads.googleads.v26.services.types.google_ads_service import (
     SearchGoogleAdsRequest,
-    SearchPagedResponse,
 )
 from google.ads.googleads.v26.resources.types.customer_user_access import (
     CustomerUserAccess,
@@ -110,7 +112,7 @@ def get_user_access(
     search_request.customer_id = customer_id
     search_request.query = query
 
-    response: SearchPagedResponse = googleads_service.search(
+    response: SearchPager = googleads_service.search(
         request=search_request
     )
 

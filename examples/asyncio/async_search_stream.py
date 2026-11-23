@@ -17,15 +17,11 @@
 import argparse
 import asyncio
 import sys
-from typing import List
 
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v26.services.services.google_ads_service import (
     GoogleAdsServiceAsyncClient,
-)
-from google.ads.googleads.v26.services.types.google_ads_service import (
-    GoogleAdsRow,
 )
 
 

@@ -21,7 +21,7 @@ import sys
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 from google.ads.googleads.v26.services.types.asset_service import AssetOperation
-from google.ads.googleads.v26.resources.types.asset import Asset
+from google.ads.googleads.v26.common.types.asset_types import CallAsset
 from google.ads.googleads.v26.common.types.criteria import AdScheduleInfo
 from google.ads.googleads.v26.services.types.customer_asset_service import (
     CustomerAssetOperation,
@@ -78,7 +78,7 @@ def add_call_asset(
     """
     operation: AssetOperation = client.get_type("AssetOperation")
     # Creates the call asset.
-    asset: Asset = operation.create.call_asset
+    asset: CallAsset = operation.create.call_asset
     asset.country_code = phone_country
     asset.phone_number = phone_number
     # Optional: Specifies day and time intervals for which the asset may serve.
